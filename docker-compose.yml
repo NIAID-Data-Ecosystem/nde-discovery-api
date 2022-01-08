@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  nde-web:
+    build:
+      context: nde-web
+      dockerfile: Dockerfile
+    depends_on:
+      - "elasticsearch"
+    environment:
+      ES_HOST: elasticsearch:9200
+    ports:
+      - "9000:9000"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.1
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "127.0.0.1:9200:9200"
+
+  demo_data_loader:
+    build:
+      context: demo_data_loader
+      dockerfile: Dockerfile
+    environment:
+      - ES_HOST=elasticsearch
+

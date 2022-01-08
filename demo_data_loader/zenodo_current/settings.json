@@ -1,0 +1,37 @@
+{
+      "index": {
+        "routing": {
+          "allocation": {
+            "include": {
+              "_tier_preference": "data_content"
+            }
+          }
+        },
+        "number_of_shards": "1",
+        "query": {
+          "default_field": "all"
+        },
+        "analysis": {
+          "normalizer": {
+            "keyword_lowercase_normalizer": {
+              "filter": [
+                "lowercase"
+              ],
+              "type": "custom",
+              "char_filter": []
+            }
+          },
+          "analyzer": {
+            "string_lowercase": {
+              "filter": "lowercase",
+              "tokenizer": "keyword"
+            },
+            "whitespace_lowercase": {
+              "filter": "lowercase",
+              "tokenizer": "whitespace"
+            }
+          }
+        },
+        "number_of_replicas": "1"
+      }
+    }
