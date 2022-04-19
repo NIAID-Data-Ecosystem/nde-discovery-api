@@ -1,3 +1,4 @@
+# https://docs.docker.com/compose/compose-file/compose-file-v3/
 version: '3'
 
 services:
@@ -5,24 +6,12 @@ services:
     build:
       context: nde-web
       dockerfile: Dockerfile
-    depends_on:
-      - "elasticsearch"
-    environment:
-      ES_HOST: elasticsearch:9200
+    # We need to access the host port from the docker container
+    # the extra_hosts field is equivalent to the docker cliend --add-host parameter
+    # https://stackoverflow.com/questions/31324981/how-to-access-host-port-from-docker-container
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
-      - "9000:9000"
+      - "8000:9000"
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.1
-    environment:
-      - discovery.type=single-node
-    ports:
-      - "127.0.0.1:9200:9200"
-
-  demo_data_loader:
-    build:
-      context: demo_data_loader
-      dockerfile: Dockerfile
-    environment:
-      - ES_HOST=elasticsearch
 

@@ -21,6 +21,6 @@ ADD config_web.py index.py ./
 STOPSIGNAL SIGINT
 
 EXPOSE 9000
-ENV ES_HOST 127.0.0.1:9200
+ENV ES_HOST host.docker.internal:9200
 ENTRYPOINT ["/home/nde/venv/bin/python", "index.py"]
 CMD ["--conf=config_web", "--port=9000"]
