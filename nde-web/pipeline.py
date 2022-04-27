@@ -7,6 +7,7 @@ logger = logging.getLogger('nde-logger')
 
 class NDEQueryBuilder(ESQueryBuilder):
 
+    # https://docs.biothings.io/en/latest/_modules/biothings/web/query/builder.html#ESQueryBuilder.default_string_query
     def default_string_query(self, q, options):
 
         search = Search()
