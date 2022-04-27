@@ -1,8 +1,8 @@
 ES_INDICES = {
     # 'zenodo': 'zenodo_current',
     # 'immport': 'immport_current'
-    # None: 'nde_all_current'
-    'niaid': 'niaid_20220418_sjwnon1o'
+    None: 'nde_all_current'
+    # 'niaid': 'niaid_20220418_sjwnon1o'
 }
 
 ES_DOC_TYPE: 'dataset'
