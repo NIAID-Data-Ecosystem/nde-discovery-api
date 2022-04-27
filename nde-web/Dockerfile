@@ -16,11 +16,11 @@ COPY --from=builder --chown=nde:nde /build/wheels /home/nde/whl
 RUN /home/nde/venv/bin/pip install /home/nde/whl/*.whl && rm -rf /home/nde/whl
 
 WORKDIR /home/nde/nde_backend
-ADD config_web.py index.py ./
+ADD config_web.py index.py pipeline.py ./
 
 STOPSIGNAL SIGINT
 
 EXPOSE 9000
-ENV ES_HOST 127.0.0.1:9200
+ENV ES_HOST host.docker.internal:9200
 ENTRYPOINT ["/home/nde/venv/bin/python", "index.py"]
 CMD ["--conf=config_web", "--port=9000"]
