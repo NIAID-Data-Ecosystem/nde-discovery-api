@@ -136,7 +136,7 @@
           },
           {
             "name": "facet_size",
-            "description": "The maximum number of records returned for each facet. This has no effect unless one or more facets are specified.",
+            "description": "Optional, an integer (1 <= facet_size <= 1000) that specifies how many buckets to return in a faceted query.",
             "in": "query",
             "required": false,
             "schema": {
@@ -151,14 +151,6 @@
             "required": false,
             "schema": {
               "type": "integer"
-            }
-          },
-          {
-            "name": "userquery",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
             }
           },
           {
@@ -221,6 +213,7 @@
           },
           {
             "name": "scopes",
+            "description": "Optional, specify one or more fields (separated by comma) as the search “scopes”",
             "in": "query",
             "required": false,
             "schema": {
