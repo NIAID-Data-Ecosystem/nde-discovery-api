@@ -1,8 +1,5 @@
-import logging
 from biothings.web.query import ESQueryBuilder
 from elasticsearch_dsl import Search, Q
-
-logger = logging.getLogger('nde-logger')
 
 
 class NDEQueryBuilder(ESQueryBuilder):
