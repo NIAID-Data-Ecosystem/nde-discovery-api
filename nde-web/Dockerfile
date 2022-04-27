@@ -16,7 +16,7 @@ COPY --from=builder --chown=nde:nde /build/wheels /home/nde/whl
 RUN /home/nde/venv/bin/pip install /home/nde/whl/*.whl && rm -rf /home/nde/whl
 
 WORKDIR /home/nde/nde_backend
-ADD config_web.py index.py ./
+ADD config_web.py index.py pipeline.py ./
 
 STOPSIGNAL SIGINT
 
