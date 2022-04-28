@@ -74,6 +74,6 @@ class NDEQueryBuilder(ESQueryBuilder):
 
     def apply_extras(self, search, options):
         # terms to filter
-        terms = {"@type": ["Dataset", "Computational Tool"]}
+        terms = {"@type": ["Dataset", "ComputationalTool"]}
         search = search.filter('terms', **terms)
         return search
