@@ -1,3 +1,6 @@
+import { useCallback } from 'react';
+import './main.css'
+
 //This component render Description as per the version name.
 const Main = ({ versions, loading }) => {
     const setColor = (label) => {
@@ -13,7 +16,7 @@ const Main = ({ versions, loading }) => {
             case "Changes":
                 color = "bg-green-500";
                 break;
-            case "Known issue":
+            case "New Data Source":
                 color = "bg-blue-600";
                 break;
             default:
@@ -21,6 +24,13 @@ const Main = ({ versions, loading }) => {
         }
         return color;
     };
+
+    const date = useCallback((data) => {
+        let dateString;
+        dateString = new Date(data);
+        return dateString.toDateString();
+    }, []);
+
 
     return (
         <>
@@ -35,10 +45,13 @@ const Main = ({ versions, loading }) => {
                             >
                                 <div
                                     className={
-                                        `version${data.version} text-gray-900 text-2xl p-2 mt-16 w-50 my-4 ml-8 font-bold`
+                                        `version-title version${data.version} text-gray-900 text-2xl p-2 mt-14 w-50 my-4 ml-8 font-bold`
                                     }
                                 >
                                     Version {data.version}
+                                    <div className="text-sm font-medium text-gray-500">
+                                        {date(data.date)}
+                                    </div>
                                 </div>
                                 <div className={"block"}>
                                     <div>
@@ -55,7 +68,7 @@ const Main = ({ versions, loading }) => {
                                                         <div
                                                             className={`${setColor(
                                                                 label
-                                                            )} w-36 h-auto leading-8 ml-10 text-left font-bold shadow-lg mt-10 mb-3 text-white rounded-md`}
+                                                            )} version-label w-36 h-auto leading-8 ml-10 text-left font-bold shadow-lg mt-10 mb-3 text-white rounded-md`}
                                                         >
                                                             <span className="ml-4">{label}</span>
                                                         </div>
