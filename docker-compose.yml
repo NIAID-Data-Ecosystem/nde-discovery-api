@@ -2,9 +2,9 @@
 version: '3'
 
 services:
-  nde-web:
+  nde-api:
     build:
-      context: nde-web
+      context: nde-api
       dockerfile: Dockerfile
     # We need to access the host port from the docker container
     # the extra_hosts field is equivalent to the docker cliend --add-host parameter
@@ -13,5 +13,3 @@ services:
       - "host.docker.internal:host-gateway"
     ports:
       - "8000:9000"
-
-
