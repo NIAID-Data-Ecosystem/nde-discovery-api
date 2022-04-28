@@ -13,7 +13,7 @@ class NDEQueryBuilder(ESQueryBuilder):
         # elasticsearch query string syntax
         # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
         if ":" in q or " AND " in q or " OR " in q:
-            return super().default_string_query(q, options)
+            search = search.query('query_string', query=q, default_operator="AND", lenient=True)
 
         # term search
         elif q.startswith('"') and q.endswith('"'):
@@ -34,14 +34,19 @@ class NDEQueryBuilder(ESQueryBuilder):
                 # query string 
                 Q('query_string', query=q, lenient=True)
             ]
-            
+
             search = search.query('dis_max', queries=queries)
+
+        # # terms to filter
+        # terms = {"@type": ["Dataset", "ComputationalTool"]}
+        # # we need to use the filter clause because we do not want the term scores to be calculated
+        # search = search.filter('terms', **terms)
 
         return search
 
     def apply_extras(self, search, options):
         # terms to filter
         terms = {"@type": ["Dataset", "ComputationalTool"]}
-        # we need to use the filter clause because we do not want the term scores to be calculated
         search = search.filter('terms', **terms)
-        return search
+
+        return super().apply_extras(search, options)
