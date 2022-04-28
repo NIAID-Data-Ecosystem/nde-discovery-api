@@ -3,11 +3,13 @@ import { GET_VERSIONS } from "../../gql/query";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Main from "../Main";
+import { Navigation } from "nde-design-system";
 
 const UI = () => {
     const { data = {}, loading } = useQuery(GET_VERSIONS);
     return (
         <>
+            {/* <Navigation /> */}
             <Header />
             <div className="min-h-screen flex flex-row">
                 <div className="flex flex-col bg-gray-100   text-white w-6/12 mobile:hidden">
