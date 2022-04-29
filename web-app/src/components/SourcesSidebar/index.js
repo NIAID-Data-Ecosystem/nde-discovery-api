@@ -28,7 +28,7 @@ const SourcesSidebar = ({ sourceData }) => {
         sourceNames
             .map((name, index) => {
                 return (
-                    <li key={index} className={"m-2 ml-4 pb-4 pt-2"}>
+                    <li key={index} className={"m-2 ml-4 pb-1 pt-5"}>
                         <a
                             className={"flex flex-col items-left h-14  cursor-pointer "}
                             onClick={() => handleNav(name)} // This onClick function will act as navigation between different section we have
