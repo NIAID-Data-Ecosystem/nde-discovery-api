@@ -40,10 +40,6 @@ const SourcesMain = ({ sourceData }) => {
                     }
                 >
                     Sources
-                    <div className="text-sm font-medium text-gray-500">
-                        {/* {date(sourceObj.dateCreated)} */}
-                        this is a date
-                    </div>
                 </div>
 
             </div>
@@ -63,6 +59,9 @@ const SourcesMain = ({ sourceData }) => {
                                 >
                                     <span className="ml-4">{setName(sourceObj.name)}</span>
                                 </div>
+                                <div className=" ml-14 font-bold text-gray-900">
+                                    {sourceObj.numberOfRecords.toLocaleString()} Records Available
+                                </div>
                                 <div // Here we are using dangerouslySetInnerHTML because we receive the html code from API, we parse it using dangerouslySetInnerHTML
                                     className="text-left ml-20 mt-4 text-gray-900"
                                     dangerouslySetInnerHTML={{
@@ -70,10 +69,10 @@ const SourcesMain = ({ sourceData }) => {
                                     }}
                                 ></div>
                                 <div className='mt-4 ml-5'>
-                                    <div className=" ml-14 font-bold text-gray-500">
+                                    <div className=" ml-14 font-bold text-gray-900">
                                         Date Modified {date(sourceObj.dateModified)}
                                     </div>
-                                    <div className=" ml-14 font-bold text-gray-500">
+                                    <div className=" ml-14 font-bold text-gray-900">
                                         Date Created {date(sourceObj.dateModified)}
                                     </div>
                                 </div>
