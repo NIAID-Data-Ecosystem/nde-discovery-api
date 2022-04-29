@@ -1,29 +1,9 @@
 import { useCallback } from 'react';
+import { setColor } from '../../utils/setFunctions';
 import './main.css'
 
 //This component render Description as per the version name.
 const Main = ({ versions, loading }) => {
-    const setColor = (label) => {
-        // We are using this util function to assign a color the label.
-        let color = "bg-red-600";
-        switch (label) {
-            case "Security fixes":
-                color = "bg-pink-600";
-                break;
-            case "Bug fixes":
-                color = "bg-yellow-600";
-                break;
-            case "Changes":
-                color = "bg-green-500";
-                break;
-            case "New Data Source":
-                color = "bg-blue-600";
-                break;
-            default:
-                color = "";
-        }
-        return color;
-    };
 
     const date = useCallback((data) => {
         let dateString;
