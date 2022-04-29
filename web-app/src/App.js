@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
+import SourcesUI from './components/SourcesUI';
 const client = new ApolloClient({
   uri: "https://release-notes-app-copy-90e.can.canonic.dev/graphql",
   cache: new InMemoryCache(),
@@ -23,6 +24,9 @@ function App() {
               <Route path='/' element={<Home />} />
               <Route path='/versions' element={
                 <UI />
+              } />
+              <Route path='/sources' element={
+                <SourcesUI />
               } />
             </Routes>
           </BrowserRouter>
