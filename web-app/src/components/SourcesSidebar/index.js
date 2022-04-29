@@ -3,7 +3,6 @@ import { scroller } from "react-scroll";
 import { useState, useEffect } from 'react'
 import { setName } from "../../utils/setFunctions";
 
-
 const SourcesSidebar = ({ sourceData }) => {
     //This useCallback function taken a string argument of date and converts it into formatted date, e.g Day Month Date Year(Monday 1 Jan 1999)
     const date = useCallback((data) => {
@@ -28,7 +27,7 @@ const SourcesSidebar = ({ sourceData }) => {
         sourceNames
             .map((name, index) => {
                 return (
-                    <li key={index} className={"m-2 ml-4 pb-1 pt-5"}>
+                    <li key={index} className={"border-none m-2 ml-4 pb-4"}>
                         <a
                             className={"flex flex-col items-left h-14  cursor-pointer "}
                             onClick={() => handleNav(name)} // This onClick function will act as navigation between different section we have
