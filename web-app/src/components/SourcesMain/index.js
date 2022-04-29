@@ -1,25 +1,31 @@
 import { useCallback } from 'react';
 import { setColor, setDescription, setName } from '../../utils/setFunctions';
+import { useState, useEffect } from 'react'
 import './sourcesmain.css'
 
 //This component render Description as per the version name.
 const SourcesMain = ({ sourceData }) => {
 
-    const sourcesArray = []
-    for (const source in sourceData.src) {
-        const sourceDetails = {
-            "name": source,
-            "description": setDescription(source),
-            "dateCreated": "",
-            "dateModified": sourceData.src[source].version,
-            "numberOfRecords": sourceData.src[source].stats[source],
-            "schema": "",
+    const [sourcesArray, setSourcesArray] = useState([])
+
+    useEffect(() => {
+        const objArray = []
+        for (const source in sourceData.src) {
+            const sourceDetails = {
+                "name": source,
+                "description": setDescription(source),
+                "dateCreated": "",
+                "dateModified": sourceData.src[source].version,
+                "numberOfRecords": sourceData.src[source].stats[source],
+                "schema": "",
+            }
+            objArray.push(sourceDetails)
         }
-        sourcesArray.push(sourceDetails)
-    }
+        objArray.sort((a, b) => a.name.localeCompare(b.name))
+        setSourcesArray(objArray)
+    }, [])
+
     console.log(sourcesArray)
-
-
     const date = useCallback((data) => {
         let dateString;
         dateString = new Date(data);
@@ -39,14 +45,14 @@ const SourcesMain = ({ sourceData }) => {
                         `sources-title text-gray-900 text-2xl p-2 mt-14 w-50 my-4 ml-8 font-bold `
                     }
                 >
-                    Sources
+                    Version 1.0.0 Data Sources
                 </div>
 
             </div>
 
             {sourcesArray.map((sourceObj, index) => {
                 return (
-                    <div className={"tab-content tab-space w-5/6 divide-y divide-light-blue-400"}>
+                    <div key={index} className={"tab-content tab-space w-5/6 divide-y divide-light-blue-400"}>
                         <div>
                             <section
                                 className="flex flex-col"

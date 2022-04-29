@@ -12,7 +12,7 @@ const SourcesSidebar = ({ sourceData }) => {
     }, []);
 
 
-    const sourceNames = Object.keys(sourceData.src)
+    const sourceNames = Object.keys(sourceData.src).sort()
 
 
     function handleNav(version) {
