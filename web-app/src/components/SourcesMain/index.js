@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { setColor, setDescription, setName } from '../../utils/setFunctions';
+import { setColor, setDateCreated, setDescription, setName } from '../../utils/setFunctions';
 import { useState, useEffect } from 'react'
 import './sourcesmain.css'
 
@@ -9,23 +9,26 @@ const SourcesMain = ({ sourceData }) => {
     const [sourcesArray, setSourcesArray] = useState([])
 
     useEffect(() => {
-        const objArray = []
-        for (const source in sourceData.src) {
-            const sourceDetails = {
-                "name": source,
-                "description": setDescription(source),
-                "dateCreated": "",
-                "dateModified": sourceData.src[source].version,
-                "numberOfRecords": sourceData.src[source].stats[source],
-                "schema": "",
+        async function buildSourceDetails() {
+            const objArray = []
+            for (const source in sourceData.src) {
+                const sourceDetails = {
+                    "name": source,
+                    "description": setDescription(source),
+                    "dateCreated": await setDateCreated(sourceData.src[source].code.file)
+                    ,
+                    "dateModified": sourceData.src[source].version,
+                    "numberOfRecords": sourceData.src[source].stats[source],
+                    "schema": "",
+                }
+                objArray.push(sourceDetails)
             }
-            objArray.push(sourceDetails)
+            objArray.sort((a, b) => a.name.localeCompare(b.name))
+            setSourcesArray(objArray)
         }
-        objArray.sort((a, b) => a.name.localeCompare(b.name))
-        setSourcesArray(objArray)
+        buildSourceDetails()
     }, [])
 
-    console.log(sourcesArray)
     const date = useCallback((data) => {
         let dateString;
         dateString = new Date(data);
@@ -34,7 +37,7 @@ const SourcesMain = ({ sourceData }) => {
 
 
     return (
-        <div>
+        <div className='mb-10'>
 
             <div
                 className="tab-content sources-title-container tab-space w-5/6 divide-y divide-light-blue-400"
@@ -76,10 +79,10 @@ const SourcesMain = ({ sourceData }) => {
                                 ></div>
                                 <div className='mt-4 ml-5'>
                                     <div className=" ml-14 font-bold text-gray-900">
-                                        Date Modified {date(sourceObj.dateModified)}
+                                        Most Recent Release {date(sourceObj.dateModified)}
                                     </div>
                                     <div className=" ml-14 font-bold text-gray-900">
-                                        Date Created {date(sourceObj.dateModified)}
+                                        First Released {date(sourceObj.dateCreated)}
                                     </div>
                                 </div>
                             </section>

@@ -36,7 +36,7 @@ const SourcesSidebar = ({ sourceData }) => {
                                 {setName(name)} <br />
                             </div>
                             <div className="text-sm font-medium text-gray-500">
-                                Released {date(sourceData.src[name].version)}
+                                Latest Release {date(sourceData.src[name].version)}
                             </div>
                         </a>
                     </li>
