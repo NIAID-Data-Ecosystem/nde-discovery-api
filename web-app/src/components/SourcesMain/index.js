@@ -79,7 +79,7 @@ const SourcesMain = ({ sourceData }) => {
                                 ></div>
                                 <div className='mt-4 ml-5'>
                                     <div className=" ml-14 font-bold text-gray-900">
-                                        Most Recent Release {date(sourceObj.dateModified)}
+                                        Latest Release {date(sourceObj.dateModified)}
                                     </div>
                                     <div className=" ml-14 font-bold text-gray-900">
                                         First Released {date(sourceObj.dateCreated)}

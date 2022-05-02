@@ -85,14 +85,6 @@
         },
         "parameters": [
           {
-            "name": "dev",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
             "name": "raw",
             "description": "Return plain text (default = False)",
             "in": "query",
@@ -128,6 +120,15 @@
           {
             "name": "fields",
             "description": "Comma-separated fields to limit the fields returned from the matching niaid hits. Note that it supports dot notation as well, e.g., you can pass \"includedInDataCatalog.name\". If \"fields=all\", all available fields will be returned. Example: date, name, description.",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "aggs",
+            "description": "Optional, a single field or comma-separated fields to return aggregations. Example \"includedInDataCatalog.name,infectiousAgent.name\"",
             "in": "query",
             "required": false,
             "schema": {
