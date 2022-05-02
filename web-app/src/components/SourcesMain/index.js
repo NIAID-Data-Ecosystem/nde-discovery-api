@@ -15,11 +15,10 @@ const SourcesMain = ({ sourceData }) => {
                 const sourceDetails = {
                     "name": source,
                     "description": setDescription(source),
-                    "dateCreated": await setDateCreated(sourceData.src[source].code.file)
-                    ,
+                    "dateCreated": await setDateCreated(sourceData.src[source].code.file),
                     "dateModified": sourceData.src[source].version,
                     "numberOfRecords": sourceData.src[source].stats[source],
-                    "schema": "",
+                    "schema": { "title": "name", "cmc_unique_id": "identifier", "brief_summary": "description", "data_availability_date": "datePublished", "most_recent_update": "dateModified", "data_available": "additionalType", "creator": "funding.funder.name", "nct_number": "nctid, identifier", "condition": "healthCondition", "clinical_trial_website": "mainEntityOfPage", "publications": "citation", "data_available_for_request": "conditionsOfAccess" },
                 }
                 objArray.push(sourceDetails)
             }
@@ -71,19 +70,48 @@ const SourcesMain = ({ sourceData }) => {
                                 <div className=" ml-14 font-bold text-gray-900">
                                     {sourceObj.numberOfRecords.toLocaleString()} Records Available
                                 </div>
-                                <div // Here we are using dangerouslySetInnerHTML because we receive the html code from API, we parse it using dangerouslySetInnerHTML
-                                    className="text-left ml-20 mt-4 text-gray-900"
-                                    dangerouslySetInnerHTML={{
-                                        __html: sourceObj.description,
-                                    }}
-                                ></div>
-                                <div className='mt-4 ml-5'>
-                                    <div className=" ml-14 font-bold text-gray-900">
-                                        Latest Release {date(sourceObj.dateModified)}
+                                <div className='ml-20'>
+                                    <div // Here we are using dangerouslySetInnerHTML because we receive the html code from API, we parse it using dangerouslySetInnerHTML
+                                        className="text-left mt-4 text-gray-900"
+                                        dangerouslySetInnerHTML={{
+                                            __html: sourceObj.description,
+                                        }}
+                                    ></div>
+                                    <div className='mt-4 '>
+                                        <div className="  font-bold text-gray-900">
+                                            Latest Release {date(sourceObj.dateModified)}
+                                        </div>
+                                        <div className="  font-bold text-gray-900">
+                                            First Released {date(sourceObj.dateCreated)}
+                                        </div>
                                     </div>
-                                    <div className=" ml-14 font-bold text-gray-900">
-                                        First Released {date(sourceObj.dateCreated)}
+                                    <div className='mt-4  max-w-2xl relative overflow-x-auto shadow-md sm:rounded-lg'>
+                                        <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
+                                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                <tr>
+                                                    <th scope="col" class="px-6 py-3">
+                                                        Data Source Property
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3">
+                                                        NIAID Data Ecosystem Property
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
+                                                {Object.entries(sourceObj.schema).map((item) => {
+                                                    return (
+                                                        <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
+                                                            {Object.entries(item).map((field) => {
+                                                                return <td className='px-6 py-2 font-medium text-gray-900 dark:text-white whitespace-nowrap'>{field[1]}</td>
+                                                            })}
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
                                     </div>
+
                                 </div>
                             </section>
                         </div>
