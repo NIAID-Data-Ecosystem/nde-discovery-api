@@ -12,7 +12,7 @@ const SourcesSidebar = ({ sourceData }) => {
     }, []);
 
 
-    const sourceNames = Object.keys(sourceData.src).sort()
+    const sourceNames = Object.keys(sourceData.src).sort((a, b) => setName(a).localeCompare(setName(b)))
 
 
     function handleNav(version) {

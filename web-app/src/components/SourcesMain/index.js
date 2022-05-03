@@ -33,7 +33,7 @@ const SourcesMain = ({ sourceData }) => {
                 }
                 objArray.push(sourceDetails)
             }
-            objArray.sort((a, b) => a.name.localeCompare(b.name))
+            objArray.sort((a, b) => setName(a.name).localeCompare(setName(b.name)))
             setSourcesArray(objArray)
         }
         buildSourceDetails()
@@ -89,43 +89,43 @@ const SourcesMain = ({ sourceData }) => {
                                         }}
                                     ></div>
 
-                                    <div className='mt-2 flex-col font-bold text-gray-900'>
-                                        <p> Visualization of the transformation of {setName(sourceObj.name)} Properties to our Data Ecosystem</p>
+                                    <div className='mt-2 font-bold text-gray-900'>
+                                        <p> Schema showing the transformation of {setName(sourceObj.name)} Properties to the NIAID Data Ecosystem</p>
                                         {schemaText.includes(sourceObj.name) &&
                                             <button id={sourceObj.name} className='bg-green-600 hover:bg-green-800 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Hide Schema</button>
                                             ||
                                             <button id={sourceObj.name} className='bg-green-600 hover:bg-green-800 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Show Schema</button>
                                         }
-                                    </div>
-                                    {schemaId.includes(sourceObj.name) &&
-                                        <div className='mt-4 transition-test max-w-2xl relative overflow-x-auto shadow-md sm:rounded-lg'>
-                                            <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-                                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                                    <tr>
-                                                        <th scope="col" className="px-6 py-3">
-                                                            {sourceObj.name} Property
-                                                        </th>
-                                                        <th scope="col" className="px-6 py-3">
-                                                            NIAID Data Ecosystem Property
-                                                        </th>
-                                                    </tr>
-                                                </thead>
+                                        {schemaId.includes(sourceObj.name) &&
+                                            <div className='mt-4 transition-test max-w-2xl relative overflow-x-auto shadow-md sm:rounded-lg'>
+                                                <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
+                                                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                        <tr>
+                                                            <th scope="col" className="px-6 py-3">
+                                                                {sourceObj.name} Property
+                                                            </th>
+                                                            <th scope="col" className="px-6 py-3">
+                                                                NIAID Data Ecosystem Property
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
 
-                                                <tbody className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-                                                    {Object.entries(sourceObj.schema).map((item) => {
-                                                        return (
-                                                            <tr key={item} className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-                                                                {Object.entries(item).map((field) => {
-                                                                    return <td
-                                                                        key={field} className='px-6 py-2 font-medium text-gray-900 dark:text-white whitespace-nowrap'>{field[1]}</td>
-                                                                })}
-                                                            </tr>
-                                                        );
-                                                    })}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    }
+                                                    <tbody className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
+                                                        {Object.entries(sourceObj.schema).map((item) => {
+                                                            return (
+                                                                <tr key={item} className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
+                                                                    {Object.entries(item).map((field) => {
+                                                                        return <td
+                                                                            key={field} className='px-6 py-2 font-medium text-gray-900 dark:text-white whitespace-nowrap'>{field[1]}</td>
+                                                                    })}
+                                                                </tr>
+                                                            );
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        }
+                                    </div>
                                     <div className='mt-4 '>
                                         <div className="  font-bold text-gray-900">
                                             Latest Release {date(sourceObj.dateModified)}

@@ -11,7 +11,7 @@
 }
 
 .transition-test {
-    animation: fade .75s;
+    animation: fade .5s;
 }
 
 @keyframes fade {
