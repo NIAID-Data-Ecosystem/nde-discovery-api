@@ -9,3 +9,25 @@
 .sources-title-container {
     border-bottom: 1px solid lightgrey;
 }
+
+.transition-test {
+    animation: fade .5s;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+    0% {
+        top: 50px;
+    }
+
+    100% {
+        top: 0px;
+    }
+}

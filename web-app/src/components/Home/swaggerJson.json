@@ -128,7 +128,7 @@
           },
           {
             "name": "aggs",
-            "description": "Optional, a single field or comma-separated fields to return aggregations. Example \"includedInDataCatalog.name,infectiousAgent.name\"",
+            "description": "Optional, a single field or comma-separated fields to return aggregations. Example \"includedInDataCatalog.name, infectiousAgent.name\"",
             "in": "query",
             "required": false,
             "schema": {
