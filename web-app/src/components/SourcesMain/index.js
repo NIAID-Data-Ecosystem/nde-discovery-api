@@ -7,17 +7,16 @@ import './sourcesmain.css'
 const SourcesMain = ({ sourceData }) => {
 
     const [sourcesArray, setSourcesArray] = useState([])
-    const [schemaId, setSchemaId] = useState('')
-    const [schemaText, setSchemaText] = useState('')
-
+    const [schemaId, setSchemaId] = useState([])
+    const [schemaText, setSchemaText] = useState([])
 
     function schemaIdFunc(e) {
-        if (schemaId === e.target.id) {
-            setSchemaText('')
-            return setSchemaId('')
+        if (schemaId.includes(e.target.id) || schemaText.includes(e.target.id)) {
+            setSchemaText(schemaText.filter(schemaText => schemaText !== e.target.id))
+            return setSchemaId(schemaId.filter(schemaId => schemaId !== e.target.id))
         }
-        setSchemaText(e.target.id)
-        return setSchemaId(e.target.id)
+        setSchemaText([...schemaText, e.target.id])
+        return setSchemaId([...schemaId, e.target.id])
     }
 
     useEffect(() => {
@@ -66,7 +65,7 @@ const SourcesMain = ({ sourceData }) => {
 
             {sourcesArray.map((sourceObj, index) => {
                 return (
-                    <div key={index} className={"tab-content pr-5 pb-5 rounded-md border-2 border-blue-100 shadow-gray-400 shadow-sm m-2 tab-space w-5/6 divide-y divide-light-blue-400"}>
+                    <div key={index} className={"tab-content pb-5 rounded-md border-2 border-blue-100 shadow-gray-400 shadow-sm m-2 tab-space w-5/6 divide-y divide-light-blue-400"}>
                         <div>
                             <section
                                 className="flex flex-col"
@@ -82,7 +81,7 @@ const SourcesMain = ({ sourceData }) => {
                                 <div className=" ml-14 font-bold text-gray-900">
                                     {sourceObj.numberOfRecords.toLocaleString()} Records Available
                                 </div>
-                                <div className='ml-20'>
+                                <div className='ml-20 mr-20'>
                                     <div // Here we are using dangerouslySetInnerHTML because we receive the html code from API, we parse it using dangerouslySetInnerHTML
                                         className="text-left mt-4 text-gray-900"
                                         dangerouslySetInnerHTML={{
@@ -92,21 +91,21 @@ const SourcesMain = ({ sourceData }) => {
 
                                     <div className='mt-2 flex-col font-bold text-gray-900'>
                                         <p> Visualization of the transformation of {setName(sourceObj.name)} Properties to our Data Ecosystem</p>
-                                        {schemaText === sourceObj.name &&
+                                        {schemaText.includes(sourceObj.name) &&
                                             <button id={sourceObj.name} className='bg-green-600 hover:bg-green-800 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Hide Schema</button>
                                             ||
                                             <button id={sourceObj.name} className='bg-green-600 hover:bg-green-800 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Show Schema</button>
                                         }
                                     </div>
-                                    {schemaId === sourceObj.name &&
+                                    {schemaId.includes(sourceObj.name) &&
                                         <div className='mt-4 transition-test max-w-2xl relative overflow-x-auto shadow-md sm:rounded-lg'>
                                             <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-                                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                     <tr>
-                                                        <th scope="col" class="px-6 py-3">
-                                                            Data Source Property
+                                                        <th scope="col" className="px-6 py-3">
+                                                            {sourceObj.name} Property
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3">
+                                                        <th scope="col" className="px-6 py-3">
                                                             NIAID Data Ecosystem Property
                                                         </th>
                                                     </tr>
@@ -115,9 +114,10 @@ const SourcesMain = ({ sourceData }) => {
                                                 <tbody className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
                                                     {Object.entries(sourceObj.schema).map((item) => {
                                                         return (
-                                                            <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
+                                                            <tr key={item} className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
                                                                 {Object.entries(item).map((field) => {
-                                                                    return <td className='px-6 py-2 font-medium text-gray-900 dark:text-white whitespace-nowrap'>{field[1]}</td>
+                                                                    return <td
+                                                                        key={field} className='px-6 py-2 font-medium text-gray-900 dark:text-white whitespace-nowrap'>{field[1]}</td>
                                                                 })}
                                                             </tr>
                                                         );
@@ -135,8 +135,8 @@ const SourcesMain = ({ sourceData }) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='text-center'>
-                                    <a href='/?' target='_blank' className='outline-none mb-1 py-2 bg-transprent text-sm font-bold text-blue-500 uppercase focus:outline-none cursor-pointer'>Search {setName(sourceObj.name)} records</a>
+                                <div className='text-center mt-2 mb-1'>
+                                    <a href='/?' target='_blank' className='outline-none py-2 bg-transprent text-sm font-bold text-blue-500 uppercase focus:outline-none cursor-pointer'>Search {setName(sourceObj.name)} records</a>
                                 </div>
                             </section>
                         </div>
