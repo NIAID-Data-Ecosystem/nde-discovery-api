@@ -35,16 +35,16 @@ export const setName = (sourceName) => {
             name = "Zenodo";
             break;
         case "ncbi_geo":
-            name = "NCBI GEO";
+            name = "NCBI Gene Expression Omnibus";
             break;
         case "immport":
-            name = "ImmPort";
+            name = "Immunology Database and Analysis Portal";
             break;
         case "omicsdi":
             name = "Omics Discovery Index (OmicsDI)";
             break;
         case "niaid":
-            name = "AccessClinicalData@NIAID";
+            name = "NIAID Clinical Trials Data Repository";
             break;
 
         default:
@@ -79,9 +79,9 @@ export const setDescription = (sourceName) => {
 
         default:
             description = "";
-    }
+    };
     return description;
-}
+};
 
 export const setDateCreated = async (sourcePath) => {
     const url = `https://api.github.com/repos/NIAID-Data-Ecosystem/nde-crawlers/commits?path=${sourcePath}`
@@ -126,6 +126,6 @@ export const setSchema = (sourceName) => {
 
         default:
             schema = "";
-    }
+    };
     return schema;
-}
+};
