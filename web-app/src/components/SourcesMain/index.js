@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { setColor, setDateCreated, setDescription, setName } from '../../utils/setFunctions';
+import { setColor, setDateCreated, setDescription, setName, setSchema } from '../../utils/setFunctions';
 import { useState, useEffect } from 'react'
 import './sourcesmain.css'
 
@@ -29,7 +29,7 @@ const SourcesMain = ({ sourceData }) => {
                     "dateCreated": await setDateCreated(sourceData.src[source].code.file),
                     "dateModified": sourceData.src[source].version,
                     "numberOfRecords": sourceData.src[source].stats[source],
-                    "schema": { "title": "name", "cmc_unique_id": "identifier", "brief_summary": "description", "data_availability_date": "datePublished", "most_recent_update": "dateModified", "data_available": "additionalType", "creator": "funding.funder.name", "nct_number": "nctid, identifier", "condition": "healthCondition", "clinical_trial_website": "mainEntityOfPage", "publications": "citation", "data_available_for_request": "conditionsOfAccess" },
+                    "schema": setSchema(source),
                 }
                 objArray.push(sourceDetails)
             }
@@ -90,7 +90,7 @@ const SourcesMain = ({ sourceData }) => {
                                     ></div>
 
                                     <div className='mt-2 font-bold text-gray-900'>
-                                        <p> Schema showing the transformation of {setName(sourceObj.name)} Properties to the NIAID Data Ecosystem</p>
+                                        {/* <p> Schema showing the transformation of {setName(sourceObj.name)} Properties to the NIAID Data Ecosystem</p> */}
                                         {schemaText.includes(sourceObj.name) &&
                                             <button id={sourceObj.name} className='bg-green-600 hover:bg-green-800 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Hide Schema</button>
                                             ||
