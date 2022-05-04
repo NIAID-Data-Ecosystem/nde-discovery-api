@@ -1,9 +1,12 @@
 ES_INDICES = {
     # 'zenodo': 'zenodo_current',
     # 'immport': 'immport_current'
-    None: 'nde_all_current'
-    # 'niaid': 'niaid_20220418_sjwnon1o'
+    # None: 'nde_all_current'
+    'niaid': 'niaid_20220504_difm00nv'
 }
+APP_LIST += [
+    (r"/{ver}/metadata/?", "web.handlers.MygeneSourceHandler"),
+]
 
 ES_DOC_TYPE: 'dataset'
 

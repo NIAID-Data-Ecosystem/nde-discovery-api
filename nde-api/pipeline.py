@@ -13,13 +13,14 @@ class NDEQueryBuilder(ESQueryBuilder):
         # elasticsearch query string syntax
         # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
         if ":" in q or " AND " in q or " OR " in q:
-            search = search.query('query_string', query=q, default_operator="AND", lenient=True)
+            search = search.query('query_string', query=q,
+                                  default_operator="AND", lenient=True)
 
         # term search
         elif q.startswith('"') and q.endswith('"'):
             queries = [
                 # term query
-                Q('term', _id={"value": q.strip('"'), "boost": 5}), 
+                Q('term', _id={"value": q.strip('"'), "boost": 5}),
                 # query string
                 Q('query_string', query=q, default_operator="AND", lenient=True)
             ]
@@ -31,7 +32,7 @@ class NDEQueryBuilder(ESQueryBuilder):
             queries = [
                 # term query
                 Q('term', _id={"value": q, "boost": 5}),
-                # query string 
+                # query string
                 Q('query_string', query=q, lenient=True)
             ]
 

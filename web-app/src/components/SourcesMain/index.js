@@ -72,9 +72,7 @@ const SourcesMain = ({ sourceData }) => {
                                 id={`version${sourceObj.name}`}
                             >
                                 <div
-                                    className={`${setColor(
-                                        "New Data Source"
-                                    )} source-label w-36 h-auto leading-8 ml-5 text-left font-bold shadow-lg mt-10 mb-3 text-white rounded-md`}
+                                    className={`bg-niaid-blue source-label w-36 h-auto leading-8 ml-5 text-left font-bold shadow-lg mt-10 mb-3 text-white rounded-md`}
                                 >
                                     <span className="ml-4">{setName(sourceObj.name)}</span>
                                 </div>
@@ -92,9 +90,9 @@ const SourcesMain = ({ sourceData }) => {
                                     <div className='mt-2 font-bold text-gray-900'>
                                         {/* <p> Schema showing the transformation of {setName(sourceObj.name)} Properties to the NIAID Data Ecosystem</p> */}
                                         {schemaText.includes(sourceObj.name) &&
-                                            <button id={sourceObj.name} className='bg-green-600 hover:bg-green-800 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Hide Schema</button>
+                                            <button id={sourceObj.name} className='bg-niaid-green-500 transition duration-300 hover:bg-niaid-green-600 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Hide Schema</button>
                                             ||
-                                            <button id={sourceObj.name} className='bg-green-600 hover:bg-green-800 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Show Schema</button>
+                                            <button id={sourceObj.name} className='bg-niaid-green-500 transition duration-300 hover:bg-niaid-green-600 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Show Schema</button>
                                         }
                                         {schemaId.includes(sourceObj.name) &&
                                             <div className='mt-4 transition-test max-w-2xl relative overflow-x-auto shadow-md sm:rounded-lg'>
@@ -136,7 +134,7 @@ const SourcesMain = ({ sourceData }) => {
                                     </div>
                                 </div>
                                 <div className='text-center mt-2 mb-1'>
-                                    <a href='/?' target='_blank' className='outline-none py-2 bg-transprent text-sm font-bold text-blue-500 uppercase focus:outline-none cursor-pointer'>Search {setName(sourceObj.name)} records</a>
+                                    <a href='/?' target='_blank' className='py-2 outline-none bg-transprent text-sm font-bold text-blue-500 uppercase focus:outline-none cursor-pointer'>Search {setName(sourceObj.name)} records</a>
                                 </div>
                             </section>
                         </div>

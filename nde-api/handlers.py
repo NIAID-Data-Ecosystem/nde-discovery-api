@@ -11,10 +11,10 @@ class NDESourceHandler(MetadataSourceHandler):
 
         _meta['sourcesInfo'] = {}
 
-        for s, d in self.biothings.config.THING.items():
-            if 'tax_id' in d:
-                _meta['taxonomy'][s] = int(d['tax_id'])
-            if 'assembly' in d:
-                _meta['genome_assembly'][s] = d['assembly']
+        # for s, d in self.biothings.config.THING.items():
+        #     if 'tax_id' in d:
+        #         _meta['taxonomy'][s] = int(d['tax_id'])
+        #     if 'assembly' in d:
+        #         _meta['genome_assembly'][s] = d['assembly']
 
         return _meta
