@@ -44,7 +44,7 @@ export const setName = (sourceName) => {
             name = "Omics Discovery Index (OmicsDI)";
             break;
         case "niaid":
-            name = "NIAID Clinical Trials Data Repository";
+            name = "AccessClinicalData@NIAID";
             break;
 
         default:

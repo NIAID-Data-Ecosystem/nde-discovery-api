@@ -1,3 +1,5 @@
+from biothings.web.settings.default import APP_LIST
+
 ES_INDICES = {
     # 'zenodo': 'zenodo_current',
     # 'immport': 'immport_current'
@@ -5,7 +7,7 @@ ES_INDICES = {
     'niaid': 'niaid_20220504_difm00nv'
 }
 APP_LIST += [
-    (r"/{ver}/metadata/?", "web.handlers.MygeneSourceHandler"),
+    (r"/{ver}/metadata/?", "handlers.NDESourceHandler"),
 ]
 
 ES_DOC_TYPE: 'dataset'
