@@ -23,8 +23,7 @@ export const setColor = (label) => {
     return color;
 };
 export const setName = (sourceName) => {
-    // We are using this util function to assign a color the label.
-    let name = "NEED NAME";
+    let name = "";
     switch (sourceName) {
         case "sb_apps":
             name = "Seven Bridges Public Apps Gallery";
@@ -94,3 +93,39 @@ export const setDateCreated = async (sourcePath) => {
     });
     return dates[dates.length - 1]
 };
+
+
+export const setSchema = (sourceName) => {
+    let schema = {};
+    switch (sourceName) {
+        case "sb_apps":
+            schema = { "class": "applicationCategory", "label": "name", "description": "description", "inputs": "input", "outputs": "output", "requirements": "softwareRequirements", "sbg:image_url": "thumbnailUrl", "sbg:toolkit": "applicationSuite", "sbg:license": "license", "sbg:links": "codeRepository", "sbg:categories": "applicationSubCategory", "sbg:toolAuthor": "author", "sbg:appVersion": "softwareVersion", "sbg:id": "url, identifier", "sbg:revisionNotes": "version", "sbg:modifiedOn": "dateModified", "sbg:createdOn": "dateCreated", "sbg:contributors": "contributor", "sbg:publisher": "sdPublisher", "sbg:workflowLanguage": "programmingLanguage" };
+            break;
+        case "dde":
+            schema = { "creator": "author", "_id": "identifier", "date_created": "dateCreated", "last_updated": "dateModifed", "@type": "@type", "measurementTechnique": "measurementTechnique", "infectiousAgent": "infectiousAgent", "infectiousDisease": "infectiousDisease", "species": "species" };
+            break;
+        case "zenodo":
+            schema = {
+                "book": "book", "bookChapter": "chapter", "annotationCollection": "collection", "collection": "collection", "software": "computationalTool", "dataManagementPlan": "creativeWork", "deliverable": "creativeWork", "interactiveResource": "creativeWork", "other": "creativeWork", "patent": "creativeWork", "proposal": "creativeWork", "section": "creativeWork", "dataset": "dataset", "drawing": "drawing", "diagram": "imageObject", "figure": "imageObject", "image": "imageObject", "plot": "imageObject", "lesson": "learningResource", "audiovisual": "mediaObject", "photo": "photograph", "poster": "poster", "presentation": "presentationDigitalDocument", "report": "report", "article": "scholarlyArticle", "conferencePaper": "scholarlyArticle", "journalArticle": "scholarlyArticle", "preprint": "scholarlyArticle", "publication": "scholarlyArticle", "thesis": "scholarlyArticle", "workingPaper": "scholarlyArticle", "softwareDocumentation": "techArticle", "technicalNote": "techArticle", "physicalObject": "thing", "video": "videoObject", "taxonomicTreatment": "scholarlyArticle", "projectDeliverable": "creativeWork", "outputManagementPlan": "creativeWork", "projectMilestone": "creativeWork"
+            };
+            break;
+        case "ncbi_geo":
+            schema = { "_id": "identifier", "contributor(s)": "author", "organization": "publisher", "title": "name", "organism": "species", "experiment type": "measurementTechnique", "summary": "description", "submission date": "datePublished", "last update date": "dateModified", "citation(s)": "citation" };
+            break;
+        case "immport":
+            schema = {
+                "_id": "identifer", "creator": "author", "citations": "citedBy", "identifers": "identifer", "species": "species", "measurementTechnique": "measurementTechnique", "distribution": "distribution", "includedInDataCatalog": "includedInDataCatalog", "date": "date"
+            };
+            break;
+        case "omicsdi":
+            schema = { "_id": "identifer", "citation": "citation", "creator": "author", "description": "description", "distribution": "distribution", "keywords": "keywords", "name": "name", "sameAs": "sameAs", "variableMeasured": "variableMeasured" };
+            break;
+        case "niaid":
+            schema = { "title": "name", "cmc_unique_id": "identifier", "brief_summary": "description", "data_availability_date": "datePublished", "most_recent_update": "dateModified", "data_available": "additionalType", "creator": "funding.funder.name", "nct_number": "nctid, identifier", "condition": "healthCondition", "clinical_trial_website": "mainEntityOfPage", "publications": "citation", "data_available_for_request": "conditionsOfAccess" };
+            break;
+
+        default:
+            schema = "";
+    }
+    return schema;
+}
