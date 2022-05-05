@@ -4,7 +4,6 @@ import json
 
 class NDESourceHandler(MetadataSourceHandler):
     """
-    GET /metadata
     GET /v1/metadata
     """
 
