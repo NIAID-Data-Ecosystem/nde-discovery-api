@@ -2,9 +2,9 @@
 version: '3'
 
 services:
-  nde-api:
+  nde-web:
     build:
-      context: nde-api
+      context: nde-web
       dockerfile: Dockerfile
     # We need to access the host port from the docker container
     # the extra_hosts field is equivalent to the docker cliend --add-host parameter

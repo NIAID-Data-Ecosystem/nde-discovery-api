@@ -22,7 +22,7 @@ const SourcesSidebar = ({ sourceData }) => {
             smooth: "easeInOutQuart",
             offset: -5,
         })
-    }; // This function helps in navigation between versions
+    };
     return (
         sourceNames
             .map((name, index) => {
@@ -30,7 +30,7 @@ const SourcesSidebar = ({ sourceData }) => {
                     <li key={index} className={"border-none m-2 ml-4 pb-4"}>
                         <a
                             className={"flex flex-col items-left h-14  cursor-pointer "}
-                            onClick={() => handleNav(name)} // This onClick function will act as navigation between different section we have
+                            onClick={() => handleNav(name)}
                         >
                             <div className="text-gray-900 text-xl font-bold  ">
                                 {setName(name)} <br />
