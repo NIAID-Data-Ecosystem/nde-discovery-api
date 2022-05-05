@@ -4,7 +4,7 @@ ES_INDICES = {
     # 'zenodo': 'zenodo_current',
     # 'immport': 'immport_current'
     None: 'nde_all_current'
-    # 'niaid': 'niaid_20220504_difm00nv'
+    # 'niaid': 'niaid_20220418_sjwnon1o'
 }
 APP_LIST += [
     (r"/{ver}/metadata/?", "handlers.NDESourceHandler"),
