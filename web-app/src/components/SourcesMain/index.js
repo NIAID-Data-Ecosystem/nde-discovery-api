@@ -65,7 +65,7 @@ const SourcesMain = ({ sourceData }) => {
 
             {sourcesArray.map((sourceObj, index) => {
                 return (
-                    <div key={index} className={"tab-content pb-5 rounded-md border-2 border-blue-100 shadow-gray-400 shadow-sm m-2 tab-space w-5/6 divide-y divide-light-blue-400"}>
+                    <div key={index} className={"tab-content pb-5 rounded-md border-2 border-niaid-blue/20 shadow-gray-400 shadow-sm m-2 tab-space w-5/6 divide-y divide-light-blue-400"}>
                         <div>
                             <section
                                 className="flex flex-col"
@@ -88,7 +88,7 @@ const SourcesMain = ({ sourceData }) => {
                                     ></div>
 
                                     <div className='mt-2 font-bold text-gray-900'>
-                                        <p> Schema showing the transformation of {sourceObj.name} Properties to the NIAID Data Ecosystem</p>
+                                        <p> Visualization of {sourceObj.name} properties transformed to the NIAID Data Ecosystem</p>
                                         {schemaText.includes(sourceObj.name) &&
                                             <button id={sourceObj.name} className='bg-niaid-green-500 transition duration-300 hover:bg-niaid-green-600 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Hide Schema</button>
                                             ||
@@ -134,7 +134,7 @@ const SourcesMain = ({ sourceData }) => {
                                     </div>
                                 </div>
                                 <div className='text-center mt-2 mb-1'>
-                                    <a href='/?' target='_blank' className='py-2 outline-none bg-transprent text-sm font-bold text-white uppercase focus:outline-none cursor-pointer px-4 py-2 font-semibold text-sm  rounded-md shadow-sm ring-1 ring-slate-900/5 bg-niaid-green-500  dark:border-niaid-green-500  hover:bg-niaid-green-600 hover:text-white  transition duration-300'>Search {sourceObj.name} records</a>
+                                    <a href='/?' target='_blank' className=' outline-none bg-transprent  text-white uppercase focus:outline-none cursor-pointer px-4 py-2 font-bold text-sm  rounded-md shadow-sm ring-1 ring-slate-900/5 bg-niaid-green-500  dark:border-niaid-green-500  hover:bg-niaid-green-600 hover:text-white  transition duration-300'>Search {sourceObj.name} records</a>
                                 </div>
                             </section>
                         </div>
