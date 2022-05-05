@@ -12,32 +12,32 @@ const SourcesMain = ({ sourceData }) => {
 
     function schemaIdFunc(e) {
         if (schemaId.includes(e.target.id) || schemaText.includes(e.target.id)) {
-            setSchemaText(schemaText.filter(schemaText => schemaText !== e.target.id))
-            return setSchemaId(schemaId.filter(schemaId => schemaId !== e.target.id))
-        }
-        setSchemaText([...schemaText, e.target.id])
-        return setSchemaId([...schemaId, e.target.id])
+            setSchemaText(schemaText.filter(schemaText => schemaText !== e.target.id));
+            return setSchemaId(schemaId.filter(schemaId => schemaId !== e.target.id));
+        };
+        setSchemaText([...schemaText, e.target.id]);
+        return setSchemaId([...schemaId, e.target.id]);
     }
 
     useEffect(() => {
         async function buildSourceDetails() {
-            const objArray = []
+            const objArray = [];
             for (const source in sourceData.src) {
                 const sourceDetails = {
-                    "name": source,
-                    "description": setDescription(source),
+                    "name": sourceData.src[source].sourceInfo.name,
+                    "description": sourceData.src[source].sourceInfo.description,
                     "dateCreated": await setDateCreated(sourceData.src[source].code.file),
                     "dateModified": sourceData.src[source].version,
                     "numberOfRecords": sourceData.src[source].stats[source],
-                    "schema": setSchema(source),
-                }
-                objArray.push(sourceDetails)
-            }
-            objArray.sort((a, b) => setName(a.name).localeCompare(setName(b.name)))
-            setSourcesArray(objArray)
-        }
-        buildSourceDetails()
-    }, [])
+                    "schema": sourceData.src[source].sourceInfo.schema,
+                };
+                objArray.push(sourceDetails);
+            };
+            objArray.sort((a, b) => a.name.localeCompare(b.name));
+            setSourcesArray(objArray);
+        };
+        buildSourceDetails();
+    }, []);
 
     const date = useCallback((data) => {
         let dateString;
@@ -74,13 +74,13 @@ const SourcesMain = ({ sourceData }) => {
                                 <div
                                     className={`bg-niaid-blue source-label w-36 h-auto leading-8 ml-5 text-left font-bold shadow-lg mt-10 mb-3 text-white rounded-md`}
                                 >
-                                    <span className="ml-4">{setName(sourceObj.name)}</span>
+                                    <span className="ml-4">{sourceObj.name}</span>
                                 </div>
                                 <div className=" ml-14 font-bold text-gray-900">
                                     {sourceObj.numberOfRecords.toLocaleString()} Records Available
                                 </div>
                                 <div className='ml-20 mr-20'>
-                                    <div // Here we are using dangerouslySetInnerHTML because we receive the html code from API, we parse it using dangerouslySetInnerHTML
+                                    <div
                                         className="text-left mt-4 text-gray-900"
                                         dangerouslySetInnerHTML={{
                                             __html: sourceObj.description,
@@ -88,7 +88,7 @@ const SourcesMain = ({ sourceData }) => {
                                     ></div>
 
                                     <div className='mt-2 font-bold text-gray-900'>
-                                        {/* <p> Schema showing the transformation of {setName(sourceObj.name)} Properties to the NIAID Data Ecosystem</p> */}
+                                        <p> Schema showing the transformation of {sourceObj.name} Properties to the NIAID Data Ecosystem</p>
                                         {schemaText.includes(sourceObj.name) &&
                                             <button id={sourceObj.name} className='bg-niaid-green-500 transition duration-300 hover:bg-niaid-green-600 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Hide Schema</button>
                                             ||
@@ -134,7 +134,7 @@ const SourcesMain = ({ sourceData }) => {
                                     </div>
                                 </div>
                                 <div className='text-center mt-2 mb-1'>
-                                    <a href='/?' target='_blank' className='py-2 outline-none bg-transprent text-sm font-bold text-blue-500 uppercase focus:outline-none cursor-pointer'>Search {setName(sourceObj.name)} records</a>
+                                    <a href='/?' target='_blank' className='py-2 outline-none bg-transprent text-sm font-bold text-blue-500 uppercase focus:outline-none cursor-pointer'>Search {sourceObj.name} records</a>
                                 </div>
                             </section>
                         </div>
