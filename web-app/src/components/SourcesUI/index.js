@@ -9,7 +9,7 @@ const SourcesUI = () => {
     const [sourceData, setSourceData] = useState({})
     const [ready, setReady] = useState(false)
 
-    const sourceURL = 'https://api.data.niaid.nih.gov/v1/metadata'
+    const sourceURL = 'https://api.data.niaid.nih.gov/v1/metadata/'
 
     const getSourcesData = async () => {
         const response = await fetch(sourceURL)

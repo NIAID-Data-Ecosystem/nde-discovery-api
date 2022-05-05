@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { scroller } from "react-scroll";
 import { useState, useEffect } from 'react'
-import { setName } from "../../utils/setFunctions";
 
 const SourcesSidebar = ({ sourceData }) => {
     //This useCallback function taken a string argument of date and converts it into formatted date, e.g Day Month Date Year(Monday 1 Jan 1999)
@@ -11,8 +10,11 @@ const SourcesSidebar = ({ sourceData }) => {
         return dateString.toDateString();
     }, []);
 
-
-    const sourceNames = Object.keys(sourceData.src).sort((a, b) => setName(a).localeCompare(setName(b)))
+    const sourceNames = []
+    for (const source in sourceData.src) {
+        sourceNames.push([sourceData.src[source].sourceInfo.name, source])
+    }
+    sourceNames.sort((a, b) => a[0].localeCompare(b[0]))
 
 
     function handleNav(version) {
@@ -23,6 +25,7 @@ const SourcesSidebar = ({ sourceData }) => {
             offset: -5,
         })
     };
+
     return (
         sourceNames
             .map((name, index) => {
@@ -30,13 +33,13 @@ const SourcesSidebar = ({ sourceData }) => {
                     <li key={index} className={"border-none m-2 ml-4 pb-4"}>
                         <a
                             className={"flex flex-col items-left h-14  cursor-pointer "}
-                            onClick={() => handleNav(name)}
+                            onClick={() => handleNav(name[0])}
                         >
                             <div className="text-gray-900 text-xl font-bold  ">
-                                {setName(name)} <br />
+                                {name[0]} <br />
                             </div>
                             <div className="text-sm font-medium text-gray-500">
-                                Latest Release {date(sourceData.src[name].version)}
+                                Latest Release {date(sourceData.src[name[1]].version)}
                             </div>
                         </a>
                     </li>

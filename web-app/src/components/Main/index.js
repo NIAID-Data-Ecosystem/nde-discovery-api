@@ -39,7 +39,6 @@ const Main = ({ versions, loading }) => {
                                             .map((item) => {
                                                 // The Description in our API is a 'field set' and it two fields, 1. Details and  2. Label
                                                 const details = item.details; // Here we are accessing the details, details contains all the text.
-                                                console.log(item)
                                                 const label = item.types.label; // Here we are accessing picker option's label. There are total 4 labels. 1. Security Fixes 2. Bug fixes, 3. Changes and 4. Know issue
                                                 return (
                                                     <section

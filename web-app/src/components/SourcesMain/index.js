@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { setColor, setDateCreated, setDescription, setName, setSchema } from '../../utils/setFunctions';
+import { setDateCreated } from '../../utils/setFunctions';
 import { useState, useEffect } from 'react'
 import './sourcesmain.css'
 
@@ -134,7 +134,7 @@ const SourcesMain = ({ sourceData }) => {
                                     </div>
                                 </div>
                                 <div className='text-center mt-2 mb-1'>
-                                    <a href='/?' target='_blank' className='py-2 outline-none bg-transprent text-sm font-bold text-blue-500 uppercase focus:outline-none cursor-pointer'>Search {sourceObj.name} records</a>
+                                    <a href='/?' target='_blank' className='py-2 outline-none bg-transprent text-sm font-bold text-white uppercase focus:outline-none cursor-pointer px-4 py-2 font-semibold text-sm  rounded-md shadow-sm ring-1 ring-slate-900/5 bg-niaid-green-500  dark:border-niaid-green-500  hover:bg-niaid-green-600 hover:text-white  transition duration-300'>Search {sourceObj.name} records</a>
                                 </div>
                             </section>
                         </div>
