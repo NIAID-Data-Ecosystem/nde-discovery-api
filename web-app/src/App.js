@@ -5,10 +5,12 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  HashRouter,
 } from "react-router-dom";
 
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
 import SourcesUI from './components/SourcesUI';
+
 const client = new ApolloClient({
   uri: "https://release-notes-app-copy-90e.can.canonic.dev/graphql",
   cache: new InMemoryCache(),
@@ -19,17 +21,17 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <div className="App" style={{ height: "100vh" }}>
-          <BrowserRouter>
+          <HashRouter>
             <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/versions' element={
+              <Route exact path={'/'} element={<Home />} />
+              <Route exact path={'/versions'} element={
                 <UI />
               } />
-              <Route path='/sources' element={
+              <Route exact path={'/sources'} element={
                 <SourcesUI />
               } />
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </div>
       </ApolloProvider>
     </>

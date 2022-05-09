@@ -1,16 +1,4 @@
-.sources-title {
-    margin-top: 3.5rem !important;
-}
-
-.source-label {
-    width: 22rem;
-}
-
-.sources-title-container {
-    border-bottom: 1px solid lightgrey;
-}
-
-.transition-test {
+.transition-fade {
     animation: fade .5s;
 }
 

@@ -10,7 +10,7 @@ const Sidebar = ({ versions, loading }) => {
         return dateString.toDateString();
     }, []);
 
-    const ready = versions && !loading; // This variable checks if data is present is versions and not in loading
+    const ready = versions && !loading;
 
     function handleNav(version) {
         scroller.scrollTo(`version${version}`, {
@@ -19,7 +19,7 @@ const Sidebar = ({ versions, loading }) => {
             smooth: "easeInOutQuart",
             offset: -80,
         })
-    }; // This function helps in navigation between versions
+    };
 
     return (
         <>
@@ -32,7 +32,7 @@ const Sidebar = ({ versions, loading }) => {
                             <li key={index} className={"m-2 ml-4 pb-4"}>
                                 <a
                                     className={"flex flex-col items-left h-14  cursor-pointer "}
-                                    onClick={() => handleNav(data.version)} // This onClick function will act as navigation between different section we have
+                                    onClick={() => handleNav(data.version)}
                                 >
                                     <div className="text-gray-900 text-2xl font-bold  ">
                                         {data.version} <br />

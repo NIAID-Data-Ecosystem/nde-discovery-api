@@ -2,7 +2,7 @@ import SourcesHeader from "../SourcesHeader";
 import SourcesMain from "../SourcesMain";
 import { useState, useEffect } from 'react'
 import SourcesSidebar from "../SourcesSidebar";
-import './sourcessidebar.css'
+import { DesktopNavItem, Navigation } from "nde-design-system";
 
 const SourcesUI = () => {
 
@@ -30,14 +30,14 @@ const SourcesUI = () => {
         <>
             {ready &&
                 <>
-                    <SourcesHeader />
+                    <Navigation />
                     <div className="min-h-screen flex flex-row">
-                        <div className="flex flex-col bg-gray-100 sidebar-container  text-white w-6/12 mobile:hidden">
+                        <div className="flex flex-col bg-gray-100 sidebar-container text-white w-6/12 hidden md:block">
                             <ul className="flex flex-col py-4 sticky top-0 divide-gray-400">
                                 <SourcesSidebar sourceData={sourceData} />
                             </ul>
                         </div>
-                        <div className="main-container">
+                        <div className="main-container text-center md:text-left">
                             <SourcesMain sourceData={sourceData} />
                         </div>
                     </div>

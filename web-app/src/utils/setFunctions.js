@@ -11,7 +11,7 @@ export const setColor = (label) => {
             color = "bg-green-500";
             break;
         case "New Data Source":
-            color = "bg-blue-600";
+            color = "bg-niaid-green-500";
             break;
         case "Known issue":
             color = "bg-blue-600";

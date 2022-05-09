@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import { setColor } from '../../utils/setFunctions';
 import './main.css'
 
-//This component render Description as per the version name.
 const Main = ({ versions, loading }) => {
 
     const date = useCallback((data) => {
@@ -37,9 +36,8 @@ const Main = ({ versions, loading }) => {
                                     <div>
                                         {data.description
                                             .map((item) => {
-                                                // The Description in our API is a 'field set' and it two fields, 1. Details and  2. Label
-                                                const details = item.details; // Here we are accessing the details, details contains all the text.
-                                                const label = item.types.label; // Here we are accessing picker option's label. There are total 4 labels. 1. Security Fixes 2. Bug fixes, 3. Changes and 4. Know issue
+                                                const details = item.details;
+                                                const label = item.types.label;
                                                 return (
                                                     <section
                                                         className="flex flex-col  mb-10"
@@ -52,7 +50,7 @@ const Main = ({ versions, loading }) => {
                                                         >
                                                             <span className="ml-4">{label}</span>
                                                         </div>
-                                                        <div // Here we are using dangerouslySetInnerHTML because we receive the html code from API, we parse it using dangerouslySetInnerHTML
+                                                        <div
                                                             className="text-left ml-20 mt-4 text-gray-900"
                                                             dangerouslySetInnerHTML={{
                                                                 __html: details,

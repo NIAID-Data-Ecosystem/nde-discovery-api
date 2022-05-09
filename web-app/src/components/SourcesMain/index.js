@@ -3,7 +3,6 @@ import { setDateCreated } from '../../utils/setFunctions';
 import { useState, useEffect } from 'react'
 import './sourcesmain.css'
 
-//This component render Description as per the version name.
 const SourcesMain = ({ sourceData }) => {
 
     const [sourcesArray, setSourcesArray] = useState([])
@@ -50,12 +49,12 @@ const SourcesMain = ({ sourceData }) => {
         <div className='mb-10'>
 
             <div
-                className="tab-content sources-title-container tab-space w-5/6 divide-y divide-light-blue-400"
+                className="tab-content tab-space md:w-5/6 divide-y divide-light-blue-400 border-b-2"
                 key={'key'}
             >
                 <div
                     className={
-                        `sources-title text-gray-900 text-2xl p-2 mt-14 w-50 my-4 ml-8 font-bold `
+                        `text-gray-900 text-2xl p-2 mt-14 w-50 my-4 md:ml-8 font-bold `
                     }
                 >
                     Version 1.0.0 Data Sources
@@ -65,29 +64,29 @@ const SourcesMain = ({ sourceData }) => {
 
             {sourcesArray.map((sourceObj, index) => {
                 return (
-                    <div key={index} className={"tab-content pb-5 rounded-md border-2 border-niaid-blue/20 shadow-gray-400 shadow-sm m-2 tab-space w-5/6 divide-y divide-light-blue-400"}>
+                    <div key={index} className={"tab-content pb-5 rounded-md border-2 border-niaid-blue/20 shadow-gray-400 shadow-sm m-2 tab-space md:w-5/6 divide-y divide-light-blue-400"}>
                         <div>
                             <section
                                 className="flex flex-col"
                                 id={`version${sourceObj.name}`}
                             >
                                 <div
-                                    className={`bg-niaid-blue source-label w-36 h-auto leading-8 ml-5 text-left font-bold shadow-lg mt-10 mb-3 text-white rounded-md`}
+                                    className={`bg-niaid-blue h-auto leading-8 ml-2 md:ml-5 text-left font-bold shadow-lg mt-10 mb-3 text-white w-96 mr-2 rounded-md`}
                                 >
                                     <span className="ml-4">{sourceObj.name}</span>
                                 </div>
-                                <div className=" ml-14 font-bold text-gray-900">
+                                <div className=" md:ml-14 font-bold text-gray-900">
                                     {sourceObj.numberOfRecords.toLocaleString()} Records Available
                                 </div>
-                                <div className='ml-20 mr-20'>
+                                <div className='md:ml-20 md:mr-20 ml-2 mr-2'>
                                     <div
-                                        className="text-left mt-4 text-gray-900"
+                                        className="text-left mt-4 text-justify text-gray-900"
                                         dangerouslySetInnerHTML={{
                                             __html: sourceObj.description,
                                         }}
                                     ></div>
 
-                                    <div className='mt-2 font-bold text-gray-900'>
+                                    <div className='mt-2 font-bold text-gray-900 hidden sm:block'>
                                         <p> Visualization of {sourceObj.name} properties transformed to the NIAID Data Ecosystem</p>
                                         {schemaText.includes(sourceObj.name) &&
                                             <button id={sourceObj.name} className='bg-niaid-green-500 transition duration-300 hover:bg-niaid-green-600 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Hide Schema</button>
@@ -95,7 +94,7 @@ const SourcesMain = ({ sourceData }) => {
                                             <button id={sourceObj.name} className='bg-niaid-green-500 transition duration-300 hover:bg-niaid-green-600 text-white font-bold py-0 px-4 rounded mt-1 w-36' onClick={(e) => schemaIdFunc(e)}>Show Schema</button>
                                         }
                                         {schemaId.includes(sourceObj.name) &&
-                                            <div className='mt-4 transition-test max-w-2xl relative overflow-x-auto shadow-md sm:rounded-lg'>
+                                            <div className='mt-4 transition-fade max-w-2xl relative overflow-x-auto shadow-md sm:rounded-lg'>
                                                 <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
                                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                         <tr>
@@ -133,8 +132,8 @@ const SourcesMain = ({ sourceData }) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='text-center mt-2 mb-1'>
-                                    <a href='/?' target='_blank' className=' outline-none bg-transprent  text-white uppercase focus:outline-none cursor-pointer px-4 py-2 font-bold text-sm  rounded-md shadow-sm ring-1 ring-slate-900/5 bg-niaid-green-500  dark:border-niaid-green-500  hover:bg-niaid-green-600 hover:text-white  transition duration-300'>Search {sourceObj.name} records</a>
+                                <div className='text-center mt-2 mb-1  outline-none bg-transprent  text-white uppercase focus:outline-none cursor-pointer px-4 py-2 font-bold text-xs rounded-md shadow-sm ring-1 ring-slate-900/5 bg-niaid-green-500  dark:border-niaid-green-500  hover:bg-niaid-green-600 hover:text-white  transition duration-300 ml-20 mr-20 md:ml-20 md:mr-20 lg:w-2/5' >
+                                    <a href='/?' target='_blank' className=' '>Search {sourceObj.name} records</a>
                                 </div>
                             </section>
                         </div>
