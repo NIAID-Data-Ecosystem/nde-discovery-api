@@ -7,7 +7,7 @@ ES_INDICES = {
     # 'niaid': 'niaid_20220504_difm00nv'
 }
 APP_LIST += [
-    (r"/{ver}/metadata", "handlers.NDESourceHandler"),
+    (r"/{ver}/metadata/?", "handlers.NDESourceHandler"),
 ]
 
 ES_DOC_TYPE: 'dataset'
