@@ -1,5 +1,11 @@
 from biothings.web.handlers import MetadataSourceHandler
 import json
+from tornado.web import RequestHandler
+
+
+class WebAppHandler(RequestHandler):
+    def get(self):
+        self.render('dist/index.html')
 
 
 class NDESourceHandler(MetadataSourceHandler):
