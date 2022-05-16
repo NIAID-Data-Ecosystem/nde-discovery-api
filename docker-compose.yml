@@ -15,7 +15,6 @@ services:
       - "8000:9000"
     volumes:
       - app-volume:/home/nde/nde_backend/dist
-
   web-app:
     build:
       context: web-app

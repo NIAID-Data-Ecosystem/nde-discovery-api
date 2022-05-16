@@ -1,11 +1,14 @@
+import logging
 from biothings.web.handlers import MetadataSourceHandler
-import json
 from tornado.web import RequestHandler
 
 
 class WebAppHandler(RequestHandler):
     def get(self):
-        self.render('dist/index.html')
+        if self.render('dist/index.html'):
+            self.render('dist/index.html')
+        else:
+            logging.info("Unable to find dist folder from react app.")
 
 
 class NDESourceHandler(MetadataSourceHandler):
@@ -14,7 +17,7 @@ class NDESourceHandler(MetadataSourceHandler):
     """
 
     def extras(self, _meta):
-
+        # TODO change to access_clinical_data
         if 'niaid' in _meta['src']:
             _meta['src']['niaid']['sourceInfo'] = {
                 "name": "AccessClinicalData@NIAID",
