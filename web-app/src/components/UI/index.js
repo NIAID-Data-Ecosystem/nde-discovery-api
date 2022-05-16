@@ -31,7 +31,7 @@ const UI = () => {
                 <>
                     <Navigation />
                     <div className="min-h-screen flex flex-row">
-                        <div className="flex flex-col bg-gray-100  text-white w-6/12 hidden md:block">
+                        <div className="flex-col bg-gray-100  text-white w-6/12 hidden md:block">
                             <ul className="flex flex-col py-4 sticky top-0 divide-gray-400">
                                 <Sidebar />
                             </ul>
