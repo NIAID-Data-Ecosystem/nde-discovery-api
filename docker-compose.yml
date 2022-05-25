@@ -13,3 +13,16 @@ services:
       - "host.docker.internal:host-gateway"
     ports:
       - "8000:9000"
+    volumes:
+      - app-volume:/home/nde/nde_backend/dist
+  web-app:
+    build:
+      context: web-app
+      dockerfile: Dockerfile
+    ports:
+      - '1337:80'
+    volumes:
+      - app-volume:/dist/
+
+volumes:
+  app-volume:

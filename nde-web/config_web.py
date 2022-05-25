@@ -10,6 +10,11 @@ APP_LIST += [
     (r"/{ver}/metadata/?", "handlers.NDESourceHandler"),
 ]
 
+# replace default landing page handler
+assert APP_LIST[0][0] == '/'
+APP_LIST[0] = ('/', 'handlers.WebAppHandler')
+
+
 ES_DOC_TYPE: 'dataset'
 
 ES_QUERY_BUILDER = "pipeline.NDEQueryBuilder"

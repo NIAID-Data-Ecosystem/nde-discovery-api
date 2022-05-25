@@ -1,7 +1,12 @@
 from biothings.web.launcher import main
+from tornado.web import RequestHandler
 
-
-ADDON_HANDLERS = []
 
 if __name__ == '__main__':
-    main(ADDON_HANDLERS)
+    main([
+        (r" ^/$", "tornado.web.StaticFileHandler", {
+            "path": "dist/static"
+        })], {
+        "default_handler_class": 'handlers.WebAppHandler',
+        "static_path": "dist/static",
+    })
