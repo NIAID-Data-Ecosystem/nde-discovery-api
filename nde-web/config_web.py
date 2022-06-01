@@ -16,8 +16,8 @@ APP_LIST[0] = ('/', 'handlers.WebAppHandler')
 
 
 ES_DOC_TYPE: 'dataset'
-
 ES_QUERY_BUILDER = "pipeline.NDEQueryBuilder"
+ALLOW_NESTED_AGGS = True
 
 try:
     from config_web_local import *
