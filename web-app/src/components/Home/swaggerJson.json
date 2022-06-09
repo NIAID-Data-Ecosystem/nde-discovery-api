@@ -276,7 +276,7 @@
     "termsOfService": "http://data.niaid.nih.gov/terms",
     "contact": {
       "email": "help@data.niaid.nih.gov",
-      "name": "NIAID",
+      "name": "Us",
       "x-role": "responsible developer"
     },
     "version": "1.0.0"
