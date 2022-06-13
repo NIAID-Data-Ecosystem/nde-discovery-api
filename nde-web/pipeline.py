@@ -33,7 +33,7 @@ class NDEQueryBuilder(ESQueryBuilder):
                 # term query
                 Q('term', _id={"value": q, "boost": 5}),
                 # query string
-                Q('query_string', query=q, lenient=True)
+                Q('query_string', query=q, default_operator="AND", lenient=True)
             ]
 
             search = search.query('dis_max', queries=queries)
