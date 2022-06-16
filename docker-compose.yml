@@ -7,7 +7,7 @@ services:
       context: nde-web
       dockerfile: Dockerfile
     # We need to access the host port from the docker container
-    # the extra_hosts field is equivalent to the docker cliend --add-host parameter
+    # the extra_hosts field is equivalent to the docker client --add-host parameter
     # https://stackoverflow.com/questions/31324981/how-to-access-host-port-from-docker-container
     extra_hosts:
       - "host.docker.internal:host-gateway"

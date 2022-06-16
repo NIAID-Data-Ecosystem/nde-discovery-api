@@ -1,9 +1,9 @@
 FROM python:3.8 AS builder
 
 WORKDIR /build/nde
-ADD requirements.txt .
+ADD requirements_web.txt .
 WORKDIR /build/wheels
-RUN pip wheel -r /build/nde/requirements.txt
+RUN pip wheel -r /build/nde/requirements_web.txt
 
 
 FROM python:3.8-slim
