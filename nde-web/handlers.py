@@ -18,8 +18,8 @@ class NDESourceHandler(MetadataSourceHandler):
 
     def extras(self, _meta):
         # TODO change to access_clinical_data
-        if 'niaid' in _meta['src']:
-            _meta['src']['niaid']['sourceInfo'] = {
+        if 'acd_niaid' in _meta['src']:
+            _meta['src']['acd_niaid']['sourceInfo'] = {
                 "name": "AccessClinicalData@NIAID",
                 "description": "AccessClinicalData@NIAID is a NIAID cloud-based, secure data platform that enables sharing of and access to reports and data sets from NIAID COVID-19 and other sponsored clinical trials for the basic and clinical research community.",
                 "schema":  {"title": "name", "cmc_unique_id": "identifier", "brief_summary": "description", "data_availability_date": "datePublished", "most_recent_update": "dateModified", "data_available": "additionalType", "creator": "funding.funder.name", "nct_number": "nctid, identifier", "condition": "healthCondition", "clinical_trial_website": "mainEntityOfPage", "publications": "citation", "data_available_for_request": "conditionsOfAccess"},
