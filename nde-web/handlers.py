@@ -67,7 +67,7 @@ class NDESourceHandler(MetadataSourceHandler):
 
         if 'immport' in _meta['src']:
             _meta['src']['immport']['sourceInfo'] = {
-                "name": "Immunology Database and Analysis Portal",
+                "name": "Immunology Database and Analysis Portal (ImmPort)",
                 "description": "The ImmPort project provides advanced information technology support in the archiving and exchange of scientific data for the diverse community of life science researchers supported by NIAID/DAIT and serves as a long-term, sustainable archive of research and clinical data. The core component of ImmPort is an extensive data warehouse containing experimental data and metadata describing the purpose of the study and the methods of data generation. The functionality of ImmPort will be expanded continuously over the life of the BISC project to accommodate the needs of expanding research communities. The shared research and clinical data, as well as the analytical tools in ImmPort are available to any researcher after registration.",
                 "schema": {
                     "_id": "identifer", "creator": "author", "citations": "citedBy", "identifers": "identifer", "species": "species", "measurementTechnique": "measurementTechnique", "distribution": "distribution", "includedInDataCatalog": "includedInDataCatalog", "date": "date"
@@ -83,6 +83,24 @@ class NDESourceHandler(MetadataSourceHandler):
                 "schema": {"_id": "identifer", "citation": "citation", "creator": "author", "description": "description", "distribution": "distribution", "keywords": "keywords", "name": "name", "sameAs": "sameAs", "variableMeasured": "variableMeasured"},
                 "url": "https://www.omicsdi.org/",
                 "identifier": "omicsdi"
+            }
+
+        if 'mendeley' in _meta['src']:
+            _meta['src']['mendeley']['sourceInfo'] = {
+                "name": "Mendeley Data",
+                "description": "Mendeley Data, a product of Elsevier, is one of the newest entrants in the research data repository landscape; the platform was released in April 2016. Mendeley Data is a general-purpose repository, allowing researchers in any field to upload and publish research data. Mendeley Data also allows researchers to share unpublished data privately with research collaborators.",
+                "schema": {"id": "identifer", "doi": "doi", "name": "name", "description": "description", "contributors": "contributors", "files": "distribution", "articles": "citation", "categories": "keywords", "publish_date": "datePublished", "related_links": "citation", "modified_on": "dateModified", "links": "url", "repository": "sdPublisher"},
+                "url": "https://www.omicsdi.org/",
+                "identifier": "mendeley"
+            }
+
+        if 'reframedb' in _meta['src']:
+            _meta['src']['reframedb']['sourceInfo'] = {
+                "name": "reframeDB",
+                "description": "The ReFRAME collection of 12,000 compounds is a best-in-class drug repurposing library containing nearly all small molecules that have reached clinical development or undergone significant preclinical profiling. The purpose of such a screening collection is to enable rapid testing of compounds with demonstrated safety profiles in new indications, such as neglected or rare diseases, where there is less commercial motivation for expensive research and development.",
+                "schema": {"assay_id": "identifer", "assay_title": "name", "title_short": "alternateName", "authors": "author", "summary": "description", "purpose": "description", "protocol": "description", "readout": "description", "detection_method": "description", "detection_reagents": "description", "components": "description", "drug_conc": "description", "indication": "healthCondition", "assay_type": "measurementTechnique", "bibliography": "citation"},
+                "url": "https://www.omicsdi.org/",
+                "identifier": "reframedb"
             }
 
         return _meta
