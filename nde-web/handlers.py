@@ -17,7 +17,17 @@ class NDESourceHandler(MetadataSourceHandler):
     """
 
     def extras(self, _meta):
-        # TODO change to access_clinical_data
+
+        # Example Object
+        # if <SOURCE_NAME> in _meta['src']:
+            # _meta['src'][<SOURCE_NAME>]['sourceInfo'] = {
+                # 'name': 'A proper source name',
+                # 'description': 'A short description of what the source offers, usually found on the source's about page',
+                # 'schema': 'A dict where the key is their metadata variable and the value is our transformation. Ex: {"summary":"description"},
+                # 'url': 'The source's URL',
+                # 'identifier':'short identifier for the source',
+        # }
+
         if 'acd_niaid' in _meta['src']:
             _meta['src']['acd_niaid']['sourceInfo'] = {
                 "name": "AccessClinicalData@NIAID",
