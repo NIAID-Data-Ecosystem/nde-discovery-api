@@ -20,12 +20,12 @@ class NDESourceHandler(MetadataSourceHandler):
 
         # Example Object
         # if <SOURCE_NAME> in _meta['src']:
-            # _meta['src'][<SOURCE_NAME>]['sourceInfo'] = {
-                # 'name': 'A proper source name',
-                # 'description': 'A short description of what the source offers, usually found on the source's about page',
-                # 'schema': 'A dict where the key is their metadata variable and the value is our transformation. Ex: {"summary":"description"},
-                # 'url': 'The source's URL',
-                # 'identifier':'short identifier for the source',
+        # _meta['src'][<SOURCE_NAME>]['sourceInfo'] = {
+        # 'name': 'A proper source name',
+        # 'description': 'A short description of what the source offers, usually found on the source's about page',
+        # 'schema': 'A dict where the key is their metadata variable and the value is our transformation. Ex: {"summary":"description"},
+        # 'url': 'The source's URL',
+        # 'identifier':'includedInDataCatalog.name',
         # }
 
         if 'acd_niaid' in _meta['src']:
@@ -34,7 +34,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "description": "AccessClinicalData@NIAID is a NIAID cloud-based, secure data platform that enables sharing of and access to reports and data sets from NIAID COVID-19 and other sponsored clinical trials for the basic and clinical research community.",
                 "schema":  {"title": "name", "cmc_unique_id": "identifier", "brief_summary": "description", "data_availability_date": "datePublished", "most_recent_update": "dateModified", "data_available": "additionalType", "creator": "funding.funder.name", "nct_number": "nctid, identifier", "condition": "healthCondition", "clinical_trial_website": "mainEntityOfPage", "publications": "citation", "data_available_for_request": "conditionsOfAccess"},
                 "url": "https://accessclinicaldata.niaid.nih.gov/",
-                "identifier": "accessclinicaldata"
+                "identifier": "AccessClinicalData@NIAID"
             }
 
         if 'sb_apps' in _meta['src']:
@@ -43,7 +43,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "description": "The Seven Bridges Public Apps Gallery offers a repository of publicly available apps suitable for many different types of data analysis. Apps include both tools (individual bioinformatics utilities) and workflows (chains or pipelines of connected tools). The publicly available apps are maintained by the Seven Bridges Platform bioinformatics team to represent the latest tool versions.",
                 "schema":  {"class": "applicationCategory", "label": "name", "description": "description", "inputs": "input", "outputs": "output", "requirements": "softwareRequirements", "sbg:image_url": "thumbnailUrl", "sbg:toolkit": "applicationSuite", "sbg:license": "license", "sbg:links": "codeRepository", "sbg:categories": "applicationSubCategory", "sbg:toolAuthor": "author", "sbg:appVersion": "softwareVersion", "sbg:id": "url, identifier", "sbg:revisionNotes": "version", "sbg:modifiedOn": "dateModified", "sbg:createdOn": "dateCreated", "sbg:contributors": "contributor", "sbg:publisher": "sdPublisher", "sbg:workflowLanguage": "programmingLanguage"},
                 "url": "https://igor.sbgenomics.com/public/apps",
-                "identifier": "sbapps"
+                "identifier": "PublicApps@SevenBridges"
             }
 
         if 'zenodo' in _meta['src']:
@@ -54,7 +54,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "book": "book", "bookChapter": "chapter", "annotationCollection": "collection", "collection": "collection", "software": "computationalTool", "dataManagementPlan": "creativeWork", "deliverable": "creativeWork", "interactiveResource": "creativeWork", "other": "creativeWork", "patent": "creativeWork", "proposal": "creativeWork", "section": "creativeWork", "dataset": "dataset", "drawing": "drawing", "diagram": "imageObject", "figure": "imageObject", "image": "imageObject", "plot": "imageObject", "lesson": "learningResource", "audiovisual": "mediaObject", "photo": "photograph", "poster": "poster", "presentation": "presentationDigitalDocument", "report": "report", "article": "scholarlyArticle", "conferencePaper": "scholarlyArticle", "journalArticle": "scholarlyArticle", "preprint": "scholarlyArticle", "publication": "scholarlyArticle", "thesis": "scholarlyArticle", "workingPaper": "scholarlyArticle", "softwareDocumentation": "techArticle", "technicalNote": "techArticle", "physicalObject": "thing", "video": "videoObject", "taxonomicTreatment": "scholarlyArticle", "projectDeliverable": "creativeWork", "outputManagementPlan": "creativeWork", "projectMilestone": "creativeWork"
                 },
                 "url": "https://zenodo.org/",
-                "identifier": "zenodo"
+                "identifier": "Zenodo"
             }
 
         if 'dde' in _meta['src']:
@@ -63,7 +63,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "description": "The Data Discovery Engine is a streamlined process to create, distribute and harves findable metadata via interoperable Schema.org schemas. The biomedical and informatics communities have largely endorsed the spirit and basic components of the FAIR Data Principles. Biomedical data producers, including CTSA hubs, need actionable best-practice guidance on how to make their data discoverable and reusable, and bring the practical benefits of data sharing to researcher's own research projects, as well as the research community as a whole.",
                 "schema": {"creator": "author", "_id": "identifier", "date_created": "dateCreated", "last_updated": "dateModifed", "@type": "@type", "measurementTechnique": "measurementTechnique", "infectiousAgent": "infectiousAgent", "infectiousDisease": "infectiousDisease", "species": "species"},
                 "url": "https://discovery.biothings.io/",
-                "identifier": "dde"
+                "identifier": "Data Discovery Engine"
             }
 
         if 'ncbi_geo' in _meta['src']:
@@ -72,7 +72,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "description": "GEO is a public functional genomics data repository supporting MIAME-compliant data submissions. Array- and sequence-based data are accepted. Tools are provided to help users query and download experiments and curated gene expression profiles.",
                 "schema": {"_id": "identifier", "contributor(s)": "author", "organization": "publisher", "title": "name", "organism": "species", "experiment type": "measurementTechnique", "summary": "description", "submission date": "datePublished", "last update date": "dateModified", "citation(s)": "citation"},
                 "url": "https://www.ncbi.nlm.nih.gov/geo/",
-                "identifier": "ncbigeo"
+                "identifier": "NCBI GEO"
             }
 
         if 'immport' in _meta['src']:
@@ -83,7 +83,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "_id": "identifer", "creator": "author", "citations": "citedBy", "identifers": "identifer", "species": "species", "measurementTechnique": "measurementTechnique", "distribution": "distribution", "includedInDataCatalog": "includedInDataCatalog", "date": "date"
                 },
                 "url": "https://www.immport.org/shared/home",
-                "identifier": "immport"
+                "identifier": "ImmPort"
             }
 
         if 'omicsdi' in _meta['src']:
@@ -92,7 +92,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "description": "The Omics Discovery Index (OmicsDI) provides a knowledge discovery framework across heterogeneous omics data (genomics, proteomics, transcriptomics and metabolomics).",
                 "schema": {"_id": "identifer", "citation": "citation", "creator": "author", "description": "description", "distribution": "distribution", "keywords": "keywords", "name": "name", "sameAs": "sameAs", "variableMeasured": "variableMeasured"},
                 "url": "https://www.omicsdi.org/",
-                "identifier": "omicsdi"
+                "identifier": "Omics Discovery Index (OmicsDI)"
             }
 
         if 'mendeley' in _meta['src']:
@@ -101,7 +101,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "description": "Mendeley Data, a product of Elsevier, is one of the newest entrants in the research data repository landscape; the platform was released in April 2016. Mendeley Data is a general-purpose repository, allowing researchers in any field to upload and publish research data. Mendeley Data also allows researchers to share unpublished data privately with research collaborators.",
                 "schema": {"id": "identifer", "doi": "doi", "name": "name", "description": "description", "contributors": "contributors", "files": "distribution", "articles": "citation", "categories": "keywords", "publish_date": "datePublished", "related_links": "citation", "modified_on": "dateModified", "links": "url", "repository": "sdPublisher"},
                 "url": "https://www.omicsdi.org/",
-                "identifier": "mendeley"
+                "identifier": "Mendeley"
             }
 
         if 'reframedb' in _meta['src']:
@@ -110,7 +110,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "description": "The ReFRAME collection of 12,000 compounds is a best-in-class drug repurposing library containing nearly all small molecules that have reached clinical development or undergone significant preclinical profiling. The purpose of such a screening collection is to enable rapid testing of compounds with demonstrated safety profiles in new indications, such as neglected or rare diseases, where there is less commercial motivation for expensive research and development.",
                 "schema": {"assay_id": "identifer", "assay_title": "name", "title_short": "alternateName", "authors": "author", "summary": "description", "purpose": "description", "protocol": "description", "readout": "description", "detection_method": "description", "detection_reagents": "description", "components": "description", "drug_conc": "description", "indication": "healthCondition", "assay_type": "measurementTechnique", "bibliography": "citation"},
                 "url": "https://www.omicsdi.org/",
-                "identifier": "reframedb"
+                "identifier": "ReframeDB"
             }
 
         return _meta
