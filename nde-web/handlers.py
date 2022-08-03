@@ -29,6 +29,15 @@ class NDESourceHandler(MetadataSourceHandler):
         # 'identifier':'includedInDataCatalog.name',
         # }
 
+        if 'vivli' in _meta['src']:
+            _meta['src']['vivli']['sourceInfo'] = {
+                "name": "Vivli",
+                "description": "Vivli is an independent non-profit organization launched in 2016. Vivli evolved from a project of The Multi-Regional Clinical Trials Center of Brigham and Women’s Hospital and Harvard(MRCT Center) to enhance access to clinical trials data by promoting data sharing and transparency. In 2013, the MRCT Center and a diverse group of global stakeholders embarked on a mission to define, design, and launch an innovative platform solution for global clinical trial data sharing. The Vivli platform provides access to anonymized individual participant-level data(IPD) or the raw data that is collected during a clinical trial. The clinical trials represented in Vivli are global and contributed by a diverse group of data contributors. By serving as a global trusted platform, Vivli increases the discoverability of available data in the wider research ecosystem, and increases the overall capacity worldwide for effective data sharing, aggregation, re-use, and novel analysis of valuable clinical research data to advance science and improve public health. The Vivli platform is a cloud-based platform that consists of a dynamic search engine, a data repository, and a secure research environment.",
+                "schema": {"nctId": "identifer", "secondaryIds": "identifier",  "registryInfo": "sdPublishers", 'principalInvestigator': 'author', 'studyTitle': 'name', 'leadSponsor': 'funding', 'collaborators': 'funding', 'studyStartDate': 'temporalInterval.startDate', 'actualStudyCompletionDate': 'temporalInterval.endDate', 'locationsOfStudySites': 'spatialCoverage', 'phase': 'keywords', 'studyType': 'keywords', 'conditions': 'healthCondition.name', 'outcomeNames': 'variable_measured', 'digitalObjectId': 'doi', 'studyMetadataDoi': 'doi', 'extractedBriefSummary': 'description', 'draftCreatedDate': 'dateCreated', 'postedDate': 'datePublished', 'updatedDate': 'dateModified'},
+                "url": "https://vivli.org/",
+                "identifier": "Vivli"
+            }
+
         if 'ncbi_pmc' in _meta['src']:
             _meta['src']['ncbi_pmc']['sourceInfo'] = {
                 "name": "NCBI PMC",
