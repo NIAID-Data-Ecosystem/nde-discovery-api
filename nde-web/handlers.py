@@ -19,6 +19,7 @@ class NDESourceHandler(MetadataSourceHandler):
     def extras(self, _meta):
 
         # Example Object
+        # <SOURCE_NAME> = https://api.data.niaid.nih.gov/v1/metadata
         # if <SOURCE_NAME> in _meta['src']:
         # _meta['src'][<SOURCE_NAME>]['sourceInfo'] = {
         # 'name': 'A proper source name',
@@ -27,6 +28,24 @@ class NDESourceHandler(MetadataSourceHandler):
         # 'url': 'The source's URL',
         # 'identifier':'includedInDataCatalog.name',
         # }
+
+        if 'ncbi_pmc' in _meta['src']:
+            _meta['src']['ncbi_pmc']['sourceInfo'] = {
+                "name": "NCBI PMC",
+                "description": "PubMed Central® (PMC) is a free full-text archive of biomedical and life sciences journal literature at the U.S. National Institutes of Health's National Library of Medicine (NIH/NLM). In keeping with NLM's legislative mandate to collect and preserve the biomedical literature, PMC is part of the NLM collection, which also includes NLM's extensive print and licensed electronic journal holdings and supports contemporary biomedical and health care research and practice as well as future scholarship. Available to the public online since 2000, PMC was developed and is maintained by the National Center for Biotechnology Information(NCBI) at NLM.",
+                "schema": {"article-id": "identifer", "article-id": "url",  "volume": "citation.volume", 'journal-title': 'citation.journalName', 'pub-date': 'citation.datePublished', 'article-title': 'citation.name', 'article-id': 'citation.pmid', 'article-id': 'citation.identifier', 'article-id': 'citation.url', 'article-id': 'citation.doi', 'abstract': 'description', 'contrib': 'author'},
+                "url": "https://www.ncbi.nlm.nih.gov/pmc/",
+                "identifier": "NCBI PMC"
+            }
+
+        if 'veupathdb' in _meta['src']:
+            _meta['src']['veupathdb']['sourceInfo'] = {
+                "name": "VEuPathDB",
+                "description": "The Eukaryotic Pathogen, Vector and Host Informatics Resource(VEuPathDB) is one of two Bioinformatics Resource Centers(BRCs) funded by the US National Institute of Allergy and Infectious Diseases(NIAID), with additional support from the Wellcome Trust(UK). VEuPathDB provides access to diverse genomic and other large scale datasets related to eukaryotic pathogens and invertebrate vectors of disease. Organisms supported by this resource include (but are not limited to) the NIAID list of emerging and re-emerging infectious diseases.",
+                "schema": {"id": "identifer", "displayName": "name", "contact_name": "author", "summary": "description", "type": "measurementTechnique", "sdPublisher": "project_id", "short_attribution": "creditText", "release_policy": "conditionOfAccess", "version": "dateModified", "author": "affiliation", "GenomeHistory": "dateUpdated", "Version": "datePublished", "organism": "species", "HyperLinks": "distribution", "gene_count": "variableMeasured", "gene_type": "GeneTypeCounts"},
+                "url": "https://veupathdb.org/veupathdb/app/",
+                "identifier": "VEuPathDB"
+            }
 
         if 'acd_niaid' in _meta['src']:
             _meta['src']['acd_niaid']['sourceInfo'] = {
