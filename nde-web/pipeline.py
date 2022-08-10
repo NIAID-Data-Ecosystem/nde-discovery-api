@@ -13,7 +13,7 @@ class NDEQueryBuilder(ESQueryBuilder):
         # elasticsearch query string syntax
         # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
         if ":" in q or " AND " in q or " OR " in q:
-            search = search.query('query_string', query=q, lenient=True)
+            search = search.query('query_string', query=q, default_operator="AND", lenient=True)
 
         # term search
         elif q.startswith('"') and q.endswith('"'):
@@ -35,9 +35,9 @@ class NDEQueryBuilder(ESQueryBuilder):
                 Q('query_string', query=q, default_operator="AND", lenient=True),
             ]
 
-            # check if q contains wildcards if not add wildcard query
+            # check if q contains wildcards if not add wildcard query to every word
             if not ("*" in q or "?" in q):
-                wc_query = Q('query_string', query=q.strip('()')+'*', default_operator="AND", boost=.5, lenient=True)
+                wc_query = Q('query_string', query='* '.join(q.split()) + '*', default_operator="AND", boost=.5, lenient=True)
                 queries.append(wc_query)
 
             search = search.query('dis_max', queries=queries)
