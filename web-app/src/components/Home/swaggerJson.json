@@ -5,7 +5,7 @@
     "description": "Documentation of the api.data.niad.nih.gov Data Ecosystem Discovery services.\n\nLearn more about [NIAID Data](http://data-staging.niaid.nih.gov/portal/). API changelog and history can be found [here](/versions).",
     "termsOfService": "http://data.niaid.nih.gov/terms",
     "contact": {
-      "name": "NIAID",
+      "name": "Us",
       "email": "help@data.niaid.nih.gov",
       "x-role": "responsible developer"
     },
