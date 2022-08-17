@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "NIAID Data Ecosystem Discovery API",
-    "description": "Documentation of the api.data.niad.nih.gov Data Ecosystem Discovery services.\n\nLearn more about [NIAID Data](http://data-staging.niaid.nih.gov/portal/). API changelog and history can be found [here](/versions).",
+    "description": "Documentation of the api.data.niad.nih.gov Data Ecosystem Discovery services.\n\nLearn more about [NIAID Data](http://data-staging.niaid.nih.gov/portal/). API changelog and history can be found [here](/#/versions).",
     "termsOfService": "http://data.niaid.nih.gov/terms",
     "contact": {
       "name": "Us",
@@ -13,7 +13,7 @@
   },
   "servers": [
     {
-      "url": "https://api.data.niaid.nih.gov/v1/",
+      "url": "http://api.data.niaid.nih.gov/v1/",
       "description": "Production server"
     },
     {
