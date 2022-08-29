@@ -50,8 +50,12 @@ class NDEQueryBuilder(ESQueryBuilder):
         return search
 
     def apply_extras(self, search, options):
-        # terms to filter
+        # We only want those of type Dataset or ComputationalTool. Terms to filter
         terms = {"@type": ["Dataset", "ComputationalTool"]}
         search = search.filter('terms', **terms)
+
+        # apply extra-filtering for frontend to avoid adding unwanted wildcards on certain queries
+        if options.extra_filter:
+            search = search.query("query_string", query=options.extra_filter)
 
         return super().apply_extras(search, options)
