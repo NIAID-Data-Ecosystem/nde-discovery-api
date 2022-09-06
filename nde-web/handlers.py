@@ -29,6 +29,15 @@ class NDESourceHandler(MetadataSourceHandler):
         # 'identifier':'includedInDataCatalog.name',
         # }
 
+        if 'dryad' in _meta['src']:
+            _meta['src']['dryad']['sourceInfo'] = {
+                "name": "Dryad Digital Repository",
+                "description": "Dryad is an open source, community driven project that takes a unique approach to data publication and digital preservation. Dryad focuses on search, presentation, and discovery and delegates the responsibility for the data preservation function to the underlying repository with which it is integrated. Dryad aims to allow researchers to validate published findings, explore new analysis methodologies, re-purpose data for research questions unanticipated by the original authors, and perform synthetic studies such as formal meta-analyses.",
+                "schema": {"name": "name", "description": "description",  "contentUrl": "contentUrl", 'identifier': 'identifier, doi', 'keywords': 'keywords', 'creator': 'author', 'distribution': 'distribution', 'temporalCoverage': 'temporalCoverage', 'spatialCoverage': 'spatialCoverage', 'citation': 'citation', 'license': 'license', 'datePublished': 'datePublished', 'conditions': 'healthCondition.name', 'outcomeNames': 'variable_measured', 'digitalObjectId': 'doi', 'studyMetadataDoi': 'doi', 'extractedBriefSummary': 'description', 'draftCreatedDate': 'dateCreated', 'postedDate': 'datePublished', 'updatedDate': 'dateModified'},
+                "url": "https://datadryad.org",
+                "identifier": "Dryad Digital Repository"
+            }
+
         if 'vivli' in _meta['src']:
             _meta['src']['vivli']['sourceInfo'] = {
                 "name": "Vivli",
