@@ -88,7 +88,21 @@ class NDESourceHandler(MetadataSourceHandler):
                 "name": "Zenodo",
                 "description": "The OpenAIRE project, in the vanguard of the open access and open data movements in Europe was commissioned by the EC to support their nascent Open Data policy by providing a catch-all repository for EC funded research. CERN, an OpenAIRE partner and pioneer in open source, open access and open data, provided this capability and Zenodo was launched in May 2013.",
                 "schema": {
-                    "book": "book", "bookChapter": "chapter", "annotationCollection": "collection", "collection": "collection", "software": "computationalTool", "dataManagementPlan": "creativeWork", "deliverable": "creativeWork", "interactiveResource": "creativeWork", "other": "creativeWork", "patent": "creativeWork", "proposal": "creativeWork", "section": "creativeWork", "dataset": "dataset", "drawing": "drawing", "diagram": "imageObject", "figure": "imageObject", "image": "imageObject", "plot": "imageObject", "lesson": "learningResource", "audiovisual": "mediaObject", "photo": "photograph", "poster": "poster", "presentation": "presentationDigitalDocument", "report": "report", "article": "scholarlyArticle", "conferencePaper": "scholarlyArticle", "journalArticle": "scholarlyArticle", "preprint": "scholarlyArticle", "publication": "scholarlyArticle", "thesis": "scholarlyArticle", "workingPaper": "scholarlyArticle", "softwareDocumentation": "techArticle", "technicalNote": "techArticle", "physicalObject": "thing", "video": "videoObject", "taxonomicTreatment": "scholarlyArticle", "projectDeliverable": "creativeWork", "outputManagementPlan": "creativeWork", "projectMilestone": "creativeWork"
+                    "title": "name",
+                    "header": "dateModifed, url",
+                    "description": "description",
+                    "date": "datePublished",
+                    "language": "inLanguage.name",
+                    "subject": "keywords",
+                    "relatedIdentifier": "topicCategory",
+                    "xml[DOI]": "doi",
+                    "xml[resourceTypeGeneral]": "@type",
+                    "xml[creator][creatorName]": "author.name",
+                    "xml[creator][affiliation]": "author.affiliation",
+                    "xml[creator][nameIdentifier]": "author.identifier",
+                    "xml[rights]": "conditionsOfAccess, license",
+                    "xml[relatedIdentifier][relationType]": "citedBy",
+                    "xml[contributor][contributorName]": "funding.funder.name"
                 },
                 "url": "https://zenodo.org/",
                 "identifier": "Zenodo"
