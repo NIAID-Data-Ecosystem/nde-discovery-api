@@ -1,6 +1,7 @@
-from biothings.web.query import ESQueryBuilder
-from elasticsearch_dsl import Search, Q
+from biothings.web.query import ESQueryBuilder, ESResultFormatter
+from elasticsearch_dsl import Search, Q, A
 
+import logging
 
 class NDEQueryBuilder(ESQueryBuilder):
 
@@ -58,4 +59,38 @@ class NDEQueryBuilder(ESQueryBuilder):
         if options.extra_filter:
             search = search.query("query_string", query=options.extra_filter)
 
+        # apply hist aggregation
+        if options.hist:
+            a = A('date_histogram', field=options.hist, calendar_interval=options.hist_interval, min_doc_count=1)
+            search.aggs.bucket('hist_dates', a)
+
         return super().apply_extras(search, options)
+
+
+class NDEFormatter(ESResultFormatter):
+    def transform_aggs(self, res):
+        for facet in res:
+            
+            res[facet]['_type'] = 'terms'  # a type of ES Bucket Aggs
+            res[facet]['terms'] = res[facet].pop('buckets')
+            # Quick fix b/c hist aggregation is not a nested aggs and does not contain sum_other_doc_count and doc_count_error_upper_bound
+            res[facet]['other'] = res[facet].pop('sum_other_doc_count', 0)
+            res[facet]['missing'] = res[facet].pop('doc_count_error_upper_bound', 0)
+
+            count = 0
+
+            for bucket in res[facet]['terms']:
+                bucket['count'] = bucket.pop('doc_count')
+                bucket['term'] = bucket.pop('key')
+                if 'key_as_string' in bucket:
+                    bucket['term'] = bucket.pop('key_as_string')
+                count += bucket['count']
+
+                # nested aggs
+                for agg_k in list(bucket.keys()):
+                    if isinstance(bucket[agg_k], dict):
+                        bucket.update(self.transform_aggs(dict({agg_k: bucket[agg_k]})))
+
+            res[facet]['total'] = count
+
+        return res
