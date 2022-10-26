@@ -152,7 +152,7 @@
           {
             "name": "aggs",
             "in": "query",
-            "description": "Optional, a single field or comma-separated fields to return aggregations. Example \"includedInDataCatalog.name,infectiousAgent.name\"",
+            "description": "Optional, a single field or comma-separated fields to return aggregations. Example \"includedInDataCatalog.name, infectiousAgent.name\"",
             "required": false,
             "style": "form",
             "explode": true,
@@ -175,7 +175,7 @@
           {
             "name": "from",
             "in": "query",
-            "description": "the number of matching hits to skip, starting from 0. Combining with \"size\" parameter, this can be useful for paging. Default: 0.",
+            "description": "The number of matching hits to skip, starting from 0. Combining with \"size\" parameter, this can be useful for paging. Default: 0.",
             "required": false,
             "style": "form",
             "explode": true,
@@ -186,7 +186,7 @@
           {
             "name": "sort",
             "in": "query",
-            "description": "the comma-separated fields to sort on. Prefix with \"-\" for descending order, otherwise in ascending order. Default: sort by matching scores in decending order.",
+            "description": "The comma-separated fields to sort on. Prefix with \"-\" for descending order, otherwise in ascending order. Default: sort by matching scores in decending order.",
             "required": false,
             "style": "form",
             "explode": true,
@@ -220,6 +220,17 @@
             "name": "scroll_id",
             "in": "query",
             "description": "Available for pagination use.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "extra_filter",
+            "in": "query",
+            "description": "Add additional layer of query filtering.",
             "required": false,
             "style": "form",
             "explode": true,
@@ -266,7 +277,7 @@
           {
             "name": "from",
             "in": "query",
-            "description": "the number of matching hits to skip, starting from 0. Combining with \"size\" parameter, this can be useful for paging. Default: 0.",
+            "description": "The number of matching hits to skip, starting from 0. Combining with \"size\" parameter, this can be useful for paging. Default: 0.",
             "required": false,
             "style": "form",
             "explode": true,
@@ -277,7 +288,7 @@
           {
             "name": "sort",
             "in": "query",
-            "description": "the comma-separated fields to sort on. Prefix with \"-\" for descending order, otherwise in ascending order. Default: sort by matching scores in decending order.",
+            "description": "The comma-separated fields to sort on. Prefix with \"-\" for descending order, otherwise in ascending order. Default: sort by matching scores in decending order.",
             "required": false,
             "style": "form",
             "explode": true,

@@ -29,6 +29,15 @@ class NDESourceHandler(MetadataSourceHandler):
         # 'identifier':'includedInDataCatalog.name',
         # }
 
+        if 'dryad' in _meta['src']:
+            _meta['src']['dryad']['sourceInfo'] = {
+                "name": "Dryad Digital Repository",
+                "description": "Dryad is an open source, community driven project that takes a unique approach to data publication and digital preservation. Dryad focuses on search, presentation, and discovery and delegates the responsibility for the data preservation function to the underlying repository with which it is integrated. Dryad aims to allow researchers to validate published findings, explore new analysis methodologies, re-purpose data for research questions unanticipated by the original authors, and perform synthetic studies such as formal meta-analyses.",
+                "schema": {"name": "name", "description": "description",  "contentUrl": "contentUrl", 'identifier': 'identifier, doi', 'keywords': 'keywords', 'creator': 'author', 'distribution': 'distribution', 'temporalCoverage': 'temporalCoverage', 'spatialCoverage': 'spatialCoverage', 'citation': 'citation', 'license': 'license', 'datePublished': 'datePublished', 'conditions': 'healthCondition.name', 'outcomeNames': 'variable_measured', 'digitalObjectId': 'doi', 'studyMetadataDoi': 'doi', 'extractedBriefSummary': 'description', 'draftCreatedDate': 'dateCreated', 'postedDate': 'datePublished', 'updatedDate': 'dateModified'},
+                "url": "https://datadryad.org",
+                "identifier": "Dryad Digital Repository"
+            }
+
         if 'vivli' in _meta['src']:
             _meta['src']['vivli']['sourceInfo'] = {
                 "name": "Vivli",
@@ -79,7 +88,21 @@ class NDESourceHandler(MetadataSourceHandler):
                 "name": "Zenodo",
                 "description": "The OpenAIRE project, in the vanguard of the open access and open data movements in Europe was commissioned by the EC to support their nascent Open Data policy by providing a catch-all repository for EC funded research. CERN, an OpenAIRE partner and pioneer in open source, open access and open data, provided this capability and Zenodo was launched in May 2013.",
                 "schema": {
-                    "book": "book", "bookChapter": "chapter", "annotationCollection": "collection", "collection": "collection", "software": "computationalTool", "dataManagementPlan": "creativeWork", "deliverable": "creativeWork", "interactiveResource": "creativeWork", "other": "creativeWork", "patent": "creativeWork", "proposal": "creativeWork", "section": "creativeWork", "dataset": "dataset", "drawing": "drawing", "diagram": "imageObject", "figure": "imageObject", "image": "imageObject", "plot": "imageObject", "lesson": "learningResource", "audiovisual": "mediaObject", "photo": "photograph", "poster": "poster", "presentation": "presentationDigitalDocument", "report": "report", "article": "scholarlyArticle", "conferencePaper": "scholarlyArticle", "journalArticle": "scholarlyArticle", "preprint": "scholarlyArticle", "publication": "scholarlyArticle", "thesis": "scholarlyArticle", "workingPaper": "scholarlyArticle", "softwareDocumentation": "techArticle", "technicalNote": "techArticle", "physicalObject": "thing", "video": "videoObject", "taxonomicTreatment": "scholarlyArticle", "projectDeliverable": "creativeWork", "outputManagementPlan": "creativeWork", "projectMilestone": "creativeWork"
+                    "title": "name",
+                    "header": "dateModifed, url",
+                    "description": "description",
+                    "date": "datePublished",
+                    "language": "inLanguage.name",
+                    "subject": "keywords",
+                    "relatedIdentifier": "topicCategory",
+                    "xml[DOI]": "doi",
+                    "xml[resourceTypeGeneral]": "@type",
+                    "xml[creator][creatorName]": "author.name",
+                    "xml[creator][affiliation]": "author.affiliation",
+                    "xml[creator][nameIdentifier]": "author.identifier",
+                    "xml[rights]": "conditionsOfAccess, license",
+                    "xml[relatedIdentifier][relationType]": "citedBy",
+                    "xml[contributor][contributorName]": "funding.funder.name"
                 },
                 "url": "https://zenodo.org/",
                 "identifier": "Zenodo"
