@@ -4,8 +4,8 @@ from biothings.web.settings.default import APP_LIST, ANNOTATION_KWARGS, QUERY_KW
 ES_INDICES = {
     # 'zenodo': 'zenodo_current',
     # 'immport': 'immport_current'
-    # None: 'nde_all_current'
-    'zenodo': 'zenodo_20221020_6h4aac2v'
+    None: 'nde_all_current'
+    #'zenodo': 'zenodo_20221020_6h4aac2v'
     # 'acd': 'acd_niaid_20220718_ulffyfib'
 }
 APP_LIST += [
