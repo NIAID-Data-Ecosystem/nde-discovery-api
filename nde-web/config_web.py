@@ -4,9 +4,9 @@ from biothings.web.settings.default import APP_LIST, ANNOTATION_KWARGS, QUERY_KW
 ES_INDICES = {
     # 'zenodo': 'zenodo_current',
     # 'immport': 'immport_current'
-    None: 'nde_all_current'
+   None: 'nde_all_current'
     #'zenodo': 'zenodo_20221020_6h4aac2v'
-    # 'acd': 'acd_niaid_20220718_ulffyfib'
+    #'acd': 'acd_niaid_20221109_o6tbj5ct'
 }
 APP_LIST += [
     (r"/{ver}/metadata/?", "handlers.NDESourceHandler"),
@@ -30,6 +30,9 @@ SOURCE_TYPEDEF={
      },
      'hist_interval': {
         'type': str, 'default': 'year'
+     },
+     'suggester': {
+        'type': str, 'default': None
      }
 }
 

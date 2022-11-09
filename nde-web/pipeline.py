@@ -64,6 +64,23 @@ class NDEQueryBuilder(ESQueryBuilder):
             a = A('date_histogram', field=options.hist, calendar_interval=options.hist_interval, min_doc_count=1)
             search.aggs.bucket('hist_dates', a)
 
+        # apply suggester
+        if options.suggester:
+            phrase_suggester = {
+                "field": "name.phrase_suggester",
+                "size": 3,
+                "direct_generator": [ {
+                    "field": "name.phrase_suggester",
+                    "suggest_mode": "always"
+                } ],
+                "max_errors": 2,
+                "highlight": {
+                    "pre_tag": "<em>",
+                    "post_tag": "</em>"
+                }
+            }
+            search = search.suggest('nde_suggester', options.suggester, phrase=phrase_suggester)
+
         return super().apply_extras(search, options)
 
 
