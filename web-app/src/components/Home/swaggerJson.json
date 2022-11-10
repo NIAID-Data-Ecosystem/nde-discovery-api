@@ -195,6 +195,28 @@
             }
           },
           {
+            "name": "hist",
+            "in": "query",
+            "description": "Histogram applied to any date field will return an aggregation organized by date. Default aggregation format is by year. Example \"datePublished\"",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hist_interval",
+            "in": "query",
+            "description": "Used with hist parameter to set specific time intervals other than the default year. Examples day, week, month, quarter, year",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "explain",
             "in": "query",
             "description": "If True, return fields within \"_explaination\" or do not return those fields \"False\"",
@@ -230,7 +252,7 @@
           {
             "name": "extra_filter",
             "in": "query",
-            "description": "Add additional layer of query filtering.",
+            "description": "Add additional layer of query filtering to retrieve more strict results. Example \"(healthCondition.name:(\"Asthma\"))+AND+(includedInDataCatalog.name:(\"Vivli\"))\"",
             "required": false,
             "style": "form",
             "explode": true,
