@@ -19,8 +19,9 @@ class NDEQueryBuilder(ESQueryBuilder):
         # term search
         elif q.startswith('"') and q.endswith('"'):
             queries = [
-                # term query
+                # term query boosting
                 Q('term', _id={"value": q.strip('"'), "boost": 5}),
+                Q('term', name={"value": q.strip('"'), "boost": 5}),
                 # query string
                 Q('query_string', query=q, default_operator="AND", lenient=True)
             ]
@@ -30,8 +31,9 @@ class NDEQueryBuilder(ESQueryBuilder):
         # simple text search
         else:
             queries = [
-                # term query
+                # term query boosting
                 Q('term', _id={"value": q, "boost": 5}),
+                Q('term', name={"value": q, "boost": 5}),
                 # query string
                 Q('query_string', query=q, default_operator="AND", lenient=True),
             ]
