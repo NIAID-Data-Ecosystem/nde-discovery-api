@@ -54,7 +54,10 @@ class NDEQueryBuilder(ESQueryBuilder):
 
     def apply_extras(self, search, options):
         # We only want those of type Dataset or ComputationalTool. Terms to filter
-        terms = {"@type": ["Dataset", "ComputationalTool"]}
+        # terms = {"@type": ["Dataset", "ComputationalTool"]}
+
+        # Temporary change for launch of the portal as requested by NIAID
+        terms = {"@type": ["Dataset"]}
         search = search.filter('terms', **terms)
 
         # apply extra-filtering for frontend to avoid adding unwanted wildcards on certain queries
