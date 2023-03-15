@@ -128,14 +128,14 @@ class NDESourceHandler(MetadataSourceHandler):
                     "name": "Mendeley Data",
                     "description": "Mendeley Data, a product of Elsevier, is one of the newest entrants in the research data repository landscape; the platform was released in April 2016. Mendeley Data is a general-purpose repository, allowing researchers in any field to upload and publish research data. Mendeley Data also allows researchers to share unpublished data privately with research collaborators.",
                     "schema": {"id": "identifer", "doi": "doi", "name": "name", "description": "description", "contributors": "contributors", "files": "distribution", "articles": "citation", "categories": "keywords", "publish_date": "datePublished", "related_links": "citation", "modified_on": "dateModified", "links": "url", "repository": "sdPublisher"},
-                    "url": "https://www.omicsdi.org/",
+                    "url": "https://data.mendeley.com/",
                     "identifier": "Mendeley"
                 },
             "reframedb": {
                     "name": "reframeDB",
                     "description": "The ReFRAME collection of 12,000 compounds is a best-in-class drug repurposing library containing nearly all small molecules that have reached clinical development or undergone significant preclinical profiling. The purpose of such a screening collection is to enable rapid testing of compounds with demonstrated safety profiles in new indications, such as neglected or rare diseases, where there is less commercial motivation for expensive research and development.",
                     "schema": {"assay_id": "identifer", "assay_title": "name", "title_short": "alternateName", "authors": "author", "summary": "description", "purpose": "description", "protocol": "description", "readout": "description", "detection_method": "description", "detection_reagents": "description", "components": "description", "drug_conc": "description", "indication": "healthCondition", "assay_type": "measurementTechnique", "bibliography": "citation"},
-                    "url": "https://www.omicsdi.org/",
+                    "url": "https://reframedb.org/",
                     "identifier": "ReframeDB"
             }
         }
