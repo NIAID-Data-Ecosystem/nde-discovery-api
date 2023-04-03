@@ -1,0 +1,9 @@
+# remote testing
+__pycache__
+
+# vscode
+.vscode
+.DS_Store
+
+# pycharm
+.idea
