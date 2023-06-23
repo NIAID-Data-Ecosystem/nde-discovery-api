@@ -43,6 +43,7 @@ ES_DOC_TYPE: 'dataset'
 ES_QUERY_BUILDER = "pipeline.NDEQueryBuilder"
 ES_RESULT_TRANSFORM = "pipeline.NDEFormatter"
 ALLOW_NESTED_AGGS = True
+DEFAULT_CACHE_MAX_AGE = 3600
 
 try:
     from config_web_local import *
