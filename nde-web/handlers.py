@@ -1,12 +1,13 @@
 import logging
+
 from biothings.web.handlers import MetadataSourceHandler
 from tornado.web import RequestHandler
 
 
 class WebAppHandler(RequestHandler):
     def get(self):
-        if self.render('dist/index.html'):
-            self.render('dist/index.html')
+        if self.render("dist/index.html"):
+            self.render("dist/index.html")
         else:
             logging.info("Unable to find dist folder from react app.")
 
@@ -15,7 +16,6 @@ class NDESourceHandler(MetadataSourceHandler):
     """
     GET /v1/metadata
     """
-
 
     def extras(self, _meta):
         source_info = {
@@ -28,120 +28,294 @@ class NDESourceHandler(MetadataSourceHandler):
             #       'url': 'The source's URL',
             #       'identifier':'includedInDataCatalog.name',
             # }
-
             "dryad": {
-                    "name": "Dryad Digital Repository",
-                    "description": "Dryad is an open source, community driven project that takes a unique approach to data publication and digital preservation. Dryad focuses on search, presentation, and discovery and delegates the responsibility for the data preservation function to the underlying repository with which it is integrated. Dryad aims to allow researchers to validate published findings, explore new analysis methodologies, re-purpose data for research questions unanticipated by the original authors, and perform synthetic studies such as formal meta-analyses.",
-                    "schema": {"name": "name", "description": "description",  "contentUrl": "contentUrl", 'identifier': 'identifier, doi', 'keywords': 'keywords', 'creator': 'author', 'distribution': 'distribution', 'temporalCoverage': 'temporalCoverage', 'spatialCoverage': 'spatialCoverage', 'citation': 'citation', 'license': 'license', 'datePublished': 'datePublished', 'conditions': 'healthCondition.name', 'outcomeNames': 'variable_measured', 'digitalObjectId': 'doi', 'studyMetadataDoi': 'doi', 'extractedBriefSummary': 'description', 'draftCreatedDate': 'dateCreated', 'postedDate': 'datePublished', 'updatedDate': 'dateModified'},
-                    "url": "https://datadryad.org",
-                    "identifier": "Dryad Digital Repository"
+                "name": "Dryad Digital Repository",
+                "description": "Dryad is an open source, community driven project that takes a unique approach to data publication and digital preservation. Dryad focuses on search, presentation, and discovery and delegates the responsibility for the data preservation function to the underlying repository with which it is integrated. Dryad aims to allow researchers to validate published findings, explore new analysis methodologies, re-purpose data for research questions unanticipated by the original authors, and perform synthetic studies such as formal meta-analyses.",
+                "schema": {
+                    "name": "name",
+                    "description": "description",
+                    "contentUrl": "contentUrl",
+                    "identifier": "identifier, doi",
+                    "keywords": "keywords",
+                    "creator": "author",
+                    "distribution": "distribution",
+                    "temporalCoverage": "temporalCoverage",
+                    "spatialCoverage": "spatialCoverage",
+                    "citation": "citation",
+                    "license": "license",
+                    "datePublished": "datePublished",
+                    "conditions": "healthCondition.name",
+                    "outcomeNames": "variable_measured",
+                    "digitalObjectId": "doi",
+                    "studyMetadataDoi": "doi",
+                    "extractedBriefSummary": "description",
+                    "draftCreatedDate": "dateCreated",
+                    "postedDate": "datePublished",
+                    "updatedDate": "dateModified",
                 },
+                "url": "https://datadryad.org",
+                "identifier": "Dryad Digital Repository",
+            },
             "vivli": {
-                    "name": "Vivli",
-                    "description": "Vivli is an independent non-profit organization launched in 2016. Vivli evolved from a project of The Multi-Regional Clinical Trials Center of Brigham and Women’s Hospital and Harvard(MRCT Center) to enhance access to clinical trials data by promoting data sharing and transparency. In 2013, the MRCT Center and a diverse group of global stakeholders embarked on a mission to define, design, and launch an innovative platform solution for global clinical trial data sharing. The Vivli platform provides access to anonymized individual participant-level data(IPD) or the raw data that is collected during a clinical trial. The clinical trials represented in Vivli are global and contributed by a diverse group of data contributors. By serving as a global trusted platform, Vivli increases the discoverability of available data in the wider research ecosystem, and increases the overall capacity worldwide for effective data sharing, aggregation, re-use, and novel analysis of valuable clinical research data to advance science and improve public health. The Vivli platform is a cloud-based platform that consists of a dynamic search engine, a data repository, and a secure research environment.",
-                    "schema": {"nctId": "identifer", "secondaryIds": "identifier",  "registryInfo": "sdPublishers", 'principalInvestigator': 'author', 'studyTitle': 'name', 'leadSponsor': 'funding', 'collaborators': 'funding', 'studyStartDate': 'temporalInterval.startDate', 'actualStudyCompletionDate': 'temporalInterval.endDate', 'locationsOfStudySites': 'spatialCoverage', 'phase': 'keywords', 'studyType': 'keywords', 'conditions': 'healthCondition.name', 'outcomeNames': 'variable_measured', 'digitalObjectId': 'doi', 'studyMetadataDoi': 'doi', 'extractedBriefSummary': 'description', 'draftCreatedDate': 'dateCreated', 'postedDate': 'datePublished', 'updatedDate': 'dateModified'},
-                    "url": "https://vivli.org/",
-                    "identifier": "Vivli"
+                "name": "Vivli",
+                "description": "Vivli is an independent non-profit organization launched in 2016. Vivli evolved from a project of The Multi-Regional Clinical Trials Center of Brigham and Women’s Hospital and Harvard(MRCT Center) to enhance access to clinical trials data by promoting data sharing and transparency. In 2013, the MRCT Center and a diverse group of global stakeholders embarked on a mission to define, design, and launch an innovative platform solution for global clinical trial data sharing. The Vivli platform provides access to anonymized individual participant-level data(IPD) or the raw data that is collected during a clinical trial. The clinical trials represented in Vivli are global and contributed by a diverse group of data contributors. By serving as a global trusted platform, Vivli increases the discoverability of available data in the wider research ecosystem, and increases the overall capacity worldwide for effective data sharing, aggregation, re-use, and novel analysis of valuable clinical research data to advance science and improve public health. The Vivli platform is a cloud-based platform that consists of a dynamic search engine, a data repository, and a secure research environment.",
+                "schema": {
+                    "nctId": "identifer",
+                    "secondaryIds": "identifier",
+                    "registryInfo": "sdPublishers",
+                    "principalInvestigator": "author",
+                    "studyTitle": "name",
+                    "leadSponsor": "funding",
+                    "collaborators": "funding",
+                    "studyStartDate": "temporalInterval.startDate",
+                    "actualStudyCompletionDate": "temporalInterval.endDate",
+                    "locationsOfStudySites": "spatialCoverage",
+                    "phase": "keywords",
+                    "studyType": "keywords",
+                    "conditions": "healthCondition.name",
+                    "outcomeNames": "variable_measured",
+                    "digitalObjectId": "doi",
+                    "studyMetadataDoi": "doi",
+                    "extractedBriefSummary": "description",
+                    "draftCreatedDate": "dateCreated",
+                    "postedDate": "datePublished",
+                    "updatedDate": "dateModified",
                 },
+                "url": "https://vivli.org/",
+                "identifier": "Vivli",
+            },
             "ncbi_pmc": {
-                    "name": "NCBI PMC",
-                    "description": "PubMed Central® (PMC) is a free full-text archive of biomedical and life sciences journal literature at the U.S. National Institutes of Health's National Library of Medicine (NIH/NLM). In keeping with NLM's legislative mandate to collect and preserve the biomedical literature, PMC is part of the NLM collection, which also includes NLM's extensive print and licensed electronic journal holdings and supports contemporary biomedical and health care research and practice as well as future scholarship. Available to the public online since 2000, PMC was developed and is maintained by the National Center for Biotechnology Information(NCBI) at NLM.",
-                    "schema": {"article-id": "identifer", "article-id": "url",  "volume": "citation.volume", 'journal-title': 'citation.journalName', 'pub-date': 'citation.datePublished', 'article-title': 'citation.name', 'article-id': 'citation.pmid', 'article-id': 'citation.identifier', 'article-id': 'citation.url', 'article-id': 'citation.doi', 'abstract': 'description', 'contrib': 'author'},
-                    "url": "https://www.ncbi.nlm.nih.gov/pmc/",
-                    "identifier": "NCBI PMC"
+                "name": "NCBI PMC",
+                "description": "PubMed Central® (PMC) is a free full-text archive of biomedical and life sciences journal literature at the U.S. National Institutes of Health's National Library of Medicine (NIH/NLM). In keeping with NLM's legislative mandate to collect and preserve the biomedical literature, PMC is part of the NLM collection, which also includes NLM's extensive print and licensed electronic journal holdings and supports contemporary biomedical and health care research and practice as well as future scholarship. Available to the public online since 2000, PMC was developed and is maintained by the National Center for Biotechnology Information(NCBI) at NLM.",
+                "schema": {
+                    "article-id": "identifer",
+                    "article-id": "url",
+                    "volume": "citation.volume",
+                    "journal-title": "citation.journalName",
+                    "pub-date": "citation.datePublished",
+                    "article-title": "citation.name",
+                    "article-id": "citation.pmid",
+                    "article-id": "citation.identifier",
+                    "article-id": "citation.url",
+                    "article-id": "citation.doi",
+                    "abstract": "description",
+                    "contrib": "author",
                 },
+                "url": "https://www.ncbi.nlm.nih.gov/pmc/",
+                "identifier": "NCBI PMC",
+            },
             "veupathdb": {
-                    "name": "VEuPathDB",
-                    "description": "The Eukaryotic Pathogen, Vector and Host Informatics Resource(VEuPathDB) is one of two Bioinformatics Resource Centers(BRCs) funded by the US National Institute of Allergy and Infectious Diseases(NIAID), with additional support from the Wellcome Trust(UK). VEuPathDB provides access to diverse genomic and other large scale datasets related to eukaryotic pathogens and invertebrate vectors of disease. Organisms supported by this resource include (but are not limited to) the NIAID list of emerging and re-emerging infectious diseases.",
-                    "schema": {"id": "identifer", "displayName": "name", "contact_name": "author", "summary": "description", "type": "measurementTechnique", "sdPublisher": "project_id", "short_attribution": "creditText", "release_policy": "conditionOfAccess", "version": "dateModified", "author": "affiliation", "GenomeHistory": "dateUpdated", "Version": "datePublished", "organism": "species", "HyperLinks": "distribution", "gene_count": "variableMeasured", "gene_type": "GeneTypeCounts"},
-                    "url": "https://veupathdb.org/veupathdb/app/",
-                    "identifier": "VEuPathDB"
+                "name": "VEuPathDB",
+                "description": "The Eukaryotic Pathogen, Vector and Host Informatics Resource(VEuPathDB) is one of two Bioinformatics Resource Centers(BRCs) funded by the US National Institute of Allergy and Infectious Diseases(NIAID), with additional support from the Wellcome Trust(UK). VEuPathDB provides access to diverse genomic and other large scale datasets related to eukaryotic pathogens and invertebrate vectors of disease. Organisms supported by this resource include (but are not limited to) the NIAID list of emerging and re-emerging infectious diseases.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
                 },
+                "url": "https://veupathdb.org/veupathdb/app/",
+                "identifier": "VEuPathDB",
+            },
             "acd_niaid": {
-                    "name": "AccessClinicalData@NIAID",
-                    "description": "AccessClinicalData@NIAID is a NIAID cloud-based, secure data platform that enables sharing of and access to reports and data sets from NIAID COVID-19 and other sponsored clinical trials for the basic and clinical research community.",
-                    "schema":  {"title": "name", "cmc_unique_id": "identifier", "brief_summary": "description", "data_availability_date": "datePublished", "most_recent_update": "dateModified", "data_available": "additionalType", "creator": "funding.funder.name", "nct_number": "nctid, identifier", "condition": "healthCondition", "clinical_trial_website": "mainEntityOfPage", "publications": "citation", "data_available_for_request": "conditionsOfAccess"},
-                    "url": "https://accessclinicaldata.niaid.nih.gov/",
-                    "identifier": "AccessClinicalData@NIAID"
+                "name": "AccessClinicalData@NIAID",
+                "description": "AccessClinicalData@NIAID is a NIAID cloud-based, secure data platform that enables sharing of and access to reports and data sets from NIAID COVID-19 and other sponsored clinical trials for the basic and clinical research community.",
+                "schema": {
+                    "title": "name",
+                    "cmc_unique_id": "identifier",
+                    "brief_summary": "description",
+                    "data_availability_date": "datePublished",
+                    "most_recent_update": "dateModified",
+                    "data_available": "additionalType",
+                    "creator": "funding.funder.name",
+                    "nct_number": "nctid, identifier",
+                    "condition": "healthCondition",
+                    "clinical_trial_website": "mainEntityOfPage",
+                    "publications": "citation",
+                    "data_available_for_request": "conditionsOfAccess",
                 },
+                "url": "https://accessclinicaldata.niaid.nih.gov/",
+                "identifier": "AccessClinicalData@NIAID",
+            },
             "sb_apps": {
-                    "name": "Seven Bridges Public Apps Gallery",
-                    "description": "The Seven Bridges Public Apps Gallery offers a repository of publicly available apps suitable for many different types of data analysis. Apps include both tools (individual bioinformatics utilities) and workflows (chains or pipelines of connected tools). The publicly available apps are maintained by the Seven Bridges Platform bioinformatics team to represent the latest tool versions.",
-                    "schema":  {"class": "applicationCategory", "label": "name", "description": "description", "inputs": "input", "outputs": "output", "requirements": "softwareRequirements", "sbg:image_url": "thumbnailUrl", "sbg:toolkit": "applicationSuite", "sbg:license": "license", "sbg:links": "codeRepository", "sbg:categories": "applicationSubCategory", "sbg:toolAuthor": "author", "sbg:appVersion": "softwareVersion", "sbg:id": "url, identifier", "sbg:revisionNotes": "version", "sbg:modifiedOn": "dateModified", "sbg:createdOn": "dateCreated", "sbg:contributors": "contributor", "sbg:publisher": "sdPublisher", "sbg:workflowLanguage": "programmingLanguage"},
-                    "url": "https://workspace.niaiddata.org/public/apps",
-                    "identifier": "PublicApps@SevenBridges"
+                "name": "Seven Bridges Public Apps Gallery",
+                "description": "The Seven Bridges Public Apps Gallery offers a repository of publicly available apps suitable for many different types of data analysis. Apps include both tools (individual bioinformatics utilities) and workflows (chains or pipelines of connected tools). The publicly available apps are maintained by the Seven Bridges Platform bioinformatics team to represent the latest tool versions.",
+                "schema": {
+                    "class": "applicationCategory",
+                    "label": "name",
+                    "description": "description",
+                    "inputs": "input",
+                    "outputs": "output",
+                    "requirements": "softwareRequirements",
+                    "sbg:image_url": "thumbnailUrl",
+                    "sbg:toolkit": "applicationSuite",
+                    "sbg:license": "license",
+                    "sbg:links": "codeRepository",
+                    "sbg:categories": "applicationSubCategory",
+                    "sbg:toolAuthor": "author",
+                    "sbg:appVersion": "softwareVersion",
+                    "sbg:id": "url, identifier",
+                    "sbg:revisionNotes": "version",
+                    "sbg:modifiedOn": "dateModified",
+                    "sbg:createdOn": "dateCreated",
+                    "sbg:contributors": "contributor",
+                    "sbg:publisher": "sdPublisher",
+                    "sbg:workflowLanguage": "programmingLanguage",
                 },
-            "zenodo":  {
-                    "name": "Zenodo",
-                    "description": "The OpenAIRE project, in the vanguard of the open access and open data movements in Europe was commissioned by the EC to support their nascent Open Data policy by providing a catch-all repository for EC funded research. CERN, an OpenAIRE partner and pioneer in open source, open access and open data, provided this capability and Zenodo was launched in May 2013.",
-                    "schema": {
-                        "title": "name",
-                        "header": "dateModifed, url",
-                        "description": "description",
-                        "date": "datePublished",
-                        "language": "inLanguage.name",
-                        "subject": "keywords",
-                        "relatedIdentifier": "topicCategory",
-                        "xml[DOI]": "doi",
-                        "xml[resourceTypeGeneral]": "@type",
-                        "xml[creator][creatorName]": "author.name",
-                        "xml[creator][affiliation]": "author.affiliation",
-                        "xml[creator][nameIdentifier]": "author.identifier",
-                        "xml[rights]": "conditionsOfAccess, license",
-                        "xml[relatedIdentifier][relationType]": "citedBy",
-                        "xml[contributor][contributorName]": "funding.funder.name"
-                    },
-                    "url": "https://zenodo.org/",
-                    "identifier": "Zenodo"
+                "url": "https://workspace.niaiddata.org/public/apps",
+                "identifier": "PublicApps@SevenBridges",
+            },
+            "zenodo": {
+                "name": "Zenodo",
+                "description": "The OpenAIRE project, in the vanguard of the open access and open data movements in Europe was commissioned by the EC to support their nascent Open Data policy by providing a catch-all repository for EC funded research. CERN, an OpenAIRE partner and pioneer in open source, open access and open data, provided this capability and Zenodo was launched in May 2013.",
+                "schema": {
+                    "title": "name",
+                    "header": "dateModifed, url",
+                    "description": "description",
+                    "date": "datePublished",
+                    "language": "inLanguage.name",
+                    "subject": "keywords",
+                    "relatedIdentifier": "topicCategory",
+                    "xml[DOI]": "doi",
+                    "xml[resourceTypeGeneral]": "@type",
+                    "xml[creator][creatorName]": "author.name",
+                    "xml[creator][affiliation]": "author.affiliation",
+                    "xml[creator][nameIdentifier]": "author.identifier",
+                    "xml[rights]": "conditionsOfAccess, license",
+                    "xml[relatedIdentifier][relationType]": "citedBy",
+                    "xml[contributor][contributorName]": "funding.funder.name",
                 },
+                "url": "https://zenodo.org/",
+                "identifier": "Zenodo",
+            },
             "dde": {
-                    "name": "Data Discovery Engine",
-                    "description": "The Data Discovery Engine is a streamlined process to create, distribute and harves findable metadata via interoperable Schema.org schemas. The biomedical and informatics communities have largely endorsed the spirit and basic components of the FAIR Data Principles. Biomedical data producers, including CTSA hubs, need actionable best-practice guidance on how to make their data discoverable and reusable, and bring the practical benefits of data sharing to researcher's own research projects, as well as the research community as a whole.",
-                    "schema": {"creator": "author", "_id": "identifier", "date_created": "dateCreated", "last_updated": "dateModifed", "@type": "@type", "measurementTechnique": "measurementTechnique", "infectiousAgent": "infectiousAgent", "infectiousDisease": "infectiousDisease", "species": "species"},
-                    "url": "https://discovery.biothings.io/",
-                    "identifier": "Data Discovery Engine"
+                "name": "Data Discovery Engine",
+                "description": "The Data Discovery Engine is a streamlined process to create, distribute and harves findable metadata via interoperable Schema.org schemas. The biomedical and informatics communities have largely endorsed the spirit and basic components of the FAIR Data Principles. Biomedical data producers, including CTSA hubs, need actionable best-practice guidance on how to make their data discoverable and reusable, and bring the practical benefits of data sharing to researcher's own research projects, as well as the research community as a whole.",
+                "schema": {
+                    "creator": "author",
+                    "_id": "identifier",
+                    "date_created": "dateCreated",
+                    "last_updated": "dateModifed",
+                    "@type": "@type",
+                    "measurementTechnique": "measurementTechnique",
+                    "infectiousAgent": "infectiousAgent",
+                    "infectiousDisease": "infectiousDisease",
+                    "species": "species",
                 },
-            "ncbi_geo":{
-                    "name": "NCBI Gene Expression Omnibus",
-                    "description": "GEO is a public functional genomics data repository supporting MIAME-compliant data submissions. Array- and sequence-based data are accepted. Tools are provided to help users query and download experiments and curated gene expression profiles.",
-                    "schema": {"_id": "identifier", "contributor(s)": "author", "organization": "publisher", "title": "name", "organism": "species", "experiment type": "measurementTechnique", "summary": "description", "submission date": "datePublished", "last update date": "dateModified", "citation(s)": "citation"},
-                    "url": "https://www.ncbi.nlm.nih.gov/geo/",
-                    "identifier": "NCBI GEO"
+                "url": "https://discovery.biothings.io/",
+                "identifier": "Data Discovery Engine",
+            },
+            "ncbi_geo": {
+                "name": "NCBI Gene Expression Omnibus",
+                "description": "GEO is a public functional genomics data repository supporting MIAME-compliant data submissions. Array- and sequence-based data are accepted. Tools are provided to help users query and download experiments and curated gene expression profiles.",
+                "schema": {
+                    "_id": "identifier",
+                    "contributor(s)": "author",
+                    "organization": "publisher",
+                    "title": "name",
+                    "organism": "species",
+                    "experiment type": "measurementTechnique",
+                    "summary": "description",
+                    "submission date": "datePublished",
+                    "last update date": "dateModified",
+                    "citation(s)": "citation",
                 },
-            "immport" : {
-                    "name": "Immunology Database and Analysis Portal (ImmPort)",
-                    "description": "The ImmPort project provides advanced information technology support in the archiving and exchange of scientific data for the diverse community of life science researchers supported by NIAID/DAIT and serves as a long-term, sustainable archive of research and clinical data. The core component of ImmPort is an extensive data warehouse containing experimental data and metadata describing the purpose of the study and the methods of data generation. The functionality of ImmPort will be expanded continuously over the life of the BISC project to accommodate the needs of expanding research communities. The shared research and clinical data, as well as the analytical tools in ImmPort are available to any researcher after registration.",
-                    "schema": {
-                        "_id": "identifer", "creator": "author", "citations": "citedBy", "identifers": "identifer", "species": "species", "measurementTechnique": "measurementTechnique", "distribution": "distribution", "includedInDataCatalog": "includedInDataCatalog", "date": "date"
-                    },
-                    "url": "https://www.immport.org/shared/home",
-                    "identifier": "ImmPort"
+                "url": "https://www.ncbi.nlm.nih.gov/geo/",
+                "identifier": "NCBI GEO",
+            },
+            "immport": {
+                "name": "ImmPort",
+                "description": "The ImmPort project provides advanced information technology support in the archiving and exchange of scientific data for the diverse community of life science researchers supported by NIAID/DAIT and serves as a long-term, sustainable archive of research and clinical data. The core component of ImmPort is an extensive data warehouse containing experimental data and metadata describing the purpose of the study and the methods of data generation. The functionality of ImmPort will be expanded continuously over the life of the BISC project to accommodate the needs of expanding research communities. The shared research and clinical data, as well as the analytical tools in ImmPort are available to any researcher after registration.",
+                "schema": {
+                    "_id": "identifer",
+                    "creator": "author",
+                    "citations": "citedBy",
+                    "identifers": "identifer",
+                    "species": "species",
+                    "measurementTechnique": "measurementTechnique",
+                    "distribution": "distribution",
+                    "includedInDataCatalog": "includedInDataCatalog",
+                    "date": "date",
                 },
-            "omicsdi":{
-                    "name": "Omics Discovery Index (OmicsDI)",
-                    "description": "The Omics Discovery Index (OmicsDI) provides a knowledge discovery framework across heterogeneous omics data (genomics, proteomics, transcriptomics and metabolomics).",
-                    "schema": {"_id": "identifer", "citation": "citation", "creator": "author", "description": "description", "distribution": "distribution", "keywords": "keywords", "name": "name", "sameAs": "sameAs", "variableMeasured": "variableMeasured"},
-                    "url": "https://www.omicsdi.org/",
-                    "identifier": "Omics Discovery Index (OmicsDI)"
+                "url": "https://www.immport.org/shared/home",
+                "identifier": "ImmPort",
+            },
+            "omicsdi": {
+                "name": "Omics Discovery Index (OmicsDI)",
+                "description": "The Omics Discovery Index (OmicsDI) provides a knowledge discovery framework across heterogeneous omics data (genomics, proteomics, transcriptomics and metabolomics).",
+                "schema": {
+                    "_id": "identifer",
+                    "citation": "citation",
+                    "creator": "author",
+                    "description": "description",
+                    "distribution": "distribution",
+                    "keywords": "keywords",
+                    "name": "name",
+                    "sameAs": "sameAs",
+                    "variableMeasured": "variableMeasured",
                 },
+                "url": "https://www.omicsdi.org/",
+                "identifier": "Omics Discovery Index (OmicsDI)",
+            },
             "mendeley": {
-                    "name": "Mendeley Data",
-                    "description": "Mendeley Data, a product of Elsevier, is one of the newest entrants in the research data repository landscape; the platform was released in April 2016. Mendeley Data is a general-purpose repository, allowing researchers in any field to upload and publish research data. Mendeley Data also allows researchers to share unpublished data privately with research collaborators.",
-                    "schema": {"id": "identifer", "doi": "doi", "name": "name", "description": "description", "contributors": "contributors", "files": "distribution", "articles": "citation", "categories": "keywords", "publish_date": "datePublished", "related_links": "citation", "modified_on": "dateModified", "links": "url", "repository": "sdPublisher"},
-                    "url": "https://data.mendeley.com/",
-                    "identifier": "Mendeley"
+                "name": "Mendeley Data",
+                "description": "Mendeley Data, a product of Elsevier, is one of the newest entrants in the research data repository landscape; the platform was released in April 2016. Mendeley Data is a general-purpose repository, allowing researchers in any field to upload and publish research data. Mendeley Data also allows researchers to share unpublished data privately with research collaborators.",
+                "schema": {
+                    "id": "identifer",
+                    "doi": "doi",
+                    "name": "name",
+                    "description": "description",
+                    "contributors": "contributors",
+                    "files": "distribution",
+                    "articles": "citation",
+                    "categories": "keywords",
+                    "publish_date": "datePublished",
+                    "related_links": "citation",
+                    "modified_on": "dateModified",
+                    "links": "url",
+                    "repository": "sdPublisher",
                 },
+                "url": "https://data.mendeley.com/",
+                "identifier": "Mendeley",
+            },
             "reframedb": {
-                    "name": "reframeDB",
-                    "description": "The ReFRAME collection of 12,000 compounds is a best-in-class drug repurposing library containing nearly all small molecules that have reached clinical development or undergone significant preclinical profiling. The purpose of such a screening collection is to enable rapid testing of compounds with demonstrated safety profiles in new indications, such as neglected or rare diseases, where there is less commercial motivation for expensive research and development.",
-                    "schema": {"assay_id": "identifer", "assay_title": "name", "title_short": "alternateName", "authors": "author", "summary": "description", "purpose": "description", "protocol": "description", "readout": "description", "detection_method": "description", "detection_reagents": "description", "components": "description", "drug_conc": "description", "indication": "healthCondition", "assay_type": "measurementTechnique", "bibliography": "citation"},
-                    "url": "https://reframedb.org/",
-                    "identifier": "ReframeDB"
-            }
+                "name": "reframeDB",
+                "description": "The ReFRAME collection of 12,000 compounds is a best-in-class drug repurposing library containing nearly all small molecules that have reached clinical development or undergone significant preclinical profiling. The purpose of such a screening collection is to enable rapid testing of compounds with demonstrated safety profiles in new indications, such as neglected or rare diseases, where there is less commercial motivation for expensive research and development.",
+                "schema": {
+                    "assay_id": "identifer",
+                    "assay_title": "name",
+                    "title_short": "alternateName",
+                    "authors": "author",
+                    "summary": "description",
+                    "purpose": "description",
+                    "protocol": "description",
+                    "readout": "description",
+                    "detection_method": "description",
+                    "detection_reagents": "description",
+                    "components": "description",
+                    "drug_conc": "description",
+                    "indication": "healthCondition",
+                    "assay_type": "measurementTechnique",
+                    "bibliography": "citation",
+                },
+                "url": "https://reframedb.org/",
+                "identifier": "ReframeDB",
+            },
         }
 
         for source in source_info:
-            if source in _meta['src']:
-                _meta['src'][source]['sourceInfo'] = source_info[source]
+            if source in _meta["src"]:
+                _meta["src"][source]["sourceInfo"] = source_info[source]
 
         return _meta
