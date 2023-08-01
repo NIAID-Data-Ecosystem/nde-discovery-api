@@ -106,7 +106,7 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "veupathdb": {
                 "name": "VEuPathDB",
-                "description": "The Eukaryotic Pathogen, Vector and Host Informatics Resource(VEuPathDB) is one of two Bioinformatics Resource Centers(BRCs) funded by the US National Institute of Allergy and Infectious Diseases(NIAID), with additional support from the Wellcome Trust(UK). VEuPathDB provides access to diverse genomic and other large scale datasets related to eukaryotic pathogens and invertebrate vectors of disease. Organisms supported by this resource include (but are not limited to) the NIAID list of emerging and re-emerging infectious diseases.",
+                "description": "The Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) is one of two Bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). VEuPathDB provides access to diverse genomic and other large scale datasets related to eukaryotic pathogens and invertebrate vectors of disease. Organisms supported by this resource include (but are not limited to) the NIAID list of emerging and re-emerging infectious diseases.",
                 "schema": {
                     "id": "identifer",
                     "displayName": "name",
