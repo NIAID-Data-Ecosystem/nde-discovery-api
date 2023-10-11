@@ -11,7 +11,9 @@ class NDEQueryBuilder(ESQueryBuilder):
         # elasticsearch query string syntax
         # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
         if ":" in q or " AND " in q or " OR " in q:
-            search = search.query("query_string", query=q, default_operator="AND", lenient=True)
+            search = search.query(
+                "query_string", query=q, default_operator="AND", lenient=True
+            )
 
         # term search
         elif q.startswith('"') and q.endswith('"'):
@@ -38,20 +40,15 @@ class NDEQueryBuilder(ESQueryBuilder):
             # check if q contains wildcards if not add wildcard query to every word
             if not ("*" in q or "?" in q):
                 wc_query = Q(
-                    "query_string", query="* ".join(q.split()) + "*", default_operator="AND", boost=0.5, lenient=True
+                    "query_string",
+                    query="* ".join(q.split()) + "*",
+                    default_operator="AND",
+                    boost=0.5,
+                    lenient=True,
                 )
                 queries.append(wc_query)
 
-            # search = search.query("dis_max", queries=queries)
-            dis_max_query = Q("dis_max", queries=queries)
-
-            function_score_query = Q(
-                "function_score",
-                query=dis_max_query,
-                boost_mode="sum",
-                field_value_factor={"field": "metadata_score"},
-            )
-            search = search.query(function_score_query)
+            search = search.query("dis_max", queries=queries)
 
         # # terms to filter
         # terms = {"@type": ["Dataset", "ComputationalTool"]}
@@ -74,7 +71,12 @@ class NDEQueryBuilder(ESQueryBuilder):
 
         # apply hist aggregation
         if options.hist:
-            a = A("date_histogram", field=options.hist, calendar_interval=options.hist_interval, min_doc_count=1)
+            a = A(
+                "date_histogram",
+                field=options.hist,
+                calendar_interval=options.hist_interval,
+                min_doc_count=1,
+            )
             search.aggs.bucket("hist_dates", a)
 
         # apply suggester
@@ -82,11 +84,24 @@ class NDEQueryBuilder(ESQueryBuilder):
             phrase_suggester = {
                 "field": "name.phrase_suggester",
                 "size": 3,
-                "direct_generator": [{"field": "name.phrase_suggester", "suggest_mode": "always"}],
+                "direct_generator": [
+                    {"field": "name.phrase_suggester", "suggest_mode": "always"}
+                ],
                 "max_errors": 2,
                 "highlight": {"pre_tag": "<em>", "post_tag": "</em>"},
             }
-            search = search.suggest("nde_suggester", options.suggester, phrase=phrase_suggester)
+            search = search.suggest(
+                "nde_suggester", options.suggester, phrase=phrase_suggester
+            )
+
+        # apply function score
+        if options.use_metadata_score:
+            function_score_query = Q(
+                "function_score",
+                boost_mode="sum",
+                field_value_factor={"field": "metadata_score", "missing": 0},
+            )
+            search = search.query(function_score_query)
 
         return super().apply_extras(search, options)
 

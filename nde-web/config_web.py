@@ -1,45 +1,49 @@
 import copy
-from biothings.web.settings.default import APP_LIST, ANNOTATION_KWARGS, QUERY_KWARGS
+
+from biothings.web.settings.default import ANNOTATION_KWARGS, APP_LIST, QUERY_KWARGS
 
 ES_INDICES = {
     # 'zenodo': 'zenodo_current',
     # 'immport': 'immport_current'
-   None: 'nde_all_current'
-    #'zenodo': 'zenodo_20221020_6h4aac2v'
-    #'acd': 'acd_niaid_20221109_o6tbj5ct'
+    None: 'nde_all_current'
+    # 'zenodo': 'zenodo_20221020_6h4aac2v'
+    # 'acd': 'acd_niaid_20221109_o6tbj5ct'
 }
 APP_LIST += [
     (r"/{ver}/metadata/?", "handlers.NDESourceHandler"),
 ]
 
 # replace default landing page handler
-assert APP_LIST[0][0] == '/'
-APP_LIST[0] = ('/', 'handlers.WebAppHandler')
+assert APP_LIST[0][0] == "/"
+APP_LIST[0] = ("/", "handlers.WebAppHandler")
 
 
 # *****************************************************************************
 # Elasticsearch Query Pipeline and Customizations
 # *****************************************************************************
 
-SOURCE_TYPEDEF={
-     'extra_filter': {
+SOURCE_TYPEDEF = {
+    'extra_filter': {
         'type': str, 'default': None
-     },
-     'hist': {
+    },
+    'hist': {
         'type': str, 'default': None
-     },
-     'hist_interval': {
+    },
+    'hist_interval': {
         'type': str, 'default': 'year'
-     },
-     'suggester': {
+    },
+    'suggester': {
         'type': str, 'default': None
-     }
+    },
+    "use_metadata_score": {
+        "type": bool, "default": False
+    }
 }
 
 QUERY_KWARGS = copy.deepcopy(QUERY_KWARGS)
-QUERY_KWARGS['GET'].update(SOURCE_TYPEDEF)
+QUERY_KWARGS["GET"].update(SOURCE_TYPEDEF)
 
-ES_DOC_TYPE: 'dataset'
+ES_DOC_TYPE: "dataset"
 ES_QUERY_BUILDER = "pipeline.NDEQueryBuilder"
 ES_RESULT_TRANSFORM = "pipeline.NDEFormatter"
 ALLOW_NESTED_AGGS = True
