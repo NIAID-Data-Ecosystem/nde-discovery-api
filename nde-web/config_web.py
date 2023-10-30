@@ -37,6 +37,9 @@ SOURCE_TYPEDEF = {
     },
     "use_metadata_score": {
         "type": bool, "default": False
+    },
+    "show_meta": {
+        "type": bool, "default": False
     }
 }
 

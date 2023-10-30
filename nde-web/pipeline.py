@@ -4,6 +4,19 @@ from elasticsearch_dsl import A, Q, Search
 
 class NDEQueryBuilder(ESQueryBuilder):
     # https://docs.biothings.io/en/latest/_modules/biothings/web/query/builder.html#ESQueryBuilder.default_string_query
+
+    def build(self, q=None, **options):
+        search = super().build(q, **options)
+
+        # Exclude _meta by default
+        search = search.source(excludes=["_meta"])
+
+        # Include _meta if options.show_meta is True
+        if options.get("show_meta"):
+            search = search.source(includes=["*"], excludes=[])
+
+        return search
+
     def default_string_query(self, q, options):
         search = Search()
         q = q.strip()
