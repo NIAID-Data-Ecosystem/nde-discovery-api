@@ -290,7 +290,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "Mendeley",
             },
             "reframedb": {
-                "name": "reframeDB",
+                "name": "ReframeDB",
                 "description": "The ReFRAME collection of 12,000 compounds is a best-in-class drug repurposing library containing nearly all small molecules that have reached clinical development or undergone significant preclinical profiling. The purpose of such a screening collection is to enable rapid testing of compounds with demonstrated safety profiles in new indications, such as neglected or rare diseases, where there is less commercial motivation for expensive research and development.",
                 "schema": {
                     "assay_id": "identifer",
