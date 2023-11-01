@@ -217,7 +217,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "Data Discovery Engine",
             },
             "ncbi_geo": {
-                "name": "NCBI Gene Expression Omnibus",
+                "name": "NCBI GEO",
                 "description": "GEO is a public functional genomics data repository supporting MIAME-compliant data submissions. Array- and sequence-based data are accepted. Tools are provided to help users query and download experiments and curated gene expression profiles.",
                 "schema": {
                     "_id": "identifier",
@@ -252,7 +252,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "ImmPort",
             },
             "omicsdi": {
-                "name": "Omics Discovery Index (OmicsDI)",
+                "name": "OmicsDI",
                 "description": "The Omics Discovery Index (OmicsDI) provides a knowledge discovery framework across heterogeneous omics data (genomics, proteomics, transcriptomics and metabolomics).",
                 "schema": {
                     "_id": "identifer",
