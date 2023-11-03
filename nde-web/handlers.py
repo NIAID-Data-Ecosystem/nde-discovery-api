@@ -30,7 +30,8 @@ class NDESourceHandler(MetadataSourceHandler):
             # }
             "dryad": {
                 "name": "Dryad Digital Repository",
-                "description": "Dryad Digital Repository is a GREI repository that includes most data types and domains.",
+                "abstract": "Dryad Digital Repository is a GREI repository that includes most data types and domains.",
+                "description": "Dryad is an open source, community driven project that takes a unique approach to data publication and digital preservation. Dryad focuses on search, presentation, and discovery and delegates the responsibility for the data preservation function to the underlying repository with which it is integrated. Dryad aims to allow researchers to validate published findings, explore new analysis methodologies, re-purpose data for research questions unanticipated by the original authors, and perform synthetic studies such as formal meta-analyses.",
                 "schema": {
                     "name": "name",
                     "description": "description",
@@ -58,7 +59,8 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "vivli": {
                 "name": "Vivli",
-                "description": "Vivli is a GREI repository that includes most data types and domains.",
+                "abstract": "Vivli is a GREI repository that includes most data types and domains.",
+                "description": "Vivli is an independent non-profit organization launched in 2016. Vivli evolved from a project of The Multi-Regional Clinical Trials Center of Brigham and Women’s Hospital and Harvard(MRCT Center) to enhance access to clinical trials data by promoting data sharing and transparency. In 2013, the MRCT Center and a diverse group of global stakeholders embarked on a mission to define, design, and launch an innovative platform solution for global clinical trial data sharing. The Vivli platform provides access to anonymized individual participant-level data(IPD) or the raw data that is collected during a clinical trial. The clinical trials represented in Vivli are global and contributed by a diverse group of data contributors. By serving as a global trusted platform, Vivli increases the discoverability of available data in the wider research ecosystem, and increases the overall capacity worldwide for effective data sharing, aggregation, re-use, and novel analysis of valuable clinical research data to advance science and improve public health. The Vivli platform is a cloud-based platform that consists of a dynamic search engine, a data repository, and a secure research environment.",
                 "schema": {
                     "nctId": "identifer",
                     "secondaryIds": "identifier",
@@ -106,7 +108,8 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "veupathdb": {
                 "name": "VEuPathDB",
-                "description": "The Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) is a NIAID supported IID repository that includes genomic and phenotypic data for eukaryotic pathogens and invertebrate vectors of infectious disease.",
+                "abstract": "The Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) is a NIAID supported IID repository that includes genomic and phenotypic data for eukaryotic pathogens and invertebrate vectors of infectious disease.",
+                "description": "The Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) is one of two Bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). VEuPathDB provides access to diverse genomic and other large scale datasets related to eukaryotic pathogens and invertebrate vectors of disease. Organisms supported by this resource include (but are not limited to) the NIAID list of emerging and re-emerging infectious diseases.",
                 "schema": {
                     "id": "identifer",
                     "displayName": "name",
@@ -130,7 +133,8 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "acd_niaid": {
                 "name": "AccessClinicalData@NIAID",
-                "description": "AccessClinicalData is a NIAID supported IID repository that includes clinical trials data.",
+                "abstract": "AccessClinicalData is a NIAID supported IID repository that includes clinical trials data.",
+                "description": "AccessClinicalData@NIAID is a NIAID cloud-based, secure data platform that enables sharing of and access to reports and data sets from NIAID COVID-19 and other sponsored clinical trials for the basic and clinical research community.",
                 "schema": {
                     "title": "name",
                     "cmc_unique_id": "identifier",
@@ -178,7 +182,8 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "zenodo": {
                 "name": "Zenodo",
-                "description": "Zenodo is a GREI repository that includes most data types and domains.",
+                "abstract": "Zenodo is a GREI repository that includes most data types and domains.",
+                "description": "The OpenAIRE project, in the vanguard of the open access and open data movements in Europe was commissioned by the EC to support their nascent Open Data policy by providing a catch-all repository for EC funded research. CERN, an OpenAIRE partner and pioneer in open source, open access and open data, provided this capability and Zenodo was launched in May 2013.",
                 "schema": {
                     "title": "name",
                     "header": "dateModifed, url",
@@ -201,7 +206,8 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "dde": {
                 "name": "Data Discovery Engine",
-                "description": "The Data Discovery Engine is a NIAID supported metadata registry that includes metadata from IID and general repositories.",
+                "abstract": "The Data Discovery Engine is a NIAID supported metadata registry that includes metadata from IID and general repositories.",
+                "description": "The Data Discovery Engine is a streamlined process to create, distribute and harves findable metadata via interoperable Schema.org schemas. The biomedical and informatics communities have largely endorsed the spirit and basic components of the FAIR Data Principles. Biomedical data producers, including CTSA hubs, need actionable best-practice guidance on how to make their data discoverable and reusable, and bring the practical benefits of data sharing to researcher's own research projects, as well as the research community as a whole.",
                 "schema": {
                     "creator": "author",
                     "_id": "identifier",
@@ -218,7 +224,8 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "ncbi_geo": {
                 "name": "NCBI GEO",
-                "description": "Gene Expression Omnibus (GEO) is an NIH supported repository that includes microarray and next-generation sequencing data for high-throughput functional genomics for most domains.",
+                "abstract": "Gene Expression Omnibus (GEO) is an NIH supported repository that includes microarray and next-generation sequencing data for high-throughput functional genomics for most domains.",
+                "description": "GEO is a public functional genomics data repository supporting MIAME-compliant data submissions. Array- and sequence-based data are accepted. Tools are provided to help users query and download experiments and curated gene expression profiles.",
                 "schema": {
                     "_id": "identifier",
                     "contributor(s)": "author",
@@ -236,7 +243,8 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "immport": {
                 "name": "ImmPort",
-                "description": "The Immunology Database and Analysis Portal (ImmPort) is a NIAID supported IID repository that includes multimodal immunological data.",
+                "abstract": "The Immunology Database and Analysis Portal (ImmPort) is a NIAID supported IID repository that includes multimodal immunological data.",
+                "description": "The ImmPort project provides advanced information technology support in the archiving and exchange of scientific data for the diverse community of life science researchers supported by NIAID/DAIT and serves as a long-term, sustainable archive of research and clinical data. The core component of ImmPort is an extensive data warehouse containing experimental data and metadata describing the purpose of the study and the methods of data generation. The functionality of ImmPort will be expanded continuously over the life of the BISC project to accommodate the needs of expanding research communities. The shared research and clinical data, as well as the analytical tools in ImmPort are available to any researcher after registration.",
                 "schema": {
                     "_id": "identifer",
                     "creator": "author",
@@ -253,7 +261,8 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "omicsdi": {
                 "name": "OmicsDI",
-                "description": "Omics Discovery Index (OmicsDI) is a generalist repository that is part of ELIXIR infrastructure that includes multi-omics data for most domains.",
+                "abstract": "Omics Discovery Index (OmicsDI) is a generalist repository that is part of ELIXIR infrastructure that includes multi-omics data for most domains.",
+                "description": "The Omics Discovery Index (OmicsDI) provides a knowledge discovery framework across heterogeneous omics data (genomics, proteomics, transcriptomics and metabolomics).",
                 "schema": {
                     "_id": "identifer",
                     "citation": "citation",
@@ -270,7 +279,8 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "mendeley": {
                 "name": "Mendeley Data",
-                "description": "Mendeley Data is a GREI repository that includes most data types and domains.",
+                "abstract": "Mendeley Data is a GREI repository that includes most data types and domains.",
+                "description": "Mendeley Data, a product of Elsevier, is one of the newest entrants in the research data repository landscape; the platform was released in April 2016. Mendeley Data is a general-purpose repository, allowing researchers in any field to upload and publish research data. Mendeley Data also allows researchers to share unpublished data privately with research collaborators.",
                 "schema": {
                     "id": "identifer",
                     "doi": "doi",
@@ -291,7 +301,8 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "reframedb": {
                 "name": "ReframeDB",
-                "description": "ReframeDB is a Calibr maintained repository that has a screening set of 12,000 compounds for drug repositioning.",
+                "abstract": "ReframeDB is a Calibr maintained repository that has a screening set of 12,000 compounds for drug repositioning.",
+                "description": "The ReFRAME collection of 12,000 compounds is a best-in-class drug repurposing library containing nearly all small molecules that have reached clinical development or undergone significant preclinical profiling. The purpose of such a screening collection is to enable rapid testing of compounds with demonstrated safety profiles in new indications, such as neglected or rare diseases, where there is less commercial motivation for expensive research and development.",
                 "schema": {
                     "assay_id": "identifer",
                     "assay_title": "name",
@@ -313,7 +324,8 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "ReframeDB",
             },
             "clinepidb": {
-                "description": "ClinEpiDB is a NIAID supported IID repository that includes epidemiological data.",
+                "abstract": "ClinEpiDB is a NIAID supported IID repository that includes epidemiological data.",
+                "description": "ClinEpiDB, launched in February 2018, is an open-access exploratory data analysis platform. We integrate data from high quality epidemiological studies, and offer tools and visualizations to explore the data within the browser in a point and click interface. We enable investigators to maximize the utility and reach of their data and to make optimal use of data released by others. ClinEpiDB is led by a team of scientists and developers based at the University of Pennsylvania, the University of Georgia, Imperial College London, and several other academic institutions. Currently, we are funded by the Bill and Melinda Gates Foundation for resource development and data integration, and by NIAID for integration of data from the International Centers of Excellence in Malaria Research (ICEMR).",
                 "identifier": "ClinEpiDB",
                 "name": "ClinEpiDB",
                 "schema": {
@@ -336,7 +348,8 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://clinepidb.org/ce/app",
             },
             "lincs": {
-                "description": "The Library of Integrated Network-Based Cellular Signatures (LINCS) Data Portal is an NIH supported repository that includes gene expression and other cellular processes data.",
+                "abstract": "The Library of Integrated Network-Based Cellular Signatures (LINCS) Data Portal is an NIH supported repository that includes gene expression and other cellular processes data.",
+                "description": "The BD2K-LINCS DCIC is comprised of four major components: Integrated Knowledge Environment (IKE), Data Science Research (DSR), Community Training and Outreach (CTO) and Consortium Coordination and Administration (CCA). The Center is constructing a high-capacity scalable integrated knowledge environment enabling federated access, intuitive querying and integrative analysis and visualization across all LINCS resources and many additional external data types from other relevant resources. The Center’s data science research projects are aimed at addressing various data integration and intracellular molecular regulatory network challenges. The Center aims to develop: 1) methods to connect cellular and organismal phenotypes with molecular cellular signatures, and 2) novel data visualization methods for dynamically interacting with large-genomics and proteomics datasets.",
                 "identifier": "LINCS",
                 "name": "BD2K-LINCS DCIC",
                 "schema": {
@@ -370,7 +383,8 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://lincsportal.ccs.miami.edu/",
             },
             "dataverse": {
-                "description": "Harvard Dataverse is a GREI repository that includes most data types and domains.",
+                "abstract": "Harvard Dataverse is a GREI repository that includes most data types and domains.",
+                "description": "The Harvard Dataverse Repository is a free data repository open to all researchers from any discipline, both inside and outside of the Harvard community, where you can share, archive, cite, access, and explore research data. Each individual Dataverse collection is a customizable collection of datasets (or a virtual repository) for organizing, managing, and showcasing datasets.",
                 "identifier": "Harvard Dataverse",
                 "name": "Harvard Dataverse",
                 "schema": {
@@ -404,7 +418,8 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://dataverse.harvard.edu/",
             },
             "hubmap": {
-                "description": "The Human BioMolecular Atlas Program (HuBMAP) is an NIH supported repository that includes multimodal data of healthy cells in the human body.",
+                "abstract": "The Human BioMolecular Atlas Program (HuBMAP) is an NIH supported repository that includes multimodal data of healthy cells in the human body.",
+                "description": "HuBMAP is part of a rich ecosystem of established and emerging atlasing programs supported by NIH and globally by other funding organizations, many of which are focused on specific organs or diseases. HuBMAP has connected with these programs to ensure data interoperability, avoid duplication of work, and leverage and synergize gained knowledge. The consortium has organized a number of events to bring together these communities to discuss topics of shared interest and is committed to improving coordination and collaboration among different programs. In addition, many of the HuBMAP PIs had been or are still actively participating in these efforts, helping with cross-pollination and advancing our global understanding. HuBMAP, as its name implies, was specifically initiated to resolve the challenge of building integrated, comprehensive, high-resolution spatial maps of human tissues and organs, which has resulted in HuBMAP providing leadership in the ecosystem around techniques for integrating disparate, multi-dimensional and multi-scale datasets, the development of a Common Coordinate Framework (CCF) for integrating data across many individuals, and the development and validation of these assays. To further increase interoperability, HuBMAP has adopted a number of standards and processes developed by other domain expert consortia, working and is actively involved in the knowledge exchange. The consortium sees itself as an integral part of the ecosystem, sharing its strengths and actively contributing to the community.",
                 "identifier": "HuBMAP",
                 "name": "HuBMAP",
                 "schema": {
@@ -446,7 +461,8 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://hubmapconsortium.org/",
             },
             "ncbi_sra": {
-                "description": "Sequence Read Archive (SRA) is the NIH supported largest publicly available repository of high throughput sequencing data that includes raw sequencing data and alignment information for most domains.",
+                "abstract": "Sequence Read Archive (SRA) is the NIH supported largest publicly available repository of high throughput sequencing data that includes raw sequencing data and alignment information for most domains.",
+                "description": "Sequence Read Archive(SRA) data, available through multiple cloud providers and NCBI servers, is the largest publicly available repository of high throughput sequencing data. The archive accepts data from all branches of life as well as metagenomic and environmental surveys. SRA stores raw sequencing data and alignment information to enhance reproducibility and facilitate new discoveries through data analysis.",
                 "identifier": "NCBI SRA",
                 "name": "NCBI SRA",
                 "schema": {
@@ -477,7 +493,8 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.ncbi.nlm.nih.gov/sra",
             },
             "vdj": {
-                "description": "VDJServer is a NIAID supported repository that includes immune repertoire sequencing data.",
+                "abstract": "VDJServer is a NIAID supported repository that includes immune repertoire sequencing data.",
+                "description": "VDJServer is a free, scalable resource for performing immune repertoire analysis and sharing data. VDJServer Community Data Portal is part of the AIRR Data Commons. Funded by a National Institute of Allergy and Infectious Diseases research grant (#1R01A1097403), the VDJServer project is led by The University of Texas Southwestern (UTSW) Medical Center in collaboration with the J. Craig Venter Institute and Yale University. The Texas Advanced Computing Center (TACC) at The University of Texas at Austin leads the cyberinfrastructure implementation, including the high performance computing (HPC) systems, storage, and software solutions.",
                 "identifier": "VDJServer",
                 "name": "VDJServer",
                 "schema": {
