@@ -5,18 +5,6 @@ from elasticsearch_dsl import A, Q, Search
 class NDEQueryBuilder(ESQueryBuilder):
     # https://docs.biothings.io/en/latest/_modules/biothings/web/query/builder.html#ESQueryBuilder.default_string_query
 
-    def build(self, q=None, **options):
-        search = super().build(q, **options)
-
-        # Exclude _meta by default
-        search = search.source(excludes=["_meta"])
-
-        # Include _meta if options.show_meta is True
-        if options.get("show_meta"):
-            search = search.source(includes=["*"], excludes=[])
-
-        return search
-
     def default_string_query(self, q, options):
         search = Search()
         q = q.strip()
@@ -115,6 +103,12 @@ class NDEQueryBuilder(ESQueryBuilder):
                 field_value_factor={"field": "metadata_score", "missing": 0},
             )
             search = search.query(function_score_query)
+
+        # hide _meta object
+        if options.show_meta:
+            search = search.source(includes=["*"], excludes=[])
+        else:
+            search = search.source(excludes=["_meta"])
 
         return super().apply_extras(search, options)
 
