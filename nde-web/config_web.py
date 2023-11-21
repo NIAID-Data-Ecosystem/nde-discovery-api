@@ -52,6 +52,11 @@ ES_RESULT_TRANSFORM = "pipeline.NDEFormatter"
 ALLOW_NESTED_AGGS = True
 DEFAULT_CACHE_MAX_AGE = 3600
 
+# Scroll_id customizations
+ES_SCROLL_TIME = "3m"
+# Size of each scroll request return
+ES_SCROLL_SIZE = 500
+
 try:
     from config_web_local import *
 except ImportError:
