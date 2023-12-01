@@ -565,8 +565,7 @@ class NDESourceHandler(MetadataSourceHandler):
             "hca": {
                 "abstract": "The Human Cell Atlas is a repository that includes multimodal data of cells in the human body.",
                 "description": "Thanks to new single cell genomics and spatial imaging technologies developed since the late 2000s and early 2010s, it is now possible to measure gene expression profiles in individual cells. These large scale data can be used with machine learning algorithms to decipher how the cells differ from and interact with their neighbors, and how they form and function in the tissue. This now allows scientists to identify and understand cell types in unprecedented detail, resolution and breadth. The Human Cell Atlas (HCA) is an international group of researchers using a combination of these new technologies to create cellular reference maps with the position, function and characteristics of every cell type in the human body.",
-                "identifier": "HCA",
-                "name": "Human Cell Atlas",
+                "identifier": "Human Cell Atlas",
                 "schema": {
                     "entryId": "url, _id",
                     "projectTitle": "name",
@@ -595,8 +594,8 @@ class NDESourceHandler(MetadataSourceHandler):
             "flowrepository": {
                 "abstract": "Flow Repository is a repository that includes flow cytometry data.",
                 "description": "FlowRepository is a database of flow cytometry experiments where you can query and download data collected and annotated according to the MIFlowCyt standard. It is primarily used as a data deposition place for experimental findings published in peer-reviewed journals in the flow cytometry field.",
-                "identifier": "FlowRepository",
-                "name": "FlowRepository",
+                "identifier": "Flow Repository",
+                "name": "Flow Repository",
                 "schema": {
                     "Repository ID": "identifier",
                     "Experiment Name": "name",
