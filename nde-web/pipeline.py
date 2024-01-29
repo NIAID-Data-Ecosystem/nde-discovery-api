@@ -63,7 +63,7 @@ class NDEQueryBuilder(ESQueryBuilder):
         # terms = {"@type": ["Dataset", "ComputationalTool"]}
 
         # Temporary change for launch of the portal as requested by NIAID
-        terms = {"@type": ["Dataset"]}
+        terms = {"@type": ["Dataset", "ResourceCatalog"]}
         search = search.filter("terms", **terms)
 
         # apply extra-filtering for frontend to avoid adding unwanted wildcards on certain queries
