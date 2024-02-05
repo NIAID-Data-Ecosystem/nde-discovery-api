@@ -546,7 +546,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://beta.microbiomedb.org/mbio.beta/app/",
             },
             "qiita": {
-                "abstract": "Qiita is a NIAID supported repository that includes microbiome data and analysis tools.",
+                "abstract": "Qiita is a repository that includes microbiome data and analysis tools.",
                 "description": "Qiita(canonically pronounced cheetah) is an entirely open-source microbial study management platform. It allows users to keep track of multiple studies with multiple 'omics data. Additionally, Qiita is capable of supporting multiple analytical pipelines through a 3rd-party plugin system, allowing the user to have a single entry point for all of their analyses. Qiita provides database and compute resources to the global community, alleviating the technical burdens that are typically limiting for researchers studying microbial ecology(e.g. familiarity with the command line or access to compute power).Qiita's platform allows for quick reanalysis of the datasets that have been deposited using the latest analytical technologies. This means that Qiita's internal datasets are living data that is periodically re-annotated according to current best practices.",
                 "identifier": "Qiita",
                 "name": "Qiita",
