@@ -543,7 +543,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "Publications": "citation, funding",
                     "AssociatedDatasets": "isPartOf, isRelatedTo",
                     "HyperLinks": "url", },
-                "url": "https://beta.microbiomedb.org/mbio.beta/app/",
+                "url": "https://microbiomedb.org/mbio/app",
             },
             "qiita": {
                 "abstract": "Qiita is a repository that includes microbiome data and analysis tools.",
