@@ -1,7 +1,43 @@
+import json
 import logging
 
 from biothings.web.handlers import MetadataSourceHandler
 from tornado.web import RequestHandler
+
+REQUIRED_FIELDS = [
+    "name",
+    "description",
+    "author",
+    "url",
+    "measurementTechnique",
+    "includedInDataCatalog",
+    "distribution",
+    "funding",
+    "date"
+]
+RECOMMENDED_FIELDS = [
+    "dateCreated",
+    "dateModified",
+    "datePublished",
+    "citedBy",
+    "doi",
+    "infectiousAgent",
+    "healthCondition",
+    "species",
+    "variableMeasured",
+    "citation",
+    "conditionsOfAccess",
+    "isBasedOn",
+    "keywords",
+    "license",
+    "sdPublisher",
+    "spatialCoverage",
+    "temporalCoverage",
+    "topicCategory",
+    "identifier",
+    "usageInfo",
+    "interactionStatistic"
+]
 
 
 class WebAppHandler(RequestHandler):
@@ -16,6 +52,25 @@ class NDESourceHandler(MetadataSourceHandler):
     """
     GET /v1/metadata
     """
+
+    def load_from_cache(self, datasource):
+        cache_file = f'cache_{datasource}.json'
+        if os.path.exists(cache_file):
+            with open(cache_file, 'r') as f:
+                averages = json.load(f)
+            return averages
+        return None
+
+    def save_to_cache(self, datasource, averages):
+        # Unique file for each datasource
+        cache_file = f'cache_{datasource}.json'
+        with open(cache_file, 'w') as f:
+            json.dump(averages, f)
+
+    def calculate_metadata_compatibility_average(self, datasource):
+        cached_averages = self.load_from_cache(datasource)
+        if cached_averages is not None:
+            return cached_averages
 
     def extras(self, _meta):
         source_info = {
@@ -523,5 +578,7 @@ class NDESourceHandler(MetadataSourceHandler):
         for source in source_info:
             if source in _meta["src"]:
                 _meta["src"][source]["sourceInfo"] = source_info[source]
+                _meta["src"][source]["sourceInfo"]["metadata_completeness"] = self.calculate_metadata_compatibility_average(
+                    source)
 
         return _meta
