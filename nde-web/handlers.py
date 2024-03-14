@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 
 from biothings.web.handlers import MetadataSourceHandler
 from tornado.web import RequestHandler
@@ -54,7 +55,9 @@ class NDESourceHandler(MetadataSourceHandler):
     """
 
     def load_from_cache(self, datasource):
-        cache_file = f'cache_{datasource}.json'
+        file_name = f'cache_{datasource}.json'
+        folder = "metadata_completeness"
+        cache_file = os.path.join(folder, file_name)
         if os.path.exists(cache_file):
             with open(cache_file, 'r') as f:
                 averages = json.load(f)
