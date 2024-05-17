@@ -1,4 +1,4 @@
-FROM python:3.8 AS builder
+FROM python:3.12 AS builder
 
 WORKDIR /build/nde
 ADD requirements_web.txt .
@@ -6,7 +6,7 @@ WORKDIR /build/wheels
 RUN pip wheel -r /build/nde/requirements_web.txt
 
 
-FROM python:3.8-slim
+FROM python:3.12-slim
 RUN apt update -q -y && apt install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m nde
