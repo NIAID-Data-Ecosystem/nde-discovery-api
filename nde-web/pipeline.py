@@ -66,6 +66,19 @@ class NDEQueryBuilder(ESQueryBuilder):
         terms = {"@type": ["Dataset", "ResourceCatalog"]}
         search = search.filter("terms", **terms)
 
+        # Define functions for the function_score query
+        functions = [
+            {"filter": {"term": {"@type": "ResourceCatalog"}}, "weight": 10}
+        ]  # Adjust this value as needed
+
+        # Apply the function_score query
+        search = search.query(
+            "function_score",
+            query=search.to_dict().get("query"),
+            functions=functions,
+            boost_mode="replace",
+        )
+
         # apply extra-filtering for frontend to avoid adding unwanted wildcards on certain queries
         if options.extra_filter:
             search = search.query("query_string", query=options.extra_filter)

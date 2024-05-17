@@ -5,7 +5,7 @@ from biothings.web.settings.default import ANNOTATION_KWARGS, APP_LIST, QUERY_KW
 ES_INDICES = {
     # 'zenodo': 'zenodo_current',
     # 'immport': 'immport_current'
-    None: 'nde_all_current'
+    None: "nde_all_current"
     # 'zenodo': 'zenodo_20221020_6h4aac2v'
     # 'acd': 'acd_niaid_20221109_o6tbj5ct'
 }
@@ -23,24 +23,12 @@ APP_LIST[0] = ("/", "handlers.WebAppHandler")
 # *****************************************************************************
 
 SOURCE_TYPEDEF = {
-    'extra_filter': {
-        'type': str, 'default': None
-    },
-    'hist': {
-        'type': str, 'default': None
-    },
-    'hist_interval': {
-        'type': str, 'default': 'year'
-    },
-    'suggester': {
-        'type': str, 'default': None
-    },
-    "use_metadata_score": {
-        "type": bool, "default": False
-    },
-    "show_meta": {
-        "type": bool, "default": False
-    }
+    "extra_filter": {"type": str, "default": None},
+    "hist": {"type": str, "default": None},
+    "hist_interval": {"type": str, "default": "year"},
+    "suggester": {"type": str, "default": None},
+    "use_metadata_score": {"type": bool, "default": False},
+    "show_meta": {"type": bool, "default": False},
 }
 
 QUERY_KWARGS = copy.deepcopy(QUERY_KWARGS)
