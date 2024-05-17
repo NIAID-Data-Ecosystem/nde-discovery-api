@@ -30,7 +30,7 @@ class NDESourceHandler(MetadataSourceHandler):
             # }
             "malariagen": {
                 "name": "MalariaGen",
-                "abstract": "MalariaGEN is a global research community that utilizes genomic data to understand and combat malaria.",
+                "abstract": "Malaria Genomic Epidemiology Network (MalariaGEN) is a IID repository that includes clinical data.",
                 "description": "MalariaGEN is an international network of researchers focused on understanding the genetic variations in humans, Plasmodium parasites, and Anopheles mosquitoes to better control malaria transmission. By leveraging advanced genomic tools and techniques, MalariaGEN aims to uncover how genetic differences influence susceptibility to malaria, track insecticide resistance in mosquitoes, and detect drug resistance in parasites. The network's efforts are crucial for developing new interventions and maintaining the effectiveness of existing ones. Coordinated from the Wellcome Sanger Institute in the UK, MalariaGEN collaborates with over 200 partners across more than 40 countries, primarily in malaria-endemic regions.",
                 "schema": {
                     "title": "name",
