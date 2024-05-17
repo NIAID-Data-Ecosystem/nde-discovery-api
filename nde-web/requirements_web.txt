@@ -1,1 +1,1 @@
-biothings[web_extra]==0.12.3
+biothings[web_extra]==0.12.4

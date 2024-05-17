@@ -1,3 +1,5 @@
+import json
+
 from biothings.web.query import ESQueryBuilder, ESResultFormatter
 from elasticsearch_dsl import A, Q, Search
 
@@ -12,9 +14,7 @@ class NDEQueryBuilder(ESQueryBuilder):
         # elasticsearch query string syntax
         # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
         if ":" in q or " AND " in q or " OR " in q:
-            search = search.query(
-                "query_string", query=q, default_operator="AND", lenient=True
-            )
+            search = search.query("query_string", query=q, default_operator="AND", lenient=True)
 
         # term search
         elif q.startswith('"') and q.endswith('"'):
@@ -51,20 +51,34 @@ class NDEQueryBuilder(ESQueryBuilder):
 
             search = search.query("dis_max", queries=queries)
 
-        # # terms to filter
-        # terms = {"@type": ["Dataset", "ComputationalTool"]}
-        # # we need to use the filter clause because we do not want the term scores to be calculated
-        # search = search.filter('terms', **terms)
-
         return search
 
     def apply_extras(self, search, options):
+
+        # remove specific documents from the search results
+        with open("resource_catalogs.json") as f:
+            data = json.load(f)
+
+        # Get the list of staging IDs
+        staging_ids = data.get("staging")
+
+        # exclude staging IDs from the search results
+        search = search.query("bool", must_not=[Q("ids", values=staging_ids)])
+
         # We only want those of type Dataset or ComputationalTool. Terms to filter
         # terms = {"@type": ["Dataset", "ComputationalTool"]}
 
         # Temporary change for launch of the portal as requested by NIAID
-        terms = {"@type": ["Dataset"]}
+        terms = {"@type": ["Dataset", "ResourceCatalog"]}
         search = search.filter("terms", **terms)
+
+        # Define functions for the function_score query
+        functions = [{"filter": {"term": {"@type": "ResourceCatalog"}}, "weight": 10}]  # Adjust this value as needed
+
+        # Apply the function_score query
+        search = search.query(
+            "function_score", query=search.to_dict().get("query"), functions=functions, boost_mode="replace"
+        )
 
         # apply extra-filtering for frontend to avoid adding unwanted wildcards on certain queries
         if options.extra_filter:
@@ -85,15 +99,11 @@ class NDEQueryBuilder(ESQueryBuilder):
             phrase_suggester = {
                 "field": "name.phrase_suggester",
                 "size": 3,
-                "direct_generator": [
-                    {"field": "name.phrase_suggester", "suggest_mode": "always"}
-                ],
+                "direct_generator": [{"field": "name.phrase_suggester", "suggest_mode": "always"}],
                 "max_errors": 2,
                 "highlight": {"pre_tag": "<em>", "post_tag": "</em>"},
             }
-            search = search.suggest(
-                "nde_suggester", options.suggester, phrase=phrase_suggester
-            )
+            search = search.suggest("nde_suggester", options.suggester, phrase=phrase_suggester)
 
         # apply function score
         if options.use_metadata_score:
