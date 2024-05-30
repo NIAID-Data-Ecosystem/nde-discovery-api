@@ -56,14 +56,20 @@ class NDEQueryBuilder(ESQueryBuilder):
     def apply_extras(self, search, options):
 
         # remove specific documents from the search results
-        with open("resource_catalogs.json") as f:
+        with open("exclusions.json") as f:
             data = json.load(f)
 
         # Get the list of staging IDs
-        staging_ids = data.get("staging")
+        staging_ids = data.get("staging_ids")
+
+        # Get the list of prod sources
+        prod_sources = data.get("prod_catalogs")
 
         # exclude staging IDs from the search results
         search = search.query("bool", must_not=[Q("ids", values=staging_ids)])
+
+        # exclude prod sources from the search results
+        search = search.query("bool", must=[Q("terms", **{"includedInDataCatalog.name": prod_sources})])
 
         # We only want those of type Dataset or ComputationalTool. Terms to filter
         # terms = {"@type": ["Dataset", "ComputationalTool"]}
