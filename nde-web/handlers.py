@@ -45,6 +45,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://www.malariagen.net/",
                 "identifier": "MalariaGen",
+                "conditionsOfAccess": "Varied",
             },
             "dryad": {
                 "name": "Dryad Digital Repository",
@@ -74,6 +75,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://datadryad.org",
                 "identifier": "Dryad Digital Repository",
+                "conditionsOfAccess": "Open",
             },
             "vivli": {
                 "name": "Vivli",
@@ -103,6 +105,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://vivli.org/",
                 "identifier": "Vivli",
+                "conditionsOfAccess": "Unknown",
             },
             "ncbi_pmc": {
                 "name": "NCBI PMC",
@@ -123,6 +126,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/pmc/",
                 "identifier": "NCBI PMC",
+                "conditionsOfAccess": "Unknown",
             },
             "veupathdb": {
                 "name": "VEuPathDB",
@@ -148,6 +152,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://veupathdb.org/veupathdb/app/",
                 "identifier": "VEuPathDB",
+                "conditionsOfAccess": "Unknown",
             },
             "acd_niaid": {
                 "name": "AccessClinicalData@NIAID",
@@ -169,6 +174,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://accessclinicaldata.niaid.nih.gov/",
                 "identifier": "AccessClinicalData@NIAID",
+                "conditionsOfAccess": "Varied",
             },
             "sb_apps": {
                 "name": "Seven Bridges Public Apps Gallery",
@@ -197,6 +203,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://workspace.niaiddata.org/public/apps",
                 "identifier": "PublicApps@SevenBridges",
+                "conditionsOfAccess": "Unknown",
             },
             "zenodo": {
                 "name": "Zenodo",
@@ -221,6 +228,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://zenodo.org/",
                 "identifier": "Zenodo",
+                "conditionsOfAccess": "Varied",
             },
             "dde": {
                 "name": "Data Discovery Engine",
@@ -239,6 +247,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://discovery.biothings.io/",
                 "identifier": "Data Discovery Engine",
+                "conditionsOfAccess": "Varied",
             },
             "ncbi_geo": {
                 "name": "NCBI GEO",
@@ -258,6 +267,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/geo/",
                 "identifier": "NCBI GEO",
+                "conditionsOfAccess": "Unknown",
             },
             "immport": {
                 "name": "ImmPort",
@@ -276,6 +286,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://www.immport.org/shared/home",
                 "identifier": "ImmPort",
+                "conditionsOfAccess": "Unknown",
             },
             "omicsdi": {
                 "name": "OmicsDI",
@@ -294,6 +305,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://www.omicsdi.org/",
                 "identifier": "Omics Discovery Index (OmicsDI)",
+                "conditionsOfAccess": "Unknown",
             },
             "mendeley": {
                 "name": "Mendeley Data",
@@ -316,6 +328,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://data.mendeley.com/",
                 "identifier": "Mendeley",
+                "conditionsOfAccess": "Unknown",
             },
             "reframedb": {
                 "name": "ReframeDB",
@@ -340,6 +353,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://reframedb.org/",
                 "identifier": "ReframeDB",
+                "conditionsOfAccess": "Unkown",
             },
             "clinepidb": {
                 "abstract": "ClinEpiDB is a NIAID supported IID repository that includes epidemiological data.",
@@ -364,6 +378,7 @@ class NDESourceHandler(MetadataSourceHandler):
                         "HyperLinks": "isBasedOn.url"
                 },
                 "url": "https://clinepidb.org/ce/app",
+                "conditionsOfAccess": "Unknown",
             },
             "lincs": {
                 "abstract": "The Library of Integrated Network-Based Cellular Signatures (LINCS) Data Portal is an NIH supported repository that includes gene expression and other cellular processes data.",
@@ -399,6 +414,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "protein": "keywords"
                 },
                 "url": "https://lincsportal.ccs.miami.edu/",
+                "conditionsOfAccess": "Unknown",
             },
             "dataverse": {
                 "abstract": "Harvard Dataverse is a GREI repository that includes most data types and domains.",
@@ -434,6 +450,7 @@ class NDESourceHandler(MetadataSourceHandler):
 
                 },
                 "url": "https://dataverse.harvard.edu/",
+                "conditionsOfAccess": "Unknown",
             },
             "hubmap": {
                 "abstract": "The Human BioMolecular Atlas Program (HuBMAP) is an NIH supported repository that includes multimodal data of healthy cells in the human body.",
@@ -477,6 +494,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "metadata.protocols_io_doi": "isBasedOn.doi"
                 },
                 "url": "https://hubmapconsortium.org/",
+                "conditionsOfAccess": "Unknown",
             },
             "ncbi_sra": {
                 "abstract": "Sequence Read Archive (SRA) is the NIH supported largest publicly available repository of high throughput sequencing data that includes raw sequencing data and alignment information for most domains.",
@@ -509,6 +527,7 @@ class NDESourceHandler(MetadataSourceHandler):
 
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/sra",
+                "conditionsOfAccess": "Unknown",
             },
             "vdj": {
                 "abstract": "VDJServer is a NIAID supported repository that includes immune repertoire sequencing data.",
@@ -535,6 +554,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "file_size": "distribution.contentSize"
                 },
                 "url": "https://vdj-staging.tacc.utexas.edu/community/",
+                "conditionsOfAccess": "Unknown",
             },
             "microbiomedb": {
                 "abstract": "MicrobiomeDB is a NIAID supported repository that includes clinical microbiome data and analysis tools.",
@@ -562,6 +582,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "AssociatedDatasets": "isPartOf, isRelatedTo",
                     "HyperLinks": "url", },
                 "url": "https://microbiomedb.org/mbio/app",
+                "conditionsOfAccess": "Open",
             },
             "qiita": {
                 "abstract": "Qiita is a repository that includes microbiome data and analysis tools.",
@@ -579,6 +600,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "ebi_study_accession": "mainEntityOfPage",
                 },
                 "url": "https://qiita.ucsd.edu/",
+                "conditionsOfAccess": "Unknown",
             },
             "hca": {
                 "abstract": "The Human Cell Atlas is a repository that includes multimodal data of cells in the human body.",
@@ -609,6 +631,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "submissionDate": "datePublished",
                 },
                 "url": "https://www.humancellatlas.org/",
+                "conditionsOfAccess": "Unknown",
             },
             "flowrepository": {
                 "abstract": "Flow Repository is a repository that includes flow cytometry data.",
@@ -634,6 +657,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "Quality control": "description",
                 },
                 "url": "http://flowrepository.org/",
+                "conditionsOfAccess": "Unknown",
             },
             "dash": {
                 "abstract": "The Data and Specimen Hub (DASH) is an NICHD supported repository that includes clinical data and specimens.",
@@ -666,6 +690,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "datasetFormat": "encodingFormat",
                 },
                 "url": "https://dash.nichd.nih.gov/",
+                "conditionsOfAccess": "Restricted",
             },
 
         }
