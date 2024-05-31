@@ -28,6 +28,8 @@
         "Data Discovery Engine, NDE Systems Biology",
         "ClinEpiDB",
         "AccessClinicalData@NIAID",
-        "Data Discovery Engine, NIAID Data Ecosystem"
+        "Data Discovery Engine, NIAID Data Ecosystem",
+        "MicrobiomeDB",
+        "MalariaGen"
     ]
 }
