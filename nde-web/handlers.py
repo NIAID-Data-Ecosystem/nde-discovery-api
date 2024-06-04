@@ -366,7 +366,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://reframedb.org/",
                 "identifier": "ReframeDB",
-                "conditionsOfAccess": "Unkown",
+                "conditionsOfAccess": "Unknown",
                 "genre": "IID"
             },
             "clinepidb": {
