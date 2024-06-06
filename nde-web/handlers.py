@@ -53,6 +53,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://amoebadb.org/amoeba/app",
                     "identifier": "AmoebaDB",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
                 {
                     "name": "CryptoDB",
@@ -78,6 +80,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://cryptodb.org/cryptodb/app",
                     "identifier": "CryptoDB",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
                 {
                     "name": "GiardiaDB",
@@ -103,6 +107,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://giardiadb.org/giardiadb/app",
                     "identifier": "GiardiaDB",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
                 {
                     "name": "HostDB",
@@ -128,6 +134,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://hostdb.org/hostdb/app",
                     "identifier": "HostDB",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
                 {
                     "name": "PlasmoDB",
@@ -153,6 +161,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://plasmodb.org/plasmo/app",
                     "identifier": "PlasmoDB",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
                 {
                     "name": "VectorBase",
@@ -178,6 +188,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://vectorbase.org/vectorbase/app",
                     "identifier": "VectorBase",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
                 {
                     "name": "FungiDB",
@@ -203,6 +215,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://fungidb.org/fungidb/app",
                     "identifier": "FungiDB",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
                 {
                     "name": "MicrosporidiaDB",
@@ -228,6 +242,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://microsporidiadb.org/micro/app",
                     "identifier": "MicrosporidiaDB",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
                 {
                     "name": "ToxoDB",
@@ -253,6 +269,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://toxodb.org/toxo/app",
                     "identifier": "ToxoDB",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
                 {
                     "name": "TrichDB",
@@ -278,6 +296,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://trichdb.org/trichdb/app",
                     "identifier": "TrichDB",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
                 {
                     "name": "TriTrypDB",
@@ -303,6 +323,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://tritrypdb.org/tritrypdb/app",
                     "identifier": "TriTrypDB",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
                 {
                     "name": "PiroplasmaDB",
@@ -328,6 +350,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     },
                     "url": "https://piroplasmadb.org/piro/app",
                     "identifier": "PiroplasmaDB",
+                    "conditionsOfAccess": "Unknown",
+                    "genre": "IID",
                 },
             ],
             "malariagen": {
