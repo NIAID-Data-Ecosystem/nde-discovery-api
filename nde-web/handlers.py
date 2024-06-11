@@ -28,6 +28,30 @@ class NDESourceHandler(MetadataSourceHandler):
             #       'url': 'The source's URL',
             #       'identifier':'includedInDataCatalog.name',
             # }
+            "massive": {
+                "name": "MassIVE",
+                "abstract": "MassIVE is a NIH supported Basic science repository that includes mass spectrometry data.",
+                "description": "MassIVE is a community resource developed by the NIH-funded Center for Computational Mass Spectrometry to promote the global, free exchange of mass spectrometry data. MassIVE datasets can be assigned ProteomeXchange accessions to satisfy publication requirements.",
+                "schema": {
+                    "dataset": "identifier",
+                    "task": "url",
+                    "repo_path": "distribution",
+                    "title": "name",
+                    "site": "sdPublisher",
+                    "description": "description",
+                    "keywords": "keywords",
+                    "create_time": "dateCreated",
+                    "instrument_resolved": "measurementTechnique",
+                    "species_resolved": "species",
+                    "pis": "author",
+                    "publications": "citation",
+                    "privacy": "conditionsOfAccess"
+                },
+                "url": "https://massive.ucsd.edu/ProteoSAFe/static/massive.jsp",
+                "identifier": "MassIVE",
+                "conditionsOfAccess": "Open",
+                "genre": "Basic science"
+            },
             "veupath_collections": [
                 {
                     "name": "AmoebaDB",
