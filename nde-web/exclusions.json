@@ -1,14 +1,11 @@
 {
     "staging_ids": [
-        "dde_8b9a4aa0d78d0659",
-        "dde_da18bc66317fc987",
-        "dde_94c560d2fe14b1b1",
-        "dde_cc13744ba5c15cca",
-        "dde_f6161fcb840b7162",
-        "dde_ebf6bb658eb18386",
-        "dde_2d572296274580f6",
-        "dde_aa7c754e5e4abe84",
-        "dde_b3bb013bc893ca80"
+        "dde_136f77a47a3e203a",
+        "dde_5a6bc368148ab46e",
+        "dde_56d15748b50a6e70",
+        "dde_a13ce89d9fe6c6c4",
+        "dde_b880e7dc2c2437e0",
+        "dde_933c129858283201"
     ],
     "prod_catalogs": [
         "Omics Discovery Index (OmicsDI)",
