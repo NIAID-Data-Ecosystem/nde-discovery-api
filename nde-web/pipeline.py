@@ -79,7 +79,7 @@ class NDEQueryBuilder(ESQueryBuilder):
         search = search.filter("terms", **terms)
 
         # Define functions for the function_score query
-        functions = [{"filter": {"term": {"@type": "ResourceCatalog"}}, "weight": 10}]  # Adjust this value as needed
+        functions = [{"filter": {"term": {"@type": "ResourceCatalog"}}, "weight": 100}]  # Adjust this value as needed
 
         # Apply the function_score query
         search = search.query(
