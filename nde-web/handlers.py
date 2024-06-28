@@ -50,7 +50,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://massive.ucsd.edu/ProteoSAFe/static/massive.jsp",
                 "identifier": "MassIVE",
                 "conditionsOfAccess": "Open",
-                "genre": "Basic science"
+                "genre": "Generalist"
             },
             "veupath_collections": [
                 {
