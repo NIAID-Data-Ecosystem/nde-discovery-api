@@ -29,6 +29,7 @@
         "AccessClinicalData@NIAID",
         "Data Discovery Engine, NIAID Data Ecosystem",
         "MicrobiomeDB",
-        "MalariaGEN"
+        "MalariaGEN",
+        "Human Cell Atlas"
     ]
 }
