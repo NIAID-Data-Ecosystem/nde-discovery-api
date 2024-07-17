@@ -93,6 +93,17 @@ class NDEQueryBuilder(ESQueryBuilder):
             )
             search.aggs.bucket("hist_dates", a)
 
+        # apply multi-term aggregation
+        if options.multi_terms_fields:
+            multi_terms_size = options.get('multi_terms_size', 10)
+            multi_terms_agg = A(
+                "multi_terms",
+                terms=[{"field": field}
+                       for field in options.multi_terms_fields],
+                size=multi_terms_size  # Add this line
+            )
+            search.aggs.bucket("multi_terms_agg", multi_terms_agg)
+
         # apply suggester
         if options.suggester:
             phrase_suggester = {
@@ -133,7 +144,8 @@ class NDEFormatter(ESResultFormatter):
             res[facet]["terms"] = res[facet].pop("buckets")
             # Quick fix b/c hist aggregation is not a nested aggs and does not contain sum_other_doc_count and doc_count_error_upper_bound
             res[facet]["other"] = res[facet].pop("sum_other_doc_count", 0)
-            res[facet]["missing"] = res[facet].pop("doc_count_error_upper_bound", 0)
+            res[facet]["missing"] = res[facet].pop(
+                "doc_count_error_upper_bound", 0)
 
             count = 0
 
@@ -147,7 +159,8 @@ class NDEFormatter(ESResultFormatter):
                 # nested aggs
                 for agg_k in list(bucket.keys()):
                     if isinstance(bucket[agg_k], dict):
-                        bucket.update(self.transform_aggs(dict({agg_k: bucket[agg_k]})))
+                        bucket.update(self.transform_aggs(
+                            dict({agg_k: bucket[agg_k]})))
 
             res[facet]["total"] = count
 

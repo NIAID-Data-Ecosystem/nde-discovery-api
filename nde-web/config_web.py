@@ -23,24 +23,14 @@ APP_LIST[0] = ("/", "handlers.WebAppHandler")
 # *****************************************************************************
 
 SOURCE_TYPEDEF = {
-    'extra_filter': {
-        'type': str, 'default': None
-    },
-    'hist': {
-        'type': str, 'default': None
-    },
-    'hist_interval': {
-        'type': str, 'default': 'year'
-    },
-    'suggester': {
-        'type': str, 'default': None
-    },
-    "use_metadata_score": {
-        "type": bool, "default": False
-    },
-    "show_meta": {
-        "type": bool, "default": False
-    }
+    "extra_filter": {"type": str, "default": None},
+    "hist": {"type": str, "default": None},
+    "hist_interval": {"type": str, "default": "year"},
+    "suggester": {"type": str, "default": None},
+    "use_metadata_score": {"type": bool, "default": False},
+    "show_meta": {"type": bool, "default": False},
+    "multi_terms_fields": {"type": list, "default": []},
+    "multi_terms_size": {"type": int, "default": 10},
 }
 
 QUERY_KWARGS = copy.deepcopy(QUERY_KWARGS)
