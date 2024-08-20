@@ -1212,12 +1212,12 @@ class NDESourceHandler(MetadataSourceHandler):
             }
         }
 
-        for source in source_info:
+        for source, data in source_info.items():
             if source in _meta["src"]:
                 _meta["src"][source]["sourceInfo"] = source_info[source]
                 _meta["src"][source]["sourceInfo"]["metadata_completeness"] = self.calculate_metadata_compatibility_average(
                     source)
-            elif 'parentCollection' in source:
+            elif 'parentCollection' in data:
                 _meta["src"][source] = {"sourceInfo": source_info[source]}
                 _meta["src"][source]["sourceInfo"]["version"] = _meta["src"]["veupath_collections"]["version"]
 
