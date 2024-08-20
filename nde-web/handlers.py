@@ -184,7 +184,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "AmoebaDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "cryptodb": {
                 "name": "CryptoDB",
@@ -212,7 +212,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "CryptoDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "giardiadb": {
                 "name": "GiardiaDB",
@@ -240,7 +240,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "GiardiaDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "hostdb": {
                 "name": "HostDB",
@@ -268,7 +268,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "HostDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "plasmodb": {
                 "name": "PlasmoDB",
@@ -296,7 +296,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "PlasmoDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "vectorbase": {
                 "name": "VectorBase",
@@ -324,7 +324,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "VectorBase",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "fungidb": {
                 "name": "FungiDB",
@@ -352,7 +352,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "FungiDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "microsporidiadb": {
                 "name": "MicrosporidiaDB",
@@ -380,7 +380,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "MicrosporidiaDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "toxodb": {
                 "name": "ToxoDB",
@@ -408,7 +408,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "ToxoDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "trichdb": {
                 "name": "TrichDB",
@@ -436,7 +436,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "TrichDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "tritrypdb": {
                 "name": "TriTrypDB",
@@ -464,7 +464,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "TriTrypDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "piroplasmadb": {
                 "name": "PiroplasmaDB",
@@ -492,7 +492,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "PiroplasmaDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupath_collections"}
+                "parentCollection": {"id": "veupathdb"}
             },
             "massive": {
                 "name": "MassIVE",
