@@ -14,7 +14,7 @@ REQUIRED_FIELDS = [
     "includedInDataCatalog",
     "distribution",
     "funding",
-    "date"
+    "date",
 ]
 RECOMMENDED_FIELDS = [
     "dateCreated",
@@ -37,7 +37,7 @@ RECOMMENDED_FIELDS = [
     "topicCategory",
     "identifier",
     "usageInfo",
-    "interactionStatistic"
+    "interactionStatistic",
 ]
 
 
@@ -55,19 +55,19 @@ class NDESourceHandler(MetadataSourceHandler):
     """
 
     def load_from_cache(self, datasource):
-        file_name = f'cache_{datasource}.json'
+        file_name = f"cache_{datasource}.json"
         folder = "metadata_completeness"
         cache_file = os.path.join(folder, file_name)
         if os.path.exists(cache_file):
-            with open(cache_file, 'r') as f:
+            with open(cache_file, "r") as f:
                 averages = json.load(f)
             return averages
         return None
 
     def save_to_cache(self, datasource, averages):
         # Unique file for each datasource
-        cache_file = f'cache_{datasource}.json'
-        with open(cache_file, 'w') as f:
+        cache_file = f"cache_{datasource}.json"
+        with open(cache_file, "w") as f:
             json.dump(averages, f)
 
     def calculate_metadata_compatibility_average(self, datasource):
@@ -405,21 +405,21 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "ClinEpiDB",
                 "name": "ClinEpiDB",
                 "schema": {
-                        "Study_Design": "measurementTechnique",
-                        "description": "description",
-                        "summary": "description",
-                        "WHO": "keywords",
-                        "Participant_Type": "keywords",
-                        "Country": "spatialCoverage",
-                        "study_access": "conditionOfAccess",
-                        "Years": "temporalCoverage",
-                        "disease": "healthCondition",
-                        "Publications": "citation",
-                        "release_date": "distribution.dateModified",
-                        "dataset_name": "distribution.name",
-                        "contact_name": "author.name",
-                        "Contacts": "affiliation",
-                        "HyperLinks": "isBasedOn.url"
+                    "Study_Design": "measurementTechnique",
+                    "description": "description",
+                    "summary": "description",
+                    "WHO": "keywords",
+                    "Participant_Type": "keywords",
+                    "Country": "spatialCoverage",
+                    "study_access": "conditionOfAccess",
+                    "Years": "temporalCoverage",
+                    "disease": "healthCondition",
+                    "Publications": "citation",
+                    "release_date": "distribution.dateModified",
+                    "dataset_name": "distribution.name",
+                    "contact_name": "author.name",
+                    "Contacts": "affiliation",
+                    "HyperLinks": "isBasedOn.url",
                 },
                 "url": "https://clinepidb.org/ce/app",
             },
@@ -454,7 +454,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "toollink": "isBasedOn",
                     "tool": "isBasedOn",
                     "protocol": "isBasedOn.url",
-                    "protein": "keywords"
+                    "protein": "keywords",
                 },
                 "url": "https://lincsportal.ccs.miami.edu/",
             },
@@ -488,8 +488,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "subjects": "topicCategory",
                     "createdAt": "dateCreated",
                     "updatedAt": "dateModified",
-                    "authors": "author.name"
-
+                    "authors": "author.name",
                 },
                 "url": "https://dataverse.harvard.edu/",
             },
@@ -532,7 +531,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "file.type": "distribution.encodingFormat",
                     "version": "version",
                     "metadata.dag_provenance_list": "isBasedOn.name",
-                    "metadata.protocols_io_doi": "isBasedOn.doi"
+                    "metadata.protocols_io_doi": "isBasedOn.doi",
                 },
                 "url": "https://hubmapconsortium.org/",
             },
@@ -563,8 +562,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "sample_accession": "isBasedOn.identifier",
                     "instrument": "isBasedOn.identifier",
                     "cell line": "isBasedOn.identifier",
-                    "HapMap sample ID": "isBasedOn.identifier"
-
+                    "HapMap sample ID": "isBasedOn.identifier",
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/sra",
             },
@@ -590,7 +588,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "adc_update_date": "dateModified",
                     "archive_file": "distribution.contentUrl",
                     "download_url": "distribution.contentUrl",
-                    "file_size": "distribution.contentSize"
+                    "file_size": "distribution.contentSize",
                 },
                 "url": "https://vdj-staging.tacc.utexas.edu/community/",
             },
@@ -618,7 +616,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     "DownloadVersion": "distribution",
                     "Publications": "citation, funding",
                     "AssociatedDatasets": "isPartOf, isRelatedTo",
-                    "HyperLinks": "url", },
+                    "HyperLinks": "url",
+                },
                 "url": "https://beta.microbiomedb.org/mbio.beta/app/",
             },
             "qiita": {
@@ -725,13 +724,81 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://dash.nichd.nih.gov/",
             },
-
+            "covid_radx": {
+                "abstract": "COVID RADx Data Hub is a NIH supported IID repository that includes clinical data.",
+                "description": "The NIH Rapid Acceleration of Diagnostics Data Hub (RADx Data Hub) is a centralized data repository that provides access to analytic tools and de-identified COVID-19 data from the RADx Initiative. The RADx Data Hub supports scientific efforts to better understand COVID-19 and factors associated with disparities in morbidity and mortality in underserved and vulnerable populations, by allowing researchers to discover, access, and perform analyses of COVID-19 datasets in a cloud-enabled platform.",
+                "identifier": "RadX Data Hub",
+                "name": "COVID RADx Data Hub",
+                "schema": {
+                    "@version": "version",
+                    "created_at": "dateCreated",
+                    "ct_url": "isBasedOn.url",
+                    "data_species": "species.name",
+                    "dcc": "sdPublisher.name",
+                    "description": "description",
+                    "disease_specific_related_conditions": "healthCondition.name",
+                    "grant_number": "funding.funder.identifier",
+                    "institution_supporting_study_array": "funding.funder.name",
+                    "multi_center_sites": "author",
+                    "pi_name": "author",
+                    "release_date": "datePublished",
+                    "publication_url": "citation, funding",
+                    "source_array": "measurementTechnique.name",
+                    "types_array": "measurementTechnique.name",
+                    "data_general_types_array": "measurementTechnique.name",
+                    "study_id": "url",
+                    "population_focus_array": "keywords",
+                    "topics_array": "keywords",
+                    "study_website_url": "mainEntityOfPage",
+                    "start_date": "temporalCoverage.startDate",
+                    "end_date": "temporalCoverage.endDate",
+                    "subject_array": "variablesMeasured",
+                    "title": "name",
+                    "updated_at": "dateModified",
+                    "general_research_group": "usageInfo",
+                    "health_biomed_group": "usageInfo",
+                },
+                "url": "https://radxdatahub.nih.gov/",
+            },
+            "biostudies": {
+                "abstract": "BioStudies is a repository that includes life sciences data by organising links to data in other databases at EMBL-EBI or elsewhere.",
+                "description": "The mission of BioStudies is to provide access to all the data outputs of a life sciences study from a single place, by organising links to data in other databases at EMBL-EBI or elsewhere, as well as hosting data and metadata that do not fit anywhere else. The database accepts submissions via an online tool, or in a simple tab-delimited format. BioStudies provides rich mechanisms for defining and using metadata guidelines specific for a particular data source such as a project or a community, and organises datasets in collections.",
+                "identifier": "BioStudies",
+                "name": "BioStudies",
+                "schema": {
+                    "attachto": "url",
+                    "releasedate": "datePublished",
+                    "doi": "doi",
+                    "title": "name",
+                    "abstract": "description",
+                    "description": "description",
+                    "acknowledgements": "description",
+                    "funding statement": "description",
+                    "keywords": "keywords",
+                    "license": "license",
+                    "organism": "species.name",
+                    "method": "measurementTechnique.name",
+                    "study type": "measurementTechnique.name",
+                    "experimental design": "measurementTechnique.name",
+                    "experimental factor": "variablesMeasured.name",
+                    "files": "distribution",
+                    "links": "isRelatedTo",
+                    "authors": "author",
+                    "organization": "author.affiliation",
+                    "funding": "funding",
+                    "image acquisition": "measurementTechnique.name",
+                    "assays and data": "measurementTechnique.name",
+                    "publication": "citation",
+                },
+                "url": "https://www.ebi.ac.uk/biostudies/",
+            },
         }
 
         for source in source_info:
             if source in _meta["src"]:
                 _meta["src"][source]["sourceInfo"] = source_info[source]
-                _meta["src"][source]["sourceInfo"]["metadata_completeness"] = self.calculate_metadata_compatibility_average(
-                    source)
+                _meta["src"][source]["sourceInfo"]["metadata_completeness"] = (
+                    self.calculate_metadata_compatibility_average(source)
+                )
 
         return _meta
