@@ -29,12 +29,10 @@ class NDESourceHandler(MetadataSourceHandler):
             return averages
         return None
 
-
     def calculate_metadata_compatibility_average(self, datasource):
         cached_averages = self.load_from_cache(datasource)
         if cached_averages is not None:
             return cached_averages
-
 
     def extras(self, _meta):
         source_info = {
@@ -1209,7 +1207,75 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://dash.nichd.nih.gov/",
                 "conditionsOfAccess": "Restricted",
                 "genre": "Generalist"
-            }
+            },
+            "covid_radx": {
+                "abstract": "COVID RADx Data Hub is a NIH supported IID repository that includes clinical data.",
+                "description": "The NIH Rapid Acceleration of Diagnostics Data Hub (RADx Data Hub) is a centralized data repository that provides access to analytic tools and de-identified COVID-19 data from the RADx Initiative. The RADx Data Hub supports scientific efforts to better understand COVID-19 and factors associated with disparities in morbidity and mortality in underserved and vulnerable populations, by allowing researchers to discover, access, and perform analyses of COVID-19 datasets in a cloud-enabled platform.",
+                "identifier": "RadX Data Hub",
+                "name": "COVID RADx Data Hub",
+                "schema": {
+                    "@version": "version",
+                    "created_at": "dateCreated",
+                    "ct_url": "isBasedOn.url",
+                    "data_species": "species.name",
+                    "dcc": "sdPublisher.name",
+                    "description": "description",
+                    "disease_specific_related_conditions": "healthCondition.name",
+                    "grant_number": "funding.funder.identifier",
+                    "institution_supporting_study_array": "funding.funder.name",
+                    "multi_center_sites": "author",
+                    "pi_name": "author",
+                    "release_date": "datePublished",
+                    "publication_url": "citation, funding",
+                    "source_array": "measurementTechnique.name",
+                    "types_array": "measurementTechnique.name",
+                    "data_general_types_array": "measurementTechnique.name",
+                    "study_id": "url",
+                    "population_focus_array": "keywords",
+                    "topics_array": "keywords",
+                    "study_website_url": "mainEntityOfPage",
+                    "start_date": "temporalCoverage.startDate",
+                    "end_date": "temporalCoverage.endDate",
+                    "subject_array": "variablesMeasured",
+                    "title": "name",
+                    "updated_at": "dateModified",
+                    "general_research_group": "usageInfo",
+                    "health_biomed_group": "usageInfo",
+                },
+                "url": "https://radxdatahub.nih.gov/",
+            },
+            "biostudies": {
+                "abstract": "BioStudies is a repository that includes life sciences data by organising links to data in other databases at EMBL-EBI or elsewhere.",
+                "description": "The mission of BioStudies is to provide access to all the data outputs of a life sciences study from a single place, by organising links to data in other databases at EMBL-EBI or elsewhere, as well as hosting data and metadata that do not fit anywhere else. The database accepts submissions via an online tool, or in a simple tab-delimited format. BioStudies provides rich mechanisms for defining and using metadata guidelines specific for a particular data source such as a project or a community, and organises datasets in collections.",
+                "identifier": "BioStudies",
+                "name": "BioStudies",
+                "schema": {
+                    "attachto": "url",
+                    "releasedate": "datePublished",
+                    "doi": "doi",
+                    "title": "name",
+                    "abstract": "description",
+                    "description": "description",
+                    "acknowledgements": "description",
+                    "funding statement": "description",
+                    "keywords": "keywords",
+                    "license": "license",
+                    "organism": "species.name",
+                    "method": "measurementTechnique.name",
+                    "study type": "measurementTechnique.name",
+                    "experimental design": "measurementTechnique.name",
+                    "experimental factor": "variablesMeasured.name",
+                    "files": "distribution",
+                    "links": "isRelatedTo",
+                    "authors": "author",
+                    "organization": "author.affiliation",
+                    "funding": "funding",
+                    "image acquisition": "measurementTechnique.name",
+                    "assays and data": "measurementTechnique.name",
+                    "publication": "citation",
+                },
+                "url": "https://www.ebi.ac.uk/biostudies/",
+            },
         }
 
         for source, data in source_info.items():
@@ -1219,6 +1285,6 @@ class NDESourceHandler(MetadataSourceHandler):
                     source)
             elif 'parentCollection' in data:
                 _meta["src"][source] = {"sourceInfo": source_info[source]}
-                _meta["src"][source]["sourceInfo"]["version"] = _meta["src"]["veupath_collections"]["version"]
+                _meta["src"][source]["version"] = _meta["src"]["veupath_collections"]["version"]
 
         return _meta
