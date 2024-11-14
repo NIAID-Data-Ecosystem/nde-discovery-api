@@ -5,41 +5,6 @@ import os
 from biothings.web.handlers import MetadataSourceHandler
 from tornado.web import RequestHandler
 
-REQUIRED_FIELDS = [
-    "name",
-    "description",
-    "author",
-    "url",
-    "measurementTechnique",
-    "includedInDataCatalog",
-    "distribution",
-    "funding",
-    "date",
-]
-RECOMMENDED_FIELDS = [
-    "dateCreated",
-    "dateModified",
-    "datePublished",
-    "citedBy",
-    "doi",
-    "infectiousAgent",
-    "healthCondition",
-    "species",
-    "variableMeasured",
-    "citation",
-    "conditionsOfAccess",
-    "isBasedOn",
-    "keywords",
-    "license",
-    "sdPublisher",
-    "spatialCoverage",
-    "temporalCoverage",
-    "topicCategory",
-    "identifier",
-    "usageInfo",
-    "interactionStatistic",
-]
-
 
 class WebAppHandler(RequestHandler):
     def get(self):
@@ -63,12 +28,6 @@ class NDESourceHandler(MetadataSourceHandler):
                 averages = json.load(f)
             return averages
         return None
-
-    def save_to_cache(self, datasource, averages):
-        # Unique file for each datasource
-        cache_file = f"cache_{datasource}.json"
-        with open(cache_file, "w") as f:
-            json.dump(averages, f)
 
     def calculate_metadata_compatibility_average(self, datasource):
         cached_averages = self.load_from_cache(datasource)
