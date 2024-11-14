@@ -1243,6 +1243,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     "health_biomed_group": "usageInfo",
                 },
                 "url": "https://radxdatahub.nih.gov/",
+                "conditionsOfAccess": "Unknown",
+                "genre": "IID"
             },
             "biostudies": {
                 "abstract": "BioStudies is a repository that includes life sciences data by organising links to data in other databases at EMBL-EBI or elsewhere.",
