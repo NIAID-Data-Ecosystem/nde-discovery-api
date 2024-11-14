@@ -12,11 +12,8 @@ class NDEQueryBuilder(ESQueryBuilder):
         # elasticsearch query string syntax
         # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
         if ":" in q or " AND " in q or " OR " in q:
-            search = search.query(
-                "query_string", query=q, default_operator="AND", lenient=True
-            )
-
-        # term search
+            search = search.query("query_string", query=q,
+                                  default_operator="AND", lenient=True)
         elif q.startswith('"') and q.endswith('"'):
             queries = [
                 # term query boosting
@@ -25,38 +22,42 @@ class NDEQueryBuilder(ESQueryBuilder):
                 # query string
                 Q("query_string", query=q, default_operator="AND", lenient=True),
             ]
-
             search = search.query("dis_max", queries=queries)
 
         # simple text search
         else:
-            queries = [
-                # term query boosting
-                Q("term", _id={"value": q, "boost": 5}),
-                Q("term", name={"value": q, "boost": 5}),
-                # query string
-                Q("query_string", query=q, default_operator="AND", lenient=True),
-            ]
-
-            # check if q contains wildcards if not add wildcard query to every word
-            if not ("*" in q or "?" in q):
-                wc_query = Q(
-                    "query_string",
-                    query="* ".join(q.split()) + "*",
-                    default_operator="AND",
-                    boost=0.5,
-                    lenient=True,
-                )
-                queries.append(wc_query)
-
+            queries = self.build_queries(q, None)
             search = search.query("dis_max", queries=queries)
 
-        # # terms to filter
-        # terms = {"@type": ["Dataset", "ComputationalTool"]}
-        # # we need to use the filter clause because we do not want the term scores to be calculated
-        # search = search.filter('terms', **terms)
-
         return search
+
+    def build_queries(self, q, custom_function_script):
+        queries = [
+            Q("function_score", query=Q("term", _id={"value": q, "boost": 5}),
+              script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
+            Q("function_score", query=Q("term", name={"value": q, "boost": 5}),
+              script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
+            Q("function_score", query=Q("query_string", query=q, default_operator="AND", lenient=True),
+              script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
+        ]
+
+        if not ("*" in q or "?" in q):
+            wc_query = Q(
+                "query_string",
+                query="* ".join(q.split()) + "*",
+                default_operator="AND",
+                boost=0.5,
+                lenient=True,
+            )
+            wc_function_score_query = Q("function_score", query=wc_query,
+                                        script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace")
+            queries.append(wc_function_score_query)
+
+        # Remove function_score wrapping if custom_function_script is None
+        if custom_function_script is None:
+            queries = [Q(q.query) for q in queries]
+
+        return queries
 
     def apply_extras(self, search, options):
         # We only want those of type Dataset or ComputationalTool. Terms to filter
@@ -65,19 +66,6 @@ class NDEQueryBuilder(ESQueryBuilder):
         # Temporary change for launch of the portal as requested by NIAID
         terms = {"@type": ["Dataset", "ResourceCatalog"]}
         search = search.filter("terms", **terms)
-
-        # Define functions for the function_score query
-        functions = [
-            {"filter": {"term": {"@type": "ResourceCatalog"}}, "weight": 100}
-        ]  # Adjust this value as needed
-
-        # Apply the function_score query
-        search = search.query(
-            "function_score",
-            query=search.to_dict().get("query"),
-            functions=functions,
-            boost_mode="replace",
-        )
 
         # apply extra-filtering for frontend to avoid adding unwanted wildcards on certain queries
         if options.extra_filter:
@@ -98,26 +86,60 @@ class NDEQueryBuilder(ESQueryBuilder):
             phrase_suggester = {
                 "field": "name.phrase_suggester",
                 "size": 3,
-                "direct_generator": [
-                    {"field": "name.phrase_suggester", "suggest_mode": "always"}
-                ],
+                "direct_generator": [{"field": "name.phrase_suggester", "suggest_mode": "always"}],
                 "max_errors": 2,
                 "highlight": {"pre_tag": "<em>", "post_tag": "</em>"},
             }
             search = search.suggest(
-                "nde_suggester", options.suggester, phrase=phrase_suggester
-            )
+                "nde_suggester", options.suggester, phrase=phrase_suggester)
 
         # apply function score
         if options.use_metadata_score:
-            function_score_query = Q(
-                "function_score",
-                boost_mode="sum",
-                field_value_factor={"field": "metadata_score", "missing": 0},
-            )
+            custom_function_script = {
+                "source": """
+                    double required_ratio = doc['_meta.completeness.required_ratio'].value;
+                    double recommended_ratio = doc['_meta.completeness.recommended_score_ratio'].value;
+                    double b = 1 - params.a;
+                    double d = 1 - params.c;
+                    double score = (params.a * _score) + (b * ((params.c * required_ratio) + (d * recommended_ratio)));
+                    if (doc['@type'].value == 'ResourceCatalog') {
+                        score *= params.boost_factor;
+                    }
+                    return score;
+                """,
+                "params": {
+                    "a": 0.8,
+                    "c": 0.75,
+                    "boost_factor": 1000.0
+                }
+            }
+            function_score_query = Q("function_score", script_score={
+                                     "script": custom_function_script}, boost_mode="replace")
             search = search.query(function_score_query)
+        else:
+            # Still boosting ResourceCatalogs
+            functions = [
+                {"filter": {"term": {"@type": "ResourceCatalog"}}, "weight": 1000}
+            ]
 
-        # hide _meta object
+            search = search.query(
+                "function_score",
+                query=search.to_dict().get("query"),
+                functions=functions,
+                boost_mode="replace",
+            )
+
+        # apply multi-term aggregation
+        if options.multi_terms_fields:
+            multi_terms_size = options.get('multi_terms_size', 10)
+            multi_terms_agg = A(
+                "multi_terms",
+                terms=[{"field": field}
+                       for field in options.multi_terms_fields],
+                size=multi_terms_size
+            )
+            search.aggs.bucket("multi_terms_agg", multi_terms_agg)
+
         if options.show_meta:
             search = search.source(includes=["*"], excludes=[])
         else:
@@ -133,7 +155,8 @@ class NDEFormatter(ESResultFormatter):
             res[facet]["terms"] = res[facet].pop("buckets")
             # Quick fix b/c hist aggregation is not a nested aggs and does not contain sum_other_doc_count and doc_count_error_upper_bound
             res[facet]["other"] = res[facet].pop("sum_other_doc_count", 0)
-            res[facet]["missing"] = res[facet].pop("doc_count_error_upper_bound", 0)
+            res[facet]["missing"] = res[facet].pop(
+                "doc_count_error_upper_bound", 0)
 
             count = 0
 
@@ -147,7 +170,8 @@ class NDEFormatter(ESResultFormatter):
                 # nested aggs
                 for agg_k in list(bucket.keys()):
                     if isinstance(bucket[agg_k], dict):
-                        bucket.update(self.transform_aggs(dict({agg_k: bucket[agg_k]})))
+                        bucket.update(self.transform_aggs(
+                            dict({agg_k: bucket[agg_k]})))
 
             res[facet]["total"] = count
 
