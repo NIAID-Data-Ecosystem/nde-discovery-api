@@ -1211,7 +1211,7 @@ class NDESourceHandler(MetadataSourceHandler):
             "covid_radx": {
                 "abstract": "COVID RADx Data Hub is a NIH supported IID repository that includes clinical data.",
                 "description": "The NIH Rapid Acceleration of Diagnostics Data Hub (RADx Data Hub) is a centralized data repository that provides access to analytic tools and de-identified COVID-19 data from the RADx Initiative. The RADx Data Hub supports scientific efforts to better understand COVID-19 and factors associated with disparities in morbidity and mortality in underserved and vulnerable populations, by allowing researchers to discover, access, and perform analyses of COVID-19 datasets in a cloud-enabled platform.",
-                "identifier": "RadX Data Hub",
+                "identifier": "RADx Data Hub",
                 "name": "COVID RADx Data Hub",
                 "schema": {
                     "@version": "version",
