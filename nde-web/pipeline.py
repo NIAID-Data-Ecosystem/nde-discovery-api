@@ -64,8 +64,26 @@ class NDEQueryBuilder(ESQueryBuilder):
         # terms = {"@type": ["Dataset", "ComputationalTool"]}
 
         # Temporary change for launch of the portal as requested by NIAID
-        terms = {"@type": ["Dataset", "ResourceCatalog"]}
-        search = search.filter("terms", **terms)
+        # terms = {"@type": ["Dataset", "ResourceCatalog"]}
+        # search = search.filter("terms", **terms)
+
+        # Filter to allow @type Dataset, ResourceCatalog and ComputationalTool only from Bio.tools
+        filter_conditions = [
+            # Include Dataset and ResourceCatalog
+            {"terms": {"@type": ["Dataset", "ResourceCatalog"]}},
+        ]
+
+        computational_tool_condition = {
+            "bool": {
+                "must": [
+                    {"term": {"@type": "ComputationalTool"}},
+                    {"term": {"includedInDataCatalog.name": "Bio.tools"}}
+                ]
+            }
+        }
+
+        search = search.filter(
+            "bool", should=filter_conditions + [computational_tool_condition])
 
         # apply extra-filtering for frontend to avoid adding unwanted wildcards on certain queries
         if options.extra_filter:
