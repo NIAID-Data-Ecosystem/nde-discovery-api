@@ -786,7 +786,8 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://bio.tools/",
                 "genre": "Generalist",
-                "conditionsOfAccess": "Varied"
+                "conditionsOfAccess": "Varied",
+                "type": "Computational Tool Repository"
             },
         }
 
