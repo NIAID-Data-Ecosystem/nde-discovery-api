@@ -170,34 +170,55 @@ class NDEQueryBuilder(ESQueryBuilder):
         )
         search = search.exclude(spam_filter)
 
+        if options.get('lineage'):
+            lineage_taxon_id = options.get('lineage')
+            lineage_agg = A('nested', path='_meta.lineage')
+
+            children_of_lineage_filter = A(
+                'filter', term={'_meta.lineage.parent_taxon': lineage_taxon_id})
+
+            taxon_ids_terms = A('terms', field='_meta.lineage.taxon')
+            taxon_ids_terms.bucket('to_parent', A('reverse_nested'))
+
+            children_of_lineage_filter.bucket('to_parent', A('reverse_nested'))
+            children_of_lineage_filter.bucket('taxon_ids', taxon_ids_terms)
+
+            lineage_agg.bucket('children_of_lineage',
+                               children_of_lineage_filter)
+
+            search.aggs.bucket('lineage', lineage_agg)
+
         return super().apply_extras(search, options)
 
 
 class NDEFormatter(ESResultFormatter):
     def transform_aggs(self, res):
-        for facet in res:
-            res[facet]["_type"] = "terms"  # a type of ES Bucket Aggs
-            res[facet]["terms"] = res[facet].pop("buckets")
-            # Quick fix b/c hist aggregation is not a nested aggs and does not contain sum_other_doc_count and doc_count_error_upper_bound
-            res[facet]["other"] = res[facet].pop("sum_other_doc_count", 0)
-            res[facet]["missing"] = res[facet].pop(
-                "doc_count_error_upper_bound", 0)
+        def transform_agg(agg_res):
+            # Handle 'terms' aggregations with 'buckets'
+            if 'buckets' in agg_res:
+                agg_res['_type'] = 'terms'
+                agg_res['terms'] = agg_res.pop('buckets')
+                agg_res['other'] = agg_res.pop('sum_other_doc_count', 0)
+                agg_res['missing'] = agg_res.pop(
+                    'doc_count_error_upper_bound', 0)
+                count = 0
+                for bucket in agg_res['terms']:
+                    bucket['count'] = bucket.pop('doc_count')
+                    bucket['term'] = bucket.pop('key')
+                    if 'key_as_string' in bucket:
+                        bucket['term'] = bucket.pop('key_as_string')
+                    count += bucket['count']
+                    # Recursively transform nested aggregations in the bucket
+                    for k in list(bucket.keys()):
+                        if isinstance(bucket[k], dict):
+                            transform_agg(bucket[k])
+                agg_res['total'] = count
+            else:
+                # Handle other types of aggregations (e.g., 'nested', 'filter')
+                for k in list(agg_res.keys()):
+                    if isinstance(agg_res[k], dict):
+                        transform_agg(agg_res[k])
 
-            count = 0
-
-            for bucket in res[facet]["terms"]:
-                bucket["count"] = bucket.pop("doc_count")
-                bucket["term"] = bucket.pop("key")
-                if "key_as_string" in bucket:
-                    bucket["term"] = bucket.pop("key_as_string")
-                count += bucket["count"]
-
-                # nested aggs
-                for agg_k in list(bucket.keys()):
-                    if isinstance(bucket[agg_k], dict):
-                        bucket.update(self.transform_aggs(
-                            dict({agg_k: bucket[agg_k]})))
-
-            res[facet]["total"] = count
-
+        # Start the recursive transformation
+        transform_agg(res)
         return res

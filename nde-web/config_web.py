@@ -31,6 +31,7 @@ SOURCE_TYPEDEF = {
     "show_meta": {"type": bool, "default": False},
     "multi_terms_fields": {"type": list, "default": []},
     "multi_terms_size": {"type": int, "default": 10},
+    "lineage": {"type": int, "default": None},
 }
 
 QUERY_KWARGS = copy.deepcopy(QUERY_KWARGS)
