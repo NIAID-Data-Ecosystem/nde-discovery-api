@@ -11,54 +11,28 @@ class NDEQueryBuilder(ESQueryBuilder):
         search = Search()
         q = q.strip()
 
-        # Function to check if a field is nested
-        def is_nested_field(field_name):
-            # List of nested fields
-            nested_fields = ['_meta.lineage.taxon',
-                             '_meta.lineage.parent_taxon']
-            return field_name in nested_fields
+        # elasticsearch query string syntax
+        # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
+        if ":" in q or " AND " in q or " OR " in q:
+            search = search.query("query_string", query=q,
+                                  default_operator="AND", lenient=True)
 
-        # Check if q is a simple field:value query
-        if ':' in q and not (' AND ' in q or ' OR ' in q):
-            field, value = q.split(':', 1)
-            if is_nested_field(field):
-                # Build nested query
-                nested_path = '_meta.lineage'
-                nested_query = Q('nested', path=nested_path,
-                                 query=Q('term', **{field: int(value)}))
-                search = search.query(nested_query)
-            else:
-                # Normal field
-                search = search.query('term', **{field: value})
+        # term search
+        elif q.startswith('"') and q.endswith('"'):
+            queries = [
+                # term query boosting
+                Q("term", _id={"value": q.strip('"'), "boost": 5}),
+                Q("term", name={"value": q.strip('"'), "boost": 5}),
+                # query string
+                Q("query_string", query=q, default_operator="AND", lenient=True),
+            ]
+
+            search = search.query("dis_max", queries=queries)
+
+        # simple text search
         else:
-            # Existing logic for complex queries
-            if ":" in q or " AND " in q or " OR " in q:
-                # Parse the query and handle nested fields
-                queries = []
-                tokens = q.split()
-                for token in tokens:
-                    if ':' in token:
-                        field, value = token.split(':', 1)
-                        if is_nested_field(field):
-                            nested_path = '_meta.lineage'
-                            nested_query = Q('nested', path=nested_path, query=Q(
-                                'term', **{field: int(value)}))
-                            queries.append(nested_query)
-                        else:
-                            queries.append(Q('term', **{field: value}))
-                    else:
-                        queries.append(Q('match', _all=token))
-                search = search.query('bool', must=queries)
-            elif q.startswith('"') and q.endswith('"'):
-                queries = [
-                    Q("term", _id={"value": q.strip('"'), "boost": 5}),
-                    Q("term", name={"value": q.strip('"'), "boost": 5}),
-                    Q("query_string", query=q, default_operator="AND", lenient=True),
-                ]
-                search = search.query("dis_max", queries=queries)
-            else:
-                queries = self.build_queries(q, None)
-                search = search.query("dis_max", queries=queries)
+            queries = self.build_queries(q, None)
+            search = search.query("dis_max", queries=queries)
 
         return search
 
@@ -198,6 +172,8 @@ class NDEQueryBuilder(ESQueryBuilder):
 
         if options.get('lineage'):
             lineage_taxon_id = options.get('lineage')
+
+            # Existing lineage aggregation
             lineage_agg = A('nested', path='_meta.lineage')
 
             children_of_lineage_filter = A(
@@ -213,6 +189,24 @@ class NDEQueryBuilder(ESQueryBuilder):
                                children_of_lineage_filter)
 
             search.aggs.bucket('lineage', lineage_agg)
+
+            # New aggregation for counting datasets based on species.identifier and infectiousAgent.identifier
+            # Since these fields are not nested, we can query them directly
+            lineage_taxon_filter = Q(
+                'bool',
+                should=[
+                    Q('term', **{'species.identifier': lineage_taxon_id}),
+                    Q('term', **
+                      {'infectiousAgent.identifier': lineage_taxon_id})
+                ],
+                minimum_should_match=1
+            )
+
+            # Create a filter aggregation using the above filter
+            lineage_doc_count_agg = A('filter', lineage_taxon_filter)
+
+            # Include this aggregation at the top level
+            search.aggs.bucket('lineage_doc_count', lineage_doc_count_agg)
 
         return super().apply_extras(search, options)
 
