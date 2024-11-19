@@ -77,7 +77,7 @@ class NDEQueryBuilder(ESQueryBuilder):
             "bool": {
                 "must": [
                     {"term": {"@type": "ComputationalTool"}},
-                    {"term": {"includedInDataCatalog.name": "Bio.tools"}}
+                    {"term": {"includedInDataCatalog.name": "bio.tools"}}
                 ]
             }
         }
