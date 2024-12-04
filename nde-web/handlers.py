@@ -779,7 +779,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "HyperLinks": "isBasedOn.url",
                 },
                 "url": "https://clinepidb.org/ce/app",
-                "conditionsOfAccess": "Unknown",
+                "conditionsOfAccess": "Varied",
                 "genre": "IID",
             },
             "lincs": {
