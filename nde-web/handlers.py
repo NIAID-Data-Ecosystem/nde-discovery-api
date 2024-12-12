@@ -20,11 +20,11 @@ class NDESourceHandler(MetadataSourceHandler):
     """
 
     def load_from_cache(self, datasource):
-        file_name = f'cache_{datasource}.json'
+        file_name = f"cache_{datasource}.json"
         folder = "metadata_completeness"
         cache_file = os.path.join(folder, file_name)
         if os.path.exists(cache_file):
-            with open(cache_file, 'r') as f:
+            with open(cache_file, "r") as f:
                 averages = json.load(f)
             return averages
         return None
@@ -97,7 +97,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "dataSource": "isBasedOn",
                     "Source": "isBasedOn",
                     "Treatment": "variableMeasured",
-                    "methods": "measurementTechnique"
+                    "methods": "measurementTechnique",
                 },
                 "url": "https://www.ndexbio.org/",
                 "identifier": "NDEx",
@@ -122,12 +122,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "relation": "url",
                     "license": "license",
                     "issued": "datePublished",
-                    "sponsor": "funding"
+                    "sponsor": "funding",
                 },
                 "url": "https://figshare.com/",
                 "identifier": "Figshare",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "veupath_collections": {
                 "name": "VEuPath Collections",
@@ -182,7 +182,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "AmoebaDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "cryptodb": {
                 "name": "CryptoDB",
@@ -210,7 +210,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "CryptoDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "giardiadb": {
                 "name": "GiardiaDB",
@@ -238,7 +238,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "GiardiaDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "hostdb": {
                 "name": "HostDB",
@@ -266,7 +266,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "HostDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "plasmodb": {
                 "name": "PlasmoDB",
@@ -294,7 +294,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "PlasmoDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "vectorbase": {
                 "name": "VectorBase",
@@ -322,7 +322,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "VectorBase",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "fungidb": {
                 "name": "FungiDB",
@@ -350,7 +350,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "FungiDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "microsporidiadb": {
                 "name": "MicrosporidiaDB",
@@ -378,7 +378,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "MicrosporidiaDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "toxodb": {
                 "name": "ToxoDB",
@@ -406,7 +406,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "ToxoDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "trichdb": {
                 "name": "TrichDB",
@@ -434,7 +434,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "TrichDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "tritrypdb": {
                 "name": "TriTrypDB",
@@ -462,7 +462,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "TriTrypDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "piroplasmadb": {
                 "name": "PiroplasmaDB",
@@ -490,7 +490,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "PiroplasmaDB",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
-                "parentCollection": {"id": "veupathdb"}
+                "parentCollection": {"id": "veupathdb"},
             },
             "massive": {
                 "name": "MassIVE",
@@ -509,12 +509,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "species_resolved": "species",
                     "pis": "author",
                     "publications": "citation",
-                    "privacy": "conditionsOfAccess"
+                    "privacy": "conditionsOfAccess",
                 },
                 "url": "https://massive.ucsd.edu/ProteoSAFe/static/massive.jsp",
                 "identifier": "MassIVE",
                 "conditionsOfAccess": "Open",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "malariagen": {
                 "name": "MalariaGEN",
@@ -529,12 +529,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "datasets": "distribution",
                     "citations": "citation",
                     "data package contact": "author",
-                    "spatialCoverage": "spatialCoverage"
+                    "spatialCoverage": "spatialCoverage",
                 },
                 "url": "https://www.malariagen.net/",
                 "identifier": "MalariaGEN",
                 "conditionsOfAccess": "Varied",
-                "genre": "IID"
+                "genre": "IID",
             },
             "dryad": {
                 "name": "Dryad Digital Repository",
@@ -560,12 +560,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "extractedBriefSummary": "description",
                     "draftCreatedDate": "dateCreated",
                     "postedDate": "datePublished",
-                    "updatedDate": "dateModified"
+                    "updatedDate": "dateModified",
                 },
                 "url": "https://datadryad.org",
                 "identifier": "Dryad Digital Repository",
                 "conditionsOfAccess": "Open",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "vivli": {
                 "name": "Vivli",
@@ -591,12 +591,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "extractedBriefSummary": "description",
                     "draftCreatedDate": "dateCreated",
                     "postedDate": "datePublished",
-                    "updatedDate": "dateModified"
+                    "updatedDate": "dateModified",
                 },
                 "url": "https://vivli.org/",
                 "identifier": "Vivli",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "ncbi_pmc": {
                 "name": "NCBI PMC",
@@ -618,7 +618,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.ncbi.nlm.nih.gov/pmc/",
                 "identifier": "NCBI PMC",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "veupathdb": {
                 "name": "VEuPathDB",
@@ -640,12 +640,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "organism": "species",
                     "HyperLinks": "distribution",
                     "gene_count": "variableMeasured",
-                    "gene_type": "GeneTypeCounts"
+                    "gene_type": "GeneTypeCounts",
                 },
                 "url": "https://veupathdb.org/veupathdb/app/",
                 "identifier": "VEuPathDB",
                 "conditionsOfAccess": "Unknown",
-                "genre": "IID"
+                "genre": "IID",
             },
             "acd_niaid": {
                 "name": "AccessClinicalData@NIAID",
@@ -663,12 +663,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "condition": "healthCondition",
                     "clinical_trial_website": "mainEntityOfPage",
                     "publications": "citation",
-                    "data_available_for_request": "conditionsOfAccess"
+                    "data_available_for_request": "conditionsOfAccess",
                 },
                 "url": "https://accessclinicaldata.niaid.nih.gov/",
                 "identifier": "AccessClinicalData@NIAID",
                 "conditionsOfAccess": "Varied",
-                "genre": "IID"
+                "genre": "IID",
             },
             "sb_apps": {
                 "name": "Seven Bridges Public Apps Gallery",
@@ -693,12 +693,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "sbg:createdOn": "dateCreated",
                     "sbg:contributors": "contributor",
                     "sbg:publisher": "sdPublisher",
-                    "sbg:workflowLanguage": "programmingLanguage"
+                    "sbg:workflowLanguage": "programmingLanguage",
                 },
                 "url": "https://workspace.niaiddata.org/public/apps",
                 "identifier": "PublicApps@SevenBridges",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "zenodo": {
                 "name": "Zenodo",
@@ -719,12 +719,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "xml[creator][nameIdentifier]": "author.identifier",
                     "xml[rights]": "conditionsOfAccess, license",
                     "xml[relatedIdentifier][relationType]": "citedBy",
-                    "xml[contributor][contributorName]": "funding.funder.name"
+                    "xml[contributor][contributorName]": "funding.funder.name",
                 },
                 "url": "https://zenodo.org/",
                 "identifier": "Zenodo",
                 "conditionsOfAccess": "Varied",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "dde": {
                 "name": "Data Discovery Engine",
@@ -739,12 +739,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "measurementTechnique": "measurementTechnique",
                     "infectiousAgent": "infectiousAgent",
                     "infectiousDisease": "infectiousDisease",
-                    "species": "species"
+                    "species": "species",
                 },
                 "url": "https://discovery.biothings.io/",
                 "identifier": "Data Discovery Engine",
                 "conditionsOfAccess": "Varied",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "ncbi_geo": {
                 "name": "NCBI GEO",
@@ -760,12 +760,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "summary": "description",
                     "submission date": "datePublished",
                     "last update date": "dateModified",
-                    "citation(s)": "citation"
+                    "citation(s)": "citation",
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/geo/",
                 "identifier": "NCBI GEO",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "immport": {
                 "name": "ImmPort",
@@ -780,12 +780,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "measurementTechnique": "measurementTechnique",
                     "distribution": "distribution",
                     "includedInDataCatalog": "includedInDataCatalog",
-                    "date": "date"
+                    "date": "date",
                 },
                 "url": "https://www.immport.org/shared/home",
                 "identifier": "ImmPort",
                 "conditionsOfAccess": "Unknown",
-                "genre": "IID"
+                "genre": "IID",
             },
             "omicsdi": {
                 "name": "OmicsDI",
@@ -800,12 +800,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "keywords": "keywords",
                     "name": "name",
                     "sameAs": "sameAs",
-                    "variableMeasured": "variableMeasured"
+                    "variableMeasured": "variableMeasured",
                 },
                 "url": "https://www.omicsdi.org/",
                 "identifier": "Omics Discovery Index (OmicsDI)",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "mendeley": {
                 "name": "Mendeley Data",
@@ -824,12 +824,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "related_links": "citation",
                     "modified_on": "dateModified",
                     "links": "url",
-                    "repository": "sdPublisher"
+                    "repository": "sdPublisher",
                 },
                 "url": "https://data.mendeley.com/",
                 "identifier": "Mendeley",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "reframedb": {
                 "name": "ReframeDB",
@@ -850,12 +850,12 @@ class NDESourceHandler(MetadataSourceHandler):
                     "drug_conc": "description",
                     "indication": "healthCondition",
                     "assay_type": "measurementTechnique",
-                    "bibliography": "citation"
+                    "bibliography": "citation",
                 },
                 "url": "https://reframedb.org/",
                 "identifier": "ReframeDB",
                 "conditionsOfAccess": "Unknown",
-                "genre": "IID"
+                "genre": "IID",
             },
             "clinepidb": {
                 "abstract": "ClinEpiDB is a NIAID supported IID repository that includes epidemiological data.",
@@ -863,25 +863,25 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "ClinEpiDB",
                 "name": "ClinEpiDB",
                 "schema": {
-                        "Study_Design": "measurementTechnique",
-                        "description": "description",
-                        "summary": "description",
-                        "WHO": "keywords",
-                        "Participant_Type": "keywords",
-                        "Country": "spatialCoverage",
-                        "study_access": "conditionOfAccess",
-                        "Years": "temporalCoverage",
-                        "disease": "healthCondition",
-                        "Publications": "citation",
-                        "release_date": "distribution.dateModified",
-                        "dataset_name": "distribution.name",
-                        "contact_name": "author.name",
-                        "Contacts": "affiliation",
-                        "HyperLinks": "isBasedOn.url"
+                    "Study_Design": "measurementTechnique",
+                    "description": "description",
+                    "summary": "description",
+                    "WHO": "keywords",
+                    "Participant_Type": "keywords",
+                    "Country": "spatialCoverage",
+                    "study_access": "conditionOfAccess",
+                    "Years": "temporalCoverage",
+                    "disease": "healthCondition",
+                    "Publications": "citation",
+                    "release_date": "distribution.dateModified",
+                    "dataset_name": "distribution.name",
+                    "contact_name": "author.name",
+                    "Contacts": "affiliation",
+                    "HyperLinks": "isBasedOn.url",
                 },
                 "url": "https://clinepidb.org/ce/app",
                 "conditionsOfAccess": "Varied",
-                "genre": "IID"
+                "genre": "IID",
             },
             "lincs": {
                 "abstract": "The Library of Integrated Network-Based Cellular Signatures (LINCS) Data Portal is an NIH supported repository that includes gene expression and other cellular processes data.",
@@ -914,11 +914,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "toollink": "isBasedOn",
                     "tool": "isBasedOn",
                     "protocol": "isBasedOn.url",
-                    "protein": "keywords"
+                    "protein": "keywords",
                 },
                 "url": "https://lincsportal.ccs.miami.edu/",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "dataverse": {
                 "abstract": "Harvard Dataverse is a GREI repository that includes most data types and domains.",
@@ -928,11 +928,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "schema": {
                     "@context": "@context",
                     "@type": "@type",
-                    "identifier": [
-                        "url",
-                        "doi",
-                        "identifier"
-                    ],
+                    "identifier": ["url", "doi", "identifier"],
                     "name": "name",
                     "creator": "author",
                     "author": "author",
@@ -954,11 +950,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "subjects": "topicCategory",
                     "createdAt": "dateCreated",
                     "updatedAt": "dateModified",
-                    "authors": "author.name"
+                    "authors": "author.name",
                 },
                 "url": "https://dataverse.harvard.edu/",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "hubmap": {
                 "abstract": "The Human BioMolecular Atlas Program (HuBMAP) is an NIH supported repository that includes multimodal data of healthy cells in the human body.",
@@ -999,11 +995,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "file.type": "distribution.encodingFormat",
                     "version": "version",
                     "metadata.dag_provenance_list": "isBasedOn.name",
-                    "metadata.protocols_io_doi": "isBasedOn.doi"
+                    "metadata.protocols_io_doi": "isBasedOn.doi",
                 },
                 "url": "https://hubmapconsortium.org/",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "ncbi_sra": {
                 "abstract": "Sequence Read Archive (SRA) is the NIH supported largest publicly available repository of high throughput sequencing data that includes raw sequencing data and alignment information for most domains.",
@@ -1032,11 +1028,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "sample_accession": "isBasedOn.identifier",
                     "instrument": "isBasedOn.identifier",
                     "cell line": "isBasedOn.identifier",
-                    "HapMap sample ID": "isBasedOn.identifier"
+                    "HapMap sample ID": "isBasedOn.identifier",
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/sra",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "vdj": {
                 "abstract": "VDJServer is a NIAID supported repository that includes immune repertoire sequencing data.",
@@ -1060,11 +1056,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "adc_update_date": "dateModified",
                     "archive_file": "distribution.contentUrl",
                     "download_url": "distribution.contentUrl",
-                    "file_size": "distribution.contentSize"
+                    "file_size": "distribution.contentSize",
                 },
                 "url": "https://vdj-staging.tacc.utexas.edu/community/",
                 "conditionsOfAccess": "Unknown",
-                "genre": "IID"
+                "genre": "IID",
             },
             "microbiomedb": {
                 "abstract": "MicrobiomeDB is a NIAID supported repository that includes clinical microbiome data and analysis tools.",
@@ -1090,11 +1086,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "DownloadVersion": "distribution",
                     "Publications": "citation, funding",
                     "AssociatedDatasets": "isPartOf, isRelatedTo",
-                    "HyperLinks": "url"
+                    "HyperLinks": "url",
                 },
                 "url": "https://microbiomedb.org/mbio/app",
                 "conditionsOfAccess": "Open",
-                "genre": "IID"
+                "genre": "IID",
             },
             "qiita": {
                 "abstract": "Qiita is a repository that includes microbiome data and analysis tools.",
@@ -1109,11 +1105,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "study_tags": "keywords",
                     "pi": "author",
                     "pubs": "doi,pmids",
-                    "ebi_study_accession": "mainEntityOfPage"
+                    "ebi_study_accession": "mainEntityOfPage",
                 },
                 "url": "https://qiita.ucsd.edu/",
                 "conditionsOfAccess": "Unknown",
-                "genre": "IID"
+                "genre": "IID",
             },
             "hca": {
                 "abstract": "The Human Cell Atlas is a repository that includes multimodal data of cells in the human body.",
@@ -1141,11 +1137,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "disease": "healthCondition.name",
                     "genusSpecies": "species",
                     "lastModifiedDate": "dateModified",
-                    "submissionDate": "datePublished"
+                    "submissionDate": "datePublished",
                 },
                 "url": "https://www.humancellatlas.org/",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "flowrepository": {
                 "abstract": "Flow Repository is a repository that includes flow cytometry data.",
@@ -1168,11 +1164,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "Conclusion": "description",
                     "Comments": "description",
                     "Funding": "funding.description",
-                    "Quality control": "description"
+                    "Quality control": "description",
                 },
                 "url": "http://flowrepository.org/",
                 "conditionsOfAccess": "Unknown",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "dash": {
                 "abstract": "The Data and Specimen Hub (DASH) is an NICHD supported repository that includes clinical data and specimens.",
@@ -1202,11 +1198,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "descriptiveDocuments": "hasPart,isBasedOn",
                     "datasetTitle": "name",
                     "datasetDescription": "description",
-                    "datasetFormat": "encodingFormat"
+                    "datasetFormat": "encodingFormat",
                 },
                 "url": "https://dash.nichd.nih.gov/",
                 "conditionsOfAccess": "Restricted",
-                "genre": "Generalist"
+                "genre": "Generalist",
             },
             "covid_radx": {
                 "abstract": "COVID RADx Data Hub is a NIH supported IID repository that includes clinical data.",
@@ -1244,7 +1240,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://radxdatahub.nih.gov/",
                 "conditionsOfAccess": "Unknown",
-                "genre": "IID"
+                "genre": "IID",
             },
             "biostudies": {
                 "abstract": "BioStudies is a repository that includes life sciences data by organising links to data in other databases at EMBL-EBI or elsewhere.",
@@ -1280,7 +1276,9 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "biotools": {
                 "abstract": "bio.tools is an ELIXIR supported tool repository that includes information about software tools, databases and services.",
-                "description": "The use of bioinformatics is ubiquitous within the life sciences.  In bio.tools, we are striving to provide a comprehensive registry of software and databases, facilitating researchers from across the spectrum of biological and biomedical science to find, understand, utilise and cite the resources they need in their day-to-day work.\nEverything from simple command-line tools and online services, through to databases and complex, multi-functional analysis workflows is included. Resources are described in a rigorous semantics and syntax, providing end-users with the convenience of concise, consistent and therefore comparable information.\nEach bio.tools entry is assigned a human-readable, unique identifier based on the resource name, e.g. biotools:signalp.  These identifiers provide a persistent reference to our ""Tool Cards"" of essential information, as well as a means to trace resources and integrate bio.tools data with other resources.\nbio.tools was supported by ELIXIR through the  ELIXIR-EXCELERATE grant, which was funded by the European Union Horizon 2020 program under grant agreement 676559.",
+                "description": "The use of bioinformatics is ubiquitous within the life sciences.  In bio.tools, we are striving to provide a comprehensive registry of software and databases, facilitating researchers from across the spectrum of biological and biomedical science to find, understand, utilise and cite the resources they need in their day-to-day work.\nEverything from simple command-line tools and online services, through to databases and complex, multi-functional analysis workflows is included. Resources are described in a rigorous semantics and syntax, providing end-users with the convenience of concise, consistent and therefore comparable information.\nEach bio.tools entry is assigned a human-readable, unique identifier based on the resource name, e.g. biotools:signalp.  These identifiers provide a persistent reference to our "
+                "Tool Cards"
+                " of essential information, as well as a means to trace resources and integrate bio.tools data with other resources.\nbio.tools was supported by ELIXIR through the  ELIXIR-EXCELERATE grant, which was funded by the European Union Horizon 2020 program under grant agreement 676559.",
                 "identifier": "bio.tools",
                 "name": "bio.tools",
                 "schema": {
@@ -1307,22 +1305,59 @@ class NDESourceHandler(MetadataSourceHandler):
                     "otherID": "doi",
                     "toolType": "applicationCategory",
                     "collectionID": "keywords",
-                    "maturity": "creativeWorkStatus"
+                    "maturity": "creativeWorkStatus",
                 },
                 "url": "https://bio.tools/",
                 "genre": "Generalist",
                 "conditionsOfAccess": "Varied",
-                "type": "Computational Tool Repository"
+                "type": "Computational Tool Repository",
+            },
+            "dbGaP": {
+                "abstract": "Database of Genotypes and Phenotypes (dbGaP) is a NIH supported IID repository that includes multiomic data.",
+                "description": "The database of Genotypes and Phenotypes (dbGaP) was developed to archive and distribute the data and results from studies that have investigated the interaction of genotype and phenotype in Humans. Such studies include genome-wide association studies, medical sequencing, molecular diagnostic assays, as well as association between genotype and non-clinical traits. The individual level data hosted at the dbGaP is distributed through a controlled access system. The types of data distributed through the dbGaP include phenotype data, association (GWAS) data, summary level analysis data, SRA (Short Read Archive) data, reference alignment (BAM) data, VCF (Variant Call Format) data, expression data, imputed genotype data, image data, etc.",
+                "identifier": "dbGaP",
+                "name": "Database of Genotypes and Phenotypes (dbGaP)",
+                "schema": {
+                    "@accession": "identifier",
+                    "@parentstudy": "isPartOf.identifier",
+                    "@createdate": "dateCreated",
+                    "@moddate": "dateModified",
+                    "attributions": "author, funding",
+                    "consentgroups.consentgroup.@longname": "usageInfo",
+                    "description": "description",
+                    "diseases.disease.@vocab_source": "healthCondition.inDefinedTermSet",
+                    "diseases.disease.@vocab_term": "healthCondition.name",
+                    "plaintextdescription": "description",
+                    "publications.publication.pubmed.@pmid": "citation.pmid",
+                    "studyhistory": "description",
+                    "studyinex": "description",
+                    "studynameentrez": "name",
+                    "studynamereportpage": "name",
+                    "studytypes.studytype": "measurementTechnique.name",
+                    "studyurls.url.@name": "isRelatedTo.name",
+                    "studyurls.url.@url": "isRelatedTo.url",
+                    "authorizedaccess.policy.documentset.datausecertificate.@filepath": "license",
+                    "authorizedaccess.policy.acknowledgementtext.para": "license",
+                    "authorizedaccess.consentgroups.participantset.irbrequired": "conditionsOfAccess",
+                    "authorizedaccess.policy.embargolength": "conditionsOfAccess",
+                    "authorizedaccess.policy.displaypublicsummary": "conditionsOfAccess",
+                    "displaypublicsummary": "conditionsOfAccess",
+                    "documents": "isBasedOn",
+                },
+                "url": "https://www.ncbi.nlm.nih.gov/gap",
             },
         }
 
         for source, data in source_info.items():
             if source in _meta["src"]:
                 _meta["src"][source]["sourceInfo"] = source_info[source]
-                _meta["src"][source]["sourceInfo"]["metadata_completeness"] = self.calculate_metadata_compatibility_average(
-                    source)
-            elif 'parentCollection' in data:
+                _meta["src"][source]["sourceInfo"]["metadata_completeness"] = (
+                    self.calculate_metadata_compatibility_average(source)
+                )
+            elif "parentCollection" in data:
                 _meta["src"][source] = {"sourceInfo": source_info[source]}
-                _meta["src"][source]["version"] = _meta["src"]["veupath_collections"]["version"]
+                _meta["src"][source]["version"] = _meta["src"]["veupath_collections"][
+                    "version"
+                ]
 
         return _meta
