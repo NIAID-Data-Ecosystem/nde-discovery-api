@@ -719,7 +719,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://radxdatahub.nih.gov/",
                 "conditionsOfAccess": "Unknown",
-                "genre": "IID"
+                "genre": "IID",
             },
             "biostudies": {
                 "abstract": "BioStudies is a repository that includes life sciences data by organising links to data in other databases at EMBL-EBI or elsewhere.",
@@ -755,7 +755,9 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "biotools": {
                 "abstract": "bio.tools is an ELIXIR supported tool repository that includes information about software tools, databases and services.",
-                "description": "The use of bioinformatics is ubiquitous within the life sciences.  In bio.tools, we are striving to provide a comprehensive registry of software and databases, facilitating researchers from across the spectrum of biological and biomedical science to find, understand, utilise and cite the resources they need in their day-to-day work.\nEverything from simple command-line tools and online services, through to databases and complex, multi-functional analysis workflows is included. Resources are described in a rigorous semantics and syntax, providing end-users with the convenience of concise, consistent and therefore comparable information.\nEach bio.tools entry is assigned a human-readable, unique identifier based on the resource name, e.g. biotools:signalp.  These identifiers provide a persistent reference to our ""Tool Cards"" of essential information, as well as a means to trace resources and integrate bio.tools data with other resources.\nbio.tools was supported by ELIXIR through the  ELIXIR-EXCELERATE grant, which was funded by the European Union Horizon 2020 program under grant agreement 676559.",
+                "description": "The use of bioinformatics is ubiquitous within the life sciences.  In bio.tools, we are striving to provide a comprehensive registry of software and databases, facilitating researchers from across the spectrum of biological and biomedical science to find, understand, utilise and cite the resources they need in their day-to-day work.\nEverything from simple command-line tools and online services, through to databases and complex, multi-functional analysis workflows is included. Resources are described in a rigorous semantics and syntax, providing end-users with the convenience of concise, consistent and therefore comparable information.\nEach bio.tools entry is assigned a human-readable, unique identifier based on the resource name, e.g. biotools:signalp.  These identifiers provide a persistent reference to our "
+                "Tool Cards"
+                " of essential information, as well as a means to trace resources and integrate bio.tools data with other resources.\nbio.tools was supported by ELIXIR through the  ELIXIR-EXCELERATE grant, which was funded by the European Union Horizon 2020 program under grant agreement 676559.",
                 "identifier": "bio.tools",
                 "name": "bio.tools",
                 "schema": {
@@ -782,12 +784,46 @@ class NDESourceHandler(MetadataSourceHandler):
                     "otherID": "doi",
                     "toolType": "applicationCategory",
                     "collectionID": "keywords",
-                    "maturity": "creativeWorkStatus"
+                    "maturity": "creativeWorkStatus",
                 },
                 "url": "https://bio.tools/",
                 "genre": "Generalist",
                 "conditionsOfAccess": "Varied",
-                "type": "Computational Tool Repository"
+                "type": "Computational Tool Repository",
+            },
+            "dbGaP": {
+                "abstract": "Database of Genotypes and Phenotypes (dbGaP) is a NIH supported IID repository that includes multiomic data.",
+                "description": "The database of Genotypes and Phenotypes (dbGaP) was developed to archive and distribute the data and results from studies that have investigated the interaction of genotype and phenotype in Humans. Such studies include genome-wide association studies, medical sequencing, molecular diagnostic assays, as well as association between genotype and non-clinical traits. The individual level data hosted at the dbGaP is distributed through a controlled access system. The types of data distributed through the dbGaP include phenotype data, association (GWAS) data, summary level analysis data, SRA (Short Read Archive) data, reference alignment (BAM) data, VCF (Variant Call Format) data, expression data, imputed genotype data, image data, etc.",
+                "identifier": "dbGaP",
+                "name": "Database of Genotypes and Phenotypes (dbGaP)",
+                "schema": {
+                    "@accession": "identifier",
+                    "@parentstudy": "isPartOf.identifier",
+                    "@createdate": "dateCreated",
+                    "@moddate": "dateModified",
+                    "attributions": "author, funding",
+                    "consentgroups.consentgroup.@longname": "usageInfo",
+                    "description": "description",
+                    "diseases.disease.@vocab_source": "healthCondition.inDefinedTermSet",
+                    "diseases.disease.@vocab_term": "healthCondition.name",
+                    "plaintextdescription": "description",
+                    "publications.publication.pubmed.@pmid": "citation.pmid",
+                    "studyhistory": "description",
+                    "studyinex": "description",
+                    "studynameentrez": "name",
+                    "studynamereportpage": "name",
+                    "studytypes.studytype": "measurementTechnique.name",
+                    "studyurls.url.@name": "isRelatedTo.name",
+                    "studyurls.url.@url": "isRelatedTo.url",
+                    "authorizedaccess.policy.documentset.datausecertificate.@filepath": "license",
+                    "authorizedaccess.policy.acknowledgementtext.para": "license",
+                    "authorizedaccess.consentgroups.participantset.irbrequired": "conditionsOfAccess",
+                    "authorizedaccess.policy.embargolength": "conditionsOfAccess",
+                    "authorizedaccess.policy.displaypublicsummary": "conditionsOfAccess",
+                    "displaypublicsummary": "conditionsOfAccess",
+                    "documents": "isBasedOn",
+                },
+                "url": "https://www.ncbi.nlm.nih.gov/gap",
             },
         }
 
