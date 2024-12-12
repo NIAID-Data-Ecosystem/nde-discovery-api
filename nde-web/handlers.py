@@ -1,4 +1,6 @@
+import json
 import logging
+import os
 
 from biothings.web.handlers import MetadataSourceHandler
 from tornado.web import RequestHandler
@@ -16,6 +18,21 @@ class NDESourceHandler(MetadataSourceHandler):
     """
     GET /v1/metadata
     """
+
+    def load_from_cache(self, datasource):
+        file_name = f'cache_{datasource}.json'
+        folder = "metadata_completeness"
+        cache_file = os.path.join(folder, file_name)
+        if os.path.exists(cache_file):
+            with open(cache_file, 'r') as f:
+                averages = json.load(f)
+            return averages
+        return None
+
+    def calculate_metadata_compatibility_average(self, datasource):
+        cached_averages = self.load_from_cache(datasource)
+        if cached_averages is not None:
+            return cached_averages
 
     def extras(self, _meta):
         source_info = {
@@ -1108,6 +1125,8 @@ class NDESourceHandler(MetadataSourceHandler):
         for source, data in source_info.items():
             if source in _meta["src"]:
                 _meta["src"][source]["sourceInfo"] = source_info[source]
+                _meta["src"][source]["sourceInfo"]["metadata_completeness"] = self.calculate_metadata_compatibility_average(
+                    source)
             elif "parentCollection" in data:
                 _meta["src"][source] = {"sourceInfo": source_info[source]}
                 _meta["src"][source]["sourceInfo"]["version"] = _meta["src"]["veupath_collections"]["version"]
