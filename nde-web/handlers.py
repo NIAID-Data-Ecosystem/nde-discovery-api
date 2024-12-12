@@ -1120,6 +1120,42 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Restricted",
                 "genre": "Generalist",
             },
+            "biotools": {
+                "abstract": "bio.tools is an ELIXIR supported tool repository that includes information about software tools, databases and services.",
+                "description": "The use of bioinformatics is ubiquitous within the life sciences.  In bio.tools, we are striving to provide a comprehensive registry of software and databases, facilitating researchers from across the spectrum of biological and biomedical science to find, understand, utilise and cite the resources they need in their day-to-day work.\nEverything from simple command-line tools and online services, through to databases and complex, multi-functional analysis workflows is included. Resources are described in a rigorous semantics and syntax, providing end-users with the convenience of concise, consistent and therefore comparable information.\nEach bio.tools entry is assigned a human-readable, unique identifier based on the resource name, e.g. biotools:signalp.  These identifiers provide a persistent reference to our ""Tool Cards"" of essential information, as well as a means to trace resources and integrate bio.tools data with other resources.\nbio.tools was supported by ELIXIR through the  ELIXIR-EXCELERATE grant, which was funded by the European Union Horizon 2020 program under grant agreement 676559.",
+                "identifier": "bio.tools",
+                "name": "bio.tools",
+                "schema": {
+                    "name": "name",
+                    "description": "description",
+                    "homepage": "mainEntityOfPage",
+                    "biotoolsID": "identifier, url, _id",
+                    "additionDate": "datePublished",
+                    "lastUpdate": "dateModified",
+                    "topic": "topicCategory",
+                    "function": "featureList, input, output",
+                    "credit": "author, contributor, funding.funder",
+                    "publication": "citation, isBasedOn, citedBy, isBasisFor",
+                    "relation": "sameAs, isBasedOn, isBasisFor, hasPart, isPartOf, isRelatedTo",
+                    "version": "softwareVersion",
+                    "license": "license",
+                    "language": "programmingLanguage",
+                    "operatingSystem": "operatingSystem",
+                    "link": "sdPublisher, codeRepository, isRelatedTo",
+                    "download": "softwareHelp, softwareAddOn, downloadUrl, thumbnailUrl, codeRepository, availableOnDevice, applicationSuite",
+                    "cost": "isAccessibleForFree",
+                    "accessibility": "conditionsOfAccess",
+                    "documentation": "softwareHelp",
+                    "otherID": "doi",
+                    "toolType": "applicationCategory",
+                    "collectionID": "keywords",
+                    "maturity": "creativeWorkStatus"
+                },
+                "url": "https://bio.tools/",
+                "genre": "Generalist",
+                "conditionsOfAccess": "Varied",
+                "type": "Computational Tool Repository"
+            },
         }
 
         for source, data in source_info.items():
