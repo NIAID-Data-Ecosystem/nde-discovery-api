@@ -72,8 +72,23 @@ class NDEQueryBuilder(ESQueryBuilder):
         search = search.query("bool", must=[Q("terms", **{"includedInDataCatalog.name": prod_sources})])
 
         # We only want those of type Dataset or ResourceCatalog.
-        terms = {"@type": ["Dataset", "ResourceCatalog"]}
-        search = search.filter("terms", **terms)
+        # Filter to allow @type Dataset, ResourceCatalog and ComputationalTool only from Bio.tools
+        filter_conditions = [
+            # Include Dataset and ResourceCatalog
+            {"terms": {"@type": ["Dataset", "ResourceCatalog"]}},
+        ]
+
+        computational_tool_condition = {
+            "bool": {
+                "must": [
+                    {"term": {"@type": "ComputationalTool"}},
+                    {"term": {"includedInDataCatalog.name": "bio.tools"}}
+                ]
+            }
+        }
+
+        search = search.filter(
+            "bool", should=filter_conditions + [computational_tool_condition])
 
         # Apply the new metadata-based scoring by default:
         # This script considers the completeness ratios and boosts ResourceCatalog items.
