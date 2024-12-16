@@ -1156,6 +1156,31 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Varied",
                 "type": "Computational Tool Repository"
             },
+            "figshare": {
+                "name": "Figshare",
+                "abstract": "Figshare is a NIH supported generalist repository that includes generalist data.",
+                "description": "Figshare is a repository where users can make all of their research outputs available in a citable, shareable and discoverable manner.",
+                "schema": {
+                    "title": "name",
+                    "creator": "author",
+                    "subject": "keywords",
+                    "description": "description",
+                    "date": "dateModified",
+                    "description": "description",
+                    "publisher": "sdPublisher",
+                    "type": "@type",
+                    "identifier": "doi",
+                    "language": "language",
+                    "relation": "url",
+                    "license": "license",
+                    "issued": "datePublished",
+                    "sponsor": "funding",
+                },
+                "url": "https://figshare.com/",
+                "identifier": "Figshare",
+                "conditionsOfAccess": "Unknown",
+                "genre": "Generalist",
+            }
         }
 
         for source, data in source_info.items():
