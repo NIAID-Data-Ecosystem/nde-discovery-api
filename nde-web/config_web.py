@@ -29,6 +29,8 @@ SOURCE_TYPEDEF = {
     "suggester": {"type": str, "default": None},
     "use_metadata_score": {"type": bool, "default": False},
     "show_meta": {"type": bool, "default": False},
+    "multi_terms_fields": {"type": list, "default": []},
+    "multi_terms_size": {"type": int, "default": 10},
 }
 
 QUERY_KWARGS = copy.deepcopy(QUERY_KWARGS)
