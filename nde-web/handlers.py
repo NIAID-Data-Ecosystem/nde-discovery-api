@@ -744,7 +744,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://data.mendeley.com/",
                 "identifier": "Mendeley",
-                "conditionsOfAccess": "Unknown",
+                "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
             },
             "reframedb": {
@@ -869,7 +869,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "authors": "author.name",
                 },
                 "url": "https://dataverse.harvard.edu/",
-                "conditionsOfAccess": "Unknown",
+                "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
             },
             "hubmap": {
@@ -914,7 +914,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "metadata.protocols_io_doi": "isBasedOn.doi",
                 },
                 "url": "https://hubmapconsortium.org/",
-                "conditionsOfAccess": "Unknown",
+                "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
             },
             "ncbi_sra": {
@@ -947,7 +947,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "HapMap sample ID": "isBasedOn.identifier",
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/sra",
-                "conditionsOfAccess": "Unknown",
+                "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
             },
             "vdj": {
@@ -1056,7 +1056,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "submissionDate": "datePublished",
                 },
                 "url": "https://www.humancellatlas.org/",
-                "conditionsOfAccess": "Unknown",
+                "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
             },
             "flowrepository": {
