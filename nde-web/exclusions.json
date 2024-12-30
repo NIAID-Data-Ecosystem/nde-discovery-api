@@ -2,10 +2,7 @@
     "staging_ids": [
         "dde_136f77a47a3e203a",
         "dde_5a6bc368148ab46e",
-        "dde_56d15748b50a6e70",
-        "dde_a13ce89d9fe6c6c4",
-        "dde_b880e7dc2c2437e0",
-        "dde_933c129858283201"
+        "dde_56d15748b50a6e70"
     ],
     "prod_catalogs": [
         "Omics Discovery Index (OmicsDI)",
