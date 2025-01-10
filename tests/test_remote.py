@@ -21,7 +21,7 @@ class TestQueryGET(BiothingsWebTest):
 
     # 1 Dataset
     def test_13(self):
-        self.query(q="_id:accessclinicaldata_ACTT")
+        self.query(q="_id:accessclinicaldata_actt")
 
     # Datasets from a specific source
     def test_14(self):
