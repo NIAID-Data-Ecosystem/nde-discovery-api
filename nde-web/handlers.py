@@ -1315,7 +1315,7 @@ class NDESourceHandler(MetadataSourceHandler):
             "dbgap": {
                 "abstract": "Database of Genotypes and Phenotypes (dbGaP) is a NIH supported IID repository that includes multiomic data.",
                 "description": "The database of Genotypes and Phenotypes (dbGaP) was developed to archive and distribute the data and results from studies that have investigated the interaction of genotype and phenotype in Humans. Such studies include genome-wide association studies, medical sequencing, molecular diagnostic assays, as well as association between genotype and non-clinical traits. The individual level data hosted at the dbGaP is distributed through a controlled access system. The types of data distributed through the dbGaP include phenotype data, association (GWAS) data, summary level analysis data, SRA (Short Read Archive) data, reference alignment (BAM) data, VCF (Variant Call Format) data, expression data, imputed genotype data, image data, etc.",
-                "identifier": "dbGaP",
+                "identifier": "The Database of Genotypes and Phenotypes",
                 "name": "Database of Genotypes and Phenotypes (dbGaP)",
                 "schema": {
                     "@accession": "identifier",
