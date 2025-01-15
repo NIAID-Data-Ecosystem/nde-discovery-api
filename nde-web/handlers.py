@@ -752,6 +752,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     "publication": "citation",
                 },
                 "url": "https://www.ebi.ac.uk/biostudies/",
+                "conditionsOfAccess": "Unknown",
+                "genre": "Biomedical",
             },
             "biotools": {
                 "abstract": "bio.tools is an ELIXIR supported tool repository that includes information about software tools, databases and services.",
