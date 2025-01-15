@@ -49,12 +49,7 @@ class NDEQueryBuilder(ESQueryBuilder):
         if not ("*" in q or "?" in q):
             wc_query = Q(
                 "query_string",
-                # original
-                # query="* ".join(q.split()) + "*",
-                # * before
-                # query="*" + "* ".join(q.split()) + "*",
-                # ? before
-                query="* ".join(["?" + w for w in q.split()]) + "*",
+                query="* ".join(q.split()) + "*",
                 default_operator="AND",
                 boost=0.5,
                 lenient=True,
