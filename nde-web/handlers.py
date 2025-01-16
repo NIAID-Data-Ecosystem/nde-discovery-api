@@ -826,6 +826,8 @@ class NDESourceHandler(MetadataSourceHandler):
                     "documents": "isBasedOn",
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/gap",
+                "genre": "Generalist",
+                "conditionsOfAccess": "Varied",
             },
         }
 
