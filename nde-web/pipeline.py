@@ -4,6 +4,31 @@ from biothings.web.query import ESQueryBuilder, ESResultFormatter
 from elasticsearch_dsl import A, Q, Search
 
 
+def transform_lineage_response(response):
+    facets = response.get('facets', {})
+    lineage = facets.get('lineage', {})
+    children = lineage.get('children_of_lineage', {})
+    taxon_ids_data = children.get('taxon_ids', {})
+
+    transformed = {
+        "lineage": {
+            "totalRecords": facets.get("lineage_doc_count", {}).get("doc_count"),
+            "children": {
+                "totalChildRecords": children.get("doc_count"),
+                "totalUniqueChildRecords": children.get("to_parent", {}).get("doc_count"),
+                "childTaxonCounts": [
+                    {
+                        "taxonId": term.get("term"),
+                        "count": term.get("count"),
+                    }
+                    for term in taxon_ids_data.get("terms", [])
+                ]
+            }
+        }
+    }
+    return transformed
+
+
 class NDEQueryBuilder(ESQueryBuilder):
     # https://docs.biothings.io/en/latest/_modules/biothings/web/query/builder.html#ESQueryBuilder.default_string_query
 
@@ -209,7 +234,6 @@ class NDEQueryBuilder(ESQueryBuilder):
 class NDEFormatter(ESResultFormatter):
     def transform_aggs(self, res):
         def transform_agg(agg_res):
-            # Handle 'terms' aggregations with 'buckets'
             if 'buckets' in agg_res:
                 agg_res['_type'] = 'terms'
                 agg_res['terms'] = agg_res.pop('buckets')
@@ -223,17 +247,43 @@ class NDEFormatter(ESResultFormatter):
                     if 'key_as_string' in bucket:
                         bucket['term'] = bucket.pop('key_as_string')
                     count += bucket['count']
-                    # Recursively transform nested aggregations in the bucket
                     for k in list(bucket.keys()):
                         if isinstance(bucket[k], dict):
                             transform_agg(bucket[k])
                 agg_res['total'] = count
             else:
-                # Handle other types of aggregations (e.g., 'nested', 'filter')
                 for k in list(agg_res.keys()):
                     if isinstance(agg_res[k], dict):
                         transform_agg(agg_res[k])
-
-        # Start the recursive transformation
         transform_agg(res)
+
+        # If lineage aggregations are present in the facets, apply our transformation
+        if 'facets' in res and 'lineage' in res['facets']:
+            raw_lineage = res['facets']['lineage']
+            raw_lineage_doc_count = res['facets'].get('lineage_doc_count', {})
+            # Prepare a temporary response structure for the transformer function
+            lineage_response = {
+                "facets": {
+                    "lineage": raw_lineage,
+                    "lineage_doc_count": raw_lineage_doc_count
+                }
+            }
+            transformed_lineage = transform_lineage_response(lineage_response)
+            # Replace the raw lineage aggregation with our transformed structure
+            res['facets']['lineage'] = transformed_lineage['lineage']
+            res['facets'].pop('lineage_doc_count', None)
+        elif 'lineage' in res:
+            # For responses where lineage is at the top level rather than under 'facets'
+            raw_lineage = res['lineage']
+            raw_lineage_doc_count = res.get('lineage_doc_count', {})
+            lineage_response = {
+                "facets": {
+                    "lineage": raw_lineage,
+                    "lineage_doc_count": raw_lineage_doc_count
+                }
+            }
+            transformed_lineage = transform_lineage_response(lineage_response)
+            res['lineage'] = transformed_lineage['lineage']
+            res.pop('lineage_doc_count', None)
+
         return res
