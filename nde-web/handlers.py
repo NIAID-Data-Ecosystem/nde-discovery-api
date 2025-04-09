@@ -1215,7 +1215,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/gap",
                 "genre": "Generalist",
-                "conditionsOfAccess": "Varied",
+                "conditionsOfAccess": "Restricted",
             }
         }
 
