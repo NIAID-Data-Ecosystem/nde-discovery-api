@@ -1024,7 +1024,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "ebi_study_accession": "mainEntityOfPage",
                 },
                 "url": "https://qiita.ucsd.edu/",
-                "conditionsOfAccess": "Unknown",
+                "conditionsOfAccess": "Closed",
                 "genre": "IID",
             },
             "hca": {
