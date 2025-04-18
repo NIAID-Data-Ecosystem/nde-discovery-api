@@ -1167,7 +1167,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "Quality control": "description",
                 },
                 "url": "http://flowrepository.org/",
-                "conditionsOfAccess": "Unknown",
+                "conditionsOfAccess": "Open",
                 "genre": "Generalist",
             },
             "dash": {
