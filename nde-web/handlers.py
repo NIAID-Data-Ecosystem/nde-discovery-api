@@ -1080,11 +1080,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "Conclusion": "description",
                     "Comments": "description",
                     "Funding": "funding.description",
-                    "Quality control": "description",
+                    "Quality control": "description"
                 },
                 "url": "http://flowrepository.org/",
-                "conditionsOfAccess": "Open",
-                "genre": "Generalist",
+                "conditionsOfAccess": "Unknown",
+                "genre": "Generalist"
             },
             "dash": {
                 "abstract": "The Data and Specimen Hub (DASH) is an NICHD supported repository that includes clinical data and specimens.",
