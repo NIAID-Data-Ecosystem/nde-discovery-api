@@ -863,6 +863,26 @@ class NDESourceHandler(MetadataSourceHandler):
                 "genre": "IID",
                 "conditionsOfAccess": "Closed",
             },
+            "immunespace": {
+                "abstract": "ImmuneSpace is a NIAID supported IID repository that includes immune data.",
+                "description": "The Human Immunology Project Consortium (HIPC) program was established in 2010, and renewed in 2015 and in 2022, by the NIAID Division of Allergy, Immunology, and Transplantation as part of the overall NIAID focus on human immunology. Through this program, well-characterized human cohorts are studied using a variety of modern analytic tools, including multiplex transcriptional, cytokine, and proteomic assays; multiparameter phenotyping of leukocyte subsets; assessment of leukocyte functional status; and multiple computational methods.Through the HIPC program, centralized research resources and a comprehensive, centralized database will be constructed for use by the greater scientific community. The information gained from the HIPC program will provide a comprehensive understanding of the human immune system and its regulation and will reveal novel associations between components of the immune system and other biological systems, identify novel immune mediators and pathways, establish predictors of vaccine safety in different populations, and enable the rapid evaluation of different vaccine formulations and administration regimens in human populations. This knowledge base will also serve as a foundation for the future study of immune-mediated diseases in the human, such as allergy, asthma, transplant rejection, autoimmune diseases, and a variety of inflammatory diseases.",
+                "identifier": "ImmuneSpace",
+                "name": "ImmuneSpace",
+                "schema": {
+                    "_id": "identifer",
+                    "creator": "author",
+                    "citations": "citedBy",
+                    "identifers": "identifer",
+                    "species": "species",
+                    "measurementTechnique": "measurementTechnique",
+                    "distribution": "distribution",
+                    "includedInDataCatalog": "includedInDataCatalog",
+                    "date": "date",
+                },
+                "url": "https://www.immunespace.org/",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+            },
         }
 
         for source in source_info:
