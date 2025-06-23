@@ -9,13 +9,18 @@ def transform_lineage_response(response):
     lineage = facets.get('lineage', {})
     children = lineage.get('children_of_lineage', {})
     taxon_ids_data = children.get('taxon_ids', {})
+    lineage_total = facets.get('lineage_total_count', {})
 
     transformed = {
         "lineage": {
-            "totalRecords": facets.get("lineage_doc_count", {}).get("doc_count"),
+            "totalRecords": facets.get("lineage_doc_count", {}).get(
+                "doc_count"),
+            "totalLineageRecords": lineage_total.get("inner_filter", {}).get(
+                "to_parent", {}).get("doc_count"),
             "children": {
                 "totalChildRecords": children.get("doc_count"),
-                "totalUniqueChildRecords": children.get("to_parent", {}).get("doc_count"),
+                "totalUniqueChildRecords": children.get("to_parent", {}).get(
+                    "doc_count"),
                 "childTaxonCounts": [
                     {
                         "taxonId": term.get("term"),
@@ -228,6 +233,16 @@ class NDEQueryBuilder(ESQueryBuilder):
             # Include this aggregation at the top level
             search.aggs.bucket('lineage_doc_count', lineage_doc_count_agg)
 
+            # New aggregation for counting total lineage records
+            # based on _meta.lineage.taxon
+            lineage_total_filter = A('nested', path='_meta.lineage')
+            lineage_total_inner_filter = A(
+                'filter', term={'_meta.lineage.taxon': lineage_taxon_id})
+            lineage_total_inner_filter.bucket('to_parent', A('reverse_nested'))
+            lineage_total_filter.bucket(
+                'inner_filter', lineage_total_inner_filter)
+            search.aggs.bucket('lineage_total_count', lineage_total_filter)
+
         return super().apply_extras(search, options)
 
 
@@ -257,33 +272,43 @@ class NDEFormatter(ESResultFormatter):
                         transform_agg(agg_res[k])
         transform_agg(res)
 
-        # If lineage aggregations are present in the facets, apply our transformation
+        # If lineage aggregations are present in the facets,
+        # apply our transformation
         if 'facets' in res and 'lineage' in res['facets']:
             raw_lineage = res['facets']['lineage']
             raw_lineage_doc_count = res['facets'].get('lineage_doc_count', {})
-            # Prepare a temporary response structure for the transformer function
+            raw_lineage_total_count = res['facets'].get(
+                'lineage_total_count', {})
+            # Prepare a temporary response structure for the transformer
             lineage_response = {
                 "facets": {
                     "lineage": raw_lineage,
-                    "lineage_doc_count": raw_lineage_doc_count
+                    "lineage_doc_count": raw_lineage_doc_count,
+                    "lineage_total_count": raw_lineage_total_count
                 }
             }
             transformed_lineage = transform_lineage_response(lineage_response)
-            # Replace the raw lineage aggregation with our transformed structure
+            # Replace the raw lineage aggregation with our
+            # transformed structure
             res['facets']['lineage'] = transformed_lineage['lineage']
             res['facets'].pop('lineage_doc_count', None)
+            res['facets'].pop('lineage_total_count', None)
         elif 'lineage' in res:
-            # For responses where lineage is at the top level rather than under 'facets'
+            # For responses where lineage is at the top level
+            # rather than under 'facets'
             raw_lineage = res['lineage']
             raw_lineage_doc_count = res.get('lineage_doc_count', {})
+            raw_lineage_total_count = res.get('lineage_total_count', {})
             lineage_response = {
                 "facets": {
                     "lineage": raw_lineage,
-                    "lineage_doc_count": raw_lineage_doc_count
+                    "lineage_doc_count": raw_lineage_doc_count,
+                    "lineage_total_count": raw_lineage_total_count
                 }
             }
             transformed_lineage = transform_lineage_response(lineage_response)
             res['lineage'] = transformed_lineage['lineage']
             res.pop('lineage_doc_count', None)
+            res.pop('lineage_total_count', None)
 
         return res
