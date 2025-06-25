@@ -988,6 +988,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "subject.species.label": "species.name",
                     "subject.diagnosis.disease_diagnosis.label": "healthCondition.name",
                     "subject.diagnosis.disease_diagnosis.id": "healthCondition.identifier",
+                    "assigned based on discussion": "license, usageInfo, conditionsOfAccess, variableMeasured",
                 },
                 "conditionsOfAccess": "Open",
                 "url": "https://vdj-staging.tacc.utexas.edu/community/",
