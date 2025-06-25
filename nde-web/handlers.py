@@ -1416,6 +1416,44 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
             },
+            "ncbi_bioproject": {
+                "abstract": "NCBI BioProject is a NIH supported generalist repository that includes multiomic data.",
+                "description": "A BioProject is a collection of biological data related to a single initiative, originating from a single organization or from a consortium. A BioProject record provides users a single place to find links to the diverse data types generated for that project.",
+                "identifier": "NCBI BioProject",
+                "name": "NCBI BioProject",
+                "schema": {
+                    "ProjectDescr/Title": "name",
+                    "ProjectDescr/Name": "name",
+                    "ProjectDescr/Description": "description",
+                    "ProjectID/ArchiveID/@accession": "identifier, url, _id",
+                    "Submission/@submitted": "datePublished",
+                    "Submission/@last_update": "dateModified",
+                    "ProjectDataTypeSet/DataType": "variableMeasured",
+                    "IntendedDataTypeSet/DataType": "variableMeasured",
+                    "Objectives/Data/@data_type": "variableMeasured",
+                    "ProjectTypeSubmission/Method/@method_type": "measurementTechnique",
+                    "ProjectTypeSubmission/Target/Organism/@taxID": "species.identifier",
+                    "ProjectTypeSubmission/Target/Organism/OrganismName": "species.name",
+                    "ProjectDescr/Grant/@GrantId": "funding.identifier",
+                    "ProjectDescr/Grant/Title": "funding.name",
+                    "ProjectDescr/Grant/Agency/@abbr": "funding.funder.alternateName",
+                    "ProjectDescr/Grant/Agency": "funding.funder.name",
+                    "ProjectDescr/Grant/PI/Given": "author.givenName",
+                    "ProjectDescr/Grant/PI/Last": "author.familyName",
+                    "ProjectDescr/Grant/PI/@affil": "author.affiliation.name",
+                    "ProjectTypeSubmission/Target/Provider": "author.name",
+                    "Submission/Description/Organization/Name": "author.name",
+                    "Submission/Description/Organization/@role": "author.role",
+                    "ProjectDescr/Publication/@id": "citation.pmid, citation.pmcid",
+                    "ProjectLinks/Link/ProjectIDRef/@accession": "hasPart.identifier, isPartOf.identifier",
+                    "Submission/Description/Access": "conditionsOfAccess",
+                    "ProjectDescr/Relevance/Medical": "keywords",
+                    "ProjectTypeSubmission/Target/@sample_scope": "keywords"
+                },
+                "url": "https://www.ncbi.nlm.nih.gov/bioproject/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist"
+            }
         }
 
         for source, data in source_info.items():
