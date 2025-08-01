@@ -1449,12 +1449,34 @@ class NDESourceHandler(MetadataSourceHandler):
                     "ProjectLinks/Link/ProjectIDRef/@accession": "hasPart.identifier, isPartOf.identifier",
                     "Submission/Description/Access": "conditionsOfAccess",
                     "ProjectDescr/Relevance/Medical": "keywords",
-                    "ProjectTypeSubmission/Target/@sample_scope": "keywords"
+                    "ProjectTypeSubmission/Target/@sample_scope": "keywords",
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/bioproject/",
                 "conditionsOfAccess": "Open",
-                "genre": "Generalist"
-            }
+                "genre": "Generalist",
+            },
+            "pdb": {
+                "abstract": "Protein Data Bank is a NIAID supported generalist repository that includes structure data.",
+                "description": "RCSB PDB (RCSB.org) is the US data center for the global Protein Data Bank (PDB) archive of 3D structure data for large biological molecules (proteins, DNA, and RNA) essential for research and education in fundamental biology, health, energy, and biotechnology. The RSCB PDB hosts ~240 K structures from the PDB archive; however, only the subset of the RSCB PDB with a potentially pathogenic organism is included in the Discovery Portal.",
+                "identifier": "Protein Data Bank",
+                "name": "Protein Data Bank",
+                "schema": {
+                    "organisms": "species.name",
+                    "struct.title": "name, description",
+                    "rscb_id": "_id, identifier, doi",
+                    "audit_author": "author",
+                    "citation": "citation",
+                    "exptl": "measurementTechnique",
+                    "pdb_audit_support": "funding",
+                    "rcsb_accession_info.deposit_date": "datePublished",
+                    "rcsb_accession_info.revision_date": "dateModified",
+                    "struct_keywords": "keywords",
+                    "rcsb_external_references": "sameAs",
+                },
+                "url": "https://www.rcsb.org/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+            },
         }
 
         for source, data in source_info.items():
