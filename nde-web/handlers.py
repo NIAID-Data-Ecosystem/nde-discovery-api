@@ -1457,7 +1457,7 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "pdb": {
                 "abstract": "Protein Data Bank is a NIAID supported generalist repository that includes structure data.",
-                "description": "RCSB PDB (RCSB.org) is the US data center for the global Protein Data Bank (PDB) archive of 3D structure data for large biological molecules (proteins, DNA, and RNA) essential for research and education in fundamental biology, health, energy, and biotechnology. The RSCB PDB hosts ~240 K structures from the PDB archive; however, only the subset of the RSCB PDB with a potentially pathogenic organism is included in the Discovery Portal.",
+                "description": "RCSB PDB (RCSB.org) is the US data center for the global Protein Data Bank (PDB) archive of 3D structure data for large biological molecules (proteins, DNA, and RNA) essential for research and education in fundamental biology, health, energy, and biotechnology. The RSCB PDB hosts ~240 K structures from the PDB archive; however, only the subset of the RSCB PDB that was funded by NIAID or has a potentially pathogenic organism is included in the Discovery Portal.",
                 "identifier": "Protein Data Bank",
                 "name": "Protein Data Bank",
                 "schema": {
