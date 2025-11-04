@@ -103,7 +103,7 @@ class NDEQueryBuilder(ESQueryBuilder):
         # Filter to allow @type Dataset, ResourceCatalog and ComputationalTool only from Bio.tools
         filter_conditions = [
             # Include Dataset and ResourceCatalog
-            {"terms": {"@type": ["Dataset", "ResourceCatalog"]}},
+            {"terms": {"@type": ["Dataset", "ResourceCatalog", "Sample"]}},
         ]
 
         computational_tool_condition = {
