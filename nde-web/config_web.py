@@ -24,13 +24,18 @@ APP_LIST += [
     (r"/{ver}/metadata/?", NDESourceHandler),
 ]
 
-# OAuth and XSRF handlers
+# OAuth and XSRF handlers (both global and versioned routes)
 APP_LIST += [
     (r"/user_info", UserInfoHandler),
+    (r"/{ver}/user_info/?", UserInfoHandler),
     (r"/logout", LogoutHandler),
+    (r"/{ver}/logout/?", LogoutHandler),
     (r"/login/github", GitHubLoginHandler),
+    (r"/{ver}/login/github/?", GitHubLoginHandler),
     (r"/login/orcid", ORCIDLoginHandler),
+    (r"/{ver}/login/orcid/?", ORCIDLoginHandler),
     (r"/xsrf_token", XSRFToken),
+    (r"/{ver}/xsrf_token/?", XSRFToken),
 ]
 
 # replace default landing page handler
