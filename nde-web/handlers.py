@@ -46,7 +46,7 @@ class GitHubLoginHandler(BaseAPIHandler, GithubOAuth2Mixin):
     """Initiate or complete the GitHub OAuth2 handshake."""
 
     SCOPES = []
-    CALLBACK_PATH = "v1/login/github"
+    CALLBACK_PATH = "login/github"
 
     async def get(self):
         client_id = self.biothings.config.GITHUB_CLIENT_ID
@@ -101,7 +101,7 @@ class ORCIDLoginHandler(BaseAPIHandler, OrcidOAuth2Mixin):
     """Initiate or complete the ORCID OAuth2 handshake."""
 
     SCOPES = ["/authenticate", "openid"]
-    CALLBACK_PATH = "v1/login/orcid"
+    CALLBACK_PATH = "login/orcid"
 
     async def get(self):
         client_id = self.biothings.config.ORCID_CLIENT_ID
