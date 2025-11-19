@@ -3,6 +3,15 @@ import os
 
 from authn.authn_provider import UserCookieAuthProvider
 from biothings.web.settings.default import APP_LIST, QUERY_KWARGS
+from handlers import (
+    GitHubLoginHandler,
+    LogoutHandler,
+    NDESourceHandler,
+    ORCIDLoginHandler,
+    UserInfoHandler,
+    WebAppHandler,
+)
+from xsrf import XSRFToken
 
 ES_INDICES = {
     # 'zenodo': 'zenodo_current',
@@ -12,21 +21,21 @@ ES_INDICES = {
     # 'acd': 'acd_niaid_20221109_o6tbj5ct'
 }
 APP_LIST += [
-    (r"/{ver}/metadata/?", "handlers.NDESourceHandler"),
+    (r"/{ver}/metadata/?", NDESourceHandler),
 ]
 
 # OAuth and XSRF handlers
 APP_LIST += [
-    (r"/user_info", "handlers.UserInfoHandler"),
-    (r"/logout", "handlers.LogoutHandler"),
-    (r"/login/github", "handlers.GitHubLoginHandler"),
-    (r"/login/orcid", "handlers.ORCIDLoginHandler"),
-    (r"/xsrf_token", "xsrf.XSRFToken"),
+    (r"/user_info", UserInfoHandler),
+    (r"/logout", LogoutHandler),
+    (r"/login/github", GitHubLoginHandler),
+    (r"/login/orcid", ORCIDLoginHandler),
+    (r"/xsrf_token", XSRFToken),
 ]
 
 # replace default landing page handler
 assert APP_LIST[0][0] == "/"
-APP_LIST[0] = ("/", "handlers.WebAppHandler")
+APP_LIST[0] = ("/", WebAppHandler)
 
 
 # *****************************************************************************
