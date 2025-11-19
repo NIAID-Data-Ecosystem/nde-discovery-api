@@ -1,6 +1,8 @@
 import copy
+import os
 
-from biothings.web.settings.default import ANNOTATION_KWARGS, APP_LIST, QUERY_KWARGS
+from authn.authn_provider import UserCookieAuthProvider
+from biothings.web.settings.default import APP_LIST, QUERY_KWARGS
 
 ES_INDICES = {
     # 'zenodo': 'zenodo_current',
@@ -11,6 +13,15 @@ ES_INDICES = {
 }
 APP_LIST += [
     (r"/{ver}/metadata/?", "handlers.NDESourceHandler"),
+]
+
+# OAuth and XSRF handlers
+APP_LIST += [
+    (r"/user_info", "handlers.UserInfoHandler"),
+    (r"/logout", "handlers.LogoutHandler"),
+    (r"/login/github", "handlers.GitHubLoginHandler"),
+    (r"/login/orcid", "handlers.ORCIDLoginHandler"),
+    (r"/xsrf_token", "xsrf.XSRFToken"),
 ]
 
 # replace default landing page handler
