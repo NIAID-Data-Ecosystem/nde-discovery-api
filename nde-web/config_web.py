@@ -24,7 +24,7 @@ APP_LIST += [
     (r"/{ver}/metadata/?", NDESourceHandler),
 ]
 
-# OAuth and XSRF handlers (both global and versioned routes)
+# OAuth and XSRF handlers
 APP_LIST += [
     (r"/user_info", UserInfoHandler),
     (r"/logout", LogoutHandler),
