@@ -351,29 +351,19 @@ class AiSearchBuilder:
     def _build_script_score_query(
         self, vector: Sequence[float], filter_query: Q
     ) -> Q:
-        script = (
-            "double baseScore = 0.0;\n"
-            "if (doc['%s'].size() > 0) {\n"
-            "    baseScore = cosineSimilarity(params.query_vector, "
-            "doc['%s']) + 1.0;\n"
-            "}\n"
-            "if (params.resource_boost > 1 && doc['@type'].size() > 0 "
-            "&& doc['@type'].contains('ResourceCatalog')) {\n"
-            "    baseScore *= params.resource_boost;\n"
-            "}\n"
-            "return baseScore;\n"
-        ) % (self.vector_field, self.vector_field)
-        return Q(
-            "script_score",
-            query=filter_query,
-            script={
-                "source": script,
-                "params": {
-                    "query_vector": vector,
-                    "resource_boost": self.resource_catalog_boost,
-                },
-            },
-        )
+        # Use KNN search for efficient vector similarity instead of script_score
+        knn_query = {
+            "field": self.vector_field,
+            "query_vector": vector,
+            "k": 10,
+            "num_candidates": 100,
+        }
+
+        # Apply filters if any exist
+        if not isinstance(filter_query, type(Q("match_all"))):
+            knn_query["filter"] = filter_query.to_dict()
+
+        return Q("knn", **knn_query)
 
     def _build_rescore(self, vector: Sequence[float]) -> Dict:
         rescore_script = (
