@@ -380,9 +380,9 @@ class AiSearchBuilder:
 
     def _build_rescore(self, vector: Sequence[float]) -> Dict:
         rescore_script = (
-            "if (doc['{field}'].isEmpty()) {\n"
+            "if (doc['{field}'].isEmpty()) {{\n"
             "    return 0.0;\n"
-            "}\n"
+            "}}\n"
             "return dotProduct(params.queryVector, doc['{field}']) + 1.0;\n"
         ).format(field=self.vector_field)
         return {
