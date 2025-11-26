@@ -11,8 +11,11 @@ from elasticsearch_dsl import Q, Search
 
 try:
     from biothings import config as bt_config
-except ImportError:  # pragma: no cover - falls back to env-only
-    bt_config = None
+except ImportError:  # pragma: no cover - falls back to project config/env
+    try:
+        import config as bt_config  # type: ignore
+    except ImportError:
+        bt_config = None
 
 logger = logging.getLogger(__name__)
 
