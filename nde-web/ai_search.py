@@ -356,16 +356,16 @@ class AiSearchBuilder:
     ) -> Q:
         script = (
             "double baseScore = 0.0;\n"
-            "if (doc['{field}'].size() > 0) {{\n"
+            "if (doc['%s'].size() > 0) {\n"
             "    baseScore = cosineSimilarity(params.query_vector, "
-            "doc['{field}'].value) + 1.0;\n"
-            "}}\n"
+            "doc['%s'].value) + 1.0;\n"
+            "}\n"
             "if (params.resource_boost > 1 && doc['@type'].size() > 0 "
-            "&& doc['@type'].contains('ResourceCatalog')) {{\n"
+            "&& doc['@type'].contains('ResourceCatalog')) {\n"
             "    baseScore *= params.resource_boost;\n"
-            "}}\n"
+            "}\n"
             "return baseScore;\n"
-        ).format(field=self.vector_field)
+        ) % (self.vector_field, self.vector_field)
         return Q(
             "script_score",
             query=filter_query,
@@ -380,11 +380,11 @@ class AiSearchBuilder:
 
     def _build_rescore(self, vector: Sequence[float]) -> Dict:
         rescore_script = (
-            "if (doc['{field}'].size() == 0) {{\n"
+            "if (doc['%s'].size() == 0) {\n"
             "    return 0.0;\n"
             "}\n"
-            "return dotProduct(params.queryVector, doc['{field}'].value) + 1.0;\n"
-        ).format(field=self.vector_field)
+            "return dotProduct(params.queryVector, doc['%s'].value) + 1.0;\n"
+        ) % (self.vector_field, self.vector_field)
         return {
             "window_size": self.rescore_window,
             "query": {
