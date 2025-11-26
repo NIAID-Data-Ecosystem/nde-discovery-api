@@ -361,7 +361,7 @@ class AiSearchBuilder:
             "doc['{field}']) + 1.0;\n"
             "}}\n"
             "if (params.resource_boost > 1 && doc['@type'].size() > 0 "
-            "&& doc['@type'].value.equals('ResourceCatalog')) {{\n"
+            "&& doc['@type'].contains('ResourceCatalog')) {{\n"
             "    baseScore *= params.resource_boost;\n"
             "}}\n"
             "return baseScore;\n"
