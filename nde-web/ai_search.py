@@ -358,7 +358,7 @@ class AiSearchBuilder:
             "double baseScore = 0.0;\n"
             "if (doc['{field}'].size() > 0) {{\n"
             "    baseScore = cosineSimilarity(params.query_vector, "
-            "doc['{field}']) + 1.0;\n"
+            "doc['{field}'].value) + 1.0;\n"
             "}}\n"
             "if (params.resource_boost > 1 && doc['@type'].size() > 0 "
             "&& doc['@type'].contains('ResourceCatalog')) {{\n"
@@ -382,8 +382,8 @@ class AiSearchBuilder:
         rescore_script = (
             "if (doc['{field}'].size() == 0) {{\n"
             "    return 0.0;\n"
-            "}}\n"
-            "return dotProduct(params.queryVector, doc['{field}']) + 1.0;\n"
+            "}\n"
+            "return dotProduct(params.queryVector, doc['{field}'].value) + 1.0;\n"
         ).format(field=self.vector_field)
         return {
             "window_size": self.rescore_window,
