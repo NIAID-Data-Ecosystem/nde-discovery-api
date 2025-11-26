@@ -10,12 +10,9 @@ import requests
 from elasticsearch_dsl import Q, Search
 
 try:
-    from biothings import config as bt_config
-except ImportError:  # pragma: no cover - falls back to project config/env
-    try:
-        import config as bt_config  # type: ignore
-    except ImportError:
-        bt_config = None
+    import config as bt_config  # type: ignore
+except ImportError:
+    bt_config = None
 
 logger = logging.getLogger(__name__)
 
@@ -358,7 +355,7 @@ class AiSearchBuilder:
             "double baseScore = 0.0;\n"
             "if (doc['%s'].size() > 0) {\n"
             "    baseScore = cosineSimilarity(params.query_vector, "
-            "doc['%s'].value) + 1.0;\n"
+            "doc['%s']) + 1.0;\n"
             "}\n"
             "if (params.resource_boost > 1 && doc['@type'].size() > 0 "
             "&& doc['@type'].contains('ResourceCatalog')) {\n"
@@ -383,7 +380,7 @@ class AiSearchBuilder:
             "if (doc['%s'].size() == 0) {\n"
             "    return 0.0;\n"
             "}\n"
-            "return dotProduct(params.queryVector, doc['%s'].value) + 1.0;\n"
+            "return dotProduct(params.queryVector, doc['%s']) + 1.0;\n"
         ) % (self.vector_field, self.vector_field)
         return {
             "window_size": self.rescore_window,
