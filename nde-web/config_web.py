@@ -1,5 +1,4 @@
 import copy
-import os
 
 from authn.authn_provider import UserCookieAuthProvider
 from biothings.web.settings.default import APP_LIST, QUERY_KWARGS
@@ -57,12 +56,13 @@ SOURCE_TYPEDEF = {
     "multi_terms_fields": {"type": list, "default": []},
     "multi_terms_size": {"type": int, "default": 10},
     "lineage": {"type": int, "default": None},
+    "use_ai_search": {"type": bool, "default": False},
 }
 
 QUERY_KWARGS = copy.deepcopy(QUERY_KWARGS)
 QUERY_KWARGS["GET"].update(SOURCE_TYPEDEF)
 
-ES_DOC_TYPE: "dataset"
+ES_DOC_TYPE = "dataset"
 ES_QUERY_BUILDER = "pipeline.NDEQueryBuilder"
 ES_RESULT_TRANSFORM = "pipeline.NDEFormatter"
 ALLOW_NESTED_AGGS = True
@@ -74,6 +74,6 @@ ES_SCROLL_TIME = "3m"
 ES_SCROLL_SIZE = 500
 
 try:
-    from config_web_local import *
+    from config_web_local import *  # noqa: F401,F403
 except ImportError:
     pass

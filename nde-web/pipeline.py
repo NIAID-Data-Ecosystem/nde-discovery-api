@@ -1,5 +1,15 @@
+import logging
+
+from ai_search import (
+    AiSearchBuilder,
+    build_embedding_client_factory,
+    get_ai_setting,
+    load_ai_search_restrictions,
+)
 from biothings.web.query import ESQueryBuilder, ESResultFormatter
 from elasticsearch_dsl import A, Q, Search
+
+logger = logging.getLogger(__name__)
 
 
 def transform_lineage_response(response):
@@ -35,15 +45,48 @@ def transform_lineage_response(response):
 class NDEQueryBuilder(ESQueryBuilder):
     # https://docs.biothings.io/en/latest/_modules/biothings/web/query/builder.html#ESQueryBuilder.default_string_query
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        restrictions = load_ai_search_restrictions()
+        ai_index = get_ai_setting("AI_SEARCH_INDEX")
+        self.ai_search_builder = AiSearchBuilder(
+            index=ai_index,
+            vector_field="ibmGraniteEmbedding",
+            embedding_client_factory=build_embedding_client_factory(),
+            staging_ids=restrictions["staging_ids"],
+            prod_sources=restrictions["prod_sources"],
+            resource_catalog_boost=1000.0,
+            rescore_window=100,
+            base_query_weight=0.5,
+            rescore_weight=1.5,
+            enable_rescore=True,
+        )
+
+    def _build_ai_search(self, query_text, options):
+        if not self.ai_search_builder:
+            raise ValueError("AI search is disabled for this deployment.")
+        try:
+            return self.ai_search_builder.build_search(query_text, options)
+        except Exception as exc:
+            logger.exception("AI search failed: %s", exc)
+            raise ValueError(f"AI search failed: {exc}") from exc
+
     def default_string_query(self, q, options):
+        if getattr(options, "use_ai_search", False):
+            return self._build_ai_search(q, options)
+
         search = Search()
         q = q.strip()
 
         # elasticsearch query string syntax
         # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
         if ":" in q or " AND " in q or " OR " in q:
-            search = search.query("query_string", query=q,
-                                  default_operator="AND", lenient=True)
+            search = search.query(
+                "query_string",
+                query=q,
+                default_operator="AND",
+                lenient=True,
+            )
 
         # term search
         elif q.startswith('"') and q.endswith('"'):
@@ -52,7 +95,12 @@ class NDEQueryBuilder(ESQueryBuilder):
                 Q("term", _id={"value": q.strip('"'), "boost": 5}),
                 Q("term", name={"value": q.strip('"'), "boost": 5}),
                 # query string
-                Q("query_string", query=q, default_operator="AND", lenient=True),
+                Q(
+                    "query_string",
+                    query=q,
+                    default_operator="AND",
+                    lenient=True,
+                ),
             ]
 
             search = search.query("dis_max", queries=queries)
@@ -65,13 +113,23 @@ class NDEQueryBuilder(ESQueryBuilder):
         return search
 
     def build_queries(self, q, custom_function_script):
+        def _function_score(base_query):
+            params = {"query": base_query, "boost_mode": "replace"}
+            if custom_function_script:
+                params["script_score"] = {"script": custom_function_script}
+            return Q("function_score", **params)
+
         queries = [
-            Q("function_score", query=Q("term", _id={"value": q, "boost": 5}),
-              script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
-            Q("function_score", query=Q("term", name={"value": q, "boost": 5}),
-              script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
-            Q("function_score", query=Q("query_string", query=q, default_operator="AND", lenient=True),
-              script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
+            _function_score(Q("term", _id={"value": q, "boost": 5})),
+            _function_score(Q("term", name={"value": q, "boost": 5})),
+            _function_score(
+                Q(
+                    "query_string",
+                    query=q,
+                    default_operator="AND",
+                    lenient=True,
+                )
+            ),
         ]
         # check if q contains wildcards if not add wildcard query to every word
         if not ("*" in q or "?" in q):
@@ -82,9 +140,7 @@ class NDEQueryBuilder(ESQueryBuilder):
                 boost=0.5,
                 lenient=True,
             )
-            wc_function_score_query = Q("function_score", query=wc_query,
-                                        script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace")
-            queries.append(wc_function_score_query)
+            queries.append(_function_score(wc_query))
 
         # Remove function_score wrapping if custom_function_script is None
         if custom_function_script is None:
@@ -93,16 +149,9 @@ class NDEQueryBuilder(ESQueryBuilder):
         return queries
 
     def apply_extras(self, search, options):
-        # We only want those of type Dataset or ComputationalTool. Terms to filter
-        # terms = {"@type": ["Dataset", "ComputationalTool"]}
-
-        # Temporary change for launch of the portal as requested by NIAID
-        # terms = {"@type": ["Dataset", "ResourceCatalog"]}
-        # search = search.filter("terms", **terms)
-
-        # Filter to allow @type Dataset, ResourceCatalog and ComputationalTool only from Bio.tools
-        filter_conditions = [
-            # Include Dataset and ResourceCatalog
+        # Align AI and keyword searches by always applying the standard
+        # resource type filters here instead of inside individual builders.
+        type_filter = [
             {"terms": {"@type": ["Dataset", "ResourceCatalog", "Sample"]}},
         ]
 
@@ -110,15 +159,15 @@ class NDEQueryBuilder(ESQueryBuilder):
             "bool": {
                 "must": [
                     {"term": {"@type": "ComputationalTool"}},
-                    {"term": {"includedInDataCatalog.name": "bio.tools"}}
+                    {"term": {"includedInDataCatalog.name": "bio.tools"}},
                 ]
             }
         }
 
         search = search.filter(
-            "bool", should=filter_conditions + [computational_tool_condition])
+            "bool", should=type_filter + [computational_tool_condition]
+        )
 
-        # apply extra-filtering for frontend to avoid adding unwanted wildcards on certain queries
         if options.extra_filter:
             search = search.query("query_string", query=options.extra_filter)
 
@@ -136,7 +185,12 @@ class NDEQueryBuilder(ESQueryBuilder):
             phrase_suggester = {
                 "field": "name.phrase_suggester",
                 "size": 3,
-                "direct_generator": [{"field": "name.phrase_suggester", "suggest_mode": "always"}],
+                "direct_generator": [
+                    {
+                        "field": "name.phrase_suggester",
+                        "suggest_mode": "always",
+                    }
+                ],
                 "max_errors": 2,
                 "highlight": {"pre_tag": "<em>", "post_tag": "</em>"},
             }
@@ -144,39 +198,50 @@ class NDEQueryBuilder(ESQueryBuilder):
                 "nde_suggester", options.suggester, phrase=phrase_suggester)
 
         # apply function score
-        if options.use_metadata_score:
-            custom_function_script = {
-                "source": """
-                    double required_ratio = doc['_meta.completeness.required_ratio'].value;
-                    double recommended_ratio = doc['_meta.completeness.recommended_score_ratio'].value;
-                    double b = 1 - params.a;
-                    double d = 1 - params.c;
-                    double score = (params.a * _score) + (b * ((params.c * required_ratio) + (d * recommended_ratio)));
-                    if (doc['@type'].value == 'ResourceCatalog') {
-                        score *= params.boost_factor;
-                    }
-                    return score;
-                """,
-                "params": {
-                    "a": 0.8,
-                    "c": 0.75,
-                    "boost_factor": 1000.0
+        if not getattr(options, "use_ai_search", False):
+            if options.use_metadata_score:
+                script_source = (
+                    "double required_ratio = doc['_meta.completeness."
+                    "required_ratio'].value;\n"
+                    "double recommended_ratio = doc['_meta.completeness."
+                    "recommended_score_ratio'].value;\n"
+                    "double b = 1 - params.a;\n"
+                    "double d = 1 - params.c;\n"
+                    "double score = (params.a * _score) + (b * ((params.c * "
+                    "required_ratio) + (d * recommended_ratio)));\n"
+                    "if (doc['@type'].value == 'ResourceCatalog') {\n"
+                    "    score *= params.boost_factor;\n"
+                    "}\n"
+                    "return score;\n"
+                )
+                custom_function_script = {
+                    "source": script_source,
+                    "params": {
+                        "a": 0.8,
+                        "c": 0.75,
+                        "boost_factor": 1000.0,
+                    },
                 }
-            }
-            function_score_query = Q("function_score", script_score={
-                                     "script": custom_function_script}, boost_mode="replace")
-            search = search.query(function_score_query)
-        else:
-            functions = [
-                {"filter": {"term": {"@type": "ResourceCatalog"}}, "weight": 1000}
-            ]
+                function_score_query = Q(
+                    "function_score",
+                    script_score={"script": custom_function_script},
+                    boost_mode="replace",
+                )
+                search = search.query(function_score_query)
+            else:
+                functions = [
+                    {
+                        "filter": {"term": {"@type": "ResourceCatalog"}},
+                        "weight": 1000,
+                    }
+                ]
 
-            search = search.query(
-                "function_score",
-                query=search.to_dict().get("query"),
-                functions=functions,
-                boost_mode="replace",
-            )
+                search = search.query(
+                    "function_score",
+                    query=search.to_dict().get("query"),
+                    functions=functions,
+                    boost_mode="replace",
+                )
 
         # apply multi-term aggregation
         if options.multi_terms_fields:
@@ -215,7 +280,8 @@ class NDEQueryBuilder(ESQueryBuilder):
             lineage_agg = A('nested', path='_meta.lineage')
 
             children_of_lineage_filter = A(
-                'filter', term={'_meta.lineage.parent_taxon': lineage_taxon_id})
+                'filter', term={'_meta.lineage.parent_taxon': lineage_taxon_id}
+            )
 
             taxon_ids_terms = A('terms', field='_meta.lineage.taxon')
             taxon_ids_terms.bucket('to_parent', A('reverse_nested'))
@@ -228,7 +294,7 @@ class NDEQueryBuilder(ESQueryBuilder):
 
             search.aggs.bucket('lineage', lineage_agg)
 
-            # New aggregation for counting datasets based on species.identifier and infectiousAgent.identifier
+            # Count datasets matching species or infectiousAgent identifiers
             # Since these fields are not nested, we can query them directly
             lineage_taxon_filter = Q(
                 'bool',
