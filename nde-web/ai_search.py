@@ -80,7 +80,23 @@ class SageMakerEmbeddingClient(_EmbeddingClientProtocol):
         )
         body = response["Body"].read()
         data = json.loads(body.decode("utf-8"))
-        vector = data.get("embedding") or data.get("vector")
+        vector = None
+        if isinstance(data, dict):
+            vector = data.get("embedding") or data.get("vector")
+            if vector is None:
+                payload = data.get("data")
+                if isinstance(payload, list) and payload:
+                    first = payload[0]
+                    if isinstance(first, dict):
+                        vector = first.get("embedding") or first.get("vector")
+                    else:
+                        vector = first
+        elif isinstance(data, list) and data:
+            first = data[0]
+            if isinstance(first, dict):
+                vector = first.get("embedding") or first.get("vector")
+            else:
+                vector = first
         if vector is None:
             raise RuntimeError(
                 "SageMaker endpoint response lacks an 'embedding' field."
@@ -120,7 +136,23 @@ class HttpEmbeddingClient(_EmbeddingClientProtocol):
         except requests.RequestException as exc:
             raise RuntimeError("HTTP embedding request failed") from exc
         data = response.json()
-        vector = data.get("embedding") or data.get("vector")
+        vector = None
+        if isinstance(data, dict):
+            vector = data.get("embedding") or data.get("vector")
+            if vector is None:
+                payload = data.get("data")
+                if isinstance(payload, list) and payload:
+                    first = payload[0]
+                    if isinstance(first, dict):
+                        vector = first.get("embedding") or first.get("vector")
+                    else:
+                        vector = first
+        elif isinstance(data, list) and data:
+            first = data[0]
+            if isinstance(first, dict):
+                vector = first.get("embedding") or first.get("vector")
+            else:
+                vector = first
         if vector is None:
             raise RuntimeError(
                 "HTTP embedding response lacks an 'embedding' field."
