@@ -71,7 +71,7 @@ class SageMakerEmbeddingClient(_EmbeddingClientProtocol):
         self.accept = accept
 
     def embed(self, text: str) -> Sequence[float]:
-        payload = json.dumps({"text": text})
+        payload = json.dumps({"inputs": text})
         response = self._client.invoke_endpoint(
             EndpointName=self.endpoint_name,
             ContentType=self.content_type,
