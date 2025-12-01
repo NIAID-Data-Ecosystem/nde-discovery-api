@@ -10,9 +10,12 @@ import requests
 from elasticsearch_dsl import Q, Search
 
 try:
-    import config as bt_config  # type: ignore
-except ImportError:
-    bt_config = None
+    from biothings import config as bt_config
+except ImportError:  # pragma: no cover - falls back to project config/env
+    try:
+        import config as bt_config  # type: ignore
+    except ImportError:
+        bt_config = None
 
 logger = logging.getLogger(__name__)
 
@@ -279,6 +282,9 @@ class AiSearchBuilder:
         base_query_weight: float = 0.5,
         rescore_weight: float = 1.5,
         enable_rescore: bool = True,
+        use_knn: bool = True,
+        knn_results: int = 50,
+        knn_candidates: int = 400,
     ) -> None:
         self.index = index
         self.vector_field = vector_field
@@ -290,6 +296,9 @@ class AiSearchBuilder:
         self.rescore_window = max(0, rescore_window)
         self.base_query_weight = base_query_weight
         self.rescore_weight = rescore_weight
+        self.use_knn = use_knn
+        self.knn_results = max(1, knn_results)
+        self.knn_candidates = max(self.knn_results, knn_candidates)
         self.enable_rescore = enable_rescore and self.rescore_window > 0
 
     def build_search(self, query: str, options) -> Search:
@@ -299,14 +308,18 @@ class AiSearchBuilder:
 
         vector = _coerce_vector(self._get_embedding_client().embed(text))
         filter_query = self._build_filter_query()
-        script_score_query = self._build_script_score_query(
-            vector, filter_query
-        )
         if self.index:
             search = Search(index=self.index)
         else:
             search = Search()
-        search = search.query(script_score_query)
+
+        if self.use_knn:
+            search = self._apply_knn(search, vector, filter_query)
+        else:
+            script_score_query = self._build_script_score_query(
+                vector, filter_query
+            )
+            search = search.query(script_score_query)
 
         if self.enable_rescore:
             search = search.extra(rescore=self._build_rescore(vector))
@@ -351,40 +364,81 @@ class AiSearchBuilder:
     def _build_script_score_query(
         self, vector: Sequence[float], filter_query: Q
     ) -> Q:
-        # Use KNN search for efficient vector similarity instead of script_score
-        knn_query = {
-            "field": self.vector_field,
-            "query_vector": vector,
-            "k": 10,
-            "num_candidates": 100,
-        }
-
-        # Apply filters if any exist
-        if not isinstance(filter_query, type(Q("match_all"))):
-            knn_query["filter"] = filter_query.to_dict()
-
-        return Q("knn", **knn_query)
+        script = (
+            "double baseScore = 0.0;\n"
+            "if (doc['{field}'].size() > 0) {{\n"
+            "    baseScore = cosineSimilarity(params.query_vector, "
+            "'{field}') + 1.0;\n"
+            "}}\n"
+            "if (params.resource_boost > 1 && doc['@type'].size() > 0 "
+            "&& doc['@type'].value.equals('ResourceCatalog')) {{\n"
+            "    baseScore *= params.resource_boost;\n"
+            "}}\n"
+            "return baseScore;\n"
+        ).format(field=self.vector_field)
+        return Q(
+            "script_score",
+            query=filter_query,
+            script={
+                "source": script,
+                "params": {
+                    "query_vector": vector,
+                    "resource_boost": self.resource_catalog_boost,
+                },
+            },
+        )
 
     def _build_rescore(self, vector: Sequence[float]) -> Dict:
         rescore_script = (
-            "if (doc['%s'].size() == 0) {\n"
-            "    return 0.0;\n"
-            "}\n"
-            "return dotProduct(params.queryVector, doc['%s']) + 1.0;\n"
-        ) % (self.vector_field, self.vector_field)
+            "double score = 0.0;\n"
+            "if (doc['{field}'].size() > 0) {{\n"
+            "    score = dotProduct(params.queryVector, '{field}') + 1.0;\n"
+            "}}\n"
+            "if (params.resource_boost > 1 && doc['@type'].size() > 0 "
+            "&& doc['@type'].value.equals('ResourceCatalog')) {{\n"
+            "    score *= params.resource_boost;\n"
+            "}}\n"
+            "return score;\n"
+        ).format(field=self.vector_field)
+        window_cap = self.rescore_window or self.knn_results
+        if self.use_knn:
+            window_cap = min(window_cap, self.knn_results)
+        window_size = max(1, window_cap)
         return {
-            "window_size": self.rescore_window,
+            "window_size": window_size,
             "query": {
                 "rescore_query": {
                     "script_score": {
                         "query": {"match_all": {}},
                         "script": {
                             "source": rescore_script,
-                            "params": {"queryVector": vector},
+                            "params": {
+                                "queryVector": vector,
+                                "resource_boost": self.resource_catalog_boost,
+                            },
                         },
                     }
                 },
-                "query_weight": self.base_query_weight,
+                "query_weight": 0.0 if self.use_knn else self.base_query_weight,
                 "rescore_query_weight": self.rescore_weight,
             },
         }
+
+    def _apply_knn(
+        self, search: Search, vector: Sequence[float], filter_query: Q
+    ) -> Search:
+        knn_payload: Dict[str, object] = {
+            "field": self.vector_field,
+            "query_vector": vector,
+            "k": self.knn_results,
+            "num_candidates": self.knn_candidates,
+        }
+        filter_dict = filter_query.to_dict()
+        if filter_dict != {"match_all": {}}:
+            knn_payload["filter"] = filter_dict
+
+        # Reduce bookkeeping overhead for the approximate search phase.
+        search = search.extra(size=self.knn_results)
+        search = search.extra(track_total_hits=False)
+        search = search.extra(knn=knn_payload)
+        return search
