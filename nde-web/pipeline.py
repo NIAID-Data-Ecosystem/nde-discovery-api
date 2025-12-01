@@ -7,6 +7,7 @@ from ai_search import (
     load_ai_search_restrictions,
 )
 from biothings.web.query import ESQueryBuilder, ESResultFormatter
+from biothings.web.query.engine import AsyncESQueryBackend
 from elasticsearch_dsl import A, Q, Search
 
 logger = logging.getLogger(__name__)
@@ -65,6 +66,8 @@ class NDEQueryBuilder(ESQueryBuilder):
     def _build_ai_search(self, query_text, options):
         if not self.ai_search_builder:
             raise ValueError("AI search is disabled for this deployment.")
+        # Ensure backend targets the AI-specific index rather than the default
+        options.biothing_type = "ai"
         try:
             return self.ai_search_builder.build_search(query_text, options)
         except Exception as exc:
@@ -254,11 +257,12 @@ class NDEQueryBuilder(ESQueryBuilder):
             )
             search.aggs.bucket("multi_terms_agg", multi_terms_agg)
 
-        # hide _meta object
+        # hide _meta object and suppress large embedding vectors in responses
+        exclude_fields = ["ibmGraniteEmbedding"]
         if options.show_meta:
-            search = search.source(includes=["*"], excludes=[])
+            search = search.source(includes=["*"], excludes=exclude_fields)
         else:
-            search = search.source(excludes=["_meta"])
+            search = search.source(excludes=exclude_fields + ["_meta"])
 
         # # spam filter
         # spam_filter = Q(
@@ -323,6 +327,13 @@ class NDEQueryBuilder(ESQueryBuilder):
             search.aggs.bucket('lineage_total_count', lineage_total_filter)
 
         return super().apply_extras(search, options)
+
+
+class NDEESQueryBackend(AsyncESQueryBackend):
+    def adjust_index(self, original_index, query, **options):
+        if options.get("use_ai_search"):
+            return self.indices.get("ai", original_index)
+        return original_index
 
 
 class NDEFormatter(ESResultFormatter):
