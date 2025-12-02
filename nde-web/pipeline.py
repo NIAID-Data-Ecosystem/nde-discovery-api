@@ -50,6 +50,11 @@ class NDEQueryBuilder(ESQueryBuilder):
         super().__init__(*args, **kwargs)
         restrictions = load_ai_search_restrictions()
         ai_index = get_ai_setting("AI_SEARCH_INDEX")
+        min_similarity_raw = get_ai_setting("AI_SEARCH_MIN_SIMILARITY", 0.2)
+        try:
+            min_similarity = float(min_similarity_raw)
+        except (TypeError, ValueError):
+            min_similarity = 0.2
         self.ai_search_builder = AiSearchBuilder(
             index=ai_index,
             vector_field="ibmGraniteEmbedding",
@@ -61,6 +66,7 @@ class NDEQueryBuilder(ESQueryBuilder):
             base_query_weight=0.5,
             rescore_weight=1.5,
             enable_rescore=True,
+            min_similarity=min_similarity,
         )
 
     def _build_ai_search(self, query_text, options):
@@ -68,11 +74,43 @@ class NDEQueryBuilder(ESQueryBuilder):
             raise ValueError("AI search is disabled for this deployment.")
         # Ensure backend targets the AI-specific index rather than the default
         options.biothing_type = "ai"
+        lexical_query = self._build_ai_lexical_query(query_text)
         try:
-            return self.ai_search_builder.build_search(query_text, options)
+            return self.ai_search_builder.build_search(
+                query_text, options, lexical_query=lexical_query
+            )
         except Exception as exc:
             logger.exception("AI search failed: %s", exc)
             raise ValueError(f"AI search failed: {exc}") from exc
+
+    def _build_ai_lexical_query(self, q):
+        q = (q or "").strip()
+        if not q:
+            return Q("match_none")
+
+        if ":" in q or " AND " in q or " OR " in q:
+            return Q(
+                "query_string",
+                query=q,
+                default_operator="AND",
+                lenient=True,
+            )
+
+        if q.startswith('"') and q.endswith('"'):
+            queries = [
+                Q("term", _id={"value": q.strip('"'), "boost": 5}),
+                Q("term", name={"value": q.strip('"'), "boost": 5}),
+                Q(
+                    "query_string",
+                    query=q,
+                    default_operator="AND",
+                    lenient=True,
+                ),
+            ]
+            return Q("dis_max", queries=queries)
+
+        queries = self.build_queries(q, None)
+        return Q("dis_max", queries=queries)
 
     def default_string_query(self, q, options):
         if getattr(options, "use_ai_search", False):

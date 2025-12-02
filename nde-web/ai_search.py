@@ -282,9 +282,7 @@ class AiSearchBuilder:
         base_query_weight: float = 0.5,
         rescore_weight: float = 1.5,
         enable_rescore: bool = True,
-        use_knn: bool = True,
-        knn_results: int = 50,
-        knn_candidates: int = 400,
+        min_similarity: float = 0.2,
     ) -> None:
         self.index = index
         self.vector_field = vector_field
@@ -296,30 +294,38 @@ class AiSearchBuilder:
         self.rescore_window = max(0, rescore_window)
         self.base_query_weight = base_query_weight
         self.rescore_weight = rescore_weight
-        self.use_knn = use_knn
-        self.knn_results = max(1, knn_results)
-        self.knn_candidates = max(self.knn_results, knn_candidates)
+        self.min_similarity = float(min_similarity)
         self.enable_rescore = enable_rescore and self.rescore_window > 0
 
-    def build_search(self, query: str, options) -> Search:
+    def build_search(
+        self,
+        query: str,
+        options,
+        *,
+        lexical_query: Optional[Q] = None,
+    ) -> Search:
         text = (query or "").strip()
         if not text:
             raise ValueError("AI search requires a non-empty query string.")
 
         vector = _coerce_vector(self._get_embedding_client().embed(text))
         filter_query = self._build_filter_query()
+        base_query = self._combine_queries(filter_query, lexical_query)
         if self.index:
             search = Search(index=self.index)
         else:
             search = Search()
 
-        if self.use_knn:
-            search = self._apply_knn(search, vector, filter_query)
-        else:
-            script_score_query = self._build_script_score_query(
-                vector, filter_query
-            )
-            search = search.query(script_score_query)
+        script_score_query = self._build_script_score_query(
+            vector, base_query
+        )
+        search = search.query(script_score_query)
+        min_score = self._min_score_threshold()
+        if min_score > 0:
+            search = search.extra(min_score=min_score)
+
+        # Ensure Elasticsearch counts every match so totals/facets are stable.
+        search = search.extra(track_total_hits=True)
 
         if self.enable_rescore:
             search = search.extra(rescore=self._build_rescore(vector))
@@ -339,6 +345,9 @@ class AiSearchBuilder:
         must_clauses: List[Q] = []
         must_not_clauses: List[Q] = []
 
+        # Only consider documents that already have the embedding field populated.
+        must_clauses.append(Q("exists", field=self.vector_field))
+
         # Base filters only enforce static exclusions (staging IDs, prod
         # catalogs); dynamic filters continue to flow through apply_extras.
         if self.prod_sources:
@@ -352,24 +361,35 @@ class AiSearchBuilder:
         if self.staging_ids:
             must_not_clauses.append(Q("ids", values=self.staging_ids))
 
-        if must_clauses or must_not_clauses:
-            bool_kwargs: Dict[str, List[Q]] = {}
-            if must_clauses:
-                bool_kwargs["must"] = must_clauses
-            if must_not_clauses:
-                bool_kwargs["must_not"] = must_not_clauses
+        bool_kwargs: Dict[str, List[Q]] = {}
+        if must_clauses:
+            bool_kwargs["must"] = must_clauses
+        if must_not_clauses:
+            bool_kwargs["must_not"] = must_not_clauses
+        if bool_kwargs:
             return Q("bool", **bool_kwargs)
         return Q("match_all")
 
+    def _combine_queries(
+        self, filter_query: Q, lexical_query: Optional[Q]
+    ) -> Q:
+        if lexical_query is None or lexical_query == Q("match_none"):
+            return filter_query
+        return Q("bool", must=[filter_query, lexical_query])
+
     def _build_script_score_query(
-        self, vector: Sequence[float], filter_query: Q
+        self, vector: Sequence[float], base_query: Q
     ) -> Q:
         script = (
-            "double baseScore = 0.0;\n"
+            "double similarity = -2.0;\n"
             "if (doc['{field}'].size() > 0) {{\n"
-            "    baseScore = cosineSimilarity(params.query_vector, "
-            "'{field}') + 1.0;\n"
+            "    similarity = cosineSimilarity(params.query_vector, "
+            "'{field}');\n"
             "}}\n"
+            "if (similarity < params.min_similarity) {{\n"
+            "    return 0.0;\n"
+            "}}\n"
+            "double baseScore = similarity + 1.0;\n"
             "if (params.resource_boost > 1 && doc['@type'].size() > 0 "
             "&& doc['@type'].value.equals('ResourceCatalog')) {{\n"
             "    baseScore *= params.resource_boost;\n"
@@ -378,15 +398,19 @@ class AiSearchBuilder:
         ).format(field=self.vector_field)
         return Q(
             "script_score",
-            query=filter_query,
+            query=base_query,
             script={
                 "source": script,
                 "params": {
                     "query_vector": vector,
                     "resource_boost": self.resource_catalog_boost,
+                    "min_similarity": self.min_similarity,
                 },
             },
         )
+
+    def _min_score_threshold(self) -> float:
+        return max(0.0, self.min_similarity + 1.0)
 
     def _build_rescore(self, vector: Sequence[float]) -> Dict:
         rescore_script = (
@@ -400,10 +424,7 @@ class AiSearchBuilder:
             "}}\n"
             "return score;\n"
         ).format(field=self.vector_field)
-        window_cap = self.rescore_window or self.knn_results
-        if self.use_knn:
-            window_cap = min(window_cap, self.knn_results)
-        window_size = max(1, window_cap)
+        window_size = max(1, self.rescore_window)
         return {
             "window_size": window_size,
             "query": {
@@ -419,26 +440,7 @@ class AiSearchBuilder:
                         },
                     }
                 },
-                "query_weight": 0.0 if self.use_knn else self.base_query_weight,
+                "query_weight": self.base_query_weight,
                 "rescore_query_weight": self.rescore_weight,
             },
         }
-
-    def _apply_knn(
-        self, search: Search, vector: Sequence[float], filter_query: Q
-    ) -> Search:
-        knn_payload: Dict[str, object] = {
-            "field": self.vector_field,
-            "query_vector": vector,
-            "k": self.knn_results,
-            "num_candidates": self.knn_candidates,
-        }
-        filter_dict = filter_query.to_dict()
-        if filter_dict != {"match_all": {}}:
-            knn_payload["filter"] = filter_dict
-
-        # Reduce bookkeeping overhead for the approximate search phase.
-        search = search.extra(size=self.knn_results)
-        search = search.extra(track_total_hits=False)
-        search = search.extra(knn=knn_payload)
-        return search
