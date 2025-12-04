@@ -3,6 +3,7 @@ import json
 import logging
 import os
 import random
+import time
 from functools import lru_cache
 from typing import Callable, Dict, List, Optional, Sequence
 
@@ -283,6 +284,7 @@ class AiSearchBuilder:
         rescore_weight: float = 1.5,
         enable_rescore: bool = True,
         min_similarity: float = 0.2,
+        track_total_hits: bool = True,
     ) -> None:
         self.index = index
         self.vector_field = vector_field
@@ -296,6 +298,7 @@ class AiSearchBuilder:
         self.rescore_weight = rescore_weight
         self.min_similarity = float(min_similarity)
         self.enable_rescore = enable_rescore and self.rescore_window > 0
+        self.track_total_hits = bool(track_total_hits)
 
     def build_search(
         self,
@@ -308,7 +311,16 @@ class AiSearchBuilder:
         if not text:
             raise ValueError("AI search requires a non-empty query string.")
 
-        vector = _coerce_vector(self._get_embedding_client().embed(text))
+        embed_start = time.perf_counter()
+        embedding_client = self._get_embedding_client()
+        vector = _coerce_vector(embedding_client.embed(text))
+        embed_duration_ms = (time.perf_counter() - embed_start) * 1000
+        logger.info(
+            "AI embedding latency %.2f ms via %s (query=%s)",
+            embed_duration_ms,
+            type(embedding_client).__name__,
+            text[:64],
+        )
         filter_query = self._build_filter_query()
         base_query = self._combine_queries(filter_query, lexical_query)
         if self.index:
@@ -325,11 +337,31 @@ class AiSearchBuilder:
             search = search.extra(min_score=min_score)
 
         # Ensure Elasticsearch counts every match so totals/facets are stable.
-        search = search.extra(track_total_hits=True)
+        if self.track_total_hits:
+            search = search.extra(track_total_hits=True)
 
         if self.enable_rescore:
             search = search.extra(rescore=self._build_rescore(vector))
+        search = self._apply_post_score_boosts(search, options)
+        # save search to json file
+        with open('search_debug.json', 'w') as f:
+            json.dump(search.to_dict(), f, indent=2)
+        return search
 
+    def build_filter_only_search(
+        self,
+        *,
+        lexical_query: Optional[Q] = None,
+    ) -> Search:
+        filter_query = self._build_filter_query()
+        base_query = self._combine_queries(filter_query, lexical_query)
+        if self.index:
+            search = Search(index=self.index)
+        else:
+            search = Search()
+        search = search.query(base_query)
+        if self.track_total_hits:
+            search = search.extra(track_total_hits=True)
         return search
 
     def _get_embedding_client(self) -> _EmbeddingClientProtocol:
@@ -341,6 +373,63 @@ class AiSearchBuilder:
             self._embedding_client = self._embedding_client_factory()
         return self._embedding_client
 
+    def _apply_post_score_boosts(self, search: Search, options) -> Search:
+        current_query = search.to_dict().get("query")
+        if not current_query:
+            return search
+        use_metadata_score = bool(
+            getattr(options, "use_metadata_score", False)
+        )
+        boost_factor = max(1.0, float(self.resource_catalog_boost))
+        if use_metadata_score:
+            script_source = (
+                "double required_ratio = doc['_meta.completeness."
+                "required_ratio'].value;\n"
+                "double recommended_ratio = doc['_meta.completeness."
+                "recommended_score_ratio'].value;\n"
+                "double b = 1 - params.a;\n"
+                "double d = 1 - params.c;\n"
+                "double score = (params.a * _score) + (b * ((params.c * "
+                "required_ratio) + (d * recommended_ratio)));\n"
+                "if (doc['@type'].value == 'ResourceCatalog') {\n"
+                "    score *= params.boost_factor;\n"
+                "}\n"
+                "return score;\n"
+            )
+            metadata_query = {
+                "function_score": {
+                    "query": current_query,
+                    "script_score": {
+                        "script": {
+                            "source": script_source,
+                            "params": {
+                                "a": 0.8,
+                                "c": 0.75,
+                                "boost_factor": boost_factor,
+                            },
+                        }
+                    },
+                    "boost_mode": "replace",
+                }
+            }
+            return search.update_from_dict({"query": metadata_query})
+
+        if boost_factor <= 1.0:
+            return search
+        resource_boost_query = {
+            "function_score": {
+                "query": current_query,
+                "functions": [
+                    {
+                        "filter": {"term": {"@type": "ResourceCatalog"}},
+                        "weight": boost_factor,
+                    }
+                ],
+                "boost_mode": "replace",
+            }
+        }
+        return search.update_from_dict({"query": resource_boost_query})
+
     def _build_filter_query(self) -> Q:
         must_clauses: List[Q] = []
         must_not_clauses: List[Q] = []
@@ -348,15 +437,32 @@ class AiSearchBuilder:
         # Only consider documents that already have the embedding field populated.
         must_clauses.append(Q("exists", field=self.vector_field))
 
-        # Base filters only enforce static exclusions (staging IDs, prod
-        # catalogs); dynamic filters continue to flow through apply_extras.
+        # Restrict types to ResourceCatalog/Dataset (optionally limited to
+        # configured production catalogs) plus ComputationalTool entries from
+        # bio.tools, matching the Streamlit prototype behavior.
+        resource_dataset_filters: List[Q] = [
+            Q("terms", **{"@type": ["ResourceCatalog", "Dataset"]})]
         if self.prod_sources:
-            must_clauses.append(
-                Q(
-                    "terms",
-                    **{"includedInDataCatalog.name": self.prod_sources},
-                )
+            resource_dataset_filters.append(
+                Q("terms", **{"includedInDataCatalog.name": self.prod_sources})
             )
+        resource_dataset_clause = Q("bool", must=resource_dataset_filters)
+
+        computational_tool_clause = Q(
+            "bool",
+            must=[
+                Q("term", **{"@type": "ComputationalTool"}),
+                Q("term", **{"includedInDataCatalog.name": "bio.tools"}),
+            ],
+        )
+
+        must_clauses.append(
+            Q(
+                "bool",
+                should=[resource_dataset_clause, computational_tool_clause],
+                minimum_should_match=1,
+            )
+        )
 
         if self.staging_ids:
             must_not_clauses.append(Q("ids", values=self.staging_ids))

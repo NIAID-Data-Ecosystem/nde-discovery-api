@@ -1,4 +1,5 @@
 import logging
+import time
 
 from ai_search import (
     AiSearchBuilder,
@@ -11,6 +12,16 @@ from biothings.web.query.engine import AsyncESQueryBackend
 from elasticsearch_dsl import A, Q, Search
 
 logger = logging.getLogger(__name__)
+
+
+def _get_ai_bool_setting(name, default):
+    raw_value = get_ai_setting(name)
+    if raw_value is None:
+        return default
+    if isinstance(raw_value, bool):
+        return raw_value
+    value = str(raw_value).strip().lower()
+    return value in {"1", "true", "yes", "on"}
 
 
 def transform_lineage_response(response):
@@ -55,6 +66,10 @@ class NDEQueryBuilder(ESQueryBuilder):
             min_similarity = float(min_similarity_raw)
         except (TypeError, ValueError):
             min_similarity = 0.2
+        enable_rescore = _get_ai_bool_setting(
+            "AI_SEARCH_ENABLE_RESCORE", False)
+        track_total_hits = _get_ai_bool_setting(
+            "AI_SEARCH_TRACK_TOTAL_HITS", False)
         self.ai_search_builder = AiSearchBuilder(
             index=ai_index,
             vector_field="ibmGraniteEmbedding",
@@ -65,8 +80,9 @@ class NDEQueryBuilder(ESQueryBuilder):
             rescore_window=100,
             base_query_weight=0.5,
             rescore_weight=1.5,
-            enable_rescore=True,
+            enable_rescore=enable_rescore,
             min_similarity=min_similarity,
+            track_total_hits=track_total_hits,
         )
 
     def _build_ai_search(self, query_text, options):
@@ -75,6 +91,18 @@ class NDEQueryBuilder(ESQueryBuilder):
         # Ensure backend targets the AI-specific index rather than the default
         options.biothing_type = "ai"
         lexical_query = self._build_ai_lexical_query(query_text)
+        size_value = getattr(options, "size", None)
+        try:
+            size_int = int(size_value) if size_value is not None else None
+        except (TypeError, ValueError):
+            size_int = None
+        if size_int == 0:
+            logger.debug(
+                "AI search facet-only request detected; skipping embeddings"
+            )
+            return self.ai_search_builder.build_filter_only_search(
+                lexical_query=lexical_query
+            )
         try:
             return self.ai_search_builder.build_search(
                 query_text, options, lexical_query=lexical_query
@@ -109,8 +137,7 @@ class NDEQueryBuilder(ESQueryBuilder):
             ]
             return Q("dis_max", queries=queries)
 
-        queries = self.build_queries(q, None)
-        return Q("dis_max", queries=queries)
+        return Q("match_all")
 
     def default_string_query(self, q, options):
         if getattr(options, "use_ai_search", False):
@@ -192,22 +219,23 @@ class NDEQueryBuilder(ESQueryBuilder):
     def apply_extras(self, search, options):
         # Align AI and keyword searches by always applying the standard
         # resource type filters here instead of inside individual builders.
-        type_filter = [
-            {"terms": {"@type": ["Dataset", "ResourceCatalog", "Sample"]}},
-        ]
+        if not getattr(options, "use_ai_search", False):
+            type_filter = [
+                {"terms": {"@type": ["Dataset", "ResourceCatalog", "Sample"]}},
+            ]
 
-        computational_tool_condition = {
-            "bool": {
-                "must": [
-                    {"term": {"@type": "ComputationalTool"}},
-                    {"term": {"includedInDataCatalog.name": "bio.tools"}},
-                ]
+            computational_tool_condition = {
+                "bool": {
+                    "must": [
+                        {"term": {"@type": "ComputationalTool"}},
+                        {"term": {"includedInDataCatalog.name": "bio.tools"}},
+                    ]
+                }
             }
-        }
 
-        search = search.filter(
-            "bool", should=type_filter + [computational_tool_condition]
-        )
+            search = search.filter(
+                "bool", should=type_filter + [computational_tool_condition]
+            )
 
         if options.extra_filter:
             search = search.query("query_string", query=options.extra_filter)
@@ -368,6 +396,20 @@ class NDEQueryBuilder(ESQueryBuilder):
 
 
 class NDEESQueryBackend(AsyncESQueryBackend):
+    async def execute(self, query, **options):
+        ai_enabled = options.get("use_ai_search", False)
+        start = time.perf_counter() if ai_enabled else None
+        res = await super().execute(query, **options)
+        if ai_enabled and isinstance(res, dict):
+            total_ms = (time.perf_counter() - start) * 1000
+            es_took = res.get("took")
+            logger.info(
+                "AI search request finished in %.2f ms (es_took=%s)",
+                total_ms,
+                es_took,
+            )
+        return res
+
     def adjust_index(self, original_index, query, **options):
         if options.get("use_ai_search"):
             return self.indices.get("ai", original_index)
