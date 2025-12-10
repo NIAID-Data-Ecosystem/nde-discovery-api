@@ -60,7 +60,6 @@ class NDEQueryBuilder(ESQueryBuilder):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         restrictions = load_ai_search_restrictions()
-        ai_index = get_ai_setting("AI_SEARCH_INDEX")
         min_similarity_raw = get_ai_setting("AI_SEARCH_MIN_SIMILARITY", 0.2)
         try:
             min_similarity = float(min_similarity_raw)
@@ -71,7 +70,6 @@ class NDEQueryBuilder(ESQueryBuilder):
         track_total_hits = _get_ai_bool_setting(
             "AI_SEARCH_TRACK_TOTAL_HITS", False)
         self.ai_search_builder = AiSearchBuilder(
-            index=ai_index,
             vector_field="ibmGraniteEmbedding",
             embedding_client_factory=build_embedding_client_factory(),
             staging_ids=restrictions["staging_ids"],
@@ -88,8 +86,6 @@ class NDEQueryBuilder(ESQueryBuilder):
     def _build_ai_search(self, query_text, options):
         if not self.ai_search_builder:
             raise ValueError("AI search is disabled for this deployment.")
-        # Ensure backend targets the AI-specific index rather than the default
-        options.biothing_type = "ai"
         lexical_query = self._build_ai_lexical_query(query_text)
         size_value = getattr(options, "size", None)
         try:
@@ -409,11 +405,6 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                 es_took,
             )
         return res
-
-    def adjust_index(self, original_index, query, **options):
-        if options.get("use_ai_search"):
-            return self.indices.get("ai", original_index)
-        return original_index
 
 
 class NDEFormatter(ESResultFormatter):

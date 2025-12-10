@@ -273,7 +273,6 @@ class AiSearchBuilder:
     def __init__(
         self,
         *,
-        index: Optional[str] = None,
         vector_field: str,
         embedding_client_factory: Callable[[], _EmbeddingClientProtocol],
         staging_ids: Optional[Sequence[str]] = None,
@@ -286,7 +285,6 @@ class AiSearchBuilder:
         min_similarity: float = 0.2,
         track_total_hits: bool = True,
     ) -> None:
-        self.index = index
         self.vector_field = vector_field
         self._embedding_client_factory = embedding_client_factory
         self._embedding_client: Optional[_EmbeddingClientProtocol] = None
@@ -323,10 +321,7 @@ class AiSearchBuilder:
         )
         filter_query = self._build_filter_query()
         base_query = self._combine_queries(filter_query, lexical_query)
-        if self.index:
-            search = Search(index=self.index)
-        else:
-            search = Search()
+        search = Search()
 
         script_score_query = self._build_script_score_query(
             vector, base_query
@@ -355,10 +350,7 @@ class AiSearchBuilder:
     ) -> Search:
         filter_query = self._build_filter_query()
         base_query = self._combine_queries(filter_query, lexical_query)
-        if self.index:
-            search = Search(index=self.index)
-        else:
-            search = Search()
+        search = Search()
         search = search.query(base_query)
         if self.track_total_hits:
             search = search.extra(track_total_hits=True)
