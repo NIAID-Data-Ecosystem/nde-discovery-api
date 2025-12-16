@@ -1,27 +1,15 @@
-import logging
+import asyncio
+import importlib
+import json
+import re
 import time
+from functools import lru_cache
 
-from ai_search import (
-    AiSearchBuilder,
-    build_embedding_client_factory,
-    get_ai_setting,
-    load_ai_search_restrictions,
-)
+import boto3
 from biothings.web.query import ESQueryBuilder, ESResultFormatter
 from biothings.web.query.engine import AsyncESQueryBackend
+from botocore.config import Config as BotoConfig
 from elasticsearch_dsl import A, Q, Search
-
-logger = logging.getLogger(__name__)
-
-
-def _get_ai_bool_setting(name, default):
-    raw_value = get_ai_setting(name)
-    if raw_value is None:
-        return default
-    if isinstance(raw_value, bool):
-        return raw_value
-    value = str(raw_value).strip().lower()
-    return value in {"1", "true", "yes", "on"}
 
 
 def transform_lineage_response(response):
@@ -54,103 +42,602 @@ def transform_lineage_response(response):
     return transformed
 
 
+def _load_runtime_config():
+    """Load the Biothings runtime config module.
+
+    The API server loads `config.py` as module name `config`. Importing it at
+    module import time would create a circular dependency, so we import lazily.
+    """
+    return importlib.import_module("config")
+
+
+def _find_first_query_string_query(query_obj):
+    if isinstance(query_obj, dict):
+        qs = query_obj.get("query_string")
+        if isinstance(qs, dict) and "query" in qs:
+            return qs.get("query")
+        for value in query_obj.values():
+            found = _find_first_query_string_query(value)
+            if found:
+                return found
+    elif isinstance(query_obj, list):
+        for item in query_obj:
+            found = _find_first_query_string_query(item)
+            if found:
+                return found
+    return None
+
+
+def _looks_like_advanced_query_string(q: str) -> bool:
+    q = (q or "").strip()
+    if not q:
+        return False
+    return (":" in q) or (" AND " in q) or (" OR " in q) or ("(" in q and ")" in q)
+
+
+_EXISTS_ONLY_RE = re.compile(r"^\s*(?P<neg>-)?_exists_:(?P<field>.+?)\s*$")
+
+
+class _TTLCache:
+    def __init__(self, *, maxsize: int, ttl_s: float):
+        self.maxsize = int(maxsize)
+        self.ttl_s = float(ttl_s)
+        self._data = {}
+
+    def get(self, key):
+        now = time.monotonic()
+        item = self._data.get(key)
+        if not item:
+            return None
+        expires_at, value = item
+        if expires_at < now:
+            self._data.pop(key, None)
+            return None
+        return value
+
+    def set(self, key, value):
+        if self.maxsize <= 0 or self.ttl_s <= 0:
+            return
+        # crude eviction: clear all when we exceed maxsize
+        if len(self._data) >= self.maxsize:
+            self._data.clear()
+        self._data[key] = (time.monotonic() + self.ttl_s, value)
+
+
+class _SageMakerEmbeddingClient:
+    def __init__(
+        self,
+        endpoint_name: str,
+        region: str,
+        content_type: str,
+        accept: str,
+        timeout_s: int,
+    ):
+        self.endpoint_name = endpoint_name
+        self.region = region
+        self.content_type = content_type
+        self.accept = accept
+        self.timeout_s = int(timeout_s)
+
+        self._client = boto3.client(
+            "sagemaker-runtime",
+            region_name=self.region,
+            config=BotoConfig(
+                connect_timeout=self.timeout_s,
+                read_timeout=self.timeout_s,
+                retries={"max_attempts": 2, "mode": "standard"},
+            ),
+        )
+
+    def embed_one(self, text: str):
+        payload = json.dumps({"inputs": text}).encode("utf-8")
+        response = self._client.invoke_endpoint(
+            EndpointName=self.endpoint_name,
+            ContentType=self.content_type,
+            Accept=self.accept,
+            Body=payload,
+        )
+        body = response["Body"].read()
+        parsed = json.loads(body)
+        if isinstance(parsed, list) and parsed and isinstance(parsed[0], list):
+            return parsed[0]
+        return parsed
+
+
+class NDEESQueryBackend(AsyncESQueryBackend):
+    """Custom ES backend enabling AI (vector) search while preserving facets.
+
+    When `use_ai_search=true`, we:
+      1) embed the user's query via SageMaker
+      2) issue an Elasticsearch kNN query using `knn.filter` to apply the same
+         type restrictions and optional `extra_filter`/`filter` constraints.
+
+    Aggregations/facets remain supported because we keep the `aggs` section
+    from
+    the Search object built by the existing query builder.
+    """
+
+    def __init__(
+        self,
+        client,
+        indices=None,
+        scroll_time="1m",
+        scroll_size=1000,
+        multisearch_concurrency=5,
+        total_hits_as_int=True,
+    ):
+        super().__init__(
+            client,
+            indices=indices,
+            scroll_time=scroll_time,
+            scroll_size=scroll_size,
+            multisearch_concurrency=multisearch_concurrency,
+            total_hits_as_int=total_hits_as_int,
+        )
+
+    @staticmethod
+    @lru_cache(maxsize=1)
+    def _embedding_client_from_config():
+        cfg = _load_runtime_config()
+        provider = getattr(cfg, "AI_EMBEDDING_PROVIDER", "sagemaker")
+        if provider != "sagemaker":
+            raise ValueError(f"Unsupported AI_EMBEDDING_PROVIDER: {provider}")
+        return _SageMakerEmbeddingClient(
+            endpoint_name=getattr(cfg, "AI_SAGEMAKER_ENDPOINT_NAME"),
+            region=getattr(cfg, "AI_SAGEMAKER_REGION"),
+            content_type=getattr(
+                cfg, "AI_SAGEMAKER_CONTENT_TYPE", "application/json"),
+            accept=getattr(cfg, "AI_SAGEMAKER_ACCEPT", "application/json"),
+            timeout_s=getattr(cfg, "AI_SAGEMAKER_TIMEOUT", 30),
+        )
+
+    @staticmethod
+    def _build_type_filter():
+        filter_conditions = [
+            {"terms": {"@type": ["Dataset", "ResourceCatalog", "Sample"]}},
+        ]
+        computational_tool_condition = {
+            "bool": {
+                "must": [
+                    {"term": {"@type": "ComputationalTool"}},
+                    {"term": {"includedInDataCatalog.name": "bio.tools"}},
+                ]
+            }
+        }
+        return {
+            "bool": {
+                "should": filter_conditions + [computational_tool_condition],
+                "minimum_should_match": 1,
+            }
+        }
+
+    @staticmethod
+    def _query_string_filter(query: str):
+        return {
+            "query_string": {
+                "query": query,
+                "default_operator": "AND",
+                "lenient": True,
+            }
+        }
+
+    @staticmethod
+    def _exists_filter(field: str):
+        return {"exists": {"field": field}}
+
+    @staticmethod
+    def _parse_exists_only_filter(extra_filter: str):
+        """Detect `_exists_:field` / `-_exists_:field` patterns.
+
+        Returns:
+            (is_negated: bool, field: str) or None
+        """
+        if not extra_filter:
+            return None
+        m = _EXISTS_ONLY_RE.match(str(extra_filter))
+        if not m:
+            return None
+        return (bool(m.group("neg")), m.group("field").strip())
+
+    async def _knn_sample_ids(
+        self,
+        *,
+        index: str,
+        vector_field: str,
+        query_vector,
+        knn_k: int,
+        num_candidates: int,
+        knn_filter,
+        total_hits_as_int: bool,
+    ):
+        """Run a lightweight kNN request to retrieve top-k document IDs.
+
+        This is used to compute aggregations/facets over the AI neighborhood
+        (kNN top-k) instead of over a global `match_all` set.
+        """
+        body = {
+            "size": int(knn_k),
+            "query": {"match_all": {}},
+            "_source": False,
+            "stored_fields": [],
+            "track_total_hits": False,
+            "knn": {
+                "field": vector_field,
+                "query_vector": query_vector,
+                "k": int(knn_k),
+                "num_candidates": int(num_candidates),
+                "filter": knn_filter,
+            },
+        }
+        if total_hits_as_int:
+            body["rest_total_hits_as_int"] = True
+
+        res = await self.client.search(index=index, **body)
+        if hasattr(res, "body"):
+            res = res.body
+        hits = (
+            res.get("hits", {}).get("hits", [])
+            if isinstance(res, dict)
+            else []
+        )
+        ids = [h.get("_id")
+               for h in hits if isinstance(h, dict) and h.get("_id")]
+        return ids
+
+    async def _execute_ai_search(self, query: Search, **options):
+        cfg = _load_runtime_config()
+
+        search_body = query.to_dict()
+        user_q = _find_first_query_string_query(search_body.get("query"))
+        if not user_q:
+            # fall back to whatever builder produced for q; if we can't find it,
+            # skip AI search to avoid returning meaningless results.
+            return await super().execute(query, **options)
+
+        # Cache embeddings because the UI can trigger many facet calls
+        # for the same query text.
+        embed_ttl = float(getattr(cfg, "AI_EMBEDDING_CACHE_TTL_S", 300))
+        embed_max = int(getattr(cfg, "AI_EMBEDDING_CACHE_MAXSIZE", 2048))
+        if not hasattr(self, "_embed_cache"):
+            self._embed_cache = _TTLCache(maxsize=embed_max, ttl_s=embed_ttl)
+
+        embed_key = str(user_q)
+        query_vector = self._embed_cache.get(embed_key)
+        if query_vector is None:
+            embedding_client = self._embedding_client_from_config()
+            query_vector = await asyncio.to_thread(
+                embedding_client.embed_one,
+                str(user_q),
+            )
+            self._embed_cache.set(embed_key, query_vector)
+
+        dims_expected = int(getattr(cfg, "AI_SEARCH_VECTOR_DIMS", 768))
+        if not isinstance(query_vector, list) or len(query_vector) != dims_expected:
+            got_dims = len(query_vector) if isinstance(
+                query_vector, list) else "N/A"
+            raise ValueError(
+                f"Embedding dims mismatch (got {got_dims}, expected {dims_expected})."
+            )
+
+        vector_field = getattr(cfg, "AI_SEARCH_VECTOR_FIELD")
+        track_total_hits = bool(
+            getattr(cfg, "AI_SEARCH_TRACK_TOTAL_HITS", True))
+
+        # Preserve all non-query pieces (aggs/suggest/_source/sort/etc.)
+        # but replace the string query with a match_all and use kNN.
+        es_kwargs = dict(search_body)
+        es_kwargs["query"] = {"match_all": {}}
+
+        requested_size = int(
+            es_kwargs.get("size", getattr(cfg, "AI_SEARCH_MAX_HITS", 10))
+        )
+        facet_size_opt = options.get("facet_size")
+        facet_size = 10 if facet_size_opt is None else int(facet_size_opt)
+        has_aggs = bool(es_kwargs.get("aggs"))
+        original_aggs = es_kwargs.get("aggs") if has_aggs else None
+
+        base_k = int(getattr(cfg, "AI_SEARCH_KNN_K", 10))
+        # Heuristic: to make totals/facets useful by default, ensure the kNN
+        # window is large enough even when the client requests size=0 or size=10.
+        min_total_k = 1000 if track_total_hits else base_k
+        knn_k = max(base_k, min_total_k, requested_size)
+        # Only increase k for facets when we actually need buckets.
+        # Many UI calls use `facet_size=0` (often with +/- _exists_) purely to
+        # get totals; bumping k to 2000 there is wasted work.
+        if has_aggs and facet_size > 0:
+            # Facet calls can request very large facet_size (e.g. 1000). Using
+            # `facet_size*10` explodes kNN work (10k+), which is too slow.
+            # Use a dedicated, capped neighborhood size for facets.
+            facet_knn_k = int(getattr(cfg, "AI_SEARCH_FACET_K", 2000))
+            facet_knn_k_max = int(
+                getattr(cfg, "AI_SEARCH_FACET_K_MAX", facet_knn_k))
+            facet_target = max(facet_knn_k, base_k, requested_size)
+            facet_target = min(facet_target, max(
+                facet_knn_k_max, base_k, requested_size))
+            knn_k = max(knn_k, facet_target)
+
+        num_candidates = int(
+            getattr(cfg, "AI_SEARCH_KNN_NUM_CANDIDATES", 1000))
+        num_candidates = max(num_candidates, knn_k)
+
+        # In AI mode, only return documents that are eligible for vector search
+        # (have an embedding) and satisfy the API's type constraints.
+        base_filters = [
+            self._build_type_filter(),
+            self._exists_filter(vector_field),
+        ]
+
+        # If the user supplied an advanced query_string (e.g. fielded constraints
+        # like @type:"ResourceCatalog"), treat it as a hard filter.
+        # This preserves expected filtering semantics while still using kNN for ranking.
+        if _looks_like_advanced_query_string(str(user_q)):
+            base_filters.append(self._query_string_filter(str(user_q)))
+
+        extra_filter = options.get("extra_filter")
+        exists_only = self._parse_exists_only_filter(
+            str(extra_filter)) if extra_filter else None
+
+        # Standard Biothings filter param (query_string filter)
+        std_filter = options.get("filter")
+        if std_filter:
+            base_filters.append(self._query_string_filter(str(std_filter)))
+
+        # Full request filters (used for ranking/hits)
+        request_filters = list(base_filters)
+        if extra_filter:
+            request_filters.append(
+                self._query_string_filter(str(extra_filter)))
+
+        # Sampling filters (used only to get candidate IDs for aggregations)
+        # Normalize pure exists filters so multiple facet calls can reuse the
+        # same sampled IDs for the same query text.
+        sampling_filters = list(base_filters)
+        if extra_filter and not exists_only:
+            sampling_filters.append(
+                self._query_string_filter(str(extra_filter)))
+
+        knn_filter = {"bool": {"filter": request_filters}}
+        knn_sampling_filter = {"bool": {"filter": sampling_filters}}
+
+        es_kwargs["knn"] = {
+            "field": vector_field,
+            "query_vector": query_vector,
+            "k": knn_k,
+            "num_candidates": num_candidates,
+            "filter": knn_filter,
+        }
+
+        # When facets/aggregations are requested, compute them over the AI
+        # neighborhood (top-k IDs) to avoid effectively-global aggregations.
+        # This keeps UI facet counts sane and aligned with AI results.
+        agg_override = None
+        sample_ids_count = None
+        if has_aggs:
+            # Prevent ES from attempting aggregations on the main kNN request.
+            # We'll compute aggs via a separate ids-filtered query.
+            es_kwargs.pop("aggs", None)
+
+            # NOTE: We need IDs of top-k candidates. If requested_size==0,
+            # ES would return no hits; even when requested_size>0, it may
+            # be much smaller than knn_k. So we do a lightweight sampling call.
+            index = self.indices[options.get("biothing_type")]
+            index = self.adjust_index(index, query, **options)
+            # Cache sampled IDs because the UI requests many facets separately.
+            ids_ttl = float(getattr(cfg, "AI_SEARCH_IDS_CACHE_TTL_S", 30))
+            ids_max = int(getattr(cfg, "AI_SEARCH_IDS_CACHE_MAXSIZE", 512))
+            if not hasattr(self, "_ids_cache"):
+                self._ids_cache = _TTLCache(maxsize=ids_max, ttl_s=ids_ttl)
+
+            ids_cache_key = (
+                vector_field,
+                str(user_q),
+                str(std_filter or ""),
+                # normalize exists-only extra_filter away for sampling
+                "" if exists_only else str(extra_filter or ""),
+                int(knn_k),
+                int(num_candidates),
+            )
+            sample_ids = self._ids_cache.get(ids_cache_key)
+            if sample_ids is None:
+                sample_ids = await self._knn_sample_ids(
+                    index=index,
+                    vector_field=vector_field,
+                    query_vector=query_vector,
+                    knn_k=knn_k,
+                    num_candidates=num_candidates,
+                    knn_filter=knn_sampling_filter,
+                    total_hits_as_int=self.total_hits_as_int,
+                )
+                self._ids_cache.set(ids_cache_key, sample_ids)
+            sample_ids_count = len(sample_ids)
+
+            if sample_ids:
+                agg_filters = [{"ids": {"values": sample_ids}}]
+                # Apply exists-only extra_filter at aggregation time.
+                if exists_only:
+                    is_negated, field = exists_only
+                    if is_negated:
+                        agg_filters.append(
+                            {"bool": {"must_not": [{"exists": {"field": field}}]}})
+                    else:
+                        agg_filters.append({"exists": {"field": field}})
+                # For non-exists extra_filter, it was already applied during sampling.
+                agg_body = {
+                    "size": 0,
+                    "query": {"bool": {"filter": agg_filters}},
+                    "aggs": original_aggs,
+                    "track_total_hits": False,
+                }
+                if self.total_hits_as_int:
+                    agg_body["rest_total_hits_as_int"] = True
+                agg_res = await self.client.search(index=index, **agg_body)
+                if hasattr(agg_res, "body"):
+                    agg_res = agg_res.body
+                if isinstance(agg_res, dict):
+                    agg_override = agg_res.get(
+                        "aggregations") or agg_res.get("aggs")
+            else:
+                agg_override = {}
+
+            # Facet-only requests (size=0) don't need a third ES call.
+            if requested_size <= 0:
+                return {
+                    "hits": {
+                        "total": int(sample_ids_count or 0),
+                        "max_score": None,
+                        "hits": [],
+                    },
+                    "aggregations": agg_override or {},
+                }
+
+        # NOTE: Elasticsearch rescore behavior with top-level `knn` varies by
+        # version. Instead of relying on it, we apply keyword boosts by issuing
+        # a second (keyword) search and merging/reranking client-side.
+
+        # Make total hits an integer (Biothings expects this by default)
+        if self.total_hits_as_int:
+            es_kwargs["rest_total_hits_as_int"] = True
+        if track_total_hits:
+            es_kwargs["track_total_hits"] = True
+
+        # elasticsearch-py uses from_ not from
+        if "from" in es_kwargs:
+            es_kwargs["from_"] = es_kwargs.pop("from")
+
+        index = self.indices[options.get("biothing_type")]
+        index = self.adjust_index(index, query, **options)
+        res = await self.client.search(index=index, **es_kwargs)
+        if hasattr(res, "body"):
+            res = res.body
+        # NOTE: Elasticsearch's `hits.total` is computed from the top-level
+        # `query` clause. In kNN mode we set `query=match_all`, so ES will
+        # return the corpus size (or filter-only size) and that won't vary with
+        # the semantic neighborhood. Override it to a useful AI interpretation:
+        # the size of the kNN neighborhood considered after filtering.
+        if isinstance(res, dict) and isinstance(res.get("hits"), dict):
+            # Elasticsearch's `hits.total` is based on the top-level `query`.
+            # In kNN mode we set `query=match_all`, so ES would return global-ish
+            # totals. Override totals to the AI neighborhood size.
+            if has_aggs and isinstance(sample_ids_count, int):
+                res["hits"]["total"] = int(sample_ids_count)
+            else:
+                res["hits"]["total"] = int(knn_k)
+
+        if has_aggs and isinstance(res, dict) and agg_override is not None:
+            res["aggregations"] = agg_override
+
+        # Apply keyword boosts in practice by merging in keyword-search hits.
+        if (
+            requested_size > 0
+            and isinstance(res, dict)
+            and isinstance(res.get("hits"), dict)
+            and isinstance(res["hits"].get("hits"), list)
+        ):
+            kw_size = int(getattr(cfg, "AI_SEARCH_KEYWORD_MERGE_SIZE", 200))
+            kw_size = max(10, min(kw_size, 500))
+
+            # Re-run the original keyword query (already includes boosts) with a
+            # bounded size and merge into the AI result set.
+            try:
+                kw_search = Search.from_dict(search_body).extra(size=kw_size)
+                # Prevent keyword merge from introducing docs that would never
+                # be eligible for vector search.
+                kw_search = kw_search.filter("exists", field=vector_field)
+                kw_search = kw_search.filter(
+                    "bool",
+                    **self._build_type_filter()["bool"],
+                )
+                kw_res = await super().execute(kw_search, **options)
+                if hasattr(kw_res, "body"):
+                    kw_res = kw_res.body
+            except Exception:
+                kw_res = None
+
+            ai_hits = res["hits"]["hits"]
+            kw_hits = (
+                kw_res.get("hits", {}).get("hits", [])
+                if isinstance(kw_res, dict)
+                else []
+            )
+
+            ai_score_by_id = {
+                h.get("_id"): float(h.get("_score") or 0.0)
+                for h in ai_hits
+                if isinstance(h, dict) and h.get("_id")
+            }
+            kw_score_by_id = {
+                h.get("_id"): float(h.get("_score") or 0.0)
+                for h in kw_hits
+                if isinstance(h, dict) and h.get("_id")
+            }
+
+            ai_max = max(ai_score_by_id.values(), default=0.0)
+            kw_max = max(kw_score_by_id.values(), default=0.0)
+            if ai_max <= 0:
+                ai_max = 1.0
+            if kw_max <= 0:
+                kw_max = 1.0
+
+            vector_weight = float(getattr(cfg, "AI_SEARCH_VECTOR_WEIGHT", 1.0))
+            text_weight = float(getattr(cfg, "AI_SEARCH_TEXT_WEIGHT", 0.4))
+
+            merged_by_id = {}
+            for hit in ai_hits:
+                if isinstance(hit, dict) and hit.get("_id"):
+                    merged_by_id[hit["_id"]] = hit
+            for hit in kw_hits:
+                if isinstance(hit, dict) and hit.get("_id"):
+                    merged_by_id.setdefault(hit["_id"], hit)
+
+            merged = []
+            for doc_id, hit in merged_by_id.items():
+                v = ai_score_by_id.get(doc_id, 0.0) / ai_max
+                t = kw_score_by_id.get(doc_id, 0.0) / kw_max
+                hit["_score"] = (vector_weight * v) + (text_weight * t)
+                merged.append(hit)
+
+            merged.sort(key=lambda h: float(
+                h.get("_score") or 0.0), reverse=True)
+            # Defensive enforcement: never return disallowed @types from AI mode
+            # (eg. ScholarlyArticle). This protects against differences in ES
+            # kNN/filter semantics and ensures API-level expectations hold.
+            allowed_types = {"Dataset", "ResourceCatalog",
+                             "Sample", "ComputationalTool"}
+            filtered_hits = []
+            for hit in merged:
+                if not isinstance(hit, dict):
+                    continue
+                src = hit.get("_source") if isinstance(
+                    hit.get("_source"), dict) else {}
+                doc_type = src.get("@type") or hit.get("@type")
+                if doc_type in allowed_types:
+                    filtered_hits.append(hit)
+                    if len(filtered_hits) >= requested_size:
+                        break
+            res["hits"]["hits"] = filtered_hits
+            if filtered_hits:
+                res["hits"]["max_score"] = float(
+                    filtered_hits[0].get("_score") or 0.0)
+        return res
+
+    async def execute(self, query, **options):
+        if options.get("use_ai_search") and isinstance(query, Search):
+            return await self._execute_ai_search(query, **options)
+        return await super().execute(query, **options)
+
+
 class NDEQueryBuilder(ESQueryBuilder):
     # https://docs.biothings.io/en/latest/_modules/biothings/web/query/builder.html#ESQueryBuilder.default_string_query
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        restrictions = load_ai_search_restrictions()
-        min_similarity_raw = get_ai_setting("AI_SEARCH_MIN_SIMILARITY", 0.2)
-        try:
-            min_similarity = float(min_similarity_raw)
-        except (TypeError, ValueError):
-            min_similarity = 0.2
-        enable_rescore = _get_ai_bool_setting(
-            "AI_SEARCH_ENABLE_RESCORE", False)
-        track_total_hits = _get_ai_bool_setting(
-            "AI_SEARCH_TRACK_TOTAL_HITS", False)
-        self.ai_search_builder = AiSearchBuilder(
-            vector_field="ibmGraniteEmbedding",
-            embedding_client_factory=build_embedding_client_factory(),
-            staging_ids=restrictions["staging_ids"],
-            prod_sources=restrictions["prod_sources"],
-            resource_catalog_boost=1000.0,
-            rescore_window=100,
-            base_query_weight=0.5,
-            rescore_weight=1.5,
-            enable_rescore=enable_rescore,
-            min_similarity=min_similarity,
-            track_total_hits=track_total_hits,
-        )
-
-    def _build_ai_search(self, query_text, options):
-        if not self.ai_search_builder:
-            raise ValueError("AI search is disabled for this deployment.")
-        lexical_query = self._build_ai_lexical_query(query_text)
-        size_value = getattr(options, "size", None)
-        try:
-            size_int = int(size_value) if size_value is not None else None
-        except (TypeError, ValueError):
-            size_int = None
-        if size_int == 0:
-            logger.debug(
-                "AI search facet-only request detected; skipping embeddings"
-            )
-            return self.ai_search_builder.build_filter_only_search(
-                lexical_query=lexical_query
-            )
-        try:
-            return self.ai_search_builder.build_search(
-                query_text, options, lexical_query=lexical_query
-            )
-        except Exception as exc:
-            logger.exception("AI search failed: %s", exc)
-            raise ValueError(f"AI search failed: {exc}") from exc
-
-    def _build_ai_lexical_query(self, q):
-        q = (q or "").strip()
-        if not q:
-            return Q("match_none")
-
-        if ":" in q or " AND " in q or " OR " in q:
-            return Q(
-                "query_string",
-                query=q,
-                default_operator="AND",
-                lenient=True,
-            )
-
-        if q.startswith('"') and q.endswith('"'):
-            queries = [
-                Q("term", _id={"value": q.strip('"'), "boost": 5}),
-                Q("term", name={"value": q.strip('"'), "boost": 5}),
-                Q(
-                    "query_string",
-                    query=q,
-                    default_operator="AND",
-                    lenient=True,
-                ),
-            ]
-            return Q("dis_max", queries=queries)
-
-        return Q("match_all")
-
     def default_string_query(self, q, options):
-        if getattr(options, "use_ai_search", False):
-            return self._build_ai_search(q, options)
-
         search = Search()
         q = q.strip()
 
         # elasticsearch query string syntax
         # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
         if ":" in q or " AND " in q or " OR " in q:
-            search = search.query(
-                "query_string",
-                query=q,
-                default_operator="AND",
-                lenient=True,
-            )
+            search = search.query("query_string", query=q,
+                                  default_operator="AND", lenient=True)
 
         # term search
         elif q.startswith('"') and q.endswith('"'):
@@ -159,12 +646,7 @@ class NDEQueryBuilder(ESQueryBuilder):
                 Q("term", _id={"value": q.strip('"'), "boost": 5}),
                 Q("term", name={"value": q.strip('"'), "boost": 5}),
                 # query string
-                Q(
-                    "query_string",
-                    query=q,
-                    default_operator="AND",
-                    lenient=True,
-                ),
+                Q("query_string", query=q, default_operator="AND", lenient=True),
             ]
 
             search = search.query("dis_max", queries=queries)
@@ -177,23 +659,13 @@ class NDEQueryBuilder(ESQueryBuilder):
         return search
 
     def build_queries(self, q, custom_function_script):
-        def _function_score(base_query):
-            params = {"query": base_query, "boost_mode": "replace"}
-            if custom_function_script:
-                params["script_score"] = {"script": custom_function_script}
-            return Q("function_score", **params)
-
         queries = [
-            _function_score(Q("term", _id={"value": q, "boost": 5})),
-            _function_score(Q("term", name={"value": q, "boost": 5})),
-            _function_score(
-                Q(
-                    "query_string",
-                    query=q,
-                    default_operator="AND",
-                    lenient=True,
-                )
-            ),
+            Q("function_score", query=Q("term", _id={"value": q, "boost": 5}),
+              script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
+            Q("function_score", query=Q("term", name={"value": q, "boost": 5}),
+              script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
+            Q("function_score", query=Q("query_string", query=q, default_operator="AND", lenient=True),
+              script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
         ]
         # check if q contains wildcards if not add wildcard query to every word
         if not ("*" in q or "?" in q):
@@ -204,7 +676,9 @@ class NDEQueryBuilder(ESQueryBuilder):
                 boost=0.5,
                 lenient=True,
             )
-            queries.append(_function_score(wc_query))
+            wc_function_score_query = Q("function_score", query=wc_query,
+                                        script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace")
+            queries.append(wc_function_score_query)
 
         # Remove function_score wrapping if custom_function_script is None
         if custom_function_script is None:
@@ -213,26 +687,35 @@ class NDEQueryBuilder(ESQueryBuilder):
         return queries
 
     def apply_extras(self, search, options):
-        # Align AI and keyword searches by always applying the standard
-        # resource type filters here instead of inside individual builders.
-        if not getattr(options, "use_ai_search", False):
-            type_filter = [
-                {"terms": {"@type": ["Dataset", "ResourceCatalog", "Sample"]}},
-            ]
+        # We only want those of type Dataset or ComputationalTool. Terms to filter
+        # terms = {"@type": ["Dataset", "ComputationalTool"]}
 
-            computational_tool_condition = {
-                "bool": {
-                    "must": [
-                        {"term": {"@type": "ComputationalTool"}},
-                        {"term": {"includedInDataCatalog.name": "bio.tools"}},
-                    ]
-                }
+        # Temporary change for launch of the portal as requested by NIAID
+        # terms = {"@type": ["Dataset", "ResourceCatalog"]}
+        # search = search.filter("terms", **terms)
+
+        # Filter to allow @type Dataset, ResourceCatalog and ComputationalTool only from Bio.tools
+        filter_conditions = [
+            # Include Dataset and ResourceCatalog
+            {"terms": {"@type": ["Dataset", "ResourceCatalog", "Sample"]}},
+        ]
+
+        computational_tool_condition = {
+            "bool": {
+                "must": [
+                    {"term": {"@type": "ComputationalTool"}},
+                    {"term": {"includedInDataCatalog.name": "bio.tools"}}
+                ]
             }
+        }
 
-            search = search.filter(
-                "bool", should=type_filter + [computational_tool_condition]
-            )
+        search = search.filter(
+            "bool",
+            should=filter_conditions + [computational_tool_condition],
+            minimum_should_match=1,
+        )
 
+        # apply extra-filtering for frontend to avoid adding unwanted wildcards on certain queries
         if options.extra_filter:
             search = search.query("query_string", query=options.extra_filter)
 
@@ -250,12 +733,7 @@ class NDEQueryBuilder(ESQueryBuilder):
             phrase_suggester = {
                 "field": "name.phrase_suggester",
                 "size": 3,
-                "direct_generator": [
-                    {
-                        "field": "name.phrase_suggester",
-                        "suggest_mode": "always",
-                    }
-                ],
+                "direct_generator": [{"field": "name.phrase_suggester", "suggest_mode": "always"}],
                 "max_errors": 2,
                 "highlight": {"pre_tag": "<em>", "post_tag": "</em>"},
             }
@@ -263,50 +741,39 @@ class NDEQueryBuilder(ESQueryBuilder):
                 "nde_suggester", options.suggester, phrase=phrase_suggester)
 
         # apply function score
-        if not getattr(options, "use_ai_search", False):
-            if options.use_metadata_score:
-                script_source = (
-                    "double required_ratio = doc['_meta.completeness."
-                    "required_ratio'].value;\n"
-                    "double recommended_ratio = doc['_meta.completeness."
-                    "recommended_score_ratio'].value;\n"
-                    "double b = 1 - params.a;\n"
-                    "double d = 1 - params.c;\n"
-                    "double score = (params.a * _score) + (b * ((params.c * "
-                    "required_ratio) + (d * recommended_ratio)));\n"
-                    "if (doc['@type'].value == 'ResourceCatalog') {\n"
-                    "    score *= params.boost_factor;\n"
-                    "}\n"
-                    "return score;\n"
-                )
-                custom_function_script = {
-                    "source": script_source,
-                    "params": {
-                        "a": 0.8,
-                        "c": 0.75,
-                        "boost_factor": 1000.0,
-                    },
-                }
-                function_score_query = Q(
-                    "function_score",
-                    script_score={"script": custom_function_script},
-                    boost_mode="replace",
-                )
-                search = search.query(function_score_query)
-            else:
-                functions = [
-                    {
-                        "filter": {"term": {"@type": "ResourceCatalog"}},
-                        "weight": 1000,
+        if options.use_metadata_score:
+            custom_function_script = {
+                "source": """
+                    double required_ratio = doc['_meta.completeness.required_ratio'].value;
+                    double recommended_ratio = doc['_meta.completeness.recommended_score_ratio'].value;
+                    double b = 1 - params.a;
+                    double d = 1 - params.c;
+                    double score = (params.a * _score) + (b * ((params.c * required_ratio) + (d * recommended_ratio)));
+                    if (doc['@type'].value == 'ResourceCatalog') {
+                        score *= params.boost_factor;
                     }
-                ]
+                    return score;
+                """,
+                "params": {
+                    "a": 0.8,
+                    "c": 0.75,
+                    "boost_factor": 1000.0
+                }
+            }
+            function_score_query = Q("function_score", script_score={
+                                     "script": custom_function_script}, boost_mode="replace")
+            search = search.query(function_score_query)
+        else:
+            functions = [
+                {"filter": {"term": {"@type": "ResourceCatalog"}}, "weight": 1000}
+            ]
 
-                search = search.query(
-                    "function_score",
-                    query=search.to_dict().get("query"),
-                    functions=functions,
-                    boost_mode="replace",
-                )
+            search = search.query(
+                "function_score",
+                query=search.to_dict().get("query"),
+                functions=functions,
+                boost_mode="replace",
+            )
 
         # apply multi-term aggregation
         if options.multi_terms_fields:
@@ -319,12 +786,19 @@ class NDEQueryBuilder(ESQueryBuilder):
             )
             search.aggs.bucket("multi_terms_agg", multi_terms_agg)
 
-        # hide _meta object and suppress large embedding vectors in responses
-        exclude_fields = ["ibmGraniteEmbedding"]
+        # hide _meta object and always exclude the vector embedding field
+        cfg = _load_runtime_config()
+        vector_field = getattr(cfg, "AI_SEARCH_VECTOR_FIELD", None)
+        excludes = []
+        if not options.show_meta:
+            excludes.append("_meta")
+        if vector_field:
+            excludes.append(vector_field)
+
         if options.show_meta:
-            search = search.source(includes=["*"], excludes=exclude_fields)
+            search = search.source(includes=["*"], excludes=excludes)
         else:
-            search = search.source(excludes=exclude_fields + ["_meta"])
+            search = search.source(excludes=excludes)
 
         # # spam filter
         # spam_filter = Q(
@@ -346,8 +820,7 @@ class NDEQueryBuilder(ESQueryBuilder):
             lineage_agg = A('nested', path='_meta.lineage')
 
             children_of_lineage_filter = A(
-                'filter', term={'_meta.lineage.parent_taxon': lineage_taxon_id}
-            )
+                'filter', term={'_meta.lineage.parent_taxon': lineage_taxon_id})
 
             taxon_ids_terms = A('terms', field='_meta.lineage.taxon')
             taxon_ids_terms.bucket('to_parent', A('reverse_nested'))
@@ -360,7 +833,7 @@ class NDEQueryBuilder(ESQueryBuilder):
 
             search.aggs.bucket('lineage', lineage_agg)
 
-            # Count datasets matching species or infectiousAgent identifiers
+            # New aggregation for counting datasets based on species.identifier and infectiousAgent.identifier
             # Since these fields are not nested, we can query them directly
             lineage_taxon_filter = Q(
                 'bool',
@@ -389,22 +862,6 @@ class NDEQueryBuilder(ESQueryBuilder):
             search.aggs.bucket('lineage_total_count', lineage_total_filter)
 
         return super().apply_extras(search, options)
-
-
-class NDEESQueryBackend(AsyncESQueryBackend):
-    async def execute(self, query, **options):
-        ai_enabled = options.get("use_ai_search", False)
-        start = time.perf_counter() if ai_enabled else None
-        res = await super().execute(query, **options)
-        if ai_enabled and isinstance(res, dict):
-            total_ms = (time.perf_counter() - start) * 1000
-            es_took = res.get("took")
-            logger.info(
-                "AI search request finished in %.2f ms (es_took=%s)",
-                total_ms,
-                es_took,
-            )
-        return res
 
 
 class NDEFormatter(ESResultFormatter):
