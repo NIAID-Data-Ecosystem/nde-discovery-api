@@ -239,6 +239,55 @@ class NDEESQueryBackend(AsyncESQueryBackend):
             return None
         return (bool(m.group("neg")), m.group("field").strip())
 
+    @staticmethod
+    def _extract_total_hits_value(total_obj) -> int:
+        if isinstance(total_obj, dict):
+            return int(total_obj.get("value") or 0)
+        try:
+            return int(total_obj or 0)
+        except Exception:
+            return 0
+
+    async def _count_exists_in_ids(self, *, index: str, ids, field: str, cache_key):
+        """Count docs (within an IDs set) that have `field` present."""
+        cfg = _load_runtime_config()
+        ttl_s = float(getattr(cfg, "AI_SEARCH_IDS_CACHE_TTL_S", 30))
+        maxsize = int(getattr(cfg, "AI_SEARCH_IDS_CACHE_MAXSIZE", 512))
+        if not hasattr(self, "_exists_count_cache"):
+            self._exists_count_cache = _TTLCache(maxsize=maxsize, ttl_s=ttl_s)
+
+        key = ("exists_count", cache_key, str(field))
+        cached = self._exists_count_cache.get(key)
+        if cached is not None:
+            return int(cached)
+
+        body = {
+            "size": 0,
+            "query": {
+                "bool": {
+                    "filter": [
+                        {"ids": {"values": list(ids)}},
+                        {"exists": {"field": field}},
+                    ]
+                }
+            },
+            "track_total_hits": True,
+        }
+        if self.total_hits_as_int:
+            body["rest_total_hits_as_int"] = True
+
+        res = await self.client.search(index=index, **body)
+        if hasattr(res, "body"):
+            res = res.body
+        total_obj = (
+            res.get("hits", {}).get("total", 0)
+            if isinstance(res, dict)
+            else 0
+        )
+        total_val = self._extract_total_hits_value(total_obj)
+        self._exists_count_cache.set(key, total_val)
+        return int(total_val)
+
     async def _knn_sample_ids(
         self,
         *,
@@ -339,7 +388,8 @@ class NDEESQueryBackend(AsyncESQueryBackend):
         base_k = int(getattr(cfg, "AI_SEARCH_KNN_K", 10))
         # Heuristic: to make totals/facets useful by default, ensure the kNN
         # window is large enough even when the client requests size=0 or size=10.
-        min_total_k = 1000 if track_total_hits else base_k
+        min_total_default = int(getattr(cfg, "AI_SEARCH_MIN_TOTAL_K", 200))
+        min_total_k = min_total_default if track_total_hits else base_k
         knn_k = max(base_k, min_total_k, requested_size)
         # Only increase k for facets when we actually need buckets.
         # Many UI calls use `facet_size=0` (often with +/- _exists_) purely to
@@ -481,9 +531,23 @@ class NDEESQueryBackend(AsyncESQueryBackend):
 
             # Facet-only requests (size=0) don't need a third ES call.
             if requested_size <= 0:
+                total = int(sample_ids_count or 0)
+                if exists_only and sample_ids:
+                    is_negated, field = exists_only
+                    exists_count = await self._count_exists_in_ids(
+                        index=index,
+                        ids=sample_ids,
+                        field=field,
+                        cache_key=ids_cache_key,
+                    )
+                    if is_negated:
+                        total = max(
+                            0, int(sample_ids_count or 0) - int(exists_count))
+                    else:
+                        total = int(exists_count)
                 return {
                     "hits": {
-                        "total": int(sample_ids_count or 0),
+                        "total": int(total),
                         "max_score": None,
                         "hits": [],
                     },
