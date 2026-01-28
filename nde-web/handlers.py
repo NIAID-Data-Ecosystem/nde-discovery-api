@@ -1,12 +1,74 @@
 import json
 import logging
 import os
+from urllib.parse import urlsplit
 
 from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.auth.oauth_mixins import GithubOAuth2Mixin, OrcidOAuth2Mixin
 from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
 from tornado.httputil import url_concat
 from tornado.web import HTTPError, RequestHandler
+
+
+def _allowed_frontend_origins(config):
+    origins = []
+    frontend_origin = getattr(config, "FRONTEND_ORIGIN", None)
+    if frontend_origin:
+        origins.append(frontend_origin)
+    origins.extend(getattr(config, "FRONTEND_ORIGIN_ALIASES", []) or [])
+    return origins
+
+
+def safe_next_url(handler, default="/"):
+    """Validate `next` to prevent open redirects and enforce SOP constraints.
+
+    Allowed values:
+    - absolute URL to an allowlisted frontend origin
+    - relative path beginning with a single '/'
+    """
+
+    raw_next = handler.get_argument("next", default)
+    if not raw_next:
+        return default
+
+    # Allow relative paths only (not protocol-relative URLs).
+    if raw_next.startswith("/") and not raw_next.startswith("//"):
+        return raw_next
+
+    try:
+        parsed = urlsplit(raw_next)
+    except Exception:
+        return default
+
+    if parsed.scheme not in ("http", "https"):
+        return default
+
+    origin = f"{parsed.scheme}://{parsed.netloc}" if parsed.netloc else ""
+    if origin not in _allowed_frontend_origins(handler.biothings.config):
+        return default
+
+    path = parsed.path or "/"
+    query = f"?{parsed.query}" if parsed.query else ""
+    fragment = f"#{parsed.fragment}" if parsed.fragment else ""
+    return origin + path + query + fragment
+
+
+def set_user_session_cookie(handler, value):
+    cookie_domain = getattr(handler.biothings.config, "COOKIE_DOMAIN", None)
+    handler.set_secure_cookie(
+        "user",
+        value,
+        domain=cookie_domain,
+        path="/",
+        secure=True,
+        httponly=True,
+        samesite="None",
+    )
+
+
+def clear_user_session_cookie(handler):
+    cookie_domain = getattr(handler.biothings.config, "COOKIE_DOMAIN", None)
+    handler.clear_cookie("user", domain=cookie_domain, path="/")
 
 
 class BaseLoginHandler(BaseAPIHandler):
@@ -17,6 +79,29 @@ class BaseLoginHandler(BaseAPIHandler):
 
 class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
     """Return the authenticated user profile or challenge the client."""
+
+    def set_default_headers(self):
+        super().set_default_headers()
+        origin = self.request.headers.get("Origin")
+        allowed_origin = getattr(
+            self.biothings.config, "FRONTEND_ORIGIN", None)
+        if origin and allowed_origin and origin == allowed_origin:
+            self.set_header("Access-Control-Allow-Origin", origin)
+            self.set_header("Access-Control-Allow-Credentials", "true")
+            self.set_header("Access-Control-Allow-Methods", "GET, OPTIONS")
+            req_headers = self.request.headers.get(
+                "Access-Control-Request-Headers"
+            )
+            self.set_header(
+                "Access-Control-Allow-Headers",
+                req_headers or "Content-Type",
+            )
+            self.set_header("Vary", "Origin")
+
+    def options(self):
+        # CORS preflight for frontend fetch() calls.
+        self.set_status(204)
+        self.finish()
 
     def get(self):
         if self.current_user:
@@ -38,8 +123,8 @@ class LogoutHandler(BaseLoginHandler):
     """Clear auth cookie and redirect home."""
 
     def get(self):
-        self.clear_cookie("user")
-        self.redirect(self.get_argument("next", "/"))
+        clear_user_session_cookie(self)
+        self.redirect(safe_next_url(self, "/"))
 
 
 class GitHubLoginHandler(BaseAPIHandler, GithubOAuth2Mixin):
@@ -76,10 +161,10 @@ class GitHubLoginHandler(BaseAPIHandler, GithubOAuth2Mixin):
         formatted = self._format_user_record(user)
         logging.info("GitHub auth response: %s", formatted)
         if formatted:
-            self.set_secure_cookie("user", formatted)
+            set_user_session_cookie(self, formatted)
         else:
-            self.clear_cookie("user")
-        self.redirect(self.get_argument("next", "/"))
+            clear_user_session_cookie(self)
+        self.redirect(safe_next_url(self, "/"))
 
     @staticmethod
     def _format_user_record(user):
@@ -132,10 +217,10 @@ class ORCIDLoginHandler(BaseAPIHandler, OrcidOAuth2Mixin):
         formatted = self._format_user_record(user)
         logging.info("ORCID auth response: %s", formatted)
         if formatted:
-            self.set_secure_cookie("user", formatted)
+            set_user_session_cookie(self, formatted)
         else:
-            self.clear_cookie("user")
-        self.redirect(self.get_argument("next", "/"))
+            clear_user_session_cookie(self)
+        self.redirect(safe_next_url(self, "/"))
 
     @staticmethod
     def _format_user_record(user):
