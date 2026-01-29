@@ -1,9 +1,253 @@
 import json
 import logging
 import os
+from urllib.parse import urlsplit
 
-from biothings.web.handlers import MetadataSourceHandler
-from tornado.web import RequestHandler
+from biothings.web.auth.authn import BioThingsAuthnMixin
+from biothings.web.auth.oauth_mixins import GithubOAuth2Mixin, OrcidOAuth2Mixin
+from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
+from tornado.httputil import url_concat
+from tornado.web import HTTPError, RequestHandler
+
+
+def _allowed_frontend_origins(config):
+    origins = []
+    frontend_origin = getattr(config, "FRONTEND_ORIGIN", None)
+    if frontend_origin:
+        origins.append(frontend_origin)
+    origins.extend(getattr(config, "FRONTEND_ORIGIN_ALIASES", []) or [])
+    return origins
+
+
+def safe_next_url(handler, default="/"):
+    """Validate `next` to prevent open redirects and enforce SOP constraints.
+
+    Allowed values:
+    - absolute URL to an allowlisted frontend origin
+    - relative path beginning with a single '/'
+    """
+
+    raw_next = handler.get_argument("next", default)
+    if not raw_next:
+        return default
+
+    # Allow relative paths only (not protocol-relative URLs).
+    if raw_next.startswith("/") and not raw_next.startswith("//"):
+        return raw_next
+
+    try:
+        parsed = urlsplit(raw_next)
+    except Exception:
+        return default
+
+    if parsed.scheme not in ("http", "https"):
+        return default
+
+    origin = f"{parsed.scheme}://{parsed.netloc}" if parsed.netloc else ""
+    if origin not in _allowed_frontend_origins(handler.biothings.config):
+        return default
+
+    path = parsed.path or "/"
+    query = f"?{parsed.query}" if parsed.query else ""
+    fragment = f"#{parsed.fragment}" if parsed.fragment else ""
+    return origin + path + query + fragment
+
+
+def set_user_session_cookie(handler, value):
+    cookie_domain = getattr(handler.biothings.config, "COOKIE_DOMAIN", None)
+    handler.set_secure_cookie(
+        "user",
+        value,
+        domain=cookie_domain,
+        path="/",
+        secure=True,
+        httponly=True,
+        samesite="None",
+    )
+
+
+def clear_user_session_cookie(handler):
+    cookie_domain = getattr(handler.biothings.config, "COOKIE_DOMAIN", None)
+    handler.clear_cookie("user", domain=cookie_domain, path="/")
+
+
+class BaseLoginHandler(BaseAPIHandler):
+    def set_cache_header(self, cache_value):
+        # Disable cache headers for auth endpoints
+        self.set_header("Cache-Control", "private, max-age=0, no-cache")
+
+
+class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
+    """Return the authenticated user profile or challenge the client."""
+
+    def set_default_headers(self):
+        super().set_default_headers()
+        origin = self.request.headers.get("Origin")
+        allowed_origin = getattr(
+            self.biothings.config, "FRONTEND_ORIGIN", None)
+        if origin and allowed_origin and origin == allowed_origin:
+            self.set_header("Access-Control-Allow-Origin", origin)
+            self.set_header("Access-Control-Allow-Credentials", "true")
+            self.set_header("Access-Control-Allow-Methods", "GET, OPTIONS")
+            req_headers = self.request.headers.get(
+                "Access-Control-Request-Headers"
+            )
+            self.set_header(
+                "Access-Control-Allow-Headers",
+                req_headers or "Content-Type",
+            )
+            self.set_header("Vary", "Origin")
+
+    def options(self):
+        # CORS preflight for frontend fetch() calls.
+        self.set_status(204)
+        self.finish()
+
+    def get(self):
+        if self.current_user:
+            self.write(self.current_user)
+            return
+
+        header = self.get_www_authenticate_header()
+        if header:
+            self.clear()
+            self.set_header("WWW-Authenticate", header)
+            self.set_status(401, "Unauthorized")
+            self.finish()
+            return
+
+        raise HTTPError(403)
+
+
+class LogoutHandler(BaseLoginHandler):
+    """Clear auth cookie and redirect home."""
+
+    def get(self):
+        clear_user_session_cookie(self)
+        self.redirect(safe_next_url(self, "/"))
+
+
+class GitHubLoginHandler(BaseAPIHandler, GithubOAuth2Mixin):
+    """Initiate or complete the GitHub OAuth2 handshake."""
+
+    SCOPES = []
+    CALLBACK_PATH = "/login/github"
+
+    async def get(self):
+        client_id = self.biothings.config.GITHUB_CLIENT_ID
+        client_secret = self.biothings.config.GITHUB_CLIENT_SECRET
+        redirect_uri = url_concat(
+            self.biothings.config.WEB_HOST + self.CALLBACK_PATH,
+            {"next": self.get_argument("next", "/")},
+        )
+        code = self.get_argument("code", None)
+
+        if not code:
+            logging.info("Redirecting to GitHub for login")
+            self.authorize_redirect(
+                redirect_uri=redirect_uri,
+                client_id=client_id,
+                scope=self.SCOPES,
+            )
+            return
+
+        logging.info("GitHub returned code, exchanging for token")
+        token = await self.github_get_oauth2_token(
+            client_id=client_id,
+            client_secret=client_secret,
+            code=code,
+        )
+        user = await self.github_get_authenticated_user(token["access_token"])
+        formatted = self._format_user_record(user)
+        logging.info("GitHub auth response: %s", formatted)
+        if formatted:
+            set_user_session_cookie(self, formatted)
+        else:
+            clear_user_session_cookie(self)
+        self.redirect(safe_next_url(self, "/"))
+
+    @staticmethod
+    def _format_user_record(user):
+        payload = {
+            "username": user.get("login"),
+            "oauth_provider": "GitHub",
+        }
+        if not payload["username"]:
+            return None
+        for field in ["name", "email", "avatar_url", "company"]:
+            value = user.get(field)
+            if value:
+                key = "organization" if field == "company" else field
+                payload[key] = value
+        return json.dumps(payload)
+
+
+class ORCIDLoginHandler(BaseAPIHandler, OrcidOAuth2Mixin):
+    """Initiate or complete the ORCID OAuth2 handshake."""
+
+    SCOPES = ["/authenticate", "openid"]
+    CALLBACK_PATH = "/login/orcid"
+
+    async def get(self):
+        client_id = self.biothings.config.ORCID_CLIENT_ID
+        client_secret = self.biothings.config.ORCID_CLIENT_SECRET
+        redirect_uri = url_concat(
+            self.biothings.config.WEB_HOST + self.CALLBACK_PATH,
+            {"next": self.get_argument("next", "/")},
+        )
+        code = self.get_argument("code", None)
+
+        if not code:
+            logging.info("Redirecting to ORCID for login")
+            self.authorize_redirect(
+                redirect_uri=redirect_uri,
+                client_id=client_id,
+                scope=self.SCOPES,
+            )
+            return
+
+        logging.info("ORCID returned code, exchanging for token")
+        token = await self.orcid_get_oauth2_token(
+            client_id=client_id,
+            client_secret=client_secret,
+            code=code,
+        )
+        orcid_id = token.get("orcid")
+        user = await self.orcid_get_authenticated_user_record(token, orcid_id)
+        formatted = self._format_user_record(user)
+        logging.info("ORCID auth response: %s", formatted)
+        if formatted:
+            set_user_session_cookie(self, formatted)
+        else:
+            clear_user_session_cookie(self)
+        self.redirect(safe_next_url(self, "/"))
+
+    @staticmethod
+    def _format_user_record(user):
+        identifier = user.get("orcid-identifier", {}).get("path")
+        if not identifier:
+            return None
+        payload = {
+            "username": identifier,
+            "oauth_provider": "ORCID",
+        }
+        person = user.get("person", {})
+        given = person.get("name", {}).get("given-names", {}).get("value")
+        family = person.get("name", {}).get("family-name", {}).get("value")
+        if given:
+            payload["name"] = given if not family else f"{given} {family}"
+        emails = person.get("emails", {}).get("email", [])
+        if emails:
+            payload["email"] = emails[0].get("email")
+        employment = (
+            user.get("activities-summary", {})
+            .get("employments", {})
+            .get("employment-summary", [])
+        )
+        if employment:
+            org = employment[0].get("organization", {})
+            payload["organization"] = org.get("name")
+        return json.dumps({k: v for k, v in payload.items() if v})
 
 
 class WebAppHandler(RequestHandler):
