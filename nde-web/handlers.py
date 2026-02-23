@@ -1750,8 +1750,7 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "clingen": {
                 "abstract": "ClinicalGenomeResource (ClinGen) is a NIH supported generalist repository that includes genomic data.",
-                "description": "The Clinical Genome Resource (ClinGen) is a National Institutes of Health (NIH)-funded resource dedicated to building an authoritative central resource that defines the clinical relevance of genes and variants for use in precision medicine and research. ClinGen is a dynamic resource that relies on the efforts of the global genomics community to contribute and curate data. The ClinGen Data Platform is a web-based application that provides access to the data and tools developed by the ClinGen community. The ClinGen Data Platform includes a variety of data types, including gene and variant curation data, clinical variant data, and gene-disease association data. The ClinGen Data Platform also includes a variety of tools for accessing and analyzing the data, including a search interface, a variant curation interface, and a gene-disease association interface.",
-                "identifier": "Clinical Genomics Resource (ClinGen)",
+                "description": "ClinGen is a National Institutes of Health (NIH)-funded resource dedicated to building an authoritative central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.",
                 "name": "ClinicalGenomeResource (ClinGen)",
                 "schema": {
                     "DISEASE ID (MONDO)": "healthCondition.identifier",
