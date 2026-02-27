@@ -1750,7 +1750,7 @@ class NDESourceHandler(MetadataSourceHandler):
             },
             "clingen": {
                 "abstract": "ClinicalGenomeResource (ClinGen) is a NIH supported generalist repository that includes genomic data.",
-                "description": "The Clinical Genome Resource (ClinGen) is a National Institutes of Health (NIH)-funded resource dedicated to building an authoritative central resource that defines the clinical relevance of genes and variants for use in precision medicine and research. ClinGen is a dynamic resource that relies on the efforts of the global genomics community to contribute and curate data. The ClinGen Data Platform is a web-based application that provides access to the data and tools developed by the ClinGen community. The ClinGen Data Platform includes a variety of data types, including gene and variant curation data, clinical variant data, and gene-disease association data. The ClinGen Data Platform also includes a variety of tools for accessing and analyzing the data, including a search interface, a variant curation interface, and a gene-disease association interface.",
+                "description": "ClinGen is a National Institutes of Health (NIH)-funded resource dedicated to building an authoritative central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.",
                 "identifier": "Clinical Genomics Resource (ClinGen)",
                 "name": "ClinicalGenomeResource (ClinGen)",
                 "schema": {
@@ -1779,6 +1779,24 @@ class NDESourceHandler(MetadataSourceHandler):
                     "Evidence Repo Link": "url",
                 },
                 "url": "https://clinicalgenome.org/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+            },
+            "emdb": {
+                "abstract": "Electron Microscopy Data Bank (EMDB) is a generalist repository that includes image data.",
+                "description": "The Electron Microscopy Data Bank (EMDB) is a public repository for cryogenic-sample Electron Microscopy (cryoEM) volumes and representative tomograms of macromolecular complexes and subcellular structures. It covers a variety of techniques, including single-particle analysis, helical reconstruction, electron tomography, subtomogram averaging, and electron crystallography (for more information, see the EMDB Policies).",
+                "identifier": "Electron Microscopy Data Bank",
+                "name": "Electron Microscopy Data Bank (EMDB)",
+                "schema": {
+                    "natural_source_ncbi_code": "species.identifier",
+                    "sample.supramolecule_list.supramolecule.natural_source.organism.valueOf_": "species.name",
+                    "admin.key_dates.deposition": "dateCreated",
+                    "admin.key_dates.update": "dateModified",
+                    "admin.grant_support.grant_reference.code": "funding.identifier",
+                    "admin.grant_support.grant_reference.funding_body": "funding.funder.name",
+                    "facet_record_count": "collectionSize.minValue"
+                },
+                "url": "https://www.ebi.ac.uk/emdb/",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
             }
