@@ -1780,6 +1780,24 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://clinicalgenome.org/",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+            },
+            "emdb": {
+                "abstract": "Electron Microscopy Data Bank (EMDB) is a generalist repository that includes image data.",
+                "description": "The Electron Microscopy Data Bank (EMDB) is a public repository for cryogenic-sample Electron Microscopy (cryoEM) volumes and representative tomograms of macromolecular complexes and subcellular structures. It covers a variety of techniques, including single-particle analysis, helical reconstruction, electron tomography, subtomogram averaging, and electron crystallography (for more information, see the EMDB Policies).",
+                "identifier": "Electron Microscopy Data Bank",
+                "name": "Electron Microscopy Data Bank (EMDB)",
+                "schema": {
+                    "natural_source_ncbi_code": "species.identifier",
+                    "sample.supramolecule_list.supramolecule.natural_source.organism.valueOf_": "species.name",
+                    "admin.key_dates.deposition": "dateCreated",
+                    "admin.key_dates.update": "dateModified",
+                    "admin.grant_support.grant_reference.code": "funding.identifier",
+                    "admin.grant_support.grant_reference.funding_body": "funding.funder.name",
+                    "facet_record_count": "collectionSize.minValue"
+                },
+                "url": "https://www.ebi.ac.uk/emdb/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
             }
         }
 
