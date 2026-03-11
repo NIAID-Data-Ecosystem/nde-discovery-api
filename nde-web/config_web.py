@@ -10,6 +10,11 @@ from handlers import (
     UserInfoHandler,
     WebAppHandler,
 )
+from user_data import (
+    UserDataHandler,
+    UserFavoriteDatasetsHandler,
+    UserFavoriteSearchesHandler,
+)
 from xsrf import XSRFToken
 
 ES_INDICES = {
@@ -19,6 +24,9 @@ ES_INDICES = {
     # 'zenodo': 'zenodo_20221020_6h4aac2v'
     # 'acd': 'acd_niaid_20221109_o6tbj5ct'
 }
+
+# Elasticsearch index for persistent user profiles and preferences
+ES_USER_INDEX = "nde_user_profiles"
 APP_LIST += [
     (r"/{ver}/metadata/?", NDESourceHandler),
 ]
@@ -30,6 +38,13 @@ APP_LIST += [
     (r"/login/github", GitHubLoginHandler),
     (r"/login/orcid", ORCIDLoginHandler),
     (r"/xsrf_token", XSRFToken),
+]
+
+# User data persistence handlers
+APP_LIST += [
+    (r"/user/data", UserDataHandler),
+    (r"/user/data/favorites/searches", UserFavoriteSearchesHandler),
+    (r"/user/data/favorites/datasets", UserFavoriteDatasetsHandler),
 ]
 
 # Authentication provider chain for BioThingsAuthnMixin consumers

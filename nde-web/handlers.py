@@ -3,11 +3,13 @@ import logging
 import os
 from urllib.parse import urlsplit
 
+import elasticsearch
 from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.auth.oauth_mixins import GithubOAuth2Mixin, OrcidOAuth2Mixin
 from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
 from tornado.httputil import url_concat
 from tornado.web import HTTPError, RequestHandler
+from user_data import _seed_user_doc, _user_doc_id
 
 
 def _allowed_frontend_origins(config):
@@ -76,6 +78,27 @@ class BaseLoginHandler(BaseAPIHandler):
         # Disable cache headers for auth endpoints
         self.set_header("Cache-Control", "private, max-age=0, no-cache")
 
+    async def _ensure_user_profile(self, user_dict: dict):
+        """Create a user profile document in ES if one does not yet exist.
+
+        Called after every successful OAuth login so the profile is always
+        available for the /user/data endpoints.
+        """
+        es = self.biothings.elasticsearch.async_client
+        index = self.biothings.config.ES_USER_INDEX
+        doc_id = _user_doc_id(user_dict)
+        try:
+            await es.get(id=doc_id, index=index)
+        except elasticsearch.exceptions.NotFoundError:
+            doc = _seed_user_doc(user_dict)
+            await es.index(id=doc_id, body=doc, index=index)
+            logging.info("Created new user profile %s", doc_id)
+        except Exception:
+            # Non-fatal: the profile will be created lazily via GET /user/data
+            logging.warning(
+                "Could not ensure user profile %s", doc_id, exc_info=True
+            )
+
 
 class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
     """Return the authenticated user profile or challenge the client."""
@@ -127,7 +150,7 @@ class LogoutHandler(BaseLoginHandler):
         self.redirect(safe_next_url(self, "/"))
 
 
-class GitHubLoginHandler(BaseAPIHandler, GithubOAuth2Mixin):
+class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
     """Initiate or complete the GitHub OAuth2 handshake."""
 
     SCOPES = []
@@ -162,6 +185,7 @@ class GitHubLoginHandler(BaseAPIHandler, GithubOAuth2Mixin):
         logging.info("GitHub auth response: %s", formatted)
         if formatted:
             set_user_session_cookie(self, formatted)
+            await self._ensure_user_profile(json.loads(formatted))
         else:
             clear_user_session_cookie(self)
         self.redirect(safe_next_url(self, "/"))
@@ -182,7 +206,7 @@ class GitHubLoginHandler(BaseAPIHandler, GithubOAuth2Mixin):
         return json.dumps(payload)
 
 
-class ORCIDLoginHandler(BaseAPIHandler, OrcidOAuth2Mixin):
+class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
     """Initiate or complete the ORCID OAuth2 handshake."""
 
     SCOPES = ["/authenticate", "openid"]
@@ -218,6 +242,7 @@ class ORCIDLoginHandler(BaseAPIHandler, OrcidOAuth2Mixin):
         logging.info("ORCID auth response: %s", formatted)
         if formatted:
             set_user_session_cookie(self, formatted)
+            await self._ensure_user_profile(json.loads(formatted))
         else:
             clear_user_session_cookie(self)
         self.redirect(safe_next_url(self, "/"))
