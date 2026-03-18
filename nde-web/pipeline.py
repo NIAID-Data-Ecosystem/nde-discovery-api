@@ -194,7 +194,8 @@ class NDEESQueryBackend(AsyncESQueryBackend):
     @staticmethod
     def _build_type_filter():
         filter_conditions = [
-            {"terms": {"@type": ["Dataset", "ResourceCatalog", "Sample"]}},
+            {"terms": {
+                "@type": ["Dataset", "ResourceCatalog", "Sample", "DataCollection"]}},
         ]
         computational_tool_condition = {
             "bool": {
@@ -857,7 +858,8 @@ class NDEQueryBuilder(ESQueryBuilder):
         # Filter to allow @type Dataset, ResourceCatalog and ComputationalTool only from Bio.tools
         filter_conditions = [
             # Include Dataset and ResourceCatalog
-            {"terms": {"@type": ["Dataset", "ResourceCatalog", "Sample"]}},
+            {"terms": {
+                "@type": ["Dataset", "ResourceCatalog", "Sample", "DataCollection"]}},
         ]
 
         computational_tool_condition = {
