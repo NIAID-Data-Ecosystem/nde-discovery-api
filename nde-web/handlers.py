@@ -1799,6 +1799,27 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.ebi.ac.uk/emdb/",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+            },
+            "node": {
+                "abstract": "NODE is a Chinese Academy of Sciences supported generalist repository that includes multiomic data.",
+                "description": "NODE (National Omics Data Encyclopedia) is a biological big data collection platform, including the experimental sample information collection, the file upload of the sequences, and the analysis, share and download of the results. NODE platform consists of six main modules: project, sample, experiment, run, data, and analysis. Project and Sample are independent of each other, but can be linked through Run. In this way, the metadata and sequence information can be integrated.",
+                "identifier": "National Omics Data Encyclopedia",
+                "name": "National Omics Data Encyclopedia (NODE)",
+                "schema": {
+                    "projectNo": "identifier",
+                    "name": "name",
+                    "publishes.doi": "citation.doi",
+                    "publishes.pmid": "citation.pmid",
+                    "submitter.firstName": "author.givenName",
+                    "submitter.lastName": "author.familyName",
+                    "submitter.orgName": "author.affiliation.name",
+                    "attributes.library_selection": "measurementTechnique.name",
+                    "attributes.library_strategy": "measurementTechnique.name",
+                    "attributes.platform": "measurementTechnique.name",
+                },
+                "url": "https://www.biosino.org/node/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
             }
         }
 
