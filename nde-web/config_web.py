@@ -72,6 +72,7 @@ SOURCE_TYPEDEF = {
     "multi_terms_size": {"type": int, "default": 10},
     "lineage": {"type": int, "default": None},
     "use_ai_search": {"type": bool, "default": False},
+    "ai_facet_fields": {"type": str, "default": None},
 }
 
 QUERY_KWARGS = copy.deepcopy(QUERY_KWARGS)
