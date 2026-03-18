@@ -594,16 +594,18 @@ class NDEESQueryBackend(AsyncESQueryBackend):
         return res
 
     async def _execute_ai_batch_facets(self, query: Search, **options):
-        """Execute a batched AI facet query.
+        """Execute a batched AI facet query with per-field kNN sampling.
 
-        Instead of running separate ES queries per facet field, this runs a
-        single ES query with all requested facet aggregations combined.
+        Instead of running N separate API calls (one per facet), this method:
+          1. Embeds the query (shared, cached)
+          2. Runs N+1 kNN samples **concurrently** — one per field with
+             ``_exists_:<field>`` (matching old per-field behavior) plus
+             one neutral sample for "None Specified" computation
+          3. Builds a **single** ES aggregation query that combines all
+             facets, each scoped to its field-specific kNN IDs
 
-        The ``ai_facet_fields`` option must contain a comma-separated list of
-        ES field names.  For each field the method produces:
-          * a ``terms`` aggregation (size = facet_size, default 1000)
-          * a ``filter(exists)`` aggregation so the frontend can derive
-            "Any" / "None Specified" counts.
+        The ``ai_facet_fields`` option must contain a comma-separated list
+        of ES field names.
         """
         cfg = _load_runtime_config()
 
@@ -618,14 +620,22 @@ class NDEESQueryBackend(AsyncESQueryBackend):
 
         # --- Embed the user's query ----------------------------------------
         search_body = query.to_dict()
-        user_q = _find_first_query_string_query(search_body.get("query"))
+        user_q = _find_first_query_string_query(
+            search_body.get("query")
+        )
         if not user_q:
             return await super().execute(query, **options)
 
-        embed_ttl = float(getattr(cfg, "AI_EMBEDDING_CACHE_TTL_S", 300))
-        embed_max = int(getattr(cfg, "AI_EMBEDDING_CACHE_MAXSIZE", 2048))
+        embed_ttl = float(
+            getattr(cfg, "AI_EMBEDDING_CACHE_TTL_S", 300)
+        )
+        embed_max = int(
+            getattr(cfg, "AI_EMBEDDING_CACHE_MAXSIZE", 2048)
+        )
         if not hasattr(self, "_embed_cache"):
-            self._embed_cache = _TTLCache(maxsize=embed_max, ttl_s=embed_ttl)
+            self._embed_cache = _TTLCache(
+                maxsize=embed_max, ttl_s=embed_ttl
+            )
 
         embed_key = str(user_q)
         query_vector = self._embed_cache.get(embed_key)
@@ -637,41 +647,51 @@ class NDEESQueryBackend(AsyncESQueryBackend):
             )
             self._embed_cache.set(embed_key, query_vector)
 
-        dims_expected = int(getattr(cfg, "AI_SEARCH_VECTOR_DIMS", 768))
+        dims_expected = int(
+            getattr(cfg, "AI_SEARCH_VECTOR_DIMS", 768)
+        )
         if (
             not isinstance(query_vector, list)
             or len(query_vector) != dims_expected
         ):
-            got_dims = (
-                len(query_vector) if isinstance(query_vector, list) else "N/A"
+            got = (
+                len(query_vector)
+                if isinstance(query_vector, list)
+                else "N/A"
             )
             raise ValueError(
-                f"Embedding dims mismatch (got {got_dims}, "
-                f"expected {dims_expected})."
+                f"Embedding dims mismatch "
+                f"(got {got}, expected {dims_expected})."
             )
 
         vector_field = getattr(cfg, "AI_SEARCH_VECTOR_FIELD")
 
-        # --- Base kNN / sampling filters ------------------------------------
+        # --- Base kNN filters -----------------------------------------------
         base_filters = [
             self._build_type_filter(),
             self._exists_filter(vector_field),
         ]
         if _looks_like_advanced_query_string(str(user_q)):
-            base_filters.append(self._query_string_filter(str(user_q)))
+            base_filters.append(
+                self._query_string_filter(str(user_q))
+            )
 
         std_filter = options.get("filter")
         if std_filter:
-            base_filters.append(self._query_string_filter(str(std_filter)))
+            base_filters.append(
+                self._query_string_filter(str(std_filter))
+            )
 
         extra_filter = options.get("extra_filter")
         if extra_filter:
-            base_filters.append(self._query_string_filter(str(extra_filter)))
+            base_filters.append(
+                self._query_string_filter(str(extra_filter))
+            )
 
-        knn_sampling_filter = {"bool": {"filter": base_filters}}
-
-        # --- Sample top-k IDs via kNN --------------------------------------
-        facet_knn_k = int(getattr(cfg, "AI_SEARCH_FACET_K", 2000))
+        # --- kNN parameters -------------------------------------------------
+        facet_knn_k = int(
+            getattr(cfg, "AI_SEARCH_FACET_K", 2000)
+        )
         base_k = int(getattr(cfg, "AI_SEARCH_KNN_K", 10))
         knn_k = max(facet_knn_k, base_k)
         num_candidates = int(
@@ -679,38 +699,122 @@ class NDEESQueryBackend(AsyncESQueryBackend):
         )
         num_candidates = max(num_candidates, knn_k)
 
-        ids_ttl = float(getattr(cfg, "AI_SEARCH_IDS_CACHE_TTL_S", 30))
-        ids_max = int(getattr(cfg, "AI_SEARCH_IDS_CACHE_MAXSIZE", 512))
+        ids_ttl = float(
+            getattr(cfg, "AI_SEARCH_IDS_CACHE_TTL_S", 30)
+        )
+        ids_max = int(
+            getattr(cfg, "AI_SEARCH_IDS_CACHE_MAXSIZE", 512)
+        )
         if not hasattr(self, "_ids_cache"):
-            self._ids_cache = _TTLCache(maxsize=ids_max, ttl_s=ids_ttl)
+            self._ids_cache = _TTLCache(
+                maxsize=ids_max, ttl_s=ids_ttl
+            )
 
         index = self.indices[options.get("biothing_type")]
         index = self.adjust_index(index, query, **options)
 
-        ids_cache_key = (
-            vector_field,
-            str(user_q),
-            str(std_filter or ""),
-            str(extra_filter or ""),
-            int(knn_k),
-            int(num_candidates),
-        )
-        sample_ids = self._ids_cache.get(ids_cache_key)
-        if sample_ids is None:
-            sample_ids = await self._knn_sample_ids(
-                index=index,
-                vector_field=vector_field,
-                query_vector=query_vector,
-                knn_k=knn_k,
-                num_candidates=num_candidates,
-                knn_filter=knn_sampling_filter,
-                total_hits_as_int=self.total_hits_as_int,
+        # --- Per-field kNN sampling (concurrent) ----------------------------
+        # Each field gets its own kNN neighborhood with _exists_:<field>
+        # in the filter, matching the old per-field API behavior.
+        async def _sample_with_exists(field_name):
+            field_filters = list(base_filters) + [
+                self._exists_filter(field_name),
+            ]
+            knn_filt = {"bool": {"filter": field_filters}}
+            ck = (
+                vector_field,
+                str(user_q),
+                str(std_filter or ""),
+                str(extra_filter or "")
+                + " AND _exists_:" + field_name,
+                int(knn_k),
+                int(num_candidates),
             )
-            self._ids_cache.set(ids_cache_key, sample_ids)
+            ids = self._ids_cache.get(ck)
+            if ids is None:
+                ids = await self._knn_sample_ids(
+                    index=index,
+                    vector_field=vector_field,
+                    query_vector=query_vector,
+                    knn_k=knn_k,
+                    num_candidates=num_candidates,
+                    knn_filter=knn_filt,
+                    total_hits_as_int=self.total_hits_as_int,
+                )
+                self._ids_cache.set(ck, ids)
+            return ids
 
-        total = len(sample_ids)
+        async def _sample_neutral():
+            knn_filt = {"bool": {"filter": base_filters}}
+            ck = (
+                vector_field,
+                str(user_q),
+                str(std_filter or ""),
+                str(extra_filter or ""),
+                int(knn_k),
+                int(num_candidates),
+            )
+            ids = self._ids_cache.get(ck)
+            if ids is None:
+                ids = await self._knn_sample_ids(
+                    index=index,
+                    vector_field=vector_field,
+                    query_vector=query_vector,
+                    knn_k=knn_k,
+                    num_candidates=num_candidates,
+                    knn_filter=knn_filt,
+                    total_hits_as_int=self.total_hits_as_int,
+                )
+                self._ids_cache.set(ck, ids)
+            return ids
 
-        if not sample_ids:
+        tasks = [_sample_with_exists(f) for f in facet_fields]
+        tasks.append(_sample_neutral())
+        results = await asyncio.gather(*tasks)
+
+        per_field_ids = {}
+        for i, field in enumerate(facet_fields):
+            per_field_ids[field] = results[i]
+        neutral_ids = results[-1]
+        neutral_total = len(neutral_ids)
+
+        # --- Build combined ES aggregation ----------------------------------
+        facet_size = int(options.get("facet_size", 1000))
+        aggs = {}
+        has_any_ids = False
+
+        for field in facet_fields:
+            field_ids = per_field_ids[field]
+            if field_ids:
+                has_any_ids = True
+                # Terms agg scoped to this field's kNN IDs
+                aggs[field] = {
+                    "filter": {
+                        "ids": {"values": field_ids},
+                    },
+                    "aggs": {
+                        "inner": {
+                            "terms": {
+                                "field": field,
+                                "size": facet_size,
+                            },
+                        },
+                    },
+                }
+            # Exists count from neutral IDs
+            if neutral_ids:
+                aggs[field + "__exists"] = {
+                    "filter": {
+                        "bool": {
+                            "filter": [
+                                {"ids": {"values": neutral_ids}},
+                                {"exists": {"field": field}},
+                            ],
+                        },
+                    },
+                }
+
+        if not has_any_ids:
             empty_aggs = {}
             for field in facet_fields:
                 empty_aggs[field] = {
@@ -718,66 +822,70 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                     "sum_other_doc_count": 0,
                     "buckets": [],
                 }
-                empty_aggs[field + "__exists"] = {"doc_count": 0}
+                empty_aggs[field + "__exists"] = {
+                    "doc_count": 0,
+                }
+                empty_aggs[field + "__total"] = {
+                    "doc_count": 0,
+                }
             return {
-                "hits": {"total": 0, "max_score": None, "hits": []},
+                "hits": {
+                    "total": 0,
+                    "max_score": None,
+                    "hits": [],
+                },
                 "aggregations": empty_aggs,
             }
 
-        # --- Build combined aggregations ------------------------------------
-        facet_size = int(options.get("facet_size", 1000))
-        aggs = {}
-        for field in facet_fields:
-            aggs[field] = {"terms": {"field": field, "size": facet_size}}
-            aggs[field + "__exists"] = {
-                "filter": {"exists": {"field": field}},
-            }
-
-        # --- Check batch agg cache -----------------------------------------
-        batch_ttl = float(getattr(cfg, "AI_SEARCH_IDS_CACHE_TTL_S", 30))
-        batch_max = int(getattr(cfg, "AI_SEARCH_IDS_CACHE_MAXSIZE", 512))
-        if not hasattr(self, "_batch_agg_cache"):
-            self._batch_agg_cache = _TTLCache(
-                maxsize=batch_max, ttl_s=batch_ttl
-            )
-
-        batch_cache_key = (
-            "batch_aggs",
-            ids_cache_key,
-            tuple(sorted(facet_fields)),
-            facet_size,
-        )
-        cached_result = self._batch_agg_cache.get(batch_cache_key)
-        if cached_result is not None:
-            return cached_result
-
-        # --- Single ES query with all aggregations --------------------------
+        # --- Execute single ES query ----------------------------------------
         agg_body = {
             "size": 0,
-            "query": {
-                "bool": {"filter": [{"ids": {"values": sample_ids}}]}
-            },
             "aggs": aggs,
             "track_total_hits": False,
         }
         if self.total_hits_as_int:
             agg_body["rest_total_hits_as_int"] = True
 
-        agg_res = await self.client.search(index=index, **agg_body)
+        agg_res = await self.client.search(
+            index=index, **agg_body
+        )
         if hasattr(agg_res, "body"):
             agg_res = agg_res.body
 
-        aggregations = (
-            agg_res.get("aggregations") or agg_res.get("aggs") or {}
+        raw_aggs = (
+            agg_res.get("aggregations")
+            or agg_res.get("aggs")
+            or {}
         )
 
-        result = {
-            "hits": {"total": int(total), "max_score": None, "hits": []},
+        # --- Restructure: flatten filter→inner for formatter ----------------
+        aggregations = {}
+        for field in facet_fields:
+            raw_facet = raw_aggs.get(field, {})
+            inner = raw_facet.get("inner", {})
+            aggregations[field] = inner
+
+            # Per-field total = its kNN sample size = "Any"
+            aggregations[field + "__total"] = {
+                "doc_count": len(per_field_ids.get(field, [])),
+            }
+
+            # Exists in neutral neighbourhood
+            raw_exists = raw_aggs.get(
+                field + "__exists", {}
+            )
+            aggregations[field + "__exists"] = {
+                "doc_count": raw_exists.get("doc_count", 0),
+            }
+
+        return {
+            "hits": {
+                "total": int(neutral_total),
+                "max_score": None,
+                "hits": [],
+            },
             "aggregations": aggregations,
         }
-
-        self._batch_agg_cache.set(batch_cache_key, result)
-        return result
 
     async def execute(self, query, **options):
         if options.get("use_ai_search") and isinstance(query, Search):
