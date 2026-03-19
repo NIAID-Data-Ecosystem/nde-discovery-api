@@ -307,7 +307,6 @@ class NDEESQueryBackend(AsyncESQueryBackend):
         """
         body = {
             "size": int(knn_k),
-            "query": {"match_all": {}},
             "_source": False,
             "stored_fields": [],
             "track_total_hits": False,
@@ -374,9 +373,13 @@ class NDEESQueryBackend(AsyncESQueryBackend):
             getattr(cfg, "AI_SEARCH_TRACK_TOTAL_HITS", True))
 
         # Preserve all non-query pieces (aggs/suggest/_source/sort/etc.)
-        # but replace the string query with a match_all and use kNN.
+        # but drop the original text query — we use kNN scoring instead.
+        # IMPORTANT: Do NOT set query={"match_all": {}} here.  ES treats
+        # top-level `knn` + `query` as a hybrid (union) search.  match_all
+        # would cause every document in the index to appear in results,
+        # bypassing kNN filters when `sort` is used and inflating totals.
         es_kwargs = dict(search_body)
-        es_kwargs["query"] = {"match_all": {}}
+        es_kwargs.pop("query", None)
 
         requested_size = int(
             es_kwargs.get("size", getattr(cfg, "AI_SEARCH_MAX_HITS", 10))
@@ -574,19 +577,14 @@ class NDEESQueryBackend(AsyncESQueryBackend):
         res = await self.client.search(index=index, **es_kwargs)
         if hasattr(res, "body"):
             res = res.body
-        # NOTE: Elasticsearch's `hits.total` is computed from the top-level
-        # `query` clause. In kNN mode we set `query=match_all`, so ES will
-        # return the corpus size (or filter-only size) and that won't vary with
-        # the semantic neighborhood. Override it to a useful AI interpretation:
-        # the size of the kNN neighborhood considered after filtering.
         if isinstance(res, dict) and isinstance(res.get("hits"), dict):
-            # Elasticsearch's `hits.total` is based on the top-level `query`.
-            # In kNN mode we set `query=match_all`, so ES would return global-ish
-            # totals. Override totals to the AI neighborhood size.
             if has_aggs and isinstance(sample_ids_count, int):
+                # Aggregation path: use the sampled neighbourhood count for
+                # consistency with the facet numbers.
                 res["hits"]["total"] = int(sample_ids_count)
-            else:
-                res["hits"]["total"] = int(knn_k)
+            # Non-agg path: with kNN-only search (no top-level `query`),
+            # ES already returns the actual neighbourhood total, so no
+            # override is needed.
 
         if has_aggs and isinstance(res, dict) and agg_override is not None:
             res["aggregations"] = agg_override
