@@ -428,30 +428,16 @@ class NDEESQueryBackend(AsyncESQueryBackend):
             base_filters.append(self._query_string_filter(str(user_q)))
 
         extra_filter = options.get("extra_filter")
-        exists_only = self._parse_exists_only_filter(
-            str(extra_filter)) if extra_filter else None
 
         # Standard Biothings filter param (query_string filter)
         std_filter = options.get("filter")
         if std_filter:
             base_filters.append(self._query_string_filter(str(std_filter)))
 
-        # Full request filters (used for ranking/hits)
-        request_filters = list(base_filters)
-        if extra_filter:
-            request_filters.append(
-                self._query_string_filter(str(extra_filter)))
-
-        # Sampling filters (used only to get candidate IDs for aggregations)
-        # Normalize pure exists filters so multiple facet calls can reuse the
-        # same sampled IDs for the same query text.
-        sampling_filters = list(base_filters)
-        if extra_filter and not exists_only:
-            sampling_filters.append(
-                self._query_string_filter(str(extra_filter)))
-
-        knn_filter = {"bool": {"filter": request_filters}}
-        knn_sampling_filter = {"bool": {"filter": sampling_filters}}
+        # kNN uses base structural filters only.  extra_filter is applied
+        # AFTER kNN sampling so that facet selections narrow results
+        # within the semantic neighbourhood instead of changing it.
+        knn_filter = {"bool": {"filter": base_filters}}
 
         es_kwargs["knn"] = {
             "field": vector_field,
@@ -461,33 +447,37 @@ class NDEESQueryBackend(AsyncESQueryBackend):
             "filter": knn_filter,
         }
 
-        # When facets/aggregations are requested, compute them over the AI
-        # neighborhood (top-k IDs) to avoid effectively-global aggregations.
-        # This keeps UI facet counts sane and aligned with AI results.
+        # -----------------------------------------------------------------
+        # Sampling: collect kNN neighbourhood IDs when aggregations are
+        # requested or when extra_filter is present (so we can apply
+        # facet filters within the neighbourhood rather than via kNN).
+        # -----------------------------------------------------------------
         agg_override = None
+        sample_ids = None
         sample_ids_count = None
-        if has_aggs:
-            # Prevent ES from attempting aggregations on the main kNN request.
-            # We'll compute aggs via a separate ids-filtered query.
-            es_kwargs.pop("aggs", None)
 
-            # NOTE: We need IDs of top-k candidates. If requested_size==0,
-            # ES would return no hits; even when requested_size>0, it may
-            # be much smaller than knn_k. So we do a lightweight sampling call.
+        if has_aggs or extra_filter:
+            if has_aggs:
+                es_kwargs.pop("aggs", None)
+
             index = self.indices[options.get("biothing_type")]
             index = self.adjust_index(index, query, **options)
-            # Cache sampled IDs because the UI requests many facets separately.
-            ids_ttl = float(getattr(cfg, "AI_SEARCH_IDS_CACHE_TTL_S", 30))
-            ids_max = int(getattr(cfg, "AI_SEARCH_IDS_CACHE_MAXSIZE", 512))
-            if not hasattr(self, "_ids_cache"):
-                self._ids_cache = _TTLCache(maxsize=ids_max, ttl_s=ids_ttl)
 
+            ids_ttl = float(
+                getattr(cfg, "AI_SEARCH_IDS_CACHE_TTL_S", 30))
+            ids_max = int(
+                getattr(cfg, "AI_SEARCH_IDS_CACHE_MAXSIZE", 512))
+            if not hasattr(self, "_ids_cache"):
+                self._ids_cache = _TTLCache(
+                    maxsize=ids_max, ttl_s=ids_ttl)
+
+            # Cache key intentionally omits extra_filter so that the
+            # same neighbourhood is reused regardless of facet
+            # selections.
             ids_cache_key = (
                 vector_field,
                 str(user_q),
                 str(std_filter or ""),
-                # normalize exists-only extra_filter away for sampling
-                "" if exists_only else str(extra_filter or ""),
                 int(knn_k),
                 int(num_candidates),
             )
@@ -499,56 +489,67 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                     query_vector=query_vector,
                     knn_k=knn_k,
                     num_candidates=num_candidates,
-                    knn_filter=knn_sampling_filter,
+                    knn_filter=knn_filter,
                     total_hits_as_int=self.total_hits_as_int,
                 )
                 self._ids_cache.set(ids_cache_key, sample_ids)
             sample_ids_count = len(sample_ids)
 
-            if sample_ids:
-                agg_filters = [{"ids": {"values": sample_ids}}]
-                # Apply exists-only extra_filter at aggregation time.
-                if exists_only:
-                    is_negated, field = exists_only
-                    if is_negated:
+            # --- Aggregations -------------------------------------------
+            if has_aggs:
+                if sample_ids:
+                    agg_filters = [
+                        {"ids": {"values": sample_ids}}]
+                    if extra_filter:
                         agg_filters.append(
-                            {"bool": {"must_not": [{"exists": {"field": field}}]}})
-                    else:
-                        agg_filters.append({"exists": {"field": field}})
-                # For non-exists extra_filter, it was already applied during sampling.
-                agg_body = {
-                    "size": 0,
-                    "query": {"bool": {"filter": agg_filters}},
-                    "aggs": original_aggs,
-                    "track_total_hits": False,
-                }
-                if self.total_hits_as_int:
-                    agg_body["rest_total_hits_as_int"] = True
-                agg_res = await self.client.search(index=index, **agg_body)
-                if hasattr(agg_res, "body"):
-                    agg_res = agg_res.body
-                if isinstance(agg_res, dict):
-                    agg_override = agg_res.get(
-                        "aggregations") or agg_res.get("aggs")
-            else:
-                agg_override = {}
+                            self._query_string_filter(
+                                str(extra_filter)))
+                    agg_body = {
+                        "size": 0,
+                        "query": {
+                            "bool": {"filter": agg_filters}},
+                        "aggs": original_aggs,
+                        "track_total_hits": False,
+                    }
+                    if self.total_hits_as_int:
+                        agg_body[
+                            "rest_total_hits_as_int"] = True
+                    agg_res = await self.client.search(
+                        index=index, **agg_body)
+                    if hasattr(agg_res, "body"):
+                        agg_res = agg_res.body
+                    if isinstance(agg_res, dict):
+                        agg_override = (
+                            agg_res.get("aggregations")
+                            or agg_res.get("aggs")
+                        )
+                else:
+                    agg_override = {}
 
-            # Facet-only requests (size=0) don't need a third ES call.
-            if requested_size <= 0:
-                total = int(sample_ids_count or 0)
-                if exists_only and sample_ids:
-                    is_negated, field = exists_only
-                    exists_count = await self._count_exists_in_ids(
-                        index=index,
-                        ids=sample_ids,
-                        field=field,
-                        cache_key=ids_cache_key,
-                    )
-                    if is_negated:
-                        total = max(
-                            0, int(sample_ids_count or 0) - int(exists_count))
-                    else:
-                        total = int(exists_count)
+            # --- Facet-only (size=0) short-circuit ----------------------
+            if has_aggs and requested_size <= 0:
+                if extra_filter and sample_ids:
+                    count_body = {
+                        "size": 0,
+                        "query": {"bool": {"filter": [
+                            {"ids": {"values": sample_ids}},
+                            self._query_string_filter(
+                                str(extra_filter)),
+                        ]}},
+                        "track_total_hits": True,
+                    }
+                    if self.total_hits_as_int:
+                        count_body[
+                            "rest_total_hits_as_int"] = True
+                    count_res = await self.client.search(
+                        index=index, **count_body)
+                    if hasattr(count_res, "body"):
+                        count_res = count_res.body
+                    total = self._extract_total_hits_value(
+                        count_res.get("hits", {}).get(
+                            "total", 0))
+                else:
+                    total = int(sample_ids_count or 0)
                 return {
                     "hits": {
                         "total": int(total),
@@ -558,17 +559,63 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                     "aggregations": agg_override or {},
                 }
 
-        # NOTE: Elasticsearch rescore behavior with top-level `knn` varies by
-        # version. Instead of relying on it, we apply keyword boosts by issuing
-        # a second (keyword) search and merging/reranking client-side.
+        # -----------------------------------------------------------------
+        # Hits path
+        # -----------------------------------------------------------------
+        if extra_filter and sample_ids is not None:
+            # Two-phase: fetch from the kNN neighbourhood filtered
+            # by extra_filter.  This ensures facet selections narrow
+            # results instead of re-computing the neighbourhood.
+            if not sample_ids:
+                res = {"hits": {
+                    "total": 0, "max_score": None, "hits": []}}
+                if has_aggs and agg_override is not None:
+                    res["aggregations"] = agg_override
+                return res
 
-        # Make total hits an integer (Biothings expects this by default)
+            index = self.indices[options.get("biothing_type")]
+            index = self.adjust_index(index, query, **options)
+
+            hit_filters = [
+                {"ids": {"values": sample_ids}},
+                self._query_string_filter(str(extra_filter)),
+            ]
+
+            hit_query = {"bool": {"filter": hit_filters}}
+
+            hit_body = {
+                "query": hit_query,
+                "size": requested_size,
+                "track_total_hits": True,
+            }
+            if self.total_hits_as_int:
+                hit_body["rest_total_hits_as_int"] = True
+            from_val = es_kwargs.get(
+                "from_", es_kwargs.get("from", 0))
+            if from_val:
+                hit_body["from_"] = from_val
+            if "sort" in es_kwargs:
+                hit_body["sort"] = es_kwargs["sort"]
+            if "_source" in es_kwargs:
+                hit_body["_source"] = es_kwargs["_source"]
+
+            res = await self.client.search(
+                index=index, **hit_body)
+            if hasattr(res, "body"):
+                res = res.body
+            if (has_aggs and isinstance(res, dict)
+                    and agg_override is not None):
+                res["aggregations"] = agg_override
+            return res
+
+        # -----------------------------------------------------------------
+        # Direct kNN path (no extra_filter)
+        # -----------------------------------------------------------------
         if self.total_hits_as_int:
             es_kwargs["rest_total_hits_as_int"] = True
         if track_total_hits:
             es_kwargs["track_total_hits"] = True
 
-        # elasticsearch-py uses from_ not from
         if "from" in es_kwargs:
             es_kwargs["from_"] = es_kwargs.pop("from")
 
@@ -577,16 +624,13 @@ class NDEESQueryBackend(AsyncESQueryBackend):
         res = await self.client.search(index=index, **es_kwargs)
         if hasattr(res, "body"):
             res = res.body
-        if isinstance(res, dict) and isinstance(res.get("hits"), dict):
+        if isinstance(res, dict) and isinstance(
+                res.get("hits"), dict):
             if has_aggs and isinstance(sample_ids_count, int):
-                # Aggregation path: use the sampled neighbourhood count for
-                # consistency with the facet numbers.
                 res["hits"]["total"] = int(sample_ids_count)
-            # Non-agg path: with kNN-only search (no top-level `query`),
-            # ES already returns the actual neighbourhood total, so no
-            # override is needed.
 
-        if has_aggs and isinstance(res, dict) and agg_override is not None:
+        if (has_aggs and isinstance(res, dict)
+                and agg_override is not None):
             res["aggregations"] = agg_override
 
         return res
@@ -681,10 +725,9 @@ class NDEESQueryBackend(AsyncESQueryBackend):
             )
 
         extra_filter = options.get("extra_filter")
-        if extra_filter:
-            base_filters.append(
-                self._query_string_filter(str(extra_filter))
-            )
+        # extra_filter is NOT added to base_filters — it is applied
+        # after kNN sampling so facet selections narrow within the
+        # semantic neighbourhood rather than changing it.
 
         # --- kNN parameters -------------------------------------------------
         facet_knn_k = int(
@@ -723,8 +766,7 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                 vector_field,
                 str(user_q),
                 str(std_filter or ""),
-                str(extra_filter or "")
-                + " AND _exists_:" + field_name,
+                "_exists_:" + field_name,
                 int(knn_k),
                 int(num_candidates),
             )
@@ -748,7 +790,7 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                 vector_field,
                 str(user_q),
                 str(std_filter or ""),
-                str(extra_filter or ""),
+                "",
                 int(knn_k),
                 int(num_candidates),
             )
@@ -785,10 +827,19 @@ class NDEESQueryBackend(AsyncESQueryBackend):
             field_ids = per_field_ids[field]
             if field_ids:
                 has_any_ids = True
-                # Terms agg scoped to this field's kNN IDs
+                # Terms agg scoped to this field's kNN IDs,
+                # further narrowed by extra_filter when present.
+                field_agg_filters = [
+                    {"ids": {"values": field_ids}},
+                ]
+                if extra_filter:
+                    field_agg_filters.append(
+                        self._query_string_filter(
+                            str(extra_filter))
+                    )
                 aggs[field] = {
                     "filter": {
-                        "ids": {"values": field_ids},
+                        "bool": {"filter": field_agg_filters},
                     },
                     "aggs": {
                         "inner": {
@@ -801,13 +852,19 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                 }
             # Exists count from neutral IDs
             if neutral_ids:
+                exists_filters = [
+                    {"ids": {"values": neutral_ids}},
+                    {"exists": {"field": field}},
+                ]
+                if extra_filter:
+                    exists_filters.append(
+                        self._query_string_filter(
+                            str(extra_filter))
+                    )
                 aggs[field + "__exists"] = {
                     "filter": {
                         "bool": {
-                            "filter": [
-                                {"ids": {"values": neutral_ids}},
-                                {"exists": {"field": field}},
-                            ],
+                            "filter": exists_filters,
                         },
                     },
                 }
@@ -863,10 +920,19 @@ class NDEESQueryBackend(AsyncESQueryBackend):
             inner = raw_facet.get("inner", {})
             aggregations[field] = inner
 
-            # Per-field total = its kNN sample size = "Any"
-            aggregations[field + "__total"] = {
-                "doc_count": len(per_field_ids.get(field, [])),
-            }
+            # Per-field total: when extra_filter is active, use the
+            # doc_count from the (now-filtered) agg bucket so the
+            # total reflects the filtered neighbourhood.  Without
+            # extra_filter, fall back to the raw sample size.
+            if extra_filter:
+                aggregations[field + "__total"] = {
+                    "doc_count": raw_facet.get("doc_count", 0),
+                }
+            else:
+                aggregations[field + "__total"] = {
+                    "doc_count": len(
+                        per_field_ids.get(field, [])),
+                }
 
             # Exists in neutral neighbourhood
             raw_exists = raw_aggs.get(
@@ -876,9 +942,41 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                 "doc_count": raw_exists.get("doc_count", 0),
             }
 
+        # Neutral total: when extra_filter is present, compute
+        # from the exists agg counts; otherwise use raw sample size.
+        if extra_filter and neutral_ids:
+            # Count how many neutral IDs pass extra_filter.
+            # We already have __exists counts per field, but for
+            # the overall total we need a dedicated count.
+            # Use the first field's __total filtered count as a
+            # reasonable proxy, or run a quick count.
+            # For accuracy, sum is not correct (fields overlap),
+            # so we compute it directly.
+            ef_count_body = {
+                "size": 0,
+                "query": {"bool": {"filter": [
+                    {"ids": {"values": neutral_ids}},
+                    self._query_string_filter(
+                        str(extra_filter)),
+                ]}},
+                "track_total_hits": True,
+            }
+            if self.total_hits_as_int:
+                ef_count_body[
+                    "rest_total_hits_as_int"] = True
+            ef_count_res = await self.client.search(
+                index=index, **ef_count_body)
+            if hasattr(ef_count_res, "body"):
+                ef_count_res = ef_count_res.body
+            resp_total = self._extract_total_hits_value(
+                ef_count_res.get("hits", {}).get(
+                    "total", 0))
+        else:
+            resp_total = int(neutral_total)
+
         return {
             "hits": {
-                "total": int(neutral_total),
+                "total": int(resp_total),
                 "max_score": None,
                 "hits": [],
             },
