@@ -434,10 +434,15 @@ class NDEESQueryBackend(AsyncESQueryBackend):
         if std_filter:
             base_filters.append(self._query_string_filter(str(std_filter)))
 
-        # kNN uses base structural filters only.  extra_filter is applied
-        # AFTER kNN sampling so that facet selections narrow results
-        # within the semantic neighbourhood instead of changing it.
-        knn_filter = {"bool": {"filter": base_filters}}
+        # Include extra_filter in the kNN pre-filter so the
+        # neighbourhood is scoped to the user's facet selection.
+        # This ensures filtered queries always find matching docs
+        # (e.g. ResourceCatalogs for "covid") rather than being
+        # limited to a neutral neighbourhood that may exclude rare types.
+        knn_filters = list(base_filters)
+        if extra_filter:
+            knn_filters.append(self._query_string_filter(str(extra_filter)))
+        knn_filter = {"bool": {"filter": knn_filters}}
 
         es_kwargs["knn"] = {
             "field": vector_field,
@@ -448,18 +453,17 @@ class NDEESQueryBackend(AsyncESQueryBackend):
         }
 
         # -----------------------------------------------------------------
-        # Sampling: collect kNN neighbourhood IDs when aggregations or
-        # extra_filter are present.  Aggregation counts and filtered
-        # hits are both scoped to this neutral neighbourhood so that
-        # facet counts and hit totals always agree.
+        # Sampling: collect kNN neighbourhood IDs when aggregations are
+        # present.  The knn_filter already includes extra_filter, so
+        # sampled IDs reflect the filtered neighbourhood.  Facet counts
+        # and hit totals both derive from this same scoped set.
         # -----------------------------------------------------------------
         agg_override = None
         sample_ids = None
         sample_ids_count = None
 
-        if has_aggs or extra_filter:
-            if has_aggs:
-                es_kwargs.pop("aggs", None)
+        if has_aggs:
+            es_kwargs.pop("aggs", None)
 
             index = self.indices[options.get("biothing_type")]
             index = self.adjust_index(index, query, **options)
@@ -472,13 +476,11 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                 self._ids_cache = _TTLCache(
                     maxsize=ids_max, ttl_s=ids_ttl)
 
-            # Cache key intentionally omits extra_filter so that the
-            # same neighbourhood is reused regardless of facet
-            # selections.
             ids_cache_key = (
                 vector_field,
                 str(user_q),
                 str(std_filter or ""),
+                str(extra_filter or ""),
                 int(knn_k),
                 int(num_candidates),
             )
@@ -497,108 +499,40 @@ class NDEESQueryBackend(AsyncESQueryBackend):
             sample_ids_count = len(sample_ids)
 
             # --- Aggregations -------------------------------------------
-            if has_aggs:
-                if sample_ids:
-                    agg_filters = [
-                        {"ids": {"values": sample_ids}}]
-                    if extra_filter:
-                        agg_filters.append(
-                            self._query_string_filter(
-                                str(extra_filter)))
-                    agg_body = {
-                        "size": 0,
-                        "query": {
-                            "bool": {"filter": agg_filters}},
-                        "aggs": original_aggs,
-                        "track_total_hits": False,
-                    }
-                    if self.total_hits_as_int:
-                        agg_body[
-                            "rest_total_hits_as_int"] = True
-                    agg_res = await self.client.search(
-                        index=index, **agg_body)
-                    if hasattr(agg_res, "body"):
-                        agg_res = agg_res.body
-                    if isinstance(agg_res, dict):
-                        agg_override = (
-                            agg_res.get("aggregations")
-                            or agg_res.get("aggs")
-                        )
-                else:
-                    agg_override = {}
+            if sample_ids:
+                agg_body = {
+                    "size": 0,
+                    "query": {
+                        "bool": {"filter": [
+                            {"ids": {"values": sample_ids}},
+                        ]}},
+                    "aggs": original_aggs,
+                    "track_total_hits": False,
+                }
+                if self.total_hits_as_int:
+                    agg_body["rest_total_hits_as_int"] = True
+                agg_res = await self.client.search(
+                    index=index, **agg_body)
+                if hasattr(agg_res, "body"):
+                    agg_res = agg_res.body
+                if isinstance(agg_res, dict):
+                    agg_override = (
+                        agg_res.get("aggregations")
+                        or agg_res.get("aggs")
+                    )
+            else:
+                agg_override = {}
 
             # --- Facet-only (size=0) short-circuit ----------------------
-            if has_aggs and requested_size <= 0:
-                if extra_filter and sample_ids:
-                    count_body = {
-                        "size": 0,
-                        "query": {"bool": {"filter": [
-                            {"ids": {"values": sample_ids}},
-                            self._query_string_filter(
-                                str(extra_filter)),
-                        ]}},
-                        "track_total_hits": True,
-                    }
-                    if self.total_hits_as_int:
-                        count_body[
-                            "rest_total_hits_as_int"] = True
-                    count_res = await self.client.search(
-                        index=index, **count_body)
-                    if hasattr(count_res, "body"):
-                        count_res = count_res.body
-                    total = self._extract_total_hits_value(
-                        count_res.get("hits", {}).get(
-                            "total", 0))
-                else:
-                    total = int(sample_ids_count or 0)
+            if requested_size <= 0:
                 return {
                     "hits": {
-                        "total": int(total),
+                        "total": int(sample_ids_count or 0),
                         "max_score": None,
                         "hits": [],
                     },
                     "aggregations": agg_override or {},
                 }
-
-            # --- Hits with extra_filter (two-phase) ---------------------
-            # Filter the neutral neighbourhood by extra_filter so that
-            # hit totals are consistent with facet counts.
-            if extra_filter and sample_ids is not None:
-                if not sample_ids:
-                    res = {"hits": {
-                        "total": 0, "max_score": None, "hits": []}}
-                    if has_aggs and agg_override is not None:
-                        res["aggregations"] = agg_override
-                    return res
-
-                hit_filters = [
-                    {"ids": {"values": sample_ids}},
-                    self._query_string_filter(str(extra_filter)),
-                ]
-                hit_body = {
-                    "query": {"bool": {"filter": hit_filters}},
-                    "size": requested_size,
-                    "track_total_hits": True,
-                }
-                if self.total_hits_as_int:
-                    hit_body["rest_total_hits_as_int"] = True
-                from_val = es_kwargs.get(
-                    "from_", es_kwargs.get("from", 0))
-                if from_val:
-                    hit_body["from_"] = from_val
-                if "sort" in es_kwargs:
-                    hit_body["sort"] = es_kwargs["sort"]
-                if "_source" in es_kwargs:
-                    hit_body["_source"] = es_kwargs["_source"]
-
-                res = await self.client.search(
-                    index=index, **hit_body)
-                if hasattr(res, "body"):
-                    res = res.body
-                if (has_aggs and isinstance(res, dict)
-                        and agg_override is not None):
-                    res["aggregations"] = agg_override
-                return res
 
         # -----------------------------------------------------------------
         # Direct kNN path (no extra_filter)
