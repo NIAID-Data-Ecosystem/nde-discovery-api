@@ -448,16 +448,16 @@ class NDEESQueryBackend(AsyncESQueryBackend):
         }
 
         # -----------------------------------------------------------------
-        # Sampling: collect kNN neighbourhood IDs when aggregations are
-        # requested so we can compute facet counts within the semantic
-        # neighbourhood.  extra_filter is handled at the kNN level for
-        # hits (see below) so that rare types still appear.
+        # Sampling: collect kNN neighbourhood IDs when aggregations or
+        # extra_filter are present.  Aggregation counts and filtered
+        # hits are both scoped to this neutral neighbourhood so that
+        # facet counts and hit totals always agree.
         # -----------------------------------------------------------------
         agg_override = None
         sample_ids = None
         sample_ids_count = None
 
-        if has_aggs:
+        if has_aggs or extra_filter:
             if has_aggs:
                 es_kwargs.pop("aggs", None)
 
@@ -560,22 +560,49 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                     "aggregations": agg_override or {},
                 }
 
-        # -----------------------------------------------------------------
-        # Hits path — direct kNN search
-        # -----------------------------------------------------------------
-        # When extra_filter is present, include it in the kNN filter so
-        # that ES finds the most relevant docs *within* the filtered
-        # space.  This avoids the "rare type" problem where a neutral
-        # neighbourhood of k=1000 contains zero ResourceCatalogs.
-        if extra_filter:
-            es_kwargs["knn"]["filter"] = {
-                "bool": {
-                    "filter": list(base_filters) + [
-                        self._query_string_filter(
-                            str(extra_filter))
-                    ]
+            # --- Hits with extra_filter (two-phase) ---------------------
+            # Filter the neutral neighbourhood by extra_filter so that
+            # hit totals are consistent with facet counts.
+            if extra_filter and sample_ids is not None:
+                if not sample_ids:
+                    res = {"hits": {
+                        "total": 0, "max_score": None, "hits": []}}
+                    if has_aggs and agg_override is not None:
+                        res["aggregations"] = agg_override
+                    return res
+
+                hit_filters = [
+                    {"ids": {"values": sample_ids}},
+                    self._query_string_filter(str(extra_filter)),
+                ]
+                hit_body = {
+                    "query": {"bool": {"filter": hit_filters}},
+                    "size": requested_size,
+                    "track_total_hits": True,
                 }
-            }
+                if self.total_hits_as_int:
+                    hit_body["rest_total_hits_as_int"] = True
+                from_val = es_kwargs.get(
+                    "from_", es_kwargs.get("from", 0))
+                if from_val:
+                    hit_body["from_"] = from_val
+                if "sort" in es_kwargs:
+                    hit_body["sort"] = es_kwargs["sort"]
+                if "_source" in es_kwargs:
+                    hit_body["_source"] = es_kwargs["_source"]
+
+                res = await self.client.search(
+                    index=index, **hit_body)
+                if hasattr(res, "body"):
+                    res = res.body
+                if (has_aggs and isinstance(res, dict)
+                        and agg_override is not None):
+                    res["aggregations"] = agg_override
+                return res
+
+        # -----------------------------------------------------------------
+        # Direct kNN path (no extra_filter)
+        # -----------------------------------------------------------------
         if self.total_hits_as_int:
             es_kwargs["rest_total_hits_as_int"] = True
         if track_total_hits:
@@ -591,8 +618,7 @@ class NDEESQueryBackend(AsyncESQueryBackend):
             res = res.body
         if isinstance(res, dict) and isinstance(
                 res.get("hits"), dict):
-            if (has_aggs and isinstance(sample_ids_count, int)
-                    and not extra_filter):
+            if has_aggs and isinstance(sample_ids_count, int):
                 res["hits"]["total"] = int(sample_ids_count)
 
         if (has_aggs and isinstance(res, dict)
