@@ -3,11 +3,13 @@ import logging
 import os
 from urllib.parse import urlsplit
 
+import elasticsearch
 from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.auth.oauth_mixins import GithubOAuth2Mixin, OrcidOAuth2Mixin
 from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
 from tornado.httputil import url_concat
 from tornado.web import HTTPError, RequestHandler
+from user_data import _seed_user_doc, _user_doc_id
 
 
 def _allowed_frontend_origins(config):
@@ -76,6 +78,27 @@ class BaseLoginHandler(BaseAPIHandler):
         # Disable cache headers for auth endpoints
         self.set_header("Cache-Control", "private, max-age=0, no-cache")
 
+    async def _ensure_user_profile(self, user_dict: dict):
+        """Create a user profile document in ES if one does not yet exist.
+
+        Called after every successful OAuth login so the profile is always
+        available for the /user/data endpoints.
+        """
+        es = self.biothings.elasticsearch.async_client
+        index = self.biothings.config.ES_USER_INDEX
+        doc_id = _user_doc_id(user_dict)
+        try:
+            await es.get(id=doc_id, index=index)
+        except elasticsearch.exceptions.NotFoundError:
+            doc = _seed_user_doc(user_dict)
+            await es.index(id=doc_id, body=doc, index=index)
+            logging.info("Created new user profile %s", doc_id)
+        except Exception:
+            # Non-fatal: the profile will be created lazily via GET /user/data
+            logging.warning(
+                "Could not ensure user profile %s", doc_id, exc_info=True
+            )
+
 
 class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
     """Return the authenticated user profile or challenge the client."""
@@ -127,7 +150,7 @@ class LogoutHandler(BaseLoginHandler):
         self.redirect(safe_next_url(self, "/"))
 
 
-class GitHubLoginHandler(BaseAPIHandler, GithubOAuth2Mixin):
+class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
     """Initiate or complete the GitHub OAuth2 handshake."""
 
     SCOPES = []
@@ -162,6 +185,7 @@ class GitHubLoginHandler(BaseAPIHandler, GithubOAuth2Mixin):
         logging.info("GitHub auth response: %s", formatted)
         if formatted:
             set_user_session_cookie(self, formatted)
+            await self._ensure_user_profile(json.loads(formatted))
         else:
             clear_user_session_cookie(self)
         self.redirect(safe_next_url(self, "/"))
@@ -182,7 +206,7 @@ class GitHubLoginHandler(BaseAPIHandler, GithubOAuth2Mixin):
         return json.dumps(payload)
 
 
-class ORCIDLoginHandler(BaseAPIHandler, OrcidOAuth2Mixin):
+class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
     """Initiate or complete the ORCID OAuth2 handshake."""
 
     SCOPES = ["/authenticate", "openid"]
@@ -218,6 +242,7 @@ class ORCIDLoginHandler(BaseAPIHandler, OrcidOAuth2Mixin):
         logging.info("ORCID auth response: %s", formatted)
         if formatted:
             set_user_session_cookie(self, formatted)
+            await self._ensure_user_profile(json.loads(formatted))
         else:
             clear_user_session_cookie(self)
         self.redirect(safe_next_url(self, "/"))
@@ -347,6 +372,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "NDEx",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "figshare": {
                 "name": "Figshare",
@@ -372,6 +398,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "Figshare",
                 "conditionsOfAccess": "Unknown",
                 "genre": "Generalist",
+                "schedule": "Manual",
             },
             "veupath_collections": {
                 "name": "VEuPath Collections",
@@ -399,6 +426,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "VEuPathDB",
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
             "amoebadb": {
                 "name": "AmoebaDB",
@@ -427,6 +455,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "cryptodb": {
                 "name": "CryptoDB",
@@ -455,6 +484,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "giardiadb": {
                 "name": "GiardiaDB",
@@ -483,6 +513,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "hostdb": {
                 "name": "HostDB",
@@ -511,6 +542,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "plasmodb": {
                 "name": "PlasmoDB",
@@ -539,6 +571,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "vectorbase": {
                 "name": "VectorBase",
@@ -567,6 +600,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "fungidb": {
                 "name": "FungiDB",
@@ -595,6 +629,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "microsporidiadb": {
                 "name": "MicrosporidiaDB",
@@ -623,6 +658,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "toxodb": {
                 "name": "ToxoDB",
@@ -651,6 +687,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "trichdb": {
                 "name": "TrichDB",
@@ -679,6 +716,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "tritrypdb": {
                 "name": "TriTrypDB",
@@ -707,6 +745,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "piroplasmadb": {
                 "name": "PiroplasmaDB",
@@ -735,6 +774,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
             },
             "massive": {
                 "name": "MassIVE",
@@ -759,6 +799,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "MassIVE",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "malariagen": {
                 "name": "MalariaGEN",
@@ -779,6 +820,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "MalariaGEN",
                 "conditionsOfAccess": "Varied",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
             "dryad": {
                 "name": "Dryad Digital Repository",
@@ -810,6 +852,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "Dryad Digital Repository",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+                "schedule": "Monthly",
             },
             "vivli": {
                 "name": "Vivli",
@@ -841,6 +884,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "Vivli",
                 "conditionsOfAccess": "Restricted",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "ncbi_pmc": {
                 "name": "NCBI PMC",
@@ -863,6 +907,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "NCBI PMC",
                 "conditionsOfAccess": "Unknown",
                 "genre": "Generalist",
+                "schedule": "Manual",
             },
             "veupathdb": {
                 "name": "VEuPathDB",
@@ -890,6 +935,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "VEuPathDB",
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
             "acd_niaid": {
                 "name": "AccessClinicalData@NIAID",
@@ -913,6 +959,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "AccessClinicalData@NIAID",
                 "conditionsOfAccess": "Varied",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
             "sb_apps": {
                 "name": "Seven Bridges Public Apps Gallery",
@@ -943,6 +990,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "PublicApps@SevenBridges",
                 "conditionsOfAccess": "Unknown",
                 "genre": "Generalist",
+                "schedule": "Manual",
             },
             "zenodo": {
                 "name": "Zenodo",
@@ -969,6 +1017,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "Zenodo",
                 "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
+                "schedule": "Quarterly",
             },
             "dde": {
                 "name": "Data Discovery Engine",
@@ -989,6 +1038,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "Data Discovery Engine",
                 "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "ncbi_geo": {
                 "name": "NCBI GEO",
@@ -1010,6 +1060,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "NCBI GEO",
                 "conditionsOfAccess": "Unknown",
                 "genre": "Generalist",
+                "schedule": "Manual",
             },
             "immport": {
                 "name": "ImmPort",
@@ -1030,6 +1081,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "ImmPort",
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
             "omicsdi": {
                 "name": "OmicsDI",
@@ -1050,6 +1102,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "Omics Discovery Index (OmicsDI)",
                 "conditionsOfAccess": "Unknown",
                 "genre": "Generalist",
+                "schedule": "Quarterly",
             },
             "mendeley": {
                 "name": "Mendeley Data",
@@ -1074,6 +1127,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "Mendeley",
                 "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "reframedb": {
                 "name": "ReframeDB",
@@ -1100,6 +1154,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "identifier": "ReframeDB",
                 "conditionsOfAccess": "Restricted",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
             "clinepidb": {
                 "abstract": "ClinEpiDB is a NIAID supported IID repository that includes epidemiological data.",
@@ -1126,6 +1181,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://clinepidb.org/ce/app",
                 "conditionsOfAccess": "Varied",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
             "lincs": {
                 "abstract": "The Library of Integrated Network-Based Cellular Signatures (LINCS) Data Portal is an NIH supported repository that includes gene expression and other cellular processes data.",
@@ -1163,6 +1219,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://lincsportal.ccs.miami.edu/",
                 "conditionsOfAccess": "Unknown",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "dataverse": {
                 "abstract": "Harvard Dataverse is a GREI repository that includes most data types and domains.",
@@ -1199,6 +1256,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://dataverse.harvard.edu/",
                 "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
+                "schedule": "Quarterly",
             },
             "hubmap": {
                 "abstract": "The Human BioMolecular Atlas Program (HuBMAP) is an NIH supported repository that includes multimodal data of healthy cells in the human body.",
@@ -1244,6 +1302,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://hubmapconsortium.org/",
                 "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "ncbi_sra": {
                 "abstract": "Sequence Read Archive (SRA) is the NIH supported largest publicly available repository of high throughput sequencing data that includes raw sequencing data and alignment information for most domains.",
@@ -1277,6 +1336,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.ncbi.nlm.nih.gov/sra",
                 "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
+                "schedule": "Quarterly",
             },
             "vdj": {
                 "abstract": "VDJServer is a NIAID supported repository that includes immune repertoire sequencing data.",
@@ -1320,6 +1380,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "conditionsOfAccess": "Open",
                 "url": "https://vdj-staging.tacc.utexas.edu/community/",
+                "schedule": "Weekly",
             },
             "microbiomedb": {
                 "abstract": "MicrobiomeDB is a NIAID supported repository that includes clinical microbiome data and analysis tools.",
@@ -1350,6 +1411,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://microbiomedb.org/mbio/app",
                 "conditionsOfAccess": "Open",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
             "qiita": {
                 "abstract": "Qiita is a repository that includes microbiome data and analysis tools.",
@@ -1369,6 +1431,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://qiita.ucsd.edu/",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
             "hca": {
                 "abstract": "The Human Cell Atlas is a repository that includes multimodal data of cells in the human body.",
@@ -1401,6 +1464,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.humancellatlas.org/",
                 "conditionsOfAccess": "Varied",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "flowrepository": {
                 "abstract": "Flow Repository is a repository that includes flow cytometry data.",
@@ -1428,6 +1492,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "http://flowrepository.org/",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "dash": {
                 "abstract": "The Data and Specimen Hub (DASH) is an NICHD supported repository that includes clinical data and specimens.",
@@ -1462,6 +1527,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://dash.nichd.nih.gov/",
                 "conditionsOfAccess": "Restricted",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "covid_radx": {
                 "abstract": "COVID RADx Data Hub is a NIH supported IID repository that includes clinical data.",
@@ -1500,6 +1566,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://radxdatahub.nih.gov/",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
+                "schedule": "Manual",
             },
             "biostudies": {
                 "abstract": "BioStudies is a repository that includes life sciences data by organising links to data in other databases at EMBL-EBI or elsewhere.",
@@ -1534,6 +1601,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.ebi.ac.uk/biostudies/",
                 "conditionsOfAccess": "Unknown",
                 "genre": "Generalist",
+                "schedule": "Manual",
             },
             "biotools": {
                 "abstract": "bio.tools is an ELIXIR supported tool repository that includes information about software tools, databases and services.",
@@ -1572,6 +1640,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "genre": "Generalist",
                 "conditionsOfAccess": "Varied",
                 "type": "Computational Tool Repository",
+                "schedule": "Manual",
             },
             "dbgap": {
                 "abstract": "Database of Genotypes and Phenotypes (dbGaP) is a NIH supported IID repository that includes multiomic data.",
@@ -1608,6 +1677,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.ncbi.nlm.nih.gov/gap",
                 "genre": "Generalist",
                 "conditionsOfAccess": "Varied",
+                "schedule": "Manual",
             },
             "tycho": {
                 "abstract": "Project TYCHO is a NIH supported IID repository that includes clinical data.",
@@ -1640,6 +1710,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.tycho.pitt.edu/",
                 "genre": "IID",
                 "conditionsOfAccess": "Closed",
+                "schedule": "Weekly",
             },
             "immunespace": {
                 "abstract": "ImmuneSpace is a NIAID supported IID repository that includes immune data.",
@@ -1660,6 +1731,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.immunespace.org/",
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
             "ncbi_bioproject": {
                 "abstract": "NCBI BioProject is a NIH supported generalist repository that includes multiomic data.",
@@ -1698,6 +1770,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.ncbi.nlm.nih.gov/bioproject/",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "pdb": {
                 "abstract": "Protein Data Bank is a NIAID supported generalist repository that includes structure data.",
@@ -1720,6 +1793,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.rcsb.org/",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "ark": {
                 "abstract": "SAGE ARK Portal is a NIAID supported IID repository that includes immune data.",
@@ -1747,11 +1821,11 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://arkportal.synapse.org/",
                 "conditionsOfAccess": "Varied",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
             "clingen": {
                 "abstract": "ClinicalGenomeResource (ClinGen) is a NIH supported generalist repository that includes genomic data.",
                 "description": "ClinGen is a National Institutes of Health (NIH)-funded resource dedicated to building an authoritative central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.",
-                "identifier": "Clinical Genomics Resource (ClinGen)",
                 "name": "ClinicalGenomeResource (ClinGen)",
                 "schema": {
                     "DISEASE ID (MONDO)": "healthCondition.identifier",
@@ -1781,6 +1855,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://clinicalgenome.org/",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "emdb": {
                 "abstract": "Electron Microscopy Data Bank (EMDB) is a generalist repository that includes image data.",
@@ -1799,6 +1874,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.ebi.ac.uk/emdb/",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "node": {
                 "abstract": "NODE is a Chinese Academy of Sciences supported generalist repository that includes multiomic data.",
@@ -1820,6 +1896,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.biosino.org/node/",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             }
         }
 

@@ -1,1 +1,2 @@
 biothings[web_extra]==0.12.5
+boto3>=1.34.0
