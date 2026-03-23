@@ -1,21 +1,6 @@
 import copy
 
-from authn.authn_provider import UserCookieAuthProvider
 from biothings.web.settings.default import APP_LIST, QUERY_KWARGS
-from handlers import (
-    GitHubLoginHandler,
-    LogoutHandler,
-    NDESourceHandler,
-    ORCIDLoginHandler,
-    UserInfoHandler,
-    WebAppHandler,
-)
-from user_data import (
-    UserDataHandler,
-    UserFavoriteDatasetsHandler,
-    UserFavoriteSearchesHandler,
-)
-from xsrf import XSRFToken
 
 ES_INDICES = {
     # 'zenodo': 'zenodo_current',
@@ -25,36 +10,13 @@ ES_INDICES = {
     # 'acd': 'acd_niaid_20221109_o6tbj5ct'
 }
 
-# Elasticsearch index for persistent user profiles and preferences
-ES_USER_INDEX = "nde_user_profiles"
 APP_LIST += [
-    (r"/{ver}/metadata/?", NDESourceHandler),
+    (r"/{ver}/metadata/?", "handlers.NDESourceHandler"),
 ]
-
-# OAuth and XSRF handlers
-APP_LIST += [
-    (r"/user_info", UserInfoHandler),
-    (r"/logout", LogoutHandler),
-    (r"/login/github", GitHubLoginHandler),
-    (r"/login/orcid", ORCIDLoginHandler),
-    (r"/xsrf_token", XSRFToken),
-]
-
-# User data persistence handlers
-APP_LIST += [
-    (r"/user/data", UserDataHandler),
-    (r"/user/data/favorites/searches", UserFavoriteSearchesHandler),
-    (r"/user/data/favorites/datasets", UserFavoriteDatasetsHandler),
-]
-
-# Authentication provider chain for BioThingsAuthnMixin consumers
-AUTHN_PROVIDERS = (
-    (UserCookieAuthProvider, {}),
-)
 
 # replace default landing page handler
 assert APP_LIST[0][0] == "/"
-APP_LIST[0] = ("/", WebAppHandler)
+APP_LIST[0] = ("/", "handlers.WebAppHandler")
 
 
 # *****************************************************************************
@@ -73,6 +35,7 @@ SOURCE_TYPEDEF = {
     "lineage": {"type": int, "default": None},
     "use_ai_search": {"type": bool, "default": False},
 }
+
 
 QUERY_KWARGS = copy.deepcopy(QUERY_KWARGS)
 QUERY_KWARGS["GET"].update(SOURCE_TYPEDEF)

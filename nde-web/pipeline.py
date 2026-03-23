@@ -193,7 +193,7 @@ class NDEESQueryBackend(AsyncESQueryBackend):
     def _build_type_filter():
         filter_conditions = [
             {"terms": {
-                "@type": ["Dataset", "ResourceCatalog", "Sample", "DataCollection"]}},
+                "@type": ["Dataset", "ResourceCatalog"]}},
         ]
         computational_tool_condition = {
             "bool": {
@@ -572,18 +572,28 @@ class NDEQueryBuilder(ESQueryBuilder):
         return queries
 
     def apply_extras(self, search, options):
-        # We only want those of type Dataset or ComputationalTool. Terms to filter
-        # terms = {"@type": ["Dataset", "ComputationalTool"]}
 
-        # Temporary change for launch of the portal as requested by NIAID
-        # terms = {"@type": ["Dataset", "ResourceCatalog"]}
-        # search = search.filter("terms", **terms)
+        # remove specific documents from the search results
+        with open("exclusions.json") as f:
+            data = json.load(f)
 
+        # Get the list of staging IDs
+        staging_ids = data.get("staging_ids")
+
+        # Get the list of prod sources
+        prod_sources = data.get("prod_catalogs")
+
+        # exclude staging IDs from the search results
+        search = search.query("bool", must_not=[Q("ids", values=staging_ids)])
+
+        # include only documents from the allowed prod sources
+        search = search.query("bool", must=[Q("terms", **{"includedInDataCatalog.name": prod_sources})])
+
+        # We only want those of type Dataset or ResourceCatalog.
         # Filter to allow @type Dataset, ResourceCatalog and ComputationalTool only from Bio.tools
         filter_conditions = [
             # Include Dataset and ResourceCatalog
-            {"terms": {
-                "@type": ["Dataset", "ResourceCatalog", "Sample", "DataCollection"]}},
+            {"terms": {"@type": ["Dataset", "ResourceCatalog"]}},
         ]
 
         computational_tool_condition = {
@@ -596,10 +606,7 @@ class NDEQueryBuilder(ESQueryBuilder):
         }
 
         search = search.filter(
-            "bool",
-            should=filter_conditions + [computational_tool_condition],
-            minimum_should_match=1,
-        )
+            "bool", should=filter_conditions + [computational_tool_condition])
 
         # Apply the new metadata-based scoring by default:
         # This script considers the completeness ratios and boosts ResourceCatalog items.
@@ -651,41 +658,6 @@ class NDEQueryBuilder(ESQueryBuilder):
             search = search.suggest(
                 "nde_suggester", options.suggester, phrase=phrase_suggester)
 
-        # apply function score
-        if options.use_metadata_score:
-            custom_function_script = {
-                "source": """
-                    double required_ratio = doc['_meta.completeness.required_ratio'].value;
-                    double recommended_ratio = doc['_meta.completeness.recommended_score_ratio'].value;
-                    double b = 1 - params.a;
-                    double d = 1 - params.c;
-                    double score = (params.a * _score) + (b * ((params.c * required_ratio) + (d * recommended_ratio)));
-                    if (doc['@type'].value == 'ResourceCatalog') {
-                        score *= params.boost_factor;
-                    }
-                    return score;
-                """,
-                "params": {
-                    "a": 0.8,
-                    "c": 0.75,
-                    "boost_factor": 1000.0
-                }
-            }
-            function_score_query = Q("function_score", script_score={
-                                     "script": custom_function_script}, boost_mode="replace")
-            search = search.query(function_score_query)
-        else:
-            functions = [
-                {"filter": {"term": {"@type": "ResourceCatalog"}}, "weight": 1000}
-            ]
-
-            search = search.query(
-                "function_score",
-                query=search.to_dict().get("query"),
-                functions=functions,
-                boost_mode="replace",
-            )
-
         # apply multi-term aggregation
         if options.multi_terms_fields:
             multi_terms_size = options.get('multi_terms_size', 10)
@@ -697,7 +669,7 @@ class NDEQueryBuilder(ESQueryBuilder):
             )
             search.aggs.bucket("multi_terms_agg", multi_terms_agg)
 
-        # hide _meta object and always exclude the vector embedding field
+        # Manage _meta field visibility and always exclude the vector embedding field
         cfg = _load_runtime_config()
         vector_field = getattr(cfg, "AI_SEARCH_VECTOR_FIELD", None)
         excludes = []
