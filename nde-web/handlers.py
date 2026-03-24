@@ -1078,7 +1078,7 @@ class NDESourceHandler(MetadataSourceHandler):
                     "date": "date",
                 },
                 "url": "https://www.immport.org/shared/home",
-                "identifier": "ImmPort",
+                "identifier": "ImmPort - Bioinformatics For the Future of Immunology",
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
                 "schedule": "Weekly",
