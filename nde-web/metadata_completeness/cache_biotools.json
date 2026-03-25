@@ -1,1 +1,53 @@
-{"avg_augmented_recommended_ratio": 0.0, "avg_augmented_required_ratio": 0.0, "avg_recommended_score_ratio": 0.2814, "avg_required_ratio": 0.6425, "required_fields": {"name": 1.0, "description": 1.0, "author": 0.7376, "url": 1.0, "measurementTechnique": 0.0, "includedInDataCatalog": 1.0, "distribution": 0.0, "funding": 0.0124, "date": 1.0}, "recommended_fields": {"dateCreated": 0.0, "dateModified": 1.0, "datePublished": 1.0, "citedBy": 0.7073, "doi": 0.001, "infectiousAgent": 0.0, "healthCondition": 0.0, "species": 0.0, "variableMeasured": 0.0, "citation": 0.243, "conditionsOfAccess": 0.2932, "isBasedOn": 0.0164, "keywords": 0.1864, "license": 0.4521, "sdPublisher": 0.0, "spatialCoverage": 0.0, "temporalCoverage": 0.0, "topicCategory": 0.9868, "identifier": 1.0, "usageInfo": 0.0, "interactionStatistic": 0.0}, "sum_required_coverage": 5.75, "sum_recommended_coverage": 5.89, "required_augmented_fields_coverage": {"funding": 0.0, "measurementTechnique": 0.0}, "recommended_augmented_fields_coverage": {"species": 0.0, "infectiousAgent": 0.0, "healthCondition": 0.0, "citation": 0.0, "topicCategory": 0.0}, "binary_required_score": 7, "binary_recommended_score": 11, "binary_required_augmented": 0, "binary_recommended_augmented": 0, "percent_required_fields": 0.78, "percent_recommended_fields": 0.52, "conditionsOfAccess": "Varied"}
+{
+  "avg_augmented_recommended_ratio": 0.0,
+  "avg_augmented_required_ratio": 0.0,
+  "avg_recommended_score_ratio": 0.4588,
+  "avg_required_ratio": 0.7901,
+  "total_documents": 32927,
+  "required_fields": {
+    "date": 1.0,
+    "includedInDataCatalog": 1.0,
+    "funding": 0.0113,
+    "author": 0.739,
+    "description": 1.0,
+    "name": 1.0
+  },
+  "recommended_fields": {
+    "citedBy": 0.7203,
+    "doi": 0.001,
+    "topicCategory": 0.9824,
+    "codeRepository": 0.0924,
+    "programmingLanguage": 0.6493,
+    "applicationCategory": 0.8256,
+    "applicationSubCategory": 0.0,
+    "input": 0.1202,
+    "output": 0.099,
+    "featureList": 0.9474,
+    "operatingSystem": 0.6123,
+    "softwareRequirements": 0.0,
+    "softwareVersion": 0.1964,
+    "citation": 0.2202,
+    "conditionsOfAccess": 0.2772,
+    "dateModified": 1.0,
+    "interactionStatistic": 0.0,
+    "license": 0.4323,
+    "identifier": 1.0,
+    "url": 1.0
+  },
+  "required_augmented_fields_coverage": {
+    "funding": 0.0
+  },
+  "recommended_augmented_fields_coverage": {
+    "citation": 0.0,
+    "topicCategory": 0.0
+  },
+  "sum_required_coverage": 4.7503,
+  "sum_recommended_coverage": 9.176,
+  "binary_required_score": 6,
+  "binary_recommended_score": 17,
+  "binary_required_augmented": 0,
+  "binary_recommended_augmented": 0,
+  "percent_required_fields": 1.0,
+  "percent_recommended_fields": 0.85,
+  "conditionsOfAccess": "Varied"
+}
