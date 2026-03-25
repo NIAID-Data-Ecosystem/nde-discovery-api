@@ -7,3 +7,9 @@ __pycache__
 
 # pycharm
 .idea
+
+config.py
+venv
+
+# build output
+web-app/dist
