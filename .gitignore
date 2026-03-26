@@ -7,3 +7,5 @@ __pycache__
 
 # pycharm
 .idea
+venv
+dist
