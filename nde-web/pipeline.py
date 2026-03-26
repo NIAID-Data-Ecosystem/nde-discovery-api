@@ -74,8 +74,6 @@ def _looks_like_advanced_query_string(q: str) -> bool:
     return (":" in q) or (" AND " in q) or (" OR " in q) or ("(" in q and ")" in q)
 
 
-
-
 class _TTLCache:
     def __init__(self, *, maxsize: int, ttl_s: float):
         self.maxsize = int(maxsize)
@@ -744,11 +742,27 @@ class NDEQueryBuilder(ESQueryBuilder):
                 'inner_filter', lineage_total_inner_filter)
             search.aggs.bucket('lineage_total_count', lineage_total_filter)
 
+        # Add companion "missing" aggregations for each facet so the
+        # formatter can report the true count of documents without the field.
+        for agg in options.aggs or []:
+            field = agg.split("(")[0] if "(" in agg else agg
+            if field:
+                search.aggs.bucket(
+                    f"__missing__{field}", "missing", field=field
+                )
+
         return super().apply_extras(search, options)
 
 
 class NDEFormatter(ESResultFormatter):
     def transform_aggs(self, res):
+        # Extract companion "missing" aggregation counts added by the builder.
+        missing_counts = {}
+        for key in list(res.keys()):
+            if key.startswith("__missing__"):
+                facet_name = key[len("__missing__"):]
+                missing_counts[facet_name] = res.pop(key).get("doc_count", 0)
+
         def transform_agg(agg_res):
             if 'buckets' in agg_res:
                 agg_res['_type'] = 'terms'
@@ -772,6 +786,11 @@ class NDEFormatter(ESResultFormatter):
                     if isinstance(agg_res[k], dict):
                         transform_agg(agg_res[k])
         transform_agg(res)
+
+        # Override missing counts with actual values from companion aggs.
+        for facet_name, count in missing_counts.items():
+            if facet_name in res:
+                res[facet_name]['missing'] = count
 
         # If lineage aggregations are present in the facets,
         # apply our transformation
