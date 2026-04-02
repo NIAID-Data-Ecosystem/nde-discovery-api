@@ -1907,6 +1907,36 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
                 "schedule": "Manual",
+            },
+            "proteomexchange": {
+                "abstract": "Proteome Xchange is a consortia supported generalist repository that includes proteomic data.",
+                "description": "The ProteomeXchange Consortium was established to provide globally coordinated standard data submission and dissemination pipelines involving the main proteomics repositories, and to encourage open data policies in the field. ProteomeXchange fully supports both MS/MS proteomics and SRM data submission. Submissions of other types of proteomics data is also possible using the Partial Submission mechanism.",
+                "identifier": "ProteomeXchange",
+                "name": "Proteome Xchange",
+                "schema": {
+                    "identifiers": "identifier",
+                    "identifiers_doi": "doi",
+                    "title": "name",
+                    "datasetHistory": "name",
+                    "description": "description",
+                    "contacts": "author.name",
+                    "contacts_affiliation": "author.affiliation.name",
+                    "species": "species.name",
+                    "species_taxid": "species.identifier",
+                    "instruments": "sample.instrument.name",
+                    "keywords": "keywords",
+                    "datasetHistory_keywords": "keywords",
+                    "publications": "citation",
+                    "datasetHistory_publication": "citation",
+                    "datasetSummary": "datePublished",
+                    "datasetHistory_identifierDate": "dateCreated",
+                    "datasetHistory_revisionDate": "dateModified",
+                    "datasetHistory_submissionDate": "dateModified",
+                    "datasetFiles": "distribution",
+                    "datasetOrigins": "isRelatedTo",
+                    "fullDatasetLinks": "sdPublisher.url",
+                    "datasetSummary_hostingRepository": "sdPublisher.name"
+                }
             }
         }
 
