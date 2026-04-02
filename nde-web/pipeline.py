@@ -74,6 +74,11 @@ def _looks_like_advanced_query_string(q: str) -> bool:
     return (":" in q) or (" AND " in q) or (" OR " in q) or ("(" in q and ")" in q)
 
 
+# Sentinel query values that represent "browse all" — not a real search intent.
+# AI / vector search should fall back to standard search for these.
+_AI_SEARCH_PASSTHROUGH_QUERIES = frozenset({"", "__all__", "__any__", "*"})
+
+
 class _TTLCache:
     def __init__(self, *, maxsize: int, ttl_s: float):
         self.maxsize = int(maxsize)
@@ -278,12 +283,15 @@ class NDEESQueryBackend(AsyncESQueryBackend):
     async def _execute_ai_search(self, query: Search, **options):
         cfg = _load_runtime_config()
 
-        search_body = query.to_dict()
-        user_q = _find_first_query_string_query(search_body.get("query"))
-        if not user_q:
-            # fall back to whatever builder produced for q; if we can't find it,
-            # skip AI search to avoid returning meaningless results.
+        # Use the raw user query attached by NDEQueryBuilder.build() so we
+        # never accidentally embed filter text (extra_filter, etc.) that the
+        # builder folds into the Search body.
+        raw_q = str(getattr(query, '_nde_raw_q', '') or '').strip()
+
+        if raw_q in _AI_SEARCH_PASSTHROUGH_QUERIES:
             return await super().execute(query, **options)
+
+        user_q = raw_q
 
         # Cache embeddings because the UI can trigger many facet calls
         # for the same query text.
@@ -320,6 +328,7 @@ class NDEESQueryBackend(AsyncESQueryBackend):
         # top-level `knn` + `query` as a hybrid (union) search.  match_all
         # would cause every document in the index to appear in results,
         # bypassing kNN filters when `sort` is used and inflating totals.
+        search_body = query.to_dict()
         es_kwargs = dict(search_body)
         es_kwargs.pop("query", None)
 
@@ -511,6 +520,12 @@ class NDEESQueryBackend(AsyncESQueryBackend):
 
 class NDEQueryBuilder(ESQueryBuilder):
     # https://docs.biothings.io/en/latest/_modules/biothings/web/query/builder.html#ESQueryBuilder.default_string_query
+
+    def build(self, q=None, **options):
+        search = super().build(q, **options)
+        if isinstance(search, Search):
+            search._nde_raw_q = q
+        return search
 
     def default_string_query(self, q, options):
         search = Search()
