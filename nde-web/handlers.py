@@ -1937,6 +1937,27 @@ class NDESourceHandler(MetadataSourceHandler):
                     "fullDatasetLinks": "sdPublisher.url",
                     "datasetSummary_hostingRepository": "sdPublisher.name"
                 }
+            },
+            "bv_brc": {
+                "abstract": "Bacterial and Viral Bioinformatics Resource Center (BV-BRC) is a NIAID supported IID repository that includes genomic data.",
+                "description": "The Bacterial and Viral Bioinformatics Resource Center (BV-BRC) is an information system designed to support research on bacterial and viral infectious diseases. The BV-BRC combines the data and tools from the Legacy BRC resources: PATRIC, the bacterial BRC, and IRD and ViPR, the viral BRCs.",
+                "identifier": "Bacterial and Viral Bioinformatics Resource Center",
+                "name": "Bacterial and Viral Bioinformatics Resource Center",
+                "schema": {
+                    "taxon_id": "infectiousAgent",
+                    "species": "name",
+                    "genome_count": "collectionSize",
+                    "completion_date": "dateCreated",
+                    "date_modified": "dateModified",
+                    "collection_date": "temporalCoverage",
+                    "isolation_country": "spatialCoverage",
+                    "host_name": "species",
+                    "disease": "healthCondition",
+                },
+                "url": "https://www.bv-brc.org/",
+                "conditionsOfAccess": "Open",
+                "genre": "IID",
+                "schedule": "Weekly",
             }
         }
 
