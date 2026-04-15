@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 UPDATABLE_PREFERENCES = frozenset(
-    {"ai_toggle_preference", "contact_preference", "beta"}
+    {"ai_toggle_preference", "contact_preference", "beta", "feedback_preference"}
 )
 
 
@@ -53,6 +53,7 @@ def _seed_user_doc(user: dict) -> dict:
         "favorite_datasets": [],
         "contact_preference": False,
         "beta": False,
+        "feedback_preference": False,
         "created": now,
         "updated": now,
     }
