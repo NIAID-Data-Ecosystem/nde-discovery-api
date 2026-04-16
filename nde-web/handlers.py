@@ -1958,6 +1958,34 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Open",
                 "genre": "IID",
                 "schedule": "Weekly",
+            },
+            "mwccs": {
+                "abstract": "MACS/WIHS Combined Cohort is a NIAID supported IID repository that includes clinical data.",
+                "description": "The MWCCS is a collaborative research effort that aims to understand and reduce the impact of chronic health conditions—including heart, lung, blood, and sleep (HLBS) disorders—that affect people living with HIV. The study is designed to investigate a spectrum of questions relating to the basic science, clinical science, and epidemiology of HIV infection in the U.S., with a focus on comorbidities among men and women living with HIV.",
+                "identifier": "The Multicenter AIDS Cohort Study (MACS) / Women's Interagency HIV Study (WIHS) Combined Cohort Study (MWCCS)",
+                "name": "MACS/WIHS Combined Cohort",
+                "schema": {
+                    "name": "name",
+                    "filename": "identifier",
+                    "url": "url",
+                    "date_created": "dateCreated",
+                    "what_measured": "variableMeasured",
+                    "measures": "measurementTechnique",
+                    "how_often": "measurementFrequency",
+                    "participant_count": "collectionSize",
+                    "participant_description": "description",
+                    "median_age": "sample.age",
+                    "hiv_percent": "sample.sampleQuantity",
+                    "women_percent": "sample.sampleQuantity",
+                    "temporal_coverage": "temporalCoverage",
+                    "learning_points": "abstract",
+                    "authors": "creator",
+                    "health_condition": "healthCondition"
+                },
+                "url": "https://statepi.jhsph.edu/mwccs/",
+                "conditionsOfAccess": "Restricted",
+                "genre": "IID",
+                "schedule": "Weekly",
             }
         }
 
