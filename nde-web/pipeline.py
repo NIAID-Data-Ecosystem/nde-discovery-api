@@ -100,6 +100,12 @@ class _TTLCache:
         self._data[key] = (time.monotonic() + self.ttl_s, value)
 
 
+@lru_cache(maxsize=4)
+def _load_tokenizer(tokenizer_id: str):
+    from tokenizers import Tokenizer
+    return Tokenizer.from_pretrained(tokenizer_id)
+
+
 class _SageMakerEmbeddingClient:
     def __init__(
         self,
@@ -108,12 +114,16 @@ class _SageMakerEmbeddingClient:
         content_type: str,
         accept: str,
         timeout_s: int,
+        tokenizer_id: str | None = None,
+        max_tokens: int = 512,
     ):
         self.endpoint_name = endpoint_name
         self.region = region
         self.content_type = content_type
         self.accept = accept
         self.timeout_s = int(timeout_s)
+        self.tokenizer_id = tokenizer_id
+        self.max_tokens = int(max_tokens)
 
         self._client = boto3.client(
             "sagemaker-runtime",
@@ -125,7 +135,22 @@ class _SageMakerEmbeddingClient:
             ),
         )
 
+    def _truncate(self, text: str) -> str:
+        if not self.tokenizer_id:
+            return text
+        tokenizer = _load_tokenizer(self.tokenizer_id)
+        # Encode without special tokens so truncation is based on raw content
+        # tokens; the endpoint adds [CLS]/[SEP] itself (2 tokens), so reserve
+        # headroom below max_tokens.
+        encoding = tokenizer.encode(text, add_special_tokens=False)
+        ids = encoding.ids
+        budget = self.max_tokens - 2
+        if len(ids) <= budget:
+            return text
+        return tokenizer.decode(ids[:budget], skip_special_tokens=True)
+
     def embed_one(self, text: str):
+        text = self._truncate(text)
         payload = json.dumps({"inputs": text}).encode("utf-8")
         response = self._client.invoke_endpoint(
             EndpointName=self.endpoint_name,
@@ -185,6 +210,8 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                 cfg, "AI_SAGEMAKER_CONTENT_TYPE", "application/json"),
             accept=getattr(cfg, "AI_SAGEMAKER_ACCEPT", "application/json"),
             timeout_s=getattr(cfg, "AI_SAGEMAKER_TIMEOUT", 30),
+            tokenizer_id=getattr(cfg, "AI_EMBEDDING_TOKENIZER", None),
+            max_tokens=getattr(cfg, "AI_EMBEDDING_MAX_TOKENS", 512),
         )
 
     @staticmethod
