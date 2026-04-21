@@ -1986,6 +1986,20 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Restricted",
                 "genre": "IID",
                 "schedule": "Weekly",
+            },
+            "dbaasp": {
+                "abstract": "Database of Antimicrobial Activity and Structure of Peptides (DBAASP) is a NIAID supported IID repository that includes structure data.",
+                "description": "The Database of Antimicrobial Activity and Structure of Peptides (DBAASP) has been created to provide users with detailed information on experimentally tested peptides regarding their chemical structure and activity against specific targets. The database is manually curated and contains information on ribosomal, nonribosomal, and synthetic peptides that show antimicrobial activity as Monomers, Multimers, and Multi-Peptides.",
+                "identifier": "Database of Antimicrobial Activity and Structure of Peptides",
+                "name": "Database of Antimicrobial Activity and Structure of Peptides (DBAASP)",
+                "schema": {
+                    "targetActivities.targetSpecies.value": "infectiousAgent.name, name, description, url, _id",
+                    "peptide_count_per_species": "collectionSize.minValue",
+                },
+                "url": "https://dbaasp.org/",
+                "conditionsOfAccess": "Open",
+                "genre": "IID",
+                "schedule": "Weekly",
             }
         }
 
