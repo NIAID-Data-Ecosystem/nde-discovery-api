@@ -1,9 +1,278 @@
 import json
 import logging
 import os
+from urllib.parse import urlsplit
 
-from biothings.web.handlers import MetadataSourceHandler
-from tornado.web import RequestHandler
+import elasticsearch
+from biothings.web.auth.authn import BioThingsAuthnMixin
+from biothings.web.auth.oauth_mixins import GithubOAuth2Mixin, OrcidOAuth2Mixin
+from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
+from tornado.httputil import url_concat
+from tornado.web import HTTPError, RequestHandler
+from user_data import _seed_user_doc, _user_doc_id
+
+
+def _allowed_frontend_origins(config):
+    origins = []
+    frontend_origin = getattr(config, "FRONTEND_ORIGIN", None)
+    if frontend_origin:
+        origins.append(frontend_origin)
+    origins.extend(getattr(config, "FRONTEND_ORIGIN_ALIASES", []) or [])
+    return origins
+
+
+def safe_next_url(handler, default="/"):
+    """Validate `next` to prevent open redirects and enforce SOP constraints.
+
+    Allowed values:
+    - absolute URL to an allowlisted frontend origin
+    - relative path beginning with a single '/'
+    """
+
+    raw_next = handler.get_argument("next", default)
+    if not raw_next:
+        return default
+
+    # Allow relative paths only (not protocol-relative URLs).
+    if raw_next.startswith("/") and not raw_next.startswith("//"):
+        return raw_next
+
+    try:
+        parsed = urlsplit(raw_next)
+    except Exception:
+        return default
+
+    if parsed.scheme not in ("http", "https"):
+        return default
+
+    origin = f"{parsed.scheme}://{parsed.netloc}" if parsed.netloc else ""
+    if origin not in _allowed_frontend_origins(handler.biothings.config):
+        return default
+
+    path = parsed.path or "/"
+    query = f"?{parsed.query}" if parsed.query else ""
+    fragment = f"#{parsed.fragment}" if parsed.fragment else ""
+    return origin + path + query + fragment
+
+
+def set_user_session_cookie(handler, value):
+    cookie_domain = getattr(handler.biothings.config, "COOKIE_DOMAIN", None)
+    handler.set_secure_cookie(
+        "user",
+        value,
+        domain=cookie_domain,
+        path="/",
+        secure=True,
+        httponly=True,
+        samesite="None",
+    )
+
+
+def clear_user_session_cookie(handler):
+    cookie_domain = getattr(handler.biothings.config, "COOKIE_DOMAIN", None)
+    handler.clear_cookie("user", domain=cookie_domain, path="/")
+
+
+class BaseLoginHandler(BaseAPIHandler):
+    def set_cache_header(self, cache_value):
+        # Disable cache headers for auth endpoints
+        self.set_header("Cache-Control", "private, max-age=0, no-cache")
+
+    async def _ensure_user_profile(self, user_dict: dict):
+        """Create a user profile document in ES if one does not yet exist.
+
+        Called after every successful OAuth login so the profile is always
+        available for the /user/data endpoints.
+        """
+        es = self.biothings.elasticsearch.async_client
+        index = self.biothings.config.ES_USER_INDEX
+        doc_id = _user_doc_id(user_dict)
+        try:
+            await es.get(id=doc_id, index=index)
+        except elasticsearch.exceptions.NotFoundError:
+            doc = _seed_user_doc(user_dict)
+            await es.index(id=doc_id, body=doc, index=index)
+            logging.info("Created new user profile %s", doc_id)
+        except Exception:
+            # Non-fatal: the profile will be created lazily via GET /user/data
+            logging.warning(
+                "Could not ensure user profile %s", doc_id, exc_info=True
+            )
+
+
+class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
+    """Return the authenticated user profile or challenge the client."""
+
+    def set_default_headers(self):
+        super().set_default_headers()
+        origin = self.request.headers.get("Origin")
+        allowed_origin = getattr(
+            self.biothings.config, "FRONTEND_ORIGIN", None)
+        if origin and allowed_origin and origin == allowed_origin:
+            self.set_header("Access-Control-Allow-Origin", origin)
+            self.set_header("Access-Control-Allow-Credentials", "true")
+            self.set_header("Access-Control-Allow-Methods", "GET, OPTIONS")
+            req_headers = self.request.headers.get(
+                "Access-Control-Request-Headers"
+            )
+            self.set_header(
+                "Access-Control-Allow-Headers",
+                req_headers or "Content-Type",
+            )
+            self.set_header("Vary", "Origin")
+
+    def options(self):
+        # CORS preflight for frontend fetch() calls.
+        self.set_status(204)
+        self.finish()
+
+    def get(self):
+        if self.current_user:
+            self.write(self.current_user)
+            return
+
+        header = self.get_www_authenticate_header()
+        if header:
+            self.clear()
+            self.set_header("WWW-Authenticate", header)
+            self.set_status(401, "Unauthorized")
+            self.finish()
+            return
+
+        raise HTTPError(403)
+
+
+class LogoutHandler(BaseLoginHandler):
+    """Clear auth cookie and redirect home."""
+
+    def get(self):
+        clear_user_session_cookie(self)
+        self.redirect(safe_next_url(self, "/"))
+
+
+class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
+    """Initiate or complete the GitHub OAuth2 handshake."""
+
+    SCOPES = []
+    CALLBACK_PATH = "/login/github"
+
+    async def get(self):
+        client_id = self.biothings.config.GITHUB_CLIENT_ID
+        client_secret = self.biothings.config.GITHUB_CLIENT_SECRET
+        redirect_uri = url_concat(
+            self.biothings.config.WEB_HOST + self.CALLBACK_PATH,
+            {"next": self.get_argument("next", "/")},
+        )
+        code = self.get_argument("code", None)
+
+        if not code:
+            logging.info("Redirecting to GitHub for login")
+            self.authorize_redirect(
+                redirect_uri=redirect_uri,
+                client_id=client_id,
+                scope=self.SCOPES,
+            )
+            return
+
+        logging.info("GitHub returned code, exchanging for token")
+        token = await self.github_get_oauth2_token(
+            client_id=client_id,
+            client_secret=client_secret,
+            code=code,
+        )
+        user = await self.github_get_authenticated_user(token["access_token"])
+        formatted = self._format_user_record(user)
+        logging.info("GitHub auth response: %s", formatted)
+        if formatted:
+            set_user_session_cookie(self, formatted)
+            await self._ensure_user_profile(json.loads(formatted))
+        else:
+            clear_user_session_cookie(self)
+        self.redirect(safe_next_url(self, "/"))
+
+    @staticmethod
+    def _format_user_record(user):
+        payload = {
+            "username": user.get("login"),
+            "oauth_provider": "GitHub",
+        }
+        if not payload["username"]:
+            return None
+        for field in ["name", "email", "avatar_url", "company"]:
+            value = user.get(field)
+            if value:
+                key = "organization" if field == "company" else field
+                payload[key] = value
+        return json.dumps(payload)
+
+
+class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
+    """Initiate or complete the ORCID OAuth2 handshake."""
+
+    SCOPES = ["/authenticate", "openid"]
+    CALLBACK_PATH = "/login/orcid"
+
+    async def get(self):
+        client_id = self.biothings.config.ORCID_CLIENT_ID
+        client_secret = self.biothings.config.ORCID_CLIENT_SECRET
+        redirect_uri = url_concat(
+            self.biothings.config.WEB_HOST + self.CALLBACK_PATH,
+            {"next": self.get_argument("next", "/")},
+        )
+        code = self.get_argument("code", None)
+
+        if not code:
+            logging.info("Redirecting to ORCID for login")
+            self.authorize_redirect(
+                redirect_uri=redirect_uri,
+                client_id=client_id,
+                scope=self.SCOPES,
+            )
+            return
+
+        logging.info("ORCID returned code, exchanging for token")
+        token = await self.orcid_get_oauth2_token(
+            client_id=client_id,
+            client_secret=client_secret,
+            code=code,
+        )
+        orcid_id = token.get("orcid")
+        user = await self.orcid_get_authenticated_user_record(token, orcid_id)
+        formatted = self._format_user_record(user)
+        logging.info("ORCID auth response: %s", formatted)
+        if formatted:
+            set_user_session_cookie(self, formatted)
+            await self._ensure_user_profile(json.loads(formatted))
+        else:
+            clear_user_session_cookie(self)
+        self.redirect(safe_next_url(self, "/"))
+
+    @staticmethod
+    def _format_user_record(user):
+        identifier = user.get("orcid-identifier", {}).get("path")
+        if not identifier:
+            return None
+        payload = {
+            "username": identifier,
+            "oauth_provider": "ORCID",
+        }
+        person = user.get("person", {})
+        given = person.get("name", {}).get("given-names", {}).get("value")
+        family = person.get("name", {}).get("family-name", {}).get("value")
+        if given:
+            payload["name"] = given if not family else f"{given} {family}"
+        emails = person.get("emails", {}).get("email", [])
+        if emails:
+            payload["email"] = emails[0].get("email")
+        employment = (
+            user.get("activities-summary", {})
+            .get("employments", {})
+            .get("employment-summary", [])
+        )
+        if employment:
+            org = employment[0].get("organization", {})
+            payload["organization"] = org.get("name")
+        return json.dumps({k: v for k, v in payload.items() if v})
 
 
 class WebAppHandler(RequestHandler):
@@ -45,6 +314,493 @@ class NDESourceHandler(MetadataSourceHandler):
             #       'url': 'The source's URL',
             #       'identifier':'includedInDataCatalog.name',
             # }
+            "ndex": {
+                "name": "The Network Data Exchange (NDEx)",
+                "abstract": "The Network Data Exchange (NDEx) is a NIH supported generalist repository that includes generalist data.",
+                "description": "The NDEx Project provides an open-source framework where scientists and organizations can store, share, manipulate, and publish biological network knowledge. One of the goals of the project is to create a home for models that are currently available only as figures, tables, or supplementary information, such as networks produced via systematic mining and integration of large-scale molecular data. The NDEx project does not compete with existing pathway and interaction databases, such as Pathway Commons, KEGG, or Reactome; instead, NDEx provides a novel, common distribution channel for these efforts, preserving their identity and attribution rather than subsuming them.",
+                "schema": {
+                    "name": "name",
+                    "description": "description",
+                    "creationTime": "dateCreated",
+                    "modificationTime": "dateModified",
+                    "lastmodifieddate": "dateModified",
+                    "ndex:modificationTime": "dateModified",
+                    "visibility": "conditionsOfAccess",
+                    "cxFileSize": "distribution.contentSize",
+                    "cxFormat": "distribution.encodingFormat",
+                    "author": "author.name",
+                    "rightsHolder": "author.name",
+                    "owner": "author.name",
+                    "bel:author": "author.name",
+                    "Author": "author.name",
+                    "disease": "healthCondition",
+                    "diseases_id": "healthCondition",
+                    "organism": "species",
+                    "species": "species",
+                    "idmapper.species": "species",
+                    "species_common_name": "species",
+                    "ORGANISM": "species",
+                    "reference": "isRelatedTo.url",
+                    "figureTitle": "isRelatedTo.name",
+                    "figureLink": "isRelatedTo.url",
+                    "uri": "isRelatedTo.url",
+                    "rights": "license",
+                    "license": "license",
+                    "bel:copyright": "license",
+                    "doi": "doi",
+                    "labels": "keywords",
+                    "network type": "keywords",
+                    "networkType": "keywords",
+                    "dc:type": "keywords",
+                    "wikipathwaysIRI": "sameAs",
+                    "URI": "sameAs",
+                    "KEGG_PATHWAY_LINK": "sameAs",
+                    "prov:wasDerivedFrom": "wasDerivedFrom",
+                    "pmcid": "citation.pmcid",
+                    "paperTitle": "citation.name",
+                    "paperLink": "citation.url",
+                    "Data source": "sdPublisher",
+                    "TCGA Data Source": "sdPublisher",
+                    "source": "sdPublisher",
+                    "dc:date": "date",
+                    "dataSource": "isBasedOn",
+                    "Source": "isBasedOn",
+                    "Treatment": "variableMeasured",
+                    "methods": "measurementTechnique",
+                },
+                "url": "https://www.ndexbio.org/",
+                "identifier": "NDEx",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+                "schedule": "Weekly",
+            },
+            "figshare": {
+                "name": "Figshare",
+                "abstract": "Figshare is a NIH supported generalist repository that includes generalist data.",
+                "description": "Figshare is a repository where users can make all of their research outputs available in a citable, shareable and discoverable manner.",
+                "schema": {
+                    "title": "name",
+                    "creator": "author",
+                    "subject": "keywords",
+                    "description": "description",
+                    "date": "dateModified",
+                    "description": "description",
+                    "publisher": "sdPublisher",
+                    "type": "@type",
+                    "identifier": "doi",
+                    "language": "language",
+                    "relation": "url",
+                    "license": "license",
+                    "issued": "datePublished",
+                    "sponsor": "funding",
+                },
+                "url": "https://figshare.com/",
+                "identifier": "Figshare",
+                "conditionsOfAccess": "Unknown",
+                "genre": "Generalist",
+                "schedule": "Manual",
+            },
+            "veupath_collections": {
+                "name": "VEuPath Collections",
+                "abstract": "VEuPathCollections are NIAID supported IID component repositories of VEuPathDB which include collections of genomic data.",
+                "description": "VEuPath Collections is the collection of component websites of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) that have been constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). \nThe VEuPath Collections include the following component websites as individual collections: \nAmoebaDB \nCryptoDB \nGiardiaDB \nHostDB \nPlasmoDB \nVectorBase \nFungiDB \nMicrosporidiaDB \nToxoDB \nTrichDB \nTriTrypDB \nPiroplasmaDB.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://veupathdb.org/veupathdb/app/",
+                "identifier": "VEuPathDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "schedule": "Weekly",
+            },
+            "amoebadb": {
+                "name": "AmoebaDB",
+                "abstract": "AmoebaDB is a NIAID supported IID repository that includes genomic data.",
+                "description": "AmoebaDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK).These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://amoebadb.org/amoeba/app",
+                "identifier": "AmoebaDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "cryptodb": {
+                "name": "CryptoDB",
+                "abstract": "CryptoDB is a NIAID supported IID repository that includes genomic data.",
+                "description": "CryptoDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://cryptodb.org/cryptodb/app",
+                "identifier": "CryptoDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "giardiadb": {
+                "name": "GiardiaDB",
+                "abstract": "GiardiaDB is a NIAID supported IID repository that includes genomic data.",
+                "description": "GiardiaDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://giardiadb.org/giardiadb/app",
+                "identifier": "GiardiaDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "hostdb": {
+                "name": "HostDB",
+                "abstract": "HostDB is a NIAID supported IID repository that includes genomic data.",
+                "description": "HostDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://hostdb.org/hostdb/app",
+                "identifier": "HostDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "plasmodb": {
+                "name": "PlasmoDB",
+                "abstract": "PlasmoDB is a NIAID supported IID repository that includes genomic data.",
+                "description": "PlasmoDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://plasmodb.org/plasmo/app",
+                "identifier": "PlasmoDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "vectorbase": {
+                "name": "VectorBase",
+                "abstract": "VectorBase is a NIAID supported IID repository that includes genomic data.",
+                "description": "VectorBase is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://vectorbase.org/vectorbase/app",
+                "identifier": "VectorBase",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "fungidb": {
+                "name": "FungiDB",
+                "abstract": "FungiDB is a NIAID supported IID repository that includes genomic data.",
+                "description": "FungiDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://fungidb.org/fungidb/app",
+                "identifier": "FungiDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "microsporidiadb": {
+                "name": "MicrosporidiaDB",
+                "abstract": "MicrosporidiaDB is a NIAID supported IID repository that includes genomic data.",
+                "description": "MicrosporidiaDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://microsporidiadb.org/micro/app",
+                "identifier": "MicrosporidiaDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "toxodb": {
+                "name": "ToxoDB",
+                "abstract": "ToxoDB is a NIAID supported IID repository that includes genomic data.",
+                "description": "ToxoDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://toxodb.org/toxo/app",
+                "identifier": "ToxoDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "trichdb": {
+                "name": "TrichDB",
+                "abstract": "TrichDB is a NIAID supported IID repository that includes genomic data.",
+                "description": "TrichDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://trichdb.org/trichdb/app",
+                "identifier": "TrichDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "tritrypdb": {
+                "name": "TriTrypDB",
+                "abstract": "TriTrypDB is a NIAID supported IID repository that includes genomic data.",
+                "description": "TriTrypDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://tritrypdb.org/tritrypdb/app",
+                "identifier": "TriTrypDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "piroplasmadb": {
+                "name": "PiroplasmaDB",
+                "abstract": "PiroplasmaDB is a NIAID supported IID repository that includes genomic data.",
+                "description": "PiroplasmaDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+                "schema": {
+                    "id": "identifer",
+                    "displayName": "name",
+                    "contact_name": "author",
+                    "summary": "description",
+                    "type": "measurementTechnique",
+                    "sdPublisher": "project_id",
+                    "short_attribution": "creditText",
+                    "release_policy": "conditionOfAccess",
+                    "version": "dateModified",
+                    "author": "affiliation",
+                    "GenomeHistory": "dateUpdated",
+                    "Version": "datePublished",
+                    "organism": "species",
+                    "HyperLinks": "distribution",
+                    "gene_count": "variableMeasured",
+                    "gene_type": "GeneTypeCounts",
+                },
+                "url": "https://piroplasmadb.org/piro/app",
+                "identifier": "PiroplasmaDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "parentCollection": {"id": "veupathdb"},
+                "schedule": "Weekly",
+            },
+            "massive": {
+                "name": "MassIVE",
+                "abstract": "MassIVE is a NIH supported Basic science repository that includes mass spectrometry data.",
+                "description": "MassIVE is a community resource developed by the NIH-funded Center for Computational Mass Spectrometry to promote the global, free exchange of mass spectrometry data. MassIVE datasets can be assigned ProteomeXchange accessions to satisfy publication requirements.",
+                "schema": {
+                    "dataset": "identifier",
+                    "task": "url",
+                    "repo_path": "distribution",
+                    "title": "name",
+                    "site": "sdPublisher",
+                    "description": "description",
+                    "keywords": "keywords",
+                    "create_time": "dateCreated",
+                    "instrument_resolved": "measurementTechnique",
+                    "species_resolved": "species",
+                    "pis": "author",
+                    "publications": "citation",
+                    "privacy": "conditionsOfAccess",
+                },
+                "url": "https://massive.ucsd.edu/ProteoSAFe/static/massive.jsp",
+                "identifier": "MassIVE",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+                "schedule": "Weekly",
+            },
             "malariagen": {
                 "name": "MalariaGEN",
                 "abstract": "Malaria Genomic Epidemiology Network (MalariaGEN) is a IID repository that includes clinical data.",
@@ -62,6 +818,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://www.malariagen.net/",
                 "identifier": "MalariaGEN",
+                "conditionsOfAccess": "Varied",
+                "genre": "IID",
+                "schedule": "Weekly",
             },
             "dryad": {
                 "name": "Dryad Digital Repository",
@@ -91,6 +850,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://datadryad.org",
                 "identifier": "Dryad Digital Repository",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+                "schedule": "Monthly",
             },
             "vivli": {
                 "name": "Vivli",
@@ -120,6 +882,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://vivli.org/",
                 "identifier": "Vivli",
+                "conditionsOfAccess": "Restricted",
+                "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "ncbi_pmc": {
                 "name": "NCBI PMC",
@@ -140,6 +905,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/pmc/",
                 "identifier": "NCBI PMC",
+                "conditionsOfAccess": "Unknown",
+                "genre": "Generalist",
+                "schedule": "Manual",
             },
             "veupathdb": {
                 "name": "VEuPathDB",
@@ -165,6 +933,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://veupathdb.org/veupathdb/app/",
                 "identifier": "VEuPathDB",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "schedule": "Weekly",
             },
             "acd_niaid": {
                 "name": "AccessClinicalData@NIAID",
@@ -186,6 +957,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://accessclinicaldata.niaid.nih.gov/",
                 "identifier": "AccessClinicalData@NIAID",
+                "conditionsOfAccess": "Varied",
+                "genre": "IID",
+                "schedule": "Weekly",
             },
             "sb_apps": {
                 "name": "Seven Bridges Public Apps Gallery",
@@ -214,6 +988,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://workspace.niaiddata.org/public/apps",
                 "identifier": "PublicApps@SevenBridges",
+                "conditionsOfAccess": "Unknown",
+                "genre": "Generalist",
+                "schedule": "Manual",
             },
             "zenodo": {
                 "name": "Zenodo",
@@ -238,6 +1015,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://zenodo.org/",
                 "identifier": "Zenodo",
+                "conditionsOfAccess": "Varied",
+                "genre": "Generalist",
+                "schedule": "Quarterly",
             },
             "dde": {
                 "name": "Data Discovery Engine",
@@ -256,6 +1036,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://discovery.biothings.io/",
                 "identifier": "Data Discovery Engine",
+                "conditionsOfAccess": "Varied",
+                "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "ncbi_geo": {
                 "name": "NCBI GEO",
@@ -275,6 +1058,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/geo/",
                 "identifier": "NCBI GEO",
+                "conditionsOfAccess": "Unknown",
+                "genre": "Generalist",
+                "schedule": "Manual",
             },
             "immport": {
                 "name": "ImmPort",
@@ -292,7 +1078,10 @@ class NDESourceHandler(MetadataSourceHandler):
                     "date": "date",
                 },
                 "url": "https://www.immport.org/shared/home",
-                "identifier": "ImmPort",
+                "identifier": "ImmPort - Bioinformatics For the Future of Immunology",
+                "conditionsOfAccess": "Closed",
+                "genre": "IID",
+                "schedule": "Weekly",
             },
             "omicsdi": {
                 "name": "OmicsDI",
@@ -311,6 +1100,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://www.omicsdi.org/",
                 "identifier": "Omics Discovery Index (OmicsDI)",
+                "conditionsOfAccess": "Unknown",
+                "genre": "Generalist",
+                "schedule": "Quarterly",
             },
             "mendeley": {
                 "name": "Mendeley Data",
@@ -333,6 +1125,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://data.mendeley.com/",
                 "identifier": "Mendeley",
+                "conditionsOfAccess": "Varied",
+                "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "reframedb": {
                 "name": "ReframeDB",
@@ -357,6 +1152,9 @@ class NDESourceHandler(MetadataSourceHandler):
                 },
                 "url": "https://reframedb.org/",
                 "identifier": "ReframeDB",
+                "conditionsOfAccess": "Restricted",
+                "genre": "IID",
+                "schedule": "Weekly",
             },
             "clinepidb": {
                 "abstract": "ClinEpiDB is a NIAID supported IID repository that includes epidemiological data.",
@@ -381,12 +1179,15 @@ class NDESourceHandler(MetadataSourceHandler):
                     "HyperLinks": "isBasedOn.url",
                 },
                 "url": "https://clinepidb.org/ce/app",
+                "conditionsOfAccess": "Varied",
+                "genre": "IID",
+                "schedule": "Weekly",
             },
             "lincs": {
                 "abstract": "The Library of Integrated Network-Based Cellular Signatures (LINCS) Data Portal is an NIH supported repository that includes gene expression and other cellular processes data.",
                 "description": "The BD2K-LINCS DCIC is comprised of four major components: Integrated Knowledge Environment (IKE), Data Science Research (DSR), Community Training and Outreach (CTO) and Consortium Coordination and Administration (CCA). The Center is constructing a high-capacity scalable integrated knowledge environment enabling federated access, intuitive querying and integrative analysis and visualization across all LINCS resources and many additional external data types from other relevant resources. The Center’s data science research projects are aimed at addressing various data integration and intracellular molecular regulatory network challenges. The Center aims to develop: 1) methods to connect cellular and organismal phenotypes with molecular cellular signatures, and 2) novel data visualization methods for dynamically interacting with large-genomics and proteomics datasets.",
                 "identifier": "LINCS",
-                "name": "BD2K-LINCS DCIC",
+                "name": "LINCS",
                 "schema": {
                     "centerdatasetid": "url",
                     "funding": "funding",
@@ -416,6 +1217,9 @@ class NDESourceHandler(MetadataSourceHandler):
                     "protein": "keywords",
                 },
                 "url": "https://lincsportal.ccs.miami.edu/",
+                "conditionsOfAccess": "Unknown",
+                "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "dataverse": {
                 "abstract": "Harvard Dataverse is a GREI repository that includes most data types and domains.",
@@ -450,6 +1254,9 @@ class NDESourceHandler(MetadataSourceHandler):
                     "authors": "author.name",
                 },
                 "url": "https://dataverse.harvard.edu/",
+                "conditionsOfAccess": "Varied",
+                "genre": "Generalist",
+                "schedule": "Quarterly",
             },
             "hubmap": {
                 "abstract": "The Human BioMolecular Atlas Program (HuBMAP) is an NIH supported repository that includes multimodal data of healthy cells in the human body.",
@@ -493,6 +1300,9 @@ class NDESourceHandler(MetadataSourceHandler):
                     "metadata.protocols_io_doi": "isBasedOn.doi",
                 },
                 "url": "https://hubmapconsortium.org/",
+                "conditionsOfAccess": "Varied",
+                "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "ncbi_sra": {
                 "abstract": "Sequence Read Archive (SRA) is the NIH supported largest publicly available repository of high throughput sequencing data that includes raw sequencing data and alignment information for most domains.",
@@ -524,6 +1334,9 @@ class NDESourceHandler(MetadataSourceHandler):
                     "HapMap sample ID": "isBasedOn.identifier",
                 },
                 "url": "https://www.ncbi.nlm.nih.gov/sra",
+                "conditionsOfAccess": "Varied",
+                "genre": "Generalist",
+                "schedule": "Quarterly",
             },
             "vdj": {
                 "abstract": "VDJServer is a NIAID supported repository that includes immune repertoire sequencing data.",
@@ -563,9 +1376,11 @@ class NDESourceHandler(MetadataSourceHandler):
                     "subject.species.label": "species.name",
                     "subject.diagnosis.disease_diagnosis.label": "healthCondition.name",
                     "subject.diagnosis.disease_diagnosis.id": "healthCondition.identifier",
+                    "assigned based on discussion": "license, usageInfo, conditionsOfAccess, variableMeasured",
                 },
                 "conditionsOfAccess": "Open",
                 "url": "https://vdj-staging.tacc.utexas.edu/community/",
+                "schedule": "Weekly",
             },
             "microbiomedb": {
                 "abstract": "MicrobiomeDB is a NIAID supported repository that includes clinical microbiome data and analysis tools.",
@@ -593,7 +1408,10 @@ class NDESourceHandler(MetadataSourceHandler):
                     "AssociatedDatasets": "isPartOf, isRelatedTo",
                     "HyperLinks": "url",
                 },
-                "url": "https://beta.microbiomedb.org/mbio.beta/app/",
+                "url": "https://microbiomedb.org/mbio/app",
+                "conditionsOfAccess": "Open",
+                "genre": "IID",
+                "schedule": "Weekly",
             },
             "qiita": {
                 "abstract": "Qiita is a repository that includes microbiome data and analysis tools.",
@@ -611,6 +1429,9 @@ class NDESourceHandler(MetadataSourceHandler):
                     "ebi_study_accession": "mainEntityOfPage",
                 },
                 "url": "https://qiita.ucsd.edu/",
+                "conditionsOfAccess": "Unknown",
+                "genre": "IID",
+                "schedule": "Weekly",
             },
             "hca": {
                 "abstract": "The Human Cell Atlas is a repository that includes multimodal data of cells in the human body.",
@@ -641,6 +1462,9 @@ class NDESourceHandler(MetadataSourceHandler):
                     "submissionDate": "datePublished",
                 },
                 "url": "https://www.humancellatlas.org/",
+                "conditionsOfAccess": "Varied",
+                "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "flowrepository": {
                 "abstract": "Flow Repository is a repository that includes flow cytometry data.",
@@ -668,6 +1492,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "http://flowrepository.org/",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "dash": {
                 "abstract": "The Data and Specimen Hub (DASH) is an NICHD supported repository that includes clinical data and specimens.",
@@ -700,6 +1525,9 @@ class NDESourceHandler(MetadataSourceHandler):
                     "datasetFormat": "encodingFormat",
                 },
                 "url": "https://dash.nichd.nih.gov/",
+                "conditionsOfAccess": "Restricted",
+                "genre": "Generalist",
+                "schedule": "Weekly",
             },
             "covid_radx": {
                 "abstract": "COVID RADx Data Hub is a NIH supported IID repository that includes clinical data.",
@@ -738,6 +1566,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://radxdatahub.nih.gov/",
                 "conditionsOfAccess": "Unknown",
                 "genre": "IID",
+                "schedule": "Manual",
             },
             "biostudies": {
                 "abstract": "BioStudies is a repository that includes life sciences data by organising links to data in other databases at EMBL-EBI or elsewhere.",
@@ -772,6 +1601,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.ebi.ac.uk/biostudies/",
                 "conditionsOfAccess": "Unknown",
                 "genre": "Generalist",
+                "schedule": "Manual",
             },
             "biotools": {
                 "abstract": "bio.tools is an ELIXIR supported tool repository that includes information about software tools, databases and services.",
@@ -810,6 +1640,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "genre": "Generalist",
                 "conditionsOfAccess": "Varied",
                 "type": "Computational Tool Repository",
+                "schedule": "Manual",
             },
             "dbgap": {
                 "abstract": "Database of Genotypes and Phenotypes (dbGaP) is a NIH supported IID repository that includes multiomic data.",
@@ -846,6 +1677,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.ncbi.nlm.nih.gov/gap",
                 "genre": "Generalist",
                 "conditionsOfAccess": "Varied",
+                "schedule": "Manual",
             },
             "tycho": {
                 "abstract": "Project TYCHO is a NIH supported IID repository that includes clinical data.",
@@ -878,6 +1710,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.tycho.pitt.edu/",
                 "genre": "IID",
                 "conditionsOfAccess": "Closed",
+                "schedule": "Weekly",
             },
             "immunespace": {
                 "abstract": "ImmuneSpace is a NIAID supported IID repository that includes immune data.",
@@ -898,14 +1731,288 @@ class NDESourceHandler(MetadataSourceHandler):
                 "url": "https://www.immunespace.org/",
                 "conditionsOfAccess": "Closed",
                 "genre": "IID",
+                "schedule": "Weekly",
             },
+            "ncbi_bioproject": {
+                "abstract": "NCBI BioProject is a NIH supported generalist repository that includes multiomic data.",
+                "description": "A BioProject is a collection of biological data related to a single initiative, originating from a single organization or from a consortium. A BioProject record provides users a single place to find links to the diverse data types generated for that project.",
+                "identifier": "NCBI BioProject",
+                "name": "NCBI BioProject",
+                "schema": {
+                    "ProjectDescr/Title": "name",
+                    "ProjectDescr/Name": "name",
+                    "ProjectDescr/Description": "description",
+                    "ProjectID/ArchiveID/@accession": "identifier, url, _id",
+                    "Submission/@submitted": "datePublished",
+                    "Submission/@last_update": "dateModified",
+                    "ProjectDataTypeSet/DataType": "variableMeasured",
+                    "IntendedDataTypeSet/DataType": "variableMeasured",
+                    "Objectives/Data/@data_type": "variableMeasured",
+                    "ProjectTypeSubmission/Method/@method_type": "measurementTechnique",
+                    "ProjectTypeSubmission/Target/Organism/@taxID": "species.identifier",
+                    "ProjectTypeSubmission/Target/Organism/OrganismName": "species.name",
+                    "ProjectDescr/Grant/@GrantId": "funding.identifier",
+                    "ProjectDescr/Grant/Title": "funding.name",
+                    "ProjectDescr/Grant/Agency/@abbr": "funding.funder.alternateName",
+                    "ProjectDescr/Grant/Agency": "funding.funder.name",
+                    "ProjectDescr/Grant/PI/Given": "author.givenName",
+                    "ProjectDescr/Grant/PI/Last": "author.familyName",
+                    "ProjectDescr/Grant/PI/@affil": "author.affiliation.name",
+                    "ProjectTypeSubmission/Target/Provider": "author.name",
+                    "Submission/Description/Organization/Name": "author.name",
+                    "Submission/Description/Organization/@role": "author.role",
+                    "ProjectDescr/Publication/@id": "citation.pmid, citation.pmcid",
+                    "ProjectLinks/Link/ProjectIDRef/@accession": "hasPart.identifier, isPartOf.identifier",
+                    "Submission/Description/Access": "conditionsOfAccess",
+                    "ProjectDescr/Relevance/Medical": "keywords",
+                    "ProjectTypeSubmission/Target/@sample_scope": "keywords",
+                },
+                "url": "https://www.ncbi.nlm.nih.gov/bioproject/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+                "schedule": "Weekly",
+            },
+            "pdb": {
+                "abstract": "Protein Data Bank is a NIAID supported generalist repository that includes structure data.",
+                "description": "RCSB PDB (RCSB.org) is the US data center for the global Protein Data Bank (PDB) archive of 3D structure data for large biological molecules (proteins, DNA, and RNA) essential for research and education in fundamental biology, health, energy, and biotechnology. The RSCB PDB hosts ~240 K structures from the PDB archive; however, only the subset of the RSCB PDB that was funded by NIAID or has a potentially pathogenic organism is included in the Discovery Portal.",
+                "identifier": "Protein Data Bank",
+                "name": "Protein Data Bank",
+                "schema": {
+                    "organisms": "species.name",
+                    "struct.title": "name, description",
+                    "rscb_id": "_id, identifier, doi",
+                    "audit_author": "author",
+                    "citation": "citation",
+                    "exptl": "measurementTechnique",
+                    "pdb_audit_support": "funding",
+                    "rcsb_accession_info.deposit_date": "datePublished",
+                    "rcsb_accession_info.revision_date": "dateModified",
+                    "struct_keywords": "keywords",
+                    "rcsb_external_references": "sameAs",
+                },
+                "url": "https://www.rcsb.org/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+                "schedule": "Weekly",
+            },
+            "ark": {
+                "abstract": "SAGE ARK Portal is a NIAID supported IID repository that includes immune data.",
+                "description": "The SAGE Arthritis and Autoimmune and Related Diseases (ARK Portal) is a public data repository that stores and shares data and research knowledge generated by a network of research teams focused on arthritis and autoimmune and related diseases. The ARK Portal is funded by the National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS), and the National Institute of Allergy and Infectious Diseases (NIAID). It is developed and maintained by Sage Bionetworks.",
+                "identifier": "SAGE ARK Portal",
+                "name": "SAGE ARK Portal",
+                "schema": {
+                    "name": "name",
+                    "description": "description",
+                    "createdOn": "dateCreated",
+                    "modifiedOn": "dateModified",
+                    "program": "author.name",
+                    "datasetStatus": "conditionsOfAccess",
+                    "datasetType, dataSubtype": "keywords",
+                    "assay, dataType": "measurementTechnique.name",
+                    "biospecimenType": "sample.anatomicalStructure.name",
+                    "biospecimenSubtype": "sample.anatomicalStructure.sampleType",
+                    "diagnosis": "healthCondition.name",
+                    "doi": "doi",
+                    "acknowledgmentStatement": "creditText",
+                    "publicationSynID": "citation",
+                    "associatedCodeURL": "isRelatedTo.codeRepository",
+                    "dbGapAccession, ImmPortAccession": "identifier",
+                },
+                "url": "https://arkportal.synapse.org/",
+                "conditionsOfAccess": "Varied",
+                "genre": "IID",
+                "schedule": "Weekly",
+            },
+            "clingen": {
+                "abstract": "ClinicalGenomeResource (ClinGen) is a NIH supported generalist repository that includes genomic data.",
+                "description": "ClinGen is a National Institutes of Health (NIH)-funded resource dedicated to building an authoritative central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.",
+                "name": "ClinicalGenomeResource (ClinGen)",
+                "schema": {
+                    "DISEASE ID (MONDO)": "healthCondition.identifier",
+                    "DISEASE LABEL": "healthCondition.name",
+                    "GENE SYMBOL": "geneSymbol",
+                    "GENE ID (HGNC)": "geneId",
+                    "#Variation": "variantId",
+                    "Uuid": "variantId",
+                    "HGVS Expressions": "hgvsExpressions",
+                    "GCEP": "author",
+                    "Expert Panel": "author",
+                    "CLASSIFICATION DATE": "dateModified",
+                    "Published Date": "dateModified",
+                    "Approval Date": "dateModified",
+                    "CLASSIFICATION": "clinicalSignificance",
+                    "Assertion": "clinicalSignificance",
+                    "Mode of Inheritance": "modeOfInheritance",
+                    "MOI": "modeOfInheritance",
+                    "Applied Evidence Codes (Met)": "appliedEvidenceCodesMet",
+                    "Applied Evidence Codes (Not Met)": "appliedEvidenceCodesNotMet",
+                    "Summary of interpretation": "summaryOfInterpretation",
+                    "Guideline": "guideline",
+                    "Retracted": "retracted",
+                    "ONLINE REPORT": "url",
+                    "Evidence Repo Link": "url",
+                },
+                "url": "https://clinicalgenome.org/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+                "schedule": "Weekly",
+            },
+            "emdb": {
+                "abstract": "Electron Microscopy Data Bank (EMDB) is a generalist repository that includes image data.",
+                "description": "The Electron Microscopy Data Bank (EMDB) is a public repository for cryogenic-sample Electron Microscopy (cryoEM) volumes and representative tomograms of macromolecular complexes and subcellular structures. It covers a variety of techniques, including single-particle analysis, helical reconstruction, electron tomography, subtomogram averaging, and electron crystallography (for more information, see the EMDB Policies).",
+                "identifier": "Electron Microscopy Data Bank",
+                "name": "Electron Microscopy Data Bank (EMDB)",
+                "schema": {
+                    "natural_source_ncbi_code": "species.identifier",
+                    "sample.supramolecule_list.supramolecule.natural_source.organism.valueOf_": "species.name",
+                    "admin.key_dates.deposition": "dateCreated",
+                    "admin.key_dates.update": "dateModified",
+                    "admin.grant_support.grant_reference.code": "funding.identifier",
+                    "admin.grant_support.grant_reference.funding_body": "funding.funder.name",
+                    "facet_record_count": "collectionSize.minValue"
+                },
+                "url": "https://www.ebi.ac.uk/emdb/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+                "schedule": "Weekly",
+            },
+            "node": {
+                "abstract": "NODE is a Chinese Academy of Sciences supported generalist repository that includes multiomic data.",
+                "description": "NODE (National Omics Data Encyclopedia) is a biological big data collection platform, including the experimental sample information collection, the file upload of the sequences, and the analysis, share and download of the results. NODE platform consists of six main modules: project, sample, experiment, run, data, and analysis. Project and Sample are independent of each other, but can be linked through Run. In this way, the metadata and sequence information can be integrated.",
+                "identifier": "National Omics Data Encyclopedia",
+                "name": "National Omics Data Encyclopedia (NODE)",
+                "schema": {
+                    "projectNo": "identifier",
+                    "name": "name",
+                    "publishes.doi": "citation.doi",
+                    "publishes.pmid": "citation.pmid",
+                    "submitter.firstName": "author.givenName",
+                    "submitter.lastName": "author.familyName",
+                    "submitter.orgName": "author.affiliation.name",
+                    "attributes.library_selection": "measurementTechnique.name",
+                    "attributes.library_strategy": "measurementTechnique.name",
+                    "attributes.platform": "measurementTechnique.name",
+                },
+                "url": "https://www.biosino.org/node/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+                "schedule": "Weekly",
+            },
+            "biosample": {
+                "abstract": "NCBI BioSample is a NIH supported generalist repository that includes other data.",
+                "description": "NCBI BioSample is a NIH supported generalist repository that includes other data.",
+                "identifier": "NCBI BioSample",
+                "name": "NCBI BioSample",
+                "url": "https://www.ncbi.nlm.nih.gov/biosample/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+                "schedule": "Manual",
+            },
+            "proteomexchange": {
+                "abstract": "Proteome Xchange is a consortia supported generalist repository that includes proteomic data.",
+                "description": "The ProteomeXchange Consortium was established to provide globally coordinated standard data submission and dissemination pipelines involving the main proteomics repositories, and to encourage open data policies in the field. ProteomeXchange fully supports both MS/MS proteomics and SRM data submission. Submissions of other types of proteomics data is also possible using the Partial Submission mechanism.",
+                "identifier": "ProteomeXchange",
+                "name": "Proteome Xchange",
+                "schema": {
+                    "identifiers": "identifier",
+                    "identifiers_doi": "doi",
+                    "title": "name",
+                    "datasetHistory": "name",
+                    "description": "description",
+                    "contacts": "author.name",
+                    "contacts_affiliation": "author.affiliation.name",
+                    "species": "species.name",
+                    "species_taxid": "species.identifier",
+                    "instruments": "sample.instrument.name",
+                    "keywords": "keywords",
+                    "datasetHistory_keywords": "keywords",
+                    "publications": "citation",
+                    "datasetHistory_publication": "citation",
+                    "datasetSummary": "datePublished",
+                    "datasetHistory_identifierDate": "dateCreated",
+                    "datasetHistory_revisionDate": "dateModified",
+                    "datasetHistory_submissionDate": "dateModified",
+                    "datasetFiles": "distribution",
+                    "datasetOrigins": "isRelatedTo",
+                    "fullDatasetLinks": "sdPublisher.url",
+                    "datasetSummary_hostingRepository": "sdPublisher.name"
+                }
+            },
+            "bv_brc": {
+                "abstract": "Bacterial and Viral Bioinformatics Resource Center (BV-BRC) is a NIAID supported IID repository that includes genomic data.",
+                "description": "The Bacterial and Viral Bioinformatics Resource Center (BV-BRC) is an information system designed to support research on bacterial and viral infectious diseases. The BV-BRC combines the data and tools from the Legacy BRC resources: PATRIC, the bacterial BRC, and IRD and ViPR, the viral BRCs.",
+                "identifier": "Bacterial and Viral Bioinformatics Resource Center",
+                "name": "Bacterial and Viral Bioinformatics Resource Center",
+                "schema": {
+                    "taxon_id": "infectiousAgent",
+                    "species": "name",
+                    "genome_count": "collectionSize",
+                    "completion_date": "dateCreated",
+                    "date_modified": "dateModified",
+                    "collection_date": "temporalCoverage",
+                    "isolation_country": "spatialCoverage",
+                    "host_name": "species",
+                    "disease": "healthCondition",
+                },
+                "url": "https://www.bv-brc.org/",
+                "conditionsOfAccess": "Open",
+                "genre": "IID",
+                "schedule": "Weekly",
+            },
+            "mwccs": {
+                "abstract": "MACS/WIHS Combined Cohort is a NIAID supported IID repository that includes clinical data.",
+                "description": "The MWCCS is a collaborative research effort that aims to understand and reduce the impact of chronic health conditions—including heart, lung, blood, and sleep (HLBS) disorders—that affect people living with HIV. The study is designed to investigate a spectrum of questions relating to the basic science, clinical science, and epidemiology of HIV infection in the U.S., with a focus on comorbidities among men and women living with HIV.",
+                "identifier": "The Multicenter AIDS Cohort Study (MACS) / Women's Interagency HIV Study (WIHS) Combined Cohort Study (MWCCS)",
+                "name": "MACS/WIHS Combined Cohort",
+                "schema": {
+                    "name": "name",
+                    "filename": "identifier",
+                    "url": "url",
+                    "date_created": "dateCreated",
+                    "what_measured": "variableMeasured",
+                    "measures": "measurementTechnique",
+                    "how_often": "measurementFrequency",
+                    "participant_count": "collectionSize",
+                    "participant_description": "description",
+                    "median_age": "sample.age",
+                    "hiv_percent": "sample.sampleQuantity",
+                    "women_percent": "sample.sampleQuantity",
+                    "temporal_coverage": "temporalCoverage",
+                    "learning_points": "abstract",
+                    "authors": "creator",
+                    "health_condition": "healthCondition"
+                },
+                "url": "https://statepi.jhsph.edu/mwccs/",
+                "conditionsOfAccess": "Restricted",
+                "genre": "IID",
+                "schedule": "Weekly",
+            },
+            "dbaasp": {
+                "abstract": "Database of Antimicrobial Activity and Structure of Peptides (DBAASP) is a NIAID supported IID repository that includes structure data.",
+                "description": "The Database of Antimicrobial Activity and Structure of Peptides (DBAASP) has been created to provide users with detailed information on experimentally tested peptides regarding their chemical structure and activity against specific targets. The database is manually curated and contains information on ribosomal, nonribosomal, and synthetic peptides that show antimicrobial activity as Monomers, Multimers, and Multi-Peptides.",
+                "identifier": "Database of Antimicrobial Activity and Structure of Peptides",
+                "name": "Database of Antimicrobial Activity and Structure of Peptides (DBAASP)",
+                "schema": {
+                    "targetActivities.targetSpecies.value": "infectiousAgent.name, name, description, url, _id",
+                    "peptide_count_per_species": "collectionSize.minValue",
+                },
+                "url": "https://dbaasp.org/",
+                "conditionsOfAccess": "Open",
+                "genre": "IID",
+                "schedule": "Weekly",
+            }
         }
 
-        for source in source_info:
+        for source, data in source_info.items():
             if source in _meta["src"]:
                 _meta["src"][source]["sourceInfo"] = source_info[source]
                 _meta["src"][source]["sourceInfo"]["metadata_completeness"] = (
                     self.calculate_metadata_compatibility_average(source)
                 )
+            elif "parentCollection" in data:
+                _meta["src"][source] = {"sourceInfo": source_info[source]}
+                _meta["src"][source]["version"] = _meta["src"]["veupath_collections"][
+                    "version"
+                ]
 
         return _meta
