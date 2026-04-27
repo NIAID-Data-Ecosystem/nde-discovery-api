@@ -1,0 +1,194 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 9,
+      "unitText": "DataCollection"
+    }
+  ],
+  "dateModified": "2025-12-15",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2025-10-23",
+      "endDate": "2025-12-15"
+    }
+  ],
+  "usageInfo": {
+    "@type": "CreativeWork",
+    "name": "MWCCS DACC Resource Request Info",
+    "url": "https://statepi.jhsph.edu/mwccs/wp-content/uploads/2022/11/MWCCS-DACC-Resource-Request-Form_final11922.pdf"
+  },
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0804",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_0804",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3305",
+      "name": "Public health and epidemiology",
+      "url": "http://edamontology.org/topic_3305",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005109",
+      "name": "HIV infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C116921",
+      "name": "Cognitive Impairment",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C116921",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005267",
+      "name": "heart disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005267",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0021945",
+      "name": "hearing disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021945",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004995",
+      "name": "cardiovascular disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004995",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005155",
+      "name": "cirrhosis of liver",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005155",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002494",
+      "name": "substance-related disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002494",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004790",
+      "name": "fatty liver disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004790",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D009057",
+      "name": "Stomatognathic Diseases",
+      "url": "https://id.nlm.nih.gov/mesh/D009057.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0006858",
+      "name": "mouth disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0006858",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11676",
+      "name": "Human immunodeficiency virus 1",
+      "url": "https://www.uniprot.org/taxonomy/11676",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11709",
+      "name": "Human immunodeficiency virus 2",
+      "url": "https://www.uniprot.org/taxonomy/11709",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Abbreviated Patient’s Assessment of Own Functioning Inventory (PAOFI)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Trials A&B"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Visual Spatial Learning Test (VSLT)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Patient Health Questionnaire-2 (PHQ-2)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "5 question survey related to stool sample"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "St. Georges Respiratory Questionnaire"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Digit Symbol Substitution Test (DSST)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "WHO Composite International Diagnostic Interview (CIDI) as defined by American Psychiatric Association Diagnostic and Statistical Manual-5"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Spatial working memory (SPWN)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Finger Tapping"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

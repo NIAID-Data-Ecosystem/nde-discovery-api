@@ -1,0 +1,380 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 1419,
+      "unitText": "Dataset"
+    }
+  ],
+  "license": "https://www.immport.org/agreement",
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0804",
+      "name": "Immunology",
+      "url": "http://edamontology.org/topic_0804",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3324",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3966",
+      "name": "Vaccinology",
+      "url": "http://edamontology.org/topic_3966",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3053",
+      "name": "Genetics",
+      "url": "http://edamontology.org/topic_3053",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3305",
+      "name": "Public health and epidemiology",
+      "url": "http://edamontology.org/topic_3305",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3679",
+      "name": "Animal study",
+      "url": "http://edamontology.org/topic_3679",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3418",
+      "name": "Paediatrics",
+      "url": "http://edamontology.org/topic_3418",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0781",
+      "name": "Virology",
+      "url": "http://edamontology.org/topic_0781",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_2229",
+      "name": "Cell biology",
+      "url": "http://edamontology.org/topic_2229",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_2259",
+      "name": "Systems biology",
+      "url": "http://edamontology.org/topic_2259",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0080600",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/DOID_0080600",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8469",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/DOID_8469",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C16269",
+      "name": "Aging",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C16269",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C15265",
+      "name": "Kidney Transplantation",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C15265",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C92861",
+      "name": "Preterm Birth",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C92861",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C25742",
+      "name": "Pregnancy",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C25742",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "399",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/DOID_399",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2841",
+      "name": "asthma",
+      "url": "http://purl.obolibrary.org/obo/DOID_2841",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0050211",
+      "name": "swine influenza",
+      "url": "http://purl.obolibrary.org/obo/DOID_0050211",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12365",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/DOID_12365",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10095",
+      "name": "Mus sp.",
+      "url": "https://www.uniprot.org/taxonomy/10095",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9605",
+      "name": "Homo",
+      "url": "https://www.uniprot.org/taxonomy/9605",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9544",
+      "name": "Macaca mulatta",
+      "url": "https://www.uniprot.org/taxonomy/9544",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10036",
+      "name": "Mesocricetus auratus",
+      "url": "https://www.uniprot.org/taxonomy/10036",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9443",
+      "name": "Primates",
+      "url": "https://www.uniprot.org/taxonomy/9443",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9669",
+      "name": "Mustela putorius furo",
+      "url": "https://www.uniprot.org/taxonomy/9669",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9539",
+      "name": "Macaca",
+      "url": "https://www.uniprot.org/taxonomy/9539",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10026",
+      "name": "Cricetinae",
+      "url": "https://www.uniprot.org/taxonomy/10026",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2901879",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/2901879",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1986198",
+      "name": "Coronaviridae sp.",
+      "url": "https://www.uniprot.org/taxonomy/1986198",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "347537",
+      "name": "Bat SARS CoV Rf1/2004",
+      "url": "https://www.uniprot.org/taxonomy/347537",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10239",
+      "name": "Viruses",
+      "url": "https://www.uniprot.org/taxonomy/10239",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "186672",
+      "name": "Pseudovirus",
+      "url": "https://www.uniprot.org/taxonomy/186672",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11709",
+      "name": "Human immunodeficiency virus 2",
+      "url": "https://www.uniprot.org/taxonomy/11709",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2971083",
+      "name": "Vector NC",
+      "url": "https://www.uniprot.org/taxonomy/2971083",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11309",
+      "name": "unidentified influenza virus",
+      "url": "https://www.uniprot.org/taxonomy/11309",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10535",
+      "name": "unidentified adenovirus",
+      "url": "https://www.uniprot.org/taxonomy/10535",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1335626",
+      "name": "Middle East respiratory syndrome-related coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/1335626",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "ELISA"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Flow Cytometry"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Pseudovirus Neutralization Assay"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "RNA sequencing"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "PCR"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Hemagglutination Inhibition"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Virus Neutralization"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "ELISPOT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Transcription profiling by array"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

@@ -1,0 +1,309 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 108,
+      "unitText": "Dataset"
+    }
+  ],
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2013-03-18"
+    }
+  ],
+  "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002546",
+      "name": "schwannoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002546",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005129",
+      "name": "cataract",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005129",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005066",
+      "name": "metabolic disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005066",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0008315",
+      "name": "prostate cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008315",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005136",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005061",
+      "name": "lung adenocarcinoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005061",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001657",
+      "name": "brain cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001657",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004471",
+      "name": "bacterial arthritis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004471",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0003055",
+      "name": "secretory meningioma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0003055",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0011122",
+      "name": "obesity disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0011122",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "50452",
+      "name": "Arabis alpina",
+      "url": "https://www.uniprot.org/taxonomy/50452",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10095",
+      "name": "Mus sp.",
+      "url": "https://www.uniprot.org/taxonomy/10095",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "71354",
+      "name": "Hirschfeldia incana",
+      "url": "https://www.uniprot.org/taxonomy/71354",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3712",
+      "name": "Brassica oleracea",
+      "url": "https://www.uniprot.org/taxonomy/3712",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3750",
+      "name": "Malus domestica",
+      "url": "https://www.uniprot.org/taxonomy/3750",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3702",
+      "name": "Arabidopsis thaliana",
+      "url": "https://www.uniprot.org/taxonomy/3702",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3728",
+      "name": "Sinapis alba",
+      "url": "https://www.uniprot.org/taxonomy/3728",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "90675",
+      "name": "Camelina sativa",
+      "url": "https://www.uniprot.org/taxonomy/90675",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "668",
+      "name": "Aliivibrio fischeri",
+      "url": "https://www.uniprot.org/taxonomy/668",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1125693",
+      "name": "Proteus mirabilis WGLW4",
+      "url": "https://www.uniprot.org/taxonomy/1125693",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5693",
+      "name": "Trypanosoma cruzi",
+      "url": "https://www.uniprot.org/taxonomy/5693",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "666",
+      "name": "Vibrio cholerae",
+      "url": "https://www.uniprot.org/taxonomy/666",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "171259",
+      "name": "Haptophyta environmental samples",
+      "url": "https://www.uniprot.org/taxonomy/171259",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "101201",
+      "name": "Trichoderma asperellum",
+      "url": "https://www.uniprot.org/taxonomy/101201",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10298",
+      "name": "Human herpesvirus 1",
+      "url": "https://www.uniprot.org/taxonomy/10298",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "6239",
+      "name": "Caenorhabditis elegans",
+      "url": "https://www.uniprot.org/taxonomy/6239",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "659499",
+      "name": "Mycale hentscheli",
+      "url": "https://www.uniprot.org/taxonomy/659499",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "MMO_0000534",
+      "name": "Mass Spectrometry",
+      "url": "https://ontobee.org/ontology/MMO?iri=http://purl.obolibrary.org/obo/MMO_0000534"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Q Exactive"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Q Exactive HF"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Orbitrap Fusion"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Q Exactive Plus"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "timsTOF fleX"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "maXis"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Orbitrap Exploris 480"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "TripleTOF 5600"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Q Exactive HF-X"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

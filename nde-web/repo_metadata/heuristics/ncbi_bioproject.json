@@ -1,0 +1,196 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 1059749,
+      "unitText": "Dataset"
+    }
+  ],
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2001-01-22"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "NCBITaxon:0",
+      "name": "Multispecies"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4558",
+      "name": "Sorghum bicolor",
+      "url": "https://www.uniprot.org/taxonomy/4558",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "38727",
+      "name": "Panicum virgatum",
+      "url": "https://www.uniprot.org/taxonomy/38727",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3702",
+      "name": "Arabidopsis thaliana",
+      "url": "https://www.uniprot.org/taxonomy/3702",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3694",
+      "name": "Populus trichocarpa",
+      "url": "https://www.uniprot.org/taxonomy/3694",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4530",
+      "name": "Oryza sativa",
+      "url": "https://www.uniprot.org/taxonomy/4530",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4577",
+      "name": "Zea mays",
+      "url": "https://www.uniprot.org/taxonomy/4577",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "410658",
+      "name": "soil metagenome",
+      "url": "https://www.uniprot.org/taxonomy/410658",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "408172",
+      "name": "marine metagenome",
+      "url": "https://www.uniprot.org/taxonomy/408172",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "573",
+      "name": "Klebsiella pneumoniae",
+      "url": "https://www.uniprot.org/taxonomy/573",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1561972",
+      "name": "seawater metagenome",
+      "url": "https://www.uniprot.org/taxonomy/1561972",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "433727",
+      "name": "hot springs metagenome",
+      "url": "https://www.uniprot.org/taxonomy/433727",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5141",
+      "name": "Neurospora crassa",
+      "url": "https://www.uniprot.org/taxonomy/5141",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "449393",
+      "name": "freshwater metagenome",
+      "url": "https://www.uniprot.org/taxonomy/449393",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "749907",
+      "name": "sediment metagenome",
+      "url": "https://www.uniprot.org/taxonomy/749907",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Sequencing"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Array"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Umbrella project"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "MassSpectrometry"
+    }
+  ]
+}

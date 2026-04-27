@@ -1,0 +1,31 @@
+{
+  "_id": "pdb",
+  "name": "Protein Data Bank",
+  "alternateName": [
+    "PDB"
+  ],
+  "identifier": "Protein Data Bank",
+  "url": "https://www.rcsb.org/",
+  "abstract": "Protein Data Bank is a NIAID supported generalist repository that includes structure data.",
+  "description": "RCSB PDB (RCSB.org) is the US data center for the global Protein Data Bank (PDB) archive of 3D structure data for large biological molecules (proteins, DNA, and RNA) essential for research and education in fundamental biology, health, energy, and biotechnology. The RSCB PDB hosts ~240 K structures from the PDB archive; however, only the subset of the RSCB PDB that was funded by NIAID or has a potentially pathogenic organism is included in the Discovery Portal.",
+  "collectionType": "Dataset Repository",
+  "genre": "Generalist",
+  "conditionsOfAccess": "Open",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
+  "schedule": "Weekly",
+  "schema": {
+    "organisms": "species.name",
+    "struct.title": "name, description",
+    "rscb_id": "_id, identifier, doi",
+    "audit_author": "author",
+    "citation": "citation",
+    "exptl": "measurementTechnique",
+    "pdb_audit_support": "funding",
+    "rcsb_accession_info.deposit_date": "datePublished",
+    "rcsb_accession_info.revision_date": "dateModified",
+    "struct_keywords": "keywords",
+    "rcsb_external_references": "sameAs"
+  }
+}

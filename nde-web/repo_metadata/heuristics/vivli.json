@@ -1,0 +1,988 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 8442,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2026-04-10",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "0001-01-01",
+      "endDate": "2026-04-10"
+    }
+  ],
+  "spatialCoverage": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Macedonia, The Former Yugoslav Republic of"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "India"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Italy"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rwanda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ethiopia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Egypt"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Moldova"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Honduras"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Moldova, Republic of"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Belarus"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Indonesia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "China"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Virgin Islands (U.S.)"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Slovenia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United Kingdom"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nicaragua"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Croatia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Uganda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Portugal"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mozambique"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Central African Republic"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Montenegro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Argentina"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Iceland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Uruguay"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ghana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "New Zealand"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Greece"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zimbabwe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Poland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lithuania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lebanon"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Thailand"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kazakhstan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gabon"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hong Kong"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guadeloupe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guinea"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Serbia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Belgium"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Austria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bangladesh"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tunisia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Oman"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Africa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sudan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Turkey"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mexico"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Japan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Finland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Belize"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Estonia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bosnia and Herzegovina"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Denmark"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Paraguay"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Puerto Rico"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Democratic Republic of the Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Dominican Republic"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Burkina Faso"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Romania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Switzerland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sierra Leone"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nepal"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Costa Rica"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Congo, The Democratic Republic of the"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Korea, Republic of"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Russian Federation"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cambodia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Botswana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Czechia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United States"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ukraine"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Russia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Israel"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jordan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jamaica"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pakistan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guatemala"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cuba"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nigeria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Iraq"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Republic of the Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mali"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Venezuela"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sweden"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Senegal"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Algeria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cyprus"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Benin"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Peru"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United Arab Emirates"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Panama"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hungary"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Luxembourg"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Latvia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bulgaria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Georgia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Qatar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Monaco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "El Salvador"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sri Lanka"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "North Macedonia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Colombia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ecuador"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Norway"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cameroon"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Spain"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Philippines"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Canada"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Morocco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Netherlands"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Serbia and Montenegro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Germany"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Réunion"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Malaysia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "France"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Malawi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tanzania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Malta"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Slovakia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Turkey (Türkiye)"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Papua New Guinea"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Taiwan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chile"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Former Serbia and Montenegro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Korea"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Armenia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bahamas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Brazil"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Saudi Arabia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Singapore"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Equatorial Guinea"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vietnam"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Czech Republic"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Australia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kuwait"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Albania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ireland"
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3379",
+      "name": "Preclinical and clinical studies",
+      "url": "http://edamontology.org/topic_3379",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0202",
+      "name": "Pharmacology",
+      "url": "http://edamontology.org/topic_0202",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0804",
+      "name": "Immunology",
+      "url": "http://edamontology.org/topic_0804",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3373",
+      "name": "Drug development",
+      "url": "http://edamontology.org/topic_3373",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3324",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3966",
+      "name": "Vaccinology",
+      "url": "http://edamontology.org/topic_3966",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3303",
+      "name": "Medicine",
+      "url": "http://edamontology.org/topic_3303",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3305",
+      "name": "Public health and epidemiology",
+      "url": "http://edamontology.org/topic_3305",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3418",
+      "name": "Paediatrics",
+      "url": "http://edamontology.org/topic_3418",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3322",
+      "name": "Respiratory medicine",
+      "url": "http://edamontology.org/topic_3322",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C115935",
+      "name": "Healthy",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C115935",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005148",
+      "name": "type 2 diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005148",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004979",
+      "name": "asthma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004979",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005002",
+      "name": "chronic obstructive pulmonary disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005002",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005109",
+      "name": "HIV infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0008383",
+      "name": "rheumatoid arthritis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008383",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002009",
+      "name": "major depressive disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002009",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005090",
+      "name": "schizophrenia",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005090",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005233",
+      "name": "non-small cell lung carcinoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005233",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9605",
+      "name": "Homo",
+      "url": "https://www.uniprot.org/taxonomy/9605",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "444854",
+      "name": "Uria lomvia lomvia",
+      "url": "https://www.uniprot.org/taxonomy/444854",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "69943",
+      "name": "Lota",
+      "url": "https://www.uniprot.org/taxonomy/69943",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "13749",
+      "name": "Vaccinium",
+      "url": "https://www.uniprot.org/taxonomy/13749",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9839",
+      "name": "Lama",
+      "url": "https://www.uniprot.org/taxonomy/9839",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2500683",
+      "name": "Datvia",
+      "url": "https://www.uniprot.org/taxonomy/2500683",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "491846",
+      "name": "Danaea vivax",
+      "url": "https://www.uniprot.org/taxonomy/491846",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3818",
+      "name": "Arachis hypogaea",
+      "url": "https://www.uniprot.org/taxonomy/3818",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9823",
+      "name": "Sus scrofa",
+      "url": "https://www.uniprot.org/taxonomy/9823",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11709",
+      "name": "Human immunodeficiency virus 2",
+      "url": "https://www.uniprot.org/taxonomy/11709",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2901879",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/2901879",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10566",
+      "name": "Human papillomavirus",
+      "url": "https://www.uniprot.org/taxonomy/10566",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3052230",
+      "name": "Hepacivirus hominis",
+      "url": "https://www.uniprot.org/taxonomy/3052230",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "489460",
+      "name": "Hepatitis B virus genotype B",
+      "url": "https://www.uniprot.org/taxonomy/489460",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11250",
+      "name": "Human respiratory syncytial virus",
+      "url": "https://www.uniprot.org/taxonomy/11250",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "333760",
+      "name": "Human papillomavirus type 16",
+      "url": "https://www.uniprot.org/taxonomy/333760",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12721",
+      "name": "Human immunodeficiency virus",
+      "url": "https://www.uniprot.org/taxonomy/12721",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1986198",
+      "name": "Coronaviridae sp.",
+      "url": "https://www.uniprot.org/taxonomy/1986198",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10407",
+      "name": "Hepatitis B virus",
+      "url": "https://www.uniprot.org/taxonomy/10407",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C15417",
+      "name": "Randomized Clinical Trial",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C15417",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C82639",
+      "name": "Parallel Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C82639",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C15228",
+      "name": "Double Blind Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C15228",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C49659",
+      "name": "Open Label Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C49659",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C70840",
+      "name": "Blinded Clinical Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C70840",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C66959",
+      "name": "Triple Blind Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C66959",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C82637",
+      "name": "Crossover Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C82637",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C82640",
+      "name": "Single Group Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C82640",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C93043",
+      "name": "Nonrandomized Clinical Trial",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C93043",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C28233",
+      "name": "Single Blind Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C28233",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

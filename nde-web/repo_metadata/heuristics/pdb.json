@@ -1,0 +1,266 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 142888,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2026-04-15",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "1972-08-11",
+      "endDate": "2026-04-15"
+    }
+  ],
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "usageInfo": {
+    "url": "https://www.rcsb.org/pages/policies"
+  },
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Protein properties",
+      "url": "http://edamontology.org/topic_0123",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Protein structure analysis",
+      "url": "http://edamontology.org/topic_2814",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9844",
+      "name": "Lama glama",
+      "url": "https://www.uniprot.org/taxonomy/9844",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8355",
+      "name": "Xenopus laevis",
+      "url": "https://www.uniprot.org/taxonomy/8355",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9544",
+      "name": "Macaca mulatta",
+      "url": "https://www.uniprot.org/taxonomy/9544",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "30538",
+      "name": "Vicugna pacos",
+      "url": "https://www.uniprot.org/taxonomy/30538",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9986",
+      "name": "Oryctolagus cuniculus",
+      "url": "https://www.uniprot.org/taxonomy/9986",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9823",
+      "name": "Sus scrofa",
+      "url": "https://www.uniprot.org/taxonomy/9823",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "32630",
+      "name": "synthetic construct",
+      "url": "https://www.uniprot.org/taxonomy/32630",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "83333",
+      "name": "Escherichia coli (strain K12)",
+      "url": "https://www.uniprot.org/taxonomy/83333",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "559292",
+      "name": "Saccharomyces cerevisiae (strain ATCC 204508 / S288c)",
+      "url": "https://www.uniprot.org/taxonomy/559292",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11676",
+      "name": "Human immunodeficiency virus 1",
+      "url": "https://www.uniprot.org/taxonomy/11676",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "83332",
+      "name": "Mycobacterium tuberculosis (strain ATCC 25618 / H37Rv)",
+      "url": "https://www.uniprot.org/taxonomy/83332",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1773",
+      "name": "Mycobacterium tuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/1773",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "X-ray diffraction",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0000156",
+      "inDefinedTermSet": "CHMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "electron microscopy",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0000068",
+      "inDefinedTermSet": "CHMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "solution-state nuclear magnetic resonance spectroscopy",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0002397",
+      "inDefinedTermSet": "CHMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "neutron diffraction",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0000698",
+      "inDefinedTermSet": "CHMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "electron diffraction",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0000142",
+      "inDefinedTermSet": "CHMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Crystallography",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C16476",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "solid-state nuclear magnetic resonance spectroscopy",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0000614",
+      "inDefinedTermSet": "CHMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "small-angle scattering 3D molecular structure determination assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002108",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Fiber Diffraction",
+      "url": "http://purl.uniprot.org/core/Fiber_Diffraction",
+      "inDefinedTermSet": "UNIPROT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "electron paramagnetic resonance spectroscopy",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000710",
+      "inDefinedTermSet": "MMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "_id": "mendeley",
+  "name": "Mendeley Data",
+  "identifier": "Mendeley",
+  "url": "https://data.mendeley.com/",
+  "abstract": "Mendeley Data is a GREI repository that includes most data types and domains.",
+  "description": "Mendeley Data, a product of Elsevier, is one of the newest entrants in the research data repository landscape; the platform was released in April 2016. Mendeley Data is a general-purpose repository, allowing researchers in any field to upload and publish research data. Mendeley Data also allows researchers to share unpublished data privately with research collaborators.",
+  "collectionType": "Dataset Repository",
+  "genre": "Generalist",
+  "conditionsOfAccess": "Varied",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "schedule": "Weekly",
+  "schema": {
+    "id": "identifer",
+    "doi": "doi",
+    "name": "name",
+    "description": "description",
+    "contributors": "contributors",
+    "files": "distribution",
+    "articles": "citation",
+    "categories": "keywords",
+    "publish_date": "datePublished",
+    "related_links": "citation",
+    "modified_on": "dateModified",
+    "links": "url",
+    "repository": "sdPublisher"
+  }
+}

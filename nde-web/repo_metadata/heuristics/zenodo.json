@@ -1,0 +1,89 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 101413,
+      "unitText": "CreativeWork"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 573,
+      "unitText": "Collection"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 29921,
+      "unitText": "Book"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 2441261,
+      "unitText": "ScholarlyArticle"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 425094,
+      "unitText": "Dataset"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 5922,
+      "unitText": "TechArticle"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 1099696,
+      "unitText": "ImageObject"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 161681,
+      "unitText": "ComputationalTool"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 5070,
+      "unitText": "Thing"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 26277,
+      "unitText": "Poster"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 3178,
+      "unitText": "Review"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 13174,
+      "unitText": "MediaObject"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 32130,
+      "unitText": "Report"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 39029,
+      "unitText": "Chapter"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 62265,
+      "unitText": "PresentationDigitalDocument"
+    }
+  ],
+  "dateModified": "2025-04-11",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "0195-09-14",
+      "endDate": "2025-04-11"
+    }
+  ],
+  "license": "Varies"
+}

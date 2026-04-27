@@ -1,0 +1,34 @@
+{
+  "_id": "clinepidb",
+  "name": "ClinEpiDB",
+  "alternateName": [
+    "Clinical Epidemiology Database"
+  ],
+  "identifier": "ClinEpiDB",
+  "url": "https://clinepidb.org/ce/app",
+  "abstract": "ClinEpiDB is a NIAID supported IID repository that includes epidemiological data.",
+  "description": "ClinEpiDB, launched in February 2018, is an open-access exploratory data analysis platform. We integrate data from high quality epidemiological studies, and offer tools and visualizations to explore the data within the browser in a point and click interface. We enable investigators to maximize the utility and reach of their data and to make optimal use of data released by others. ClinEpiDB is led by a team of scientists and developers based at the University of Pennsylvania, the University of Georgia, Imperial College London, and several other academic institutions. Currently, we are funded by the Bill and Melinda Gates Foundation for resource development and data integration, and by NIAID for integration of data from the International Centers of Excellence in Malaria Research (ICEMR).",
+  "collectionType": "Dataset Repository",
+  "genre": "IID",
+  "conditionsOfAccess": "Varied",
+  "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
+  "schedule": "Weekly",
+  "schema": {
+    "Study_Design": "measurementTechnique",
+    "description": "description",
+    "summary": "description",
+    "WHO": "keywords",
+    "Participant_Type": "keywords",
+    "Country": "spatialCoverage",
+    "study_access": "conditionOfAccess",
+    "Years": "temporalCoverage",
+    "disease": "healthCondition",
+    "Publications": "citation",
+    "release_date": "distribution.dateModified",
+    "dataset_name": "distribution.name",
+    "contact_name": "author.name",
+    "Contacts": "affiliation",
+    "HyperLinks": "isBasedOn.url"
+  }
+}

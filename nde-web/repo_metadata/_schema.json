@@ -1,0 +1,324 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.niaid.nih.gov/schemas/repo_metadata.json",
+  "title": "NDE per-repo metadata",
+  "description": "Schema for nde-web/repo_metadata/<key>.json files. The NDESourceHandler merges each one with nde-web/repo_metadata/heuristics/<key>.json before returning as sourceInfo under /v1/metadata.",
+  "type": "object",
+  "required": [
+    "_id",
+    "name",
+    "description"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "_id": {
+      "type": "string"
+    },
+    "_mongoCollection": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "_mongoFilter": {
+      "type": "object",
+      "description": "Mongo query prepended to every heuristic aggregation"
+    },
+    "abstract": {
+      "type": "string",
+      "description": "handlers.py parity floor - never overwritten by sync"
+    },
+    "alternateName": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "collectionSize": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/QuantitativeValue"
+      }
+    },
+    "collectionType": {
+      "type": "string"
+    },
+    "conditionsOfAccess": {
+      "type": "string",
+      "enum": [
+        "Open",
+        "Closed",
+        "Restricted",
+        "Embargoed",
+        "Varied",
+        "Unknown"
+      ],
+      "description": "handlers.py parity floor - never overwritten by sync"
+    },
+    "creativeWorkStatus": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "description": "ISO date (YYYY-MM-DD) or year (YYYY)"
+    },
+    "dateModified": {
+      "type": "string",
+      "description": "ISO date (YYYY-MM-DD) or year (YYYY) | heuristic cache overrides curated value (freshness > sheet); produced by both curated JSON and heuristic cache"
+    },
+    "datePublished": {
+      "type": "string",
+      "description": "ISO date (YYYY-MM-DD) or year (YYYY)"
+    },
+    "description": {
+      "type": "string",
+      "description": "handlers.py parity floor - never overwritten by sync"
+    },
+    "genre": {
+      "type": "string",
+      "description": "Typically 'IID' or 'Generalist'; resource_base rows sometimes carry semicolon-joined multi-category strings (e.g. 'IID; Omics'). | handlers.py parity floor - never overwritten by sync"
+    },
+    "hasAPI": {
+      "type": "boolean"
+    },
+    "hasDownload": {
+      "type": "string"
+    },
+    "healthCondition": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DefinedTerm"
+      }
+    },
+    "identifier": {
+      "type": "string",
+      "description": "handlers.py parity floor - never overwritten by sync"
+    },
+    "inLanguage": {
+      "type": "string"
+    },
+    "infectiousAgent": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DefinedTerm"
+      }
+    },
+    "isAccessibleForFree": {
+      "type": "boolean"
+    },
+    "license": {
+      "type": "string"
+    },
+    "measurementTechnique": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DefinedTerm"
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "handlers.py parity floor - never overwritten by sync"
+    },
+    "parentCollection": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "handlers.py parity floor - never overwritten by sync"
+    },
+    "schedule": {
+      "type": "string",
+      "enum": [
+        "Weekly",
+        "Monthly",
+        "Quarterly",
+        "Manual"
+      ],
+      "description": "handlers.py parity floor - never overwritten by sync"
+    },
+    "schema": {
+      "type": "object",
+      "description": "Source-field -> NDE-field ingest mapping | handlers.py parity floor - never overwritten by sync",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "spatialCoverage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AdministrativeArea"
+      }
+    },
+    "species": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DefinedTerm"
+      }
+    },
+    "temporalCoverage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TemporalInterval"
+      }
+    },
+    "topicCategory": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DefinedTerm"
+      }
+    },
+    "type": {
+      "type": "string",
+      "description": "handlers.py parity floor - never overwritten by sync"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "handlers.py parity floor - never overwritten by sync"
+    },
+    "usageInfo": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/$defs/CreativeWork"
+        }
+      ]
+    },
+    "variableMeasured": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DefinedTerm"
+      }
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "DefinedTerm": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "@type": {
+          "const": "DefinedTerm"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "identifier"
+          ]
+        },
+        {
+          "required": [
+            "name"
+          ]
+        }
+      ]
+    },
+    "QuantitativeValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "@type",
+        "minValue",
+        "unitText"
+      ],
+      "properties": {
+        "@type": {
+          "const": "QuantitativeValue"
+        },
+        "minValue": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unitText": {
+          "type": "string"
+        }
+      }
+    },
+    "TemporalInterval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "@type"
+      ],
+      "properties": {
+        "@type": {
+          "const": "TemporalInterval"
+        },
+        "temporalType": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      }
+    },
+    "AdministrativeArea": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "@type",
+        "name"
+      ],
+      "properties": {
+        "@type": {
+          "const": "AdministrativeArea"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CreativeWork": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,384 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 1637,
+      "unitText": "Dataset"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 170601,
+      "unitText": "Sample"
+    }
+  ],
+  "dateModified": "2026-04-22",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2016-04-20",
+      "endDate": "2026-04-22"
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3050",
+      "name": "Biodiversity",
+      "url": "http://edamontology.org/topic_3050",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3070",
+      "name": "Biology",
+      "url": "http://edamontology.org/topic_3070",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3301",
+      "name": "Microbiology",
+      "url": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0091",
+      "name": "Bioinformatics",
+      "url": "http://edamontology.org/topic_0091",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_2229",
+      "name": "Cell biology",
+      "url": "http://edamontology.org/topic_2229",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3855",
+      "name": "Environmental sciences",
+      "url": "http://edamontology.org/topic_3855",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3174",
+      "name": "Metagenomics",
+      "url": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3053",
+      "name": "Genetics",
+      "url": "http://edamontology.org/topic_3053",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3360",
+      "name": "Biomarkers",
+      "url": "http://edamontology.org/topic_3360",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005148",
+      "name": "type 2 diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005148",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0007256",
+      "name": "hepatocellular carcinoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0007256",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0021040",
+      "name": "pancreatic neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021040",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005076",
+      "name": "periodontitis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005076",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0019167",
+      "name": "immunoglobulin A vasculitis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0019167",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005062",
+      "name": "lymphoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005062",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018874",
+      "name": "acute myeloid leukemia",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018874",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0021100",
+      "name": "breast neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005575",
+      "name": "colorectal cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005575",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005258",
+      "name": "autism spectrum disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005258",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10088",
+      "name": "Mus",
+      "url": "https://www.uniprot.org/taxonomy/10088",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Homo sapiens [Taxonomy ID: 9606]"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4442",
+      "name": "Camellia sinensis",
+      "url": "https://www.uniprot.org/taxonomy/4442",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "21880",
+      "name": "Salvia",
+      "url": "https://www.uniprot.org/taxonomy/21880",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7227",
+      "name": "Drosophila melanogaster",
+      "url": "https://www.uniprot.org/taxonomy/7227",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4139",
+      "name": "Scutellaria",
+      "url": "https://www.uniprot.org/taxonomy/4139",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "65409",
+      "name": "Scutellaria baicalensis",
+      "url": "https://www.uniprot.org/taxonomy/65409",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10088",
+      "name": "Mus"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "408170",
+      "name": "human gut metagenome",
+      "url": "https://www.uniprot.org/taxonomy/408170",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "449393",
+      "name": "freshwater metagenome",
+      "url": "https://www.uniprot.org/taxonomy/449393",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "408172",
+      "name": "marine metagenome",
+      "url": "https://www.uniprot.org/taxonomy/408172",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "447426",
+      "name": "human oral metagenome",
+      "url": "https://www.uniprot.org/taxonomy/447426",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "556182",
+      "name": "freshwater sediment metagenome",
+      "url": "https://www.uniprot.org/taxonomy/556182",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "256318",
+      "name": "metagenome",
+      "url": "https://www.uniprot.org/taxonomy/256318",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "539655",
+      "name": "human skin metagenome",
+      "url": "https://www.uniprot.org/taxonomy/539655",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "PCR"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina NovaSeq 6000"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "RNA-Seq"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "RANDOM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "AMPLICON"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "WGS"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina HiSeq 2500"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina MiSeq"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "HiSeq X Ten"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "cDNA"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

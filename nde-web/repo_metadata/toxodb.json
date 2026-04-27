@@ -1,0 +1,40 @@
+{
+  "_id": "toxodb",
+  "name": "ToxoDB",
+  "identifier": "ToxoDB",
+  "url": "https://toxodb.org/toxo/app",
+  "abstract": "ToxoDB is a NIAID supported IID repository that includes genomic data.",
+  "description": "ToxoDB is a component website of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) and is constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). These resources stem from support initially provided for the Plasmodium Genome Database by the Burroughs Wellcome Fund (2000-2) and a research grant from NIAID (2002-6). The BRC program was initiated in 2004 to provide public access to computational platforms and analysis tools enabling collection, management, integration and mining of genomic information and other large-scale datasets relevant to infectious disease pathogens including their interaction with mammalian hosts and invertebrate vectors of disease.",
+  "collectionType": "Dataset Repository",
+  "genre": "IID",
+  "conditionsOfAccess": "Closed",
+  "hasAPI": true,
+  "parentCollection": {
+    "id": "veupathdb"
+  },
+  "schedule": "Weekly",
+  "_mongoCollection": "veupath_collections",
+  "_mongoFilter": {
+    "url": {
+      "$regex": "toxodb\\.org"
+    }
+  },
+  "schema": {
+    "id": "identifer",
+    "displayName": "name",
+    "contact_name": "author",
+    "summary": "description",
+    "type": "measurementTechnique",
+    "sdPublisher": "project_id",
+    "short_attribution": "creditText",
+    "release_policy": "conditionOfAccess",
+    "version": "dateModified",
+    "author": "affiliation",
+    "GenomeHistory": "dateUpdated",
+    "Version": "datePublished",
+    "organism": "species",
+    "HyperLinks": "distribution",
+    "gene_count": "variableMeasured",
+    "gene_type": "GeneTypeCounts"
+  }
+}

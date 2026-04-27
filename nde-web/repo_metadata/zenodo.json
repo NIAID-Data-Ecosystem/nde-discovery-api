@@ -1,0 +1,31 @@
+{
+  "_id": "zenodo",
+  "name": "Zenodo",
+  "identifier": "Zenodo",
+  "url": "https://zenodo.org/",
+  "abstract": "Zenodo is a GREI repository that includes most data types and domains.",
+  "description": "The OpenAIRE project, in the vanguard of the open access and open data movements in Europe was commissioned by the EC to support their nascent Open Data policy by providing a catch-all repository for EC funded research. CERN, an OpenAIRE partner and pioneer in open source, open access and open data, provided this capability and Zenodo was launched in May 2013.",
+  "collectionType": "Dataset Repository",
+  "genre": "Generalist",
+  "conditionsOfAccess": "Varied",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "schedule": "Quarterly",
+  "schema": {
+    "title": "name",
+    "header": "dateModifed, url",
+    "description": "description",
+    "date": "datePublished",
+    "language": "inLanguage.name",
+    "subject": "keywords",
+    "relatedIdentifier": "topicCategory",
+    "xml[DOI]": "doi",
+    "xml[resourceTypeGeneral]": "@type",
+    "xml[creator][creatorName]": "author.name",
+    "xml[creator][affiliation]": "author.affiliation",
+    "xml[creator][nameIdentifier]": "author.identifier",
+    "xml[rights]": "conditionsOfAccess, license",
+    "xml[relatedIdentifier][relationType]": "citedBy",
+    "xml[contributor][contributorName]": "funding.funder.name"
+  }
+}

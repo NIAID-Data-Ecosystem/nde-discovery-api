@@ -1,0 +1,308 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 3225,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2024-05-07",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "1998-10-15",
+      "endDate": "2024-05-07"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005136",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0011989",
+      "name": "leishmaniasis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0011989",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001444",
+      "name": "Chagas disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001444",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C189188",
+      "name": "Infected with SARS-CoV-2",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001103",
+      "name": "giardiasis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001103",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0019956",
+      "name": "encephalitis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0019956",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D007239",
+      "name": "Infections",
+      "url": "https://id.nlm.nih.gov/mesh/D007239.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0010691",
+      "name": "Norrie disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0010691",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005661",
+      "name": "babesiosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005661",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7159",
+      "name": "Aedes aegypti",
+      "url": "https://www.uniprot.org/taxonomy/7159",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7165",
+      "name": "Anopheles gambiae",
+      "url": "https://www.uniprot.org/taxonomy/7165",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "180454",
+      "name": "Anopheles gambiae str. PEST",
+      "url": "https://www.uniprot.org/taxonomy/180454",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7160",
+      "name": "Aedes albopictus",
+      "url": "https://www.uniprot.org/taxonomy/7160",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "30069",
+      "name": "Anopheles stephensi",
+      "url": "https://www.uniprot.org/taxonomy/30069",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7173",
+      "name": "Anopheles arabiensis",
+      "url": "https://www.uniprot.org/taxonomy/7173",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1518534",
+      "name": "Anopheles coluzzii",
+      "url": "https://www.uniprot.org/taxonomy/1518534",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "62324",
+      "name": "Anopheles funestus",
+      "url": "https://www.uniprot.org/taxonomy/62324",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7176",
+      "name": "Culex quinquefasciatus",
+      "url": "https://www.uniprot.org/taxonomy/7176",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "6945",
+      "name": "Ixodes scapularis",
+      "url": "https://www.uniprot.org/taxonomy/6945",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "36329",
+      "name": "Plasmodium falciparum (isolate 3D7)",
+      "url": "https://www.uniprot.org/taxonomy/36329",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2971083",
+      "name": "Vector NC",
+      "url": "https://www.uniprot.org/taxonomy/2971083",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "508771",
+      "name": "Toxoplasma gondii (strain ATCC 50611 / Me49)",
+      "url": "https://www.uniprot.org/taxonomy/508771",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "185431",
+      "name": "Trypanosoma brucei brucei (strain 927/4 GUTat10.1)",
+      "url": "https://www.uniprot.org/taxonomy/185431",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "330879",
+      "name": "Aspergillus fumigatus (strain ATCC MYA-4609 / CBS 101355 / FGSC A1100 / Af293)",
+      "url": "https://www.uniprot.org/taxonomy/330879",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "367110",
+      "name": "Neurospora crassa (strain ATCC 24698 / 74-OR23-1A / CBS 708.71 / DSM 1257 / FGSC 987)",
+      "url": "https://www.uniprot.org/taxonomy/367110",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5811",
+      "name": "Toxoplasma gondii",
+      "url": "https://www.uniprot.org/taxonomy/5811",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "353152",
+      "name": "Cryptosporidium parvum (strain Iowa II)",
+      "url": "https://www.uniprot.org/taxonomy/353152",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "237561",
+      "name": "Candida albicans (strain SC5314 / ATCC MYA-2876)",
+      "url": "https://www.uniprot.org/taxonomy/237561",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "235443",
+      "name": "Cryptococcus neoformans var. grubii serotype A (strain H99 / ATCC 208821 / CBS 10515 / FGSC 9487)",
+      "url": "https://www.uniprot.org/taxonomy/235443",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "transcript_expression"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "population_biology"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "genome"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "isolates"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "protein_expression"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "transcript_expression_platform"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "aligned_sequence"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "feature"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "EST"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "generic_profiles"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 12,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2025-07-01",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2020-11-05",
+      "endDate": "2025-07-01"
+    }
+  ],
+  "usageInfo": {
+    "url": "https://accessclinicaldata.niaid.nih.gov/api/files/NIAIDDUAAccessclinicaldata@NIAID.pdf"
+  },
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3324",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3379",
+      "name": "Preclinical and clinical studies",
+      "url": "http://edamontology.org/topic_3379",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3305",
+      "name": "Public health and epidemiology",
+      "url": "http://edamontology.org/topic_3305",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3303",
+      "name": "Medicine",
+      "url": "http://edamontology.org/topic_3303",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0804",
+      "name": "Immunology",
+      "url": "http://edamontology.org/topic_0804",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0202",
+      "name": "Pharmacology",
+      "url": "http://edamontology.org/topic_0202",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018076",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Tuberculosis (TB)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C35650",
+      "name": "Upper Respiratory Tract Infection",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C35650",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C154635",
+      "name": "Death Domain",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C154635",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005249",
+      "name": "pneumonia",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005249",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000775",
+      "name": "drug allergy",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0000775",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005109",
+      "name": "HIV infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
+      "inDefinedTermSet": "MONDO"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "694009",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/694009",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C82639",
+      "name": "Parallel Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C82639",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C15417",
+      "name": "Randomized Clinical Trial",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C15417",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C15228",
+      "name": "Double Blind Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C15228",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C66959",
+      "name": "Triple Blind Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C66959",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C49659",
+      "name": "Open Label Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C49659",
+      "inDefinedTermSet": "NCIT"
+    }
+  ]
+}

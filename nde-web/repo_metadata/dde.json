@@ -1,0 +1,28 @@
+{
+  "_id": "dde",
+  "name": "Data Discovery Engine",
+  "alternateName": [
+    "DDE"
+  ],
+  "identifier": "Data Discovery Engine",
+  "url": "https://discovery.biothings.io/",
+  "abstract": "The Data Discovery Engine is a NIAID supported metadata registry that includes metadata from IID and general repositories.",
+  "description": "The Data Discovery Engine is a streamlined process to create, distribute and harves findable metadata via interoperable Schema.org schemas. The biomedical and informatics communities have largely endorsed the spirit and basic components of the FAIR Data Principles. Biomedical data producers, including CTSA hubs, need actionable best-practice guidance on how to make their data discoverable and reusable, and bring the practical benefits of data sharing to researcher's own research projects, as well as the research community as a whole.",
+  "collectionType": "Dataset Repository",
+  "genre": "Generalist",
+  "conditionsOfAccess": "Varied",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "schedule": "Weekly",
+  "schema": {
+    "creator": "author",
+    "_id": "identifier",
+    "date_created": "dateCreated",
+    "last_updated": "dateModifed",
+    "@type": "@type",
+    "measurementTechnique": "measurementTechnique",
+    "infectiousAgent": "infectiousAgent",
+    "infectiousDisease": "infectiousDisease",
+    "species": "species"
+  }
+}

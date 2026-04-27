@@ -1,0 +1,329 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 399,
+      "unitText": "Dataset"
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3336",
+      "name": "Drug discovery",
+      "url": "http://edamontology.org/topic_3336",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3292",
+      "name": "Biochemistry",
+      "url": "http://edamontology.org/topic_3292",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_4013",
+      "name": "Antimicrobial Resistance",
+      "url": "http://edamontology.org/topic_4013",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3301",
+      "name": "Microbiology",
+      "url": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3047",
+      "name": "Molecular biology",
+      "url": "http://edamontology.org/topic_3047",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_2229",
+      "name": "Cell biology",
+      "url": "http://edamontology.org/topic_2229",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3324",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3343",
+      "name": "Compound libraries and screening",
+      "url": "http://edamontology.org/topic_3343",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0781",
+      "name": "Virology",
+      "url": "http://edamontology.org/topic_0781",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3302",
+      "name": "Parasitology",
+      "url": "http://edamontology.org/topic_3302",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "name": "not provided"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018076",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Mutant Kras is associated with several human cancers, most notably pancreactic, colon, and lung."
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0015474",
+      "name": "cryptosporidiosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0015474",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001517",
+      "name": "dysentery",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001517",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005136",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C27988",
+      "name": "Cytotoxicity",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C27988",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "extensively drug-resistant Acinetobacter baumannii"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Serious Gram-negative bacterial infections (by WHO priority 1 pathogens for which new drugs are needed)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "human"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1869227",
+      "name": "bacteria"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "mouse"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Human"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "SARS-CoV-2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10239",
+      "name": "viruses"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9605",
+      "name": "humans"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9925",
+      "name": "goat"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "SARS-CoV2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1773",
+      "name": "Mycobacterium tuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/1773",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5807",
+      "name": "Cryptosporidium parvum",
+      "url": "https://www.uniprot.org/taxonomy/5807",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "237895",
+      "name": "Cryptosporidium hominis",
+      "url": "https://www.uniprot.org/taxonomy/237895",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "353151",
+      "name": "Cryptosporidium hominis (strain TU502)",
+      "url": "https://www.uniprot.org/taxonomy/353151",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11620",
+      "name": "Mammarenavirus lassaense",
+      "url": "https://www.uniprot.org/taxonomy/11620",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11623",
+      "name": "Mammarenavirus choriomeningitidis",
+      "url": "https://www.uniprot.org/taxonomy/11623",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000502",
+      "name": "cell-based bioassay",
+      "url": "https://ontobee.org/ontology/MMO?iri=http://purl.obolibrary.org/obo/MMO_0000502",
+      "inDefinedTermSet": "MMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000190",
+      "name": "Biochemical Assay",
+      "url": "https://ontobee.org/ontology/APO?iri=http://purl.obolibrary.org/obo/APO_0000190",
+      "inDefinedTermSet": "APO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "not known"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0007550",
+      "name": "high content screen",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0007550",
+      "inDefinedTermSet": "EFO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0003583",
+      "name": "cell viability assay",
+      "url": "https://ontobee.org/ontology/OBI?iri=http://purl.obolibrary.org/obo/OBI_0003583",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000388",
+      "name": "enzymatic method",
+      "url": "https://ontobee.org/ontology/MMO?iri=http://purl.obolibrary.org/obo/MMO_0000388",
+      "inDefinedTermSet": "MMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "flow cytometry"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "phenotypic and cell-based approach"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0013017",
+      "name": "functional phenotypic",
+      "url": "http://www.bioassayontology.org/bao#BAO_0013017",
+      "inDefinedTermSet": "BAO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "imaging"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

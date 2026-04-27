@@ -1,0 +1,312 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 12510,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2025-02-28",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2015-06-19",
+      "endDate": "2025-02-28"
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3305",
+      "name": "Public health and epidemiology",
+      "url": "http://edamontology.org/topic_3305",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3324",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3418",
+      "name": "Paediatrics",
+      "url": "http://edamontology.org/topic_3418",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3411",
+      "name": "Gynaecology and obstetrics",
+      "url": "http://edamontology.org/topic_3411",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3344",
+      "name": "Biomedical science",
+      "url": "http://edamontology.org/topic_3344",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0202",
+      "name": "Pharmacology",
+      "url": "http://edamontology.org/topic_0202",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3379",
+      "name": "Preclinical and clinical studies",
+      "url": "http://edamontology.org/topic_3379",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3303",
+      "name": "Medicine",
+      "url": "http://edamontology.org/topic_3303",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0804",
+      "name": "Immunology",
+      "url": "http://edamontology.org/topic_0804",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3419",
+      "name": "Psychiatry",
+      "url": "http://edamontology.org/topic_3419",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005109",
+      "name": "HIV infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0011122",
+      "name": "obesity disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0011122",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001711",
+      "name": "hepatic encephalopathy",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001711",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C35041",
+      "name": "Stress",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C35041",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C154635",
+      "name": "Death Domain",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C154635",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005344",
+      "name": "hepatitis B virus infection",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005344",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0012268",
+      "name": "AIDS",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0012268",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C189188",
+      "name": "Infected with SARS-CoV-2",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000020",
+      "name": "Urinary incontinence",
+      "url": "http://purl.obolibrary.org/obo/HP_0000020",
+      "inDefinedTermSet": "HP"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3483",
+      "name": "Cannabis sativa",
+      "url": "https://www.uniprot.org/taxonomy/3483",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9319",
+      "name": "Osphranter robustus",
+      "url": "https://www.uniprot.org/taxonomy/9319",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4097",
+      "name": "Nicotiana tabacum",
+      "url": "https://www.uniprot.org/taxonomy/4097",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "100569",
+      "name": "Ficus racemosa",
+      "url": "https://www.uniprot.org/taxonomy/100569",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12721",
+      "name": "Human immunodeficiency virus",
+      "url": "https://www.uniprot.org/taxonomy/12721",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11676",
+      "name": "Human immunodeficiency virus 1",
+      "url": "https://www.uniprot.org/taxonomy/11676",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10407",
+      "name": "Hepatitis B virus",
+      "url": "https://www.uniprot.org/taxonomy/10407",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11103",
+      "name": "Hepacivirus hominis",
+      "url": "https://www.uniprot.org/taxonomy/11103",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10566",
+      "name": "Human papillomavirus",
+      "url": "https://www.uniprot.org/taxonomy/10566",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "208726",
+      "name": "Human hepatitis A virus",
+      "url": "https://www.uniprot.org/taxonomy/208726",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12814",
+      "name": "Respiratory syncytial virus",
+      "url": "https://www.uniprot.org/taxonomy/12814",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "64320",
+      "name": "Zika virus",
+      "url": "https://www.uniprot.org/taxonomy/64320",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "37296",
+      "name": "Human herpesvirus 8",
+      "url": "https://www.uniprot.org/taxonomy/37296",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10376",
+      "name": "Epstein-Barr virus (strain GD1)",
+      "url": "https://www.uniprot.org/taxonomy/10376",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Clinical Study"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Clinical Trial"
+    }
+  ]
+}

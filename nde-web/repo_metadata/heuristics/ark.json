@@ -1,0 +1,173 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 27,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2026-04-03",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2022-04-27",
+      "endDate": "2026-04-03"
+    }
+  ],
+  "license": "https://arkportal.synapse.org/Data%20Access",
+  "usageInfo": {
+    "url": "https://help.arkportal.org/help/data-use-certificate#DataUse&Acknowledgement-Acknowledgement"
+  },
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3308",
+      "name": "Transcriptomics",
+      "url": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0121",
+      "name": "Proteomics",
+      "url": "http://edamontology.org/topic_0121",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3173",
+      "name": "Epigenomics",
+      "url": "http://edamontology.org/topic_3173",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0008383",
+      "name": "rheumatoid arthritis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008383",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0007915",
+      "name": "systemic lupus erythematosus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0007915",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005178",
+      "name": "osteoarthritis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005178",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0016367",
+      "name": "dermatomyositis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0016367",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0008661",
+      "name": "vitiligo",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008661",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005282",
+      "name": "cutaneous lupus erythematosus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005282",
+      "inDefinedTermSet": "MONDO"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3308",
+      "name": "Transcriptomics",
+      "url": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000862",
+      "name": "single cell RNA-seq assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000862",
+      "inDefinedTermSet": "MMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0121",
+      "name": "Proteomics",
+      "url": "http://edamontology.org/topic_0121",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001977",
+      "name": "cytometry assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001977",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002115",
+      "name": "cytometry time of flight assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002115",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "multimodal"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C202255",
+      "name": "Feature Barcoding",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C202255",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0009294",
+      "name": "CITE-seq",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0009294",
+      "inDefinedTermSet": "EFO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0600047",
+      "name": "sequencing assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0600047",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0030014",
+      "name": "bulk immune repertoire sequencing",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0030014",
+      "inDefinedTermSet": "EFO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

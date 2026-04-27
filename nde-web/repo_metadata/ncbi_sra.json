@@ -1,0 +1,42 @@
+{
+  "_id": "ncbi_sra",
+  "name": "NCBI SRA",
+  "alternateName": [
+    "National Center for Biotechnology Information Sequence Read Archive",
+    "NCBI Sequence Read Archive"
+  ],
+  "identifier": "NCBI SRA",
+  "url": "https://www.ncbi.nlm.nih.gov/sra",
+  "abstract": "Sequence Read Archive (SRA) is the NIH supported largest publicly available repository of high throughput sequencing data that includes raw sequencing data and alignment information for most domains.",
+  "description": "Sequence Read Archive(SRA) data, available through multiple cloud providers and NCBI servers, is the largest publicly available repository of high throughput sequencing data. The archive accepts data from all branches of life as well as metagenomic and environmental surveys. SRA stores raw sequencing data and alignment information to enhance reproducibility and facilitate new discoveries through data analysis.",
+  "collectionType": "Dataset Repository",
+  "genre": "Generalist",
+  "conditionsOfAccess": "Varied",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "schedule": "Quarterly",
+  "schema": {
+    "Accession": "url",
+    "Updated": "dateModified",
+    "Published": "datePublished",
+    "Recieved": "dateCreated",
+    "Visibility": "conditionsOfAccess",
+    "ReplacedBy": "sameAs",
+    "study_title": "name",
+    "study_abstract": "description",
+    "contact_name": "author",
+    "GCP_url": "contentUrl",
+    "GCP_free_egress": "isAccessibleForFree",
+    "AWS_url": "contentUrl",
+    "AWS_free_egress": "isAccessibleForFree",
+    "organism_taxid": "species.identifier",
+    "organism_name": "species.name",
+    "run_accession": "isBasedOn.identifier",
+    "BioProject": "isBasedOn.identifier",
+    "experiment_accession": "isBasedOn.identifier",
+    "sample_accession": "isBasedOn.identifier",
+    "instrument": "isBasedOn.identifier",
+    "cell line": "isBasedOn.identifier",
+    "HapMap sample ID": "isBasedOn.identifier"
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 1457,
+      "unitText": "DataCollection"
+    }
+  ],
+  "dateModified": "2026-04-18",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "endDate": "2026-04-18"
+    }
+  ],
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "usageInfo": {
+    "@type": "CreativeWork",
+    "name": "Conditions of use",
+    "url": "https://dbaasp.org/DBAASP_Terms_And_Conditions.pdf"
+  },
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_2814",
+      "name": "Chemoinformatics",
+      "url": "http://edamontology.org/topic_2814",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0209",
+      "name": "Medicinal chemistry",
+      "url": "http://edamontology.org/topic_0209",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3301",
+      "name": "Microbiology",
+      "url": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Enterococcus sp. J14365/08"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Human colon"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Acinetobacter sp. DSM 586"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Human Melanoma SBcl-2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Salmonella sp. Group B"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "VSV-SARS-CoV-2-Omicron"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Neisseria spp."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "VSV-SARS-CoV-2-D614G"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Rhodoturula glutinis"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1306",
+      "name": "Streptococcus sp.",
+      "url": "https://www.uniprot.org/taxonomy/1306",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "36809",
+      "name": "Mycobacteroides abscessus",
+      "url": "https://www.uniprot.org/taxonomy/36809",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "75985",
+      "name": "Mannheimia haemolytica",
+      "url": "https://www.uniprot.org/taxonomy/75985",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5022",
+      "name": "Leptosphaeria maculans",
+      "url": "https://www.uniprot.org/taxonomy/5022",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "29850",
+      "name": "Gaeumannomyces graminis",
+      "url": "https://www.uniprot.org/taxonomy/29850",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4911",
+      "name": "Kluyveromyces marxianus",
+      "url": "https://www.uniprot.org/taxonomy/4911",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "96241",
+      "name": "Bacillus spizizenii",
+      "url": "https://www.uniprot.org/taxonomy/96241",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "90371",
+      "name": "Salmonella typhimurium",
+      "url": "https://www.uniprot.org/taxonomy/90371",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "80867",
+      "name": "Paracidovorax avenae",
+      "url": "https://www.uniprot.org/taxonomy/80867",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "29471",
+      "name": "Pectobacterium atrosepticum",
+      "url": "https://www.uniprot.org/taxonomy/29471",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Minimum Inhibitory Concentration Test",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C128985",
+      "inDefinedTermSet": "GENEPIO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "cytotoxicity assay",
+      "url": "http://www.bioassayontology.org/bao#BAO_0002993",
+      "inDefinedTermSet": "ENM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "3D structure prediction",
+      "url": "http://www.bioassayontology.org/bao#BAO_0002216",
+      "inDefinedTermSet": "BAO"
+    }
+  ]
+}

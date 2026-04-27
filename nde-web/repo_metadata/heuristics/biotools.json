@@ -1,0 +1,239 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 32927,
+      "unitText": "ComputationalTool"
+    }
+  ],
+  "dateModified": "2026-03-02",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2015-01-21",
+      "endDate": "2026-03-02"
+    }
+  ],
+  "license": "Varies",
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3474",
+      "name": "Machine learning",
+      "url": "http://edamontology.org/topic_3474",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0602",
+      "name": "Molecular interactions, pathways and networks",
+      "url": "http://edamontology.org/topic_0602",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0203",
+      "name": "Gene expression",
+      "url": "http://edamontology.org/topic_0203",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0154",
+      "name": "Small molecules",
+      "url": "http://edamontology.org/topic_0154",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3170",
+      "name": "RNA-Seq",
+      "url": "http://edamontology.org/topic_3170",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3168",
+      "name": "Sequencing",
+      "url": "http://edamontology.org/topic_3168",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0080",
+      "name": "Sequence analysis",
+      "url": "http://edamontology.org/topic_0080",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0625",
+      "name": "Genotype and phenotype",
+      "url": "http://edamontology.org/topic_0625",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0121",
+      "name": "Proteomics",
+      "url": "http://edamontology.org/topic_0121",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0769",
+      "name": "Workflows",
+      "url": "http://edamontology.org/topic_0769",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005070",
+      "name": "neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0021100",
+      "name": "breast neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018076",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000001",
+      "name": "disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0000001",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005812",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C4878",
+      "name": "Lung Carcinoma",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C4878",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005136",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005015",
+      "name": "diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "human"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "mouse"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Human"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2873985",
+      "name": "vector"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2775475",
+      "name": "binary"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "SARS-CoV-2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3193",
+      "name": "plants"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1869227",
+      "name": "bacteria"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10239",
+      "name": "viruses"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "408169",
+      "name": "metagenomes"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ]
+}

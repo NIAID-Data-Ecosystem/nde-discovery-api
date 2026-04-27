@@ -1,0 +1,24 @@
+{
+  "_id": "qiita",
+  "name": "Qiita",
+  "identifier": "Qiita",
+  "url": "https://qiita.ucsd.edu/",
+  "abstract": "Qiita is a repository that includes microbiome data and analysis tools.",
+  "description": "Qiita(canonically pronounced cheetah) is an entirely open-source microbial study management platform. It allows users to keep track of multiple studies with multiple 'omics data. Additionally, Qiita is capable of supporting multiple analytical pipelines through a 3rd-party plugin system, allowing the user to have a single entry point for all of their analyses. Qiita provides database and compute resources to the global community, alleviating the technical burdens that are typically limiting for researchers studying microbial ecology(e.g. familiarity with the command line or access to compute power).Qiita's platform allows for quick reanalysis of the datasets that have been deposited using the latest analytical technologies. This means that Qiita's internal datasets are living data that is periodically re-annotated according to current best practices.",
+  "collectionType": "Dataset Repository",
+  "genre": "IID",
+  "conditionsOfAccess": "Unknown",
+  "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
+  "schedule": "Weekly",
+  "schema": {
+    "study_abstract": "description",
+    "study_id": "url",
+    "study_alias": "_id",
+    "study_title": "name",
+    "study_tags": "keywords",
+    "pi": "author",
+    "pubs": "doi,pmids",
+    "ebi_study_accession": "mainEntityOfPage"
+  }
+}

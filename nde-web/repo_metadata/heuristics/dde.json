@@ -1,0 +1,684 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 50,
+      "unitText": "ComputationalTool"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 574,
+      "unitText": "Dataset"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 43,
+      "unitText": "ResourceCatalog"
+    }
+  ],
+  "dateModified": "2026-04-14",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "1988-12-31",
+      "endDate": "2026-04-14"
+    }
+  ],
+  "license": "Varies",
+  "usageInfo": "Varies",
+  "spatialCoverage": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Belarus"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nigeria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United Kingdom"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "China"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MN"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Moldova"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hospital de Base of São José do Rio Preto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Duluth"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "India"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ukraine"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jordan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Michigan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Uganda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Republic of Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Peru"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Neotropics"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "São Paulo state"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Belo Horizonte"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Liberia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Togo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mali"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Seattle"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Benin"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Senegal"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rhode Island"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sweden"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Baltimore"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United States of America"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Georgia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "New York"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zimbabwe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Argentina"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ghana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "São José do Rio Preto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "São José do Rio Preto, SP, Brazil"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Côte d'Ivoire"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "São Paulo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Democratic Republic of Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guinea"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kazakhstan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gabon"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Thailand"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Africa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Haiti"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MD"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cebu City, Philippines"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Spain"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Canada"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Philippines"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Azerbaijan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "France"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hospital de Base and Care Units in São José do Rio Preto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Malawi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mexico"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Europe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Florida"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Brazil"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Washington"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tanzania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cambodia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vietnam"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kyrgyzstan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Botswana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hospital de Base in São José do Rio Preto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sierra Leone"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Perú"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Romania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "São Paulo "
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3324",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3301",
+      "name": "Microbiology",
+      "url": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3308",
+      "name": "Transcriptomics",
+      "url": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0804",
+      "name": "Immunology",
+      "url": "http://edamontology.org/topic_0804",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3172",
+      "name": "Metabolomics",
+      "url": "http://edamontology.org/topic_3172",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_4013",
+      "name": "Antimicrobial Resistance",
+      "url": "http://edamontology.org/topic_4013",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0781",
+      "name": "Virology",
+      "url": "http://edamontology.org/topic_0781",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0091",
+      "name": "Bioinformatics",
+      "url": "http://edamontology.org/topic_0091",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_2229",
+      "name": "Cell biology",
+      "url": "http://edamontology.org/topic_2229",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3053",
+      "name": "Genetics",
+      "url": "http://edamontology.org/topic_3053",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C189188",
+      "name": "Infected with SARS-CoV-2",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D007239",
+      "name": "Infections",
+      "url": "https://id.nlm.nih.gov/mesh/D007239.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C171532",
+      "name": "Severe Acute Respiratory Syndrome Coronavirus 2 Measurement",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C171532",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D003643",
+      "name": "Death",
+      "url": "https://id.nlm.nih.gov/mesh/D003643.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018076",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0020731",
+      "name": "arbovirus infection",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0020731",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005812",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005502",
+      "name": "dengue disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005502",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "13613",
+      "name": "Microbiota",
+      "url": "https://www.uniprot.org/taxonomy/13613",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9544",
+      "name": "Macaca mulatta",
+      "url": "https://www.uniprot.org/taxonomy/9544",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9669",
+      "name": "Mustela putorius furo",
+      "url": "https://www.uniprot.org/taxonomy/9669",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9031",
+      "name": "Gallus gallus",
+      "url": "https://www.uniprot.org/taxonomy/9031",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7955",
+      "name": "Danio rerio",
+      "url": "https://www.uniprot.org/taxonomy/7955",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9796",
+      "name": "Equus caballus",
+      "url": "https://www.uniprot.org/taxonomy/9796",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9986",
+      "name": "Oryctolagus cuniculus",
+      "url": "https://www.uniprot.org/taxonomy/9986",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11320",
+      "name": "Influenza A virus",
+      "url": "https://www.uniprot.org/taxonomy/11320",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1335626",
+      "name": "Middle East respiratory syndrome-related coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/1335626",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1773",
+      "name": "Mycobacterium tuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/1773",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "114727",
+      "name": "H1N1 subtype",
+      "url": "https://www.uniprot.org/taxonomy/114727",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "102793",
+      "name": "Influenza A virus H5N1",
+      "url": "https://www.uniprot.org/taxonomy/102793",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1570291",
+      "name": "Ebola virus",
+      "url": "https://www.uniprot.org/taxonomy/1570291",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11082",
+      "name": "West Nile virus",
+      "url": "https://www.uniprot.org/taxonomy/11082",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "470",
+      "name": "Acinetobacter baumannii",
+      "url": "https://www.uniprot.org/taxonomy/470",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "transcriptomics"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "DNA Sequencing"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "metabolomics"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "genomics"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "microbiome sequencing"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "mRNA (microarray)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "proteomics"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Bacteriological Assay"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Curation",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C48292",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "microRNA (microarray)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

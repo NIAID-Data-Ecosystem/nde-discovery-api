@@ -1,0 +1,385 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 11297,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2026-04-13",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2015-09-22",
+      "endDate": "2026-04-13"
+    }
+  ],
+  "license": "Varies",
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0602",
+      "name": "Molecular interactions, pathways and networks",
+      "url": "http://edamontology.org/topic_0602",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0091",
+      "name": "Bioinformatics",
+      "url": "http://edamontology.org/topic_0091",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3070",
+      "name": "Biology",
+      "url": "http://edamontology.org/topic_3070",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3344",
+      "name": "Biomedical science",
+      "url": "http://edamontology.org/topic_3344",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_2229",
+      "name": "Cell biology",
+      "url": "http://edamontology.org/topic_2229",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3292",
+      "name": "Biochemistry",
+      "url": "http://edamontology.org/topic_3292",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0804",
+      "name": "Immunology",
+      "url": "http://edamontology.org/topic_0804",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3307",
+      "name": "Computational biology",
+      "url": "http://edamontology.org/topic_3307",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3335",
+      "name": "Cardiology",
+      "url": "http://edamontology.org/topic_3335",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0204",
+      "name": "Gene regulation",
+      "url": "http://edamontology.org/topic_0204",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005045",
+      "name": "hypertrophic cardiomyopathy",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005045",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004994",
+      "name": "cardiomyopathy",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004994",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004992",
+      "name": "cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004992",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0020731",
+      "name": "arbovirus infection",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0020731",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005091",
+      "name": "severe acute respiratory syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005091",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005719",
+      "name": "Coronavinae infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005719",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C48660",
+      "name": "Not Applicable",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C48660",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C41132",
+      "name": "None",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C41132",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4530",
+      "name": "Oryza sativa",
+      "url": "https://www.uniprot.org/taxonomy/4530",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3702",
+      "name": "Arabidopsis thaliana",
+      "url": "https://www.uniprot.org/taxonomy/3702",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4577",
+      "name": "Zea mays",
+      "url": "https://www.uniprot.org/taxonomy/4577",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "ENP China (ERC)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "218843",
+      "name": "Turnera subulata",
+      "url": "https://www.uniprot.org/taxonomy/218843",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "329199",
+      "name": "Turnera joelii",
+      "url": "https://www.uniprot.org/taxonomy/329199",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "ENP China"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11118",
+      "name": "Coronaviridae",
+      "url": "https://www.uniprot.org/taxonomy/11118",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "694009",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/694009",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11320",
+      "name": "Influenza A virus",
+      "url": "https://www.uniprot.org/taxonomy/11320",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1335626",
+      "name": "Middle East respiratory syndrome-related coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/1335626",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10566",
+      "name": "Human papillomavirus",
+      "url": "https://www.uniprot.org/taxonomy/10566",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11676",
+      "name": "Human immunodeficiency virus 1",
+      "url": "https://www.uniprot.org/taxonomy/11676",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5518",
+      "name": "Gibberella zeae",
+      "url": "https://www.uniprot.org/taxonomy/5518",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "90371",
+      "name": "Salmonella typhimurium",
+      "url": "https://www.uniprot.org/taxonomy/90371",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "data integration and warehousing",
+      "url": "http://edamontology.org/topic_3366"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "curation",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C48292"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "cluster analysis",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C63918"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "string",
+      "url": "http://purl.obolibrary.org/obo/MI_1014"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "FAIRE-seq",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0004428"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Bayesian approach",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C142403"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "computational method",
+      "url": "http://www.bioassayontology.org/bao#BAO_0002094"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "CRISPR/Cas9 method",
+      "url": "http://www.bioassayontology.org/bao#BAO_0010249"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "image processing",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17606"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "cytoscape network analysis",
+      "url": "http://www.bioassayontology.org/bao#BAO_0002362"
+    }
+  ]
+}

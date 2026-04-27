@@ -1,0 +1,40 @@
+{
+  "_id": "hca",
+  "name": "Human Cell Atlas",
+  "alternateName": [
+    "HCA"
+  ],
+  "identifier": "Human Cell Atlas",
+  "url": "https://www.humancellatlas.org/",
+  "abstract": "The Human Cell Atlas is a repository that includes multimodal data of cells in the human body.",
+  "description": "Thanks to new single cell genomics and spatial imaging technologies developed since the late 2000s and early 2010s, it is now possible to measure gene expression profiles in individual cells. These large scale data can be used with machine learning algorithms to decipher how the cells differ from and interact with their neighbors, and how they form and function in the tissue. This now allows scientists to identify and understand cell types in unprecedented detail, resolution and breadth. The Human Cell Atlas (HCA) is an international group of researchers using a combination of these new technologies to create cellular reference maps with the position, function and characteristics of every cell type in the human body.",
+  "collectionType": "Dataset Repository",
+  "genre": "Generalist",
+  "conditionsOfAccess": "Varied",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "schedule": "Weekly",
+  "schema": {
+    "entryId": "url, _id",
+    "projectTitle": "name",
+    "projectDescription": "description",
+    "institution": "author.affiliation",
+    "laboratory": "author.affiliation",
+    "contactName": "author.name",
+    "projectRole": "author.role",
+    "email": "author.email",
+    "publicationTitle": "ncitation.ame",
+    "publicationUrl": "citation.url",
+    "doi": "citation.doi",
+    "supplementaryLinks": "mainEntityOfPage, isBasedOn.codeRepository",
+    "accession": "sameAs",
+    "accessible": "isAccessibleForFree",
+    "effectiveOrgan": "keywords",
+    "organ": "keywords",
+    "organPart": "keywords",
+    "disease": "healthCondition.name",
+    "genusSpecies": "species",
+    "lastModifiedDate": "dateModified",
+    "submissionDate": "datePublished"
+  }
+}

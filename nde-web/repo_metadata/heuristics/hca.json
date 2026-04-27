@@ -1,0 +1,121 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 530,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2026-03-02",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2019-05-10",
+      "endDate": "2026-03-02"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C115935",
+      "name": "Healthy",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C115935",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005002",
+      "name": "chronic obstructive pulmonary disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005002",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0800029",
+      "name": "interstitial lung disease 2",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0800029",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005148",
+      "name": "type 2 diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005148",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005005",
+      "name": "clear cell renal carcinoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005005",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005011",
+      "name": "Crohn disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005011",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005812",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005301",
+      "name": "multiple sclerosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005301",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C3346",
+      "name": "Psoriasis",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3346",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9615",
+      "name": "Canis lupus familiaris",
+      "url": "https://www.uniprot.org/taxonomy/9615",
+      "inDefinedTermSet": "UniProt"
+    }
+  ]
+}

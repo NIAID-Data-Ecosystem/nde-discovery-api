@@ -1,0 +1,128 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 25,
+      "unitText": "Dataset"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000775",
+      "name": "drug allergy",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0000775",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0043579",
+      "name": "enteritis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0043579",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0009061",
+      "name": "cystic fibrosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0009061",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C189188",
+      "name": "Infected with SARS-CoV-2",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C3038",
+      "name": "Fever",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3038",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0006873",
+      "name": "nutritional deficiency disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0006873",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004979",
+      "name": "asthma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004979",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005093",
+      "name": "skin disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005093",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D007239",
+      "name": "Infections",
+      "url": "https://id.nlm.nih.gov/mesh/D007239.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001517",
+      "name": "dysentery",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001517",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9685",
+      "name": "Felis catus",
+      "url": "https://www.uniprot.org/taxonomy/9685",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9615",
+      "name": "Canis lupus familiaris",
+      "url": "https://www.uniprot.org/taxonomy/9615",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5740",
+      "name": "Giardia",
+      "url": "https://www.uniprot.org/taxonomy/5740",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "410661",
+      "name": "mouse gut metagenome",
+      "url": "https://www.uniprot.org/taxonomy/410661",
+      "inDefinedTermSet": "UniProt"
+    }
+  ]
+}

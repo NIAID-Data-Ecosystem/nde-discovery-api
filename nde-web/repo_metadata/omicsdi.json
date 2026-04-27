@@ -1,0 +1,29 @@
+{
+  "_id": "omicsdi",
+  "name": "OmicsDI",
+  "alternateName": [
+    "Omics Discovery Index",
+    "OmicsDI"
+  ],
+  "identifier": "Omics Discovery Index (OmicsDI)",
+  "url": "https://www.omicsdi.org/",
+  "abstract": "Omics Discovery Index (OmicsDI) is a generalist repository that is part of ELIXIR infrastructure that includes multi-omics data for most domains.",
+  "description": "The Omics Discovery Index (OmicsDI) provides a knowledge discovery framework across heterogeneous omics data (genomics, proteomics, transcriptomics and metabolomics).",
+  "collectionType": "Dataset Repository",
+  "genre": "Generalist",
+  "conditionsOfAccess": "Unknown",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "schedule": "Quarterly",
+  "schema": {
+    "_id": "identifer",
+    "citation": "citation",
+    "creator": "author",
+    "description": "description",
+    "distribution": "distribution",
+    "keywords": "keywords",
+    "name": "name",
+    "sameAs": "sameAs",
+    "variableMeasured": "variableMeasured"
+  }
+}

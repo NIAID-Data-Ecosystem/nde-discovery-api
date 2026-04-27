@@ -1,0 +1,35 @@
+{
+  "_id": "ncbi_geo",
+  "name": "NCBI GEO",
+  "alternateName": [
+    "National Center for Biotechnology Information Gene Expression Omnibus",
+    "NCBI Gene Expression Omnibus"
+  ],
+  "identifier": "NCBI GEO",
+  "url": "https://www.ncbi.nlm.nih.gov/geo/",
+  "abstract": "Gene Expression Omnibus (GEO) is an NIH supported repository that includes microarray and next-generation sequencing data for high-throughput functional genomics for most domains.",
+  "description": "GEO is a public functional genomics data repository supporting MIAME-compliant data submissions. Array- and sequence-based data are accepted. Tools are provided to help users query and download experiments and curated gene expression profiles.",
+  "collectionType": "Dataset Repository",
+  "genre": "Generalist",
+  "conditionsOfAccess": "Unknown",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
+  "schedule": "Manual",
+  "_mongoCollection": [
+    "gse_ncbi_geo",
+    "gsm_ncbi_geo"
+  ],
+  "schema": {
+    "_id": "identifier",
+    "contributor(s)": "author",
+    "organization": "publisher",
+    "title": "name",
+    "organism": "species",
+    "experiment type": "measurementTechnique",
+    "summary": "description",
+    "submission date": "datePublished",
+    "last update date": "dateModified",
+    "citation(s)": "citation"
+  }
+}

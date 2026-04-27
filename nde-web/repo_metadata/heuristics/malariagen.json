@@ -1,0 +1,113 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 59,
+      "unitText": "Dataset"
+    }
+  ],
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2011-01-20"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005136",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
+      "inDefinedTermSet": "MONDO"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7165",
+      "name": "Anopheles gambiae",
+      "url": "https://www.uniprot.org/taxonomy/7165",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "62324",
+      "name": "Anopheles funestus",
+      "url": "https://www.uniprot.org/taxonomy/62324",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1518534",
+      "name": "Anopheles coluzzii",
+      "url": "https://www.uniprot.org/taxonomy/1518534",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7173",
+      "name": "Anopheles arabiensis",
+      "url": "https://www.uniprot.org/taxonomy/7173",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "44482",
+      "name": "Anopheles",
+      "url": "https://www.uniprot.org/taxonomy/44482",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "491846",
+      "name": "Danaea vivax",
+      "url": "https://www.uniprot.org/taxonomy/491846",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2971083",
+      "name": "Vector NC",
+      "url": "https://www.uniprot.org/taxonomy/2971083",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5833",
+      "name": "Plasmodium falciparum",
+      "url": "https://www.uniprot.org/taxonomy/5833",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "357002",
+      "name": "Jola",
+      "url": "https://www.uniprot.org/taxonomy/357002",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5855",
+      "name": "Plasmodium vivax",
+      "url": "https://www.uniprot.org/taxonomy/5855",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5820",
+      "name": "Plasmodium",
+      "url": "https://www.uniprot.org/taxonomy/5820",
+      "inDefinedTermSet": "UniProt"
+    }
+  ]
+}

@@ -1,0 +1,394 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 65,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2024-05-07",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "endDate": "2024-05-07"
+    }
+  ],
+  "spatialCoverage": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rwanda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya, Tanzania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "India"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Myanmar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ethiopia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bangladesh, Brazil, India, Nepal, Pakistan, Peru, South Africa, Tanzania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bangladesh"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bangladesh, India, Kenya, Mali, Mozambique, Pakistan, The Gambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Africa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zambia, Zimbabwe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zanzibar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mali, The Gambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mali"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Niger"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Uganda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cote dIvoire"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Peru"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mozambique"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Democratic Republic of the Congo, Zambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cote dIvoire, Kenya, Tanzania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bangladesh, Kenya, Mali, South Africa, Thailand, The Gambia, Zambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Burundi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tanzania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zimbabwe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya, Mali, The Gambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cameroon, Cote dIvoire, Ethiopia, Kenya, and Uganda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Brazil"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "The Gambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Thailand"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cambodia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "India, Mali, Sri Lanka"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zambia"
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3305",
+      "name": "Public health and epidemiology",
+      "url": "http://edamontology.org/topic_3305",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3324",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3302",
+      "name": "Parasitology",
+      "url": "http://edamontology.org/topic_3302",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3056",
+      "name": "Population genetics",
+      "url": "http://edamontology.org/topic_3056",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3301",
+      "name": "Microbiology",
+      "url": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3303",
+      "name": "Medicine",
+      "url": "http://edamontology.org/topic_3303",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3575",
+      "name": "Tropical medicine",
+      "url": "http://edamontology.org/topic_3575",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3418",
+      "name": "Paediatrics",
+      "url": "http://edamontology.org/topic_3418",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3390",
+      "name": "Nutritional science",
+      "url": "http://edamontology.org/topic_3390",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3077",
+      "name": "Data acquisition",
+      "url": "http://edamontology.org/topic_3077",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005136",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001517",
+      "name": "dysentery",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001517",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C3038",
+      "name": "Fever",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3038",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001673",
+      "name": "diarrheal disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001673",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004981",
+      "name": "atrial fibrillation",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004981",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D007239",
+      "name": "Infections",
+      "url": "https://id.nlm.nih.gov/mesh/D007239.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0015254",
+      "name": "schistosomiasis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0015254",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0050686",
+      "name": "organ system cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_0050686",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0021113",
+      "name": "respiratory failure",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021113",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7157",
+      "name": "Culicidae",
+      "url": "https://www.uniprot.org/taxonomy/7157",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "95269",
+      "name": "Arge",
+      "url": "https://www.uniprot.org/taxonomy/95269",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9605",
+      "name": "Homo",
+      "url": "https://www.uniprot.org/taxonomy/9605",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2971083",
+      "name": "Vector NC",
+      "url": "https://www.uniprot.org/taxonomy/2971083",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C46079",
+      "name": "Randomized Controlled Clinical Trial",
+      "url": "https://ontobee.org/ontology/NCIT?iri=http://purl.obolibrary.org/obo/NCIT_C46079",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C15208",
+      "name": "Cohort Study",
+      "url": "https://ontobee.org/ontology/NCIT?iri=http://purl.obolibrary.org/obo/NCIT_C15208",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C53310",
+      "name": "Cross-Sectional Study",
+      "url": "https://ontobee.org/ontology/NCIT?iri=http://purl.obolibrary.org/obo/NCIT_C53310",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C15197",
+      "name": "Case-Control Study",
+      "url": "https://ontobee.org/ontology/NCIT?iri=http://purl.obolibrary.org/obo/NCIT_C15197",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C93043",
+      "name": "Nonrandomized Clinical Trial",
+      "url": "https://ontobee.org/ontology/NCIT?iri=http://purl.obolibrary.org/obo/NCIT_C93043",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C142646",
+      "name": "Prospective Study",
+      "url": "https://ontobee.org/ontology/NCIT?iri=http://purl.obolibrary.org/obo/NCIT_C142646",
+      "inDefinedTermSet": "NCIT"
+    }
+  ]
+}

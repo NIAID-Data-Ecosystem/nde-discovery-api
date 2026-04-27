@@ -1,0 +1,216 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 1827196,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2055-12-31",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "1753-01-01",
+      "endDate": "2055-12-31"
+    }
+  ],
+  "license": "Varies",
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "EDAM.TOPIC:3070",
+      "name": "Biology"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "EDAM.TOPIC:3303",
+      "name": "Medicine"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "EDAM.TOPIC:3297",
+      "name": "Biotechnology"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "EDAM.TOPIC:2640",
+      "name": "Oncology"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "EDAM.TOPIC:3053",
+      "name": "Genetics"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "EDAM.TOPIC:3324",
+      "name": "Infectious disease"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "EDAM.TOPIC:3292",
+      "name": "Biochemistry"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "EDAM.TOPIC:2229",
+      "name": "Cell biology"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "EDAM.TOPIC:3855",
+      "name": "Environmental sciences"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "EDAM.TOPIC:0610",
+      "name": "Ecology"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005015",
+      "name": "diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0003265",
+      "name": "adjustment disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0003265",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005070",
+      "name": "neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0021100",
+      "name": "breast neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005098",
+      "name": "stroke disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005098",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0011122",
+      "name": "obesity disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0011122",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005044",
+      "name": "hypertensive disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005044",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Disease"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C4878",
+      "name": "Lung Carcinoma",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C4878",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "human"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "mice"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3193",
+      "name": "plants"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1869227",
+      "name": "bacteria"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "mouse"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2839062",
+      "name": "transformation"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11676",
+      "name": "HIV"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2873985",
+      "name": "vector"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9605",
+      "name": "humans"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "SARS-CoV-2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ]
+}

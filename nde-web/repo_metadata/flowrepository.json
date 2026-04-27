@@ -1,0 +1,32 @@
+{
+  "_id": "flowrepository",
+  "name": "Flow Repository",
+  "identifier": "Flow Repository",
+  "url": "http://flowrepository.org/",
+  "abstract": "Flow Repository is a repository that includes flow cytometry data.",
+  "description": "FlowRepository is a database of flow cytometry experiments where you can query and download data collected and annotated according to the MIFlowCyt standard. It is primarily used as a data deposition place for experimental findings published in peer-reviewed journals in the flow cytometry field.",
+  "collectionType": "Dataset Repository",
+  "genre": "Generalist",
+  "conditionsOfAccess": "Open",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "schedule": "Weekly",
+  "schema": {
+    "Repository ID": "identifier",
+    "Experiment Name": "name",
+    "Primary researcher": "author.name",
+    "PI/manager": "author.name",
+    "Uploaded by": "author.name",
+    "Experiment dates": "temporalCoverage.startDate,temporalCoverage.endDate",
+    "Dataset uploaded": "datePublished",
+    "Last updated": "dateModified",
+    "Keywords": "keywords",
+    "Manuscripts": "citation,funding",
+    "Organizations": "author.affiliation.name",
+    "Purpose": "description",
+    "Conclusion": "description",
+    "Comments": "description",
+    "Funding": "funding.description",
+    "Quality control": "description"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "_id": "dataverse",
+  "name": "Harvard Dataverse",
+  "alternateName": [
+    "Dataverse"
+  ],
+  "identifier": "Harvard Dataverse",
+  "url": "https://dataverse.harvard.edu/",
+  "abstract": "Harvard Dataverse is a GREI repository that includes most data types and domains.",
+  "description": "The Harvard Dataverse Repository is a free data repository open to all researchers from any discipline, both inside and outside of the Harvard community, where you can share, archive, cite, access, and explore research data. Each individual Dataverse collection is a customizable collection of datasets (or a virtual repository) for organizing, managing, and showcasing datasets.",
+  "collectionType": "Dataset Repository",
+  "genre": "Generalist",
+  "conditionsOfAccess": "Varied",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "schedule": "Quarterly",
+  "schema": {
+    "@context": "@context",
+    "@type": "@type",
+    "identifier": [
+      "url",
+      "doi",
+      "identifier"
+    ],
+    "name": "name",
+    "creator": "author",
+    "author": "author",
+    "datePublished": "datePublished",
+    "dateModified": "dateModified",
+    "description": "description",
+    "keywords": "keywords",
+    "citation": "citation.citation",
+    "license": "license",
+    "includedInDataCatalog": "includedInDataCatalog",
+    "publisher": "sdPublisher",
+    "funder": "funder",
+    "distribution": "distribution",
+    "type": "@type",
+    "global_id": "doi",
+    "published_at": "datePublished",
+    "identifier_of_dataverse": "sdPublisher.identifier",
+    "name_of_dataverse": "sdPublisher.name",
+    "subjects": "topicCategory",
+    "createdAt": "dateCreated",
+    "updatedAt": "dateModified",
+    "authors": "author.name"
+  }
+}

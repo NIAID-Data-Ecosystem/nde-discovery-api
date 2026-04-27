@@ -1,0 +1,146 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 2193,
+      "unitText": "DataCollection"
+    }
+  ],
+  "dateModified": "2026-04-17",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2016-05-06",
+      "endDate": "2026-04-17"
+    }
+  ],
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "usageInfo": {
+    "url": "https://www.clinicalgenome.org/docs/?doc-type=policies-position-statements"
+  },
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0625",
+      "name": "Genotype and phenotype",
+      "url": "http://edamontology.org/topic_0625",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0199",
+      "name": "Genetic variation",
+      "url": "http://edamontology.org/topic_0199",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002921",
+      "name": "congenital structural myopathy",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002921",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001071",
+      "name": "intellectual disability",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001071",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0003778",
+      "name": "inborn error of immunity",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0003778",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018875",
+      "name": "Li-Fraumeni syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018875",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0015974",
+      "name": "severe combined immunodeficiency",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0015974",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0031332",
+      "name": "Glanzmann thrombasthenia 1",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0031332",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004741",
+      "name": "tyrosinemia",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004741",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018958",
+      "name": "nemaline myopathy",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018958",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "MONDO:0000573",
+      "name": "recombinase activating gene 2 deficiency",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "MONDO:0100562",
+      "name": "HBA2-related alpha thalassemia spectrum",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Curation",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C48292",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Classification",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C25161",
+      "inDefinedTermSet": "NCIT"
+    }
+  ]
+}

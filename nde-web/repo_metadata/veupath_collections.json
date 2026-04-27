@@ -1,0 +1,31 @@
+{
+  "_id": "veupath_collections",
+  "name": "VEuPath Collections",
+  "identifier": "VEuPathDB",
+  "url": "https://veupathdb.org/veupathdb/app/",
+  "abstract": "VEuPathCollections are NIAID supported IID component repositories of VEuPathDB which include collections of genomic data.",
+  "description": "VEuPath Collections is the collection of component websites of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) that have been constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). \nThe VEuPath Collections include the following component websites as individual collections: \nAmoebaDB \nCryptoDB \nGiardiaDB \nHostDB \nPlasmoDB \nVectorBase \nFungiDB \nMicrosporidiaDB \nToxoDB \nTrichDB \nTriTrypDB \nPiroplasmaDB.",
+  "collectionType": "Dataset Repository",
+  "genre": "IID",
+  "conditionsOfAccess": "Closed",
+  "hasAPI": true,
+  "schedule": "Weekly",
+  "schema": {
+    "id": "identifer",
+    "displayName": "name",
+    "contact_name": "author",
+    "summary": "description",
+    "type": "measurementTechnique",
+    "sdPublisher": "project_id",
+    "short_attribution": "creditText",
+    "release_policy": "conditionOfAccess",
+    "version": "dateModified",
+    "author": "affiliation",
+    "GenomeHistory": "dateUpdated",
+    "Version": "datePublished",
+    "organism": "species",
+    "HyperLinks": "distribution",
+    "gene_count": "variableMeasured",
+    "gene_type": "GeneTypeCounts"
+  }
+}

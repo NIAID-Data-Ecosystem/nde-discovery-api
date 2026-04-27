@@ -1,0 +1,29 @@
+{
+  "_id": "figshare",
+  "name": "Figshare",
+  "identifier": "Figshare",
+  "url": "https://figshare.com/",
+  "abstract": "Figshare is a NIH supported generalist repository that includes generalist data.",
+  "description": "Figshare is a repository where users can make all of their research outputs available in a citable, shareable and discoverable manner.",
+  "collectionType": "Dataset Repository",
+  "genre": "Generalist",
+  "conditionsOfAccess": "Unknown",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "schedule": "Manual",
+  "schema": {
+    "title": "name",
+    "creator": "author",
+    "subject": "keywords",
+    "description": "description",
+    "date": "dateModified",
+    "publisher": "sdPublisher",
+    "type": "@type",
+    "identifier": "doi",
+    "language": "language",
+    "relation": "url",
+    "license": "license",
+    "issued": "datePublished",
+    "sponsor": "funding"
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 52930808,
+      "unitText": "Sample"
+    }
+  ],
+  "dateModified": "2026-03-12",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "1970-02-24",
+      "endDate": "2026-03-12"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "name": "COVID-19"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Neoplasms"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "severe accute respiratory syndrome"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Not available"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "normal"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "diseased"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Prostatic Neoplasms"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Tuberculosis"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Breast Neoplasms"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "healthy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Homo sapiens"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Human"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Severe acute respiratory syndrome coronavirus 2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "human"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Mus musculus"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "C57BL/6J"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "C57BL/6"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "house mouse"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "enterica"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "human gut metagenome"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Severe acute respiratory syndrome coronavirus 2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Homo sapiens"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "C57BL/6J"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "C57BL/6"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "enterica"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "human gut metagenome"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Mus musculus"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "metagenome"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "uncultured bacterium"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Escherichia coli"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina NovaSeq 6000"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina MiSeq"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina HiSeq 2000"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina HiSeq 2500"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina HiSeq 4000"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "NextSeq 500"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "MiSeq"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "16S"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "pyrosequencing"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

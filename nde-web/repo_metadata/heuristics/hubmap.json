@@ -1,0 +1,255 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 4547,
+      "unitText": "Sample"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 6314,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2026-04-16",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2019-09-20",
+      "endDate": "2026-04-16"
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3053",
+      "name": "Genetics",
+      "url": "http://edamontology.org/topic_3053",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3067",
+      "name": "Anatomy",
+      "url": "http://edamontology.org/topic_3067",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3070",
+      "name": "Biology",
+      "url": "http://edamontology.org/topic_3070",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_2229",
+      "name": "Cell biology",
+      "url": "http://edamontology.org/topic_2229",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3301",
+      "name": "Microbiology",
+      "url": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3047",
+      "name": "Molecular biology",
+      "url": "http://edamontology.org/topic_3047",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3308",
+      "name": "Transcriptomics",
+      "url": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3344",
+      "name": "Biomedical science",
+      "url": "http://edamontology.org/topic_3344",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3409",
+      "name": "Gastroenterology",
+      "url": "http://edamontology.org/topic_3409",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005044",
+      "name": "hypertensive disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005044",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004992",
+      "name": "cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004992",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005049",
+      "name": "obsolete intracranial hemorrhage",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005049",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005010",
+      "name": "coronary artery disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005010",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D014949",
+      "name": "Wounds, Nonpenetrating",
+      "url": "https://id.nlm.nih.gov/mesh/D014949.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004995",
+      "name": "cardiovascular disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004995",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000745",
+      "name": "cardiac arrest",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0000745",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005148",
+      "name": "type 2 diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005148",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Hyperlipidimia"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018770",
+      "name": "Jeune syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018770",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1207117",
+      "name": "Anoxia",
+      "url": "https://www.uniprot.org/taxonomy/1207117",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1492155",
+      "name": "bacterium 57",
+      "url": "https://www.uniprot.org/taxonomy/1492155",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "SNARE-RNAseq2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "MIBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "salmon_sn_rnaseq_10x"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "mibi_deepcell"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "LC-MS"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "snRNAseq-10xGenomics-v3"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "AF"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "CODEX"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "SNAREseq"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "SNARE-ATACseq2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}
