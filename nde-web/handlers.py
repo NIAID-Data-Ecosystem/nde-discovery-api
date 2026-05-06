@@ -1063,7 +1063,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 "schedule": "Manual",
             },
             "immport": {
-                "name": "ImmPort",
+                "name": "ImmPort - Bioinformatics For the Future of Immunology",
                 "abstract": "The Immunology Database and Analysis Portal (ImmPort) is a NIAID supported IID repository that includes multimodal immunological data.",
                 "description": "The ImmPort project provides advanced information technology support in the archiving and exchange of scientific data for the diverse community of life science researchers supported by NIAID/DAIT and serves as a long-term, sustainable archive of research and clinical data. The core component of ImmPort is an extensive data warehouse containing experimental data and metadata describing the purpose of the study and the methods of data generation. The functionality of ImmPort will be expanded continuously over the life of the BISC project to accommodate the needs of expanding research communities. The shared research and clinical data, as well as the analytical tools in ImmPort are available to any researcher after registration.",
                 "schema": {
