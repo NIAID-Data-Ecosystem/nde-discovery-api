@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 2193,
+      "minValue": 2202,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-04-17",
+  "dateModified": "2026-05-01",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2016-05-06",
-      "endDate": "2026-04-17"
+      "endDate": "2026-05-01"
     }
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -29,16 +29,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0622",
-      "name": "Genomics",
-      "url": "http://edamontology.org/topic_0622",
+      "identifier": "topic_0199",
+      "name": "Genetic variation",
+      "url": "http://edamontology.org/topic_0199",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0199",
-      "name": "Genetic variation",
-      "url": "http://edamontology.org/topic_0199",
+      "identifier": "topic_0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -66,13 +66,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0018875",
-      "name": "Li-Fraumeni syndrome",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0018875",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0015974",
       "name": "severe combined immunodeficiency",
       "url": "http://purl.obolibrary.org/obo/MONDO_0015974",
@@ -80,9 +73,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0031332",
-      "name": "Glanzmann thrombasthenia 1",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0031332",
+      "identifier": "0018875",
+      "name": "Li-Fraumeni syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018875",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -94,21 +87,29 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0018958",
-      "name": "nemaline myopathy",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0018958",
+      "identifier": "0031332",
+      "name": "Glanzmann thrombasthenia 1",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0031332",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "MONDO:0000573",
-      "name": "recombinase activating gene 2 deficiency",
+      "identifier": "0010305",
+      "name": "creatine transporter deficiency",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0010305",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "MONDO:0100562",
-      "name": "HBA2-related alpha thalassemia spectrum",
+      "identifier": "MONDO:0010880",
+      "name": "telangiectasia, hereditary hemorrhagic, type 2",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0008723",
+      "name": "very long chain acyl-CoA dehydrogenase deficiency",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008723",
       "inDefinedTermSet": "MONDO"
     },
     {

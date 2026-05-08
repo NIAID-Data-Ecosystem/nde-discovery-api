@@ -10,7 +10,9 @@
   "abstract": "Sequence Read Archive (SRA) is the NIH supported largest publicly available repository of high throughput sequencing data that includes raw sequencing data and alignment information for most domains.",
   "description": "Sequence Read Archive(SRA) data, available through multiple cloud providers and NCBI servers, is the largest publicly available repository of high throughput sequencing data. The archive accepts data from all branches of life as well as metagenomic and environmental surveys. SRA stores raw sequencing data and alignment information to enhance reproducibility and facilitate new discoveries through data analysis.",
   "collectionType": "Dataset Repository",
-  "genre": "Generalist",
+  "genre": [
+    "Generalist"
+  ],
   "conditionsOfAccess": "Varied",
   "isAccessibleForFree": true,
   "hasAPI": true,

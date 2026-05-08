@@ -57,16 +57,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "identifier": "0005559",
+      "name": "neurodegenerative disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005559",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005559",
-      "name": "neurodegenerative disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005559",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
       "inDefinedTermSet": "MONDO"
     },
     {

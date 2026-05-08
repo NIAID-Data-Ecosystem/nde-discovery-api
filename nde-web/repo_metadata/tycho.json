@@ -6,7 +6,9 @@
   "abstract": "Project TYCHO is a NIH supported IID repository that includes clinical data.",
   "description": "The Project Tycho Repository for Global Health Data aims to advance the availabilty and use of data for improving global health. Project Tycho unlocks global health data to a rapidly growing user community of over 3,000 researchers, students, journalists, officials, and others in over 90 countries. A Project Tycho dataset includes case counts for a disease condition in a country. Data for Project Tycho datasets can come from various sources and have been pre-processed into the standard Project Tycho data format.",
   "collectionType": "Dataset Repository",
-  "genre": "IID",
+  "genre": [
+    "IID"
+  ],
   "conditionsOfAccess": "Closed",
   "isAccessibleForFree": true,
   "hasAPI": true,

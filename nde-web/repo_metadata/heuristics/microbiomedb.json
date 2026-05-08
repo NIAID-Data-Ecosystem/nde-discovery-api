@@ -16,31 +16,17 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "0043579",
       "name": "enteritis",
       "url": "http://purl.obolibrary.org/obo/MONDO_0043579",
       "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0009061",
-      "name": "cystic fibrosis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0009061",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C189188",
-      "name": "Infected with SARS-CoV-2",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C3038",
-      "name": "Fever",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C3038",
-      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -51,9 +37,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0004979",
-      "name": "asthma",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004979",
+      "identifier": "0005446",
+      "name": "cutaneous leishmaniasis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005446",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -65,10 +51,24 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "D007239",
-      "name": "Infections",
-      "url": "https://id.nlm.nih.gov/mesh/D007239.html",
-      "inDefinedTermSet": "MeSH"
+      "identifier": "0004979",
+      "name": "asthma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004979",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C3038",
+      "name": "Fever",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3038",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0011989",
+      "name": "leishmaniasis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0011989",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
@@ -96,16 +96,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9606",
-      "name": "Homo sapiens",
-      "url": "https://www.uniprot.org/taxonomy/9606",
+      "identifier": "9615",
+      "name": "Canis lupus familiaris",
+      "url": "https://www.uniprot.org/taxonomy/9615",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9615",
-      "name": "Canis lupus familiaris",
-      "url": "https://www.uniprot.org/taxonomy/9615",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
       "inDefinedTermSet": "UniProt"
     }
   ],

@@ -10,7 +10,9 @@
   "abstract": "Omics Discovery Index (OmicsDI) is a generalist repository that is part of ELIXIR infrastructure that includes multi-omics data for most domains.",
   "description": "The Omics Discovery Index (OmicsDI) provides a knowledge discovery framework across heterogeneous omics data (genomics, proteomics, transcriptomics and metabolomics).",
   "collectionType": "Dataset Repository",
-  "genre": "Generalist",
+  "genre": [
+    "Generalist"
+  ],
   "conditionsOfAccess": "Unknown",
   "isAccessibleForFree": true,
   "hasAPI": true,

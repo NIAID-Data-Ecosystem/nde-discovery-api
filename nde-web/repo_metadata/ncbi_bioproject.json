@@ -6,7 +6,9 @@
   "abstract": "NCBI BioProject is a NIH supported generalist repository that includes multiomic data.",
   "description": "A BioProject is a collection of biological data related to a single initiative, originating from a single organization or from a consortium. A BioProject record provides users a single place to find links to the diverse data types generated for that project.",
   "collectionType": "Dataset Repository",
-  "genre": "Generalist",
+  "genre": [
+    "Generalist"
+  ],
   "conditionsOfAccess": "Open",
   "isAccessibleForFree": true,
   "hasAPI": true,

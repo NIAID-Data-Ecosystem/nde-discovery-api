@@ -2,22 +2,22 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 4547,
-      "unitText": "Sample"
+      "minValue": 6537,
+      "unitText": "Dataset"
     },
     {
       "@type": "QuantitativeValue",
-      "minValue": 6314,
-      "unitText": "Dataset"
+      "minValue": 4878,
+      "unitText": "Sample"
     }
   ],
-  "dateModified": "2026-04-16",
+  "dateModified": "2026-04-30",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2019-09-20",
-      "endDate": "2026-04-16"
+      "endDate": "2026-04-30"
     }
   ],
   "topicCategory": [
@@ -205,43 +205,73 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "SNARE-RNAseq2"
+      "identifier": "0003108",
+      "name": "single-nucleus chromatin accessibility and mRNA expression sequencing assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0003108",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "MIBI"
+      "identifier": "0003100",
+      "name": "multiplexed ion beam imaging assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0003100",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "salmon_sn_rnaseq_10x"
+      "identifier": "0000869",
+      "name": "single nucleus RNA-seq assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000869",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "mibi_deepcell"
+      "identifier": "0000659",
+      "name": "RNA-seq assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000659",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "LC-MS"
+      "identifier": "0003093",
+      "name": "co-detection by indexing assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0003093",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "snRNAseq-10xGenomics-v3"
+      "identifier": "0000535",
+      "name": "liquid chromatography-mass spectrometry",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000535",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "AF"
+      "identifier": "0002762",
+      "name": "single-nucleus ATAC-seq",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002762",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "CODEX"
+      "identifier": "0003088",
+      "name": "autofluorescence microscopy assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0003088",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "SNAREseq"
+      "identifier": "0002039",
+      "name": "assay for transposase-accessible chromatin using sequencing",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002039",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "SNARE-ATACseq2"
+      "identifier": "0003089",
+      "name": "bulk assay for transposase-accessible chromatin using sequencing",
+      "url": "http://purl.obolibrary.org/obo/OBI_0003089",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",

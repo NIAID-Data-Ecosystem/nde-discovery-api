@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 1059749,
+      "minValue": 1064932,
       "unitText": "Dataset"
     }
   ],
@@ -174,23 +174,31 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "Sequencing"
+      "identifier": "0600047",
+      "name": "sequencing assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0600047",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Array"
+      "identifier": "0001985",
+      "name": "microarray assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001985",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Other"
+      "identifier": "0000011",
+      "name": "planned process",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000011",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Umbrella project"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "MassSpectrometry"
+      "identifier": "0000534",
+      "name": "mass spectrometry",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000534",
+      "inDefinedTermSet": "MMO"
     }
   ]
 }

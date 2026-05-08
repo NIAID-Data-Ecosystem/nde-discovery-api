@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 1419,
+      "minValue": 1447,
       "unitText": "Dataset"
     }
   ],
@@ -97,10 +97,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "8469",
+      "identifier": "0005812",
       "name": "influenza",
-      "url": "http://purl.obolibrary.org/obo/DOID_8469",
-      "inDefinedTermSet": "DOID"
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
@@ -118,16 +118,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C92861",
-      "name": "Preterm Birth",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C92861",
+      "identifier": "C25742",
+      "name": "Pregnancy",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C25742",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C25742",
-      "name": "Pregnancy",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C25742",
+      "identifier": "C92861",
+      "name": "Preterm Birth",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C92861",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -212,16 +212,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9443",
-      "name": "Primates",
-      "url": "https://www.uniprot.org/taxonomy/9443",
+      "identifier": "9669",
+      "name": "Mustela putorius furo",
+      "url": "https://www.uniprot.org/taxonomy/9669",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9669",
-      "name": "Mustela putorius furo",
-      "url": "https://www.uniprot.org/taxonomy/9669",
+      "identifier": "9443",
+      "name": "Primates",
+      "url": "https://www.uniprot.org/taxonomy/9443",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -313,9 +313,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1335626",
-      "name": "Middle East respiratory syndrome-related coronavirus",
-      "url": "https://www.uniprot.org/taxonomy/1335626",
+      "identifier": "357231",
+      "name": "Murine norovirus",
+      "url": "https://www.uniprot.org/taxonomy/357231",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -330,43 +330,73 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "ELISA"
+      "identifier": "0000075",
+      "name": "enzyme linked immunosorbent assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000075",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Flow Cytometry"
+      "identifier": "0000061",
+      "name": "flow cytometry",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0000061",
+      "inDefinedTermSet": "CHMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Pseudovirus Neutralization Assay"
+      "identifier": "0002680",
+      "name": "pseudovirus entry assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002680",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "RNA sequencing"
+      "identifier": "0000659",
+      "name": "RNA-seq assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000659",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "PCR"
+      "identifier": "0000459",
+      "name": "polymerase chain reaction assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000459",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Hemagglutination Inhibition"
+      "identifier": "0000875",
+      "name": "viral hemagglutination inhibition assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000875",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Other"
+      "identifier": "0000011",
+      "name": "planned process",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000011",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Virus Neutralization"
+      "identifier": "0000458",
+      "name": "enzyme-linked immunosorbent spot assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000458",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "ELISPOT"
+      "identifier": "C120695",
+      "name": "Virus Neutralization Assay",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C120695",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Transcription profiling by array"
+      "identifier": "0001463",
+      "name": "transcription profiling by array assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001463",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",

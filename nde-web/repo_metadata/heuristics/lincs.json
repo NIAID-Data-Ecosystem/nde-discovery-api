@@ -235,10 +235,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0010045",
-      "name": "RNA-seq gene expression profiling assay",
-      "url": "https://ontobee.org/ontology/BAO?iri=http://www.bioassayontology.org/bao#BAO_0010045",
-      "inDefinedTermSet": "BAO"
+      "identifier": "0002951",
+      "name": "fluorescence imaging-based cell morphology assay",
+      "url": "https://ontobee.org/ontology/OBI?iri=http://purl.obolibrary.org/obo/OBI_0002951",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",

@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 877,
+      "minValue": 878,
       "unitText": "Dataset"
     }
   ],
@@ -215,13 +215,13 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "4751",
-      "name": "fungi"
+      "identifier": "1869227",
+      "name": "Bacterial"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1869227",
-      "name": "Bacterial"
+      "identifier": "1239",
+      "name": "Firmicutes"
     },
     {
       "@type": "DefinedTerm",
@@ -291,16 +291,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "562",
-      "name": "Escherichia coli",
-      "url": "https://www.uniprot.org/taxonomy/562",
+      "identifier": "408169",
+      "name": "metagenomes",
+      "url": "https://www.uniprot.org/taxonomy/408169",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "408169",
-      "name": "metagenomes",
-      "url": "https://www.uniprot.org/taxonomy/408169",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
       "inDefinedTermSet": "UniProt"
     },
     {

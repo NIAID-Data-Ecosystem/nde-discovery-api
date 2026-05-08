@@ -338,17 +338,17 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "identifier": "0002117",
-      "name": "whole genome sequencing assay",
-      "url": "http://purl.obolibrary.org/obo/OBI_0002117",
-      "inDefinedTermSet": "OBI"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0000659",
       "name": "RNA-seq assay",
       "url": "http://purl.obolibrary.org/obo/MMO_0000659",
       "inDefinedTermSet": "MMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002117",
+      "name": "whole genome sequencing assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002117",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
@@ -366,24 +366,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C19590",
-      "name": "Whole Genome Amplification",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C19590",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0002118",
-      "name": "exome sequencing assay",
-      "url": "http://purl.obolibrary.org/obo/OBI_0002118",
-      "inDefinedTermSet": "OBI"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0000716",
       "name": "ChIP-seq assay",
       "url": "http://purl.obolibrary.org/obo/OBI_0000716",
       "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C19590",
+      "name": "Whole Genome Amplification",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C19590",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -404,6 +397,13 @@
       "identifier": "0002039",
       "name": "assay for transposase-accessible chromatin using sequencing",
       "url": "http://purl.obolibrary.org/obo/OBI_0002039",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002118",
+      "name": "exome sequencing assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002118",
       "inDefinedTermSet": "OBI"
     },
     {

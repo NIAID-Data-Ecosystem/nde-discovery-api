@@ -2,22 +2,22 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 84,
-      "unitText": "Dataset"
+      "minValue": 4386,
+      "unitText": "Sample"
     },
     {
       "@type": "QuantitativeValue",
-      "minValue": 4319,
-      "unitText": "Sample"
+      "minValue": 85,
+      "unitText": "Dataset"
     }
   ],
-  "dateModified": "2025-10-31",
+  "dateModified": "2026-04-03",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2019-06-11",
-      "endDate": "2025-10-31"
+      "endDate": "2026-04-03"
     }
   ],
   "license": "https://creativecommons.org/public-domain/",
@@ -33,7 +33,7 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "USA"
+      "name": "MADRID"
     },
     {
       "@type": "AdministrativeArea",
@@ -41,15 +41,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MADRID"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Madrid"
+      "name": "USA"
     },
     {
       "@type": "AdministrativeArea",
       "name": "Brescia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Madrid"
     }
   ],
   "topicCategory": [
@@ -97,13 +97,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3070",
-      "name": "Biology",
-      "url": "http://edamontology.org/topic_3070",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "topic_0781",
       "name": "Virology",
       "url": "http://edamontology.org/topic_0781",
@@ -111,9 +104,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3047",
-      "name": "Molecular biology",
-      "url": "http://edamontology.org/topic_3047",
+      "identifier": "topic_3070",
+      "name": "Biology",
+      "url": "http://edamontology.org/topic_3070",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -121,6 +114,13 @@
       "identifier": "topic_3966",
       "name": "Vaccinology",
       "url": "http://edamontology.org/topic_3966",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3047",
+      "name": "Molecular biology",
+      "url": "http://edamontology.org/topic_3047",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -139,14 +139,6 @@
       "name": "COVID-19",
       "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
       "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Cytomegalovirus -"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Cytomegalovirus +"
     },
     {
       "@type": "DefinedTerm",
@@ -199,6 +191,20 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "0005314",
+      "name": "relapsing-remitting multiple sclerosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005314",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005109",
+      "name": "HIV infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
       "name": "Other",
       "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
       "inDefinedTermSet": "NCIT",
@@ -223,6 +229,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "54878",
+      "name": "Enterolobium cyclocarpum",
+      "url": "https://www.uniprot.org/taxonomy/54878",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "103480",
       "name": "Castanea crenata",
       "url": "https://www.uniprot.org/taxonomy/103480",
@@ -233,13 +246,6 @@
       "identifier": "163112",
       "name": "Molva molva",
       "url": "https://www.uniprot.org/taxonomy/163112",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "54878",
-      "name": "Enterolobium cyclocarpum",
-      "url": "https://www.uniprot.org/taxonomy/54878",
       "inDefinedTermSet": "UniProt"
     }
   ],
@@ -253,16 +259,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11676",
-      "name": "Human immunodeficiency virus 1",
-      "url": "https://www.uniprot.org/taxonomy/11676",
+      "identifier": "11118",
+      "name": "Coronaviridae",
+      "url": "https://www.uniprot.org/taxonomy/11118",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11118",
-      "name": "Coronaviridae",
-      "url": "https://www.uniprot.org/taxonomy/11118",
+      "identifier": "11676",
+      "name": "Human immunodeficiency virus 1",
+      "url": "https://www.uniprot.org/taxonomy/11676",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -274,6 +280,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "11320",
+      "name": "Influenza A virus",
+      "url": "https://www.uniprot.org/taxonomy/11320",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "694009",
       "name": "Severe acute respiratory syndrome coronavirus",
       "url": "https://www.uniprot.org/taxonomy/694009",
@@ -281,9 +294,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11320",
-      "name": "Influenza A virus",
-      "url": "https://www.uniprot.org/taxonomy/11320",
+      "identifier": "333760",
+      "name": "Human papillomavirus type 16",
+      "url": "https://www.uniprot.org/taxonomy/333760",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10376",
+      "name": "Epstein-Barr virus (strain GD1)",
+      "url": "https://www.uniprot.org/taxonomy/10376",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -302,20 +322,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "333760",
-      "name": "Human papillomavirus type 16",
-      "url": "https://www.uniprot.org/taxonomy/333760",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "10310",
-      "name": "Human herpesvirus 2",
-      "url": "https://www.uniprot.org/taxonomy/10310",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "name": "All",
       "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
       "inDefinedTermSet": "NCBITaxon",
@@ -326,17 +332,31 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "identifier": "NCIT:C16084",
+      "identifier": "C16084",
       "name": "Observational Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C16084",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "name": "library preparation"
+      "identifier": "0000711",
+      "name": "library preparation",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000711",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "PCR"
+      "identifier": "0000459",
+      "name": "polymerase chain reaction assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000459",
+      "inDefinedTermSet": "MMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000655",
+      "name": "reverse transcription polymerase chain reaction assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000655",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
@@ -344,17 +364,21 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "RT(specific)+PCR"
-    },
-    {
-      "@type": "DefinedTerm",
       "name": "v2"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "NCIT:C15197",
+      "identifier": "C15197",
       "name": "Case-Control Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C15197",
       "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0008980",
+      "name": "UMI Method",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0008980",
+      "inDefinedTermSet": "EFO"
     },
     {
       "@type": "DefinedTerm",
@@ -362,13 +386,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "NCIT:C63536",
+      "identifier": "C63536",
       "name": "Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C63536",
       "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "RT(oligo-dT)+TS(UMI)+PCR"
     },
     {
       "@type": "DefinedTerm",

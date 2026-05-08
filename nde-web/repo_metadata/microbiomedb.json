@@ -6,7 +6,9 @@
   "abstract": "MicrobiomeDB is a NIAID supported repository that includes clinical microbiome data and analysis tools.",
   "description": "MicrobiomeDB was developed as a discovery tool that empowers researchers to fully leverage their experimental metadata to construct queries that interrogate microbiome datasets.",
   "collectionType": "Dataset Repository",
-  "genre": "IID",
+  "genre": [
+    "IID"
+  ],
   "conditionsOfAccess": "Open",
   "hasAPI": true,
   "schedule": "Weekly",

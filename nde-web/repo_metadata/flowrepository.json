@@ -6,7 +6,9 @@
   "abstract": "Flow Repository is a repository that includes flow cytometry data.",
   "description": "FlowRepository is a database of flow cytometry experiments where you can query and download data collected and annotated according to the MIFlowCyt standard. It is primarily used as a data deposition place for experimental findings published in peer-reviewed journals in the flow cytometry field.",
   "collectionType": "Dataset Repository",
-  "genre": "Generalist",
+  "genre": [
+    "Generalist"
+  ],
   "conditionsOfAccess": "Open",
   "isAccessibleForFree": true,
   "hasAPI": true,

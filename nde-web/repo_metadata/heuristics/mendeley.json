@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 140855,
+      "minValue": 141885,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-04-19",
+  "dateModified": "2026-05-01",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "1970-01-01",
-      "endDate": "2026-04-19"
+      "endDate": "2026-05-01"
     }
   ],
   "license": "Varies",
@@ -283,16 +283,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11118",
-      "name": "Coronaviridae",
-      "url": "https://www.uniprot.org/taxonomy/11118",
+      "identifier": "1773",
+      "name": "Mycobacterium tuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/1773",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1773",
-      "name": "Mycobacterium tuberculosis",
-      "url": "https://www.uniprot.org/taxonomy/1773",
+      "identifier": "11118",
+      "name": "Coronaviridae",
+      "url": "https://www.uniprot.org/taxonomy/11118",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -304,9 +304,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "287",
-      "name": "Pseudomonas aeruginosa",
-      "url": "https://www.uniprot.org/taxonomy/287",
+      "identifier": "90371",
+      "name": "Salmonella typhimurium",
+      "url": "https://www.uniprot.org/taxonomy/90371",
       "inDefinedTermSet": "UniProt"
     },
     {

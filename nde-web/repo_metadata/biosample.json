@@ -5,7 +5,9 @@
   "url": "https://www.ncbi.nlm.nih.gov/biosample/",
   "abstract": "NCBI BioSample is a NIH supported generalist repository that includes other data.",
   "description": "NCBI BioSample is a NIH supported generalist repository that includes other data.",
-  "genre": "Generalist",
+  "genre": [
+    "Generalist"
+  ],
   "conditionsOfAccess": "Open",
   "schedule": "Manual"
 }

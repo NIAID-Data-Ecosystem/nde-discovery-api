@@ -147,16 +147,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "62324",
-      "name": "Anopheles funestus",
-      "url": "https://www.uniprot.org/taxonomy/62324",
+      "identifier": "7176",
+      "name": "Culex quinquefasciatus",
+      "url": "https://www.uniprot.org/taxonomy/7176",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7176",
-      "name": "Culex quinquefasciatus",
-      "url": "https://www.uniprot.org/taxonomy/7176",
+      "identifier": "62324",
+      "name": "Anopheles funestus",
+      "url": "https://www.uniprot.org/taxonomy/62324",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -258,43 +258,71 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "transcript_expression"
+      "identifier": "0000641",
+      "name": "transcript expression assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000641",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "population_biology"
+      "identifier": "0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "name": "genome"
+      "identifier": "C19142",
+      "name": "Population Biology",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C19142",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "name": "isolates"
+      "identifier": "C70700",
+      "name": "Biospecimen Collection Method",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C70700",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "name": "protein_expression"
+      "identifier": "0000642",
+      "name": "protein expression assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000642",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "transcript_expression_platform"
+      "identifier": "0000",
+      "name": "DELETE / move to keywords OR IGNORE for now-- not a method, and can't determine what it is"
     },
     {
       "@type": "DefinedTerm",
-      "name": "aligned_sequence"
+      "identifier": "0002567",
+      "name": "sequence alignment",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002567",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "feature"
+      "identifier": "0003754",
+      "name": "EST sequencing",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0003754",
+      "inDefinedTermSet": "EFO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "EST"
+      "identifier": "0000011",
+      "name": "planned process",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000011",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "generic_profiles"
+      "identifier": "0600047",
+      "name": "sequencing assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0600047",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",

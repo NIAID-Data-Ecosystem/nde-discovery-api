@@ -23,16 +23,16 @@
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0804",
-      "name": "Infectious disease",
-      "url": "http://edamontology.org/topic_0804",
+      "identifier": "topic_3305",
+      "name": "Public health and epidemiology",
+      "url": "http://edamontology.org/topic_3305",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3305",
-      "name": "Public health and epidemiology",
-      "url": "http://edamontology.org/topic_3305",
+      "identifier": "topic_0804",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_0804",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -53,16 +53,20 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005267",
-      "name": "heart disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005267",
+      "identifier": "0005155",
+      "name": "cirrhosis of liver",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005155",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021945",
-      "name": "hearing disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021945",
+      "name": "gut microbiome alteration"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005267",
+      "name": "heart disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005267",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -74,16 +78,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005155",
-      "name": "cirrhosis of liver",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005155",
+      "identifier": "0005275",
+      "name": "lung disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005275",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0002494",
-      "name": "substance-related disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0002494",
+      "identifier": "0021945",
+      "name": "hearing disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021945",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0006858",
+      "name": "mouth disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0006858",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -91,20 +102,6 @@
       "identifier": "0004790",
       "name": "fatty liver disease",
       "url": "http://purl.obolibrary.org/obo/MONDO_0004790",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "D009057",
-      "name": "Stomatognathic Diseases",
-      "url": "https://id.nlm.nih.gov/mesh/D009057.html",
-      "inDefinedTermSet": "MeSH"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0006858",
-      "name": "mouth disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0006858",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -144,7 +141,10 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "Abbreviated Patient’s Assessment of Own Functioning Inventory (PAOFI)"
+      "identifier": "0001000",
+      "name": "questionnaire",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001000",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
@@ -156,31 +156,34 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Patient Health Questionnaire-2 (PHQ-2)"
+      "name": "Abbreviated Patient’s Assessment of Own Functioning Inventory (PAOFI)"
     },
     {
       "@type": "DefinedTerm",
-      "name": "5 question survey related to stool sample"
+      "name": "Modified Medical Research Council Dyspnea scale"
     },
     {
       "@type": "DefinedTerm",
-      "name": "St. Georges Respiratory Questionnaire"
+      "name": "10-minute National Health and Nutrition Examination Survey (NHANES) hearing and balance survey"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Digit Symbol Substitution Test (DSST)"
+      "name": "BRACE+ (Brainbaseline 60-75 min Assessment of Cognition and Everyday Function Plus)"
     },
     {
       "@type": "DefinedTerm",
-      "name": "WHO Composite International Diagnostic Interview (CIDI) as defined by American Psychiatric Association Diagnostic and Statistical Manual-5"
+      "identifier": "0003506",
+      "name": "finger to finger assessment",
+      "url": "http://purl.obolibrary.org/obo/OBI_0003506",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Spatial working memory (SPWN)"
+      "name": "Fibroscan with Controlled Attenuation Parameter (CAP): Ultrasound of the liver to estimate the amount of liver fibrosis (liver scarring) and steatosis (fat)."
     },
     {
       "@type": "DefinedTerm",
-      "name": "Finger Tapping"
+      "name": "upper and lower parts of mouth"
     },
     {
       "@type": "DefinedTerm",

@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 399,
+      "minValue": 401,
       "unitText": "Dataset"
     }
   ],
@@ -58,13 +58,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3343",
-      "name": "Compound libraries and screening",
-      "url": "http://edamontology.org/topic_3343",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "topic_0781",
       "name": "Virology",
       "url": "http://edamontology.org/topic_0781",
@@ -79,6 +72,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "topic_3343",
+      "name": "Compound libraries and screening",
+      "url": "http://edamontology.org/topic_3343",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
       "name": "Topic",
       "url": "http://edamontology.org/topic_0003",
       "inDefinedTermSet": "EDAM",
@@ -87,10 +87,6 @@
     }
   ],
   "healthCondition": [
-    {
-      "@type": "DefinedTerm",
-      "name": "not provided"
-    },
     {
       "@type": "DefinedTerm",
       "identifier": "0100096",
@@ -107,6 +103,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "0005136",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
       "name": "Mutant Kras is associated with several human cancers, most notably pancreactic, colon, and lung."
     },
     {
@@ -118,20 +121,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0001517",
-      "name": "dysentery",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0001517",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005136",
-      "name": "malaria",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "C27988",
       "name": "Cytotoxicity",
       "url": "http://purl.obolibrary.org/obo/NCIT_C27988",
@@ -139,11 +128,25 @@
     },
     {
       "@type": "DefinedTerm",
+      "name": "Serious Gram-negative bacterial infections (by WHO priority 1 pathogens for which new drugs are needed)"
+    },
+    {
+      "@type": "DefinedTerm",
       "name": "extensively drug-resistant Acinetobacter baumannii"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Serious Gram-negative bacterial infections (by WHO priority 1 pathogens for which new drugs are needed)"
+      "identifier": "0001517",
+      "name": "dysentery",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001517",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005812",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
@@ -177,13 +180,13 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2697049",
-      "name": "SARS-CoV-2"
+      "identifier": "10239",
+      "name": "viruses"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10239",
-      "name": "viruses"
+      "identifier": "2697049",
+      "name": "SARS-CoV-2"
     },
     {
       "@type": "DefinedTerm",
@@ -217,16 +220,16 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
-      "identifier": "1773",
-      "name": "Mycobacterium tuberculosis",
-      "url": "https://www.uniprot.org/taxonomy/1773",
+      "identifier": "5807",
+      "name": "Cryptosporidium parvum",
+      "url": "https://www.uniprot.org/taxonomy/5807",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "5807",
-      "name": "Cryptosporidium parvum",
-      "url": "https://www.uniprot.org/taxonomy/5807",
+      "identifier": "1773",
+      "name": "Mycobacterium tuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/1773",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -275,7 +278,8 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "not known"
+      "identifier": "0000",
+      "name": "DELETE"
     },
     {
       "@type": "DefinedTerm",
@@ -300,14 +304,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "flow cytometry"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "phenotypic and cell-based approach"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0013017",
       "name": "functional phenotypic",
       "url": "http://www.bioassayontology.org/bao#BAO_0013017",
@@ -315,7 +311,24 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "imaging"
+      "identifier": "0000061",
+      "name": "flow cytometry",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0000061",
+      "inDefinedTermSet": "CHMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000185",
+      "name": "imaging assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000185",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0003829",
+      "name": "luminescence detection assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0003829",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",

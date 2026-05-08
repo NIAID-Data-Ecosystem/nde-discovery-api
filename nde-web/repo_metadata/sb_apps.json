@@ -4,7 +4,9 @@
   "identifier": "PublicApps@SevenBridges",
   "url": "https://workspace.niaiddata.org/public/apps",
   "description": "The Seven Bridges Public Apps Gallery offers a repository of publicly available apps suitable for many different types of data analysis. Apps include both tools (individual bioinformatics utilities) and workflows (chains or pipelines of connected tools). The publicly available apps are maintained by the Seven Bridges Platform bioinformatics team to represent the latest tool versions.",
-  "genre": "Generalist",
+  "genre": [
+    "Generalist"
+  ],
   "conditionsOfAccess": "Unknown",
   "schedule": "Manual",
   "schema": {

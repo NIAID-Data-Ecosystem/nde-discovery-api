@@ -32,13 +32,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005002",
-      "name": "chronic obstructive pulmonary disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005002",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0800029",
       "name": "interstitial lung disease 2",
       "url": "http://purl.obolibrary.org/obo/MONDO_0800029",
@@ -49,6 +42,13 @@
       "identifier": "0005148",
       "name": "type 2 diabetes mellitus",
       "url": "http://purl.obolibrary.org/obo/MONDO_0005148",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005002",
+      "name": "chronic obstructive pulmonary disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005002",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -67,10 +67,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005812",
-      "name": "influenza",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "C3346",
+      "name": "Psoriasis",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3346",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -81,10 +81,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C3346",
-      "name": "Psoriasis",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C3346",
-      "inDefinedTermSet": "NCIT"
+      "identifier": "0005812",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",

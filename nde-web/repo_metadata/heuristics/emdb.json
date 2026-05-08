@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 2901,
+      "minValue": 2925,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-04-15",
+  "dateModified": "2026-04-29",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2002-06-18",
-      "endDate": "2026-04-15"
+      "endDate": "2026-04-29"
     }
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -22,16 +22,16 @@
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0611",
-      "name": "Electron microscopy",
-      "url": "http://edamontology.org/topic_0611",
+      "identifier": "topic_0781",
+      "name": "Virology",
+      "url": "http://edamontology.org/topic_0781",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0781",
-      "name": "Virology",
-      "url": "http://edamontology.org/topic_0781",
+      "identifier": "topic_0611",
+      "name": "Electron microscopy",
+      "url": "http://edamontology.org/topic_0611",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -45,13 +45,6 @@
   "species": [
     {
       "@type": "DefinedTerm",
-      "identifier": "9606",
-      "name": "Homo sapiens",
-      "url": "https://www.uniprot.org/taxonomy/9606",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "10090",
       "name": "Mus musculus",
       "url": "https://www.uniprot.org/taxonomy/10090",
@@ -59,9 +52,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10116",
-      "name": "Rattus norvegicus",
-      "url": "https://www.uniprot.org/taxonomy/10116",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9986",
+      "name": "Oryctolagus cuniculus",
+      "url": "https://www.uniprot.org/taxonomy/9986",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -80,23 +80,30 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9986",
-      "name": "Oryctolagus cuniculus",
-      "url": "https://www.uniprot.org/taxonomy/9986",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3562",
-      "name": "Spinacia oleracea",
-      "url": "https://www.uniprot.org/taxonomy/3562",
+      "identifier": "4568",
+      "name": "Triticum monococcum",
+      "url": "https://www.uniprot.org/taxonomy/4568",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "6884",
-      "name": "Leiurus hebraeus",
-      "url": "https://www.uniprot.org/taxonomy/6884",
+      "identifier": "4577",
+      "name": "Zea mays",
+      "url": "https://www.uniprot.org/taxonomy/4577",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3702",
+      "name": "Arabidopsis thaliana",
+      "url": "https://www.uniprot.org/taxonomy/3702",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -104,13 +111,6 @@
       "identifier": "9838",
       "name": "Camelus dromedarius",
       "url": "https://www.uniprot.org/taxonomy/9838",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "212017",
-      "name": "Lethocerus indicus",
-      "url": "https://www.uniprot.org/taxonomy/212017",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -132,16 +132,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "4932",
-      "name": "Saccharomyces cerevisiae",
-      "url": "https://www.uniprot.org/taxonomy/4932",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "83333",
-      "name": "Escherichia coli (strain K12)",
-      "url": "https://www.uniprot.org/taxonomy/83333",
+      "identifier": "694009",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/694009",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -153,44 +146,51 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "694009",
-      "name": "Severe acute respiratory syndrome coronavirus",
-      "url": "https://www.uniprot.org/taxonomy/694009",
+      "identifier": "83333",
+      "name": "Escherichia coli (strain K12)",
+      "url": "https://www.uniprot.org/taxonomy/83333",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1148",
-      "name": "Synechocystis sp. PCC 6803",
-      "url": "https://www.uniprot.org/taxonomy/1148",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1094619",
-      "name": "Phytophthora sojae (strain P6497)",
-      "url": "https://www.uniprot.org/taxonomy/1094619",
+      "identifier": "358",
+      "name": "Rhizobium radiobacter",
+      "url": "https://www.uniprot.org/taxonomy/358",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1891767",
-      "name": "Simian virus 40",
-      "url": "https://www.uniprot.org/taxonomy/1891767",
+      "identifier": "1640",
+      "name": "Listeria seeligeri",
+      "url": "https://www.uniprot.org/taxonomy/1640",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1333499",
-      "name": "Nannochloropsis oceanica strain IMET1",
-      "url": "https://www.uniprot.org/taxonomy/1333499",
+      "identifier": "103690",
+      "name": "Nostoc sp. (strain PCC 7120 / SAG 25.82 / UTEX 2576)",
+      "url": "https://www.uniprot.org/taxonomy/103690",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "444185",
-      "name": "Rotavirus A (strain RVA/Monkey/United States/RRV/1975/G3P5B[3])",
-      "url": "https://www.uniprot.org/taxonomy/444185",
+      "identifier": "1392",
+      "name": "Bacillus anthracis",
+      "url": "https://www.uniprot.org/taxonomy/1392",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12022",
+      "name": "Escherichia phage MS2",
+      "url": "https://www.uniprot.org/taxonomy/12022",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -205,14 +205,20 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
+      "name": "Tomography",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C38093",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
       "name": "Atomic Resolution X-Ray Crystallography",
       "url": "http://purl.obolibrary.org/obo/NCIT_C19588",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Tomography",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C38093",
+      "name": "Electron Microscopy",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C16854",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -220,12 +226,6 @@
       "name": "Bioimaging",
       "url": "http://edamontology.org/topic_3383",
       "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Electron Microscopy",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C16854",
-      "inDefinedTermSet": "NCIT"
     }
   ]
 }

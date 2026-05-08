@@ -10,7 +10,10 @@
   "abstract": "Gene Expression Omnibus (GEO) is an NIH supported repository that includes microarray and next-generation sequencing data for high-throughput functional genomics for most domains.",
   "description": "GEO is a public functional genomics data repository supporting MIAME-compliant data submissions. Array- and sequence-based data are accepted. Tools are provided to help users query and download experiments and curated gene expression profiles.",
   "collectionType": "Dataset Repository",
-  "genre": "Generalist",
+  "genre": [
+    "Generalist",
+    "Omics"
+  ],
   "conditionsOfAccess": "Unknown",
   "isAccessibleForFree": true,
   "hasAPI": true,

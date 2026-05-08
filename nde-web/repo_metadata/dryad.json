@@ -9,7 +9,9 @@
   "abstract": "Dryad Digital Repository is a GREI repository that includes most data types and domains.",
   "description": "Dryad is an open source, community driven project that takes a unique approach to data publication and digital preservation. Dryad focuses on search, presentation, and discovery and delegates the responsibility for the data preservation function to the underlying repository with which it is integrated. Dryad aims to allow researchers to validate published findings, explore new analysis methodologies, re-purpose data for research questions unanticipated by the original authors, and perform synthetic studies such as formal meta-analyses.",
   "collectionType": "Dataset Repository",
-  "genre": "Generalist",
+  "genre": [
+    "Generalist"
+  ],
   "conditionsOfAccess": "Open",
   "isAccessibleForFree": true,
   "hasAPI": true,

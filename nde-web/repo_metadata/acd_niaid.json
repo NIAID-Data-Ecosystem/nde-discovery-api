@@ -9,7 +9,13 @@
   "abstract": "AccessClinicalData is a NIAID supported IID repository that includes clinical trials data.",
   "description": "AccessClinicalData@NIAID is a NIAID cloud-based, secure data platform that enables sharing of and access to reports and data sets from NIAID COVID-19 and other sponsored clinical trials for the basic and clinical research community.",
   "collectionType": "Dataset Repository",
-  "genre": "IID",
+  "genre": [
+    "IID",
+    "Biological Assay",
+    "Clinical",
+    "Epidemiological",
+    "Respiratory Pathogens"
+  ],
   "conditionsOfAccess": "Varied",
   "isAccessibleForFree": true,
   "hasAPI": false,

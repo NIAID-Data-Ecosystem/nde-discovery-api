@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 59,
+      "minValue": 60,
       "unitText": "Dataset"
     }
   ],
@@ -46,16 +46,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7173",
-      "name": "Anopheles arabiensis",
-      "url": "https://www.uniprot.org/taxonomy/7173",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9606",
-      "name": "Homo sapiens",
-      "url": "https://www.uniprot.org/taxonomy/9606",
+      "identifier": "7173",
+      "name": "Anopheles arabiensis",
+      "url": "https://www.uniprot.org/taxonomy/7173",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -90,6 +90,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "5820",
+      "name": "Plasmodium",
+      "url": "https://www.uniprot.org/taxonomy/5820",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "357002",
       "name": "Jola",
       "url": "https://www.uniprot.org/taxonomy/357002",
@@ -100,13 +107,6 @@
       "identifier": "5855",
       "name": "Plasmodium vivax",
       "url": "https://www.uniprot.org/taxonomy/5855",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "5820",
-      "name": "Plasmodium",
-      "url": "https://www.uniprot.org/taxonomy/5820",
       "inDefinedTermSet": "UniProt"
     }
   ]

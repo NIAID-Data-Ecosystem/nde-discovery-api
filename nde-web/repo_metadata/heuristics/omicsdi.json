@@ -18,83 +18,7 @@
   "spatialCoverage": [
     {
       "@type": "AdministrativeArea",
-      "name": "Estonia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Finland"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Japan"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Mexico"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Europe"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Turkey"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Sudan"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "South Africa"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Bangladesh"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Tunisia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Belgium"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Austria"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Czechia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Kyrgyzstan"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Nepal"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Costa Rica"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Switzerland"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Romania"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Sichuan"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "North America"
+      "name": "Sri Lanka"
     },
     {
       "@type": "AdministrativeArea",
@@ -102,19 +26,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Democratic Republic of the Congo"
+      "name": "Asia except Japan"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Puerto Rico"
+      "name": "Ireland"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Denmark"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Bosnia and Herzegovina"
+      "name": "Greece"
     },
     {
       "@type": "AdministrativeArea",
@@ -122,15 +42,51 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Croatia"
+      "name": "Romania"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "United Kingdom"
+      "name": "Rwanda"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Slovenia"
+      "name": "Malta"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Democratic Republic of the Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "European Union"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sudan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Moldova"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Singapore"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Malaysia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chile"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Venezuela"
     },
     {
       "@type": "AdministrativeArea",
@@ -138,11 +94,363 @@
     },
     {
       "@type": "AdministrativeArea",
+      "name": "North America"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Estonia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Israel"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cameroon"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Iran"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lebanon"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Saudi Arabia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Norway"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "India"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Andorra"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Switzerland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kyrgyzstan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Russia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Myanmar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Serbia and Montenegro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Puerto Rico"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Netherlands"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tunisia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vietnam"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Argentina"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Morocco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pakistan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Africa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Iceland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South America"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Panama"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "North Macedonia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Philippines"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Poland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "France"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nepal"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guam"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "North Korea"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ukraine"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Finland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hungary"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Austria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Georgia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Iraq"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Uruguay"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Korea"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Taiwan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Japan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Canada"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Serbia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nigeria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Aland Islands"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Italy"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United Kingdom"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Colombia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cuba"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Thailand"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Peru"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Belgium"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United States"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Czechia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Egypt"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United Arab Emirates"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Denmark"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sweden"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Spain"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "American Samoa"
+    },
+    {
+      "@type": "AdministrativeArea",
       "name": "Belarus"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Kenya"
+      "name": "Bosnia and Herzegovina"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Oceania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Germany"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Martinique"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Costa Rica"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hong Kong"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Brazil"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kazakhstan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Montenegro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mexico"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Turkey"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Former Serbia and Montenegro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cyprus"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Europe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "New Zealand"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Slovenia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Croatia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Luxembourg"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Asia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Australia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ecuador"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bangladesh"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Algeria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sichuan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Latvia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Syria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Slovakia"
     },
     {
       "@type": "AdministrativeArea",
@@ -154,263 +462,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Egypt"
+      "name": "Jordan"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Italy"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "India"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Moldova"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Rwanda"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Serbia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Hong Kong"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Africa"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Kazakhstan"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Thailand"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Lebanon"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Poland"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Lithuania"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Greece"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "New Zealand"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Guam"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Ghana"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Uruguay"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Argentina"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Oceania"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Martinique"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Montenegro"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Iceland"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "European Union"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "American Samoa"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "France"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Malaysia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "North Korea"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Germany"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Serbia and Montenegro"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Netherlands"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Canada"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Philippines"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Morocco"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Spain"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Norway"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Myanmar"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "South America"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Ireland"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Asia except Japan"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Ecuador"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Australia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Cameroon"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Vietnam"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Singapore"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Saudi Arabia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Brazil"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "South Korea"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Chile"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Taiwan"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Slovakia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Malta"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Former Serbia and Montenegro"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Asia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Peru"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "United Arab Emirates"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Syria"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Cyprus"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Algeria"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Sweden"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Venezuela"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Nigeria"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Cuba"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Iraq"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Aland Islands"
+      "name": "South Africa"
     },
     {
       "@type": "AdministrativeArea",
@@ -418,71 +474,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Pakistan"
+      "name": "Ghana"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Jordan"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Andorra"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Israel"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Russia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Ukraine"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "United States"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Iran"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Colombia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Sri Lanka"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "North Macedonia"
+      "name": "Lithuania"
     },
     {
       "@type": "AdministrativeArea",
       "name": "Bulgaria"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Georgia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Latvia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Luxembourg"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Hungary"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Panama"
     }
   ],
   "topicCategory": [
@@ -610,13 +610,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "C173158",
       "name": "Disease Free",
       "url": "http://purl.obolibrary.org/obo/NCIT_C173158",
@@ -634,6 +627,13 @@
       "identifier": "0008170",
       "name": "ovarian cancer",
       "url": "http://purl.obolibrary.org/obo/MONDO_0008170",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -674,10 +674,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "['Homo sapiens']"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "3702",
       "name": "Arabidopsis thaliana"
     },
@@ -700,7 +696,15 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Homo Sapiens (ncbitaxon:9606)"
+      "identifier": "7227",
+      "name": "Drosophila melanogaster",
+      "url": "https://www.uniprot.org/taxonomy/7227",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3701",
+      "name": "Arabidopsis"
     },
     {
       "@type": "DefinedTerm",
@@ -735,6 +739,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "408170",
+      "name": "human gut metagenome",
+      "url": "https://www.uniprot.org/taxonomy/408170",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "6239",
       "name": "Caenorhabditis elegans",
       "url": "https://www.uniprot.org/taxonomy/6239",
@@ -745,6 +756,13 @@
       "identifier": "1869227",
       "name": "bacterium",
       "url": "https://www.uniprot.org/taxonomy/1869227",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "256318",
+      "name": "metagenome",
+      "url": "https://www.uniprot.org/taxonomy/256318",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -763,23 +781,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "5691",
-      "name": "Trypanosoma brucei",
-      "url": "https://www.uniprot.org/taxonomy/5691",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "36329",
-      "name": "Plasmodium falciparum (isolate 3D7)",
-      "url": "https://www.uniprot.org/taxonomy/36329",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "1773",
-      "name": "Mycobacterium tuberculosis",
-      "url": "https://www.uniprot.org/taxonomy/1773",
+      "identifier": "1169740",
+      "name": "aquatic metagenome",
+      "url": "https://www.uniprot.org/taxonomy/1169740",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -794,43 +798,70 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "Mass Spectrometry"
+      "identifier": "0000470",
+      "name": "mass spectrometry assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000470",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Shotgun proteomics"
+      "identifier": "0000534",
+      "name": "mass spectrometry",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000534",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Not available"
+      "identifier": "0000428",
+      "name": "Bottom-up proteomics",
+      "url": "http://purl.obolibrary.org/obo/PRIDE_0000428",
+      "inDefinedTermSet": "PRIDE"
     },
     {
       "@type": "DefinedTerm",
-      "name": "N/A"
+      "identifier": "0000",
+      "name": "DELETE"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Interventional"
+      "identifier": "0003229",
+      "name": "plasma proteomics assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0003229",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Bottom-up proteomics"
+      "identifier": "C98388",
+      "name": "Interventional Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C98388",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Affinity purification coupled with mass spectrometry proteomics"
+      "identifier": "0003781",
+      "name": "proteomics by mass spectrometry assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0003781",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Data-dependent acquisition"
+      "identifier": "0600008",
+      "name": "acquisition",
+      "url": "http://purl.obolibrary.org/obo/OBI_0600008",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Gel-based experiment"
+      "identifier": "0002603",
+      "name": "affinity purification method",
+      "url": "http://www.bioassayontology.org/bao#BAO_0002603",
+      "inDefinedTermSet": "BAO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Other"
+      "identifier": "C161785",
+      "name": "Data-Dependent Acquisition",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C161785"
     },
     {
       "@type": "DefinedTerm",

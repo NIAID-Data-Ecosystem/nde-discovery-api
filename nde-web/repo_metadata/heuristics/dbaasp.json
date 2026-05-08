@@ -6,12 +6,12 @@
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-04-18",
+  "dateModified": "2026-05-02",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "endDate": "2026-04-18"
+      "endDate": "2026-05-02"
     }
   ],
   "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -23,9 +23,9 @@
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_2814",
-      "name": "Chemoinformatics",
-      "url": "http://edamontology.org/topic_2814",
+      "identifier": "topic_3301",
+      "name": "Microbiology",
+      "url": "http://edamontology.org/topic_3301",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -37,9 +37,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3301",
-      "name": "Microbiology",
-      "url": "http://edamontology.org/topic_3301",
+      "identifier": "topic_2814",
+      "name": "Chemoinformatics",
+      "url": "http://edamontology.org/topic_2814",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -53,39 +53,42 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Enterococcus sp. J14365/08"
+      "name": "Ascodesmis sphaerospora"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Human colon"
+      "name": "Lymphocytic choriomeningitis"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Acinetobacter sp. DSM 586"
+      "name": "Human fibrosarcoma"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Human Melanoma SBcl-2"
+      "identifier": "13123",
+      "name": "Lymantria dispar",
+      "url": "https://www.uniprot.org/taxonomy/13123",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Salmonella sp. Group B"
+      "name": "Human uveal"
     },
     {
       "@type": "DefinedTerm",
-      "name": "VSV-SARS-CoV-2-Omicron"
+      "name": "Human osteosarcoma"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Neisseria spp."
+      "name": "Simian immunodeficiency"
     },
     {
       "@type": "DefinedTerm",
-      "name": "VSV-SARS-CoV-2-D614G"
+      "name": "Human endometrial"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Rhodoturula glutinis"
+      "name": "Human cutaneous"
     },
     {
       "@type": "DefinedTerm",
@@ -106,16 +109,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "36809",
-      "name": "Mycobacteroides abscessus",
-      "url": "https://www.uniprot.org/taxonomy/36809",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "75985",
-      "name": "Mannheimia haemolytica",
-      "url": "https://www.uniprot.org/taxonomy/75985",
+      "identifier": "648",
+      "name": "Aeromonas caviae",
+      "url": "https://www.uniprot.org/taxonomy/648",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -127,6 +123,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "64495",
+      "name": "Rhizopus oryzae",
+      "url": "https://www.uniprot.org/taxonomy/64495",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "29850",
       "name": "Gaeumannomyces graminis",
       "url": "https://www.uniprot.org/taxonomy/29850",
@@ -134,23 +137,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "4911",
-      "name": "Kluyveromyces marxianus",
-      "url": "https://www.uniprot.org/taxonomy/4911",
+      "identifier": "552467",
+      "name": "Cryptococcus gattii",
+      "url": "https://www.uniprot.org/taxonomy/552467",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "96241",
-      "name": "Bacillus spizizenii",
-      "url": "https://www.uniprot.org/taxonomy/96241",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "90371",
-      "name": "Salmonella typhimurium",
-      "url": "https://www.uniprot.org/taxonomy/90371",
+      "identifier": "319705",
+      "name": "Mycobacteroides abscessus subsp. bolletii",
+      "url": "https://www.uniprot.org/taxonomy/319705",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -158,6 +154,13 @@
       "identifier": "80867",
       "name": "Paracidovorax avenae",
       "url": "https://www.uniprot.org/taxonomy/80867",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "456327",
+      "name": "Xanthomonas euvesicatoria",
+      "url": "https://www.uniprot.org/taxonomy/456327",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -179,9 +182,9 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "Minimum Inhibitory Concentration Test",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C128985",
-      "inDefinedTermSet": "GENEPIO"
+      "name": "3D structure prediction",
+      "url": "http://www.bioassayontology.org/bao#BAO_0002216",
+      "inDefinedTermSet": "BAO"
     },
     {
       "@type": "DefinedTerm",
@@ -191,9 +194,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "3D structure prediction",
-      "url": "http://www.bioassayontology.org/bao#BAO_0002216",
-      "inDefinedTermSet": "BAO"
+      "name": "Minimum Inhibitory Concentration Test",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C128985",
+      "inDefinedTermSet": "GENEPIO"
     }
   ]
 }

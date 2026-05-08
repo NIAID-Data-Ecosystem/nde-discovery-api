@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 142888,
+      "minValue": 143149,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-04-15",
+  "dateModified": "2026-04-29",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "1972-08-11",
-      "endDate": "2026-04-15"
+      "endDate": "2026-04-29"
     }
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -214,12 +214,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "neutron diffraction",
-      "url": "http://purl.obolibrary.org/obo/CHMO_0000698",
-      "inDefinedTermSet": "CHMO"
-    },
-    {
-      "@type": "DefinedTerm",
       "name": "electron diffraction",
       "url": "http://purl.obolibrary.org/obo/CHMO_0000142",
       "inDefinedTermSet": "CHMO"
@@ -229,6 +223,12 @@
       "name": "Crystallography",
       "url": "http://purl.obolibrary.org/obo/NCIT_C16476",
       "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "neutron diffraction",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0000698",
+      "inDefinedTermSet": "CHMO"
     },
     {
       "@type": "DefinedTerm",
