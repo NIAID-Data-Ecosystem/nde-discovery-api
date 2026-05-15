@@ -276,9 +276,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "6239",
-      "name": "Caenorhabditis elegans",
-      "url": "https://www.uniprot.org/taxonomy/6239",
+      "identifier": "11118",
+      "name": "Coronaviridae",
+      "url": "https://www.uniprot.org/taxonomy/11118",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -290,9 +290,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11118",
-      "name": "Coronaviridae",
-      "url": "https://www.uniprot.org/taxonomy/11118",
+      "identifier": "6239",
+      "name": "Caenorhabditis elegans",
+      "url": "https://www.uniprot.org/taxonomy/6239",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -304,9 +304,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "90371",
-      "name": "Salmonella typhimurium",
-      "url": "https://www.uniprot.org/taxonomy/90371",
+      "identifier": "287",
+      "name": "Pseudomonas aeruginosa",
+      "url": "https://www.uniprot.org/taxonomy/287",
       "inDefinedTermSet": "UniProt"
     },
     {

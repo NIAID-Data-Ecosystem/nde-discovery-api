@@ -53,24 +53,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005155",
-      "name": "cirrhosis of liver",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005155",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "gut microbiome alteration"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005267",
-      "name": "heart disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005267",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0004995",
       "name": "cardiovascular disorder",
       "url": "http://purl.obolibrary.org/obo/MONDO_0004995",
@@ -85,13 +67,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021945",
-      "name": "hearing disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021945",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0006858",
       "name": "mouth disorder",
       "url": "http://purl.obolibrary.org/obo/MONDO_0006858",
@@ -99,9 +74,37 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0004790",
-      "name": "fatty liver disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004790",
+      "identifier": "0021945",
+      "name": "hearing disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021945",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005155",
+      "name": "cirrhosis of liver",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005155",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002025",
+      "name": "psychiatric disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002025",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005267",
+      "name": "heart disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005267",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002494",
+      "name": "substance-related disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002494",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -148,7 +151,7 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Trials A&B"
+      "name": "Abbreviated Patient’s Assessment of Own Functioning Inventory (PAOFI)"
     },
     {
       "@type": "DefinedTerm",
@@ -156,15 +159,7 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Abbreviated Patient’s Assessment of Own Functioning Inventory (PAOFI)"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Modified Medical Research Council Dyspnea scale"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "10-minute National Health and Nutrition Examination Survey (NHANES) hearing and balance survey"
+      "name": "Trials A&B"
     },
     {
       "@type": "DefinedTerm",
@@ -172,18 +167,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0003506",
-      "name": "finger to finger assessment",
-      "url": "http://purl.obolibrary.org/obo/OBI_0003506",
-      "inDefinedTermSet": "OBI"
+      "name": "Spatial working memory (SPWN)"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Fibroscan with Controlled Attenuation Parameter (CAP): Ultrasound of the liver to estimate the amount of liver fibrosis (liver scarring) and steatosis (fat)."
+      "name": "10-minute National Health and Nutrition Examination Survey (NHANES) hearing and balance survey"
     },
     {
       "@type": "DefinedTerm",
-      "name": "upper and lower parts of mouth"
+      "name": "areas of the mouth that look different than expected"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "WHO Composite International Diagnostic Interview (CIDI) as defined by American Psychiatric Association Diagnostic and Statistical Manual-5"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "BRACE (Brainbaseline 10- min Assessment of Cognition and Everyday Function)"
     },
     {
       "@type": "DefinedTerm",

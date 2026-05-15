@@ -134,11 +134,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Switzerland"
+      "name": "Kyrgyzstan"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Kyrgyzstan"
+      "name": "Switzerland"
     },
     {
       "@type": "AdministrativeArea",
@@ -330,11 +330,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Sweden"
+      "name": "Spain"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Spain"
+      "name": "Sweden"
     },
     {
       "@type": "AdministrativeArea",
@@ -354,11 +354,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Germany"
+      "name": "Martinique"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Martinique"
+      "name": "Germany"
     },
     {
       "@type": "AdministrativeArea",
@@ -703,8 +703,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3701",
-      "name": "Arabidopsis"
+      "identifier": "9823",
+      "name": "Sus scrofa",
+      "url": "https://www.uniprot.org/taxonomy/9823",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",

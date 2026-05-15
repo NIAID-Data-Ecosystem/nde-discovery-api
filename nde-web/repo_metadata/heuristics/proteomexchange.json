@@ -22,14 +22,14 @@
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "name": "Protein properties",
-      "url": "http://edamontology.org/topic_0123",
+      "name": "Proteomics",
+      "url": "http://edamontology.org/topic_0121",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Proteomics",
-      "url": "http://edamontology.org/topic_0121",
+      "name": "Protein properties",
+      "url": "http://edamontology.org/topic_0123",
       "inDefinedTermSet": "EDAM"
     }
   ],

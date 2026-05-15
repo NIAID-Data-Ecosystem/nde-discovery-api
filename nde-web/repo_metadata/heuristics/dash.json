@@ -278,16 +278,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "37296",
-      "name": "Human herpesvirus 8",
-      "url": "https://www.uniprot.org/taxonomy/37296",
+      "identifier": "10376",
+      "name": "Epstein-Barr virus (strain GD1)",
+      "url": "https://www.uniprot.org/taxonomy/10376",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10376",
-      "name": "Epstein-Barr virus (strain GD1)",
-      "url": "https://www.uniprot.org/taxonomy/10376",
+      "identifier": "37296",
+      "name": "Human herpesvirus 8",
+      "url": "https://www.uniprot.org/taxonomy/37296",
       "inDefinedTermSet": "UniProt"
     },
     {

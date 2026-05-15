@@ -147,16 +147,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7176",
-      "name": "Culex quinquefasciatus",
-      "url": "https://www.uniprot.org/taxonomy/7176",
+      "identifier": "62324",
+      "name": "Anopheles funestus",
+      "url": "https://www.uniprot.org/taxonomy/62324",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "62324",
-      "name": "Anopheles funestus",
-      "url": "https://www.uniprot.org/taxonomy/62324",
+      "identifier": "7176",
+      "name": "Culex quinquefasciatus",
+      "url": "https://www.uniprot.org/taxonomy/7176",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -265,17 +265,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0622",
-      "name": "Genomics",
-      "url": "http://edamontology.org/topic_0622",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "C19142",
       "name": "Population Biology",
       "url": "http://purl.obolibrary.org/obo/NCIT_C19142",
       "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
@@ -313,7 +313,7 @@
     {
       "@type": "DefinedTerm",
       "identifier": "0000011",
-      "name": "planned process",
+      "name": "Planned process",
       "url": "http://purl.obolibrary.org/obo/OBI_0000011",
       "inDefinedTermSet": "OBI"
     },

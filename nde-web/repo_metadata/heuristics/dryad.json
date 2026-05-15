@@ -17,6 +17,10 @@
   "spatialCoverage": [
     {
       "@type": "AdministrativeArea",
+      "name": "Columbia River"
+    },
+    {
+      "@type": "AdministrativeArea",
       "name": "Pacific Northwest"
     },
     {
@@ -25,15 +29,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "World's Oceans"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "Western Jutland Denmark"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Columbia River"
+      "name": "World's Oceans"
     }
   ],
   "topicCategory": [
@@ -234,13 +234,13 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "4751",
-      "name": "fungi"
+      "identifier": "10090",
+      "name": "mice"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10090",
-      "name": "mice"
+      "identifier": "4751",
+      "name": "fungi"
     },
     {
       "@type": "DefinedTerm",

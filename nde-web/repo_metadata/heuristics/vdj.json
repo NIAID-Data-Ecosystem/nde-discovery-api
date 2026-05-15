@@ -2,13 +2,13 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 4386,
-      "unitText": "Sample"
+      "minValue": 85,
+      "unitText": "Dataset"
     },
     {
       "@type": "QuantitativeValue",
-      "minValue": 85,
-      "unitText": "Dataset"
+      "minValue": 4386,
+      "unitText": "Sample"
     }
   ],
   "dateModified": "2026-04-03",
@@ -29,15 +29,7 @@
   "spatialCoverage": [
     {
       "@type": "AdministrativeArea",
-      "name": "SPAIN"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MADRID"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "None"
+      "name": "Madrid"
     },
     {
       "@type": "AdministrativeArea",
@@ -45,11 +37,19 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Brescia"
+      "name": "SPAIN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Madrid"
+      "name": "None"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MADRID"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Brescia"
     }
   ],
   "topicCategory": [
@@ -111,16 +111,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3966",
-      "name": "Vaccinology",
-      "url": "http://edamontology.org/topic_3966",
+      "identifier": "topic_3047",
+      "name": "Molecular biology",
+      "url": "http://edamontology.org/topic_3047",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3047",
-      "name": "Molecular biology",
-      "url": "http://edamontology.org/topic_3047",
+      "identifier": "topic_3966",
+      "name": "Vaccinology",
+      "url": "http://edamontology.org/topic_3966",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -259,16 +259,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11118",
-      "name": "Coronaviridae",
-      "url": "https://www.uniprot.org/taxonomy/11118",
+      "identifier": "11676",
+      "name": "Human immunodeficiency virus 1",
+      "url": "https://www.uniprot.org/taxonomy/11676",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11676",
-      "name": "Human immunodeficiency virus 1",
-      "url": "https://www.uniprot.org/taxonomy/11676",
+      "identifier": "11118",
+      "name": "Coronaviridae",
+      "url": "https://www.uniprot.org/taxonomy/11118",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -280,13 +280,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11320",
-      "name": "Influenza A virus",
-      "url": "https://www.uniprot.org/taxonomy/11320",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "694009",
       "name": "Severe acute respiratory syndrome coronavirus",
       "url": "https://www.uniprot.org/taxonomy/694009",
@@ -294,9 +287,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "333760",
-      "name": "Human papillomavirus type 16",
-      "url": "https://www.uniprot.org/taxonomy/333760",
+      "identifier": "11320",
+      "name": "Influenza A virus",
+      "url": "https://www.uniprot.org/taxonomy/11320",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -315,9 +308,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11089",
-      "name": "Yellow fever virus",
-      "url": "https://www.uniprot.org/taxonomy/11089",
+      "identifier": "10310",
+      "name": "Human herpesvirus 2",
+      "url": "https://www.uniprot.org/taxonomy/10310",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "333760",
+      "name": "Human papillomavirus type 16",
+      "url": "https://www.uniprot.org/taxonomy/333760",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -360,14 +360,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "v4"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "v2"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "C15197",
       "name": "Case-Control Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C15197",
@@ -382,14 +374,31 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "v3"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "C63536",
       "name": "Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C63536",
       "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000011",
+      "name": "planned process",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000011",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3679",
+      "name": "Animal study",
+      "url": "http://edamontology.org/topic_3679",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0200082",
+      "name": "longitudinal data analysis",
+      "url": "http://purl.obolibrary.org/obo/OBI_0200082",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",

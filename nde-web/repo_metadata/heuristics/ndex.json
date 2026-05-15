@@ -141,16 +141,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005719",
-      "name": "Coronavinae infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005719",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "identifier": "0005719",
+      "name": "Coronavinae infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005719",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -295,13 +295,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10566",
-      "name": "Human papillomavirus",
-      "url": "https://www.uniprot.org/taxonomy/10566",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "90371",
       "name": "Salmonella typhimurium",
       "url": "https://www.uniprot.org/taxonomy/90371",
@@ -309,16 +302,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "5518",
-      "name": "Gibberella zeae",
-      "url": "https://www.uniprot.org/taxonomy/5518",
+      "identifier": "11676",
+      "name": "Human immunodeficiency virus 1",
+      "url": "https://www.uniprot.org/taxonomy/11676",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11676",
-      "name": "Human immunodeficiency virus 1",
-      "url": "https://www.uniprot.org/taxonomy/11676",
+      "identifier": "10566",
+      "name": "Human papillomavirus",
+      "url": "https://www.uniprot.org/taxonomy/10566",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5518",
+      "name": "Gibberella zeae",
+      "url": "https://www.uniprot.org/taxonomy/5518",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -353,13 +353,13 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Bayesian approach",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C142403"
+      "name": "FAIRE-seq",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0004428"
     },
     {
       "@type": "DefinedTerm",
-      "name": "FAIRE-seq",
-      "url": "http://www.ebi.ac.uk/efo/EFO_0004428"
+      "name": "Bayesian approach",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C142403"
     },
     {
       "@type": "DefinedTerm",

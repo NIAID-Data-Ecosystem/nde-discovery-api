@@ -18,7 +18,17 @@
   "healthCondition": [
     {
       "@type": "DefinedTerm",
-      "name": "COVID-19"
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005070",
+      "name": "neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
@@ -26,35 +36,52 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Not available"
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Neoplasms"
+      "identifier": "0018076",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "normal"
+      "identifier": "0008315",
+      "name": "prostate cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008315",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "diseased"
+      "identifier": "C115935",
+      "name": "Healthy",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C115935",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Prostatic Neoplasms"
+      "identifier": "0021100",
+      "name": "breast neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Tuberculosis"
+      "identifier": "0021117",
+      "name": "lung neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021117",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Breast Neoplasms"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "healthy"
+      "identifier": "D009361",
+      "name": "Neoplasm Invasiveness",
+      "url": "https://id.nlm.nih.gov/mesh/D009361.html",
+      "inDefinedTermSet": "MeSH"
     },
     {
       "@type": "DefinedTerm",
@@ -68,43 +95,73 @@
   "species": [
     {
       "@type": "DefinedTerm",
-      "name": "Homo sapiens"
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Human"
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Severe acute respiratory syndrome coronavirus 2"
+      "identifier": "1927752",
+      "name": "Zungaro sp. 6J",
+      "url": "https://www.uniprot.org/taxonomy/1927752",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "human"
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Mus musculus"
+      "identifier": "9031",
+      "name": "Gallus gallus",
+      "url": "https://www.uniprot.org/taxonomy/9031",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "C57BL/6J"
+      "identifier": "9823",
+      "name": "Sus scrofa",
+      "url": "https://www.uniprot.org/taxonomy/9823",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "C57BL/6"
+      "identifier": "112509",
+      "name": "Hordeum vulgare subsp. vulgare",
+      "url": "https://www.uniprot.org/taxonomy/112509",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "house mouse"
+      "identifier": "1211459",
+      "name": "Echium vulgare subsp. vulgare",
+      "url": "https://www.uniprot.org/taxonomy/1211459",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "enterica"
+      "identifier": "3702",
+      "name": "Arabidopsis thaliana",
+      "url": "https://www.uniprot.org/taxonomy/3702",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "human gut metagenome"
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
@@ -118,7 +175,10 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
-      "name": "Severe acute respiratory syndrome coronavirus 2"
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
@@ -130,31 +190,49 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "C57BL/6"
+      "identifier": "451626",
+      "name": "bacterium 7BL",
+      "url": "https://www.uniprot.org/taxonomy/451626",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "enterica"
+      "identifier": "59201",
+      "name": "Salmonella enterica I",
+      "url": "https://www.uniprot.org/taxonomy/59201",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "human gut metagenome"
+      "identifier": "408170",
+      "name": "human gut metagenome",
+      "url": "https://www.uniprot.org/taxonomy/408170",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "256318",
+      "name": "metagenome",
+      "url": "https://www.uniprot.org/taxonomy/256318",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "77133",
+      "name": "uncultured bacterium",
+      "url": "https://www.uniprot.org/taxonomy/77133",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
       "name": "Mus musculus"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "metagenome"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "uncultured bacterium"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Escherichia coli"
     },
     {
       "@type": "DefinedTerm",
@@ -168,43 +246,73 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "Illumina"
+      "identifier": "0003114",
+      "name": "Illumina MiniSeq",
+      "url": "http://purl.obolibrary.org/obo/OBI_0003114",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Illumina NovaSeq 6000"
+      "identifier": "0002003",
+      "name": "Illumina MiSeq",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002003",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Illumina MiSeq"
+      "identifier": "0002630",
+      "name": "Illumina NovaSeq 6000",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002630",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Illumina HiSeq 2000"
+      "identifier": "0002001",
+      "name": "Illumina HiSeq 2000",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002001",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Illumina HiSeq 2500"
+      "identifier": "0002002",
+      "name": "Illumina HiSeq 2500",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002002",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Illumina HiSeq 4000"
+      "identifier": "0002021",
+      "name": "NextSeq 500",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002021",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "NextSeq 500"
+      "identifier": "0002049",
+      "name": "Illumina HiSeq 4000",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002049",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "MiSeq"
+      "identifier": "0002129",
+      "name": "Illumina HiSeq X Ten",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002129",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "16S"
+      "identifier": "0002763",
+      "name": "16s ribosomal gene sequencing assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002763",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "pyrosequencing"
+      "identifier": "0000730",
+      "name": "pyrosequencing",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000730",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",

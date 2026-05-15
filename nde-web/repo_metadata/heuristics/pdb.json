@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 143149,
+      "minValue": 148768,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-04-29",
+  "dateModified": "2026-05-06",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "1972-08-11",
-      "endDate": "2026-04-29"
+      "endDate": "2026-05-06"
     }
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -64,16 +64,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "8355",
-      "name": "Xenopus laevis",
-      "url": "https://www.uniprot.org/taxonomy/8355",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10116",
-      "name": "Rattus norvegicus",
-      "url": "https://www.uniprot.org/taxonomy/10116",
+      "identifier": "8355",
+      "name": "Xenopus laevis",
+      "url": "https://www.uniprot.org/taxonomy/8355",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -214,15 +214,15 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "electron diffraction",
-      "url": "http://purl.obolibrary.org/obo/CHMO_0000142",
-      "inDefinedTermSet": "CHMO"
-    },
-    {
-      "@type": "DefinedTerm",
       "name": "Crystallography",
       "url": "http://purl.obolibrary.org/obo/NCIT_C16476",
       "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "electron diffraction",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0000142",
+      "inDefinedTermSet": "CHMO"
     },
     {
       "@type": "DefinedTerm",

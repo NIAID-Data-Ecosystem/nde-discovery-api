@@ -73,16 +73,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0016367",
-      "name": "dermatomyositis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0016367",
+      "identifier": "0005282",
+      "name": "cutaneous lupus erythematosus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005282",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005282",
-      "name": "cutaneous lupus erythematosus",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005282",
+      "identifier": "0016367",
+      "name": "dermatomyositis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0016367",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -135,10 +135,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0600047",
-      "name": "sequencing assay",
-      "url": "http://purl.obolibrary.org/obo/OBI_0600047",
-      "inDefinedTermSet": "OBI"
+      "identifier": "0009294",
+      "name": "CITE-seq",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0009294",
+      "inDefinedTermSet": "EFO"
     },
     {
       "@type": "DefinedTerm",
@@ -149,16 +149,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0009294",
-      "name": "CITE-seq",
-      "url": "http://www.ebi.ac.uk/efo/EFO_0009294",
-      "inDefinedTermSet": "EFO"
+      "identifier": "0600047",
+      "name": "sequencing assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0600047",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0008981",
-      "name": "VDJ-Seq",
-      "url": "http://www.ebi.ac.uk/efo/EFO_0008981",
+      "identifier": "0030014",
+      "name": "bulk immune repertoire sequencing",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0030014",
       "inDefinedTermSet": "EFO"
     },
     {

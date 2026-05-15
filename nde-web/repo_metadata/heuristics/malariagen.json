@@ -90,9 +90,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "5820",
-      "name": "Plasmodium",
-      "url": "https://www.uniprot.org/taxonomy/5820",
+      "identifier": "5855",
+      "name": "Plasmodium vivax",
+      "url": "https://www.uniprot.org/taxonomy/5855",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -104,9 +104,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "5855",
-      "name": "Plasmodium vivax",
-      "url": "https://www.uniprot.org/taxonomy/5855",
+      "identifier": "5820",
+      "name": "Plasmodium",
+      "url": "https://www.uniprot.org/taxonomy/5820",
       "inDefinedTermSet": "UniProt"
     }
   ]

@@ -69,16 +69,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_2229",
-      "name": "Cell biology",
-      "url": "http://edamontology.org/topic_2229",
+      "identifier": "topic_0781",
+      "name": "Virology",
+      "url": "http://edamontology.org/topic_0781",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0781",
-      "name": "Virology",
-      "url": "http://edamontology.org/topic_0781",
+      "identifier": "topic_2229",
+      "name": "Cell biology",
+      "url": "http://edamontology.org/topic_2229",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -135,27 +135,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0016168",
-      "name": "cryopyrin-associated periodic syndrome",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0016168",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0004975",
-      "name": "Alzheimer disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004975",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "D003643",
-      "name": "Death",
-      "url": "https://id.nlm.nih.gov/mesh/D003643.html",
-      "inDefinedTermSet": "MeSH"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0005109",
       "name": "HIV infectious disease",
       "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
@@ -166,6 +145,27 @@
       "identifier": "0100163",
       "name": "COVID-19–associated multisystem inflammatory syndrome in children",
       "url": "http://purl.obolibrary.org/obo/MONDO_0100163",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C189188",
+      "name": "Infected with SARS-CoV-2",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D003643",
+      "name": "Death",
+      "url": "https://id.nlm.nih.gov/mesh/D003643.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0016168",
+      "name": "cryopyrin-associated periodic syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0016168",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -224,13 +224,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11709",
-      "name": "Human immunodeficiency virus 2",
-      "url": "https://www.uniprot.org/taxonomy/11709",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "10239",
       "name": "Viruses",
       "url": "https://www.uniprot.org/taxonomy/10239",
@@ -241,6 +234,13 @@
       "identifier": "12814",
       "name": "Respiratory syncytial virus",
       "url": "https://www.uniprot.org/taxonomy/12814",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11709",
+      "name": "Human immunodeficiency virus 2",
+      "url": "https://www.uniprot.org/taxonomy/11709",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -283,16 +283,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C16751",
+      "identifier": "C154589",
       "name": "Focus Group",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C16751",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C154589",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C154589",
+      "identifier": "C16751",
       "name": "Focus Group",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C154589",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C16751",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -318,16 +318,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C170821",
-      "name": "Electronic health record",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C170821",
+      "identifier": "C16723",
+      "name": "Immunology Test",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C16723",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C16723",
-      "name": "Immunology Test",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C16723",
+      "identifier": "C170821",
+      "name": "Electronic health record",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C170821",
       "inDefinedTermSet": "NCIT"
     },
     {

@@ -16,9 +16,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "identifier": "0005093",
+      "name": "skin disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005093",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -30,30 +30,44 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0006873",
-      "name": "nutritional deficiency disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0006873",
+      "identifier": "C13359",
+      "name": "Gastrointestinal",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C13359",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D007239",
+      "name": "Infections",
+      "url": "https://id.nlm.nih.gov/mesh/D007239.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0009061",
+      "name": "cystic fibrosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0009061",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005446",
-      "name": "cutaneous leishmaniasis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005446",
+      "identifier": "C189188",
+      "name": "Infected with SARS-CoV-2",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001517",
+      "name": "dysentery",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001517",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005093",
-      "name": "skin disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005093",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0004979",
-      "name": "asthma",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004979",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -62,20 +76,6 @@
       "name": "Fever",
       "url": "http://purl.obolibrary.org/obo/NCIT_C3038",
       "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0011989",
-      "name": "leishmaniasis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0011989",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0001517",
-      "name": "dysentery",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0001517",
-      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
@@ -89,13 +89,6 @@
   "species": [
     {
       "@type": "DefinedTerm",
-      "identifier": "9685",
-      "name": "Felis catus",
-      "url": "https://www.uniprot.org/taxonomy/9685",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "9615",
       "name": "Canis lupus familiaris",
       "url": "https://www.uniprot.org/taxonomy/9615",
@@ -106,6 +99,13 @@
       "identifier": "9606",
       "name": "Homo sapiens",
       "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9685",
+      "name": "Felis catus",
+      "url": "https://www.uniprot.org/taxonomy/9685",
       "inDefinedTermSet": "UniProt"
     }
   ],

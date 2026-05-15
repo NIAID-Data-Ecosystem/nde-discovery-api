@@ -152,10 +152,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "D007239",
-      "name": "Infections",
-      "url": "https://id.nlm.nih.gov/mesh/D007239.html",
-      "inDefinedTermSet": "MeSH"
+      "identifier": "0005109",
+      "name": "HIV infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
@@ -176,8 +176,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1869227",
-      "name": "bacteria"
+      "identifier": "10095",
+      "name": "Mus sp.",
+      "url": "https://www.uniprot.org/taxonomy/10095",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
@@ -188,40 +190,52 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "749906",
-      "name": "gut microbiome"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "9606",
-      "name": "human"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "10090",
-      "name": "mice"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "10090",
-      "name": "mouse"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "10116",
-      "name": "Rattus norvegicus",
-      "url": "https://www.uniprot.org/taxonomy/10116",
+      "identifier": "9605",
+      "name": "Homo",
+      "url": "https://www.uniprot.org/taxonomy/9605",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1869227",
-      "name": "Bacterial"
+      "identifier": "3193",
+      "name": "Embryophyta",
+      "url": "https://www.uniprot.org/taxonomy/3193",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1239",
-      "name": "Firmicutes"
+      "identifier": "10114",
+      "name": "Rattus",
+      "url": "https://www.uniprot.org/taxonomy/10114",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "13613",
+      "name": "Microbiota",
+      "url": "https://www.uniprot.org/taxonomy/13613",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "381124",
+      "name": "Zea mays subsp. mays",
+      "url": "https://www.uniprot.org/taxonomy/381124",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "50557",
+      "name": "Insecta",
+      "url": "https://www.uniprot.org/taxonomy/50557",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2157",
+      "name": "Archaea",
+      "url": "https://www.uniprot.org/taxonomy/2157",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
@@ -235,16 +249,16 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
-      "identifier": "749906",
-      "name": "gut metagenome",
-      "url": "https://www.uniprot.org/taxonomy/749906",
+      "identifier": "410661",
+      "name": "mouse gut metagenome",
+      "url": "https://www.uniprot.org/taxonomy/410661",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "646099",
-      "name": "human metagenome",
-      "url": "https://www.uniprot.org/taxonomy/646099",
+      "identifier": "2",
+      "name": "Bacteria",
+      "url": "https://www.uniprot.org/taxonomy/2",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -256,51 +270,51 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "818",
-      "name": "Bacteroides thetaiotaomicron",
-      "url": "https://www.uniprot.org/taxonomy/818",
+      "identifier": "1936497",
+      "name": "Firmicutes bacterium Firmicutes_1",
+      "url": "https://www.uniprot.org/taxonomy/1936497",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1681",
-      "name": "Bifidobacterium bifidum",
-      "url": "https://www.uniprot.org/taxonomy/1681",
+      "identifier": "269269",
+      "name": "Bacteroidetes bacterium S1",
+      "url": "https://www.uniprot.org/taxonomy/269269",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1275957",
-      "name": "environmental samples",
-      "url": "https://www.uniprot.org/taxonomy/1275957",
+      "identifier": "357231",
+      "name": "Murine norovirus",
+      "url": "https://www.uniprot.org/taxonomy/357231",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2697049",
-      "name": "Severe acute respiratory syndrome coronavirus 2",
-      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "identifier": "816",
+      "name": "Bacteroides",
+      "url": "https://www.uniprot.org/taxonomy/816",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "47770",
-      "name": "Lactobacillus crispatus",
-      "url": "https://www.uniprot.org/taxonomy/47770",
+      "identifier": "1578",
+      "name": "Lactobacillus",
+      "url": "https://www.uniprot.org/taxonomy/1578",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "408169",
-      "name": "metagenomes",
-      "url": "https://www.uniprot.org/taxonomy/408169",
+      "identifier": "2964732",
+      "name": "Archaeal virus sp.",
+      "url": "https://www.uniprot.org/taxonomy/2964732",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "562",
-      "name": "Escherichia coli",
-      "url": "https://www.uniprot.org/taxonomy/562",
+      "identifier": "4751",
+      "name": "Fungi",
+      "url": "https://www.uniprot.org/taxonomy/4751",
       "inDefinedTermSet": "UniProt"
     },
     {

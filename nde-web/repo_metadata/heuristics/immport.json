@@ -97,10 +97,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005812",
+      "identifier": "8469",
       "name": "influenza",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_8469",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",

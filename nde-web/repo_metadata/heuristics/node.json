@@ -225,16 +225,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "65409",
-      "name": "Scutellaria baicalensis",
-      "url": "https://www.uniprot.org/taxonomy/65409",
+      "identifier": "4139",
+      "name": "Scutellaria",
+      "url": "https://www.uniprot.org/taxonomy/4139",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "4139",
-      "name": "Scutellaria",
-      "url": "https://www.uniprot.org/taxonomy/4139",
+      "identifier": "65409",
+      "name": "Scutellaria baicalensis",
+      "url": "https://www.uniprot.org/taxonomy/65409",
       "inDefinedTermSet": "UniProt"
     },
     {

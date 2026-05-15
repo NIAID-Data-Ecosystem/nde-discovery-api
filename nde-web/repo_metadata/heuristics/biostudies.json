@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 107822,
+      "minValue": 92644,
       "unitText": "Dataset"
     }
   ],
@@ -52,13 +52,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3295",
-      "name": "Epigenetics",
-      "url": "http://edamontology.org/topic_3295",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "topic_0804",
       "name": "Immunology",
       "url": "http://edamontology.org/topic_0804",
@@ -66,9 +59,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0204",
-      "name": "Gene regulation",
-      "url": "http://edamontology.org/topic_0204",
+      "identifier": "topic_3295",
+      "name": "Epigenetics",
+      "url": "http://edamontology.org/topic_3295",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -76,6 +69,13 @@
       "identifier": "topic_3679",
       "name": "Animal study",
       "url": "http://edamontology.org/topic_3679",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0204",
+      "name": "Gene regulation",
+      "url": "http://edamontology.org/topic_0204",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -118,13 +118,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10116",
-      "name": "Rattus norvegicus",
-      "url": "https://www.uniprot.org/taxonomy/10116",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "7227",
       "name": "Drosophila melanogaster",
       "url": "https://www.uniprot.org/taxonomy/7227",
@@ -132,7 +125,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Homo sapiens (human)"
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
@@ -150,6 +146,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "9031",
+      "name": "Gallus gallus",
+      "url": "https://www.uniprot.org/taxonomy/9031",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "9913",
       "name": "Bos taurus",
       "url": "https://www.uniprot.org/taxonomy/9913",
@@ -157,7 +160,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Mus musculus (mouse)"
+      "identifier": "4530",
+      "name": "Oryza sativa",
+      "url": "https://www.uniprot.org/taxonomy/4530",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
@@ -213,9 +219,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "511145",
-      "name": "Escherichia coli str. K-12 substr. MG1655",
-      "url": "https://www.uniprot.org/taxonomy/511145",
+      "identifier": "90371",
+      "name": "Salmonella typhimurium",
+      "url": "https://www.uniprot.org/taxonomy/90371",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -227,16 +233,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1773",
-      "name": "Mycobacterium tuberculosis",
-      "url": "https://www.uniprot.org/taxonomy/1773",
+      "identifier": "511145",
+      "name": "Escherichia coli str. K-12 substr. MG1655",
+      "url": "https://www.uniprot.org/taxonomy/511145",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "90371",
-      "name": "Salmonella typhimurium",
-      "url": "https://www.uniprot.org/taxonomy/90371",
+      "identifier": "1773",
+      "name": "Mycobacterium tuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/1773",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -251,43 +257,73 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "RNA assay"
+      "identifier": "0000070",
+      "name": "assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000070",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Array assay"
+      "identifier": "0001457",
+      "name": "RNA assay",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0001457",
+      "inDefinedTermSet": "EFO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "transcription profiling by array"
+      "identifier": "0001865",
+      "name": "assay array",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001865",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Sequencing assay"
+      "identifier": "0001463",
+      "name": "transcription profiling by array assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001463",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "DNA assay"
+      "identifier": "0600047",
+      "name": "sequencing assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0600047",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "RNA-seq of coding RNA"
+      "identifier": "0001456",
+      "name": "DNA assay",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0001456",
+      "inDefinedTermSet": "EFO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "ChIP-seq"
+      "identifier": "0003738",
+      "name": "RNA-seq of coding RNA",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0003738",
+      "inDefinedTermSet": "EFO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "comparative genomic hybridization by array"
+      "identifier": "0000716",
+      "name": "ChIP-seq assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000716",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "RNA-seq of non coding RNA"
+      "identifier": "0001247",
+      "name": "genotyping by high throughput sequencing assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001247",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "methylation profiling by array"
+      "identifier": "0001393",
+      "name": "comparative genomic hybridization by array assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001393",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",

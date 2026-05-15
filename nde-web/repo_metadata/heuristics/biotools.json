@@ -162,9 +162,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005015",
-      "name": "diabetes mellitus",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
+      "identifier": "0004975",
+      "name": "Alzheimer disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004975",
       "inDefinedTermSet": "MONDO"
     },
     {
