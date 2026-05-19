@@ -2000,6 +2000,86 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Open",
                 "genre": "IID",
                 "schedule": "Weekly",
+            },
+            "ceirr": {
+                "abstract": "Centers of Excellence for Influenza Research and Response (CEIRR) is a NIAID supported IID repository that includes reagent data.",
+                "description": "Resources from the Centers of Excellence for Influenza Research and Response (CEIRR) Network. The Centers of Excellence for Influenza Research and Response (CEIRR) Network is a multidisciplinary and collaborative research network funded by the National Institute of Allergy and Infectious Diseases (NIAID) to study the natural history, transmission and pathogenesis of influenza, and provide an international research infrastructure to address influenza outbreaks.\nCEIRR Centers conduct studies both in the United States and abroad to study key influenza research areas and provide pandemic response. Centers undertake projects that aim to better understand the immune response to influenza vaccination and infection and identify which immunological factors can determine disease severity. Surveillance projects investigate how influenza viruses infect, evolve, and transmit in both human and animal infections.",
+                "identifier": "Centers of Excellence for Influenza Research and Response (CEIRR) Resources",
+                "name": "Centers of Excellence for Influenza Research and Response (CEIRR) Resources",
+                "schema": {
+                    "_uuid": "_id, identifier",
+                    "sample_id": "_id, identifier",
+                    "sample_identifier": "identifier, name, alternateIdentifier",
+                    "SK": "identifier",
+                    "bei_number": "identifier, sameAs, isRelatedTo",
+
+                    "_ceirr_source_url": "url, includedInDataCatalog.archivedAt",
+
+                    "reagent_name": "name",
+
+                    "_sample_create_date": "dateCreated",
+                    "_create_timestamp": "dateCreated",
+                    "_modified_timestamp": "dateModified",
+                    "modified_timestamp": "dateModified",
+
+                    "availability": "creativeWorkStatus, sampleAvailability",
+                    "_ceirr_reagent_category": "sampleType, keywords",
+
+                    "project_identifier": "collector, author",
+                    "study_identifier": "isPartOf",
+
+                    "contact_name": "contributor.name",
+                    "contact_email": "contributor.email",
+                    "contributing_institution": "contributor.affiliation, itemLocation.identifier",
+
+                    "host_common_name": "species.name",
+                    "_common_host": "species.name",
+                    "host": "species.name",
+                    "host_identifier": "species.identifier",
+                    "host_sex": "sex",
+                    "host_strain": "associatedGenotype",
+
+                    "strain_name": "infectiousAgent, associatedGenotype",
+                    "parent_strain_name": "infectiousAgent, associatedGenotype",
+                    "influenza_type": "infectiousAgent, additionalProperty",
+                    "subtype": "infectiousAgent",
+                    "origin": "locationOfOrigin",
+                    "year": "dateCollected",
+
+                    "sample_material": "sampleType, cellType",
+                    "sample_material_form": "sampleState",
+                    "supplied_as": "sampleQuantity",
+                    "passage_history": "sampleState",
+                    "mutations": "associatedGenotype",
+                    "vector": "isBasedOn",
+                    "immunogen": "isBasedOn",
+                    "produced_in": "species",
+                    "compatibility": "experimentalPurpose",
+                    "comments": "description",
+                    "concentration": "sampleQuantity, additionalProperty",
+                    "quantity_available": "sampleQuantity, creativeWorkStatus",
+                    "quantity_minimum": "sampleQuantity",
+                    "purification": "sampleProcess",
+                    "antibody_type": "keywords",
+                    "specificity": "keywords",
+                    "protein": "hasPart",
+                    "segment": "hasPart",
+
+                    "publication_pmid": "isBasedOn",
+
+                    "HA": "isBasedOn",
+                    "NA": "isBasedOn",
+                    "NP": "isBasedOn",
+                    "NS": "isBasedOn",
+                    "PA": "isBasedOn",
+                    "PB1": "isBasedOn",
+                    "PB2": "isBasedOn",
+                    "MP": "isBasedOn"
+                },
+                "url": "https://www.ceirr-network.org/",
+                "conditionsOfAccess": "Restricted",
+                "genre": "IID",
+                "schedule": "Weekly",
             }
         }
 
