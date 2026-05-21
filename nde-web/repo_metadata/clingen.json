@@ -3,6 +3,7 @@
   "name": "ClinicalGenomeResource (ClinGen)",
   "identifier": "Clinical Genomics Resource (ClinGen)",
   "url": "https://clinicalgenome.org/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_b880e7dc2c2437e0",
   "abstract": "ClinicalGenomeResource (ClinGen) is a NIH supported generalist repository that includes genomic data.",
   "description": "ClinGen is a National Institutes of Health (NIH)-funded resource dedicated to building an authoritative central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.",
   "genre": [

@@ -6,6 +6,7 @@
   ],
   "identifier": "Bacterial and Viral Bioinformatics Resource Center",
   "url": "https://www.bv-brc.org/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_42e839db86d4166d",
   "abstract": "Bacterial and Viral Bioinformatics Resource Center (BV-BRC) is a NIAID supported IID repository that includes genomic data.",
   "description": "The Bacterial and Viral Bioinformatics Resource Center (BV-BRC) is an information system designed to support research on bacterial and viral infectious diseases. The BV-BRC combines the data and tools from the Legacy BRC resources: PATRIC, the bacterial BRC, and IRD and ViPR, the viral BRCs.",
   "collectionType": "Cloud Ecosystem",
@@ -13,10 +14,13 @@
     "IID"
   ],
   "conditionsOfAccess": "Open",
+  "license": "https://www.bv-brc.org/docs/system_documentation/data_management_sharing.html",
+  "inLanguage": "English",
   "version": "3.33.16",
   "isAccessibleForFree": true,
   "hasAPI": true,
   "hasDownload": "All Content",
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Weekly",
   "schema": {
     "taxon_id": "infectiousAgent",

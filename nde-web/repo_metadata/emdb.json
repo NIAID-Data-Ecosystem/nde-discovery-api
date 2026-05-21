@@ -1,14 +1,28 @@
 {
   "_id": "emdb",
   "name": "Electron Microscopy Data Bank (EMDB)",
+  "alternateName": [
+    "EMDB"
+  ],
   "identifier": "Electron Microscopy Data Bank",
   "url": "https://www.ebi.ac.uk/emdb/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_f6161fcb840b7162",
   "abstract": "Electron Microscopy Data Bank (EMDB) is a generalist repository that includes image data.",
   "description": "The Electron Microscopy Data Bank (EMDB) is a public repository for cryogenic-sample Electron Microscopy (cryoEM) volumes and representative tomograms of macromolecular complexes and subcellular structures. It covers a variety of techniques, including single-particle analysis, helical reconstruction, electron tomography, subtomogram averaging, and electron crystallography (for more information, see the EMDB Policies).",
+  "collectionType": "Data Repository",
   "genre": [
     "Generalist"
   ],
   "conditionsOfAccess": "Open",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "usageInfo": "https://www.ebi.ac.uk/emdb/documentation/policies#5-1-1",
+  "inLanguage": "English",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "hasDownload": "All content",
+  "creativeWorkStatus": "Accepting Data",
+  "dateModified": "2024-05-08",
+  "datePublished": "2013-04-02",
   "schedule": "Weekly",
   "schema": {
     "natural_source_ncbi_code": "species.identifier",
