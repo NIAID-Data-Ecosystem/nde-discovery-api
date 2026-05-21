@@ -1826,6 +1826,7 @@ class NDESourceHandler(MetadataSourceHandler):
             "clingen": {
                 "abstract": "ClinicalGenomeResource (ClinGen) is a NIH supported generalist repository that includes genomic data.",
                 "description": "ClinGen is a National Institutes of Health (NIH)-funded resource dedicated to building an authoritative central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.",
+                "identifier": "Clinical Genomics Resource (ClinGen)",
                 "name": "ClinicalGenomeResource (ClinGen)",
                 "schema": {
                     "DISEASE ID (MONDO)": "healthCondition.identifier",
