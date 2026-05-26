@@ -5,6 +5,7 @@
   "url": "https://www.ebi.ac.uk/biostudies/",
   "abstract": "BioStudies is a repository that includes life sciences data by organising links to data in other databases at EMBL-EBI or elsewhere.",
   "description": "The mission of BioStudies is to provide access to all the data outputs of a life sciences study from a single place, by organising links to data in other databases at EMBL-EBI or elsewhere, as well as hosting data and metadata that do not fit anywhere else. The database accepts submissions via an online tool, or in a simple tab-delimited format. BioStudies provides rich mechanisms for defining and using metadata guidelines specific for a particular data source such as a project or a community, and organises datasets in collections.",
+  "type": "Dataset Repository",
   "genre": [
     "Generalist"
   ],

@@ -10,6 +10,7 @@
   "abstract": "Electron Microscopy Data Bank (EMDB) is a generalist repository that includes image data.",
   "description": "The Electron Microscopy Data Bank (EMDB) is a public repository for cryogenic-sample Electron Microscopy (cryoEM) volumes and representative tomograms of macromolecular complexes and subcellular structures. It covers a variety of techniques, including single-particle analysis, helical reconstruction, electron tomography, subtomogram averaging, and electron crystallography (for more information, see the EMDB Policies).",
   "collectionType": "Data Repository",
+  "type": "Data Repository",
   "genre": [
     "Generalist"
   ],
