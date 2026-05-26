@@ -2081,7 +2081,65 @@ class NDESourceHandler(MetadataSourceHandler):
                 "conditionsOfAccess": "Restricted",
                 "genre": "IID",
                 "schedule": "Weekly",
-            }
+            },
+            "bei": {
+                "abstract": "BEIResources is a NIAID supported IID repository that includes reagent data.",
+                "description": "BEI Resources was established by the National Institute of Allergy and Infectious Diseases (NIAID) to provide reagents, tools and information for studying Category A, B, and C priority pathogens, emerging infectious disease agents, non-pathogenic microbes and other microbiological materials of relevance to the research community. BEI Resources acquires, authenticates and produces reagents that scientists need to carry out basic research and develop improved diagnostic tests, vaccines, and therapies. By centralizing these functions within BEI Resources, access to and use of these materials in the scientific community is monitored and quality control of the reagents is assured. In addition to supplying the infectious disease community with materials, BEI Resources also encourages and supports the deposit of materials from researchers and institutions. Depositing materials with BEI Resources has many advantages to the researcher and the research community including secure storage, community access and distribution; all while protecting the intellectual property rights of the depositor. The BEI Resources repository will be maintained as a resource for researchers as long as there is need. Your deposit into BEI Resources is a long term investment to aid future research. BEI Resources has been managed under contract by American Type Culture Collection (ATCC) since 2003. A seven-year contract to continue managing BEI Resources was awarded to ATCC in May 2016. The scope of the contract has expanded to a more comprehensive catalog of research materials, including those deposited by other Government-supported research projects, to be made available to the biodefense and emerging infectious disease scientific communities. Fungal, Parasite, Vector and other relevant Materials have been added to the existing Bacterial, Viral and Toxin reagents which cover NIAID Category A, B and C Priority Pathogens and NIAID designated emerging infectious disease agents and organisms.",
+                "identifier": "BEI Resources",
+                "name": "BEI Resources",
+                "schema": {
+                    "_id": "_id, identifier",
+                    "url": "url, includedInDataCatalog.archivedAt",
+
+                    "Organism:": "species.name",
+                    "Taxonomy:": "species.name",
+                    "SubTaxon:": "species.additionalProperty",
+
+                    "Product Name:": "name",
+                    "Designations:": "name",
+
+                    "Biosafety Level:": "keywords",
+                    "Availability Status:": "creativeWorkStatus, sampleAvailability",
+
+                    "Storage Temperature:": "sampleStorageTemperature.name",
+                    "Contributor:": "contributor.name",
+
+                    "Comments:": "description",
+                    "Description:": "usageInfo.description, description",
+                    "Product Description:": "description",
+                    "Additional Notes:": "description",
+
+                    "Citations:": "creditText",
+                    "References:": "creditText, isBasedOn",
+                    "Publications Citing this Reagent:": "citedBy",
+
+                    "Restrictions On Use:": "license",
+                    "Patents or other restrictions:": "usageInfo.description",
+                    "Ownership statement:": "usageInfo.description",
+
+                    "Material Provided:": "sampleState",
+                    "Solubility:": "sampleState",
+                    "Storage of Reconstituted Peptides:": "sampleState",
+
+                    "Manufacturer:": "author",
+                    "Packing/Storage:": "sampleProcess",
+                    "Functional Activity:": "experimentalPurpose",
+
+                    "Components:": "hasPart",
+                    "Additional Information:": "isRelatedTo",
+
+                    "Insert Size:": "additionalProperty",
+                    "Growth Conditions:": "additionalProperty",
+                    "Safety Precautions:": "additionalProperty",
+                    "Thawing and Growth:": "additionalProperty",
+                    "Reconstitution:": "additionalProperty",
+                    "Sequence:": "additionalProperty"
+                },
+                "url": "https://www.beiresources.org/Home.aspx",
+                "conditionsOfAccess": "Restricted",
+                "genre": "IID",
+                "schedule": "Weekly",
+            },
         }
 
         for source, data in source_info.items():
