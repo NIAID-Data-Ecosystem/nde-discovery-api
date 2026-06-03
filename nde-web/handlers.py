@@ -2140,6 +2140,36 @@ class NDESourceHandler(MetadataSourceHandler):
                 "genre": "IID",
                 "schedule": "Weekly",
             },
+            "uniprot": {
+                "abstract": "UniProt is a NIAID supported generalist repository that includes proteomic data.",
+                "description": 'The UniProt Knowledgebase (UniProtKB) is the central hub for the collection of functional information on proteins, with accurate, consistent and rich annotation. In addition to capturing the core data mandatory for each UniProtKB entry (mainly, the amino acid sequence, protein name or description, taxonomic data and citation information), as much annotation information as possible is added. This includes widely accepted biological ontologies, classifications and cross-references, and clear indications of the quality of annotation in the form of evidence attribution of experimental and computational data. The UniProt Knowledgebase consists of two sections: a reviewed section containing manually-annotated records with information extracted from literature and curator-evaluated computational analysis (aka "UniProtKB/Swiss-Prot"), and an unreviewed section with computationally analyzed records that await full manual annotation (aka "UniProtKB/TrEMBL").',
+                "identifier": "UniProt Knowledgebase",
+                "name": "UniProt",
+                "schema": {
+                    "taxonomy.taxonId": "_id, name, url, description, species.identifier, species.url, includedInDataCatalog.archivedAt, exampleOfWork.potentialAction.target, isBasedOn.url",
+                    "taxonomy.scientificName": "name, description, species.name",
+                    "taxonomy.commonName": "name, description, species.name, species.alternateName",
+
+                    "taxonomy.statistics.proteomeCount": "collectionSize.minValue",
+                    "taxonomy.statistics.reviewedProteinCount": "collectionSize.minValue",
+                    "taxonomy.statistics.unreviewedProteinCount": "collectionSize.minValue",
+
+                    "proteomes.modified": "date, dateModified",
+
+                    "X-UniProt-Release": "version, includedInDataCatalog.version, isBasedOn.version",
+                    "X-UniProt-Release-Date": "date, dateModified, includedInDataCatalog.versionDate, isBasedOn.versionDate",
+
+                    "record id": "_id",
+                    "UI URL": "url, includedInDataCatalog.archivedAt",
+                    "API query URL": "exampleOfWork.potentialAction.target, isBasedOn.url",
+                    "collection kind": "name, description, collectionSize.unitText, isBasedOn.description",
+                    "current date": "date, dateModified, includedInDataCatalog.versionDate",
+                },
+                "url": "https://www.uniprot.org/",
+                "conditionsOfAccess": "Open",
+                "genre": "Generalist",
+                "schedule": "Weekly",
+            }
         }
 
         for source, data in source_info.items():
