@@ -17,6 +17,7 @@ the TSV or Google Sheet changes.
 
 Usage:
     python nde-web/scripts/sync_repo_metadata.py
+    python nde-web/scripts/sync_repo_metadata.py --source uniprot
 """
 
 from __future__ import annotations
@@ -104,6 +105,8 @@ def load_existing_repo_jsons() -> dict[str, dict[str, Any]]:
     if not REPO_METADATA_DIR.exists():
         return out
     for path in sorted(REPO_METADATA_DIR.glob("*.json")):
+        if path.name.startswith("_"):
+            continue
         key = path.stem
         with path.open() as f:
             out[key] = json.load(f)
@@ -397,17 +400,35 @@ def build() -> dict[str, dict[str, Any]]:
     return repos
 
 
+def _serialized(data: dict[str, Any]) -> str:
+    return json.dumps(data, indent=2, ensure_ascii=False) + "\n"
+
+
 def write(repos: dict[str, dict[str, Any]]) -> list[Path]:
     REPO_METADATA_DIR.mkdir(parents=True, exist_ok=True)
     written: list[Path] = []
     for key, data in sorted(repos.items()):
         ordered = order_fields(data)
         path = REPO_METADATA_DIR / f"{key}.json"
+        payload = _serialized(ordered)
+        if path.exists() and path.read_text() == payload:
+            continue
         with path.open("w") as f:
-            json.dump(ordered, f, indent=2, ensure_ascii=False)
-            f.write("\n")
+            f.write(payload)
         written.append(path)
     return written
+
+
+def filter_repos(
+    repos: dict[str, dict[str, Any]],
+    source: str | None,
+) -> dict[str, dict[str, Any]]:
+    if source is None:
+        return repos
+    key = _norm_source_key(source)
+    if key not in repos:
+        raise KeyError(key)
+    return {key: repos[key]}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -417,8 +438,17 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="Build in memory and print a summary without writing files.",
     )
+    parser.add_argument(
+        "--source",
+        help="Only write this source key. Default: all sources.",
+    )
     args = parser.parse_args(argv)
     repos = build()
+    try:
+        repos = filter_repos(repos, args.source)
+    except KeyError as exc:
+        print(f"No repo metadata found for source {exc.args[0]!r}")
+        return 1
     if args.dry_run:
         print(f"Would write {len(repos)} repo metadata files")
         for key in sorted(repos):

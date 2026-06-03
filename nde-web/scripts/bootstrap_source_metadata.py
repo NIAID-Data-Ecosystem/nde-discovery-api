@@ -5,9 +5,10 @@ For a new source, this helper can:
 
 1. download the latest SourceMetaCuration resource_base Google Sheet as TSV
 2. create a minimal ``nde-web/repo_metadata/<source>.json`` stub if needed
-3. run ``sync_repo_metadata.py``
+3. run ``sync_repo_metadata.py --source <source>``
 4. run ``compute_heuristics.py --source <source>``
 5. run ``metadata_compatibility_calculator.py --datasource <source>``
+6. run ``validate_repo_metadata.py --source <source>``
 
 Usage:
     python nde-web/scripts/bootstrap_source_metadata.py
@@ -269,6 +270,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Do not run metadata_compatibility_calculator.py.",
     )
     parser.add_argument(
+        "--skip-validation",
+        action="store_true",
+        help="Do not run validate_repo_metadata.py at the end.",
+    )
+    parser.add_argument(
         "-y",
         "--yes",
         action="store_true",
@@ -291,6 +297,7 @@ def main(argv: list[str] | None = None) -> int:
     if source_key != source_input:
         print(f"Using normalized source key: {source_key}")
 
+    source_json_path = REPO_METADATA_DIR / f"{source_key}.json"
     resource_base_tsv = Path(args.resource_base_tsv)
     if not resource_base_tsv.is_absolute():
         resource_base_tsv = REPO_ROOT / resource_base_tsv
@@ -310,8 +317,19 @@ def main(argv: list[str] | None = None) -> int:
             download_resource_base_tsv(args.sheet_url, resource_base_tsv)
             print(f"Saved {resource_base_tsv.relative_to(REPO_ROOT)}")
 
-    source_json_path = REPO_METADATA_DIR / f"{source_key}.json"
-    rows = load_resource_base_rows(resource_base_tsv)
+    if resource_base_tsv.exists():
+        rows = load_resource_base_rows(resource_base_tsv)
+    elif source_json_path.exists():
+        rows = []
+        print(
+            f"Warning: {resource_base_tsv.relative_to(REPO_ROOT)} is missing; "
+            "continuing with the existing source JSON only."
+        )
+    else:
+        raise SystemExit(
+            f"Missing {resource_base_tsv.relative_to(REPO_ROOT)}. "
+            "Download the sheet TSV or rerun without --skip-download."
+        )
     row = find_source_row(rows, source_key)
     if row is None and not source_json_path.exists():
         raise SystemExit(
@@ -348,7 +366,15 @@ def main(argv: list[str] | None = None) -> int:
 
     python = python_for_subprocess()
     if not args.skip_sync:
-        run_command([python, "nde-web/scripts/sync_repo_metadata.py"], args.dry_run)
+        run_command(
+            [
+                python,
+                "nde-web/scripts/sync_repo_metadata.py",
+                "--source",
+                source_key,
+            ],
+            args.dry_run,
+        )
     if not args.skip_heuristics:
         run_command(
             [
@@ -375,6 +401,16 @@ def main(argv: list[str] | None = None) -> int:
                 args.mongo_url,
                 "--cache-dir",
                 str(METADATA_COMPLETENESS_DIR.relative_to(REPO_ROOT)),
+            ],
+            args.dry_run,
+        )
+    if not args.skip_validation:
+        run_command(
+            [
+                python,
+                "nde-web/scripts/validate_repo_metadata.py",
+                "--source",
+                source_key,
             ],
             args.dry_run,
         )
