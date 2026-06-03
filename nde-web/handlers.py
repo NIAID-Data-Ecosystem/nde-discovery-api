@@ -1902,8 +1902,8 @@ class NDESourceHandler(MetadataSourceHandler):
             "biosample": {
                 "abstract": "NCBI BioSample is a NIH supported generalist repository that includes other data.",
                 "description": "NCBI BioSample is a NIH supported generalist repository that includes other data.",
-                "identifier": "NCBI BioSample",
-                "name": "NCBI BioSample",
+                "identifier": "BioSample",
+                "name": "BioSample",
                 "url": "https://www.ncbi.nlm.nih.gov/biosample/",
                 "conditionsOfAccess": "Open",
                 "genre": "Generalist",
