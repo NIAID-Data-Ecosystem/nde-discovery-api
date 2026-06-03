@@ -12,7 +12,9 @@
   "collectionType": "Cloud Ecosystem",
   "type": "Data Repository",
   "genre": [
-    "IID"
+    "IID",
+    "Computational biology, Omics",
+    "[Portal Metadata field]"
   ],
   "conditionsOfAccess": "Open",
   "license": "https://www.bv-brc.org/docs/system_documentation/data_management_sharing.html",

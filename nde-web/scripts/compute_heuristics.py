@@ -44,7 +44,11 @@ REPO_METADATA_DIR = REPO_ROOT / "nde-web" / "repo_metadata"
 HEURISTICS_DIR = REPO_METADATA_DIR / "heuristics"
 
 DEFAULT_MONGO_URL = os.environ.get(
-    "MONGO_URL", "mongodb://su11:27017/"
+    "MONGO_URL",
+    # Use the rs0biothings replica set so we route around any single
+    # member being down (su11 went away at one point).
+    "mongodb://su02:27017,su09:27017,su11:27017/"
+    "?replicaSet=rs0biothings&readPreference=secondaryPreferred",
 )
 DEFAULT_MONGO_DB = os.environ.get("MONGO_DB", "nde_hub_src")
 

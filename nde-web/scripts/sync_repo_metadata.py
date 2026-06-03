@@ -10,7 +10,7 @@ merging, in order of increasing precedence:
     2. the legacy ``source_info`` dict inside ``handlers.py``, if still
        present (used for the initial bootstrap; a no-op afterward)
     3. scalar fields from ``SourceMetaCuration - resource_base.tsv``
-       (matched by URL)
+       (matched by URL; ``sameAs`` can also fall back to source key)
 
 Existing fields are preserved; TSV values only fill gaps. Re-run any time
 the TSV or Google Sheet changes.
@@ -25,6 +25,7 @@ import argparse
 import ast
 import csv
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -53,6 +54,7 @@ FIELD_ORDER = [
     "alternateName",
     "identifier",
     "url",
+    "sameAs",
     "abstract",
     "description",
     "collectionType",
@@ -119,6 +121,10 @@ def _norm_url(url: str) -> str:
     return u
 
 
+def _norm_source_key(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "_", value.strip().lower()).strip("_")
+
+
 def _coerce_bool(value: str) -> bool | None:
     v = value.strip().upper()
     if v in ("TRUE", "YES", "1"):
@@ -133,6 +139,7 @@ def _coerce_bool(value: str) -> bool | None:
 RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
     "name": ("name", None),
     "url": ("url", None),
+    "sameAs": ("sameAs", None),
     "identifier": ("identifier", None),
     "alternateName": (
         "alternateName",
@@ -149,7 +156,10 @@ RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
     "isAccessibleForFree": ("isAccessibleForFree", _coerce_bool),
     "inLanguage": ("inLanguage", None),
     "version": ("version", None),
-    "genre": ("genre", None),
+    "genre": (
+        "genre",
+        lambda v: [s.strip() for s in v.split(";") if s.strip()],
+    ),
     "dateModified": ("dateModified", None),
     "dateCreated": ("dateCreated", None),
     "datePublished": ("datePublished", None),
@@ -165,7 +175,10 @@ RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
 # than parsed heuristically here.
 PRIORITY_SCALAR_PROPERTIES: dict[str, tuple[str, Any]] = {
     "collectionType": ("collectionType", None),
-    "genre": ("genre", None),
+    "genre": (
+        "genre",
+        lambda v: [s.strip() for s in v.split(";") if s.strip()],
+    ),
     "doi": ("doi", None),
     "abstract": ("abstract", None),
     "inLanguage": ("inLanguage", None),
@@ -273,6 +286,28 @@ def load_resource_base_by_url() -> dict[str, dict[str, Any]]:
     return out
 
 
+def load_resource_base_same_as_by_source_key() -> dict[str, dict[str, Any]]:
+    """Return sameAs values keyed by source-like TSV identifiers.
+
+    Most rows are matched by URL. A few curation rows use a URL variant
+    from the one in repo metadata, so this fallback lets ``DBAASP`` map
+    to ``dbaasp`` without broadening all resource_base fields.
+    """
+    if not RESOURCE_BASE_TSV.exists():
+        return {}
+    out: dict[str, dict[str, Any]] = {}
+    with RESOURCE_BASE_TSV.open() as f:
+        reader = csv.DictReader(f, delimiter="\t")
+        for row in reader:
+            same_as = (row.get("sameAs") or "").strip()
+            if not same_as:
+                continue
+            key = _norm_source_key(row.get("identifier") or "")
+            if key:
+                out[key] = {"sameAs": same_as}
+    return out
+
+
 # Fields originally hand-maintained inside handlers.py. These are the
 # parity floor: automated TSV syncs may fill them when blank but must
 # never overwrite them. Everything else is rebuildable from the sheet.
@@ -290,21 +325,33 @@ HANDLERS_PROTECTED_FIELDS = frozenset({
     "type",
 })
 
+# Fields where the curation TSVs are authoritative and should overwrite
+# the handlers.py floor. Use sparingly — these fields lose their parity
+# guarantee in exchange for picking up richer values curated in the
+# spreadsheets (e.g. ``genre`` multi-category lists like
+# ``["IID", "Omics", ...]``).
+TSV_OVERRIDES = frozenset({"genre"})
+
 
 def merge(into: dict[str, Any], overlay: dict[str, Any]) -> None:
-    """Fill blanks in ``into`` from ``overlay``; never overwrite existing."""
+    """Fill blanks in ``into`` from ``overlay``; ``TSV_OVERRIDES`` fields
+    overwrite unconditionally."""
     for key, value in overlay.items():
-        if key not in into or into[key] in (None, "", [], {}):
+        if key in TSV_OVERRIDES:
+            into[key] = value
+        elif key not in into or into[key] in (None, "", [], {}):
             into[key] = value
 
 
 def merge_update(into: dict[str, Any], overlay: dict[str, Any]) -> None:
     """Overlay wins for non-protected fields; protected fields are only
-    filled when blank. Used when ``overlay`` is authoritative curated
-    data (e.g. the priority sheet) that should reflect edits on re-sync.
+    filled when blank; ``TSV_OVERRIDES`` always overwrite. Used when
+    ``overlay`` is authoritative curated data (e.g. the priority sheet).
     """
     for key, value in overlay.items():
-        if key in HANDLERS_PROTECTED_FIELDS:
+        if key in TSV_OVERRIDES:
+            into[key] = value
+        elif key in HANDLERS_PROTECTED_FIELDS:
             if key not in into or into[key] in (None, "", [], {}):
                 into[key] = value
         else:
@@ -330,6 +377,7 @@ def build() -> dict[str, dict[str, Any]]:
         repos.setdefault(key, {})
         merge(repos[key], data)
     tsv_by_url = load_resource_base_by_url()
+    tsv_same_as_by_key = load_resource_base_same_as_by_source_key()
     priority_by_key = load_priority_sheet_by_key()
     # Priority sheet is curated and authoritative for non-protected
     # fields; resource_base.tsv is coarser and only fills blanks.
@@ -343,6 +391,9 @@ def build() -> dict[str, dict[str, Any]]:
             tsv_row = tsv_by_url.get(_norm_url(url))
             if tsv_row:
                 merge(data, tsv_row)
+        tsv_same_as = tsv_same_as_by_key.get(_norm_source_key(key))
+        if tsv_same_as:
+            merge(data, tsv_same_as)
     return repos
 
 
