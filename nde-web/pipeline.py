@@ -8,7 +8,7 @@ import boto3
 from biothings.web.query import ESQueryBuilder, ESResultFormatter
 from biothings.web.query.engine import AsyncESQueryBackend
 from botocore.config import Config as BotoConfig
-from elasticsearch_dsl import A, Q, Search
+from elasticsearch.dsl import A, Q, Search
 
 
 def transform_lineage_response(response):
