@@ -1,0 +1,171 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 11850,
+      "unitText": "Sample"
+    }
+  ],
+  "dateModified": "2026-05-27",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2015-04-20",
+      "endDate": "2026-05-27"
+    }
+  ],
+  "usageInfo": {
+    "@type": "CreativeWork",
+    "description": "The CEIRR Reagents webpage is a searchable and filterable catalog of over 10,000 free and unique reagents developed by CEIRR investigators, which are made available to the broad scientific community to help advance influenza and other viral research worldwide. Some reagents on this page may require additional documentation to verify that the requesting lab has the appropriate permits and facilities to receive the reagent. Additional time may be required to ship reagents that are classified as BSL-3. Please respond promptly to any correspondence to ensure that the reagent is shipped as quickly as possible."
+  },
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3324",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0804",
+      "name": "Immunology",
+      "url": "http://edamontology.org/topic_0804",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3277",
+      "name": "Sample collections",
+      "url": "http://edamontology.org/topic_3277",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005812",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9823",
+      "name": "Sus scrofa",
+      "url": "https://www.uniprot.org/taxonomy/9823",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8839",
+      "name": "Anas platyrhynchos",
+      "url": "https://www.uniprot.org/taxonomy/8839",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9031",
+      "name": "Gallus gallus",
+      "url": "https://www.uniprot.org/taxonomy/9031",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9091",
+      "name": "Coturnix coturnix",
+      "url": "https://www.uniprot.org/taxonomy/9091",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9796",
+      "name": "Equus caballus",
+      "url": "https://www.uniprot.org/taxonomy/9796",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9709",
+      "name": "Phocidae",
+      "url": "https://www.uniprot.org/taxonomy/9709",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9925",
+      "name": "Capra hircus",
+      "url": "https://www.uniprot.org/taxonomy/9925",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "171585",
+      "name": "Inachis io",
+      "url": "https://www.uniprot.org/taxonomy/171585",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "32644",
+      "name": "unidentified",
+      "url": "https://www.uniprot.org/taxonomy/32644",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "136645",
+      "name": "Baculovirus transfer vector pFASTBAC1",
+      "url": "https://www.uniprot.org/taxonomy/136645",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "114727",
+      "name": "H1N1 subtype",
+      "url": "https://www.uniprot.org/taxonomy/114727",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "119210",
+      "name": "H3N2 subtype",
+      "url": "https://www.uniprot.org/taxonomy/119210",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11138",
+      "name": "Murine hepatitis virus",
+      "url": "https://www.uniprot.org/taxonomy/11138",
+      "inDefinedTermSet": "UniProt"
+    }
+  ]
+}

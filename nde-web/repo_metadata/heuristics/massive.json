@@ -1,0 +1,310 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 108,
+      "unitText": "Dataset"
+    }
+  ],
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2013-03-18"
+    }
+  ],
+  "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0021100",
+      "name": "breast neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005070",
+      "name": "neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005401",
+      "name": "colonic neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005401",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002546",
+      "name": "schwannoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002546",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004993",
+      "name": "carcinoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004993",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005335",
+      "name": "colorectal neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005335",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005575",
+      "name": "colorectal cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005575",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0007256",
+      "name": "hepatocellular carcinoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0007256",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Colon_Cancer"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7227",
+      "name": "Drosophila melanogaster",
+      "url": "https://www.uniprot.org/taxonomy/7227",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7108",
+      "name": "Spodoptera frugiperda",
+      "url": "https://www.uniprot.org/taxonomy/7108",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "703267",
+      "name": "Nephus includens",
+      "url": "https://www.uniprot.org/taxonomy/703267",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "221784",
+      "name": "Pfaffia",
+      "url": "https://www.uniprot.org/taxonomy/221784",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "29726",
+      "name": "Arabidopsis sp.",
+      "url": "https://www.uniprot.org/taxonomy/29726",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "271790",
+      "name": "Lablab",
+      "url": "https://www.uniprot.org/taxonomy/271790",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9823",
+      "name": "Sus scrofa",
+      "url": "https://www.uniprot.org/taxonomy/9823",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "270351",
+      "name": "Methylobacterium aquaticum",
+      "url": "https://www.uniprot.org/taxonomy/270351",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1712661",
+      "name": "Bacillus sp. PRV20",
+      "url": "https://www.uniprot.org/taxonomy/1712661",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "32630",
+      "name": "synthetic construct",
+      "url": "https://www.uniprot.org/taxonomy/32630",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "367830",
+      "name": "Staphylococcus aureus (strain USA300)",
+      "url": "https://www.uniprot.org/taxonomy/367830",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3037",
+      "name": "Euglena longa",
+      "url": "https://www.uniprot.org/taxonomy/3037",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "227866",
+      "name": "Bacillus tequilensis",
+      "url": "https://www.uniprot.org/taxonomy/227866",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "135461",
+      "name": "Bacillus subtilis subsp. subtilis",
+      "url": "https://www.uniprot.org/taxonomy/135461",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1869227",
+      "name": "bacterium",
+      "url": "https://www.uniprot.org/taxonomy/1869227",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1428",
+      "name": "Bacillus thuringiensis",
+      "url": "https://www.uniprot.org/taxonomy/1428",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000534",
+      "name": "mass spectrometry",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000534",
+      "inDefinedTermSet": "MMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000470",
+      "name": "mass spectrometry assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0000470",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "LTQ Orbitrap Elite"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "LTQ Orbitrap XL"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Synapt G2 HDMS"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "maXis"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "LTQ Orbitrap Velos"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Orbitrap Ascend"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Q Exactive HF-X"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Exactive"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

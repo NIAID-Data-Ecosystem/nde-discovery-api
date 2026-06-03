@@ -1,0 +1,252 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 424,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2020-08-27",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2011-07-15",
+      "endDate": "2020-08-27"
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3336",
+      "name": "Drug discovery",
+      "url": "http://edamontology.org/topic_3336",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3292",
+      "name": "Biochemistry",
+      "url": "http://edamontology.org/topic_3292",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_2229",
+      "name": "Cell biology",
+      "url": "http://edamontology.org/topic_2229",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3047",
+      "name": "Molecular biology",
+      "url": "http://edamontology.org/topic_3047",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3343",
+      "name": "Compound libraries and screening",
+      "url": "http://edamontology.org/topic_3343",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0121",
+      "name": "Proteomics",
+      "url": "http://edamontology.org/topic_0121",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0091",
+      "name": "Bioinformatics",
+      "url": "http://edamontology.org/topic_0091",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3307",
+      "name": "Computational biology",
+      "url": "http://edamontology.org/topic_3307",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0202",
+      "name": "Pharmacology",
+      "url": "http://edamontology.org/topic_0202",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3369",
+      "name": "Chemical biology",
+      "url": "http://edamontology.org/topic_3369",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0021100",
+      "name": "breast neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005105",
+      "name": "melanoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005105",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004976",
+      "name": "amyotrophic lateral sclerosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004976",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004323",
+      "name": "muscular atrophy",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004323",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0008383",
+      "name": "rheumatoid arthritis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008383",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002129",
+      "name": "bone cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002129",
+      "inDefinedTermSet": "MONDO"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "55714",
+      "name": "Venus",
+      "url": "https://www.uniprot.org/taxonomy/55714",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "13661",
+      "name": "Ruvettus",
+      "url": "https://www.uniprot.org/taxonomy/13661",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "145437",
+      "name": "Rumina",
+      "url": "https://www.uniprot.org/taxonomy/145437",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002963",
+      "name": "KINOMEscan assay",
+      "url": "https://ontobee.org/ontology/OBI?iri=http://purl.obolibrary.org/obo/OBI_0002963",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002949",
+      "name": "fluorescence imaging-based cell viability assay",
+      "url": "https://ontobee.org/ontology/OBI?iri=http://purl.obolibrary.org/obo/OBI_0002949",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002964",
+      "name": "KiNativ assay",
+      "url": "https://ontobee.org/ontology/OBI?iri=http://purl.obolibrary.org/obo/OBI_0002964",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0010060",
+      "name": "MEMA cell growth assay",
+      "url": "https://ontobee.org/ontology/BAO?iri=http://www.bioassayontology.org/bao#BAO_0010060",
+      "inDefinedTermSet": "BAO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0010054",
+      "name": "Fluorescence imaging cell count assay",
+      "url": "https://ontobee.org/ontology/BAO?iri=http://www.bioassayontology.org/bao#BAO_0010054",
+      "inDefinedTermSet": "BAO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0010056",
+      "name": "Fluorescence imaging cell growth inhibition assay",
+      "url": "https://ontobee.org/ontology/BAO?iri=http://www.bioassayontology.org/bao#BAO_0010056",
+      "inDefinedTermSet": "BAO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0010059",
+      "name": "Fluorescence imaging protein state assay",
+      "url": "https://ontobee.org/ontology/BAO?iri=http://www.bioassayontology.org/bao#BAO_0010059",
+      "inDefinedTermSet": "BAO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0010046",
+      "name": "L1000 mRNA profiling assay",
+      "url": "https://ontobee.org/ontology/BAO?iri=http://www.bioassayontology.org/bao#BAO_0010046",
+      "inDefinedTermSet": "BAO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002946",
+      "name": "fluorescence imaging-based apoptosis assay",
+      "url": "https://ontobee.org/ontology/OBI?iri=http://purl.obolibrary.org/obo/OBI_0002946",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0010045",
+      "name": "RNA-seq gene expression profiling assay",
+      "url": "https://ontobee.org/ontology/BAO?iri=http://www.bioassayontology.org/bao#BAO_0010045",
+      "inDefinedTermSet": "BAO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}
