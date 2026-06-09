@@ -23,8 +23,22 @@ The main new-source command is:
 ./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --source uniprot
 ```
 
-It prompts before downloading the latest `SourceMetaCuration - resource_base`
-tab from Google Sheets as `SourceMetaCuration - resource_base.tsv`, then runs:
+It prompts you to manually download the private `SourceMetaCuration -
+resource_base` tab as TSV from:
+
+```text
+https://docs.google.com/spreadsheets/d/1SjZ7BNC6oah722psQ_q8oFDB5ZBZjo3np5lBtA3cN-k/edit#gid=349233573
+```
+
+Select the `resource_base` tab, download it as tab-separated values
+(`.tsv`, current sheet), then move/rename the file to the root of this
+repository as:
+
+```text
+SourceMetaCuration - resource_base.tsv
+```
+
+After the TSV is in place, press Enter in the script prompt. It then runs:
 
 ```bash
 ./nde-web/venv/bin/python nde-web/scripts/sync_repo_metadata.py --source <source>
@@ -35,25 +49,16 @@ tab from Google Sheets as `SourceMetaCuration - resource_base.tsv`, then runs:
 ./nde-web/venv/bin/python nde-web/scripts/validate_repo_metadata.py --source <source>
 ```
 
-For non-interactive defaults:
+For non-interactive defaults after the TSV is already at the repository root:
 
 ```bash
 ./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --source uniprot -y
 ```
 
-For a new source that does not yet have `repo_metadata/<source>.json`, pass a
-schema mapping JSON if you have one:
-
-```bash
-./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py \
-  --source uniprot \
-  --schema-json path/to/schema.json \
-  --schedule Weekly
-```
-
-If the Google Sheet download needs browser auth, download the tab manually as
-TSV and save it at the repo root as `SourceMetaCuration - resource_base.tsv`,
-then rerun with `--skip-download`.
+For a new source that does not yet have `repo_metadata/<source>.json`, the
+bootstrap script creates the stub with an empty `schedule` string and empty
+`schema` object. Fill out those two fields in the generated source metadata
+before committing.
 
 ## Commit Checklist
 

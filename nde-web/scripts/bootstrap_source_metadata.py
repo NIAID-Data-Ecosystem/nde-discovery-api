@@ -3,7 +3,7 @@
 
 For a new source, this helper can:
 
-1. download the latest SourceMetaCuration resource_base Google Sheet as TSV
+1. prompt for the private SourceMetaCuration resource_base Google Sheet TSV
 2. create a minimal ``nde-web/repo_metadata/<source>.json`` stub if needed
 3. run ``sync_repo_metadata.py --source <source>``
 4. run ``compute_heuristics.py --source <source>``
@@ -23,8 +23,6 @@ import json
 import re
 import subprocess
 import sys
-import tempfile
-import urllib.request
 from pathlib import Path
 from typing import Any
 
@@ -35,16 +33,15 @@ RESOURCE_BASE_TSV = REPO_ROOT / "SourceMetaCuration - resource_base.tsv"
 
 SHEET_ID = "1SjZ7BNC6oah722psQ_q8oFDB5ZBZjo3np5lBtA3cN-k"
 RESOURCE_BASE_GID = "349233573"
-RESOURCE_BASE_EXPORT_URL = (
-    f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export"
-    f"?format=tsv&gid={RESOURCE_BASE_GID}"
+RESOURCE_BASE_SHEET_URL = (
+    f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/edit"
+    f"#gid={RESOURCE_BASE_GID}"
 )
 
 DEFAULT_MONGO_URL = (
     "mongodb://su02:27017,su09:27017,su11:27017/"
     "?replicaSet=rs0biothings&readPreference=secondaryPreferred"
 )
-SCHEDULES = ("Weekly", "Monthly", "Quarterly", "Manual")
 
 
 def normalize_source_key(value: str) -> str:
@@ -72,23 +69,43 @@ def python_for_subprocess() -> str:
     return sys.executable
 
 
-def download_resource_base_tsv(url: str, destination: Path) -> None:
-    request = urllib.request.Request(
-        url,
-        headers={"User-Agent": "nde-source-metadata-bootstrap/1.0"},
-    )
-    with urllib.request.urlopen(request, timeout=60) as response:
-        payload = response.read()
-
-    with tempfile.NamedTemporaryFile(delete=False) as tmp:
-        tmp.write(payload)
-        tmp_path = Path(tmp.name)
-
+def display_path(path: Path) -> str:
     try:
-        validate_resource_base_tsv(tmp_path)
-        destination.write_bytes(payload)
-    finally:
-        tmp_path.unlink(missing_ok=True)
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
+
+
+def resource_base_download_instructions(path: Path) -> str:
+    return "\n".join(
+        [
+            "The SourceMetaCuration resource_base sheet is private, so this "
+            "script cannot download it automatically.",
+            f"Open the sheet: {RESOURCE_BASE_SHEET_URL}",
+            "Select the resource_base tab, then choose File > Download > "
+            "Tab-separated values (.tsv, current sheet).",
+            f"Move/rename the downloaded file to: {display_path(path)}",
+        ]
+    )
+
+
+def prompt_for_resource_base_tsv(
+    path: Path,
+    dry_run: bool,
+    wait_for_replacement: bool = False,
+) -> None:
+    print(resource_base_download_instructions(path))
+    if dry_run:
+        print(f"Would wait for {display_path(path)} to exist.")
+        return
+
+    if wait_for_replacement and path.exists():
+        input("Press Enter after replacing the TSV, or Ctrl-C to stop.")
+
+    while not path.exists():
+        input("Press Enter after moving the TSV into place, or Ctrl-C to stop.")
+        if not path.exists():
+            print(f"Still missing {display_path(path)}.")
 
 
 def validate_resource_base_tsv(path: Path) -> None:
@@ -101,9 +118,10 @@ def validate_resource_base_tsv(path: Path) -> None:
     required = {"name", "url", "abstract", "description"}
     if not required.issubset(set(header)):
         raise RuntimeError(
-            "Downloaded file does not look like SourceMetaCuration "
-            "resource_base.tsv. If the sheet requires Google auth, download "
-            f"the tab manually as TSV and save it to {RESOURCE_BASE_TSV}."
+            f"{display_path(path)} does not look like SourceMetaCuration "
+            "resource_base.tsv. "
+            f"Download the resource_base tab as TSV from {RESOURCE_BASE_SHEET_URL} "
+            f"and save it to {display_path(RESOURCE_BASE_TSV)}."
         )
 
 
@@ -137,30 +155,22 @@ def split_semicolon(value: str) -> list[str]:
     return [item.strip() for item in value.split(";") if item.strip()]
 
 
-def load_schema(path: str | None) -> dict[str, Any]:
-    if not path:
-        return {}
-    schema_path = Path(path).expanduser()
-    if not schema_path.is_absolute():
-        schema_path = REPO_ROOT / schema_path
-    with schema_path.open(encoding="utf-8") as f:
-        value = json.load(f)
-    if not isinstance(value, dict):
-        raise RuntimeError("Schema mapping JSON must be an object")
-    return value.get("schema", value)
+def source_stub_reminder(path: Path) -> str:
+    return (
+        f"Reminder: fill out 'schedule' and 'schema' in {display_path(path)} "
+        "before committing the source metadata."
+    )
 
 
 def create_source_stub(
     source_key: str,
     row: dict[str, str],
-    schedule: str,
-    schema: dict[str, Any],
     assume_yes: bool,
     dry_run: bool,
-) -> None:
+) -> Path | None:
     path = REPO_METADATA_DIR / f"{source_key}.json"
     if path.exists():
-        return
+        return None
 
     name = (row.get("name") or "").strip()
     if not name:
@@ -182,8 +192,8 @@ def create_source_stub(
         "url": (row.get("url") or "").strip(),
         "abstract": (row.get("abstract") or "").strip(),
         "description": (row.get("description") or "").strip(),
-        "schedule": schedule,
-        "schema": schema,
+        "schedule": "",
+        "schema": {},
     }
     genre = split_semicolon((row.get("genre") or "").strip())
     if genre:
@@ -192,17 +202,22 @@ def create_source_stub(
     if conditions:
         data["conditionsOfAccess"] = conditions
 
-    data = {k: v for k, v in data.items() if v not in ("", [], {}) or k == "schema"}
+    data = {
+        k: v
+        for k, v in data.items()
+        if v not in ("", [], {}) or k in {"schedule", "schema"}
+    }
 
     if dry_run:
         print(f"Would create {path.relative_to(REPO_ROOT)}")
-        return
+        return path
 
     REPO_METADATA_DIR.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
         f.write("\n")
     print(f"Created {path.relative_to(REPO_ROOT)}")
+    return path
 
 
 def run_command(cmd: list[str], dry_run: bool) -> None:
@@ -221,11 +236,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="NDE source key / Mongo collection name, e.g. uniprot.",
     )
     parser.add_argument(
-        "--sheet-url",
-        default=RESOURCE_BASE_EXPORT_URL,
-        help="Google Sheets TSV export URL for SourceMetaCuration resource_base.",
-    )
-    parser.add_argument(
         "--resource-base-tsv",
         default=str(RESOURCE_BASE_TSV),
         help="Where to save/read SourceMetaCuration - resource_base.tsv.",
@@ -233,16 +243,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--skip-download",
         action="store_true",
-        help="Use the existing local resource_base TSV instead of downloading it.",
-    )
-    parser.add_argument(
-        "--schema-json",
-        help="Optional JSON object containing the source schema mapping.",
-    )
-    parser.add_argument(
-        "--schedule",
-        choices=SCHEDULES,
-        help="Schedule for a newly-created source JSON stub.",
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--mongo-url",
@@ -283,7 +284,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Print actions without downloading, writing, or running generators.",
+        help="Print actions without writing or running generators.",
     )
     return parser.parse_args(argv)
 
@@ -302,33 +303,37 @@ def main(argv: list[str] | None = None) -> int:
     if not resource_base_tsv.is_absolute():
         resource_base_tsv = REPO_ROOT / resource_base_tsv
 
-    should_download = not args.skip_download
-    if should_download and not args.yes:
-        should_download = confirm(
-            "Download the latest SourceMetaCuration resource_base TSV from Google Sheets?",
-            default=True,
-        )
-    if should_download:
-        if args.dry_run:
-            print(f"Would download {args.sheet_url}")
-            print(f"Would save to {resource_base_tsv.relative_to(REPO_ROOT)}")
+    if not args.skip_download:
+        if args.yes:
+            if not resource_base_tsv.exists():
+                print(resource_base_download_instructions(resource_base_tsv))
+        elif resource_base_tsv.exists():
+            if confirm(
+                "Refresh SourceMetaCuration resource_base TSV manually before continuing?",
+                default=False,
+            ):
+                prompt_for_resource_base_tsv(
+                    resource_base_tsv,
+                    args.dry_run,
+                    wait_for_replacement=True,
+                )
         else:
-            print(f"Downloading {args.sheet_url}")
-            download_resource_base_tsv(args.sheet_url, resource_base_tsv)
-            print(f"Saved {resource_base_tsv.relative_to(REPO_ROOT)}")
+            print(f"Missing {display_path(resource_base_tsv)}.")
+            prompt_for_resource_base_tsv(resource_base_tsv, args.dry_run)
 
     if resource_base_tsv.exists():
         rows = load_resource_base_rows(resource_base_tsv)
     elif source_json_path.exists():
         rows = []
         print(
-            f"Warning: {resource_base_tsv.relative_to(REPO_ROOT)} is missing; "
+            f"Warning: {display_path(resource_base_tsv)} is missing; "
             "continuing with the existing source JSON only."
         )
     else:
         raise SystemExit(
-            f"Missing {resource_base_tsv.relative_to(REPO_ROOT)}. "
-            "Download the sheet TSV or rerun without --skip-download."
+            f"Missing {display_path(resource_base_tsv)}. "
+            f"Download the resource_base tab as TSV from {RESOURCE_BASE_SHEET_URL} "
+            "and move it to the repository root before rerunning."
         )
     row = find_source_row(rows, source_key)
     if row is None and not source_json_path.exists():
@@ -343,23 +348,11 @@ def main(argv: list[str] | None = None) -> int:
             "sync will use the existing source JSON only."
         )
 
+    created_stub_path = None
     if not source_json_path.exists():
-        schedule = args.schedule
-        if schedule is None:
-            schedule = "Weekly" if args.yes else prompt("Schedule", "Weekly")
-        if schedule not in SCHEDULES:
-            raise SystemExit(f"Schedule must be one of: {', '.join(SCHEDULES)}")
-
-        schema_path = args.schema_json
-        if schema_path is None and not args.yes:
-            schema_path = prompt("Schema mapping JSON path (blank for empty schema)", "")
-        schema = load_schema(schema_path)
-
-        create_source_stub(
+        created_stub_path = create_source_stub(
             source_key=source_key,
             row=row or {},
-            schedule=schedule,
-            schema=schema,
             assume_yes=args.yes,
             dry_run=args.dry_run,
         )
@@ -416,6 +409,8 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     print("Done.")
+    if created_stub_path is not None:
+        print(source_stub_reminder(created_stub_path))
     return 0
 
 

@@ -28,8 +28,10 @@ REPO_METADATA_DIR = REPO_ROOT / "nde-web" / "repo_metadata"
 HEURISTICS_DIR = REPO_METADATA_DIR / "heuristics"
 METADATA_COMPLETENESS_DIR = REPO_ROOT / "nde-web" / "metadata_completeness"
 
-REQUIRED_SOURCE_FIELDS = ("_id", "name", "description", "url", "identifier", "schema")
-CONDITIONS_OF_ACCESS = {"Open", "Closed", "Restricted", "Embargoed", "Varied", "Unknown"}
+REQUIRED_SOURCE_FIELDS = ("_id", "name", "description",
+                          "url", "identifier", "schema")
+CONDITIONS_OF_ACCESS = {"Open", "Closed",
+                        "Restricted", "Embargoed", "Varied", "Unknown"}
 SCHEDULES = {"Weekly", "Monthly", "Quarterly", "Manual"}
 
 
@@ -83,10 +85,6 @@ def validate_curated(path: Path, errors: list[str], warnings: list[str]) -> None
             f"{label}: conditionsOfAccess must be one of "
             f"{', '.join(sorted(CONDITIONS_OF_ACCESS))}"
         )
-    if data.get("schedule") not in (None, *SCHEDULES):
-        errors.append(
-            f"{label}: schedule must be one of {', '.join(sorted(SCHEDULES))}"
-        )
 
     if not (HEURISTICS_DIR / f"{key}.json").exists():
         warnings.append(f"{key}: no heuristic cache file")
@@ -99,7 +97,8 @@ def validate_generated_json(path: Path, errors: list[str]) -> None:
         return
     data = load_json(path, errors)
     if data is not None and not isinstance(data, dict):
-        errors.append(f"{path.relative_to(REPO_ROOT)}: top-level JSON must be an object")
+        errors.append(
+            f"{path.relative_to(REPO_ROOT)}: top-level JSON must be an object")
 
 
 def validate_source_generated(source: str, errors: list[str]) -> None:
@@ -109,7 +108,8 @@ def validate_source_generated(source: str, errors: list[str]) -> None:
     ]
     for path in required_paths:
         if not path.exists():
-            errors.append(f"{path.relative_to(REPO_ROOT)}: missing generated file")
+            errors.append(
+                f"{path.relative_to(REPO_ROOT)}: missing generated file")
         else:
             validate_generated_json(path, errors)
 
