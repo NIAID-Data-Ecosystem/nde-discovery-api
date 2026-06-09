@@ -1,0 +1,284 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 97334,
+      "unitText": "Sample"
+    }
+  ],
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "spatialCoverage": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "North America"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Arctic"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Asia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Africa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Europe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Australia and Oceania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Antarctica"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Middle and South America"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0008383",
+      "name": "rheumatoid arthritis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008383",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0009061",
+      "name": "cystic fibrosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0009061",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005249",
+      "name": "pneumonia",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005249",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001513",
+      "name": "Obesity",
+      "url": "http://purl.obolibrary.org/obo/HP_0001513",
+      "inDefinedTermSet": "HP"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018076",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005077",
+      "name": "pertussis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005077",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005025",
+      "name": "endocarditis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005025",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005824",
+      "name": "Legionnaires' disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005824",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0010691",
+      "name": "Norrie disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0010691",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0015364",
+      "name": "hereditary sensory and autonomic neuropathy",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0015364",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3702",
+      "name": "Arabidopsis thaliana",
+      "url": "https://www.uniprot.org/taxonomy/3702",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4577",
+      "name": "Zea mays",
+      "url": "https://www.uniprot.org/taxonomy/4577",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4113",
+      "name": "Solanum tuberosum",
+      "url": "https://www.uniprot.org/taxonomy/4113",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4530",
+      "name": "Oryza sativa",
+      "url": "https://www.uniprot.org/taxonomy/4530",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4081",
+      "name": "Solanum lycopersicum",
+      "url": "https://www.uniprot.org/taxonomy/4081",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3847",
+      "name": "Glycine max",
+      "url": "https://www.uniprot.org/taxonomy/3847",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "231123",
+      "name": "Sphagnum papillosum",
+      "url": "https://www.uniprot.org/taxonomy/231123",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8030",
+      "name": "Salmo salar",
+      "url": "https://www.uniprot.org/taxonomy/8030",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "35608",
+      "name": "Artemisia annua",
+      "url": "https://www.uniprot.org/taxonomy/35608",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1931",
+      "name": "Streptomyces sp.",
+      "url": "https://www.uniprot.org/taxonomy/1931",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1667",
+      "name": "Arthrobacter sp.",
+      "url": "https://www.uniprot.org/taxonomy/1667",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "56",
+      "name": "Sorangium cellulosum",
+      "url": "https://www.uniprot.org/taxonomy/56",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "54",
+      "name": "Nannocystis exedens",
+      "url": "https://www.uniprot.org/taxonomy/54",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1396",
+      "name": "Bacillus cereus",
+      "url": "https://www.uniprot.org/taxonomy/1396",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "68252",
+      "name": "Streptomyces parvisporogenes",
+      "url": "https://www.uniprot.org/taxonomy/68252",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1869227",
+      "name": "bacterium",
+      "url": "https://www.uniprot.org/taxonomy/1869227",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1145276",
+      "name": "Lysinibacillus varians",
+      "url": "https://www.uniprot.org/taxonomy/1145276",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1421",
+      "name": "Lysinibacillus sphaericus",
+      "url": "https://www.uniprot.org/taxonomy/1421",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ]
+}
