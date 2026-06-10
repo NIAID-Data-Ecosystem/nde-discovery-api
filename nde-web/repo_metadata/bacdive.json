@@ -24,6 +24,19 @@
   "dateCreated": "2012-04-01",
   "dateModified": "2024-05-15",
   "datePublished": "2013-09-01",
-  "schedule": "",
-  "schema": {}
+  "schedule": "Weekly",
+  "schema": {
+    "Bacdive-ID": "_id, identifier, url",
+    "DSM-Number": "identifier, url",
+    "keywords": "keywords",
+    "NCBI tax id": "infectiousAgent.identifier",
+    "doi": "doi",
+    "Name and taxonomic classification.LPSN.synonyms": "infectiousAgent.alternateName",
+    "Isolation, sampling and environmental information": "sampleType, locationOfOrigin, species, dateProcessed, dateCollected, collectionMethod, environmentalSystem",
+    "Sequence information": "isBasisFor",
+    "Literature.culture collection no.": "identifier",
+    "Literature.literature": "citation",
+    "Reference": "isBasedOn",
+    "Morphology.cell morphology": "associatedPhenotype"
+  }
 }
