@@ -2,22 +2,22 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 85,
-      "unitText": "Dataset"
+      "minValue": 4661,
+      "unitText": "Sample"
     },
     {
       "@type": "QuantitativeValue",
-      "minValue": 4386,
-      "unitText": "Sample"
+      "minValue": 88,
+      "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-04-03",
+  "dateModified": "2026-05-12",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2019-06-11",
-      "endDate": "2026-04-03"
+      "endDate": "2026-05-12"
     }
   ],
   "license": "https://creativecommons.org/public-domain/",
@@ -29,10 +29,6 @@
   "spatialCoverage": [
     {
       "@type": "AdministrativeArea",
-      "name": "Madrid"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "USA"
     },
     {
@@ -41,11 +37,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "None"
+      "name": "MADRID"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MADRID"
+      "name": "Madrid"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "None"
     },
     {
       "@type": "AdministrativeArea",
@@ -111,16 +111,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3047",
-      "name": "Molecular biology",
-      "url": "http://edamontology.org/topic_3047",
+      "identifier": "topic_3966",
+      "name": "Vaccinology",
+      "url": "http://edamontology.org/topic_3966",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3966",
-      "name": "Vaccinology",
-      "url": "http://edamontology.org/topic_3966",
+      "identifier": "topic_3047",
+      "name": "Molecular biology",
+      "url": "http://edamontology.org/topic_3047",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -156,6 +156,20 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "0005070",
+      "name": "neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004970",
+      "name": "adenocarcinoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004970",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "0021100",
       "name": "breast neoplasm",
       "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
@@ -163,10 +177,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005070",
-      "name": "neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "C12801",
+      "name": "Tissue",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C12801",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -187,20 +201,6 @@
       "identifier": "0010150",
       "name": "head and neck squamous cell carcinoma",
       "url": "http://purl.obolibrary.org/obo/MONDO_0010150",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005314",
-      "name": "relapsing-remitting multiple sclerosis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005314",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005109",
-      "name": "HIV infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -236,16 +236,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "103480",
-      "name": "Castanea crenata",
-      "url": "https://www.uniprot.org/taxonomy/103480",
+      "identifier": "163112",
+      "name": "Molva molva",
+      "url": "https://www.uniprot.org/taxonomy/163112",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "163112",
-      "name": "Molva molva",
-      "url": "https://www.uniprot.org/taxonomy/163112",
+      "identifier": "103480",
+      "name": "Castanea crenata",
+      "url": "https://www.uniprot.org/taxonomy/103480",
       "inDefinedTermSet": "UniProt"
     }
   ],
@@ -294,16 +294,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10376",
-      "name": "Epstein-Barr virus (strain GD1)",
-      "url": "https://www.uniprot.org/taxonomy/10376",
+      "identifier": "191496",
+      "name": "clinical samples",
+      "url": "https://www.uniprot.org/taxonomy/191496",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "191496",
-      "name": "clinical samples",
-      "url": "https://www.uniprot.org/taxonomy/191496",
+      "identifier": "10376",
+      "name": "Epstein-Barr virus (strain GD1)",
+      "url": "https://www.uniprot.org/taxonomy/10376",
       "inDefinedTermSet": "UniProt"
     },
     {

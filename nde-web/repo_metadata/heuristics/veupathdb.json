@@ -313,7 +313,7 @@
     {
       "@type": "DefinedTerm",
       "identifier": "0000011",
-      "name": "Planned process",
+      "name": "planned process",
       "url": "http://purl.obolibrary.org/obo/OBI_0000011",
       "inDefinedTermSet": "OBI"
     },

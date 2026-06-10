@@ -204,16 +204,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10114",
-      "name": "Rattus",
-      "url": "https://www.uniprot.org/taxonomy/10114",
+      "identifier": "13613",
+      "name": "Microbiota",
+      "url": "https://www.uniprot.org/taxonomy/13613",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "13613",
-      "name": "Microbiota",
-      "url": "https://www.uniprot.org/taxonomy/13613",
+      "identifier": "10114",
+      "name": "Rattus",
+      "url": "https://www.uniprot.org/taxonomy/10114",
       "inDefinedTermSet": "UniProt"
     },
     {

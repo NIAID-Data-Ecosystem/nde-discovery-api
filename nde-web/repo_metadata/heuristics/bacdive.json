@@ -10,15 +10,11 @@
   "spatialCoverage": [
     {
       "@type": "AdministrativeArea",
-      "name": "North America"
+      "name": "Antarctica"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Arctic"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Asia"
+      "name": "Middle and South America"
     },
     {
       "@type": "AdministrativeArea",
@@ -34,11 +30,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Antarctica"
+      "name": "North America"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Middle and South America"
+      "name": "Arctic"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Asia"
     }
   ],
   "healthCondition": [
@@ -260,16 +260,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1145276",
-      "name": "Lysinibacillus varians",
-      "url": "https://www.uniprot.org/taxonomy/1145276",
+      "identifier": "1130819",
+      "name": "Lysinibacillus mangiferihumi",
+      "url": "https://www.uniprot.org/taxonomy/1130819",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1421",
-      "name": "Lysinibacillus sphaericus",
-      "url": "https://www.uniprot.org/taxonomy/1421",
+      "identifier": "1145276",
+      "name": "Lysinibacillus varians",
+      "url": "https://www.uniprot.org/taxonomy/1145276",
       "inDefinedTermSet": "UniProt"
     },
     {

@@ -17,82 +17,6 @@
   "spatialCoverage": [
     {
       "@type": "AdministrativeArea",
-      "name": "KOREA (REPUBLIC OF)"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MONTENEGRO"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "FI"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "CHAD"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MALDIVES"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "HT"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MG"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "OMAN"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "PE"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "FJ"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "COMOROS"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "FK"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "DENMARK"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "BB"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "AT"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "NORWAY"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "CU"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "ROMANIA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "CM"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "EGYPT"
     },
     {
@@ -113,6 +37,30 @@
     },
     {
       "@type": "AdministrativeArea",
+      "name": "CU"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ROMANIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CM"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RW"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "TIMOR-LESTE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MA"
+    },
+    {
+      "@type": "AdministrativeArea",
       "name": "WALLIS AND FUTUNA"
     },
     {
@@ -129,87 +77,59 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "RW"
+      "name": "FI"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "TIMOR-LESTE"
+      "name": "MONTENEGRO"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MA"
+      "name": "MALDIVES"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "KYRGYZSTAN"
+      "name": "HT"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "HN"
+      "name": "COMOROS"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "PM"
+      "name": "FK"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SC"
+      "name": "DENMARK"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "HONDURAS"
+      "name": "BB"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BONAIRE, SINT EUSTATIUS AND SABA"
+      "name": "NORWAY"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SAINT VINCENT AND THE GRENADINES"
+      "name": "AT"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "IM"
+      "name": "MG"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GUINEA"
+      "name": "OMAN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BARBADOS"
+      "name": "PE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "EL SALVADOR"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "PW"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MD"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "ANTARCTICA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MAURITANIA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "ALBANIA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "HU"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "LU"
+      "name": "FJ"
     },
     {
       "@type": "AdministrativeArea",
@@ -218,6 +138,30 @@
     {
       "@type": "AdministrativeArea",
       "name": "KG"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "LU"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "PALAU"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BELARUS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CR"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "TT"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GP"
     },
     {
       "@type": "AdministrativeArea",
@@ -237,95 +181,67 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "PALAU"
+      "name": "PM"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BELARUS"
+      "name": "SC"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "TT"
+      "name": "HONDURAS"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MONTSERRAT"
+      "name": "BONAIRE, SINT EUSTATIUS AND SABA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "IQ"
+      "name": "KYRGYZSTAN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GP"
+      "name": "HN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SAINT BARTHÉLEMY"
+      "name": "HU"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MW"
+      "name": "BARBADOS"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CYPRUS"
+      "name": "EL SALVADOR"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CR"
+      "name": "PW"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LUXEMBOURG"
+      "name": "MAURITANIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ETHIOPIA"
+      "name": "MD"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "RWANDA"
+      "name": "ANTARCTICA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SENEGAL"
+      "name": "ALBANIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SB"
+      "name": "SAINT VINCENT AND THE GRENADINES"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "JE"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MAURITIUS"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "BURUNDI"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "TM"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "POLAND"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "VIET NAM"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "GQ"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "TOGO"
+      "name": "IM"
     },
     {
       "@type": "AdministrativeArea",
@@ -333,11 +249,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "PN"
+      "name": "ZIMBABWE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ZIMBABWE"
+      "name": "PN"
     },
     {
       "@type": "AdministrativeArea",
@@ -353,7 +269,27 @@
     },
     {
       "@type": "AdministrativeArea",
+      "name": "GUINEA"
+    },
+    {
+      "@type": "AdministrativeArea",
       "name": "SUDAN"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "VIET NAM"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GQ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "TOGO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NR"
     },
     {
       "@type": "AdministrativeArea",
@@ -373,7 +309,99 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NR"
+      "name": "LUXEMBOURG"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MONTSERRAT"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "IQ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SAINT BARTHÉLEMY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MW"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CYPRUS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MAURITIUS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BURUNDI"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "POLAND"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "TM"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RWANDA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ETHIOPIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SENEGAL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SB"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "JE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "AI"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "KOREA (DEMOCRATIC PEOPLE'S REPUBLIC OF)"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NEW ZEALAND"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BR"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "TL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "AR"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "TANZANIA, UNITED REPUBLIC OF"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CROATIA"
     },
     {
       "@type": "AdministrativeArea",
@@ -389,19 +417,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "FO"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "TANZANIA, UNITED REPUBLIC OF"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "EH"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CROATIA"
+      "name": "FO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NU"
     },
     {
       "@type": "AdministrativeArea",
@@ -421,107 +445,19 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LV"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "ESTONIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NU"
+      "name": "LV"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NEW ZEALAND"
+      "name": "MALAYSIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "AI"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "KOREA (DEMOCRATIC PEOPLE'S REPUBLIC OF)"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "AR"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "BR"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "TL"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "GW"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MONACO"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "AUSTRIA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "UY"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "SAINT MARTIN (FRENCH PART)"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "EG"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "PALESTINE, STATE OF"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "FINLAND"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "SERBIA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "PITCAIRN"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "CA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "AZ"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "SX"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "WS"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "BT"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "VE"
+      "name": "MALTA"
     },
     {
       "@type": "AdministrativeArea",
@@ -537,11 +473,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MALAYSIA"
+      "name": "NZ"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MALTA"
+      "name": "FALKLAND ISLANDS (MALVINAS)"
     },
     {
       "@type": "AdministrativeArea",
@@ -557,83 +493,79 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NZ"
+      "name": "PALESTINE, STATE OF"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "FALKLAND ISLANDS (MALVINAS)"
+      "name": "EG"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "DJ"
+      "name": "UY"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "PG"
+      "name": "FINLAND"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "TRINIDAD AND TOBAGO"
+      "name": "GW"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "VENEZUELA (BOLIVARIAN REPUBLIC OF)"
+      "name": "SAINT MARTIN (FRENCH PART)"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SOUTH AFRICA"
+      "name": "AUSTRIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GUATEMALA"
+      "name": "MONACO"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "KIRIBATI"
+      "name": "SERBIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "AG"
+      "name": "AZ"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ARUBA"
+      "name": "SX"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BW"
+      "name": "WS"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "EC"
+      "name": "VE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MX"
+      "name": "BT"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BG"
+      "name": "PITCAIRN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GEORGIA"
+      "name": "CA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "HOLY SEE"
+      "name": "BOLIVIA (PLURINATIONAL STATE OF)"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "AM"
+      "name": "DZ"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GU"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "DM"
+      "name": "NIUE"
     },
     {
       "@type": "AdministrativeArea",
@@ -653,15 +585,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BOLIVIA (PLURINATIONAL STATE OF)"
+      "name": "KOREA (THE REPUBLIC OF)"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "DZ"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "NIUE"
+      "name": "MT"
     },
     {
       "@type": "AdministrativeArea",
@@ -681,47 +609,79 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "KOREA (THE REPUBLIC OF)"
+      "name": "SOUTH AFRICA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MT"
+      "name": "GUATEMALA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "DOMINICAN REPUBLIC"
+      "name": "DJ"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NETHERLANDS"
+      "name": "PG"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BERMUDA"
+      "name": "TRINIDAD AND TOBAGO"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ZM"
+      "name": "VENEZUELA (BOLIVARIAN REPUBLIC OF)"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SK"
+      "name": "HOLY SEE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "TAJIKISTAN"
+      "name": "AM"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "TONGA"
+      "name": "DM"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SLOVENIA"
+      "name": "GU"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "AE"
+      "name": "AG"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "KIRIBATI"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GEORGIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ARUBA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "EC"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MX"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BG"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BW"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BD"
     },
     {
       "@type": "AdministrativeArea",
@@ -741,7 +701,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BD"
+      "name": "ANDORRA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SWEDEN"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BN"
     },
     {
       "@type": "AdministrativeArea",
@@ -757,67 +725,55 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ANDORRA"
+      "name": "ZM"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SWEDEN"
+      "name": "BERMUDA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BN"
+      "name": "DOMINICAN REPUBLIC"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "UNITED ARAB EMIRATES"
+      "name": "NETHERLANDS"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ER"
+      "name": "SLOVENIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SAMOA"
+      "name": "AE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BRAZIL"
+      "name": "SK"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "VG"
+      "name": "TAJIKISTAN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ARMENIA"
+      "name": "TONGA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "PK"
+      "name": "RE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SZ"
+      "name": "TAIWAN, PROVINCE OF CHINA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "AW"
+      "name": "GE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MARSHALL ISLANDS"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "DE"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "BAHAMAS"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "OM"
+      "name": "GM"
     },
     {
       "@type": "AdministrativeArea",
@@ -841,19 +797,7 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "RE"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "TAIWAN, PROVINCE OF CHINA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "GM"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "GE"
+      "name": "BY"
     },
     {
       "@type": "AdministrativeArea",
@@ -861,19 +805,183 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BY"
+      "name": "VG"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ICELAND"
+      "name": "PK"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "AF"
+      "name": "ARMENIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NP"
+      "name": "UNITED ARAB EMIRATES"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ER"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SAMOA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BRAZIL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BAHAMAS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "OM"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SZ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "AW"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MARSHALL ISLANDS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "DE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "LK"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SAINT HELENA, ASCENSION AND TRISTAN DA CUNHA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ESWATINI"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "THAILAND"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NAMIBIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GT"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "HONG KONG"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NEW CALEDONIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MF"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "PANAMA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "KM"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "UKRAINE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "PS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SLOVAKIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "IRELAND"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BM"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "LR"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SAO TOME AND PRINCIPE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SAINT KITTS AND NEVIS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "WF"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "TR"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "LC"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "VI"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MYANMAR"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "IRAQ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "US"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MOROCCO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "PERU"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "AL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MALI"
     },
     {
       "@type": "AdministrativeArea",
@@ -889,7 +997,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LT"
+      "name": "ICELAND"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "AF"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NP"
     },
     {
       "@type": "AdministrativeArea",
@@ -913,131 +1029,75 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NEW CALEDONIA"
+      "name": "LT"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MF"
+      "name": "SINGAPORE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "PANAMA"
+      "name": "AU"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LR"
+      "name": "XK"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "UKRAINE"
+      "name": "VU"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SLOVAKIA"
+      "name": "SY"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "IRELAND"
+      "name": "INDONESIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CO"
+      "name": "LB"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SAINT HELENA, ASCENSION AND TRISTAN DA CUNHA"
+      "name": "TC"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LK"
+      "name": "GN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NAMIBIA"
+      "name": "YT"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "THAILAND"
+      "name": "FM"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ESWATINI"
+      "name": "LIECHTENSTEIN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GT"
+      "name": "CUBA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "HONG KONG"
+      "name": "HUNGARY"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "KM"
+      "name": "UG"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "VI"
+      "name": "GY"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MYANMAR"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "US"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "PS"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MOROCCO"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "PERU"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "IRAQ"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "BM"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "AL"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "WF"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "SAO TOME AND PRINCIPE"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "SAINT KITTS AND NEVIS"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "BE"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "LC"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "TR"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MALI"
+      "name": "LIBERIA"
     },
     {
       "@type": "AdministrativeArea",
@@ -1054,26 +1114,6 @@
     {
       "@type": "AdministrativeArea",
       "name": "LEBANON"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "UG"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "GY"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "LIBERIA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "TW"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "KP"
     },
     {
       "@type": "AdministrativeArea",
@@ -1097,59 +1137,95 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SY"
+      "name": "TW"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "INDONESIA"
+      "name": "KP"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LB"
+      "name": "UNITED KINGDOM"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "TC"
+      "name": "UZ"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SINGAPORE"
+      "name": "NI"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "AU"
+      "name": "SURINAME"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "XK"
+      "name": "DK"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "VU"
+      "name": "NEPAL"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "FM"
+      "name": "HAITI"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "HUNGARY"
+      "name": "SH"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CUBA"
+      "name": "ZW"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LIECHTENSTEIN"
+      "name": "ERITREA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GN"
+      "name": "NAURU"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "YT"
+      "name": "PA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "COLOMBIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CG"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SRI LANKA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "YE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SEYCHELLES"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CHINA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BI"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MU"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "TJ"
     },
     {
       "@type": "AdministrativeArea",
@@ -1166,50 +1242,6 @@
     {
       "@type": "AdministrativeArea",
       "name": "FRANCE"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "SEYCHELLES"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "SRI LANKA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "CHINA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "TJ"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "BI"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MU"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "YE"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "BS"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "CZ"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "PAPUA NEW GUINEA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MZ"
     },
     {
       "@type": "AdministrativeArea",
@@ -1233,159 +1265,27 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "AQ"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "ME"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SURINAME"
+      "name": "AQ"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "DK"
+      "name": "BS"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "HAITI"
+      "name": "CZ"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NEPAL"
+      "name": "PAPUA NEW GUINEA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ZW"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "UNITED KINGDOM"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "UZ"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "NI"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "NAURU"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "COLOMBIA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "PA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "CG"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "SH"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "ERITREA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "AD"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "NICARAGUA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MC"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "SO"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "TUNISIA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "FAROE ISLANDS"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "LAO PEOPLE'S DEMOCRATIC REPUBLIC"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "UZBEKISTAN"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "ML"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "VC"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "BHUTAN"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "VA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "JO"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "CANADA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "KY"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "LY"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "HR"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "GRENADA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "KW"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "ISLE OF MAN"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MK"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "GL"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "ANTIGUA AND BARBUDA"
+      "name": "MZ"
     },
     {
       "@type": "AdministrativeArea",
@@ -1413,15 +1313,19 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GABON"
+      "name": "ISLE OF MAN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MN"
+      "name": "MK"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MOLDOVA, REPUBLIC OF"
+      "name": "GL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ANTIGUA AND BARBUDA"
     },
     {
       "@type": "AdministrativeArea",
@@ -1437,87 +1341,91 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "PAKISTAN"
+      "name": "GABON"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "RS"
+      "name": "MN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MONGOLIA"
+      "name": "MOLDOVA, REPUBLIC OF"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CHILE"
+      "name": "SO"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BJ"
+      "name": "FAROE ISLANDS"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "JERSEY"
+      "name": "LAO PEOPLE'S DEMOCRATIC REPUBLIC"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "JM"
+      "name": "UZBEKISTAN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CV"
+      "name": "ML"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "JP"
+      "name": "AD"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MQ"
+      "name": "NICARAGUA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "UA"
+      "name": "MC"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GG"
+      "name": "TUNISIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "KOSOVO"
+      "name": "KY"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "KAZAKHSTAN"
+      "name": "LY"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LITHUANIA"
+      "name": "HR"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CONGO"
+      "name": "GRENADA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NE"
+      "name": "KW"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "JAPAN"
+      "name": "VC"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ST"
+      "name": "BHUTAN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "ALGERIA"
+      "name": "VA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "AUSTRALIA"
+      "name": "JO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CANADA"
     },
     {
       "@type": "AdministrativeArea",
@@ -1545,19 +1453,27 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GUAM"
+      "name": "NE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CI"
+      "name": "CONGO"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LI"
+      "name": "JAPAN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MAYOTTE"
+      "name": "ST"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ALGERIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "AUSTRALIA"
     },
     {
       "@type": "AdministrativeArea",
@@ -1565,15 +1481,7 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MP"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "BL"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "FR"
     },
     {
       "@type": "AdministrativeArea",
@@ -1589,59 +1497,87 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MOZAMBIQUE"
+      "name": "GUAM"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "RÉUNION"
+      "name": "CI"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "IN"
+      "name": "LI"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CW"
+      "name": "MP"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "INDIA"
+      "name": "MAYOTTE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "PHILIPPINES"
+      "name": "FR"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SOLOMON ISLANDS"
+      "name": "MONGOLIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LS"
+      "name": "CHILE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GERMANY"
+      "name": "BJ"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "VN"
+      "name": "JERSEY"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "AO"
+      "name": "JM"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LATVIA"
+      "name": "CV"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NO"
+      "name": "PAKISTAN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BH"
+      "name": "RS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "KOSOVO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "KAZAKHSTAN"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "LITHUANIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "JP"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MQ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "UA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GG"
     },
     {
       "@type": "AdministrativeArea",
@@ -1661,6 +1597,22 @@
     },
     {
       "@type": "AdministrativeArea",
+      "name": "NO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BH"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CAMBODIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BULGARIA"
+    },
+    {
+      "@type": "AdministrativeArea",
       "name": "MM"
     },
     {
@@ -1677,99 +1629,51 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CAMBODIA"
+      "name": "CW"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BULGARIA"
+      "name": "INDIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BQ"
+      "name": "PHILIPPINES"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "IL"
+      "name": "MOZAMBIQUE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "COOK ISLANDS"
+      "name": "RÉUNION"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GD"
+      "name": "IN"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GAMBIA"
+      "name": "AO"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "RU"
+      "name": "LATVIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MARTINIQUE"
+      "name": "SOLOMON ISLANDS"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NIGERIA"
+      "name": "LS"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SINT MAARTEN (DUTCH PART)"
+      "name": "GERMANY"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "PL"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "CAYMAN ISLANDS"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "GB"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MO"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "GREECE"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "BELIZE"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "PH"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "TO"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "FIJI"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "NA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "NIGER"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "UGANDA"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "SN"
+      "name": "VN"
     },
     {
       "@type": "AdministrativeArea",
@@ -1805,11 +1709,7 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CONGO, DEMOCRATIC REPUBLIC OF THE"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "LESOTHO"
+      "name": "NIGER"
     },
     {
       "@type": "AdministrativeArea",
@@ -1817,11 +1717,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "TUVALU"
+      "name": "UGANDA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "TH"
+      "name": "SN"
     },
     {
       "@type": "AdministrativeArea",
@@ -1833,51 +1733,107 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "IE"
+      "name": "CONGO, DEMOCRATIC REPUBLIC OF THE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MS"
+      "name": "LESOTHO"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CZECHIA"
+      "name": "TUVALU"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "NL"
+      "name": "TH"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "PORTUGAL"
+      "name": "GAMBIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BANGLADESH"
+      "name": "RU"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "SM"
+      "name": "PL"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MACAO"
+      "name": "MARTINIQUE"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "PUERTO RICO"
+      "name": "SINT MAARTEN (DUTCH PART)"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "GREENLAND"
+      "name": "NIGERIA"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "MV"
+      "name": "BQ"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "LA"
+      "name": "IL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "COOK ISLANDS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GD"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "PH"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "TO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "FIJI"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CAYMAN ISLANDS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GB"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GREECE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BELIZE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "KZ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "WESTERN SAHARA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BF"
     },
     {
       "@type": "AdministrativeArea",
@@ -1897,15 +1853,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "KZ"
+      "name": "CURAÇAO"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "BF"
+      "name": "KOREA (REPUBLIC OF)"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "WESTERN SAHARA"
+      "name": "CHAD"
     },
     {
       "@type": "AdministrativeArea",
@@ -1929,22 +1885,66 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "CURAÇAO"
+      "name": "NL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "PORTUGAL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BANGLADESH"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "IE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CZECHIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GREENLAND"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MV"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "LA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SM"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MACAO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "PUERTO RICO"
     }
   ],
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3305",
-      "name": "Public health and epidemiology",
-      "url": "http://edamontology.org/topic_3305",
+      "identifier": "topic_3324",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_3324",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3324",
-      "name": "Infectious disease",
-      "url": "http://edamontology.org/topic_3324",
+      "identifier": "topic_3305",
+      "name": "Public health and epidemiology",
+      "url": "http://edamontology.org/topic_3305",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -1986,9 +1986,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0019345",
-      "name": "shigellosis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0019345",
+      "identifier": "0005701",
+      "name": "chlamydia trachomatis infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005701",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0020920",
+      "name": "escherichia coli infection",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0020920",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005344",
+      "name": "hepatitis B virus infection",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005344",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -2003,20 +2017,6 @@
       "identifier": "0018076",
       "name": "tuberculosis",
       "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005114",
-      "name": "pneumococcal infection",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005114",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0020920",
-      "name": "escherichia coli infection",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0020920",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -2080,14 +2080,14 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Salmonella",
-      "url": "https://www.uniprot.org/taxonomy/590",
+      "name": "Streptococcus pneumoniae",
+      "url": "https://www.uniprot.org/taxonomy/1313",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Mycobacterium tuberculosis",
-      "url": "https://www.uniprot.org/taxonomy/1773",
+      "name": "Viruses",
+      "url": "https://www.uniprot.org/taxonomy/10239",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -2144,20 +2144,20 @@
     },
     {
       "@type": "DefinedTerm",
+      "name": "Streptococcus pneumoniae",
+      "url": "https://www.uniprot.org/taxonomy/1313",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Viruses",
+      "url": "https://www.uniprot.org/taxonomy/10239",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "name": "Salmonella",
       "url": "https://www.uniprot.org/taxonomy/590",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Treponema pallidum",
-      "url": "https://www.uniprot.org/taxonomy/160",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Mycobacterium tuberculosis",
-      "url": "https://www.uniprot.org/taxonomy/1773",
       "inDefinedTermSet": "UniProt"
     },
     {

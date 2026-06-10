@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 2929,
+      "minValue": 2958,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-05-06",
+  "dateModified": "2026-06-03",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2002-06-18",
-      "endDate": "2026-05-06"
+      "endDate": "2026-06-03"
     }
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -20,13 +20,6 @@
     "url": "https://www.ebi.ac.uk/emdb/faq#:~:text=Data%20files%20contained%20in%20the,and%20the%20EMDB%20accession%20id."
   },
   "topicCategory": [
-    {
-      "@type": "DefinedTerm",
-      "identifier": "topic_0781",
-      "name": "Virology",
-      "url": "http://edamontology.org/topic_0781",
-      "inDefinedTermSet": "EDAM"
-    },
     {
       "@type": "DefinedTerm",
       "identifier": "topic_0611",
@@ -39,6 +32,13 @@
       "identifier": "topic_1317",
       "name": "Structural biology",
       "url": "http://edamontology.org/topic_1317",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0781",
+      "name": "Virology",
+      "url": "http://edamontology.org/topic_0781",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -59,23 +59,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10116",
-      "name": "Rattus norvegicus",
-      "url": "https://www.uniprot.org/taxonomy/10116",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "7227",
-      "name": "Drosophila melanogaster",
-      "url": "https://www.uniprot.org/taxonomy/7227",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "8364",
       "name": "Xenopus tropicalis",
       "url": "https://www.uniprot.org/taxonomy/8364",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -87,9 +80,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9838",
-      "name": "Camelus dromedarius",
-      "url": "https://www.uniprot.org/taxonomy/9838",
+      "identifier": "7227",
+      "name": "Drosophila melanogaster",
+      "url": "https://www.uniprot.org/taxonomy/7227",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7108",
+      "name": "Spodoptera frugiperda",
+      "url": "https://www.uniprot.org/taxonomy/7108",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -101,9 +101,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "6884",
-      "name": "Leiurus hebraeus",
-      "url": "https://www.uniprot.org/taxonomy/6884",
+      "identifier": "3562",
+      "name": "Spinacia oleracea",
+      "url": "https://www.uniprot.org/taxonomy/3562",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -132,9 +132,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "83333",
-      "name": "Escherichia coli (strain K12)",
-      "url": "https://www.uniprot.org/taxonomy/83333",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -153,44 +153,44 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1280",
-      "name": "Staphylococcus aureus",
-      "url": "https://www.uniprot.org/taxonomy/1280",
+      "identifier": "83333",
+      "name": "Escherichia coli (strain K12)",
+      "url": "https://www.uniprot.org/taxonomy/83333",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1094619",
-      "name": "Phytophthora sojae (strain P6497)",
-      "url": "https://www.uniprot.org/taxonomy/1094619",
+      "identifier": "615",
+      "name": "Serratia marcescens",
+      "url": "https://www.uniprot.org/taxonomy/615",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1351",
-      "name": "Enterococcus faecalis",
-      "url": "https://www.uniprot.org/taxonomy/1351",
+      "identifier": "1061",
+      "name": "Rhodobacter capsulatus",
+      "url": "https://www.uniprot.org/taxonomy/1061",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "29488",
-      "name": "Photorhabdus luminescens",
-      "url": "https://www.uniprot.org/taxonomy/29488",
+      "identifier": "1308",
+      "name": "Streptococcus thermophilus",
+      "url": "https://www.uniprot.org/taxonomy/1308",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "319",
-      "name": "Pseudomonas savastanoi pv. phaseolicola",
-      "url": "https://www.uniprot.org/taxonomy/319",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "818",
-      "name": "Bacteroides thetaiotaomicron",
-      "url": "https://www.uniprot.org/taxonomy/818",
+      "identifier": "1902",
+      "name": "Streptomyces coelicolor",
+      "url": "https://www.uniprot.org/taxonomy/1902",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -205,15 +205,15 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "Tomography",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C38093",
+      "name": "Atomic Resolution X-Ray Crystallography",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C19588",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Bioimaging",
-      "url": "http://edamontology.org/topic_3383",
-      "inDefinedTermSet": "EDAM"
+      "name": "Tomography",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C38093",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -223,9 +223,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Atomic Resolution X-Ray Crystallography",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C19588",
-      "inDefinedTermSet": "NCIT"
+      "name": "Bioimaging",
+      "url": "http://edamontology.org/topic_3383",
+      "inDefinedTermSet": "EDAM"
     }
   ]
 }

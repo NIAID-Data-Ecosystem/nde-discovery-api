@@ -6,12 +6,12 @@
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-05-09",
+  "dateModified": "2026-06-06",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "endDate": "2026-05-09"
+      "endDate": "2026-06-06"
     }
   ],
   "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -95,23 +95,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "557577",
-      "name": "Pterodroma cervicalis",
-      "url": "https://www.uniprot.org/taxonomy/557577",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "58762",
-      "name": "Mesothelae",
-      "url": "https://www.uniprot.org/taxonomy/58762",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "1137542",
       "name": "Aristida utilis var. utilis",
       "url": "https://www.uniprot.org/taxonomy/1137542",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "42043",
+      "name": "Silene vulgaris",
+      "url": "https://www.uniprot.org/taxonomy/42043",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2613138",
+      "name": "Omicron",
+      "url": "https://www.uniprot.org/taxonomy/2613138",
       "inDefinedTermSet": "UniProt"
     },
     {

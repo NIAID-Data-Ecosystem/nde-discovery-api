@@ -37,8 +37,6 @@
     "usageInfo": 0,
     "interactionStatistic": 0
   },
-  "required_augmented_fields_coverage": {},
-  "recommended_augmented_fields_coverage": {},
   "sum_required_coverage": 0,
   "sum_recommended_coverage": 0,
   "binary_required_score": 0,
@@ -47,6 +45,5 @@
   "binary_recommended_augmented": 0,
   "percent_required_fields": 0,
   "percent_recommended_fields": 0,
-  "conditionsOfAccess": "Unknown",
-  "total_documents": 0
+  "conditionsOfAccess": "Unknown"
 }

@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 2203,
+      "minValue": 2220,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-05-08",
+  "dateModified": "2026-06-05",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2016-05-06",
-      "endDate": "2026-05-08"
+      "endDate": "2026-06-05"
     }
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -29,16 +29,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0622",
-      "name": "Genomics",
-      "url": "http://edamontology.org/topic_0622",
+      "identifier": "topic_0199",
+      "name": "Genetic variation",
+      "url": "http://edamontology.org/topic_0199",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0199",
-      "name": "Genetic variation",
-      "url": "http://edamontology.org/topic_0199",
+      "identifier": "topic_0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -59,9 +59,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0003778",
-      "name": "inborn error of immunity",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0003778",
+      "identifier": "0031332",
+      "name": "Glanzmann thrombasthenia 1",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0031332",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -73,16 +73,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0031332",
-      "name": "Glanzmann thrombasthenia 1",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0031332",
+      "identifier": "0004741",
+      "name": "tyrosinemia",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004741",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0004741",
-      "name": "tyrosinemia",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004741",
+      "identifier": "0003778",
+      "name": "inborn error of immunity",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0003778",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -94,22 +94,22 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021060",
-      "name": "RASopathy",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021060",
+      "identifier": "0005835",
+      "name": "Lynch syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005835",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "MONDO:0100216",
-      "name": "DICER1-related tumor predisposition",
+      "identifier": "MONDO:0010938",
+      "name": "T-B+ severe combined immunodeficiency due to JAK3 deficiency",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0009728",
-      "name": "nephronophthisis 1",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0009728",
+      "identifier": "0010315",
+      "name": "T-B+ severe combined immunodeficiency due to gamma chain deficiency",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0010315",
       "inDefinedTermSet": "MONDO"
     },
     {

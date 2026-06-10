@@ -106,16 +106,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005292",
-      "name": "colitis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005292",
+      "identifier": "0005070",
+      "name": "neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005070",
-      "name": "neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
+      "identifier": "0005292",
+      "name": "colitis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005292",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -214,16 +214,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10114",
-      "name": "Rattus",
-      "url": "https://www.uniprot.org/taxonomy/10114",
+      "identifier": "227726",
+      "name": "Solanum hyporhodium",
+      "url": "https://www.uniprot.org/taxonomy/227726",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "227726",
-      "name": "Solanum hyporhodium",
-      "url": "https://www.uniprot.org/taxonomy/227726",
+      "identifier": "10114",
+      "name": "Rattus",
+      "url": "https://www.uniprot.org/taxonomy/10114",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -235,16 +235,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9913",
-      "name": "Bos taurus",
-      "url": "https://www.uniprot.org/taxonomy/9913",
+      "identifier": "9534",
+      "name": "Chlorocebus aethiops",
+      "url": "https://www.uniprot.org/taxonomy/9534",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9796",
-      "name": "Equus caballus",
-      "url": "https://www.uniprot.org/taxonomy/9796",
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -294,16 +294,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "562",
-      "name": "Escherichia coli",
-      "url": "https://www.uniprot.org/taxonomy/562",
+      "identifier": "2",
+      "name": "Bacteria",
+      "url": "https://www.uniprot.org/taxonomy/2",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2",
-      "name": "Bacteria",
-      "url": "https://www.uniprot.org/taxonomy/2",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
       "inDefinedTermSet": "UniProt"
     },
     {

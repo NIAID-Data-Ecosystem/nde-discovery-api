@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 1447,
+      "minValue": 1458,
       "unitText": "Dataset"
     }
   ],
@@ -313,9 +313,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "357231",
-      "name": "Murine norovirus",
-      "url": "https://www.uniprot.org/taxonomy/357231",
+      "identifier": "1773",
+      "name": "Mycobacterium tuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/1773",
       "inDefinedTermSet": "UniProt"
     },
     {

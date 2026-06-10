@@ -214,6 +214,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "3034371",
+      "name": "China",
+      "url": "https://www.uniprot.org/taxonomy/3034371",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "4577",
       "name": "Zea mays",
       "url": "https://www.uniprot.org/taxonomy/4577",
@@ -228,10 +235,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "ENP China (ERC)"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "329199",
       "name": "Turnera joelii",
       "url": "https://www.uniprot.org/taxonomy/329199",
@@ -239,7 +242,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "ENP China"
+      "identifier": "97700",
+      "name": "Quercus lobata",
+      "url": "https://www.uniprot.org/taxonomy/97700",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
@@ -295,9 +301,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "90371",
-      "name": "Salmonella typhimurium",
-      "url": "https://www.uniprot.org/taxonomy/90371",
+      "identifier": "349846",
+      "name": "Pseudomonas sp. 7049",
+      "url": "https://www.uniprot.org/taxonomy/349846",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2901879",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/2901879",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -305,13 +318,6 @@
       "identifier": "11676",
       "name": "Human immunodeficiency virus 1",
       "url": "https://www.uniprot.org/taxonomy/11676",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "10566",
-      "name": "Human papillomavirus",
-      "url": "https://www.uniprot.org/taxonomy/10566",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -353,18 +359,13 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "FAIRE-seq",
-      "url": "http://www.ebi.ac.uk/efo/EFO_0004428"
-    },
-    {
-      "@type": "DefinedTerm",
       "name": "Bayesian approach",
       "url": "http://purl.obolibrary.org/obo/NCIT_C142403"
     },
     {
       "@type": "DefinedTerm",
-      "name": "CRISPR/Cas9 method",
-      "url": "http://www.bioassayontology.org/bao#BAO_0010249"
+      "name": "FAIRE-seq",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0004428"
     },
     {
       "@type": "DefinedTerm",
@@ -373,13 +374,18 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "cytoscape network analysis",
-      "url": "http://www.bioassayontology.org/bao#BAO_0002362"
+      "name": "CRISPR/Cas9 method",
+      "url": "http://www.bioassayontology.org/bao#BAO_0010249"
     },
     {
       "@type": "DefinedTerm",
       "name": "image processing",
       "url": "http://purl.obolibrary.org/obo/NCIT_C17606"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "cytoscape network analysis",
+      "url": "http://www.bioassayontology.org/bao#BAO_0002362"
     }
   ]
 }

@@ -3,7 +3,6 @@
   "avg_augmented_required_ratio": 0.0,
   "avg_recommended_score_ratio": 0.4588,
   "avg_required_ratio": 0.7901,
-  "total_documents": 32927,
   "required_fields": {
     "date": 1.0,
     "includedInDataCatalog": 1.0,
@@ -34,6 +33,8 @@
     "identifier": 1.0,
     "url": 1.0
   },
+  "sum_required_coverage": 4.75,
+  "sum_recommended_coverage": 9.18,
   "required_augmented_fields_coverage": {
     "funding": 0.0
   },
@@ -41,8 +42,6 @@
     "citation": 0.0,
     "topicCategory": 0.0
   },
-  "sum_required_coverage": 4.7503,
-  "sum_recommended_coverage": 9.176,
   "binary_required_score": 6,
   "binary_recommended_score": 17,
   "binary_required_augmented": 0,

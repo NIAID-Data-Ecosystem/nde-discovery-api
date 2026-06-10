@@ -22,13 +22,6 @@
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3324",
-      "name": "Infectious disease",
-      "url": "http://edamontology.org/topic_3324",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "topic_0804",
       "name": "Immunology",
       "url": "http://edamontology.org/topic_0804",
@@ -39,6 +32,13 @@
       "identifier": "topic_3277",
       "name": "Sample collections",
       "url": "http://edamontology.org/topic_3277",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3324",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_3324",
       "inDefinedTermSet": "EDAM"
     }
   ],

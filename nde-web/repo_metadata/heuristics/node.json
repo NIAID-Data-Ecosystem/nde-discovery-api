@@ -365,17 +365,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C163989",
-      "name": "Randomly Selected Genomic Library",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C163989",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0002620",
       "name": "random mutagenesis",
       "url": "http://purl.obolibrary.org/obo/OBI_0002620",
       "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C163989",
+      "name": "Randomly Selected Genomic Library",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C163989",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
