@@ -12,7 +12,9 @@
   "collectionType": "Dataset Repository",
   "genre": [
     "Generalist",
-    "Computational biology, Other, Omics"
+    "Computational biology",
+    "Other",
+    "Omics"
   ],
   "conditionsOfAccess": "Open",
   "isAccessibleForFree": true,

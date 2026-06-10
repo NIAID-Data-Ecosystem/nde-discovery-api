@@ -55,6 +55,24 @@ For non-interactive defaults after the TSV is already at the repository root:
 ./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --source uniprot -y
 ```
 
+## Bootstrap All Existing Sources
+
+To run the same bootstrap flow for every existing source JSON in
+`nde-web/repo_metadata/`, use:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --all -y
+```
+
+If you only need to apply the updated TSV fields and validate, without
+regenerating Mongo-backed heuristic and completeness caches:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --all -y \
+  --skip-heuristics \
+  --skip-completeness
+```
+
 For a new source that does not yet have `repo_metadata/<source>.json`, the
 bootstrap script creates the stub with an empty `schedule` string and empty
 `schema` object. Fill out those two fields in the generated source metadata

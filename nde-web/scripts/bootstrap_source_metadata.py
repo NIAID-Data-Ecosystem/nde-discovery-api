@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Bootstrap repo-level metadata artifacts for one NDE source.
+"""Bootstrap repo-level metadata artifacts for NDE sources.
 
-For a new source, this helper can:
+For one source, this helper can:
 
 1. prompt for the private SourceMetaCuration resource_base Google Sheet TSV
 2. create a minimal ``nde-web/repo_metadata/<source>.json`` stub if needed
@@ -13,6 +13,7 @@ For a new source, this helper can:
 Usage:
     python nde-web/scripts/bootstrap_source_metadata.py
     python nde-web/scripts/bootstrap_source_metadata.py --source uniprot -y
+    python nde-web/scripts/bootstrap_source_metadata.py --all -y
 """
 
 from __future__ import annotations
@@ -229,11 +230,72 @@ def run_command(cmd: list[str], dry_run: bool) -> None:
     subprocess.run(cmd, cwd=REPO_ROOT, check=True)
 
 
+def existing_source_keys() -> list[str]:
+    """Return source keys with existing curated metadata JSON files."""
+    if not REPO_METADATA_DIR.exists():
+        return []
+    return [
+        path.stem
+        for path in sorted(REPO_METADATA_DIR.glob("*.json"))
+        if not path.name.startswith("_")
+    ]
+
+
+def resolve_resource_base_tsv(path_arg: str) -> Path:
+    path = Path(path_arg)
+    if not path.is_absolute():
+        path = REPO_ROOT / path
+    return path
+
+
+def prepare_resource_base_tsv(
+    args: argparse.Namespace,
+    resource_base_tsv: Path,
+    require_for_new_source: bool,
+) -> list[dict[str, str]]:
+    if not args.skip_download:
+        if args.yes:
+            if not resource_base_tsv.exists():
+                print(resource_base_download_instructions(resource_base_tsv))
+        elif resource_base_tsv.exists():
+            if confirm(
+                "Refresh SourceMetaCuration resource_base TSV manually before continuing?",
+                default=False,
+            ):
+                prompt_for_resource_base_tsv(
+                    resource_base_tsv,
+                    args.dry_run,
+                    wait_for_replacement=True,
+                )
+        else:
+            print(f"Missing {display_path(resource_base_tsv)}.")
+            prompt_for_resource_base_tsv(resource_base_tsv, args.dry_run)
+
+    if resource_base_tsv.exists():
+        return load_resource_base_rows(resource_base_tsv)
+    if require_for_new_source:
+        raise SystemExit(
+            f"Missing {display_path(resource_base_tsv)}. "
+            f"Download the resource_base tab as TSV from {RESOURCE_BASE_SHEET_URL} "
+            "and move it to the repository root before rerunning."
+        )
+    print(
+        f"Warning: {display_path(resource_base_tsv)} is missing; "
+        "continuing with existing source JSON files only."
+    )
+    return []
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--source",
         help="NDE source key / Mongo collection name, e.g. uniprot.",
+    )
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Bootstrap every existing source in nde-web/repo_metadata.",
     )
     parser.add_argument(
         "--resource-base-tsv",
@@ -286,55 +348,19 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Print actions without writing or running generators.",
     )
-    return parser.parse_args(argv)
+    args = parser.parse_args(argv)
+    if args.all and args.source:
+        parser.error("--all cannot be used with --source")
+    return args
 
 
-def main(argv: list[str] | None = None) -> int:
-    args = parse_args(argv)
-    source_input = args.source or prompt("Source key / Mongo collection name")
-    source_key = normalize_source_key(source_input)
-    if not source_key:
-        raise SystemExit("A source key is required.")
-    if source_key != source_input:
-        print(f"Using normalized source key: {source_key}")
-
+def bootstrap_source(
+    args: argparse.Namespace,
+    source_key: str,
+    rows: list[dict[str, str]],
+) -> None:
     source_json_path = REPO_METADATA_DIR / f"{source_key}.json"
-    resource_base_tsv = Path(args.resource_base_tsv)
-    if not resource_base_tsv.is_absolute():
-        resource_base_tsv = REPO_ROOT / resource_base_tsv
 
-    if not args.skip_download:
-        if args.yes:
-            if not resource_base_tsv.exists():
-                print(resource_base_download_instructions(resource_base_tsv))
-        elif resource_base_tsv.exists():
-            if confirm(
-                "Refresh SourceMetaCuration resource_base TSV manually before continuing?",
-                default=False,
-            ):
-                prompt_for_resource_base_tsv(
-                    resource_base_tsv,
-                    args.dry_run,
-                    wait_for_replacement=True,
-                )
-        else:
-            print(f"Missing {display_path(resource_base_tsv)}.")
-            prompt_for_resource_base_tsv(resource_base_tsv, args.dry_run)
-
-    if resource_base_tsv.exists():
-        rows = load_resource_base_rows(resource_base_tsv)
-    elif source_json_path.exists():
-        rows = []
-        print(
-            f"Warning: {display_path(resource_base_tsv)} is missing; "
-            "continuing with the existing source JSON only."
-        )
-    else:
-        raise SystemExit(
-            f"Missing {display_path(resource_base_tsv)}. "
-            f"Download the resource_base tab as TSV from {RESOURCE_BASE_SHEET_URL} "
-            "and move it to the repository root before rerunning."
-        )
     row = find_source_row(rows, source_key)
     if row is None and not source_json_path.exists():
         raise SystemExit(
@@ -344,8 +370,8 @@ def main(argv: list[str] | None = None) -> int:
         )
     if row is None:
         print(
-            f"Warning: no resource_base row matched {source_key!r}; "
-            "sync will use the existing source JSON only."
+            f"Warning: no resource_base row matched {source_key!r} by "
+            "source key; sync_repo_metadata.py may still match by URL."
         )
 
     created_stub_path = None
@@ -411,6 +437,50 @@ def main(argv: list[str] | None = None) -> int:
     print("Done.")
     if created_stub_path is not None:
         print(source_stub_reminder(created_stub_path))
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    resource_base_tsv = resolve_resource_base_tsv(args.resource_base_tsv)
+
+    if args.all:
+        source_keys = existing_source_keys()
+        if not source_keys:
+            raise SystemExit(f"No source JSON files found in {display_path(REPO_METADATA_DIR)}.")
+        rows = prepare_resource_base_tsv(
+            args,
+            resource_base_tsv,
+            require_for_new_source=False,
+        )
+        total = len(source_keys)
+        for index, source_key in enumerate(source_keys, start=1):
+            print(f"\n=== [{index}/{total}] {source_key} ===")
+            bootstrap_source(args, source_key, rows)
+        if not args.skip_validation:
+            run_command(
+                [
+                    python_for_subprocess(),
+                    "nde-web/scripts/validate_repo_metadata.py",
+                ],
+                args.dry_run,
+            )
+        print(f"Done bootstrapping {total} sources.")
+        return 0
+
+    source_input = args.source or prompt("Source key / Mongo collection name")
+    source_key = normalize_source_key(source_input)
+    if not source_key:
+        raise SystemExit("A source key is required.")
+    if source_key != source_input:
+        print(f"Using normalized source key: {source_key}")
+
+    source_json_path = REPO_METADATA_DIR / f"{source_key}.json"
+    rows = prepare_resource_base_tsv(
+        args,
+        resource_base_tsv,
+        require_for_new_source=not source_json_path.exists(),
+    )
+    bootstrap_source(args, source_key, rows)
     return 0
 
 
