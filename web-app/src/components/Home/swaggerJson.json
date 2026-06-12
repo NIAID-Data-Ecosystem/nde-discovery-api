@@ -272,29 +272,44 @@
           "query"
         ],
         "summary": "Make data batch query and return matching hits",
+        "description": "Batch lookup endpoint. For a list of record IDs, pass comma-separated IDs in the `q` query parameter and use `scopes=_id`. For full Lucene-style search queries such as `*:*` or `includedInDataCatalog.name:Zenodo`, use GET /query instead.",
         "parameters": [
           {
             "name": "q",
             "in": "query",
-            "description": "Query string. Examples \"zenodo\", \"ComputationalTool\", \"Reference Genome\", \"dataset\".",
+            "description": "Comma-separated values to look up. For batch ID lookup, pass IDs such as `dde_8b9a4aa0d78d0659,zenodo_14068920`.",
             "required": true,
             "style": "form",
             "explode": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "dde_8b9a4aa0d78d0659,zenodo_14068920"
           },
           {
             "name": "scopes",
             "in": "query",
-            "description": "Optional, specify one or more fields (separated by comma) as the search “scopes”",
+            "description": "Optional, specify one or more fields (separated by comma) as the search “scopes”. Use `_id` for record ID lookup.",
             "required": false,
             "style": "form",
             "explode": true,
             "schema": {
               "type": "string",
               "default": "_id"
-            }
+            },
+            "example": "_id"
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated fields to limit the fields returned from the matching NIAID hits. Dot notation is supported, e.g. `includedInDataCatalog.name`.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "_id,name,includedInDataCatalog.name"
           },
           {
             "name": "from",
@@ -308,23 +323,25 @@
             }
           },
           {
-            "name": "sort",
+            "name": "size",
             "in": "query",
-            "description": "The comma-separated fields to sort on. Prefix with \"-\" for descending order, otherwise in ascending order. Default: sort by matching scores in decending order.",
+            "description": "The maximum number of matching hits to return for each query value. Default: 10.",
             "required": false,
             "style": "form",
             "explode": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
         "requestBody": {
+          "description": "Optional JSON body. When using the query parameters above in Swagger UI, use `{}` as the body. Do not use the generated placeholder values.",
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/query_body"
-              }
+              },
+              "example": {}
             },
             "application/yaml": {},
             "application/x-www-form-urlencoded": {},
@@ -647,18 +664,44 @@
       },
       "query_body": {
         "type": "object",
+        "description": "Optional POST /query body. Values may also be supplied as query parameters.",
         "properties": {
           "q": {
-            "type": "string"
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "description": "A single lookup value, comma-separated lookup values, or an array of lookup values.",
+            "example": [
+              "dde_8b9a4aa0d78d0659",
+              "zenodo_14068920"
+            ]
           },
           "scopes": {
-            "type": "string"
+            "type": "string",
+            "description": "One or more comma-separated fields to search. Use `_id` for record ID lookup.",
+            "default": "_id",
+            "example": "_id"
+          },
+          "fields": {
+            "type": "string",
+            "description": "Comma-separated fields to return.",
+            "example": "_id,name,includedInDataCatalog.name"
           },
           "from": {
-            "type": "integer"
+            "type": "integer",
+            "minimum": 0
           },
-          "sort": {
-            "type": "string"
+          "size": {
+            "type": "integer",
+            "minimum": 1
           }
         }
       },
