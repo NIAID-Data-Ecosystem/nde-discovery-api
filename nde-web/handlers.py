@@ -334,10 +334,15 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
 
 class WebAppHandler(RequestHandler):
     def get(self):
-        if self.render("dist/index.html"):
+        index_file = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "dist", "index.html"
+        )
+        if os.path.exists(index_file):
             self.render("dist/index.html")
-        else:
-            logging.info("Unable to find dist folder from react app.")
+            return
+
+        logging.info("Unable to find dist folder from react app.")
+        raise HTTPError(404)
 
 
 class NDESourceHandler(MetadataSourceHandler):
