@@ -1,0 +1,200 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 9,
+      "unitText": "DataCollection"
+    }
+  ],
+  "dateModified": "2025-12-15",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2025-10-23",
+      "endDate": "2025-12-15"
+    }
+  ],
+  "usageInfo": {
+    "@type": "CreativeWork",
+    "name": "MWCCS DACC Resource Request Info",
+    "url": "https://statepi.jhsph.edu/mwccs/wp-content/uploads/2022/11/MWCCS-DACC-Resource-Request-Form_final11922.pdf"
+  },
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3305",
+      "name": "Public health and epidemiology",
+      "url": "http://edamontology.org/topic_3305",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0804",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_0804",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005109",
+      "name": "HIV infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C116921",
+      "name": "Cognitive Impairment",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C116921",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004790",
+      "name": "fatty liver disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004790",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005275",
+      "name": "lung disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005275",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D009057",
+      "name": "Stomatognathic Diseases",
+      "url": "https://id.nlm.nih.gov/mesh/D009057.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002025",
+      "name": "psychiatric disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002025",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002643",
+      "name": "vestibular disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002643",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "gut microbiome alteration"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005155",
+      "name": "cirrhosis of liver",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005155",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002494",
+      "name": "substance-related disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002494",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11709",
+      "name": "Human immunodeficiency virus 2",
+      "url": "https://www.uniprot.org/taxonomy/11709",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11676",
+      "name": "Human immunodeficiency virus 1",
+      "url": "https://www.uniprot.org/taxonomy/11676",
+      "inDefinedTermSet": "UniProt"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001000",
+      "name": "questionnaire",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001000",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Trials A&B"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Visual Spatial Learning Test (VSLT)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Abbreviated Patient’s Assessment of Own Functioning Inventory (PAOFI)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002901",
+      "name": "visible light source",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002901",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "areas of the mouth that look different than expected"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "10-minute National Health and Nutrition Examination Survey (NHANES) hearing and balance survey"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "BRACE+ (Brainbaseline 60-75 min Assessment of Cognition and Everyday Function Plus)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0003506",
+      "name": "finger to finger assessment",
+      "url": "http://purl.obolibrary.org/obo/OBI_0003506",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Fibroscan with Controlled Attenuation Parameter (CAP): Ultrasound of the liver to estimate the amount of liver fibrosis (liver scarring) and steatosis (fat)."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

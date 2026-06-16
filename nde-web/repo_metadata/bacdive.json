@@ -1,0 +1,42 @@
+{
+  "_id": "bacdive",
+  "name": "BacDive",
+  "alternateName": [
+    "Bacterial Diversity Metadatabase"
+  ],
+  "identifier": "BacDive",
+  "url": "https://bacdive.dsmz.de/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_e9c5ccfa4872afe2",
+  "abstract": "BacDive is a BMBF supported IID repository that includes phenotypic data.",
+  "description": "The Bacterial Diversity Metadatabase BacDive is the worldwide largest database for standardized bacterial phenotypic information. Its mission is to mobilize research data on strain level from internal files in culture collections (e.g. CABI, CIP, CCUG, DSMZ) as well as from primary literature and make it freely accessible. Today BacDive offers data on 93,254 bacterial and archaeal strains, including 19,313 type strains and thereby covers approx. 90% of the validly described species. Within over 600 data fields the topics taxonomy, morphology, physiology, origin, molecular data, and cultivation conditions are covered. The database offers systematic access to phenotypic data. BacDive thereby enables queries like \"show me all strains that grow under certain conditions” by using the Advanced search or queries like “show me all strains isolated from a marine environment” by using the Isolation source search. With currently 15,357 API® tests for 27,634 strains, BacDive also offers the worldwide largest API® test collection, which can be queried using the API test finder tool.",
+  "collectionType": "Sample Repository",
+  "genre": [
+    "IID"
+  ],
+  "conditionsOfAccess": "Open",
+  "license": "http://creativecommons.org/licenses/by/4.0/",
+  "usageInfo": "https://bacdive.dsmz.de/about",
+  "inLanguage": "English",
+  "version": "15.05.2024",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "hasDownload": "Record-level",
+  "dateCreated": "2012-04-01",
+  "dateModified": "2024-05-15",
+  "datePublished": "2013-09-01",
+  "schedule": "Weekly",
+  "schema": {
+    "Bacdive-ID": "_id, identifier, url",
+    "DSM-Number": "identifier, url",
+    "keywords": "keywords",
+    "NCBI tax id": "infectiousAgent.identifier",
+    "doi": "doi",
+    "Name and taxonomic classification.LPSN.synonyms": "infectiousAgent.alternateName",
+    "Isolation, sampling and environmental information": "sampleType, locationOfOrigin, species, dateProcessed, dateCollected, collectionMethod, environmentalSystem",
+    "Sequence information": "isBasisFor",
+    "Literature.culture collection no.": "identifier",
+    "Literature.literature": "citation",
+    "Reference": "isBasedOn",
+    "Morphology.cell morphology": "associatedPhenotype"
+  }
+}

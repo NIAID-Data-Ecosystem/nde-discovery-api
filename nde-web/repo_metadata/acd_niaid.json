@@ -1,0 +1,38 @@
+{
+  "_id": "acd_niaid",
+  "name": "accessclinicaldata@NIAID",
+  "alternateName": [
+    "acd_niaid"
+  ],
+  "identifier": "accessclinicaldata@NIAID",
+  "url": "https://accessclinicaldata.niaid.nih.gov/",
+  "abstract": "accessclinicaldata is a NIAID supported IID repository that includes clinical trials data.",
+  "description": "accessclinicaldata@NIAID is a NIAID cloud-based, secure data platform that enables sharing of and access to reports and data sets from NIAID COVID-19 and other sponsored clinical trials for the basic and clinical research community.",
+  "collectionType": "Dataset Repository",
+  "genre": [
+    "IID",
+    "Biological Assay",
+    "Clinical",
+    "Epidemiological",
+    "Respiratory Pathogens"
+  ],
+  "conditionsOfAccess": "Varied",
+  "isAccessibleForFree": true,
+  "hasAPI": false,
+  "creativeWorkStatus": "Accepting Data",
+  "schedule": "Weekly",
+  "schema": {
+    "title": "name",
+    "cmc_unique_id": "identifier",
+    "brief_summary": "description",
+    "data_availability_date": "datePublished",
+    "most_recent_update": "dateModified",
+    "data_available": "additionalType",
+    "creator": "funding.funder.name",
+    "nct_number": "nctid, identifier",
+    "condition": "healthCondition",
+    "clinical_trial_website": "mainEntityOfPage",
+    "publications": "citation",
+    "data_available_for_request": "conditionsOfAccess"
+  }
+}

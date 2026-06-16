@@ -1,1 +1,60 @@
-{"avg_augmented_recommended_ratio": 0.0462, "avg_augmented_required_ratio": 0.0, "avg_recommended_score_ratio": 0.4671, "avg_required_ratio": 0.7549, "required_fields": {"name": 1.0, "description": 0.7716, "author": 1.0, "url": 1.0, "measurementTechnique": 0.0, "includedInDataCatalog": 1.0, "distribution": 0.0, "funding": 0.9999, "date": 1.0}, "recommended_fields": {"dateCreated": 1.0, "dateModified": 1.0, "datePublished": 1.0, "citedBy": 0.0, "doi": 1.0, "infectiousAgent": 0.0, "healthCondition": 0.9235, "species": 0.0, "variableMeasured": 0.7437, "citation": 0.0, "conditionsOfAccess": 0.0, "isBasedOn": 0.0, "keywords": 0.9884, "license": 0.0, "sdPublisher": 1.0, "spatialCoverage": 0.6792, "temporalCoverage": 0.7651, "topicCategory": 0.9246, "identifier": 1.0, "usageInfo": 0.0, "interactionStatistic": 0.0}, "sum_required_coverage": 6.77, "sum_recommended_coverage": 11.02, "required_augmented_fields_coverage": {"funding": 0.0, "measurementTechnique": 0.0}, "recommended_augmented_fields_coverage": {"species": 0.0, "infectiousAgent": 0.0, "healthCondition": 0.0, "citation": 0.0, "topicCategory": 0.92}, "binary_required_score": 7, "binary_recommended_score": 12, "binary_required_augmented": 0, "binary_recommended_augmented": 0, "percent_required_fields": 0.78, "percent_recommended_fields": 0.57, "conditionsOfAccess": "Unknown"}
+{
+  "avg_augmented_recommended_ratio": 0.0593,
+  "avg_augmented_required_ratio": 0.0704,
+  "avg_recommended_score_ratio": 0.5052,
+  "avg_required_ratio": 0.7559,
+  "required_fields": {
+    "name": 1.0,
+    "description": 0.7836,
+    "author": 1.0,
+    "url": 1.0,
+    "measurementTechnique": 0.6399,
+    "includedInDataCatalog": 1.0,
+    "distribution": 0.0,
+    "funding": 0.9978,
+    "date": 1.0
+  },
+  "recommended_fields": {
+    "dateCreated": 1.0,
+    "dateModified": 1.0,
+    "datePublished": 1.0,
+    "citedBy": 0.0,
+    "doi": 1.0,
+    "infectiousAgent": 0.0875,
+    "healthCondition": 0.9517,
+    "species": 0.0396,
+    "variableMeasured": 0.7434,
+    "citation": 0.0,
+    "conditionsOfAccess": 1.0,
+    "isBasedOn": 0.0,
+    "keywords": 0.9899,
+    "license": 0.0,
+    "sdPublisher": 1.0,
+    "spatialCoverage": 0.6887,
+    "temporalCoverage": 0.7621,
+    "topicCategory": 0.7783,
+    "identifier": 1.0,
+    "usageInfo": 0.0,
+    "interactionStatistic": 0.0
+  },
+  "sum_required_coverage": 7.42,
+  "sum_recommended_coverage": 12.04,
+  "required_augmented_fields_coverage": {
+    "funding": 0.0,
+    "measurementTechnique": 0.64
+  },
+  "recommended_augmented_fields_coverage": {
+    "species": 0.04,
+    "infectiousAgent": 0.09,
+    "healthCondition": 0.29,
+    "citation": 0.0,
+    "topicCategory": 0.78
+  },
+  "binary_required_score": 8,
+  "binary_recommended_score": 15,
+  "binary_required_augmented": 1,
+  "binary_recommended_augmented": 4,
+  "percent_required_fields": 0.89,
+  "percent_recommended_fields": 0.71,
+  "conditionsOfAccess": "Restricted"
+}
