@@ -1,0 +1,226 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 6242,
+      "unitText": "DataCollection"
+    }
+  ],
+  "dateModified": "2026-06-06",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "endDate": "2026-06-06"
+    }
+  ],
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "usageInfo": {
+    "@type": "CreativeWork",
+    "name": "Conditions of use",
+    "url": "https://dbaasp.org/DBAASP_Terms_And_Conditions.pdf"
+  },
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_2814",
+      "name": "Chemoinformatics",
+      "url": "http://edamontology.org/topic_2814",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0209",
+      "name": "Medicinal chemistry",
+      "url": "http://edamontology.org/topic_0209",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3301",
+      "name": "Microbiology",
+      "url": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "6754",
+      "name": "Cancer",
+      "url": "https://www.uniprot.org/taxonomy/6754",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "222794",
+      "name": "Neurotoma",
+      "url": "https://www.uniprot.org/taxonomy/222794",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1268774",
+      "name": "Carabus lusitanicus lusitanicus",
+      "url": "https://www.uniprot.org/taxonomy/1268774",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10088",
+      "name": "Mus",
+      "url": "https://www.uniprot.org/taxonomy/10088",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2823050",
+      "name": "Pastor",
+      "url": "https://www.uniprot.org/taxonomy/2823050",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "998453",
+      "name": "Delta",
+      "url": "https://www.uniprot.org/taxonomy/998453",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "121226",
+      "name": "Pediculus humanus capitis",
+      "url": "https://www.uniprot.org/taxonomy/121226",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1137542",
+      "name": "Aristida utilis var. utilis",
+      "url": "https://www.uniprot.org/taxonomy/1137542",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "42043",
+      "name": "Silene vulgaris",
+      "url": "https://www.uniprot.org/taxonomy/42043",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2613138",
+      "name": "Omicron",
+      "url": "https://www.uniprot.org/taxonomy/2613138",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "287",
+      "name": "Pseudomonas aeruginosa",
+      "url": "https://www.uniprot.org/taxonomy/287",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5476",
+      "name": "Candida albicans",
+      "url": "https://www.uniprot.org/taxonomy/5476",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "573",
+      "name": "Klebsiella pneumoniae",
+      "url": "https://www.uniprot.org/taxonomy/573",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1423",
+      "name": "Bacillus subtilis",
+      "url": "https://www.uniprot.org/taxonomy/1423",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "470",
+      "name": "Acinetobacter baumannii",
+      "url": "https://www.uniprot.org/taxonomy/470",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1351",
+      "name": "Enterococcus faecalis",
+      "url": "https://www.uniprot.org/taxonomy/1351",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1282",
+      "name": "Staphylococcus epidermidis",
+      "url": "https://www.uniprot.org/taxonomy/1282",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1352",
+      "name": "Enterococcus faecium",
+      "url": "https://www.uniprot.org/taxonomy/1352",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1396",
+      "name": "Bacillus cereus",
+      "url": "https://www.uniprot.org/taxonomy/1396",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Minimum Inhibitory Concentration Test",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C128985",
+      "inDefinedTermSet": "GENEPIO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "cytotoxicity assay",
+      "url": "http://www.bioassayontology.org/bao#BAO_0002993",
+      "inDefinedTermSet": "ENM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "3D structure prediction",
+      "url": "http://www.bioassayontology.org/bao#BAO_0002216",
+      "inDefinedTermSet": "BAO"
+    }
+  ]
+}

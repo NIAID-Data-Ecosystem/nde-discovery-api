@@ -1,0 +1,251 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 16670,
+      "unitText": "Sample"
+    }
+  ],
+  "license": "Varies",
+  "usageInfo": "Varies",
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018076",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005812",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0009693",
+      "name": "plasma cell myeloma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0009693",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005091",
+      "name": "severe acute respiratory syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005091",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0006052",
+      "name": "pulmonary tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0006052",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002595",
+      "name": "vaccinia",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002595",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0020731",
+      "name": "arbovirus infection",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0020731",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005136",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0012268",
+      "name": "AIDS",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0012268",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001673",
+      "name": "diarrheal disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001673",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9669",
+      "name": "Mustela putorius furo",
+      "url": "https://www.uniprot.org/taxonomy/9669",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7159",
+      "name": "Aedes aegypti",
+      "url": "https://www.uniprot.org/taxonomy/7159",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10141",
+      "name": "Cavia porcellus",
+      "url": "https://www.uniprot.org/taxonomy/10141",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1374025",
+      "name": "Hemibela hemicalypta",
+      "url": "https://www.uniprot.org/taxonomy/1374025",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7165",
+      "name": "Anopheles gambiae",
+      "url": "https://www.uniprot.org/taxonomy/7165",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9544",
+      "name": "Macaca mulatta",
+      "url": "https://www.uniprot.org/taxonomy/9544",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3988",
+      "name": "Ricinus communis",
+      "url": "https://www.uniprot.org/taxonomy/3988",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1773",
+      "name": "Mycobacterium tuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/1773",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "46170",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/46170",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12721",
+      "name": "Human immunodeficiency virus",
+      "url": "https://www.uniprot.org/taxonomy/12721",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11320",
+      "name": "Influenza A virus",
+      "url": "https://www.uniprot.org/taxonomy/11320",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5833",
+      "name": "Plasmodium falciparum",
+      "url": "https://www.uniprot.org/taxonomy/5833",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "59201",
+      "name": "Salmonella enterica I",
+      "url": "https://www.uniprot.org/taxonomy/59201",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2901879",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/2901879",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "64320",
+      "name": "Zika virus",
+      "url": "https://www.uniprot.org/taxonomy/64320",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ]
+}
