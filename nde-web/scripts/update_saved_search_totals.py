@@ -13,6 +13,7 @@ import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlencode, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
 
@@ -78,6 +79,7 @@ def _apply_config_defaults(args):
     args.es_host = args.es_host or defaults["es_host"] or "http://localhost:9200"
     args.user_index = args.user_index or defaults["user_index"] or DEFAULT_USER_INDEX
     args.data_index = args.data_index or defaults["data_index"] or DEFAULT_DATA_INDEX
+    args.query_url = args.query_url or _query_url_from_metadata_url(args.metadata_url)
     args.es_args = defaults["es_args"]
     args.request_timeout = (
         args.request_timeout
@@ -116,6 +118,19 @@ def _fetch_build_info(metadata_url, *, timeout):
     request = Request(metadata_url, headers={"Accept": "application/json"})
     with urlopen(request, timeout=timeout) as response:
         return _extract_build_info(json.load(response))
+
+
+def _query_url_from_metadata_url(metadata_url):
+    if not metadata_url:
+        return None
+
+    parsed = urlsplit(metadata_url)
+    path = parsed.path.rstrip("/")
+    if path.endswith("/metadata"):
+        path = path[: -len("/metadata")] + "/query"
+    else:
+        path = path.rstrip("/") + "/query"
+    return urlunsplit((parsed.scheme, parsed.netloc, path, "", ""))
 
 
 def _resolve_build_info(args):
@@ -184,12 +199,157 @@ def _iter_user_profiles(client, *, index, batch_size, scroll):
 
 
 def _count_saved_search(client, *, index, favorite_search):
+    return _count_saved_search_with_es(
+        client,
+        index=index,
+        favorite_search=favorite_search,
+    )
+
+
+def _count_saved_search_with_es(client, *, index, favorite_search):
     body = build_saved_search_count_body(
         favorite_search.get("query"),
         favorite_search.get("filters"),
     )
     response = client.count(index=index, query=body["query"])
     return int(response["count"])
+
+
+def _count_saved_search_with_api(query_url, *, favorite_search, timeout):
+    params = _saved_search_api_params(favorite_search)
+    separator = "&" if urlsplit(query_url).query else "?"
+    request = Request(
+        query_url + separator + urlencode(params),
+        headers={"Accept": "application/json"},
+    )
+    with urlopen(request, timeout=timeout) as response:
+        payload = json.load(response)
+    return _extract_total(payload)
+
+
+def _extract_total(payload):
+    if not isinstance(payload, dict):
+        raise ValueError("Query API response must be a JSON object.")
+    if "total" in payload:
+        return int(payload["total"] or 0)
+
+    total = payload.get("hits", {}).get("total")
+    if isinstance(total, dict):
+        return int(total.get("value") or 0)
+    return int(total or 0)
+
+
+def _saved_search_api_params(favorite_search):
+    params = {
+        "q": favorite_search.get("query") or "__all__",
+        "size": 0,
+        "facet_size": 0,
+    }
+
+    extra_filter = _filters_to_query_string(favorite_search.get("filters"))
+    if extra_filter:
+        params["extra_filter"] = extra_filter
+
+    if favorite_search.get("use_ai_search") is not None:
+        params["use_ai_search"] = str(bool(favorite_search["use_ai_search"])).lower()
+
+    return params
+
+
+def _filters_to_query_string(filters):
+    if filters in (None, "", False):
+        return None
+
+    if isinstance(filters, str):
+        return filters.strip() or None
+
+    if isinstance(filters, list):
+        clauses = [_filters_to_query_string(item) for item in filters]
+        clauses = [clause for clause in clauses if clause]
+        return " AND ".join(f"({clause})" for clause in clauses) or None
+
+    if not isinstance(filters, dict):
+        return None
+
+    if "query_string" in filters:
+        query_string = filters.get("query_string") or {}
+        if isinstance(query_string, dict):
+            return query_string.get("query")
+
+    if "extra_filter" in filters:
+        return _filters_to_query_string(filters["extra_filter"])
+    if "filter" in filters:
+        return _filters_to_query_string(filters["filter"])
+
+    es_clause = _es_filter_clause_to_query_string(filters)
+    if es_clause:
+        return es_clause
+
+    clauses = []
+    for field, value in filters.items():
+        clause = _field_filter_to_query_string(field, value)
+        if clause:
+            clauses.append(clause)
+    return " AND ".join(clauses) or None
+
+
+def _es_filter_clause_to_query_string(filters):
+    if set(filters) == {"term"}:
+        term = filters["term"]
+        if isinstance(term, dict) and len(term) == 1:
+            field, value = next(iter(term.items()))
+            if isinstance(value, dict) and "value" in value:
+                value = value["value"]
+            return _field_filter_to_query_string(field, value)
+
+    if set(filters) == {"terms"}:
+        terms = filters["terms"]
+        if isinstance(terms, dict) and len(terms) == 1:
+            field, values = next(iter(terms.items()))
+            return _field_filter_to_query_string(field, values)
+
+    if set(filters) == {"exists"}:
+        exists = filters["exists"]
+        if isinstance(exists, dict) and exists.get("field"):
+            return f'_exists_:{exists["field"]}'
+
+    if set(filters) == {"range"}:
+        ranges = filters["range"]
+        if isinstance(ranges, dict) and len(ranges) == 1:
+            field, bounds = next(iter(ranges.items()))
+            if isinstance(bounds, dict):
+                lower = bounds.get("gte", bounds.get("gt", "*"))
+                upper = bounds.get("lte", bounds.get("lt", "*"))
+                return f"{field}:[{_quote_query_value(lower)} TO {_quote_query_value(upper)}]"
+
+    return None
+
+
+def _field_filter_to_query_string(field, value):
+    if value in (None, "", False):
+        return None
+
+    if isinstance(value, dict):
+        if "values" in value:
+            return _field_filter_to_query_string(field, value["values"])
+        if "value" in value:
+            return _field_filter_to_query_string(field, value["value"])
+        return None
+
+    if isinstance(value, list):
+        values = [_quote_query_value(item) for item in value if item not in (None, "", False)]
+        if not values:
+            return None
+        return f"{field}:({' OR '.join(values)})"
+
+    return f"{field}:{_quote_query_value(value)}"
+
+
+def _quote_query_value(value):
+    if value == "*":
+        return "*"
+    text = str(value).replace("\\", "\\\\").replace('"', '\\"')
+    return f'"{text}"'
 
 
 def refresh_saved_search_totals(
@@ -199,6 +359,8 @@ def refresh_saved_search_totals(
     data_index,
     batch_size,
     scroll,
+    query_url=None,
+    request_timeout=60,
     dry_run=False,
     limit=None,
 ):
@@ -245,11 +407,18 @@ def refresh_saved_search_totals(
 
             stats["saved_searches_seen"] += 1
             try:
-                total = _count_saved_search(
-                    client,
-                    index=data_index,
-                    favorite_search=favorite_search,
-                )
+                if query_url:
+                    total = _count_saved_search_with_api(
+                        query_url,
+                        favorite_search=favorite_search,
+                        timeout=request_timeout,
+                    )
+                else:
+                    total = _count_saved_search(
+                        client,
+                        index=data_index,
+                        favorite_search=favorite_search,
+                    )
             except Exception:
                 stats["saved_searches_failed"] += 1
                 logger.warning(
@@ -333,6 +502,11 @@ def build_parser():
         help="Optional /v1/metadata URL used to detect the current build.",
     )
     parser.add_argument(
+        "--query-url",
+        default=os.getenv("NDE_QUERY_URL"),
+        help="Optional /v1/query URL used to compute frontend-equivalent totals.",
+    )
+    parser.add_argument(
         "--build-date",
         default=os.getenv("NDE_BUILD_DATE"),
         help="Optional build date override when metadata URL is not available.",
@@ -373,6 +547,12 @@ def main(argv=None):
     build_info = _resolve_build_info(args)
     if build_info:
         logger.info("Resolved build info: %s", build_info)
+    if args.query_url:
+        logger.info("Counting saved searches with query API: %s", args.query_url)
+    else:
+        logger.warning(
+            "No query API URL configured; falling back to raw Elasticsearch counts."
+        )
 
     if build_info and not args.force:
         marker = _get_refresh_marker(client, user_index=args.user_index)
@@ -389,6 +569,8 @@ def main(argv=None):
         data_index=args.data_index,
         batch_size=args.batch_size,
         scroll=args.scroll,
+        query_url=args.query_url,
+        request_timeout=args.request_timeout,
         dry_run=args.dry_run,
         limit=args.limit,
     )

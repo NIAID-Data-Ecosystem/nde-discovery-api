@@ -91,9 +91,11 @@ user's saved searches:
 Use `--dry-run` first to count without writing profile updates. When
 `--metadata-url` is provided, the script records the processed `build_version`
 and `build_date` in the user profile index and skips later runs for the same
-build unless `--force` is passed. The script reads Elasticsearch settings from
-`nde-web/config.py` or `nde-web/config_web.py` by default; override them with
-`--es-host`, `--user-index`, or `--data-index` only when needed.
+build unless `--force` is passed. It also derives the sibling `/v1/query` URL
+from `--metadata-url` and uses that API response to compute frontend-equivalent
+totals. The script reads Elasticsearch settings from `nde-web/config.py` or
+`nde-web/config_web.py` by default; override them with `--es-host`,
+`--user-index`, or `--data-index` only when needed.
 
 ## Commit Checklist
 
