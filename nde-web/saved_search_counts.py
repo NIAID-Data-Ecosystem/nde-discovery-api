@@ -6,6 +6,7 @@ query shape without depending on Tornado or BioThings runtime objects.
 """
 
 from collections.abc import Iterable, Mapping
+from datetime import datetime, timezone
 
 
 DEFAULT_DATA_INDEX = "nde_all_current"
@@ -13,41 +14,55 @@ DEFAULT_USER_INDEX = "nde_user_profiles"
 
 _BROWSE_ALL_QUERIES = frozenset({"", "__all__", "__any__", "*", "*:*"})
 _SUPPORTED_TYPES = ["Dataset", "ResourceCatalog", "Sample", "DataCollection"]
+_DEFAULT_DATE_START = "2000-01-01"
 
-_ES_QUERY_KEYS = frozenset(
-    {
-        "bool",
-        "boosting",
-        "constant_score",
-        "dis_max",
-        "exists",
-        "function_score",
-        "fuzzy",
-        "ids",
-        "match",
-        "match_all",
-        "match_none",
-        "multi_match",
-        "nested",
-        "prefix",
-        "query_string",
-        "range",
-        "regexp",
-        "simple_query_string",
-        "term",
-        "terms",
-        "wildcard",
-    }
-)
-
-
-def build_saved_search_count_body(query: str | None, filters=None) -> dict:
+def build_saved_search_count_body(
+    query: str | None,
+    filters=None,
+    *,
+    include_frontend_defaults: bool = True,
+) -> dict:
     """Return an Elasticsearch count body for a saved search entry."""
+    extra_filter = build_saved_search_extra_filter(
+        filters,
+        include_frontend_defaults=include_frontend_defaults,
+    )
     bool_query = {
         "must": [_build_query_clause(query)],
-        "filter": [_build_type_filter(), *_build_filter_clauses(filters)],
+        "filter": [_build_type_filter(), *_build_filter_clauses(extra_filter)],
     }
     return {"query": {"bool": bool_query}}
+
+
+def build_saved_search_extra_filter(
+    filters=None,
+    *,
+    include_frontend_defaults: bool = True,
+    year: int | None = None,
+) -> str | None:
+    """Return the frontend-equivalent extra_filter for a saved search."""
+    clauses = []
+    user_filter = _filters_to_query_string(filters)
+
+    if include_frontend_defaults:
+        default_filter = frontend_default_extra_filter(year=year)
+        if not _looks_like_frontend_default_filter(user_filter):
+            clauses.append(default_filter)
+
+    if user_filter:
+        clauses.append(user_filter)
+
+    return " AND ".join(f"({clause})" for clause in clauses) or None
+
+
+def frontend_default_extra_filter(*, year: int | None = None) -> str:
+    """Default frontend visibility filter applied to ordinary search totals."""
+    year = year or datetime.now(timezone.utc).year
+    return (
+        f'(date:["{_DEFAULT_DATE_START}" TO "{year}-12-31"] '
+        'OR (-_exists_:("date"))) '
+        'AND NOT(@type:Sample AND NOT additionalType:"BioSample")'
+    )
 
 
 def _build_type_filter() -> dict:
@@ -129,75 +144,128 @@ def _build_query_clause(query: str | None) -> dict:
     return {"dis_max": {"queries": queries}}
 
 
-def _build_filter_clauses(filters) -> list[dict]:
-    if filters in (None, "", False):
+def _build_filter_clauses(extra_filter: str | None) -> list[dict]:
+    if not extra_filter:
         return []
+
+    return [{"query_string": {"query": extra_filter}}]
+
+
+def _filters_to_query_string(filters) -> str | None:
+    if filters in (None, "", False):
+        return None
 
     if isinstance(filters, str):
-        stripped = filters.strip()
-        return [{"query_string": {"query": stripped}}] if stripped else []
+        return filters.strip() or None
 
     if isinstance(filters, Mapping):
-        return _build_mapping_filter_clauses(filters)
+        return _mapping_filter_to_query_string(filters)
 
     if isinstance(filters, Iterable):
-        clauses = []
-        for item in filters:
-            clauses.extend(_build_filter_clauses(item))
-        return clauses
+        clauses = [_filters_to_query_string(item) for item in filters]
+        clauses = [clause for clause in clauses if clause]
+        return " AND ".join(f"({clause})" for clause in clauses) or None
 
-    return []
+    return None
 
 
-def _build_mapping_filter_clauses(filters: Mapping) -> list[dict]:
+def _mapping_filter_to_query_string(filters: Mapping) -> str | None:
     if not filters:
-        return []
+        return None
 
-    if _is_es_query_clause(filters):
-        return [dict(filters)]
+    if "query_string" in filters:
+        query_string = filters.get("query_string") or {}
+        if isinstance(query_string, Mapping):
+            return query_string.get("query")
+
+    if "extra_filter" in filters:
+        return _filters_to_query_string(filters["extra_filter"])
+    if "filter" in filters:
+        return _filters_to_query_string(filters["filter"])
+    if "filters" in filters:
+        return _filters_to_query_string(filters["filters"])
+
+    es_clause = _es_filter_clause_to_query_string(filters)
+    if es_clause:
+        return es_clause
 
     clauses = []
     for field, value in filters.items():
-        if field == "filters":
-            clauses.extend(_build_filter_clauses(value))
-            continue
-        if field in {"extra_filter", "filter"}:
-            clauses.extend(_build_filter_clauses(value))
-            continue
-        clauses.extend(_field_filter_clause(field, value))
-    return clauses
+        clause = _field_filter_to_query_string(field, value)
+        if clause:
+            clauses.append(clause)
+    return " AND ".join(clauses) or None
 
 
-def _field_filter_clause(field: str, value) -> list[dict]:
+def _es_filter_clause_to_query_string(filters: Mapping) -> str | None:
+    if set(filters) == {"term"}:
+        term = filters["term"]
+        if isinstance(term, Mapping) and len(term) == 1:
+            field, value = next(iter(term.items()))
+            if isinstance(value, Mapping) and "value" in value:
+                value = value["value"]
+            return _field_filter_to_query_string(field, value)
+
+    if set(filters) == {"terms"}:
+        terms = filters["terms"]
+        if isinstance(terms, Mapping) and len(terms) == 1:
+            field, values = next(iter(terms.items()))
+            return _field_filter_to_query_string(field, values)
+
+    if set(filters) == {"exists"}:
+        exists = filters["exists"]
+        if isinstance(exists, Mapping) and exists.get("field"):
+            return f'_exists_:{exists["field"]}'
+
+    if set(filters) == {"range"}:
+        ranges = filters["range"]
+        if isinstance(ranges, Mapping) and len(ranges) == 1:
+            field, bounds = next(iter(ranges.items()))
+            if isinstance(bounds, Mapping):
+                lower = bounds.get("gte", bounds.get("gt", "*"))
+                upper = bounds.get("lte", bounds.get("lt", "*"))
+                return (
+                    f"{field}:[{_quote_query_value(lower)} "
+                    f"TO {_quote_query_value(upper)}]"
+                )
+
+    return None
+
+
+def _field_filter_to_query_string(field: str, value) -> str | None:
     if value in (None, "", False):
-        return []
+        return None
 
     if isinstance(value, Mapping):
-        if _is_es_query_clause(value):
-            return [dict(value)]
         if "values" in value:
-            return _field_filter_clause(field, value["values"])
+            return _field_filter_to_query_string(field, value["values"])
         if "value" in value:
-            return _field_filter_clause(field, value["value"])
-        return [
-            {"term": {f"{field}.{subfield}": subvalue}}
-            for subfield, subvalue in value.items()
-            if subvalue not in (None, "", False)
-        ]
+            return _field_filter_to_query_string(field, value["value"])
+        return None
 
     if isinstance(value, str):
-        return [{"term": {field: value}}]
+        return f"{field}:{_quote_query_value(value)}"
 
     if isinstance(value, Iterable):
         values = [item for item in value if item not in (None, "", False)]
         if not values:
-            return []
-        if len(values) == 1:
-            return [{"term": {field: values[0]}}]
-        return [{"terms": {field: values}}]
+            return None
+        return f"{field}:({' OR '.join(_quote_query_value(item) for item in values)})"
 
-    return [{"term": {field: value}}]
+    return f"{field}:{_quote_query_value(value)}"
 
 
-def _is_es_query_clause(value: Mapping) -> bool:
-    return len(value) == 1 and next(iter(value)) in _ES_QUERY_KEYS
+def _quote_query_value(value) -> str:
+    if value == "*":
+        return "*"
+    text = str(value).replace("\\", "\\\\").replace('"', '\\"')
+    return f'"{text}"'
+
+
+def _looks_like_frontend_default_filter(extra_filter: str | None) -> bool:
+    if not extra_filter:
+        return False
+    return (
+        "NOT(@type:Sample AND NOT additionalType" in extra_filter
+        or "NOT+(@type:Sample+AND+NOT+additionalType" in extra_filter
+    )

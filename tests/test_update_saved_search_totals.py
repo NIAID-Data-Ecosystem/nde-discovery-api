@@ -3,6 +3,7 @@ import json
 import sys
 import types
 from pathlib import Path
+from urllib.parse import parse_qs, urlsplit
 
 
 SCRIPT_PATH = (
@@ -133,9 +134,17 @@ def test_refresh_saved_search_totals_can_count_with_query_api():
 
     assert stats["saved_searches_changed"] == 1
     assert client.updates[0]["body"]["doc"]["favorite_searches"][0]["total"] == 11500
-    assert opened_urls == [
-        "https://api-staging.data.niaid.nih.gov/v1/query?q=asthma&size=0&facet_size=0"
-    ]
+    assert len(opened_urls) == 1
+    parsed = urlsplit(opened_urls[0])
+    params = parse_qs(parsed.query)
+    assert parsed.geturl().startswith("https://api-staging.data.niaid.nih.gov/v1/query?")
+    assert params["q"] == ["asthma"]
+    assert params["size"] == ["0"]
+    assert params["facet_size"] == ["0"]
+    assert params["use_ai_search"] == ["false"]
+    assert "NOT(@type:Sample AND NOT additionalType:\"BioSample\")" in (
+        params["extra_filter"][0]
+    )
 
 
 def test_extract_build_info_reads_metadata_release_fields():
@@ -181,12 +190,18 @@ def test_saved_search_api_params_convert_filters_to_extra_filter():
         }
     )
 
-    assert params == {
-        "q": "__all__",
-        "size": 0,
-        "facet_size": 0,
-        "extra_filter": 'healthCondition.name:("asthma" OR "diabetes") AND @type:"Dataset"',
-    }
+    assert params["q"] == "__all__"
+    assert params["size"] == 0
+    assert params["facet_size"] == 0
+    assert params["use_ai_search"] == "false"
+    assert 'date:["2000-01-01" TO "' in params["extra_filter"]
+    assert 'AND NOT(@type:Sample AND NOT additionalType:"BioSample")' in (
+        params["extra_filter"]
+    )
+    assert 'healthCondition.name:("asthma" OR "diabetes")' in (
+        params["extra_filter"]
+    )
+    assert '@type:"Dataset"' in params["extra_filter"]
 
 
 def test_build_marker_matches_current_build_version():

@@ -24,6 +24,7 @@ from saved_search_counts import (  # noqa: E402
     DEFAULT_DATA_INDEX,
     DEFAULT_USER_INDEX,
     build_saved_search_count_body,
+    build_saved_search_extra_filter,
 )
 
 
@@ -244,9 +245,10 @@ def _saved_search_api_params(favorite_search):
         "q": favorite_search.get("query") or "__all__",
         "size": 0,
         "facet_size": 0,
+        "use_ai_search": "false",
     }
 
-    extra_filter = _filters_to_query_string(favorite_search.get("filters"))
+    extra_filter = build_saved_search_extra_filter(favorite_search.get("filters"))
     if extra_filter:
         params["extra_filter"] = extra_filter
 
@@ -254,102 +256,6 @@ def _saved_search_api_params(favorite_search):
         params["use_ai_search"] = str(bool(favorite_search["use_ai_search"])).lower()
 
     return params
-
-
-def _filters_to_query_string(filters):
-    if filters in (None, "", False):
-        return None
-
-    if isinstance(filters, str):
-        return filters.strip() or None
-
-    if isinstance(filters, list):
-        clauses = [_filters_to_query_string(item) for item in filters]
-        clauses = [clause for clause in clauses if clause]
-        return " AND ".join(f"({clause})" for clause in clauses) or None
-
-    if not isinstance(filters, dict):
-        return None
-
-    if "query_string" in filters:
-        query_string = filters.get("query_string") or {}
-        if isinstance(query_string, dict):
-            return query_string.get("query")
-
-    if "extra_filter" in filters:
-        return _filters_to_query_string(filters["extra_filter"])
-    if "filter" in filters:
-        return _filters_to_query_string(filters["filter"])
-
-    es_clause = _es_filter_clause_to_query_string(filters)
-    if es_clause:
-        return es_clause
-
-    clauses = []
-    for field, value in filters.items():
-        clause = _field_filter_to_query_string(field, value)
-        if clause:
-            clauses.append(clause)
-    return " AND ".join(clauses) or None
-
-
-def _es_filter_clause_to_query_string(filters):
-    if set(filters) == {"term"}:
-        term = filters["term"]
-        if isinstance(term, dict) and len(term) == 1:
-            field, value = next(iter(term.items()))
-            if isinstance(value, dict) and "value" in value:
-                value = value["value"]
-            return _field_filter_to_query_string(field, value)
-
-    if set(filters) == {"terms"}:
-        terms = filters["terms"]
-        if isinstance(terms, dict) and len(terms) == 1:
-            field, values = next(iter(terms.items()))
-            return _field_filter_to_query_string(field, values)
-
-    if set(filters) == {"exists"}:
-        exists = filters["exists"]
-        if isinstance(exists, dict) and exists.get("field"):
-            return f'_exists_:{exists["field"]}'
-
-    if set(filters) == {"range"}:
-        ranges = filters["range"]
-        if isinstance(ranges, dict) and len(ranges) == 1:
-            field, bounds = next(iter(ranges.items()))
-            if isinstance(bounds, dict):
-                lower = bounds.get("gte", bounds.get("gt", "*"))
-                upper = bounds.get("lte", bounds.get("lt", "*"))
-                return f"{field}:[{_quote_query_value(lower)} TO {_quote_query_value(upper)}]"
-
-    return None
-
-
-def _field_filter_to_query_string(field, value):
-    if value in (None, "", False):
-        return None
-
-    if isinstance(value, dict):
-        if "values" in value:
-            return _field_filter_to_query_string(field, value["values"])
-        if "value" in value:
-            return _field_filter_to_query_string(field, value["value"])
-        return None
-
-    if isinstance(value, list):
-        values = [_quote_query_value(item) for item in value if item not in (None, "", False)]
-        if not values:
-            return None
-        return f"{field}:({' OR '.join(values)})"
-
-    return f"{field}:{_quote_query_value(value)}"
-
-
-def _quote_query_value(value):
-    if value == "*":
-        return "*"
-    text = str(value).replace("\\", "\\\\").replace('"', '\\"')
-    return f'"{text}"'
 
 
 def refresh_saved_search_totals(
