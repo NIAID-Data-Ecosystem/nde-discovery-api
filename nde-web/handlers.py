@@ -79,6 +79,13 @@ _REPO_METADATA_DIR = os.path.join(
 _HEURISTICS_DIR = os.path.join(_REPO_METADATA_DIR, "heuristics")
 _source_info_cache = None
 
+_SOURCE_STAT_COUNT_OVERRIDES = {
+    "empiar": {
+        "field": "includedInDataCatalog.name",
+        "value": "Electron Microscopy Public Image Archive",
+    },
+}
+
 
 def _load_source_info():
     """Load per-repo metadata dicts keyed by source name.
@@ -365,7 +372,31 @@ class NDESourceHandler(MetadataSourceHandler):
         if cached_averages is not None:
             return cached_averages
 
-    def extras(self, _meta):
+    async def _refresh_source_stat_count(self, source, config, _meta):
+        if source not in _meta["src"]:
+            return
+
+        index = getattr(self.metadata, "indices", {}).get(self.biothing_type)
+        if not index:
+            return
+
+        stats_key = config.get("stats_key", source)
+        try:
+            response = await self.biothings.elasticsearch.async_client.count(
+                index=index,
+                query={"term": {config["field"]: config["value"]}},
+            )
+        except Exception:
+            logging.warning(
+                "Unable to refresh metadata stats count for source %s",
+                source,
+                exc_info=True,
+            )
+            return
+
+        _meta["src"][source].setdefault("stats", {})[stats_key] = response["count"]
+
+    async def extras(self, _meta):
         source_info = _load_source_info()
         for source, data in source_info.items():
             if source in _meta["src"]:
@@ -377,4 +408,8 @@ class NDESourceHandler(MetadataSourceHandler):
                 _meta["src"][source] = {"sourceInfo": source_info[source]}
                 parent = _meta["src"]["veupath_collections"]
                 _meta["src"][source]["version"] = parent["version"]
+
+        for source, config in _SOURCE_STAT_COUNT_OVERRIDES.items():
+            await self._refresh_source_stat_count(source, config, _meta)
+
         return _meta
