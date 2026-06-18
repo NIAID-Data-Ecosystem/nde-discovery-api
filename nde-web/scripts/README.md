@@ -85,16 +85,15 @@ user's saved searches:
 
 ```bash
 ./nde-web/venv/bin/python nde-web/scripts/update_saved_search_totals.py \
-  --es-host http://localhost:9200 \
-  --user-index nde_user_profiles \
-  --data-index nde_all_current \
   --metadata-url https://api.data.niaid.nih.gov/v1/metadata
 ```
 
 Use `--dry-run` first to count without writing profile updates. When
 `--metadata-url` is provided, the script records the processed `build_version`
 and `build_date` in the user profile index and skips later runs for the same
-build unless `--force` is passed.
+build unless `--force` is passed. The script reads Elasticsearch settings from
+`nde-web/config.py` or `nde-web/config_web.py` by default; override them with
+`--es-host`, `--user-index`, or `--data-index` only when needed.
 
 ## Commit Checklist
 

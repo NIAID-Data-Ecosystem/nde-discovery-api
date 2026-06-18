@@ -1,4 +1,6 @@
 import importlib.util
+import sys
+import types
 from pathlib import Path
 
 
@@ -120,3 +122,37 @@ def test_save_refresh_marker_records_build_info_and_stats():
     assert client.indexes[0]["body"]["kind"] == "saved_search_totals_refresh"
     assert client.indexes[0]["body"]["build_version"] == "20260615"
     assert client.indexes[0]["body"]["stats"] == {"profiles_seen": 2}
+
+
+def test_apply_config_defaults_reads_es_settings_from_config_module():
+    module = _load_script_module()
+    config_name = "fake_nde_config_for_saved_search_totals"
+    config = types.ModuleType(config_name)
+    config.ES_HOST = "http://172.30.2.11:9200"
+    config.ES_USER_INDEX = "custom_user_profiles"
+    config.ES_INDICES = {None: "custom_data_current"}
+    config.ES_ARGS = {
+        "request_timeout": 120,
+        "max_retries": 5,
+        "http_compress": True,
+    }
+    sys.modules[config_name] = config
+
+    args = types.SimpleNamespace(
+        config_module=config_name,
+        es_host=None,
+        user_index=None,
+        data_index=None,
+        request_timeout=None,
+    )
+    try:
+        args = module._apply_config_defaults(args)
+    finally:
+        sys.modules.pop(config_name, None)
+
+    assert args.es_host == "http://172.30.2.11:9200"
+    assert args.user_index == "custom_user_profiles"
+    assert args.data_index == "custom_data_current"
+    assert args.request_timeout == 120
+    assert args.es_args["max_retries"] == 5
+    assert args.es_args["http_compress"] is True

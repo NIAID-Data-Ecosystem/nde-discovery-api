@@ -6,6 +6,7 @@ Run this after publishing a new data release so each user profile's
 """
 
 import argparse
+import importlib
 import json
 import logging
 import os
@@ -43,10 +44,54 @@ def _parse_basic_auth(value):
     return username, password
 
 
+def _load_config_defaults(config_module=None):
+    defaults = {
+        "es_host": None,
+        "user_index": None,
+        "data_index": None,
+        "es_args": {},
+    }
+    module_names = [config_module] if config_module else ["config", "config_web"]
+    for module_name in module_names:
+        if not module_name:
+            continue
+        try:
+            config = importlib.import_module(module_name)
+        except ImportError:
+            continue
+
+        indices = getattr(config, "ES_INDICES", {}) or {}
+        defaults.update(
+            {
+                "es_host": getattr(config, "ES_HOST", None),
+                "user_index": getattr(config, "ES_USER_INDEX", None),
+                "data_index": indices.get(None) or indices.get("dataset"),
+                "es_args": dict(getattr(config, "ES_ARGS", {}) or {}),
+            }
+        )
+        break
+    return defaults
+
+
+def _apply_config_defaults(args):
+    defaults = _load_config_defaults(args.config_module)
+    args.es_host = args.es_host or defaults["es_host"] or "http://localhost:9200"
+    args.user_index = args.user_index or defaults["user_index"] or DEFAULT_USER_INDEX
+    args.data_index = args.data_index or defaults["data_index"] or DEFAULT_DATA_INDEX
+    args.es_args = defaults["es_args"]
+    args.request_timeout = (
+        args.request_timeout
+        or args.es_args.get("request_timeout")
+        or 60
+    )
+    return args
+
+
 def _build_client(args):
     from elasticsearch import Elasticsearch
 
-    client_kwargs = {"request_timeout": args.request_timeout}
+    client_kwargs = dict(getattr(args, "es_args", {}) or {})
+    client_kwargs["request_timeout"] = args.request_timeout
     if args.api_key:
         client_kwargs["api_key"] = args.api_key
     if args.basic_auth:
@@ -248,21 +293,24 @@ def build_parser():
         description="Refresh favorite_searches[*].total in user profile data."
     )
     parser.add_argument(
+        "--config-module",
+        default=os.getenv("NDE_CONFIG_MODULE"),
+        help="Optional Python config module to read ES defaults from. Defaults to config, then config_web.",
+    )
+    parser.add_argument(
         "--es-host",
-        default=os.getenv("ELASTICSEARCH_URL")
-        or os.getenv("ES_HOST")
-        or "http://localhost:9200",
-        help="Elasticsearch URL. Defaults to ELASTICSEARCH_URL, ES_HOST, or localhost.",
+        default=os.getenv("ELASTICSEARCH_URL") or os.getenv("ES_HOST"),
+        help="Elasticsearch URL. Defaults to env, config.py, then localhost.",
     )
     parser.add_argument(
         "--user-index",
-        default=os.getenv("ES_USER_INDEX", DEFAULT_USER_INDEX),
-        help=f"User profile index. Defaults to {DEFAULT_USER_INDEX}.",
+        default=os.getenv("ES_USER_INDEX"),
+        help=f"User profile index. Defaults to config.py or {DEFAULT_USER_INDEX}.",
     )
     parser.add_argument(
         "--data-index",
-        default=os.getenv("ES_DATA_INDEX", DEFAULT_DATA_INDEX),
-        help=f"Data search index. Defaults to {DEFAULT_DATA_INDEX}.",
+        default=os.getenv("ES_DATA_INDEX"),
+        help=f"Data search index. Defaults to config.py or {DEFAULT_DATA_INDEX}.",
     )
     parser.add_argument(
         "--api-key",
@@ -296,7 +344,7 @@ def build_parser():
     )
     parser.add_argument("--batch-size", type=int, default=500)
     parser.add_argument("--scroll", default="5m")
-    parser.add_argument("--request-timeout", type=int, default=60)
+    parser.add_argument("--request-timeout", type=int, default=None)
     parser.add_argument(
         "--limit",
         type=int,
@@ -315,6 +363,7 @@ def build_parser():
 
 def main(argv=None):
     args = build_parser().parse_args(argv)
+    args = _apply_config_defaults(args)
     logging.basicConfig(
         level=logging.DEBUG if args.verbose else logging.INFO,
         format="%(levelname)s %(message)s",
