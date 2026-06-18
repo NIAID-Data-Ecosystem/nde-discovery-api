@@ -78,6 +78,24 @@ bootstrap script creates the stub with an empty `schedule` string and empty
 `schema` object. Fill out those two fields in the generated source metadata
 before committing.
 
+## Refresh Saved Search Totals
+
+After publishing a new data release, refresh the stored result count for each
+user's saved searches:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/update_saved_search_totals.py \
+  --es-host http://localhost:9200 \
+  --user-index nde_user_profiles \
+  --data-index nde_all_current \
+  --metadata-url https://api.data.niaid.nih.gov/v1/metadata
+```
+
+Use `--dry-run` first to count without writing profile updates. When
+`--metadata-url` is provided, the script records the processed `build_version`
+and `build_date` in the user profile index and skips later runs for the same
+build unless `--force` is passed.
+
 ## Commit Checklist
 
 Commit source-specific metadata outputs:
@@ -95,6 +113,7 @@ nde-web/scripts/bootstrap_source_metadata.py
 nde-web/scripts/metadata_compatibility_calculator.py
 nde-web/scripts/sync_repo_metadata.py
 nde-web/scripts/compute_heuristics.py
+nde-web/scripts/update_saved_search_totals.py
 nde-web/scripts/validate_repo_metadata.py
 nde-web/requirements_scripts.txt
 ```
