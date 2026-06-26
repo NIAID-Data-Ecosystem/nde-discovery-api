@@ -17,6 +17,7 @@ from datetime import datetime, timezone
 import elasticsearch
 from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.handlers import BaseAPIHandler
+from saved_search_counts import build_saved_search_count_body
 from tornado.web import HTTPError
 
 logger = logging.getLogger(__name__)
@@ -26,7 +27,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 UPDATABLE_PREFERENCES = frozenset(
-    {"ai_toggle_preference", "contact_preference", "beta"}
+    {"ai_toggle_preference", "contact_preference", "beta", "feedback_preference"}
 )
 
 
@@ -53,6 +54,7 @@ def _seed_user_doc(user: dict) -> dict:
         "favorite_datasets": [],
         "contact_preference": False,
         "beta": False,
+        "feedback_preference": False,
         "created": now,
         "updated": now,
     }
@@ -121,6 +123,15 @@ class _UserDataBase(BioThingsAuthnMixin, BaseAPIHandler):
     def _index(self):
         return self.biothings.config.ES_USER_INDEX
 
+    @property
+    def _data_index(self):
+        indices = getattr(self.biothings.config, "ES_INDICES", {}) or {}
+        return (
+            indices.get(None)
+            or indices.get("dataset")
+            or getattr(self.biothings.config, "ES_INDEX", None)
+        )
+
     async def _get_user_doc(self, doc_id: str) -> dict | None:
         """Fetch a user document; return *None* if it does not exist."""
         try:
@@ -138,6 +149,23 @@ class _UserDataBase(BioThingsAuthnMixin, BaseAPIHandler):
         await self._es.update(
             id=doc_id, body={"doc": partial}, index=self._index
         )
+
+    async def _count_saved_search_total(self, entry: dict) -> int | None:
+        """Return the current result count for a saved search, if available."""
+        index = self._data_index
+        if not index:
+            return None
+
+        body = build_saved_search_count_body(
+            entry.get("query"),
+            entry.get("filters"),
+        )
+        try:
+            resp = await self._es.count(index=index, query=body["query"])
+            return int(resp["count"])
+        except Exception:
+            logger.warning("Unable to count saved search total", exc_info=True)
+            return None
 
 
 # ---------------------------------------------------------------------------
@@ -230,6 +258,7 @@ class UserFavoriteSearchesHandler(_UserDataBase):
             "filters": payload.get("filters", {}),
             "saved_at": _now_iso(),
         }
+        entry["total"] = await self._count_saved_search_total(entry)
 
         doc_id = _user_doc_id(self.current_user)
         doc = await self._get_user_doc(doc_id)
