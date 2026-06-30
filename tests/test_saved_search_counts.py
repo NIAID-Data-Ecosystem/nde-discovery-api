@@ -95,6 +95,54 @@ def test_frontend_date_filter_with_exists_keeps_date_or_grouped():
     )
 
 
+def test_positive_and_negative_exists_filters_are_grouped_by_field():
+    extra_filter = build_saved_search_extra_filter(
+        {
+            "_exists_": ["species.displayName.raw", "includedInDataCatalog.name"],
+            "-_exists_": ["species.displayName.raw", "measurementTechnique.name.raw"],
+        },
+        include_frontend_defaults=False,
+    )
+
+    assert extra_filter == (
+        '(_exists_:("includedInDataCatalog.name") '
+        'AND -_exists_:("measurementTechnique.name.raw") '
+        'AND ((_exists_:("species.displayName.raw")) OR (-_exists_:("species.displayName.raw"))))'
+    )
+
+
+def test_mixed_value_and_exists_filters_keep_frontend_or_semantics():
+    extra_filter = build_saved_search_extra_filter(
+        {
+            "species.displayName.raw": ["Human | Homo sapiens"],
+            "_exists_": ["species.displayName.raw"],
+            "-_exists_": ["measurementTechnique.name.raw"],
+        },
+        include_frontend_defaults=False,
+    )
+
+    assert extra_filter == (
+        '((species.displayName.raw:("Human | Homo sapiens") '
+        'OR (_exists_:("species.displayName.raw"))) '
+        'AND -_exists_:("measurementTechnique.name.raw"))'
+    )
+
+
+def test_mixed_value_and_missing_filters_keep_frontend_or_semantics():
+    extra_filter = build_saved_search_extra_filter(
+        {
+            "measurementTechnique.name.raw": ["ELISA"],
+            "-_exists_": ["measurementTechnique.name.raw"],
+        },
+        include_frontend_defaults=False,
+    )
+
+    assert extra_filter == (
+        '((measurementTechnique.name.raw:("ELISA") '
+        'OR (-_exists_:("measurementTechnique.name.raw"))))'
+    )
+
+
 def test_elasticsearch_query_filter_is_preserved():
     es_filter = {"range": {"date": {"gte": "2020-01-01", "lte": "2020-12-31"}}}
     body = build_saved_search_count_body(
@@ -128,4 +176,28 @@ def test_saved_search_extra_filter_combines_frontend_default_and_user_filters():
         == '((date:["2000-01-01" TO "2026-12-31"] OR (-_exists_:("date"))) '
         'AND NOT(@type:Sample AND NOT additionalType:"BioSample")) '
         'AND (healthCondition.name:("asthma" OR "diabetes"))'
+    )
+
+
+def test_explicit_date_filter_keeps_sample_default_without_duplicate_date_default():
+    extra_filter = build_saved_search_extra_filter(
+        {"date": ["1990-01-01", "1999-12-31"]},
+        year=2026,
+    )
+
+    assert extra_filter == (
+        '(NOT(@type:Sample AND NOT additionalType:"BioSample")) '
+        'AND (date:["1990-01-01" TO "1999-12-31"])'
+    )
+
+
+def test_explicit_date_exists_filter_skips_date_default():
+    extra_filter = build_saved_search_extra_filter(
+        {"_exists_": ["date"]},
+        year=2026,
+    )
+
+    assert extra_filter == (
+        '(NOT(@type:Sample AND NOT additionalType:"BioSample")) '
+        'AND (_exists_:("date"))'
     )
