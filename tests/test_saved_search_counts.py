@@ -76,7 +76,7 @@ def test_frontend_date_filter_with_missing_date_uses_or_range():
         include_frontend_defaults=False,
     )
 
-    assert extra_filter == '(date:["2000-01-01" TO "2026-12-31"] OR (-_exists_:("date")))'
+    assert extra_filter == '((date:["2000-01-01" TO "2026-12-31"] OR (-_exists_:("date"))))'
 
 
 def test_frontend_date_filter_with_exists_keeps_date_or_grouped():
@@ -90,8 +90,8 @@ def test_frontend_date_filter_with_exists_keeps_date_or_grouped():
     )
 
     assert extra_filter == (
-        '(date:["2000-01-01" TO "2026-12-31"] OR (-_exists_:("date"))) '
-        'AND _exists_:("species.displayName.raw")'
+        '((date:["2000-01-01" TO "2026-12-31"] OR (-_exists_:("date"))) '
+        'AND _exists_:("species.displayName.raw"))'
     )
 
 
