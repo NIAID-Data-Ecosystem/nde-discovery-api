@@ -189,20 +189,25 @@ def _mapping_filter_to_query_string(filters: Mapping) -> str | None:
     if es_clause:
         return es_clause
 
-    missing_fields = _filter_values(filters.get("-_exists_"))
-    missing_fields = [str(field) for field in missing_fields]
+    exists_fields = [str(field) for field in _filter_values(filters.get("_exists_"))]
+    missing_fields = [str(field) for field in _filter_values(filters.get("-_exists_"))]
     missing_fields_used = set()
     clauses = []
     for field, value in filters.items():
-        if field == "-_exists_":
+        if field in {"_exists_", "-_exists_"}:
             continue
 
         clause = _field_filter_to_query_string(field, value)
         if clause:
             if field in missing_fields and _date_range_filter_to_query_string(field, value):
                 missing_clause = _missing_field_filter_to_query_string(field)
-                clause = f"{clause} OR ({missing_clause})"
+                clause = f"({clause} OR ({missing_clause}))"
                 missing_fields_used.add(field)
+            clauses.append(clause)
+
+    for field in exists_fields:
+        clause = _exists_field_filter_to_query_string(field)
+        if clause:
             clauses.append(clause)
 
     for field in missing_fields:
@@ -293,6 +298,12 @@ def _missing_field_filter_to_query_string(field: str) -> str | None:
     if field in (None, "", False):
         return None
     return f"-_exists_:({_quote_query_value(field)})"
+
+
+def _exists_field_filter_to_query_string(field: str) -> str | None:
+    if field in (None, "", False):
+        return None
+    return f"_exists_:({_quote_query_value(field)})"
 
 
 def _filter_values(value) -> list:
