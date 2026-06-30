@@ -189,11 +189,29 @@ def _mapping_filter_to_query_string(filters: Mapping) -> str | None:
     if es_clause:
         return es_clause
 
+    missing_fields = _filter_values(filters.get("-_exists_"))
+    missing_fields = [str(field) for field in missing_fields]
+    missing_fields_used = set()
     clauses = []
     for field, value in filters.items():
+        if field == "-_exists_":
+            continue
+
         clause = _field_filter_to_query_string(field, value)
         if clause:
+            if field in missing_fields and _date_range_filter_to_query_string(field, value):
+                missing_clause = _missing_field_filter_to_query_string(field)
+                clause = f"{clause} OR ({missing_clause})"
+                missing_fields_used.add(field)
             clauses.append(clause)
+
+    for field in missing_fields:
+        if field in missing_fields_used:
+            continue
+        clause = _missing_field_filter_to_query_string(field)
+        if clause:
+            clauses.append(clause)
+
     return " AND ".join(clauses) or None
 
 
@@ -236,6 +254,10 @@ def _field_filter_to_query_string(field: str, value) -> str | None:
     if value in (None, "", False):
         return None
 
+    date_range_clause = _date_range_filter_to_query_string(field, value)
+    if date_range_clause:
+        return date_range_clause
+
     if isinstance(value, Mapping):
         if "values" in value:
             return _field_filter_to_query_string(field, value["values"])
@@ -253,6 +275,44 @@ def _field_filter_to_query_string(field: str, value) -> str | None:
         return f"{field}:({' OR '.join(_quote_query_value(item) for item in values)})"
 
     return f"{field}:{_quote_query_value(value)}"
+
+
+def _date_range_filter_to_query_string(field: str, value) -> str | None:
+    if field != "date":
+        return None
+
+    values = _filter_values(value)
+    if len(values) != 2:
+        return None
+
+    lower, upper = values
+    return f"{field}:[{_quote_query_value(lower)} TO {_quote_query_value(upper)}]"
+
+
+def _missing_field_filter_to_query_string(field: str) -> str | None:
+    if field in (None, "", False):
+        return None
+    return f"-_exists_:({_quote_query_value(field)})"
+
+
+def _filter_values(value) -> list:
+    if value in (None, "", False):
+        return []
+
+    if isinstance(value, Mapping):
+        if "values" in value:
+            return _filter_values(value["values"])
+        if "value" in value:
+            return _filter_values(value["value"])
+        return []
+
+    if isinstance(value, str):
+        return [value]
+
+    if isinstance(value, Iterable):
+        return [item for item in value if item not in (None, "", False)]
+
+    return [value]
 
 
 def _quote_query_value(value) -> str:

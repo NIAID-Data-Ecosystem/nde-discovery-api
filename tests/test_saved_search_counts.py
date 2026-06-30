@@ -70,6 +70,15 @@ def test_mapping_filters_become_field_filters():
     }
 
 
+def test_frontend_date_filter_with_missing_date_uses_or_range():
+    extra_filter = build_saved_search_extra_filter(
+        {"date": ["2000-01-01", "2026-12-31"], "-_exists_": ["date"]},
+        include_frontend_defaults=False,
+    )
+
+    assert extra_filter == '(date:["2000-01-01" TO "2026-12-31"] OR (-_exists_:("date")))'
+
+
 def test_elasticsearch_query_filter_is_preserved():
     es_filter = {"range": {"date": {"gte": "2020-01-01", "lte": "2020-12-31"}}}
     body = build_saved_search_count_body(
