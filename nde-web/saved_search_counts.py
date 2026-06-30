@@ -15,6 +15,9 @@ DEFAULT_USER_INDEX = "nde_user_profiles"
 _BROWSE_ALL_QUERIES = frozenset({"", "__all__", "__any__", "*", "*:*"})
 _SUPPORTED_TYPES = ["Dataset", "ResourceCatalog", "Sample", "DataCollection"]
 _DEFAULT_DATE_START = "2000-01-01"
+_DEFAULT_SAMPLE_VISIBILITY_FILTER = (
+    'NOT(@type:Sample AND NOT additionalType:"BioSample")'
+)
 
 def build_saved_search_count_body(
     query: str | None,
@@ -45,9 +48,12 @@ def build_saved_search_extra_filter(
     user_filter = _filters_to_query_string(filters)
 
     if include_frontend_defaults:
-        default_filter = frontend_default_extra_filter(year=year)
         if not _looks_like_frontend_default_filter(user_filter):
-            clauses.append(default_filter)
+            default_clauses = []
+            if not _has_explicit_date_filter(user_filter):
+                default_clauses.append(frontend_default_date_filter(year=year))
+            default_clauses.append(_DEFAULT_SAMPLE_VISIBILITY_FILTER)
+            clauses.append(" AND ".join(default_clauses))
 
     if user_filter:
         clauses.append(user_filter)
@@ -57,11 +63,18 @@ def build_saved_search_extra_filter(
 
 def frontend_default_extra_filter(*, year: int | None = None) -> str:
     """Default frontend visibility filter applied to ordinary search totals."""
+    return (
+        f"{frontend_default_date_filter(year=year)} "
+        f"AND {_DEFAULT_SAMPLE_VISIBILITY_FILTER}"
+    )
+
+
+def frontend_default_date_filter(*, year: int | None = None) -> str:
+    """Default frontend date filter applied when a search has no date filter."""
     year = year or datetime.now(timezone.utc).year
     return (
         f'(date:["{_DEFAULT_DATE_START}" TO "{year}-12-31"] '
-        'OR (-_exists_:("date"))) '
-        'AND NOT(@type:Sample AND NOT additionalType:"BioSample")'
+        'OR (-_exists_:("date")))'
     )
 
 
@@ -189,8 +202,9 @@ def _mapping_filter_to_query_string(filters: Mapping) -> str | None:
     if es_clause:
         return es_clause
 
-    exists_fields = [str(field) for field in _filter_values(filters.get("_exists_"))]
-    missing_fields = [str(field) for field in _filter_values(filters.get("-_exists_"))]
+    exists_fields = set(str(field) for field in _filter_values(filters.get("_exists_")))
+    missing_fields = set(str(field) for field in _filter_values(filters.get("-_exists_")))
+    exists_fields_used = set()
     missing_fields_used = set()
     clauses = []
     for field, value in filters.items():
@@ -199,23 +213,27 @@ def _mapping_filter_to_query_string(filters: Mapping) -> str | None:
 
         clause = _field_filter_to_query_string(field, value)
         if clause:
-            if field in missing_fields and _date_range_filter_to_query_string(field, value):
-                missing_clause = _missing_field_filter_to_query_string(field)
-                clause = f"({clause} OR ({missing_clause}))"
+            field_clauses = [clause]
+            if field in exists_fields:
+                field_clauses.append(f"({_exists_field_filter_to_query_string(field)})")
+                exists_fields_used.add(field)
+            if field in missing_fields:
+                field_clauses.append(f"({_missing_field_filter_to_query_string(field)})")
                 missing_fields_used.add(field)
+            if len(field_clauses) > 1:
+                clause = f"({' OR '.join(field_clauses)})"
             clauses.append(clause)
 
-    for field in exists_fields:
-        clause = _exists_field_filter_to_query_string(field)
-        if clause:
-            clauses.append(clause)
-
-    for field in missing_fields:
-        if field in missing_fields_used:
-            continue
-        clause = _missing_field_filter_to_query_string(field)
-        if clause:
-            clauses.append(clause)
+    for field in sorted((exists_fields | missing_fields) - (exists_fields_used | missing_fields_used)):
+        field_clauses = []
+        if field in exists_fields:
+            field_clauses.append(_exists_field_filter_to_query_string(field))
+        if field in missing_fields:
+            field_clauses.append(_missing_field_filter_to_query_string(field))
+        if len(field_clauses) == 1:
+            clauses.append(field_clauses[0])
+        elif field_clauses:
+            clauses.append(f"({' OR '.join(f'({clause})' for clause in field_clauses)})")
 
     return " AND ".join(clauses) or None
 
@@ -339,4 +357,15 @@ def _looks_like_frontend_default_filter(extra_filter: str | None) -> bool:
     return (
         "NOT(@type:Sample AND NOT additionalType" in extra_filter
         or "NOT+(@type:Sample+AND+NOT+additionalType" in extra_filter
+    )
+
+
+def _has_explicit_date_filter(extra_filter: str | None) -> bool:
+    if not extra_filter:
+        return False
+    return (
+        "date:" in extra_filter
+        or '_exists_:("date")' in extra_filter
+        or "_exists_:(date)" in extra_filter
+        or "_exists_:date" in extra_filter
     )
