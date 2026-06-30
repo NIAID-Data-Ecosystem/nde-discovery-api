@@ -7,6 +7,7 @@ import elasticsearch
 from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.auth.oauth_mixins import GithubOAuth2Mixin, OrcidOAuth2Mixin
 from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
+from tornado.httpclient import HTTPClientError
 from tornado.httputil import url_concat
 from tornado.web import HTTPError, RequestHandler
 from user_data import _seed_user_doc, _user_doc_id
@@ -53,6 +54,10 @@ def safe_next_url(handler, default="/"):
     query = f"?{parsed.query}" if parsed.query else ""
     fragment = f"#{parsed.fragment}" if parsed.fragment else ""
     return origin + path + query + fragment
+
+
+def login_error_url(handler, error_code, default="/"):
+    return url_concat(safe_next_url(handler, default), {"login_error": error_code})
 
 
 def set_user_session_cookie(handler, value):
@@ -239,12 +244,35 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
             return
 
         logging.info("GitHub returned code, exchanging for token")
-        token = await self.github_get_oauth2_token(
-            client_id=client_id,
-            client_secret=client_secret,
-            code=code,
-        )
-        user = await self.github_get_authenticated_user(token["access_token"])
+        try:
+            token = await self.github_get_oauth2_token(
+                client_id=client_id,
+                client_secret=client_secret,
+                code=code,
+            )
+            access_token = token.get("access_token") if isinstance(token, dict) else None
+            if not access_token:
+                logging.warning(
+                    "GitHub OAuth token response did not include an access token: %s",
+                    token.get("error") if isinstance(token, dict) else type(token).__name__,
+                )
+                clear_user_session_cookie(self)
+                self.redirect(login_error_url(self, "github_login_failed"))
+                return
+            user = await self.github_get_authenticated_user(access_token)
+        except HTTPClientError as exc:
+            error_code = (
+                "github_unavailable" if exc.code and exc.code >= 500 else "github_login_failed"
+            )
+            logging.warning(
+                "GitHub OAuth request failed with HTTP %s; redirecting with %s",
+                exc.code,
+                error_code,
+                exc_info=True,
+            )
+            clear_user_session_cookie(self)
+            self.redirect(login_error_url(self, error_code))
+            return
         formatted = self._format_user_record(user)
         logging.info("GitHub auth response: %s", formatted)
         if formatted:
@@ -295,13 +323,37 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
             return
 
         logging.info("ORCID returned code, exchanging for token")
-        token = await self.orcid_get_oauth2_token(
-            client_id=client_id,
-            client_secret=client_secret,
-            code=code,
-        )
-        orcid_id = token.get("orcid")
-        user = await self.orcid_get_authenticated_user_record(token, orcid_id)
+        try:
+            token = await self.orcid_get_oauth2_token(
+                client_id=client_id,
+                client_secret=client_secret,
+                code=code,
+            )
+            access_token = token.get("access_token") if isinstance(token, dict) else None
+            orcid_id = token.get("orcid") if isinstance(token, dict) else None
+            if not access_token or not orcid_id:
+                logging.warning(
+                    "ORCID OAuth token response was incomplete: %s",
+                    token.get("error") if isinstance(token, dict) else type(token).__name__,
+                )
+                clear_user_session_cookie(self)
+                self.redirect(login_error_url(self, "orcid_login_failed"))
+                return
+            user = await self.orcid_get_authenticated_user_record(token, orcid_id)
+        except (HTTPClientError, ValueError) as exc:
+            status = getattr(exc, "code", None)
+            error_code = (
+                "orcid_unavailable" if status and status >= 500 else "orcid_login_failed"
+            )
+            logging.warning(
+                "ORCID OAuth request failed with %s; redirecting with %s",
+                status or type(exc).__name__,
+                error_code,
+                exc_info=True,
+            )
+            clear_user_session_cookie(self)
+            self.redirect(login_error_url(self, error_code))
+            return
         formatted = self._format_user_record(user)
         logging.info("ORCID auth response: %s", formatted)
         if formatted:
