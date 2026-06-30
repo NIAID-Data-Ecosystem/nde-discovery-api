@@ -13,6 +13,7 @@ For one source, this helper can:
 Usage:
     python nde-web/scripts/bootstrap_source_metadata.py
     python nde-web/scripts/bootstrap_source_metadata.py --source uniprot -y
+    python nde-web/scripts/bootstrap_source_metadata.py --source "NCBI GEO" -y
     python nde-web/scripts/bootstrap_source_metadata.py --all -y
 """
 
@@ -47,6 +48,14 @@ DEFAULT_MONGO_URL = (
 
 def normalize_source_key(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", value.strip().lower()).strip("_")
+
+
+def split_alternate_names(value: str) -> list[str]:
+    return [
+        item.strip(" []\"'")
+        for item in re.split(r"[,;]", value)
+        if item.strip(" []\"'")
+    ]
 
 
 def prompt(message: str, default: str | None = None) -> str:
@@ -139,8 +148,7 @@ def row_source_candidates(row: dict[str, str]) -> list[str]:
         row.get("name", ""),
         row.get("identifier", ""),
     ]
-    alternate = row.get("alternateName", "")
-    candidates.extend(re.split(r"[,;]", alternate))
+    candidates.extend(split_alternate_names(row.get("alternateName", "")))
     return [candidate.strip() for candidate in candidates if candidate.strip()]
 
 
@@ -150,6 +158,35 @@ def find_source_row(rows: list[dict[str, str]], source_key: str) -> dict[str, st
         if any(normalize_source_key(candidate) == source_key for candidate in candidates):
             return row
     return None
+
+
+def alternate_name_source_key(row: dict[str, str]) -> str | None:
+    alternate_names = split_alternate_names(row.get("alternateName", ""))
+    if not alternate_names:
+        return None
+    key = normalize_source_key(alternate_names[0])
+    return key or None
+
+
+def resolve_new_source_key_from_alternate_name(
+    source_key: str,
+    rows: list[dict[str, str]],
+) -> str:
+    row = find_source_row(rows, source_key)
+    if row is None:
+        raise SystemExit(
+            f"No resource_base row matched source key {source_key!r}; "
+            "cannot derive a key from alternateName."
+        )
+
+    alternate_key = alternate_name_source_key(row)
+    if alternate_key is None:
+        raise SystemExit(
+            f"resource_base row for {source_key!r} has no alternateName; "
+            "cannot derive an alternateName source key."
+        )
+
+    return alternate_key
 
 
 def split_semicolon(value: str) -> list[str]:
@@ -180,11 +217,15 @@ def create_source_stub(
             "Create the source JSON manually or fix the sheet row."
         )
 
+    alternate_names = split_alternate_names(row.get("alternateName", ""))
     identifier = (row.get("identifier") or "").strip()
     if not identifier and not assume_yes:
-        identifier = prompt("Identifier", name)
+        identifier = prompt(
+            "Identifier",
+            alternate_names[0] if alternate_names else name,
+        )
     if not identifier:
-        identifier = name
+        identifier = alternate_names[0] if alternate_names else name
 
     data: dict[str, Any] = {
         "_id": source_key,
@@ -196,6 +237,8 @@ def create_source_stub(
         "schedule": "",
         "schema": {},
     }
+    if alternate_names:
+        data["alternateName"] = alternate_names
     genre = split_semicolon((row.get("genre") or "").strip())
     if genre:
         data["genre"] = genre
@@ -306,6 +349,27 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--skip-download",
         action="store_true",
         help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--use-alternate-name-key",
+        action="store_true",
+        default=True,
+        help=(
+            "Default for new sources: derive the source key from the first "
+            "resource_base.tsv alternateName value. This controls the "
+            "repo_metadata filename, _id, heuristic filename, and metadata "
+            "completeness cache filename."
+        ),
+    )
+    parser.add_argument(
+        "--use-source-key",
+        "--no-alternate-name-key",
+        dest="use_alternate_name_key",
+        action="store_false",
+        help=(
+            "For new sources, use the normalized --source value instead of "
+            "deriving the source key from alternateName."
+        ),
     )
     parser.add_argument(
         "--mongo-url",
@@ -468,18 +532,27 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     source_input = args.source or prompt("Source key / Mongo collection name")
-    source_key = normalize_source_key(source_input)
-    if not source_key:
+    requested_source_key = normalize_source_key(source_input)
+    if not requested_source_key:
         raise SystemExit("A source key is required.")
-    if source_key != source_input:
-        print(f"Using normalized source key: {source_key}")
+    if requested_source_key != source_input:
+        print(f"Using normalized source key: {requested_source_key}")
 
-    source_json_path = REPO_METADATA_DIR / f"{source_key}.json"
+    requested_source_json_path = REPO_METADATA_DIR / f"{requested_source_key}.json"
     rows = prepare_resource_base_tsv(
         args,
         resource_base_tsv,
-        require_for_new_source=not source_json_path.exists(),
+        require_for_new_source=not requested_source_json_path.exists(),
     )
+    source_key = requested_source_key
+    if args.use_alternate_name_key and not requested_source_json_path.exists():
+        source_key = resolve_new_source_key_from_alternate_name(
+            requested_source_key,
+            rows,
+        )
+        if source_key != requested_source_key:
+            print(f"Using alternateName source key: {source_key}")
+
     bootstrap_source(args, source_key, rows)
     return 0
 

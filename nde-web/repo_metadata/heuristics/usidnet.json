@@ -110,16 +110,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9615",
-      "name": "Canis lupus familiaris",
-      "url": "https://www.uniprot.org/taxonomy/9615",
+      "identifier": "332270",
+      "name": "Certhia familiaris familiaris",
+      "url": "https://www.uniprot.org/taxonomy/332270",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "332270",
-      "name": "Certhia familiaris familiaris",
-      "url": "https://www.uniprot.org/taxonomy/332270",
+      "identifier": "9615",
+      "name": "Canis lupus familiaris",
+      "url": "https://www.uniprot.org/taxonomy/9615",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -138,16 +138,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9986",
-      "name": "Oryctolagus cuniculus",
-      "url": "https://www.uniprot.org/taxonomy/9986",
+      "identifier": "10029",
+      "name": "Cricetulus griseus",
+      "url": "https://www.uniprot.org/taxonomy/10029",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10029",
-      "name": "Cricetulus griseus",
-      "url": "https://www.uniprot.org/taxonomy/10029",
+      "identifier": "9986",
+      "name": "Oryctolagus cuniculus",
+      "url": "https://www.uniprot.org/taxonomy/9986",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -193,11 +193,11 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Oryctolagus cuniculus"
+      "name": "Cricetulus griseus"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Cricetulus griseus"
+      "name": "Oryctolagus cuniculus"
     },
     {
       "@type": "DefinedTerm",

@@ -55,6 +55,23 @@ For non-interactive defaults after the TSV is already at the repository root:
 ./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --source uniprot -y
 ```
 
+When bootstrapping a brand-new source from a `resource_base.tsv` row, the
+script uses the first `alternateName` value as the canonical source key by
+default:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py \
+  --source "United States Immunodeficiency Network (USIDNET)" \
+  -y
+```
+
+That key controls `repo_metadata/<source>.json`, the source `_id`,
+`repo_metadata/heuristics/<source>.json`, and
+`metadata_completeness/cache_<source>.json`.
+
+Use `--use-source-key` only when the normalized `--source` value should be
+used instead.
+
 ### Troubleshooting: Missing Heuristics Cache File
 
 If bootstrap fails at validation with output like:
