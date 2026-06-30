@@ -1,0 +1,219 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 75842,
+      "unitText": "Sample"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005027",
+      "name": "epilepsy",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005027",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005015",
+      "name": "diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005044",
+      "name": "hypertensive disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005044",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001627",
+      "name": "dementia",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0001627",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005180",
+      "name": "Parkinson disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005180",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004976",
+      "name": "amyotrophic lateral sclerosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004976",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005098",
+      "name": "stroke disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005098",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005267",
+      "name": "heart disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005267",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002354",
+      "name": "Memory impairment",
+      "url": "http://purl.obolibrary.org/obo/HP_0002354",
+      "inDefinedTermSet": "HP"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004992",
+      "name": "cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004992",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9615",
+      "name": "Canis lupus familiaris",
+      "url": "https://www.uniprot.org/taxonomy/9615",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "332270",
+      "name": "Certhia familiaris familiaris",
+      "url": "https://www.uniprot.org/taxonomy/332270",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9545",
+      "name": "Macaca nemestrina",
+      "url": "https://www.uniprot.org/taxonomy/9545",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9986",
+      "name": "Oryctolagus cuniculus",
+      "url": "https://www.uniprot.org/taxonomy/9986",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10029",
+      "name": "Cricetulus griseus",
+      "url": "https://www.uniprot.org/taxonomy/10029",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9823",
+      "name": "Sus scrofa",
+      "url": "https://www.uniprot.org/taxonomy/9823",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Homo sapiens"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Mus musculus"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Bos taurus"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Canis familiaris"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Rattus norvegicus"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Macaca nemestrina"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Oryctolagus cuniculus"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Cricetulus griseus"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Sus scrofa"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Macaca mulatta"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ]
+}

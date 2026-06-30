@@ -55,6 +55,30 @@ For non-interactive defaults after the TSV is already at the repository root:
 ./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --source uniprot -y
 ```
 
+### Troubleshooting: Missing Heuristics Cache File
+
+If bootstrap fails at validation with output like:
+
+```text
+Running: /.../python nde-web/scripts/validate_repo_metadata.py --source <source>
+Warnings:
+  - <source>: no heuristic cache file
+Errors:
+  - nde-web/repo_metadata/heuristics/<source>.json: missing generated file
+```
+
+one common cause is that the source key does not match the actual Mongo
+collection name. In that case, set `_mongoCollection` in
+`nde-web/repo_metadata/<source>.json` to the real collection name.
+
+Example (USIDNET):
+
+```json
+"_mongoCollection": "usidnet"
+```
+
+Then re-run bootstrap for that source.
+
 ## Bootstrap All Existing Sources
 
 To run the same bootstrap flow for every existing source JSON in
