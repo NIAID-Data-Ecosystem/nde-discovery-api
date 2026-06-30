@@ -49,7 +49,7 @@ def _seed_user_doc(user: dict) -> dict:
         "username": user["username"],
         "oauth_provider": user["oauth_provider"],
         "linked_accounts": [],
-        "ai_toggle_preference": True,
+        "ai_toggle_preference": False,
         "favorite_searches": [],
         "favorite_datasets": [],
         "contact_preference": False,

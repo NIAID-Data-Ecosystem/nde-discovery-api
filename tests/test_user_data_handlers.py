@@ -99,6 +99,7 @@ def test_user_data_get_bootstraps_missing_profile():
     assert handler.saved[0][0] == DOC_ID
     assert handler.saved[0][1]["username"] == "alice"
     assert handler.saved[0][1]["oauth_provider"] == "GitHub"
+    assert handler.saved[0][1]["ai_toggle_preference"] is False
     assert handler.saved[0][1]["favorite_searches"] == []
     assert handler.saved[0][1]["favorite_datasets"] == []
     assert handler.writes == [handler.saved[0][1]]
@@ -150,6 +151,7 @@ def test_user_data_put_creates_profile_when_missing():
     _run(handler.put)
 
     assert handler.saved[0][0] == DOC_ID
+    assert handler.saved[0][1]["ai_toggle_preference"] is False
     assert handler.saved[0][1]["contact_preference"] is True
     assert handler.updated == []
 
