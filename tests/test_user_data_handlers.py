@@ -102,6 +102,7 @@ def test_user_data_get_bootstraps_missing_profile():
     assert handler.saved[0][1]["ai_toggle_preference"] is False
     assert handler.saved[0][1]["favorite_searches"] == []
     assert handler.saved[0][1]["favorite_datasets"] == []
+    assert "last_active" in handler.saved[0][1]
     assert handler.writes == [handler.saved[0][1]]
 
 
@@ -113,7 +114,28 @@ def test_user_data_get_returns_existing_profile():
     _run(handler.get)
 
     assert handler.saved == []
-    assert handler.writes == [profile]
+    assert handler.updated[0][0] == DOC_ID
+    assert "last_active" in handler.updated[0][1]
+    assert handler.writes[0]["last_active"] == handler.updated[0][1]["last_active"]
+    assert handler.writes[0]["beta"] is True
+
+
+def test_seed_user_doc_preserves_available_email_records():
+    user = {
+        **USER,
+        "emails": [
+            {"email": "alice@example.org", "primary": True, "verified": True},
+            {"email": "alice@institution.edu", "verified": True},
+        ],
+    }
+
+    profile = user_data._seed_user_doc(user)
+
+    assert profile["email"] == "alice@example.org"
+    assert profile["emails"] == [
+        {"email": "alice@example.org", "primary": True, "verified": True},
+        {"email": "alice@institution.edu", "verified": True},
+    ]
 
 
 def test_user_data_put_updates_all_preferences_on_existing_profile():
@@ -139,6 +161,7 @@ def test_user_data_put_updates_all_preferences_on_existing_profile():
     assert updated["beta"] is True
     assert updated["feedback_preference"] is True
     assert "updated" in updated
+    assert "last_active" in updated
     assert handler.writes[0]["success"] is True
 
 
@@ -153,6 +176,7 @@ def test_user_data_put_creates_profile_when_missing():
     assert handler.saved[0][0] == DOC_ID
     assert handler.saved[0][1]["ai_toggle_preference"] is False
     assert handler.saved[0][1]["contact_preference"] is True
+    assert "last_active" in handler.saved[0][1]
     assert handler.updated == []
 
 

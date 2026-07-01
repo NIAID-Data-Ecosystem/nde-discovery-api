@@ -8,9 +8,17 @@ from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.auth.oauth_mixins import GithubOAuth2Mixin, OrcidOAuth2Mixin
 from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
 from tornado.httpclient import HTTPClientError
-from tornado.httputil import url_concat
+from tornado.httputil import HTTPHeaders, url_concat
 from tornado.web import HTTPError, RequestHandler
-from user_data import _seed_user_doc, _user_doc_id
+from user_data import (
+    _activity_update,
+    _oauth_profile_updates,
+    _seed_user_doc,
+    _user_doc_id,
+)
+
+
+EMAIL_RECORD_FIELDS = ("email", "primary", "verified", "visibility")
 
 
 def _allowed_frontend_origins(config):
@@ -58,6 +66,37 @@ def safe_next_url(handler, default="/"):
 
 def login_error_url(handler, error_code, default="/"):
     return url_concat(safe_next_url(handler, default), {"login_error": error_code})
+
+
+def _format_email_records(records):
+    emails = []
+    seen = set()
+    for record in records or []:
+        if isinstance(record, str):
+            record = {"email": record}
+        if not isinstance(record, dict):
+            continue
+        email = record.get("email")
+        if not email or email in seen:
+            continue
+        formatted = {
+            field: record[field]
+            for field in EMAIL_RECORD_FIELDS
+            if record.get(field) is not None
+        }
+        emails.append(formatted)
+        seen.add(email)
+    return emails
+
+
+def _primary_email(email_records, fallback=None):
+    emails = _format_email_records(email_records)
+    for record in emails:
+        if record.get("primary"):
+            return record["email"]
+    if emails:
+        return emails[0]["email"]
+    return fallback
 
 
 def set_user_session_cookie(handler, value):
@@ -157,16 +196,32 @@ class BaseLoginHandler(BaseAPIHandler):
         index = self.biothings.config.ES_USER_INDEX
         doc_id = _user_doc_id(user_dict)
         try:
-            await es.get(id=doc_id, index=index)
+            resp = await es.get(id=doc_id, index=index)
         except elasticsearch.exceptions.NotFoundError:
-            doc = _seed_user_doc(user_dict)
-            await es.index(id=doc_id, body=doc, index=index)
-            logging.info("Created new user profile %s", doc_id)
+            try:
+                doc = _seed_user_doc(user_dict)
+                await es.index(id=doc_id, body=doc, index=index)
+                logging.info("Created new user profile %s", doc_id)
+            except Exception:
+                logging.warning(
+                    "Could not create user profile %s", doc_id, exc_info=True
+                )
         except Exception:
             # Non-fatal: the profile will be created lazily via GET /user/data
             logging.warning(
                 "Could not ensure user profile %s", doc_id, exc_info=True
             )
+        else:
+            updates = _oauth_profile_updates(resp.get("_source", {}), user_dict)
+            updates.update(_activity_update())
+            if updates:
+                try:
+                    await es.update(id=doc_id, body={"doc": updates}, index=index)
+                    logging.info("Updated user profile identity fields %s", doc_id)
+                except Exception:
+                    logging.warning(
+                        "Could not update user profile %s", doc_id, exc_info=True
+                    )
 
 
 class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
@@ -222,7 +277,7 @@ class LogoutHandler(BaseLoginHandler):
 class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
     """Initiate or complete the GitHub OAuth2 handshake."""
 
-    SCOPES = []
+    SCOPES = ["user:email"]
     CALLBACK_PATH = "/login/github"
 
     async def get(self):
@@ -260,6 +315,7 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
                 self.redirect(login_error_url(self, "github_login_failed"))
                 return
             user = await self.github_get_authenticated_user(access_token)
+            emails = await self.github_get_authenticated_user_emails(access_token)
         except HTTPClientError as exc:
             error_code = (
                 "github_unavailable" if exc.code and exc.code >= 500 else "github_login_failed"
@@ -273,7 +329,7 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
             clear_user_session_cookie(self)
             self.redirect(login_error_url(self, error_code))
             return
-        formatted = self._format_user_record(user)
+        formatted = self._format_user_record(user, emails=emails)
         logging.info("GitHub auth response: %s", formatted)
         if formatted:
             set_user_session_cookie(self, formatted)
@@ -282,19 +338,50 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
             clear_user_session_cookie(self)
         self.redirect(safe_next_url(self, "/"))
 
+    async def github_get_authenticated_user_emails(self, access_token):
+        """Fetch GitHub account email addresses when the granted scope allows it."""
+        http = self.get_auth_http_client()
+        headers = HTTPHeaders()
+        headers.add("Authorization", f"token {access_token}")
+        headers.add("Accept", "application/vnd.github+json")
+        try:
+            response = await http.fetch(
+                self._GITHUB_API_URL_BASE + "user/emails",
+                method="GET",
+                headers=headers,
+            )
+        except HTTPClientError:
+            logging.info("GitHub email lookup was unavailable", exc_info=True)
+            return []
+        try:
+            emails = json.loads(response.body)
+        except (TypeError, json.JSONDecodeError):
+            logging.info("GitHub email lookup returned invalid JSON", exc_info=True)
+            return []
+        return emails if isinstance(emails, list) else []
+
     @staticmethod
-    def _format_user_record(user):
+    def _format_user_record(user, emails=None):
+        email_records = _format_email_records(emails)
+        public_email = user.get("email")
+        if public_email:
+            email_records = _format_email_records([*email_records, public_email])
         payload = {
             "username": user.get("login"),
             "oauth_provider": "GitHub",
         }
         if not payload["username"]:
             return None
-        for field in ["name", "email", "avatar_url", "company"]:
+        for field in ["name", "avatar_url", "company"]:
             value = user.get(field)
             if value:
                 key = "organization" if field == "company" else field
                 payload[key] = value
+        email = _primary_email(email_records, public_email)
+        if email:
+            payload["email"] = email
+        if email_records:
+            payload["emails"] = email_records
         return json.dumps(payload)
 
 
@@ -378,8 +465,12 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
         if given:
             payload["name"] = given if not family else f"{given} {family}"
         emails = person.get("emails", {}).get("email", [])
-        if emails:
-            payload["email"] = emails[0].get("email")
+        email_records = _format_email_records(emails)
+        email = _primary_email(email_records)
+        if email:
+            payload["email"] = email
+        if email_records:
+            payload["emails"] = email_records
         employment = (
             user.get("activities-summary", {})
             .get("employments", {})
