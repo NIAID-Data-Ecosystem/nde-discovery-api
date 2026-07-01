@@ -98,6 +98,21 @@ filter. The script reads Elasticsearch settings from `nde-web/config.py` or
 `nde-web/config_web.py` by default; override them with `--es-host`,
 `--user-index`, or `--data-index` only when needed.
 
+## Delete Inactive User Profiles
+
+User profile documents track `last_active` when a user logs in or uses the
+account-data endpoints. Delete profiles inactive for two years with:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/delete_inactive_user_profiles.py \
+  --dry-run
+```
+
+Remove `--dry-run` after reviewing the counts. The script reads Elasticsearch
+settings from `nde-web/config.py` or `nde-web/config_web.py` by default, skips
+system marker documents, and falls back to `updated` then `created` for legacy
+profiles that do not yet have `last_active`.
+
 ## Commit Checklist
 
 Commit source-specific metadata outputs:
@@ -115,6 +130,7 @@ nde-web/scripts/bootstrap_source_metadata.py
 nde-web/scripts/metadata_compatibility_calculator.py
 nde-web/scripts/sync_repo_metadata.py
 nde-web/scripts/compute_heuristics.py
+nde-web/scripts/delete_inactive_user_profiles.py
 nde-web/scripts/update_saved_search_totals.py
 nde-web/scripts/validate_repo_metadata.py
 nde-web/requirements_scripts.txt

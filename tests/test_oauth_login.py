@@ -1,4 +1,5 @@
 import asyncio
+import json
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -10,6 +11,22 @@ WEB_DIR = Path(__file__).resolve().parents[1] / "nde-web"
 sys.path.insert(0, str(WEB_DIR))
 
 import handlers  # noqa: E402
+
+
+class _AsyncClient:
+    def __init__(self, *, source=None):
+        self.source = source or {}
+        self.indexed = []
+        self.updated = []
+
+    async def get(self, **_kwargs):
+        return {"_source": self.source}
+
+    async def index(self, **kwargs):
+        self.indexed.append(kwargs)
+
+    async def update(self, **kwargs):
+        self.updated.append(kwargs)
 
 
 def _github_handler(next_url, exc=None, token=None):
@@ -170,3 +187,110 @@ def test_github_login_redirects_when_token_response_has_no_access_token():
     assert redirects == [
         "https://data.niaid.nih.gov/account?login_error=github_login_failed"
     ]
+
+
+def test_github_format_user_record_saves_available_emails():
+    formatted = handlers.GitHubLoginHandler._format_user_record(
+        {
+            "login": "alice",
+            "name": "Alice Example",
+            "email": "public@example.org",
+        },
+        emails=[
+            {
+                "email": "primary@example.org",
+                "primary": True,
+                "verified": True,
+                "visibility": "private",
+            },
+            {
+                "email": "public@example.org",
+                "primary": False,
+                "verified": True,
+                "visibility": "public",
+            },
+        ],
+    )
+
+    payload = json.loads(formatted)
+
+    assert payload["email"] == "primary@example.org"
+    assert payload["emails"] == [
+        {
+            "email": "primary@example.org",
+            "primary": True,
+            "verified": True,
+            "visibility": "private",
+        },
+        {
+            "email": "public@example.org",
+            "primary": False,
+            "verified": True,
+            "visibility": "public",
+        },
+    ]
+
+
+def test_orcid_format_user_record_saves_available_emails():
+    formatted = handlers.ORCIDLoginHandler._format_user_record(
+        {
+            "orcid-identifier": {"path": "0000-0001-2345-6789"},
+            "person": {
+                "name": {
+                    "given-names": {"value": "Alice"},
+                    "family-name": {"value": "Example"},
+                },
+                "emails": {
+                    "email": [
+                        {"email": "alice@example.org", "visibility": "PUBLIC"},
+                        {"email": "alice@institution.edu", "visibility": "LIMITED"},
+                    ]
+                },
+            },
+        }
+    )
+
+    payload = json.loads(formatted)
+
+    assert payload["email"] == "alice@example.org"
+    assert payload["emails"] == [
+        {"email": "alice@example.org", "visibility": "PUBLIC"},
+        {"email": "alice@institution.edu", "visibility": "LIMITED"},
+    ]
+
+
+def test_ensure_user_profile_refreshes_available_oauth_identity_fields():
+    handler = handlers.BaseLoginHandler.__new__(handlers.BaseLoginHandler)
+    client = _AsyncClient(
+        source={
+            "username": "alice",
+            "oauth_provider": "GitHub",
+            "favorite_searches": [],
+        }
+    )
+    handler.application = SimpleNamespace(
+        biothings=SimpleNamespace(
+            config=SimpleNamespace(ES_USER_INDEX="users"),
+            elasticsearch=SimpleNamespace(async_client=client),
+        )
+    )
+
+    asyncio.run(
+        handler._ensure_user_profile(
+            {
+                "username": "alice",
+                "oauth_provider": "GitHub",
+                "email": "alice@example.org",
+                "emails": [{"email": "alice@example.org", "primary": True}],
+            }
+        )
+    )
+
+    assert client.indexed == []
+    assert client.updated[0]["id"] == "github:alice"
+    assert client.updated[0]["body"]["doc"]["email"] == "alice@example.org"
+    assert client.updated[0]["body"]["doc"]["emails"] == [
+        {"email": "alice@example.org", "primary": True}
+    ]
+    assert "last_active" in client.updated[0]["body"]["doc"]
+    assert "updated" in client.updated[0]["body"]["doc"]
