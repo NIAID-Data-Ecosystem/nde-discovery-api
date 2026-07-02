@@ -157,32 +157,32 @@ def test_elasticsearch_query_filter_is_preserved():
 
 
 def test_frontend_default_extra_filter_matches_visible_records():
-    extra_filter = frontend_default_extra_filter(year=2026)
+    extra_filter = frontend_default_extra_filter()
 
-    assert extra_filter == (
-        '(date:["2000-01-01" TO "2026-12-31"] OR (-_exists_:("date"))) '
-        'AND NOT(@type:Sample AND NOT additionalType:"BioSample")'
-    )
+    assert extra_filter == 'NOT(@type:Sample AND NOT additionalType:"BioSample")'
 
 
-def test_saved_search_extra_filter_combines_frontend_default_and_user_filters():
+def test_saved_search_extra_filter_keeps_empty_filters_date_free():
+    extra_filter = build_saved_search_extra_filter({})
+
+    assert extra_filter == '(NOT(@type:Sample AND NOT additionalType:"BioSample"))'
+
+
+def test_saved_search_extra_filter_combines_frontend_visibility_and_user_filters():
     extra_filter = build_saved_search_extra_filter(
         {"healthCondition.name": ["asthma", "diabetes"]},
-        year=2026,
     )
 
     assert (
         extra_filter
-        == '((date:["2000-01-01" TO "2026-12-31"] OR (-_exists_:("date"))) '
-        'AND NOT(@type:Sample AND NOT additionalType:"BioSample")) '
+        == '(NOT(@type:Sample AND NOT additionalType:"BioSample")) '
         'AND (healthCondition.name:("asthma" OR "diabetes"))'
     )
 
 
-def test_explicit_date_filter_keeps_sample_default_without_duplicate_date_default():
+def test_explicit_date_filter_is_preserved_with_frontend_visibility():
     extra_filter = build_saved_search_extra_filter(
         {"date": ["1990-01-01", "1999-12-31"]},
-        year=2026,
     )
 
     assert extra_filter == (
@@ -194,7 +194,6 @@ def test_explicit_date_filter_keeps_sample_default_without_duplicate_date_defaul
 def test_explicit_date_exists_filter_skips_date_default():
     extra_filter = build_saved_search_extra_filter(
         {"_exists_": ["date"]},
-        year=2026,
     )
 
     assert extra_filter == (
