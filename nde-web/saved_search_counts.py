@@ -6,7 +6,6 @@ query shape without depending on Tornado or BioThings runtime objects.
 """
 
 from collections.abc import Iterable, Mapping
-from datetime import datetime, timezone
 
 
 DEFAULT_DATA_INDEX = "nde_all_current"
@@ -14,7 +13,6 @@ DEFAULT_USER_INDEX = "nde_user_profiles"
 
 _BROWSE_ALL_QUERIES = frozenset({"", "__all__", "__any__", "*", "*:*"})
 _SUPPORTED_TYPES = ["Dataset", "ResourceCatalog", "Sample", "DataCollection"]
-_DEFAULT_DATE_START = "2000-01-01"
 _DEFAULT_SAMPLE_VISIBILITY_FILTER = (
     'NOT(@type:Sample AND NOT additionalType:"BioSample")'
 )
@@ -41,7 +39,6 @@ def build_saved_search_extra_filter(
     filters=None,
     *,
     include_frontend_defaults: bool = True,
-    year: int | None = None,
 ) -> str | None:
     """Return the frontend-equivalent extra_filter for a saved search."""
     clauses = []
@@ -49,11 +46,7 @@ def build_saved_search_extra_filter(
 
     if include_frontend_defaults:
         if not _looks_like_frontend_default_filter(user_filter):
-            default_clauses = []
-            if not _has_explicit_date_filter(user_filter):
-                default_clauses.append(frontend_default_date_filter(year=year))
-            default_clauses.append(_DEFAULT_SAMPLE_VISIBILITY_FILTER)
-            clauses.append(" AND ".join(default_clauses))
+            clauses.append(frontend_default_extra_filter())
 
     if user_filter:
         clauses.append(user_filter)
@@ -61,21 +54,9 @@ def build_saved_search_extra_filter(
     return " AND ".join(f"({clause})" for clause in clauses) or None
 
 
-def frontend_default_extra_filter(*, year: int | None = None) -> str:
+def frontend_default_extra_filter() -> str:
     """Default frontend visibility filter applied to ordinary search totals."""
-    return (
-        f"{frontend_default_date_filter(year=year)} "
-        f"AND {_DEFAULT_SAMPLE_VISIBILITY_FILTER}"
-    )
-
-
-def frontend_default_date_filter(*, year: int | None = None) -> str:
-    """Default frontend date filter applied when a search has no date filter."""
-    year = year or datetime.now(timezone.utc).year
-    return (
-        f'(date:["{_DEFAULT_DATE_START}" TO "{year}-12-31"] '
-        'OR (-_exists_:("date")))'
-    )
+    return _DEFAULT_SAMPLE_VISIBILITY_FILTER
 
 
 def _build_type_filter() -> dict:
@@ -357,15 +338,4 @@ def _looks_like_frontend_default_filter(extra_filter: str | None) -> bool:
     return (
         "NOT(@type:Sample AND NOT additionalType" in extra_filter
         or "NOT+(@type:Sample+AND+NOT+additionalType" in extra_filter
-    )
-
-
-def _has_explicit_date_filter(extra_filter: str | None) -> bool:
-    if not extra_filter:
-        return False
-    return (
-        "date:" in extra_filter
-        or '_exists_:("date")' in extra_filter
-        or "_exists_:(date)" in extra_filter
-        or "_exists_:date" in extra_filter
     )

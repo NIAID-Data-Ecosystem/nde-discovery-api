@@ -194,8 +194,8 @@ def test_saved_search_api_params_convert_filters_to_extra_filter():
     assert params["size"] == 0
     assert params["facet_size"] == 0
     assert params["use_ai_search"] == "false"
-    assert 'date:["2000-01-01" TO "' in params["extra_filter"]
-    assert 'AND NOT(@type:Sample AND NOT additionalType:"BioSample")' in (
+    assert 'date:["2000-01-01" TO "' not in params["extra_filter"]
+    assert 'NOT(@type:Sample AND NOT additionalType:"BioSample")' in (
         params["extra_filter"]
     )
     assert 'healthCondition.name:("asthma" OR "diabetes")' in (
