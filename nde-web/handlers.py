@@ -12,6 +12,8 @@ from tornado.httputil import HTTPHeaders, url_concat
 from tornado.web import HTTPError, RequestHandler
 from user_data import (
     _activity_update,
+    _now_iso,
+    _oauth_profile_removals,
     _oauth_profile_updates,
     _seed_user_doc,
     _user_doc_id,
@@ -182,6 +184,33 @@ class BaseLoginHandler(BaseAPIHandler):
         # Disable cache headers for auth endpoints
         self.set_header("Cache-Control", "private, max-age=0, no-cache")
 
+    async def _update_user_profile(self, es, doc_id, index, updates, removals=None):
+        removals = removals or []
+        if not removals:
+            await es.update(id=doc_id, body={"doc": updates}, index=index)
+            return
+
+        await es.update(
+            id=doc_id,
+            body={
+                "script": {
+                    "source": """
+                        for (entry in params.updates.entrySet()) {
+                            ctx._source[entry.getKey()] = entry.getValue();
+                        }
+                        for (field in params.removals) {
+                            ctx._source.remove(field);
+                        }
+                    """,
+                    "params": {
+                        "updates": updates,
+                        "removals": removals,
+                    },
+                },
+            },
+            index=index,
+        )
+
     async def _ensure_user_profile(self, user_dict: dict):
         """Create a user profile document in ES if one does not yet exist.
 
@@ -208,11 +237,21 @@ class BaseLoginHandler(BaseAPIHandler):
                 "Could not ensure user profile %s", doc_id, exc_info=True
             )
         else:
-            updates = _oauth_profile_updates(resp.get("_source", {}), user_dict)
+            existing = resp.get("_source", {})
+            updates = _oauth_profile_updates(existing, user_dict)
+            removals = _oauth_profile_removals(existing, user_dict)
+            if removals and "updated" not in updates:
+                updates["updated"] = _now_iso()
             updates.update(_activity_update())
             if updates:
                 try:
-                    await es.update(id=doc_id, body={"doc": updates}, index=index)
+                    await self._update_user_profile(
+                        es,
+                        doc_id,
+                        index,
+                        updates,
+                        removals,
+                    )
                     logging.info("Updated user profile identity fields %s", doc_id)
                 except Exception:
                     logging.warning(

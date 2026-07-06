@@ -294,3 +294,70 @@ def test_ensure_user_profile_refreshes_available_oauth_identity_fields():
     ]
     assert "last_active" in client.updated[0]["body"]["doc"]
     assert "updated" in client.updated[0]["body"]["doc"]
+
+
+def test_ensure_user_profile_removes_orcid_email_when_no_longer_available():
+    handler = handlers.BaseLoginHandler.__new__(handlers.BaseLoginHandler)
+    client = _AsyncClient(
+        source={
+            "username": "0000-0001-2345-6789",
+            "oauth_provider": "ORCID",
+            "email": "alice@example.org",
+            "emails": [{"email": "alice@example.org", "visibility": "PUBLIC"}],
+        }
+    )
+    handler.application = SimpleNamespace(
+        biothings=SimpleNamespace(
+            config=SimpleNamespace(ES_USER_INDEX="users"),
+            elasticsearch=SimpleNamespace(async_client=client),
+        )
+    )
+
+    asyncio.run(
+        handler._ensure_user_profile(
+            {
+                "username": "0000-0001-2345-6789",
+                "oauth_provider": "ORCID",
+            }
+        )
+    )
+
+    body = client.updated[0]["body"]
+    params = body["script"]["params"]
+    assert client.updated[0]["id"] == "orcid:0000-0001-2345-6789"
+    assert params["removals"] == ["email", "emails"]
+    assert "email" not in params["updates"]
+    assert "emails" not in params["updates"]
+    assert "last_active" in params["updates"]
+    assert "updated" in params["updates"]
+
+
+def test_ensure_user_profile_keeps_github_email_when_email_lookup_is_unavailable():
+    handler = handlers.BaseLoginHandler.__new__(handlers.BaseLoginHandler)
+    client = _AsyncClient(
+        source={
+            "username": "alice",
+            "oauth_provider": "GitHub",
+            "email": "alice@example.org",
+            "emails": [{"email": "alice@example.org", "primary": True}],
+        }
+    )
+    handler.application = SimpleNamespace(
+        biothings=SimpleNamespace(
+            config=SimpleNamespace(ES_USER_INDEX="users"),
+            elasticsearch=SimpleNamespace(async_client=client),
+        )
+    )
+
+    asyncio.run(
+        handler._ensure_user_profile(
+            {
+                "username": "alice",
+                "oauth_provider": "GitHub",
+            }
+        )
+    )
+
+    assert client.updated[0]["id"] == "github:alice"
+    assert set(client.updated[0]["body"]) == {"doc"}
+    assert set(client.updated[0]["body"]["doc"]) == {"last_active"}

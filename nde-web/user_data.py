@@ -36,6 +36,9 @@ OAUTH_PROFILE_FIELDS = (
     "avatar_url",
     "organization",
 )
+REMOVABLE_OAUTH_PROFILE_FIELDS = {
+    "ORCID": ("email", "emails"),
+}
 ACTIVITY_FIELD = "last_active"
 
 
@@ -65,6 +68,17 @@ def _oauth_profile_updates(existing: dict, user: dict) -> dict:
     if updates:
         updates["updated"] = _now_iso()
     return updates
+
+
+def _oauth_profile_removals(existing: dict, user: dict) -> list[str]:
+    """Return OAuth-derived fields that should be removed from an existing doc."""
+    provider = (user.get("oauth_provider") or "").upper()
+    removable_fields = REMOVABLE_OAUTH_PROFILE_FIELDS.get(provider, ())
+    return [
+        field
+        for field in removable_fields
+        if field in existing and not user.get(field)
+    ]
 
 
 def _activity_update(now=None) -> dict:
