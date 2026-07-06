@@ -5,23 +5,29 @@ helpers keep the stored ``total`` calculation aligned with the public search
 query shape without depending on Tornado or BioThings runtime objects.
 """
 
+import json
 from collections.abc import Iterable, Mapping
+from pathlib import Path
 
 
 DEFAULT_DATA_INDEX = "nde_all_current"
 DEFAULT_USER_INDEX = "nde_user_profiles"
 
 _BROWSE_ALL_QUERIES = frozenset({"", "__all__", "__any__", "*", "*:*"})
-_SUPPORTED_TYPES = ["Dataset", "ResourceCatalog", "Sample", "DataCollection"]
+_SUPPORTED_TYPES = ["Dataset", "ResourceCatalog"]
 _DEFAULT_SAMPLE_VISIBILITY_FILTER = (
     'NOT(@type:Sample AND NOT additionalType:"BioSample")'
 )
+_EXCLUSIONS_PATH = Path(__file__).with_name("exclusions.json")
+
 
 def build_saved_search_count_body(
     query: str | None,
     filters=None,
     *,
     include_frontend_defaults: bool = True,
+    include_exclusions: bool = True,
+    exclusions: Mapping | None = None,
 ) -> dict:
     """Return an Elasticsearch count body for a saved search entry."""
     extra_filter = build_saved_search_extra_filter(
@@ -30,7 +36,14 @@ def build_saved_search_count_body(
     )
     bool_query = {
         "must": [_build_query_clause(query)],
-        "filter": [_build_type_filter(), *_build_filter_clauses(extra_filter)],
+        "filter": [
+            _build_type_filter(),
+            *_build_exclusion_filter_clauses(
+                exclusions=exclusions,
+                include_exclusions=include_exclusions,
+            ),
+            *_build_filter_clauses(extra_filter),
+        ],
     }
     return {"query": {"bool": bool_query}}
 
@@ -77,6 +90,38 @@ def _build_type_filter() -> dict:
             "minimum_should_match": 1,
         }
     }
+
+
+def _load_exclusions() -> dict:
+    try:
+        with _EXCLUSIONS_PATH.open() as handle:
+            return json.load(handle)
+    except FileNotFoundError:
+        return {}
+
+
+def _build_exclusion_filter_clauses(
+    *,
+    exclusions: Mapping | None = None,
+    include_exclusions: bool = True,
+) -> list[dict]:
+    if not include_exclusions:
+        return []
+
+    exclusions = exclusions if exclusions is not None else _load_exclusions()
+    if not isinstance(exclusions, Mapping):
+        return []
+
+    clauses = []
+    prod_catalogs = _filter_values(exclusions.get("prod_catalogs"))
+    if prod_catalogs:
+        clauses.append({"terms": {"includedInDataCatalog.name": prod_catalogs}})
+
+    staging_ids = _filter_values(exclusions.get("staging_ids"))
+    if staging_ids:
+        clauses.append({"bool": {"must_not": [{"ids": {"values": staging_ids}}]}})
+
+    return clauses
 
 
 def _build_query_clause(query: str | None) -> dict:

@@ -17,10 +17,54 @@ def test_browse_query_uses_match_all_with_type_filter():
         "__all__",
         {},
         include_frontend_defaults=False,
+        include_exclusions=False,
     )
 
     assert body["query"]["bool"]["must"] == [{"match_all": {}}]
     assert body["query"]["bool"]["filter"][0]["bool"]["minimum_should_match"] == 1
+
+
+def test_count_body_uses_main_frontend_type_filter():
+    body = build_saved_search_count_body(
+        "__all__",
+        {},
+        include_frontend_defaults=False,
+        include_exclusions=False,
+    )
+    type_filter = body["query"]["bool"]["filter"][0]["bool"]
+
+    assert type_filter["should"][0] == {
+        "terms": {"@type": ["Dataset", "ResourceCatalog"]}
+    }
+    assert "Sample" not in type_filter["should"][0]["terms"]["@type"]
+    assert "DataCollection" not in type_filter["should"][0]["terms"]["@type"]
+    assert type_filter["should"][1] == {
+        "bool": {
+            "must": [
+                {"term": {"@type": "ComputationalTool"}},
+                {"term": {"includedInDataCatalog.name": "bio.tools"}},
+            ]
+        }
+    }
+
+
+def test_count_body_applies_main_exclusions():
+    body = build_saved_search_count_body(
+        "__all__",
+        {},
+        include_frontend_defaults=False,
+        exclusions={
+            "prod_catalogs": ["Zenodo", "NCBI SRA"],
+            "staging_ids": ["staging-doc"],
+        },
+    )
+
+    assert body["query"]["bool"]["filter"][1] == {
+        "terms": {"includedInDataCatalog.name": ["Zenodo", "NCBI SRA"]}
+    }
+    assert body["query"]["bool"]["filter"][2] == {
+        "bool": {"must_not": [{"ids": {"values": ["staging-doc"]}}]}
+    }
 
 
 def test_simple_query_matches_public_search_shape():
@@ -28,6 +72,7 @@ def test_simple_query_matches_public_search_shape():
         "covid data",
         {},
         include_frontend_defaults=False,
+        include_exclusions=False,
     )
     queries = body["query"]["bool"]["must"][0]["dis_max"]["queries"]
 
@@ -47,6 +92,7 @@ def test_string_filter_is_query_string_clause():
         "__all__",
         '(healthCondition.name:("asthma")) AND -_exists_:measurementTechnique.name',
         include_frontend_defaults=False,
+        include_exclusions=False,
     )
 
     assert body["query"]["bool"]["filter"][1] == {
@@ -61,6 +107,7 @@ def test_mapping_filters_become_field_filters():
         "covid",
         {"includedInDataCatalog.name": ["Zenodo", "Figshare"], "@type": "Dataset"},
         include_frontend_defaults=False,
+        include_exclusions=False,
     )
 
     assert body["query"]["bool"]["filter"][1] == {
@@ -149,6 +196,7 @@ def test_elasticsearch_query_filter_is_preserved():
         "__all__",
         es_filter,
         include_frontend_defaults=False,
+        include_exclusions=False,
     )
 
     assert body["query"]["bool"]["filter"][1] == {
