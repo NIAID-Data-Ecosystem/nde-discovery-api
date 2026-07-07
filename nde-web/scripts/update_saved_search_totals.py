@@ -429,7 +429,7 @@ def build_parser():
         "--limit",
         type=int,
         default=None,
-        help="Limit profiles processed.",
+        help="Limit profiles processed. Limited runs are not marked complete.",
     )
     parser.add_argument("--dry-run", action="store_true", help="Count but do not write.")
     parser.add_argument(
@@ -485,6 +485,10 @@ def main(argv=None):
             logger.warning(
                 "Not marking build complete because %s saved searches failed.",
                 stats["saved_searches_failed"],
+            )
+        elif args.limit is not None:
+            logger.warning(
+                "Not marking build complete because --limit processed only part of the user index."
             )
         else:
             _save_refresh_marker(

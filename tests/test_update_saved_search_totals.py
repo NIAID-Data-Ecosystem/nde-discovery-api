@@ -235,6 +235,52 @@ def test_save_refresh_marker_records_build_info_and_stats():
     assert client.indexes[0]["body"]["stats"] == {"profiles_seen": 2}
 
 
+def test_main_does_not_mark_limited_refresh_complete():
+    module = _load_script_module()
+    client = FakeClient([])
+    saved_markers = []
+
+    original_build_client = module._build_client
+    original_resolve_build_info = module._resolve_build_info
+    original_get_refresh_marker = module._get_refresh_marker
+    original_refresh = module.refresh_saved_search_totals
+    original_save_refresh_marker = module._save_refresh_marker
+
+    module._build_client = lambda args: client
+    module._resolve_build_info = lambda args: {"build_version": "20260615"}
+    module._get_refresh_marker = lambda *args, **kwargs: None
+    module.refresh_saved_search_totals = lambda *args, **kwargs: {
+        "profiles_seen": 1,
+        "profiles_changed": 1,
+        "saved_searches_seen": 1,
+        "saved_searches_changed": 1,
+        "saved_searches_failed": 0,
+    }
+    module._save_refresh_marker = (
+        lambda *args, **kwargs: saved_markers.append(kwargs)
+    )
+    try:
+        exit_code = module.main(
+            [
+                "--config-module",
+                "missing_config_for_test",
+                "--build-version",
+                "20260615",
+                "--limit",
+                "1",
+            ]
+        )
+    finally:
+        module._build_client = original_build_client
+        module._resolve_build_info = original_resolve_build_info
+        module._get_refresh_marker = original_get_refresh_marker
+        module.refresh_saved_search_totals = original_refresh
+        module._save_refresh_marker = original_save_refresh_marker
+
+    assert exit_code == 0
+    assert saved_markers == []
+
+
 def test_apply_config_defaults_reads_es_settings_from_config_module():
     module = _load_script_module()
     config_name = "fake_nde_config_for_saved_search_totals"

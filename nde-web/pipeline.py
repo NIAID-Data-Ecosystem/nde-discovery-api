@@ -228,9 +228,20 @@ class NDEESQueryBackend(AsyncESQueryBackend):
                 ]
             }
         }
+        experimental_run_sample_condition = {
+            "bool": {
+                "must": [
+                    {"term": {"@type": "Sample"}},
+                    {"term": {"additionalType": "ExperimentalRunSample"}},
+                ]
+            }
+        }
         return {
             "bool": {
-                "should": filter_conditions + [computational_tool_condition],
+                "should": filter_conditions + [
+                    computational_tool_condition,
+                    experimental_run_sample_condition,
+                ],
                 "minimum_should_match": 1,
             }
         }
@@ -614,8 +625,9 @@ class NDEQueryBuilder(ESQueryBuilder):
         # include only documents from the allowed prod sources
         search = search.query("bool", must=[Q("terms", **{"includedInDataCatalog.name": prod_sources})])
 
-        # We only want those of type Dataset or ResourceCatalog.
-        # Filter to allow @type Dataset, ResourceCatalog and ComputationalTool only from Bio.tools
+        # We only want supported public types.
+        # Filter to allow @type Dataset, ResourceCatalog, ComputationalTool only
+        # from Bio.tools, and ExperimentalRunSample records.
         filter_conditions = [
             # Include Dataset and ResourceCatalog
             {"terms": {"@type": ["Dataset", "ResourceCatalog"]}},
@@ -630,8 +642,23 @@ class NDEQueryBuilder(ESQueryBuilder):
             }
         }
 
+        experimental_run_sample_condition = {
+            "bool": {
+                "must": [
+                    {"term": {"@type": "Sample"}},
+                    {"term": {"additionalType": "ExperimentalRunSample"}}
+                ]
+            }
+        }
+
         search = search.filter(
-            "bool", should=filter_conditions + [computational_tool_condition])
+            "bool",
+            should=filter_conditions + [
+                computational_tool_condition,
+                experimental_run_sample_condition,
+            ],
+            minimum_should_match=1,
+        )
 
         # Apply the new metadata-based scoring by default:
         # This script considers the completeness ratios and boosts ResourceCatalog items.

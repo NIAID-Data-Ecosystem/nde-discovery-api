@@ -46,6 +46,8 @@ def test_count_body_uses_main_frontend_type_filter():
             ]
         }
     }
+    assert len(type_filter["should"]) == 2
+    assert "ExperimentalRunSample" not in str(type_filter)
 
 
 def test_count_body_applies_main_exclusions():
