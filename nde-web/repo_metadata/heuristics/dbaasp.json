@@ -6,12 +6,12 @@
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-06-06",
+  "dateModified": "2026-07-04",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "endDate": "2026-06-06"
+      "endDate": "2026-07-04"
     }
   ],
   "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -20,12 +20,19 @@
     "name": "Conditions of use",
     "url": "https://dbaasp.org/DBAASP_Terms_And_Conditions.pdf"
   },
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Peptide",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C735"
+    }
+  ],
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_2814",
-      "name": "Chemoinformatics",
-      "url": "http://edamontology.org/topic_2814",
+      "identifier": "topic_3301",
+      "name": "Microbiology",
+      "url": "http://edamontology.org/topic_3301",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -37,9 +44,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3301",
-      "name": "Microbiology",
-      "url": "http://edamontology.org/topic_3301",
+      "identifier": "topic_2814",
+      "name": "Chemoinformatics",
+      "url": "http://edamontology.org/topic_2814",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -67,13 +74,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10088",
-      "name": "Mus",
-      "url": "https://www.uniprot.org/taxonomy/10088",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "2823050",
       "name": "Pastor",
       "url": "https://www.uniprot.org/taxonomy/2823050",
@@ -88,16 +88,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "121226",
-      "name": "Pediculus humanus capitis",
-      "url": "https://www.uniprot.org/taxonomy/121226",
+      "identifier": "10088",
+      "name": "Mus",
+      "url": "https://www.uniprot.org/taxonomy/10088",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1137542",
-      "name": "Aristida utilis var. utilis",
-      "url": "https://www.uniprot.org/taxonomy/1137542",
+      "identifier": "119374",
+      "name": "Haemulon",
+      "url": "https://www.uniprot.org/taxonomy/119374",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -112,6 +112,13 @@
       "identifier": "2613138",
       "name": "Omicron",
       "url": "https://www.uniprot.org/taxonomy/2613138",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "58762",
+      "name": "Mesothelae",
+      "url": "https://www.uniprot.org/taxonomy/58762",
       "inDefinedTermSet": "UniProt"
     },
     {
