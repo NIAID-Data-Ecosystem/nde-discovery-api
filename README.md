@@ -10,5 +10,4 @@ Elasticsearch config and uploads to `s3://nde/es_backup/`. AWS credentials
 are resolved through the normal `boto3` credential chain. Retention and storage
 class transitions are managed by the S3 bucket lifecycle policy. Use
 `backup.restore_from_s3(config)` to restore the latest user-profile backup, or
-pass a backup filename/key to restore a specific object. See the [workflow
-visual](docs/daily_s3_backup_workflow.md) for the function-by-function flow.
+pass a backup filename/key to restore a specific object.
