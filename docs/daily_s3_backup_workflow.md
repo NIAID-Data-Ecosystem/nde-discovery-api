@@ -28,7 +28,7 @@ flowchart TD
     Q --> R["write_backup_zip(data)<br/>compressed JSON archive"]
     R --> S["upload_to_s3(archive)<br/>bucket nde, prefix es_backup"]
     S --> T["s3://nde/es_backup/<br/>nde_user_profiles_backup_TIMESTAMP.zip"]
-    S --> U["cleanup_backup_files()<br/>keep newest 10 local zips"]
+    S --> U["S3 lifecycle policy<br/>handles retention and storage class"]
     U --> V["Log result<br/>index, doc_count, bucket, key"]
 ```
 
@@ -50,7 +50,9 @@ flowchart LR
         H["_backup_doc"]
         I["write_backup_zip"]
         J["upload_to_s3"]
-        K["cleanup_backup_files"]
+        K["read_backup_from_s3"]
+        L["restore_user_index"]
+        M["restore_from_s3"]
     end
 
     A -->|"register midnight cron"| B
@@ -62,7 +64,8 @@ flowchart LR
     G --> H
     D --> I
     D --> J
-    D --> K
+    M --> K
+    M --> L
 ```
 
 ## Archive Shape
@@ -97,4 +100,8 @@ flowchart TD
 5. The user-profile index metadata and every document are exported into a
    zipped JSON archive.
 6. The archive is uploaded to the existing `nde` S3 bucket under `es_backup/`.
-7. Older local zip files are trimmed, while the uploaded S3 backups remain.
+7. Retention and storage-class transitions for uploaded backups are handled by
+   the S3 bucket lifecycle policy.
+8. To restore, `restore_from_s3(config)` downloads the latest backup object by
+   default, reads the zipped JSON payload, and bulk-indexes the saved documents
+   into the configured user-profile index.
