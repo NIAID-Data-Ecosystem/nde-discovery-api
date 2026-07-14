@@ -10,6 +10,7 @@ from saved_search_counts import (  # noqa: E402
     build_saved_search_extra_filter,
     frontend_default_extra_filter,
 )
+from supported_types import PUBLIC_DIRECT_TYPES  # noqa: E402
 
 
 def test_browse_query_uses_match_all_with_type_filter():
@@ -21,6 +22,20 @@ def test_browse_query_uses_match_all_with_type_filter():
 
     assert body["query"]["bool"]["must"] == [{"match_all": {}}]
     assert body["query"]["bool"]["filter"][0]["bool"]["minimum_should_match"] == 1
+
+
+def test_public_type_filter_includes_inference():
+    body = build_saved_search_count_body(
+        "__all__",
+        {},
+        include_frontend_defaults=False,
+    )
+
+    type_filter = body["query"]["bool"]["filter"][0]
+    direct_type_terms = type_filter["bool"]["should"][0]["terms"]["@type"]
+
+    assert "Inference" in PUBLIC_DIRECT_TYPES
+    assert "Inference" in direct_type_terms
 
 
 def test_simple_query_matches_public_search_shape():

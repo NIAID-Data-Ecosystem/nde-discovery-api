@@ -7,12 +7,16 @@ query shape without depending on Tornado or BioThings runtime objects.
 
 from collections.abc import Iterable, Mapping
 
+from supported_types import (
+    PUBLIC_COMPUTATIONAL_TOOL_CATALOG,
+    PUBLIC_DIRECT_TYPES,
+)
+
 
 DEFAULT_DATA_INDEX = "nde_all_current"
 DEFAULT_USER_INDEX = "nde_user_profiles"
 
 _BROWSE_ALL_QUERIES = frozenset({"", "__all__", "__any__", "*", "*:*"})
-_SUPPORTED_TYPES = ["Dataset", "ResourceCatalog", "Sample", "DataCollection"]
 _DEFAULT_SAMPLE_VISIBILITY_FILTER = (
     'NOT(@type:Sample AND NOT additionalType:"BioSample")'
 )
@@ -64,14 +68,20 @@ def _build_type_filter() -> dict:
         "bool": {
             "must": [
                 {"term": {"@type": "ComputationalTool"}},
-                {"term": {"includedInDataCatalog.name": "bio.tools"}},
+                {
+                    "term": {
+                        "includedInDataCatalog.name": (
+                            PUBLIC_COMPUTATIONAL_TOOL_CATALOG
+                        )
+                    }
+                },
             ]
         }
     }
     return {
         "bool": {
             "should": [
-                {"terms": {"@type": _SUPPORTED_TYPES}},
+                {"terms": {"@type": list(PUBLIC_DIRECT_TYPES)}},
                 computational_tool_condition,
             ],
             "minimum_should_match": 1,

@@ -10,6 +10,11 @@ from biothings.web.query.engine import AsyncESQueryBackend
 from botocore.config import Config as BotoConfig
 from elasticsearch.dsl import A, Q, Search
 
+from supported_types import (
+    PUBLIC_COMPUTATIONAL_TOOL_CATALOG,
+    PUBLIC_DIRECT_TYPES,
+)
+
 
 def transform_lineage_response(response):
     facets = response.get('facets', {})
@@ -222,14 +227,19 @@ class NDEESQueryBackend(AsyncESQueryBackend):
     @staticmethod
     def _build_type_filter():
         filter_conditions = [
-            {"terms": {
-                "@type": ["Dataset", "ResourceCatalog", "Sample", "DataCollection"]}},
+            {"terms": {"@type": list(PUBLIC_DIRECT_TYPES)}},
         ]
         computational_tool_condition = {
             "bool": {
                 "must": [
                     {"term": {"@type": "ComputationalTool"}},
-                    {"term": {"includedInDataCatalog.name": "bio.tools"}},
+                    {
+                        "term": {
+                            "includedInDataCatalog.name": (
+                                PUBLIC_COMPUTATIONAL_TOOL_CATALOG
+                            )
+                        }
+                    },
                 ]
             }
         }
@@ -619,18 +629,22 @@ class NDEQueryBuilder(ESQueryBuilder):
         # terms = {"@type": ["Dataset", "ResourceCatalog"]}
         # search = search.filter("terms", **terms)
 
-        # Filter to allow @type Dataset, ResourceCatalog and ComputationalTool only from Bio.tools
+        # Filter to allow public direct types and ComputationalTool only from Bio.tools.
         filter_conditions = [
-            # Include Dataset and ResourceCatalog
-            {"terms": {
-                "@type": ["Dataset", "ResourceCatalog", "Sample", "DataCollection"]}},
+            {"terms": {"@type": list(PUBLIC_DIRECT_TYPES)}},
         ]
 
         computational_tool_condition = {
             "bool": {
                 "must": [
                     {"term": {"@type": "ComputationalTool"}},
-                    {"term": {"includedInDataCatalog.name": "bio.tools"}}
+                    {
+                        "term": {
+                            "includedInDataCatalog.name": (
+                                PUBLIC_COMPUTATIONAL_TOOL_CATALOG
+                            )
+                        }
+                    }
                 ]
             }
         }
