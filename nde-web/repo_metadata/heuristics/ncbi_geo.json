@@ -335,43 +335,73 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "Expression profiling by high throughput sequencing"
+      "identifier": "0002697",
+      "name": "assay by high throughput sequencer",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0002697",
+      "inDefinedTermSet": "EFO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Expression profiling by array"
+      "identifier": "0000644",
+      "name": "high-throughput expression assay",
+      "url": "https://ontobee.org/ontology/MMO?iri=http://purl.obolibrary.org/obo/MMO_0000644",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Genome binding/occupancy profiling by high throughput sequencing"
+      "identifier": "0002696",
+      "name": "assay by array",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0002696",
+      "inDefinedTermSet": "EFO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Other"
+      "identifier": "0000640",
+      "name": "expression assay",
+      "url": "https://ontobee.org/ontology/MMO?iri=http://purl.obolibrary.org/obo/MMO_0000640",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Non-coding RNA profiling by high throughput sequencing"
+      "identifier": "0003033",
+      "name": "genome binding",
+      "url": "https://ontobee.org/ontology/FBcv?iri=http://purl.obolibrary.org/obo/FBcv_0003033",
+      "inDefinedTermSet": "FB-CV"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Methylation profiling by high throughput sequencing"
+      "identifier": "0000011",
+      "name": "planned process",
+      "url": "https://ontobee.org/ontology/OBI?iri=http://purl.obolibrary.org/obo/OBI_0000011",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Non-coding RNA profiling by array"
+      "identifier": "C172858",
+      "name": "Non-Coding RNA Sequencing",
+      "url": "https://ontobee.org/ontology/NCIT?iri=http://purl.obolibrary.org/obo/NCIT_C172858",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Methylation profiling by genome tiling array"
+      "identifier": "0002704",
+      "name": "tiling array",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0002704",
+      "inDefinedTermSet": "EFO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Genome binding/occupancy profiling by genome tiling array"
+      "identifier": "0002761",
+      "name": "methylation profiling by high throughput sequencing",
+      "url": "https://www.ebi.ac.uk/ols4/ontologies/efo/classes?short_form=EFO_0002761",
+      "inDefinedTermSet": "EFO"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Methylation profiling by array"
+      "identifier": "C94411",
+      "name": "Genomic Profile",
+      "url": "https://ontobee.org/ontology/NCIT?iri=http://purl.obolibrary.org/obo/NCIT_C94411",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",

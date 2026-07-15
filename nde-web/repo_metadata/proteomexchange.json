@@ -2,6 +2,7 @@
   "_id": "proteomexchange",
   "name": "Proteome Xchange",
   "identifier": "ProteomeXchange",
+  "url": "https://www.proteomexchange.org/",
   "abstract": "Proteome Xchange is a consortia supported generalist repository that includes proteomic data.",
   "description": "The ProteomeXchange Consortium was established to provide globally coordinated standard data submission and dissemination pipelines involving the main proteomics repositories, and to encourage open data policies in the field. ProteomeXchange fully supports both MS/MS proteomics and SRM data submission. Submissions of other types of proteomics data is also possible using the Partial Submission mechanism.",
   "type": "Dataset Repository",

@@ -13,3 +13,6 @@ venv
 
 # build output
 web-app/dist
+
+# downloaded tsv
+*.tsv

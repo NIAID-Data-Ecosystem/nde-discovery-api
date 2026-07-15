@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 401,
+      "minValue": 408,
       "unitText": "Dataset"
     }
   ],
@@ -58,16 +58,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3302",
-      "name": "Parasitology",
-      "url": "http://edamontology.org/topic_3302",
+      "identifier": "topic_3343",
+      "name": "Compound libraries and screening",
+      "url": "http://edamontology.org/topic_3343",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3343",
-      "name": "Compound libraries and screening",
-      "url": "http://edamontology.org/topic_3343",
+      "identifier": "topic_3302",
+      "name": "Parasitology",
+      "url": "http://edamontology.org/topic_3302",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -114,24 +114,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C27988",
-      "name": "Cytotoxicity",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C27988",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005136",
-      "name": "malaria",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Serious Gram-negative bacterial infections (by WHO priority 1 pathogens for which new drugs are needed)"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0001517",
       "name": "dysentery",
       "url": "http://purl.obolibrary.org/obo/MONDO_0001517",
@@ -143,10 +125,25 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005812",
-      "name": "influenza",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "identifier": "C27988",
+      "name": "Cytotoxicity",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C27988",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Serious Gram-negative bacterial infections (by WHO priority 1 pathogens for which new drugs are needed)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005136",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
       "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "ADMET - Metabolism"
     },
     {
       "@type": "DefinedTerm",
@@ -240,16 +237,16 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
-      "identifier": "2901879",
-      "name": "Severe acute respiratory syndrome coronavirus",
-      "url": "https://www.uniprot.org/taxonomy/2901879",
+      "identifier": "2",
+      "name": "Bacteria",
+      "url": "https://www.uniprot.org/taxonomy/2",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2",
-      "name": "Bacteria",
-      "url": "https://www.uniprot.org/taxonomy/2",
+      "identifier": "2901879",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/2901879",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -289,16 +286,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "470",
-      "name": "Acinetobacter baumannii",
-      "url": "https://www.uniprot.org/taxonomy/470",
+      "identifier": "6134",
+      "name": "Renilla",
+      "url": "https://www.uniprot.org/taxonomy/6134",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "6134",
-      "name": "Renilla",
-      "url": "https://www.uniprot.org/taxonomy/6134",
+      "identifier": "470",
+      "name": "Acinetobacter baumannii",
+      "url": "https://www.uniprot.org/taxonomy/470",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -374,17 +371,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0000063",
-      "name": "bioluminescence resonance energy transfer",
-      "url": "http://purl.obolibrary.org/obo/CHMO_0000063",
-      "inDefinedTermSet": "CHMO"
+      "identifier": "C16802",
+      "name": "Luciferase",
+      "url": "https://ontobee.org/ontology/NCIT?iri=http://purl.obolibrary.org/obo/NCIT_C16802",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0002992",
-      "name": "cell motility assay",
-      "url": "http://www.bioassayontology.org/bao#BAO_0002992",
-      "inDefinedTermSet": "BAO"
+      "identifier": "0001746",
+      "name": "development or differentiation design",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0001746",
+      "inDefinedTermSet": "EFO"
     },
     {
       "@type": "DefinedTerm",

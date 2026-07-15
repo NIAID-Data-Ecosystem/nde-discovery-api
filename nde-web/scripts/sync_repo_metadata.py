@@ -56,6 +56,7 @@ FIELD_ORDER = [
     "identifier",
     "url",
     "sameAs",
+    "about",
     "abstract",
     "description",
     "collectionType",
@@ -171,9 +172,10 @@ RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
 
 
 # Priority-sheet properties safe to extract as scalars. Complex object
-# fields (funding, author, citation, measurementTechnique, infectiousAgent,
-# species, variableMeasured, spatialCoverage, temporalCoverage, usageInfo,
-# collectionSize, topicCategory, etc.) mix free-text with JSON-like
+# fields (funding, author, citation, about, measurementTechnique,
+# infectiousAgent, species, variableMeasured, spatialCoverage,
+# temporalCoverage, usageInfo, collectionSize, topicCategory, etc.) mix
+# free-text with JSON-like
 # fragments — they are left to the Phase 3 heuristics pipeline rather
 # than parsed heuristically here.
 PRIORITY_SCALAR_PROPERTIES: dict[str, tuple[str, Any]] = {

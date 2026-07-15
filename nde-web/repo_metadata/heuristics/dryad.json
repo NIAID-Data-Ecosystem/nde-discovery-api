@@ -17,10 +17,6 @@
   "spatialCoverage": [
     {
       "@type": "AdministrativeArea",
-      "name": "Columbia River"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "Pacific Northwest"
     },
     {
@@ -29,11 +25,15 @@
     },
     {
       "@type": "AdministrativeArea",
+      "name": "World's Oceans"
+    },
+    {
+      "@type": "AdministrativeArea",
       "name": "Western Jutland Denmark"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "World's Oceans"
+      "name": "Columbia River"
     }
   ],
   "topicCategory": [

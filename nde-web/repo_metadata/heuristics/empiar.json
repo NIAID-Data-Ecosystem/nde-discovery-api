@@ -1,0 +1,345 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 2976,
+      "unitText": "Dataset"
+    }
+  ],
+  "dateModified": "2026-06-12",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2013-02-28",
+      "endDate": "2026-06-12"
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0611",
+      "name": "Electron microscopy",
+      "url": "http://edamontology.org/topic_0611",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_1317",
+      "name": "Structural biology",
+      "url": "http://edamontology.org/topic_1317",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3383",
+      "name": "Bioimaging",
+      "url": "http://edamontology.org/topic_3383",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005812",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018076",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004975",
+      "name": "Alzheimer disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004975",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C189188",
+      "name": "Infected with SARS-CoV-2",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0009693",
+      "name": "plasma cell myeloma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0009693",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005478",
+      "name": "torsades de pointes",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005478",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0050424",
+      "name": "familial adenomatous polyposis",
+      "url": "http://purl.obolibrary.org/obo/DOID_0050424",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004976",
+      "name": "amyotrophic lateral sclerosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004976",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "59238",
+      "name": "Arctica",
+      "url": "https://www.uniprot.org/taxonomy/59238",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9986",
+      "name": "Oryctolagus cuniculus",
+      "url": "https://www.uniprot.org/taxonomy/9986",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8364",
+      "name": "Xenopus tropicalis",
+      "url": "https://www.uniprot.org/taxonomy/8364",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1408216",
+      "name": "Lamella",
+      "url": "https://www.uniprot.org/taxonomy/1408216",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2499517",
+      "name": "Thermocellio",
+      "url": "https://www.uniprot.org/taxonomy/2499517",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7955",
+      "name": "Danio rerio",
+      "url": "https://www.uniprot.org/taxonomy/7955",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3082809",
+      "name": "Candidatus Colicola",
+      "url": "https://www.uniprot.org/taxonomy/3082809",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "694009",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/694009",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2901879",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/2901879",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11676",
+      "name": "Human immunodeficiency virus 1",
+      "url": "https://www.uniprot.org/taxonomy/11676",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1423",
+      "name": "Bacillus subtilis",
+      "url": "https://www.uniprot.org/taxonomy/1423",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11118",
+      "name": "Coronaviridae",
+      "url": "https://www.uniprot.org/taxonomy/11118",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5833",
+      "name": "Plasmodium falciparum",
+      "url": "https://www.uniprot.org/taxonomy/5833",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "CHMO_0000068",
+      "name": "electron microscopy",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0000068",
+      "inDefinedTermSet": "CHMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "FIB-SEM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "FBbi_00000585",
+      "name": "serial block face SEM (SBFSEM)",
+      "url": "http://purl.obolibrary.org/obo/FBbi_00000585",
+      "inDefinedTermSet": "EFO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "CHMO_0000102",
+      "name": "light microscopy assay",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0000102",
+      "inDefinedTermSet": "CHMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Exception"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "serial section electron tomography"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "correlative light-electron microscopy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "soft x-ray tomography"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "FBbi_00001003",
+      "name": "X-ray tomography",
+      "url": "http://purl.obolibrary.org/obo/FBbi_00001003",
+      "inDefinedTermSet": "EFO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "CHMO_0002312",
+      "name": "X-ray microscopy",
+      "url": "http://purl.obolibrary.org/obo/CHMO_0002312"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

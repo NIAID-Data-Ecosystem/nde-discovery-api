@@ -23,8 +23,22 @@ The main new-source command is:
 ./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --source uniprot
 ```
 
-It prompts before downloading the latest `SourceMetaCuration - resource_base`
-tab from Google Sheets as `SourceMetaCuration - resource_base.tsv`, then runs:
+It prompts you to manually download the private `SourceMetaCuration -
+resource_base` tab as TSV from:
+
+```text
+https://docs.google.com/spreadsheets/d/1SjZ7BNC6oah722psQ_q8oFDB5ZBZjo3np5lBtA3cN-k/edit#gid=349233573
+```
+
+Select the `resource_base` tab, download it as tab-separated values
+(`.tsv`, current sheet), then move/rename the file to the root of this
+repository as:
+
+```text
+SourceMetaCuration - resource_base.tsv
+```
+
+After the TSV is in place, press Enter in the script prompt. It then runs:
 
 ```bash
 ./nde-web/venv/bin/python nde-web/scripts/sync_repo_metadata.py --source <source>
@@ -35,25 +49,111 @@ tab from Google Sheets as `SourceMetaCuration - resource_base.tsv`, then runs:
 ./nde-web/venv/bin/python nde-web/scripts/validate_repo_metadata.py --source <source>
 ```
 
-For non-interactive defaults:
+For non-interactive defaults after the TSV is already at the repository root:
 
 ```bash
 ./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --source uniprot -y
 ```
 
-For a new source that does not yet have `repo_metadata/<source>.json`, pass a
-schema mapping JSON if you have one:
+When bootstrapping a brand-new source from a `resource_base.tsv` row, the
+script uses the first `alternateName` value as the canonical source key by
+default:
 
 ```bash
 ./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py \
-  --source uniprot \
-  --schema-json path/to/schema.json \
-  --schedule Weekly
+  --source "United States Immunodeficiency Network (USIDNET)" \
+  -y
 ```
 
-If the Google Sheet download needs browser auth, download the tab manually as
-TSV and save it at the repo root as `SourceMetaCuration - resource_base.tsv`,
-then rerun with `--skip-download`.
+That key controls `repo_metadata/<source>.json`, the source `_id`,
+`repo_metadata/heuristics/<source>.json`, and
+`metadata_completeness/cache_<source>.json`.
+
+Use `--use-source-key` only when the normalized `--source` value should be
+used instead.
+
+### Troubleshooting: Missing Heuristics Cache File
+
+If bootstrap fails at validation with output like:
+
+```text
+Running: /.../python nde-web/scripts/validate_repo_metadata.py --source <source>
+Warnings:
+  - <source>: no heuristic cache file
+Errors:
+  - nde-web/repo_metadata/heuristics/<source>.json: missing generated file
+```
+
+one common cause is that the source key does not match the actual Mongo
+collection name. In that case, set `_mongoCollection` in
+`nde-web/repo_metadata/<source>.json` to the real collection name.
+
+Example (USIDNET):
+
+```json
+"_mongoCollection": "usidnet"
+```
+
+Then re-run bootstrap for that source.
+
+## Bootstrap All Existing Sources
+
+To run the same bootstrap flow for every existing source JSON in
+`nde-web/repo_metadata/`, use:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --all -y
+```
+
+If you only need to apply the updated TSV fields and validate, without
+regenerating Mongo-backed heuristic and completeness caches:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --all -y \
+  --skip-heuristics \
+  --skip-completeness
+```
+
+For a new source that does not yet have `repo_metadata/<source>.json`, the
+bootstrap script creates the stub with an empty `schedule` string and empty
+`schema` object. Fill out those two fields in the generated source metadata
+before committing.
+
+## Refresh Saved Search Totals
+
+After publishing a new data release, refresh the stored result count for each
+user's saved searches:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/update_saved_search_totals.py \
+  --metadata-url https://api.data.niaid.nih.gov/v1/metadata
+```
+
+Use `--dry-run` first to count without writing profile updates. When
+`--metadata-url` is provided, the script records the processed `build_version`
+and `build_date` in the user profile index and skips later runs for the same
+build unless `--force` is passed. It also derives the sibling `/v1/query` URL
+from `--metadata-url` and uses that API response to compute frontend-equivalent
+totals, including the frontend's BioSample visibility filter. Date filters are
+used only when they are present on the saved search. The script reads
+Elasticsearch settings from `nde-web/config.py` or
+`nde-web/config_web.py` by default; override them with `--es-host`,
+`--user-index`, or `--data-index` only when needed.
+
+## Delete Inactive User Profiles
+
+User profile documents track `last_active` when a user logs in or uses the
+account-data endpoints. Delete profiles inactive for two years with:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/delete_inactive_user_profiles.py \
+  --dry-run
+```
+
+Remove `--dry-run` after reviewing the counts. The script reads Elasticsearch
+settings from `nde-web/config.py` or `nde-web/config_web.py` by default, skips
+system marker documents, and falls back to `updated` then `created` for legacy
+profiles that do not yet have `last_active`.
 
 ## Commit Checklist
 
@@ -72,6 +172,8 @@ nde-web/scripts/bootstrap_source_metadata.py
 nde-web/scripts/metadata_compatibility_calculator.py
 nde-web/scripts/sync_repo_metadata.py
 nde-web/scripts/compute_heuristics.py
+nde-web/scripts/delete_inactive_user_profiles.py
+nde-web/scripts/update_saved_search_totals.py
 nde-web/scripts/validate_repo_metadata.py
 nde-web/requirements_scripts.txt
 ```

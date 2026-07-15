@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 27,
+      "minValue": 29,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-04-03",
+  "dateModified": "2026-05-18",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2022-04-27",
-      "endDate": "2026-04-03"
+      "endDate": "2026-05-18"
     }
   ],
   "license": "https://arkportal.synapse.org/Data%20Access",
@@ -36,16 +36,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3173",
-      "name": "Epigenomics",
-      "url": "http://edamontology.org/topic_3173",
+      "identifier": "topic_0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0622",
-      "name": "Genomics",
-      "url": "http://edamontology.org/topic_0622",
+      "identifier": "topic_3173",
+      "name": "Epigenomics",
+      "url": "http://edamontology.org/topic_3173",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -73,9 +73,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005282",
-      "name": "cutaneous lupus erythematosus",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005282",
+      "identifier": "0008661",
+      "name": "vitiligo",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008661",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -87,9 +87,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0008661",
-      "name": "vitiligo",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0008661",
+      "identifier": "0005282",
+      "name": "cutaneous lupus erythematosus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005282",
       "inDefinedTermSet": "MONDO"
     }
   ],
@@ -117,20 +117,13 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0001977",
-      "name": "cytometry assay",
-      "url": "http://purl.obolibrary.org/obo/OBI_0001977",
-      "inDefinedTermSet": "OBI"
-    },
-    {
-      "@type": "DefinedTerm",
       "name": "multimodal"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0002115",
-      "name": "cytometry time of flight assay",
-      "url": "http://purl.obolibrary.org/obo/OBI_0002115",
+      "identifier": "0001977",
+      "name": "cytometry assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001977",
       "inDefinedTermSet": "OBI"
     },
     {
@@ -156,9 +149,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0030014",
-      "name": "bulk immune repertoire sequencing",
-      "url": "http://www.ebi.ac.uk/efo/EFO_0030014",
+      "identifier": "0002115",
+      "name": "cytometry time of flight assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_0002115",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0030015",
+      "name": "single cell immune repertoire sequencing",
+      "url": "http://www.ebi.ac.uk/efo/EFO_0030015",
       "inDefinedTermSet": "EFO"
     },
     {

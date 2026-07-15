@@ -1,9 +1,8 @@
 {
-  "avg_augmented_recommended_ratio": 0.0908,
-  "avg_augmented_required_ratio": 0.0105,
+  "avg_augmented_recommended_ratio": 0.0904,
+  "avg_augmented_required_ratio": 0.0091,
   "avg_recommended_score_ratio": 0.3142,
-  "avg_required_ratio": 0.9313,
-  "total_documents": 2277,
+  "avg_required_ratio": 0.9339,
   "required_fields": {
     "name": 1.0,
     "description": 1.0,
@@ -12,7 +11,7 @@
     "measurementTechnique": 1.0,
     "includedInDataCatalog": 1.0,
     "distribution": 1.0,
-    "funding": 0.4058,
+    "funding": 0.407,
     "date": 1.0
   },
   "recommended_fields": {
@@ -21,41 +20,41 @@
     "datePublished": 1.0,
     "citedBy": 0.0,
     "doi": 0.0,
-    "infectiousAgent": 0.1577,
-    "healthCondition": 0.2148,
-    "species": 0.1774,
+    "infectiousAgent": 0.1612,
+    "healthCondition": 0.2142,
+    "species": 0.1794,
     "variableMeasured": 0.0,
-    "citation": 0.3303,
+    "citation": 0.328,
     "conditionsOfAccess": 1.0,
     "isBasedOn": 0.0,
-    "keywords": 0.6034,
+    "keywords": 0.6038,
     "license": 1.0,
     "sdPublisher": 0.0,
     "spatialCoverage": 0.0,
     "temporalCoverage": 1.0,
-    "topicCategory": 0.9763,
+    "topicCategory": 0.9657,
     "identifier": 1.0,
     "usageInfo": 0.0,
     "interactionStatistic": 0.0
   },
+  "sum_required_coverage": 8.41,
+  "sum_recommended_coverage": 8.45,
   "required_augmented_fields_coverage": {
-    "funding": 0.0957,
+    "funding": 0.08,
     "measurementTechnique": 0.0
   },
   "recommended_augmented_fields_coverage": {
-    "species": 0.1774,
-    "infectiousAgent": 0.1577,
-    "healthCondition": 0.2139,
-    "citation": 0.3303,
-    "topicCategory": 0.9763
+    "species": 0.18,
+    "infectiousAgent": 0.16,
+    "healthCondition": 0.21,
+    "citation": 0.33,
+    "topicCategory": 0.97
   },
-  "sum_required_coverage": 8.4058,
-  "sum_recommended_coverage": 8.4599,
   "binary_required_score": 9,
   "binary_recommended_score": 12,
   "binary_required_augmented": 1,
   "binary_recommended_augmented": 5,
   "percent_required_fields": 1.0,
-  "percent_recommended_fields": 0.5714,
+  "percent_recommended_fields": 0.57,
   "conditionsOfAccess": "Open"
 }

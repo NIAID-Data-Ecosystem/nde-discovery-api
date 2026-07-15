@@ -32,16 +32,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "62324",
-      "name": "Anopheles funestus",
-      "url": "https://www.uniprot.org/taxonomy/62324",
+      "identifier": "1518534",
+      "name": "Anopheles coluzzii",
+      "url": "https://www.uniprot.org/taxonomy/1518534",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1518534",
-      "name": "Anopheles coluzzii",
-      "url": "https://www.uniprot.org/taxonomy/1518534",
+      "identifier": "62324",
+      "name": "Anopheles funestus",
+      "url": "https://www.uniprot.org/taxonomy/62324",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -90,13 +90,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "5855",
-      "name": "Plasmodium vivax",
-      "url": "https://www.uniprot.org/taxonomy/5855",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "357002",
       "name": "Jola",
       "url": "https://www.uniprot.org/taxonomy/357002",
@@ -107,6 +100,13 @@
       "identifier": "5820",
       "name": "Plasmodium",
       "url": "https://www.uniprot.org/taxonomy/5820",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5855",
+      "name": "Plasmodium vivax",
+      "url": "https://www.uniprot.org/taxonomy/5855",
       "inDefinedTermSet": "UniProt"
     }
   ]

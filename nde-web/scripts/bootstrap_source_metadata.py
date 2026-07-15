@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Bootstrap repo-level metadata artifacts for one NDE source.
+"""Bootstrap repo-level metadata artifacts for NDE sources.
 
-For a new source, this helper can:
+For one source, this helper can:
 
-1. download the latest SourceMetaCuration resource_base Google Sheet as TSV
+1. prompt for the private SourceMetaCuration resource_base Google Sheet TSV
 2. create a minimal ``nde-web/repo_metadata/<source>.json`` stub if needed
 3. run ``sync_repo_metadata.py --source <source>``
 4. run ``compute_heuristics.py --source <source>``
@@ -13,6 +13,8 @@ For a new source, this helper can:
 Usage:
     python nde-web/scripts/bootstrap_source_metadata.py
     python nde-web/scripts/bootstrap_source_metadata.py --source uniprot -y
+    python nde-web/scripts/bootstrap_source_metadata.py --source "NCBI GEO" -y
+    python nde-web/scripts/bootstrap_source_metadata.py --all -y
 """
 
 from __future__ import annotations
@@ -23,8 +25,6 @@ import json
 import re
 import subprocess
 import sys
-import tempfile
-import urllib.request
 from pathlib import Path
 from typing import Any
 
@@ -35,20 +35,27 @@ RESOURCE_BASE_TSV = REPO_ROOT / "SourceMetaCuration - resource_base.tsv"
 
 SHEET_ID = "1SjZ7BNC6oah722psQ_q8oFDB5ZBZjo3np5lBtA3cN-k"
 RESOURCE_BASE_GID = "349233573"
-RESOURCE_BASE_EXPORT_URL = (
-    f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export"
-    f"?format=tsv&gid={RESOURCE_BASE_GID}"
+RESOURCE_BASE_SHEET_URL = (
+    f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/edit"
+    f"#gid={RESOURCE_BASE_GID}"
 )
 
 DEFAULT_MONGO_URL = (
     "mongodb://su02:27017,su09:27017,su11:27017/"
     "?replicaSet=rs0biothings&readPreference=secondaryPreferred"
 )
-SCHEDULES = ("Weekly", "Monthly", "Quarterly", "Manual")
 
 
 def normalize_source_key(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", value.strip().lower()).strip("_")
+
+
+def split_alternate_names(value: str) -> list[str]:
+    return [
+        item.strip(" []\"'")
+        for item in re.split(r"[,;]", value)
+        if item.strip(" []\"'")
+    ]
 
 
 def prompt(message: str, default: str | None = None) -> str:
@@ -72,23 +79,43 @@ def python_for_subprocess() -> str:
     return sys.executable
 
 
-def download_resource_base_tsv(url: str, destination: Path) -> None:
-    request = urllib.request.Request(
-        url,
-        headers={"User-Agent": "nde-source-metadata-bootstrap/1.0"},
-    )
-    with urllib.request.urlopen(request, timeout=60) as response:
-        payload = response.read()
-
-    with tempfile.NamedTemporaryFile(delete=False) as tmp:
-        tmp.write(payload)
-        tmp_path = Path(tmp.name)
-
+def display_path(path: Path) -> str:
     try:
-        validate_resource_base_tsv(tmp_path)
-        destination.write_bytes(payload)
-    finally:
-        tmp_path.unlink(missing_ok=True)
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
+
+
+def resource_base_download_instructions(path: Path) -> str:
+    return "\n".join(
+        [
+            "The SourceMetaCuration resource_base sheet is private, so this "
+            "script cannot download it automatically.",
+            f"Open the sheet: {RESOURCE_BASE_SHEET_URL}",
+            "Select the resource_base tab, then choose File > Download > "
+            "Tab-separated values (.tsv, current sheet).",
+            f"Move/rename the downloaded file to: {display_path(path)}",
+        ]
+    )
+
+
+def prompt_for_resource_base_tsv(
+    path: Path,
+    dry_run: bool,
+    wait_for_replacement: bool = False,
+) -> None:
+    print(resource_base_download_instructions(path))
+    if dry_run:
+        print(f"Would wait for {display_path(path)} to exist.")
+        return
+
+    if wait_for_replacement and path.exists():
+        input("Press Enter after replacing the TSV, or Ctrl-C to stop.")
+
+    while not path.exists():
+        input("Press Enter after moving the TSV into place, or Ctrl-C to stop.")
+        if not path.exists():
+            print(f"Still missing {display_path(path)}.")
 
 
 def validate_resource_base_tsv(path: Path) -> None:
@@ -101,9 +128,10 @@ def validate_resource_base_tsv(path: Path) -> None:
     required = {"name", "url", "abstract", "description"}
     if not required.issubset(set(header)):
         raise RuntimeError(
-            "Downloaded file does not look like SourceMetaCuration "
-            "resource_base.tsv. If the sheet requires Google auth, download "
-            f"the tab manually as TSV and save it to {RESOURCE_BASE_TSV}."
+            f"{display_path(path)} does not look like SourceMetaCuration "
+            "resource_base.tsv. "
+            f"Download the resource_base tab as TSV from {RESOURCE_BASE_SHEET_URL} "
+            f"and save it to {display_path(RESOURCE_BASE_TSV)}."
         )
 
 
@@ -120,8 +148,7 @@ def row_source_candidates(row: dict[str, str]) -> list[str]:
         row.get("name", ""),
         row.get("identifier", ""),
     ]
-    alternate = row.get("alternateName", "")
-    candidates.extend(re.split(r"[,;]", alternate))
+    candidates.extend(split_alternate_names(row.get("alternateName", "")))
     return [candidate.strip() for candidate in candidates if candidate.strip()]
 
 
@@ -133,34 +160,55 @@ def find_source_row(rows: list[dict[str, str]], source_key: str) -> dict[str, st
     return None
 
 
+def alternate_name_source_key(row: dict[str, str]) -> str | None:
+    alternate_names = split_alternate_names(row.get("alternateName", ""))
+    if not alternate_names:
+        return None
+    key = normalize_source_key(alternate_names[0])
+    return key or None
+
+
+def resolve_new_source_key_from_alternate_name(
+    source_key: str,
+    rows: list[dict[str, str]],
+) -> str:
+    row = find_source_row(rows, source_key)
+    if row is None:
+        raise SystemExit(
+            f"No resource_base row matched source key {source_key!r}; "
+            "cannot derive a key from alternateName."
+        )
+
+    alternate_key = alternate_name_source_key(row)
+    if alternate_key is None:
+        raise SystemExit(
+            f"resource_base row for {source_key!r} has no alternateName; "
+            "cannot derive an alternateName source key."
+        )
+
+    return alternate_key
+
+
 def split_semicolon(value: str) -> list[str]:
     return [item.strip() for item in value.split(";") if item.strip()]
 
 
-def load_schema(path: str | None) -> dict[str, Any]:
-    if not path:
-        return {}
-    schema_path = Path(path).expanduser()
-    if not schema_path.is_absolute():
-        schema_path = REPO_ROOT / schema_path
-    with schema_path.open(encoding="utf-8") as f:
-        value = json.load(f)
-    if not isinstance(value, dict):
-        raise RuntimeError("Schema mapping JSON must be an object")
-    return value.get("schema", value)
+def source_stub_reminder(path: Path) -> str:
+    return (
+        f"Reminder: fill out 'schedule' and 'schema' in {display_path(path)} "
+        "before committing the source metadata."
+    )
 
 
 def create_source_stub(
     source_key: str,
     row: dict[str, str],
-    schedule: str,
-    schema: dict[str, Any],
     assume_yes: bool,
     dry_run: bool,
-) -> None:
+) -> Path | None:
     path = REPO_METADATA_DIR / f"{source_key}.json"
     if path.exists():
-        return
+        return None
 
     name = (row.get("name") or "").strip()
     if not name:
@@ -169,11 +217,15 @@ def create_source_stub(
             "Create the source JSON manually or fix the sheet row."
         )
 
+    alternate_names = split_alternate_names(row.get("alternateName", ""))
     identifier = (row.get("identifier") or "").strip()
     if not identifier and not assume_yes:
-        identifier = prompt("Identifier", name)
+        identifier = prompt(
+            "Identifier",
+            alternate_names[0] if alternate_names else name,
+        )
     if not identifier:
-        identifier = name
+        identifier = alternate_names[0] if alternate_names else name
 
     data: dict[str, Any] = {
         "_id": source_key,
@@ -182,9 +234,11 @@ def create_source_stub(
         "url": (row.get("url") or "").strip(),
         "abstract": (row.get("abstract") or "").strip(),
         "description": (row.get("description") or "").strip(),
-        "schedule": schedule,
-        "schema": schema,
+        "schedule": "",
+        "schema": {},
     }
+    if alternate_names:
+        data["alternateName"] = alternate_names
     genre = split_semicolon((row.get("genre") or "").strip())
     if genre:
         data["genre"] = genre
@@ -192,17 +246,22 @@ def create_source_stub(
     if conditions:
         data["conditionsOfAccess"] = conditions
 
-    data = {k: v for k, v in data.items() if v not in ("", [], {}) or k == "schema"}
+    data = {
+        k: v
+        for k, v in data.items()
+        if v not in ("", [], {}) or k in {"schedule", "schema"}
+    }
 
     if dry_run:
         print(f"Would create {path.relative_to(REPO_ROOT)}")
-        return
+        return path
 
     REPO_METADATA_DIR.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
         f.write("\n")
     print(f"Created {path.relative_to(REPO_ROOT)}")
+    return path
 
 
 def run_command(cmd: list[str], dry_run: bool) -> None:
@@ -214,6 +273,62 @@ def run_command(cmd: list[str], dry_run: bool) -> None:
     subprocess.run(cmd, cwd=REPO_ROOT, check=True)
 
 
+def existing_source_keys() -> list[str]:
+    """Return source keys with existing curated metadata JSON files."""
+    if not REPO_METADATA_DIR.exists():
+        return []
+    return [
+        path.stem
+        for path in sorted(REPO_METADATA_DIR.glob("*.json"))
+        if not path.name.startswith("_")
+    ]
+
+
+def resolve_resource_base_tsv(path_arg: str) -> Path:
+    path = Path(path_arg)
+    if not path.is_absolute():
+        path = REPO_ROOT / path
+    return path
+
+
+def prepare_resource_base_tsv(
+    args: argparse.Namespace,
+    resource_base_tsv: Path,
+    require_for_new_source: bool,
+) -> list[dict[str, str]]:
+    if not args.skip_download:
+        if args.yes:
+            if not resource_base_tsv.exists():
+                print(resource_base_download_instructions(resource_base_tsv))
+        elif resource_base_tsv.exists():
+            if confirm(
+                "Refresh SourceMetaCuration resource_base TSV manually before continuing?",
+                default=False,
+            ):
+                prompt_for_resource_base_tsv(
+                    resource_base_tsv,
+                    args.dry_run,
+                    wait_for_replacement=True,
+                )
+        else:
+            print(f"Missing {display_path(resource_base_tsv)}.")
+            prompt_for_resource_base_tsv(resource_base_tsv, args.dry_run)
+
+    if resource_base_tsv.exists():
+        return load_resource_base_rows(resource_base_tsv)
+    if require_for_new_source:
+        raise SystemExit(
+            f"Missing {display_path(resource_base_tsv)}. "
+            f"Download the resource_base tab as TSV from {RESOURCE_BASE_SHEET_URL} "
+            "and move it to the repository root before rerunning."
+        )
+    print(
+        f"Warning: {display_path(resource_base_tsv)} is missing; "
+        "continuing with existing source JSON files only."
+    )
+    return []
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -221,9 +336,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="NDE source key / Mongo collection name, e.g. uniprot.",
     )
     parser.add_argument(
-        "--sheet-url",
-        default=RESOURCE_BASE_EXPORT_URL,
-        help="Google Sheets TSV export URL for SourceMetaCuration resource_base.",
+        "--all",
+        action="store_true",
+        help="Bootstrap every existing source in nde-web/repo_metadata.",
     )
     parser.add_argument(
         "--resource-base-tsv",
@@ -233,16 +348,28 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--skip-download",
         action="store_true",
-        help="Use the existing local resource_base TSV instead of downloading it.",
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
-        "--schema-json",
-        help="Optional JSON object containing the source schema mapping.",
+        "--use-alternate-name-key",
+        action="store_true",
+        default=True,
+        help=(
+            "Default for new sources: derive the source key from the first "
+            "resource_base.tsv alternateName value. This controls the "
+            "repo_metadata filename, _id, heuristic filename, and metadata "
+            "completeness cache filename."
+        ),
     )
     parser.add_argument(
-        "--schedule",
-        choices=SCHEDULES,
-        help="Schedule for a newly-created source JSON stub.",
+        "--use-source-key",
+        "--no-alternate-name-key",
+        dest="use_alternate_name_key",
+        action="store_false",
+        help=(
+            "For new sources, use the normalized --source value instead of "
+            "deriving the source key from alternateName."
+        ),
     )
     parser.add_argument(
         "--mongo-url",
@@ -283,53 +410,21 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Print actions without downloading, writing, or running generators.",
+        help="Print actions without writing or running generators.",
     )
-    return parser.parse_args(argv)
+    args = parser.parse_args(argv)
+    if args.all and args.source:
+        parser.error("--all cannot be used with --source")
+    return args
 
 
-def main(argv: list[str] | None = None) -> int:
-    args = parse_args(argv)
-    source_input = args.source or prompt("Source key / Mongo collection name")
-    source_key = normalize_source_key(source_input)
-    if not source_key:
-        raise SystemExit("A source key is required.")
-    if source_key != source_input:
-        print(f"Using normalized source key: {source_key}")
-
+def bootstrap_source(
+    args: argparse.Namespace,
+    source_key: str,
+    rows: list[dict[str, str]],
+) -> None:
     source_json_path = REPO_METADATA_DIR / f"{source_key}.json"
-    resource_base_tsv = Path(args.resource_base_tsv)
-    if not resource_base_tsv.is_absolute():
-        resource_base_tsv = REPO_ROOT / resource_base_tsv
 
-    should_download = not args.skip_download
-    if should_download and not args.yes:
-        should_download = confirm(
-            "Download the latest SourceMetaCuration resource_base TSV from Google Sheets?",
-            default=True,
-        )
-    if should_download:
-        if args.dry_run:
-            print(f"Would download {args.sheet_url}")
-            print(f"Would save to {resource_base_tsv.relative_to(REPO_ROOT)}")
-        else:
-            print(f"Downloading {args.sheet_url}")
-            download_resource_base_tsv(args.sheet_url, resource_base_tsv)
-            print(f"Saved {resource_base_tsv.relative_to(REPO_ROOT)}")
-
-    if resource_base_tsv.exists():
-        rows = load_resource_base_rows(resource_base_tsv)
-    elif source_json_path.exists():
-        rows = []
-        print(
-            f"Warning: {resource_base_tsv.relative_to(REPO_ROOT)} is missing; "
-            "continuing with the existing source JSON only."
-        )
-    else:
-        raise SystemExit(
-            f"Missing {resource_base_tsv.relative_to(REPO_ROOT)}. "
-            "Download the sheet TSV or rerun without --skip-download."
-        )
     row = find_source_row(rows, source_key)
     if row is None and not source_json_path.exists():
         raise SystemExit(
@@ -339,27 +434,15 @@ def main(argv: list[str] | None = None) -> int:
         )
     if row is None:
         print(
-            f"Warning: no resource_base row matched {source_key!r}; "
-            "sync will use the existing source JSON only."
+            f"Warning: no resource_base row matched {source_key!r} by "
+            "source key; sync_repo_metadata.py may still match by URL."
         )
 
+    created_stub_path = None
     if not source_json_path.exists():
-        schedule = args.schedule
-        if schedule is None:
-            schedule = "Weekly" if args.yes else prompt("Schedule", "Weekly")
-        if schedule not in SCHEDULES:
-            raise SystemExit(f"Schedule must be one of: {', '.join(SCHEDULES)}")
-
-        schema_path = args.schema_json
-        if schema_path is None and not args.yes:
-            schema_path = prompt("Schema mapping JSON path (blank for empty schema)", "")
-        schema = load_schema(schema_path)
-
-        create_source_stub(
+        created_stub_path = create_source_stub(
             source_key=source_key,
             row=row or {},
-            schedule=schedule,
-            schema=schema,
             assume_yes=args.yes,
             dry_run=args.dry_run,
         )
@@ -416,6 +499,61 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     print("Done.")
+    if created_stub_path is not None:
+        print(source_stub_reminder(created_stub_path))
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    resource_base_tsv = resolve_resource_base_tsv(args.resource_base_tsv)
+
+    if args.all:
+        source_keys = existing_source_keys()
+        if not source_keys:
+            raise SystemExit(f"No source JSON files found in {display_path(REPO_METADATA_DIR)}.")
+        rows = prepare_resource_base_tsv(
+            args,
+            resource_base_tsv,
+            require_for_new_source=False,
+        )
+        total = len(source_keys)
+        for index, source_key in enumerate(source_keys, start=1):
+            print(f"\n=== [{index}/{total}] {source_key} ===")
+            bootstrap_source(args, source_key, rows)
+        if not args.skip_validation:
+            run_command(
+                [
+                    python_for_subprocess(),
+                    "nde-web/scripts/validate_repo_metadata.py",
+                ],
+                args.dry_run,
+            )
+        print(f"Done bootstrapping {total} sources.")
+        return 0
+
+    source_input = args.source or prompt("Source key / Mongo collection name")
+    requested_source_key = normalize_source_key(source_input)
+    if not requested_source_key:
+        raise SystemExit("A source key is required.")
+    if requested_source_key != source_input:
+        print(f"Using normalized source key: {requested_source_key}")
+
+    requested_source_json_path = REPO_METADATA_DIR / f"{requested_source_key}.json"
+    rows = prepare_resource_base_tsv(
+        args,
+        resource_base_tsv,
+        require_for_new_source=not requested_source_json_path.exists(),
+    )
+    source_key = requested_source_key
+    if args.use_alternate_name_key and not requested_source_json_path.exists():
+        source_key = resolve_new_source_key_from_alternate_name(
+            requested_source_key,
+            rows,
+        )
+        if source_key != requested_source_key:
+            print(f"Using alternateName source key: {source_key}")
+
+    bootstrap_source(args, source_key, rows)
     return 0
 
 

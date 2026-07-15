@@ -20,6 +20,13 @@
     "name": "MWCCS DACC Resource Request Info",
     "url": "https://statepi.jhsph.edu/mwccs/wp-content/uploads/2022/11/MWCCS-DACC-Resource-Request-Form_final11922.pdf"
   },
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Patient",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C16960"
+    }
+  ],
   "topicCategory": [
     {
       "@type": "DefinedTerm",
@@ -67,16 +74,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0006858",
-      "name": "mouth disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0006858",
+      "identifier": "0002025",
+      "name": "psychiatric disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002025",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021945",
-      "name": "hearing disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021945",
+      "identifier": "0002494",
+      "name": "substance-related disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002494",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -88,9 +95,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0002025",
-      "name": "psychiatric disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0002025",
+      "identifier": "0021945",
+      "name": "hearing disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021945",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -102,9 +109,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0002494",
-      "name": "substance-related disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0002494",
+      "identifier": "0006858",
+      "name": "mouth disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0006858",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -155,15 +162,27 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Visual Spatial Learning Test (VSLT)"
-    },
-    {
-      "@type": "DefinedTerm",
       "name": "Trials A&B"
     },
     {
       "@type": "DefinedTerm",
-      "name": "BRACE+ (Brainbaseline 60-75 min Assessment of Cognition and Everyday Function Plus)"
+      "name": "Visual Spatial Learning Test (VSLT)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Echocardiogram examination (an ultrasound that takes pictures of the heart and records blood flow through the heart and attached blood vessels)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Modified Medical Research Council Dyspnea scale"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Spirometry"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Photographs of the inside of the mouth:"
     },
     {
       "@type": "DefinedTerm",
@@ -171,19 +190,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "10-minute National Health and Nutrition Examination Survey (NHANES) hearing and balance survey"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "areas of the mouth that look different than expected"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "WHO Composite International Diagnostic Interview (CIDI) as defined by American Psychiatric Association Diagnostic and Statistical Manual-5"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "BRACE (Brainbaseline 10- min Assessment of Cognition and Everyday Function)"
+      "identifier": "0200111",
+      "name": "data visualization",
+      "url": "http://purl.obolibrary.org/obo/OBI_0200111",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",

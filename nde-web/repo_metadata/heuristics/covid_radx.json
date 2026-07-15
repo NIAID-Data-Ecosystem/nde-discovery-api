@@ -69,16 +69,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0781",
-      "name": "Virology",
-      "url": "http://edamontology.org/topic_0781",
+      "identifier": "topic_2229",
+      "name": "Cell biology",
+      "url": "http://edamontology.org/topic_2229",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_2229",
-      "name": "Cell biology",
-      "url": "http://edamontology.org/topic_2229",
+      "identifier": "topic_0781",
+      "name": "Virology",
+      "url": "http://edamontology.org/topic_0781",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -135,24 +135,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005109",
-      "name": "HIV infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
+      "identifier": "0004975",
+      "name": "Alzheimer disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004975",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0100163",
-      "name": "COVID-19–associated multisystem inflammatory syndrome in children",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0100163",
+      "identifier": "0016168",
+      "name": "cryopyrin-associated periodic syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0016168",
       "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C189188",
-      "name": "Infected with SARS-CoV-2",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
-      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -163,10 +156,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0016168",
-      "name": "cryopyrin-associated periodic syndrome",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0016168",
+      "identifier": "0005109",
+      "name": "HIV infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
       "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C189188",
+      "name": "Infected with SARS-CoV-2",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -224,13 +224,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10239",
-      "name": "Viruses",
-      "url": "https://www.uniprot.org/taxonomy/10239",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "12814",
       "name": "Respiratory syncytial virus",
       "url": "https://www.uniprot.org/taxonomy/12814",
@@ -245,6 +238,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "10239",
+      "name": "Viruses",
+      "url": "https://www.uniprot.org/taxonomy/10239",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "114727",
       "name": "H1N1 subtype",
       "url": "https://www.uniprot.org/taxonomy/114727",
@@ -252,9 +252,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2839062",
-      "name": "Transformation",
-      "url": "https://www.uniprot.org/taxonomy/2839062",
+      "identifier": "147711",
+      "name": "Rhinovirus A",
+      "url": "https://www.uniprot.org/taxonomy/147711",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -283,13 +283,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C154589",
-      "name": "Focus Group",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C154589",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "C16751",
       "name": "Focus Group",
       "url": "http://purl.obolibrary.org/obo/NCIT_C16751",
@@ -297,9 +290,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C20055",
-      "name": "organism detection by PCR assay",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C20055",
+      "identifier": "C154589",
+      "name": "Focus Group",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C154589",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -308,6 +301,13 @@
       "name": "organism detection by PCR assay",
       "url": "http://purl.obolibrary.org/obo/OBI_0002740",
       "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C20055",
+      "name": "organism detection by PCR assay",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C20055",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",

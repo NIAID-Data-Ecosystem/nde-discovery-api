@@ -2,8 +2,8 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 39029,
-      "unitText": "Chapter"
+      "minValue": 5070,
+      "unitText": "Thing"
     },
     {
       "@type": "QuantitativeValue",
@@ -12,13 +12,18 @@
     },
     {
       "@type": "QuantitativeValue",
-      "minValue": 1099696,
-      "unitText": "ImageObject"
+      "minValue": 13174,
+      "unitText": "MediaObject"
     },
     {
       "@type": "QuantitativeValue",
-      "minValue": 13174,
-      "unitText": "MediaObject"
+      "minValue": 39029,
+      "unitText": "Chapter"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 1099696,
+      "unitText": "ImageObject"
     },
     {
       "@type": "QuantitativeValue",
@@ -37,6 +42,11 @@
     },
     {
       "@type": "QuantitativeValue",
+      "minValue": 2441261,
+      "unitText": "ScholarlyArticle"
+    },
+    {
+      "@type": "QuantitativeValue",
       "minValue": 161681,
       "unitText": "ComputationalTool"
     },
@@ -47,8 +57,8 @@
     },
     {
       "@type": "QuantitativeValue",
-      "minValue": 2441261,
-      "unitText": "ScholarlyArticle"
+      "minValue": 32130,
+      "unitText": "Report"
     },
     {
       "@type": "QuantitativeValue",
@@ -62,18 +72,8 @@
     },
     {
       "@type": "QuantitativeValue",
-      "minValue": 32130,
-      "unitText": "Report"
-    },
-    {
-      "@type": "QuantitativeValue",
       "minValue": 573,
       "unitText": "Collection"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 5070,
-      "unitText": "Thing"
     }
   ],
   "dateModified": "2025-04-11",

@@ -17,6 +17,7 @@ from datetime import datetime, timezone
 import elasticsearch
 from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.handlers import BaseAPIHandler
+from saved_search_counts import build_saved_search_count_body
 from tornado.web import HTTPError
 
 logger = logging.getLogger(__name__)
@@ -28,6 +29,17 @@ logger = logging.getLogger(__name__)
 UPDATABLE_PREFERENCES = frozenset(
     {"ai_toggle_preference", "contact_preference", "beta", "feedback_preference"}
 )
+OAUTH_PROFILE_FIELDS = (
+    "name",
+    "email",
+    "emails",
+    "avatar_url",
+    "organization",
+)
+REMOVABLE_OAUTH_PROFILE_FIELDS = {
+    "ORCID": ("email", "emails"),
+}
+ACTIVITY_FIELD = "last_active"
 
 
 def _now_iso():
@@ -41,6 +53,46 @@ def _user_doc_id(user: dict) -> str:
     return f"{provider}:{username}"
 
 
+def _oauth_profile_fields(user: dict) -> dict:
+    """Profile fields copied from the OAuth provider payload when available."""
+    return {field: user[field] for field in OAUTH_PROFILE_FIELDS if user.get(field)}
+
+
+def _oauth_profile_updates(existing: dict, user: dict) -> dict:
+    """Return OAuth-derived fields that should be refreshed on an existing doc."""
+    updates = {
+        field: value
+        for field, value in _oauth_profile_fields(user).items()
+        if existing.get(field) != value
+    }
+    if updates:
+        updates["updated"] = _now_iso()
+    return updates
+
+
+def _oauth_profile_removals(existing: dict, user: dict) -> list[str]:
+    """Return OAuth-derived fields that should be removed from an existing doc."""
+    provider = (user.get("oauth_provider") or "").upper()
+    removable_fields = REMOVABLE_OAUTH_PROFILE_FIELDS.get(provider, ())
+    return [
+        field
+        for field in removable_fields
+        if field in existing and not user.get(field)
+    ]
+
+
+def _activity_update(now=None) -> dict:
+    """Return fields that record user-driven account activity."""
+    return {ACTIVITY_FIELD: now or _now_iso()}
+
+
+def _mark_doc_active(doc: dict, now=None) -> str:
+    """Set the profile's last activity timestamp and return the value used."""
+    active_at = now or _now_iso()
+    doc[ACTIVITY_FIELD] = active_at
+    return active_at
+
+
 def _seed_user_doc(user: dict) -> dict:
     """Build a fresh user document from the OAuth cookie payload."""
     now = _now_iso()
@@ -48,7 +100,7 @@ def _seed_user_doc(user: dict) -> dict:
         "username": user["username"],
         "oauth_provider": user["oauth_provider"],
         "linked_accounts": [],
-        "ai_toggle_preference": True,
+        "ai_toggle_preference": False,
         "favorite_searches": [],
         "favorite_datasets": [],
         "contact_preference": False,
@@ -56,10 +108,9 @@ def _seed_user_doc(user: dict) -> dict:
         "feedback_preference": False,
         "created": now,
         "updated": now,
+        ACTIVITY_FIELD: now,
     }
-    for optional in ("name", "email", "avatar_url", "organization"):
-        if user.get(optional):
-            doc[optional] = user[optional]
+    doc.update(_oauth_profile_fields(user))
     return doc
 
 
@@ -122,6 +173,15 @@ class _UserDataBase(BioThingsAuthnMixin, BaseAPIHandler):
     def _index(self):
         return self.biothings.config.ES_USER_INDEX
 
+    @property
+    def _data_index(self):
+        indices = getattr(self.biothings.config, "ES_INDICES", {}) or {}
+        return (
+            indices.get(None)
+            or indices.get("dataset")
+            or getattr(self.biothings.config, "ES_INDEX", None)
+        )
+
     async def _get_user_doc(self, doc_id: str) -> dict | None:
         """Fetch a user document; return *None* if it does not exist."""
         try:
@@ -140,6 +200,33 @@ class _UserDataBase(BioThingsAuthnMixin, BaseAPIHandler):
             id=doc_id, body={"doc": partial}, index=self._index
         )
 
+    async def _record_user_activity(self, doc_id: str, doc: dict | None = None):
+        """Record that the authenticated user interacted with account data."""
+        activity = _activity_update()
+        if doc is not None:
+            doc.update(activity)
+        try:
+            await self._update_user_doc(doc_id, activity)
+        except Exception:
+            logger.warning("Unable to update user activity timestamp", exc_info=True)
+
+    async def _count_saved_search_total(self, entry: dict) -> int | None:
+        """Return the current result count for a saved search, if available."""
+        index = self._data_index
+        if not index:
+            return None
+
+        body = build_saved_search_count_body(
+            entry.get("query"),
+            entry.get("filters"),
+        )
+        try:
+            resp = await self._es.count(index=index, query=body["query"])
+            return int(resp["count"])
+        except Exception:
+            logger.warning("Unable to count saved search total", exc_info=True)
+            return None
+
 
 # ---------------------------------------------------------------------------
 # GET / PUT  /user/data
@@ -157,6 +244,8 @@ class UserDataHandler(_UserDataBase):
             doc = _seed_user_doc(self.current_user)
             await self._save_user_doc(doc_id, doc)
             logger.info("Created user profile %s", doc_id)
+        else:
+            await self._record_user_activity(doc_id, doc)
         self.write(doc)
 
     @user_authenticated
@@ -194,7 +283,9 @@ class UserDataHandler(_UserDataBase):
             doc.update(updates)
             await self._save_user_doc(doc_id, doc)
         else:
-            updates["updated"] = _now_iso()
+            now = _now_iso()
+            updates["updated"] = now
+            updates.update(_activity_update(now))
             await self._update_user_doc(doc_id, updates)
 
         self.write({"success": True, "updated_fields": list(updates.keys())})
@@ -231,6 +322,7 @@ class UserFavoriteSearchesHandler(_UserDataBase):
             "filters": payload.get("filters", {}),
             "saved_at": _now_iso(),
         }
+        entry["total"] = await self._count_saved_search_total(entry)
 
         doc_id = _user_doc_id(self.current_user)
         doc = await self._get_user_doc(doc_id)
@@ -238,7 +330,9 @@ class UserFavoriteSearchesHandler(_UserDataBase):
             doc = _seed_user_doc(self.current_user)
 
         doc.setdefault("favorite_searches", []).append(entry)
-        doc["updated"] = _now_iso()
+        now = _now_iso()
+        doc["updated"] = now
+        _mark_doc_active(doc, now)
         await self._save_user_doc(doc_id, doc)
 
         self.write(
@@ -271,7 +365,9 @@ class UserFavoriteSearchesHandler(_UserDataBase):
             raise HTTPError(400, reason="Index out of range.")
 
         searches.pop(idx)
-        doc["updated"] = _now_iso()
+        now = _now_iso()
+        doc["updated"] = now
+        _mark_doc_active(doc, now)
         await self._save_user_doc(doc_id, doc)
 
         self.write({"success": True, "favorite_searches": searches})
@@ -320,7 +416,9 @@ class UserFavoriteDatasetsHandler(_UserDataBase):
             raise HTTPError(409, reason="Dataset already in favorites.")
 
         favorites.append(entry)
-        doc["updated"] = _now_iso()
+        now = _now_iso()
+        doc["updated"] = now
+        _mark_doc_active(doc, now)
         await self._save_user_doc(doc_id, doc)
 
         self.write({"success": True, "favorite_datasets": favorites})
@@ -355,7 +453,9 @@ class UserFavoriteDatasetsHandler(_UserDataBase):
             raise HTTPError(404, reason="Dataset not found in favorites.")
 
         doc["favorite_datasets"] = favorites
-        doc["updated"] = _now_iso()
+        now = _now_iso()
+        doc["updated"] = now
+        _mark_doc_active(doc, now)
         await self._save_user_doc(doc_id, doc)
 
         self.write({"success": True, "favorite_datasets": favorites})

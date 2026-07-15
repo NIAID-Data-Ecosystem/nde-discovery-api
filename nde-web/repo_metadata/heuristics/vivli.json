@@ -2,27 +2,115 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 8612,
+      "minValue": 8621,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-05-08",
+  "dateModified": "2026-05-29",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "0001-01-01",
-      "endDate": "2026-05-08"
+      "endDate": "2026-05-29"
     }
   ],
   "spatialCoverage": [
     {
       "@type": "AdministrativeArea",
-      "name": "Albania"
+      "name": "Paraguay"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Colombia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cuba"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nigeria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Italy"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United Kingdom"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Czechia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Egypt"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zimbabwe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United Arab Emirates"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Denmark"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sweden"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Spain"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Armenia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Thailand"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Peru"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Belgium"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United States"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Benin"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Papua New Guinea"
     },
     {
       "@type": "AdministrativeArea",
       "name": "Germany"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Albania"
     },
     {
       "@type": "AdministrativeArea",
@@ -46,15 +134,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Turkey"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "Mexico"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Gabon"
+      "name": "Turkey"
     },
     {
       "@type": "AdministrativeArea",
@@ -62,11 +146,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Former Serbia and Montenegro"
+      "name": "Gabon"
     },
     {
       "@type": "AdministrativeArea",
       "name": "Central African Republic"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Former Serbia and Montenegro"
     },
     {
       "@type": "AdministrativeArea",
@@ -82,155 +170,7 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Paraguay"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Colombia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Zambia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Congo"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Cuba"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Nigeria"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Italy"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "United Kingdom"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Zimbabwe"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Egypt"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Czechia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "United Arab Emirates"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Spain"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Sweden"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Denmark"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Armenia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Peru"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Thailand"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "United States"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Belgium"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Papua New Guinea"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Benin"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Mali"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "South Africa"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Jordan"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Slovakia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Tanzania"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Indonesia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Honduras"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Bahamas"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Lithuania"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Moldova, Republic of"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Bulgaria"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Sri Lanka"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Ghana"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Guatemala"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "Australia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Equatorial Guinea"
     },
     {
       "@type": "AdministrativeArea",
@@ -238,11 +178,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Cyprus"
+      "name": "Equatorial Guinea"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "New Zealand"
+      "name": "Cyprus"
     },
     {
       "@type": "AdministrativeArea",
@@ -250,11 +190,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Croatia"
+      "name": "New Zealand"
     },
     {
       "@type": "AdministrativeArea",
       "name": "Gambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Croatia"
     },
     {
       "@type": "AdministrativeArea",
@@ -290,15 +234,155 @@
     },
     {
       "@type": "AdministrativeArea",
+      "name": "Mali"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jordan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Africa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Slovakia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tanzania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Indonesia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Honduras"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bahamas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lithuania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bulgaria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Moldova, Republic of"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sri Lanka"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ghana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guatemala"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ireland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Macedonia, The Former Yugoslav Republic of"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Greece"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Romania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Portugal"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kuwait"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Dominican Republic"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guinea"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Virgin Islands (U.S.)"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Botswana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jamaica"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Singapore"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Malaysia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chile"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Venezuela"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rwanda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Malta"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Democratic Republic of the Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sudan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Moldova"
+    },
+    {
+      "@type": "AdministrativeArea",
       "name": "Israel"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Malawi"
+      "name": "Cameroon"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Cameroon"
+      "name": "Malawi"
     },
     {
       "@type": "AdministrativeArea",
@@ -310,11 +394,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Czech Republic"
+      "name": "Réunion"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Réunion"
+      "name": "Czech Republic"
     },
     {
       "@type": "AdministrativeArea",
@@ -354,87 +438,67 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Ireland"
+      "name": "Republic of the Congo"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Greece"
+      "name": "Vietnam"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Kuwait"
+      "name": "Argentina"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Macedonia, The Former Yugoslav Republic of"
+      "name": "Panama"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Romania"
+      "name": "Iceland"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Portugal"
+      "name": "Serbia and Montenegro"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Dominican Republic"
+      "name": "Puerto Rico"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Guinea"
+      "name": "Netherlands"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Botswana"
+      "name": "Tunisia"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Virgin Islands (U.S.)"
+      "name": "Poland"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Singapore"
+      "name": "France"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Jamaica"
+      "name": "Nepal"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Chile"
+      "name": "Morocco"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Malaysia"
+      "name": "Pakistan"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Venezuela"
+      "name": "North Macedonia"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Kenya"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Malta"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Rwanda"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Democratic Republic of the Congo"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Moldova"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Sudan"
+      "name": "Philippines"
     },
     {
       "@type": "AdministrativeArea",
@@ -442,7 +506,7 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Iraq"
+      "name": "Qatar"
     },
     {
       "@type": "AdministrativeArea",
@@ -454,7 +518,7 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Qatar"
+      "name": "Iraq"
     },
     {
       "@type": "AdministrativeArea",
@@ -474,10 +538,6 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Finland"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "Belize"
     },
     {
@@ -486,7 +546,7 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Guadeloupe"
+      "name": "Finland"
     },
     {
       "@type": "AdministrativeArea",
@@ -494,11 +554,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Sierra Leone"
+      "name": "Guadeloupe"
     },
     {
       "@type": "AdministrativeArea",
       "name": "Japan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sierra Leone"
     },
     {
       "@type": "AdministrativeArea",
@@ -519,70 +583,6 @@
     {
       "@type": "AdministrativeArea",
       "name": "Senegal"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Republic of the Congo"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Argentina"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Vietnam"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Panama"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Iceland"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Puerto Rico"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Serbia and Montenegro"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Tunisia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Netherlands"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "France"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Poland"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Nepal"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Pakistan"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "North Macedonia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Morocco"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Philippines"
     }
   ],
   "topicCategory": [
@@ -909,70 +909,70 @@
     {
       "@type": "DefinedTerm",
       "identifier": "C15417",
-      "name": "NCIT Term C15417",
+      "name": "Randomized Clinical Trial",
       "url": "http://purl.obolibrary.org/obo/NCIT_C15417",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C82639",
-      "name": "NCIT Term C82639",
+      "name": "Parallel Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C82639",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C15228",
-      "name": "NCIT Term C15228",
+      "name": "Double Blind Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C15228",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C49659",
-      "name": "NCIT Term C49659",
+      "name": "Open Label Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C49659",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C70840",
-      "name": "NCIT Term C70840",
+      "name": "Blinded Clinical Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C70840",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C66959",
-      "name": "NCIT Term C66959",
+      "name": "Triple Blind Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C66959",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C82637",
-      "name": "NCIT Term C82637",
+      "name": "Crossover Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C82637",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C82640",
-      "name": "NCIT Term C82640",
+      "name": "Single Group Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C82640",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C93043",
-      "name": "NCIT Term C93043",
+      "name": "Nonrandomized Clinical Trial",
       "url": "http://purl.obolibrary.org/obo/NCIT_C93043",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C28233",
-      "name": "NCIT Term C28233",
+      "name": "Single Blind Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C28233",
       "inDefinedTermSet": "NCIT"
     },

@@ -7,9 +7,20 @@ import elasticsearch
 from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.auth.oauth_mixins import GithubOAuth2Mixin, OrcidOAuth2Mixin
 from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
-from tornado.httputil import url_concat
+from tornado.httpclient import HTTPClientError
+from tornado.httputil import HTTPHeaders, url_concat
 from tornado.web import HTTPError, RequestHandler
-from user_data import _seed_user_doc, _user_doc_id
+from user_data import (
+    _activity_update,
+    _now_iso,
+    _oauth_profile_removals,
+    _oauth_profile_updates,
+    _seed_user_doc,
+    _user_doc_id,
+)
+
+
+EMAIL_RECORD_FIELDS = ("email", "primary", "verified", "visibility")
 
 
 def _allowed_frontend_origins(config):
@@ -55,6 +66,41 @@ def safe_next_url(handler, default="/"):
     return origin + path + query + fragment
 
 
+def login_error_url(handler, error_code, default="/"):
+    return url_concat(safe_next_url(handler, default), {"login_error": error_code})
+
+
+def _format_email_records(records):
+    emails = []
+    seen = set()
+    for record in records or []:
+        if isinstance(record, str):
+            record = {"email": record}
+        if not isinstance(record, dict):
+            continue
+        email = record.get("email")
+        if not email or email in seen:
+            continue
+        formatted = {
+            field: record[field]
+            for field in EMAIL_RECORD_FIELDS
+            if record.get(field) is not None
+        }
+        emails.append(formatted)
+        seen.add(email)
+    return emails
+
+
+def _primary_email(email_records, fallback=None):
+    emails = _format_email_records(email_records)
+    for record in emails:
+        if record.get("primary"):
+            return record["email"]
+    if emails:
+        return emails[0]["email"]
+    return fallback
+
+
 def set_user_session_cookie(handler, value):
     cookie_domain = getattr(handler.biothings.config, "COOKIE_DOMAIN", None)
     handler.set_secure_cookie(
@@ -78,6 +124,13 @@ _REPO_METADATA_DIR = os.path.join(
 )
 _HEURISTICS_DIR = os.path.join(_REPO_METADATA_DIR, "heuristics")
 _source_info_cache = None
+
+_SOURCE_STAT_COUNT_OVERRIDES = {
+    "empiar": {
+        "field": "includedInDataCatalog.name",
+        "value": "Electron Microscopy Public Image Archive",
+    },
+}
 
 
 def _load_source_info():
@@ -135,6 +188,33 @@ class BaseLoginHandler(BaseAPIHandler):
         # Disable cache headers for auth endpoints
         self.set_header("Cache-Control", "private, max-age=0, no-cache")
 
+    async def _update_user_profile(self, es, doc_id, index, updates, removals=None):
+        removals = removals or []
+        if not removals:
+            await es.update(id=doc_id, body={"doc": updates}, index=index)
+            return
+
+        await es.update(
+            id=doc_id,
+            body={
+                "script": {
+                    "source": """
+                        for (entry in params.updates.entrySet()) {
+                            ctx._source[entry.getKey()] = entry.getValue();
+                        }
+                        for (field in params.removals) {
+                            ctx._source.remove(field);
+                        }
+                    """,
+                    "params": {
+                        "updates": updates,
+                        "removals": removals,
+                    },
+                },
+            },
+            index=index,
+        )
+
     async def _ensure_user_profile(self, user_dict: dict):
         """Create a user profile document in ES if one does not yet exist.
 
@@ -145,16 +225,42 @@ class BaseLoginHandler(BaseAPIHandler):
         index = self.biothings.config.ES_USER_INDEX
         doc_id = _user_doc_id(user_dict)
         try:
-            await es.get(id=doc_id, index=index)
+            resp = await es.get(id=doc_id, index=index)
         except elasticsearch.exceptions.NotFoundError:
-            doc = _seed_user_doc(user_dict)
-            await es.index(id=doc_id, body=doc, index=index)
-            logging.info("Created new user profile %s", doc_id)
+            try:
+                doc = _seed_user_doc(user_dict)
+                await es.index(id=doc_id, body=doc, index=index)
+                logging.info("Created new user profile %s", doc_id)
+            except Exception:
+                logging.warning(
+                    "Could not create user profile %s", doc_id, exc_info=True
+                )
         except Exception:
             # Non-fatal: the profile will be created lazily via GET /user/data
             logging.warning(
                 "Could not ensure user profile %s", doc_id, exc_info=True
             )
+        else:
+            existing = resp.get("_source", {})
+            updates = _oauth_profile_updates(existing, user_dict)
+            removals = _oauth_profile_removals(existing, user_dict)
+            if removals and "updated" not in updates:
+                updates["updated"] = _now_iso()
+            updates.update(_activity_update())
+            if updates:
+                try:
+                    await self._update_user_profile(
+                        es,
+                        doc_id,
+                        index,
+                        updates,
+                        removals,
+                    )
+                    logging.info("Updated user profile identity fields %s", doc_id)
+                except Exception:
+                    logging.warning(
+                        "Could not update user profile %s", doc_id, exc_info=True
+                    )
 
 
 class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
@@ -210,7 +316,7 @@ class LogoutHandler(BaseLoginHandler):
 class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
     """Initiate or complete the GitHub OAuth2 handshake."""
 
-    SCOPES = []
+    SCOPES = ["user:email"]
     CALLBACK_PATH = "/login/github"
 
     async def get(self):
@@ -232,13 +338,37 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
             return
 
         logging.info("GitHub returned code, exchanging for token")
-        token = await self.github_get_oauth2_token(
-            client_id=client_id,
-            client_secret=client_secret,
-            code=code,
-        )
-        user = await self.github_get_authenticated_user(token["access_token"])
-        formatted = self._format_user_record(user)
+        try:
+            token = await self.github_get_oauth2_token(
+                client_id=client_id,
+                client_secret=client_secret,
+                code=code,
+            )
+            access_token = token.get("access_token") if isinstance(token, dict) else None
+            if not access_token:
+                logging.warning(
+                    "GitHub OAuth token response did not include an access token: %s",
+                    token.get("error") if isinstance(token, dict) else type(token).__name__,
+                )
+                clear_user_session_cookie(self)
+                self.redirect(login_error_url(self, "github_login_failed"))
+                return
+            user = await self.github_get_authenticated_user(access_token)
+            emails = await self.github_get_authenticated_user_emails(access_token)
+        except HTTPClientError as exc:
+            error_code = (
+                "github_unavailable" if exc.code and exc.code >= 500 else "github_login_failed"
+            )
+            logging.warning(
+                "GitHub OAuth request failed with HTTP %s; redirecting with %s",
+                exc.code,
+                error_code,
+                exc_info=True,
+            )
+            clear_user_session_cookie(self)
+            self.redirect(login_error_url(self, error_code))
+            return
+        formatted = self._format_user_record(user, emails=emails)
         logging.info("GitHub auth response: %s", formatted)
         if formatted:
             set_user_session_cookie(self, formatted)
@@ -247,19 +377,50 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
             clear_user_session_cookie(self)
         self.redirect(safe_next_url(self, "/"))
 
+    async def github_get_authenticated_user_emails(self, access_token):
+        """Fetch GitHub account email addresses when the granted scope allows it."""
+        http = self.get_auth_http_client()
+        headers = HTTPHeaders()
+        headers.add("Authorization", f"token {access_token}")
+        headers.add("Accept", "application/vnd.github+json")
+        try:
+            response = await http.fetch(
+                self._GITHUB_API_URL_BASE + "user/emails",
+                method="GET",
+                headers=headers,
+            )
+        except HTTPClientError:
+            logging.info("GitHub email lookup was unavailable", exc_info=True)
+            return []
+        try:
+            emails = json.loads(response.body)
+        except (TypeError, json.JSONDecodeError):
+            logging.info("GitHub email lookup returned invalid JSON", exc_info=True)
+            return []
+        return emails if isinstance(emails, list) else []
+
     @staticmethod
-    def _format_user_record(user):
+    def _format_user_record(user, emails=None):
+        email_records = _format_email_records(emails)
+        public_email = user.get("email")
+        if public_email:
+            email_records = _format_email_records([*email_records, public_email])
         payload = {
             "username": user.get("login"),
             "oauth_provider": "GitHub",
         }
         if not payload["username"]:
             return None
-        for field in ["name", "email", "avatar_url", "company"]:
+        for field in ["name", "avatar_url", "company"]:
             value = user.get(field)
             if value:
                 key = "organization" if field == "company" else field
                 payload[key] = value
+        email = _primary_email(email_records, public_email)
+        if email:
+            payload["email"] = email
+        if email_records:
+            payload["emails"] = email_records
         return json.dumps(payload)
 
 
@@ -288,13 +449,37 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
             return
 
         logging.info("ORCID returned code, exchanging for token")
-        token = await self.orcid_get_oauth2_token(
-            client_id=client_id,
-            client_secret=client_secret,
-            code=code,
-        )
-        orcid_id = token.get("orcid")
-        user = await self.orcid_get_authenticated_user_record(token, orcid_id)
+        try:
+            token = await self.orcid_get_oauth2_token(
+                client_id=client_id,
+                client_secret=client_secret,
+                code=code,
+            )
+            access_token = token.get("access_token") if isinstance(token, dict) else None
+            orcid_id = token.get("orcid") if isinstance(token, dict) else None
+            if not access_token or not orcid_id:
+                logging.warning(
+                    "ORCID OAuth token response was incomplete: %s",
+                    token.get("error") if isinstance(token, dict) else type(token).__name__,
+                )
+                clear_user_session_cookie(self)
+                self.redirect(login_error_url(self, "orcid_login_failed"))
+                return
+            user = await self.orcid_get_authenticated_user_record(token, orcid_id)
+        except (HTTPClientError, ValueError) as exc:
+            status = getattr(exc, "code", None)
+            error_code = (
+                "orcid_unavailable" if status and status >= 500 else "orcid_login_failed"
+            )
+            logging.warning(
+                "ORCID OAuth request failed with %s; redirecting with %s",
+                status or type(exc).__name__,
+                error_code,
+                exc_info=True,
+            )
+            clear_user_session_cookie(self)
+            self.redirect(login_error_url(self, error_code))
+            return
         formatted = self._format_user_record(user)
         logging.info("ORCID auth response: %s", formatted)
         if formatted:
@@ -319,8 +504,12 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
         if given:
             payload["name"] = given if not family else f"{given} {family}"
         emails = person.get("emails", {}).get("email", [])
-        if emails:
-            payload["email"] = emails[0].get("email")
+        email_records = _format_email_records(emails)
+        email = _primary_email(email_records)
+        if email:
+            payload["email"] = email
+        if email_records:
+            payload["emails"] = email_records
         employment = (
             user.get("activities-summary", {})
             .get("employments", {})
@@ -334,10 +523,15 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
 
 class WebAppHandler(RequestHandler):
     def get(self):
-        if self.render("dist/index.html"):
+        index_file = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "dist", "index.html"
+        )
+        if os.path.exists(index_file):
             self.render("dist/index.html")
-        else:
-            logging.info("Unable to find dist folder from react app.")
+            return
+
+        logging.info("Unable to find dist folder from react app.")
+        raise HTTPError(404)
 
 
 class NDESourceHandler(MetadataSourceHandler):
@@ -360,7 +554,31 @@ class NDESourceHandler(MetadataSourceHandler):
         if cached_averages is not None:
             return cached_averages
 
-    def extras(self, _meta):
+    async def _refresh_source_stat_count(self, source, config, _meta):
+        if source not in _meta["src"]:
+            return
+
+        index = getattr(self.metadata, "indices", {}).get(self.biothing_type)
+        if not index:
+            return
+
+        stats_key = config.get("stats_key", source)
+        try:
+            response = await self.biothings.elasticsearch.async_client.count(
+                index=index,
+                query={"term": {config["field"]: config["value"]}},
+            )
+        except Exception:
+            logging.warning(
+                "Unable to refresh metadata stats count for source %s",
+                source,
+                exc_info=True,
+            )
+            return
+
+        _meta["src"][source].setdefault("stats", {})[stats_key] = response["count"]
+
+    async def extras(self, _meta):
         source_info = _load_source_info()
         for source, data in source_info.items():
             if source in _meta["src"]:
@@ -372,4 +590,8 @@ class NDESourceHandler(MetadataSourceHandler):
                 _meta["src"][source] = {"sourceInfo": source_info[source]}
                 parent = _meta["src"]["veupath_collections"]
                 _meta["src"][source]["version"] = parent["version"]
+
+        for source, config in _SOURCE_STAT_COUNT_OVERRIDES.items():
+            await self._refresh_source_stat_count(source, config, _meta)
+
         return _meta

@@ -17,71 +17,7 @@
   "spatialCoverage": [
     {
       "@type": "AdministrativeArea",
-      "name": "Thailand"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Peru"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "India, Mali, Sri Lanka"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Zanzibar"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Bangladesh"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Rwanda"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Kenya"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Democratic Republic of the Congo, Zambia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Myanmar"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Zimbabwe"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "Bangladesh, Kenya, Mali, South Africa, Thailand, The Gambia, Zambia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Cote dIvoire"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Mozambique"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Zambia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Zambia, Zimbabwe"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Niger"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Brazil"
     },
     {
       "@type": "AdministrativeArea",
@@ -97,43 +33,23 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Uganda"
-    },
-    {
-      "@type": "AdministrativeArea",
       "name": "Cambodia"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Kenya, Mali, The Gambia"
+      "name": "Uganda"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Mali, The Gambia"
+      "name": "Niger"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Bangladesh, India, Kenya, Mali, Mozambique, Pakistan, The Gambia"
+      "name": "Zambia, Zimbabwe"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Tanzania"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Ethiopia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Cote dIvoire, Kenya, Tanzania"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Burundi"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Bangladesh, Brazil, India, Nepal, Pakistan, Peru, South Africa, Tanzania"
+      "name": "Brazil"
     },
     {
       "@type": "AdministrativeArea",
@@ -146,6 +62,90 @@
     {
       "@type": "AdministrativeArea",
       "name": "The Gambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zanzibar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "India, Mali, Sri Lanka"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya, Mali, The Gambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mali, The Gambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tanzania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bangladesh, India, Kenya, Mali, Mozambique, Pakistan, The Gambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ethiopia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cote dIvoire, Kenya, Tanzania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bangladesh, Brazil, India, Nepal, Pakistan, Peru, South Africa, Tanzania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Burundi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Thailand"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rwanda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bangladesh"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Peru"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cote dIvoire"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mozambique"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Democratic Republic of the Congo, Zambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Myanmar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zimbabwe"
     }
   ],
   "topicCategory": [
@@ -207,16 +207,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3077",
-      "name": "Data acquisition",
-      "url": "http://edamontology.org/topic_3077",
+      "identifier": "topic_3366",
+      "name": "Data integration and warehousing",
+      "url": "http://edamontology.org/topic_3366",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3390",
-      "name": "Nutritional science",
-      "url": "http://edamontology.org/topic_3390",
+      "identifier": "topic_3077",
+      "name": "Data acquisition",
+      "url": "http://edamontology.org/topic_3077",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -287,9 +287,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005249",
-      "name": "pneumonia",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005249",
+      "identifier": "0005896",
+      "name": "Paramyxoviridae infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005896",
       "inDefinedTermSet": "MONDO"
     },
     {

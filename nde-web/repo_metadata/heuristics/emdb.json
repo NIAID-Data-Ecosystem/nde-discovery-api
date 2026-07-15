@@ -2,23 +2,30 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 2929,
+      "minValue": 2992,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-05-06",
+  "dateModified": "2026-07-01",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2002-06-18",
-      "endDate": "2026-05-06"
+      "endDate": "2026-07-01"
     }
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
   "usageInfo": {
     "url": "https://www.ebi.ac.uk/emdb/faq#:~:text=Data%20files%20contained%20in%20the,and%20the%20EMDB%20accession%20id."
   },
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Image",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C48179"
+    }
+  ],
   "topicCategory": [
     {
       "@type": "DefinedTerm",
@@ -45,16 +52,16 @@
   "species": [
     {
       "@type": "DefinedTerm",
-      "identifier": "10090",
-      "name": "Mus musculus",
-      "url": "https://www.uniprot.org/taxonomy/10090",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9606",
-      "name": "Homo sapiens",
-      "url": "https://www.uniprot.org/taxonomy/9606",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -73,13 +80,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "8364",
-      "name": "Xenopus tropicalis",
-      "url": "https://www.uniprot.org/taxonomy/8364",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "9986",
       "name": "Oryctolagus cuniculus",
       "url": "https://www.uniprot.org/taxonomy/9986",
@@ -87,16 +87,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9838",
-      "name": "Camelus dromedarius",
-      "url": "https://www.uniprot.org/taxonomy/9838",
+      "identifier": "8364",
+      "name": "Xenopus tropicalis",
+      "url": "https://www.uniprot.org/taxonomy/8364",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "39946",
-      "name": "Oryza sativa subsp. indica",
-      "url": "https://www.uniprot.org/taxonomy/39946",
+      "identifier": "7108",
+      "name": "Spodoptera frugiperda",
+      "url": "https://www.uniprot.org/taxonomy/7108",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -108,9 +108,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "212017",
-      "name": "Lethocerus indicus",
-      "url": "https://www.uniprot.org/taxonomy/212017",
+      "identifier": "451444",
+      "name": "Xenopus calcaratus",
+      "url": "https://www.uniprot.org/taxonomy/451444",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3562",
+      "name": "Spinacia oleracea",
+      "url": "https://www.uniprot.org/taxonomy/3562",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -132,16 +139,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "83333",
-      "name": "Escherichia coli (strain K12)",
-      "url": "https://www.uniprot.org/taxonomy/83333",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "4932",
-      "name": "Saccharomyces cerevisiae",
-      "url": "https://www.uniprot.org/taxonomy/4932",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -153,16 +153,37 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1280",
-      "name": "Staphylococcus aureus",
-      "url": "https://www.uniprot.org/taxonomy/1280",
+      "identifier": "1314",
+      "name": "Streptococcus pyogenes",
+      "url": "https://www.uniprot.org/taxonomy/1314",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1094619",
-      "name": "Phytophthora sojae (strain P6497)",
-      "url": "https://www.uniprot.org/taxonomy/1094619",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "83333",
+      "name": "Escherichia coli (strain K12)",
+      "url": "https://www.uniprot.org/taxonomy/83333",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "45657",
+      "name": "Desulfonema ishimotonii",
+      "url": "https://www.uniprot.org/taxonomy/45657",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -174,23 +195,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "29488",
-      "name": "Photorhabdus luminescens",
-      "url": "https://www.uniprot.org/taxonomy/29488",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "319",
-      "name": "Pseudomonas savastanoi pv. phaseolicola",
-      "url": "https://www.uniprot.org/taxonomy/319",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "818",
-      "name": "Bacteroides thetaiotaomicron",
-      "url": "https://www.uniprot.org/taxonomy/818",
+      "identifier": "66797",
+      "name": "Spbetavirus SPbeta",
+      "url": "https://www.uniprot.org/taxonomy/66797",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -205,8 +212,8 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "Tomography",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C38093",
+      "name": "Atomic Resolution X-Ray Crystallography",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C19588",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -223,8 +230,8 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Atomic Resolution X-Ray Crystallography",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C19588",
+      "name": "Tomography",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C38093",
       "inDefinedTermSet": "NCIT"
     }
   ]

@@ -11,9 +11,9 @@ in MongoDB (``nde_hub_src.<source_key>``) into repo-level fields:
 * ``temporalCoverage`` — ``TemporalInterval`` from earliest
   ``dateCreated``/``datePublished`` to latest ``dateModified``
 * ``spatialCoverage`` — deduped ``AdministrativeArea`` array
-* ``topicCategory``, ``healthCondition``, ``species``,
-  ``infectiousAgent``, ``measurementTechnique``, ``variableMeasured`` —
-  deduped ``DefinedTerm`` arrays
+* ``about``, ``topicCategory``, ``healthCondition``, ``species``,
+  ``infectiousAgent``, ``measurementTechnique`` — deduped
+  ``DefinedTerm`` arrays
 
 Results are written to ``nde-web/repo_metadata/heuristics/<key>.json``
 and loaded by ``NDESourceHandler`` at runtime. Curated values in
@@ -57,6 +57,7 @@ DEFAULT_MONGO_DB = os.environ.get("MONGO_DB", "nde_hub_src")
 MAX_TERMS = int(os.environ.get("HEURISTICS_MAX_TERMS", "5000"))
 
 DEFINED_TERM_FIELDS = [
+    "about",
     "topicCategory",
     "healthCondition",
     "species",

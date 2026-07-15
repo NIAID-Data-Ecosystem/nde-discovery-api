@@ -2,16 +2,16 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 67130,
+      "minValue": 71038,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-01-28",
+  "dateModified": "2026-06-10",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "endDate": "2026-01-28"
+      "endDate": "2026-06-10"
     }
   ],
   "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -20,6 +20,20 @@
     "name": "License and disclaimer",
     "url": "https://www.uniprot.org/help/license"
   },
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Proteome",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C18276",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Protein",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17021",
+      "inDefinedTermSet": "NCIT"
+    }
+  ],
   "topicCategory": [
     {
       "@type": "DefinedTerm",
@@ -46,72 +60,72 @@
   "species": [
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:1815559",
-      "name": "Cellvibrio fontiphilus",
-      "url": "http://purl.uniprot.org/taxonomy/1815559",
+      "identifier": "60889",
+      "name": "Melipona bicolor",
+      "url": "https://www.uniprot.org/taxonomy/60889",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:2365005",
-      "name": "Streptococcus phage CHPC1005",
-      "url": "http://purl.uniprot.org/taxonomy/2365005",
+      "identifier": "10089",
+      "name": "Mus caroli",
+      "url": "https://www.uniprot.org/taxonomy/10089",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:2294094",
-      "name": "Paguma larvata circovirus",
-      "url": "http://purl.uniprot.org/taxonomy/2294094",
+      "identifier": "37079",
+      "name": "Pelecanoides urinatrix",
+      "url": "https://www.uniprot.org/taxonomy/37079",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:2944811",
-      "name": "Caldimonas mangrovi",
-      "url": "http://purl.uniprot.org/taxonomy/2944811",
+      "identifier": "159417",
+      "name": "Clavelina lepadiformis",
+      "url": "https://www.uniprot.org/taxonomy/159417",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:2908208",
-      "name": "Sphingomonas alba",
-      "url": "http://purl.uniprot.org/taxonomy/2908208",
+      "identifier": "33528",
+      "name": "Gambusia affinis",
+      "url": "https://www.uniprot.org/taxonomy/33528",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:2786647",
-      "name": "ssRNA phage SRR7976299_7",
-      "url": "http://purl.uniprot.org/taxonomy/2786647",
+      "identifier": "9770",
+      "name": "Balaenoptera physalus",
+      "url": "https://www.uniprot.org/taxonomy/9770",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:2174902",
-      "name": "Sida yellow golden mosaic virus",
-      "url": "http://purl.uniprot.org/taxonomy/2174902",
+      "identifier": "7994",
+      "name": "Astyanax mexicanus",
+      "url": "https://www.uniprot.org/taxonomy/7994",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:2967336",
-      "name": "Bombella pluederhausensis",
-      "url": "http://purl.uniprot.org/taxonomy/2967336",
+      "identifier": "7461",
+      "name": "Apis cerana",
+      "url": "https://www.uniprot.org/taxonomy/7461",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:2023994",
-      "name": "Streptomyces phage Peebs",
-      "url": "http://purl.uniprot.org/taxonomy/2023994",
+      "identifier": "187382",
+      "name": "Chlamydotis macqueenii",
+      "url": "https://www.uniprot.org/taxonomy/187382",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:290008",
-      "name": "Isfahan virus",
-      "url": "http://purl.uniprot.org/taxonomy/290008",
+      "identifier": "100784",
+      "name": "Balearica regulorum gibbericeps",
+      "url": "https://www.uniprot.org/taxonomy/100784",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -133,37 +147,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "508771",
-      "name": "Toxoplasma gondii (strain ATCC 50611 / Me49)",
-      "url": "https://www.uniprot.org/taxonomy/508771",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "105219",
-      "name": "Ralstonia mannitolilytica",
-      "url": "https://www.uniprot.org/taxonomy/105219",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "587735",
-      "name": "Jeotgalibacillus terrae",
-      "url": "https://www.uniprot.org/taxonomy/587735",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "405555",
       "name": "Haloactinospora alba",
       "url": "https://www.uniprot.org/taxonomy/405555",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "47760",
-      "name": "Streptomyces aurantiacus",
-      "url": "https://www.uniprot.org/taxonomy/47760",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -175,6 +161,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "587735",
+      "name": "Jeotgalibacillus terrae",
+      "url": "https://www.uniprot.org/taxonomy/587735",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "64495",
       "name": "Rhizopus oryzae",
       "url": "https://www.uniprot.org/taxonomy/64495",
@@ -182,16 +175,37 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1118202",
-      "name": "Cruoricaptor ignavus",
-      "url": "https://www.uniprot.org/taxonomy/1118202",
+      "identifier": "508771",
+      "name": "Toxoplasma gondii (strain ATCC 50611 / Me49)",
+      "url": "https://www.uniprot.org/taxonomy/508771",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "204507",
-      "name": "Neodiprion abietis nucleopolyhedrovirus",
-      "url": "https://www.uniprot.org/taxonomy/204507",
+      "identifier": "358",
+      "name": "Rhizobium radiobacter",
+      "url": "https://www.uniprot.org/taxonomy/358",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "47760",
+      "name": "Streptomyces aurantiacus",
+      "url": "https://www.uniprot.org/taxonomy/47760",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "105219",
+      "name": "Ralstonia mannitolilytica",
+      "url": "https://www.uniprot.org/taxonomy/105219",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2500789",
+      "name": "Gordonia phage Mutzi",
+      "url": "https://www.uniprot.org/taxonomy/2500789",
       "inDefinedTermSet": "UniProt"
     },
     {

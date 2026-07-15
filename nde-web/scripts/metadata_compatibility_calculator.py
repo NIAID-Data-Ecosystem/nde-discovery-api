@@ -14,8 +14,12 @@ import argparse
 import json
 import logging
 import os
+from pathlib import Path
 
 from pymongo import MongoClient
+
+
+REPO_METADATA_DIR = Path(__file__).resolve().parents[1] / "repo_metadata"
 
 # Field definitions for different datasource types
 COMPUTATIONAL_TOOL_REQUIRED = [
@@ -269,6 +273,86 @@ class MetadataCompatibilityCalculator:
         if not os.path.exists(self.cache_dir):
             os.makedirs(self.cache_dir)
 
+    def load_repo_metadata(self, datasource):
+        """Load curated repo metadata for a datasource, when available."""
+        path = REPO_METADATA_DIR / f"{datasource}.json"
+        if not path.exists():
+            return {}
+
+        try:
+            with path.open() as f:
+                repo_metadata = json.load(f)
+        except (json.JSONDecodeError, IOError) as e:
+            logging.warning(
+                f"Failed to load repo metadata for {datasource}: {e}")
+            return {}
+
+        if not isinstance(repo_metadata, dict):
+            logging.warning(
+                f"Repo metadata for {datasource} is not an object; ignoring")
+            return {}
+
+        return repo_metadata
+
+    def resolve_mongo_target(self, datasource):
+        """Resolve datasource key to Mongo collection(s) and optional filter."""
+        repo_metadata = self.load_repo_metadata(datasource)
+        override = repo_metadata.get("_mongoCollection") or datasource
+
+        if isinstance(override, str):
+            collection_names = [override]
+        elif isinstance(override, list) and all(
+            isinstance(name, str) for name in override
+        ):
+            collection_names = override
+        else:
+            logging.warning(
+                "%s has invalid _mongoCollection %r; using datasource name",
+                datasource,
+                override,
+            )
+            collection_names = [datasource]
+
+        if not collection_names:
+            logging.warning(
+                "%s has empty _mongoCollection; using datasource name",
+                datasource,
+            )
+            collection_names = [datasource]
+
+        mongo_filter = repo_metadata.get("_mongoFilter")
+        return collection_names, mongo_filter
+
+    def combine_aggregation_results(self, results):
+        """Combine aggregation averages from one or more Mongo collections."""
+        if not results:
+            return {}
+
+        if len(results) == 1:
+            averages = dict(results[0])
+            averages.pop('_id', None)
+            averages.pop('record_count', None)
+            return averages
+
+        combined = {}
+        keys = set().union(*(result.keys() for result in results))
+        keys.discard('_id')
+        keys.discard('record_count')
+
+        for key in keys:
+            total = 0
+            weight = 0
+            for result in results:
+                value = result.get(key)
+                record_count = result.get('record_count', 0)
+                if value is None or not record_count:
+                    continue
+                total += value * record_count
+                weight += record_count
+            combined[key] = total / weight if weight else None
+
+        return combined
+
     def load_from_cache(self, datasource):
         """Load cached results for a datasource."""
         cache_file = os.path.join(self.cache_dir, f'cache_{datasource}.json')
@@ -292,7 +376,12 @@ class MetadataCompatibilityCalculator:
         except IOError as e:
             logging.error(f"Failed to save cache for {datasource}: {e}")
 
-    def calculate_conditionsOfAccess_uniformity(self, datasource, collection):
+    def calculate_conditionsOfAccess_uniformity(
+        self,
+        datasource,
+        collections,
+        mongo_filter=None,
+    ):
         """Calculate uniformity of conditionsOfAccess field."""
         varied_datasources = [
             "ncbi_sra",
@@ -305,6 +394,11 @@ class MetadataCompatibilityCalculator:
         if datasource in varied_datasources:
             return "Varied"
 
+        if not isinstance(collections, (list, tuple)):
+            collections = [collections]
+
+        unique_values = []
+
         # Aggregate to get all unique conditionsOfAccess values
         pipeline = [
             {
@@ -314,21 +408,29 @@ class MetadataCompatibilityCalculator:
                 }
             }
         ]
+        if mongo_filter:
+            pipeline = [{'$match': mongo_filter}, *pipeline]
 
-        try:
-            result = list(collection.aggregate(pipeline))
-        except Exception as e:
-            logging.error(
-                f"Error aggregating conditionsOfAccess for {datasource}: {e}")
-            return "Unknown"
+        for collection in collections:
+            try:
+                result = list(collection.aggregate(pipeline))
+            except Exception as e:
+                logging.error(
+                    "Error aggregating conditionsOfAccess for %s: %s",
+                    datasource,
+                    e,
+                )
+                return "Unknown"
+            if result:
+                unique_values.extend(result[0]['uniqueValues'])
 
         # Check if there's exactly one unique value
-        if result and len(result[0]['uniqueValues']) == 1 and result[0]['uniqueValues'][0] is not None:
-            return result[0]['uniqueValues'][0]
-        elif result and len(set(result[0]['uniqueValues']) - {None}) == 1:
+        if len(unique_values) == 1 and unique_values[0] is not None:
+            return unique_values[0]
+        elif len(set(unique_values) - {None}) == 1:
             # Handle case where there's one unique value plus None values
-            return (set(result[0]['uniqueValues']) - {None}).pop()
-        elif result and len(result[0]['uniqueValues']) == 0:
+            return (set(unique_values) - {None}).pop()
+        elif len(unique_values) == 0:
             return "Unknown"
         else:
             return "Varied"
@@ -386,7 +488,18 @@ class MetadataCompatibilityCalculator:
         try:
             client = MongoClient(self.mongo_url)
             db = client["nde_hub_src"]
-            collection = db[datasource]
+            collection_names, mongo_filter = self.resolve_mongo_target(
+                datasource)
+            collections = [db[name] for name in collection_names]
+            if collection_names != [datasource]:
+                logging.info(
+                    "%s: using Mongo collection(s) %s",
+                    datasource,
+                    collection_names,
+                )
+            if mongo_filter:
+                logging.info("%s: using Mongo filter %s",
+                             datasource, mongo_filter)
             logging.info(
                 f"Calculating metadata compatibility average for {datasource}")
         except Exception as e:
@@ -434,10 +547,12 @@ class MetadataCompatibilityCalculator:
 
         # Build the aggregation pipeline
         aggregation_pipeline = [
+            *([{'$match': mongo_filter}] if mongo_filter else []),
             project_stage,
             {
                 '$group': {
                     '_id': None,
+                    'record_count': {'$sum': 1},
                     'avg_augmented_recommended_ratio': {
                         '$avg': '$_meta.completeness.augmented_recommended_ratio'
                     },
@@ -469,15 +584,16 @@ class MetadataCompatibilityCalculator:
         ]
 
         try:
-            result = list(collection.aggregate(aggregation_pipeline))
+            result = []
+            for collection in collections:
+                result.extend(collection.aggregate(aggregation_pipeline))
         except Exception as e:
             logging.error(
                 f"Error running aggregation pipeline for {datasource}: {e}")
             return self._get_default_averages(required_fields, recommended_fields)
 
         if result:
-            averages = result[0]
-            del averages['_id']
+            averages = self.combine_aggregation_results(result)
 
             # Round numerical values
             for key in list(averages):
@@ -577,7 +693,7 @@ class MetadataCompatibilityCalculator:
 
             # Conditions of access uniformity
             averages['conditionsOfAccess'] = self.calculate_conditionsOfAccess_uniformity(
-                datasource, collection)
+                datasource, collections, mongo_filter=mongo_filter)
 
             logging.info(f"Metadata Completeness calculated for {datasource}")
         else:

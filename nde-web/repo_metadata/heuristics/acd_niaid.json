@@ -79,16 +79,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C154635",
-      "name": "Death Domain",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C154635",
+      "identifier": "C35650",
+      "name": "Upper Respiratory Tract Infection",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C35650",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -107,10 +100,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C35650",
-      "name": "Upper Respiratory Tract Infection",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C35650",
+      "identifier": "C154635",
+      "name": "Death Domain",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C154635",
       "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
@@ -132,16 +132,16 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
-      "identifier": "694009",
-      "name": "Severe acute respiratory syndrome coronavirus",
-      "url": "https://www.uniprot.org/taxonomy/694009",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2697049",
-      "name": "Severe acute respiratory syndrome coronavirus 2",
-      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "identifier": "694009",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/694009",
       "inDefinedTermSet": "UniProt"
     }
   ],
@@ -149,35 +149,35 @@
     {
       "@type": "DefinedTerm",
       "identifier": "C82639",
-      "name": "NCIT Term C82639",
+      "name": "Parallel Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C82639",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C15417",
-      "name": "NCIT Term C15417",
+      "name": "Randomized Clinical Trial",
       "url": "http://purl.obolibrary.org/obo/NCIT_C15417",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C15228",
-      "name": "NCIT Term C15228",
+      "name": "Double Blind Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C15228",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C66959",
-      "name": "NCIT Term C66959",
+      "name": "Triple Blind Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C66959",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "C49659",
-      "name": "NCIT Term C49659",
+      "name": "Open Label Study",
       "url": "http://purl.obolibrary.org/obo/NCIT_C49659",
       "inDefinedTermSet": "NCIT"
     }

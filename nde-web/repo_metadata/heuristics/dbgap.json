@@ -83,9 +83,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3344",
-      "name": "Biomedical science",
-      "url": "http://edamontology.org/topic_3344",
+      "identifier": "topic_3337",
+      "name": "Biobank",
+      "url": "http://edamontology.org/topic_3337",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -229,16 +229,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3483",
-      "name": "Cannabis sativa",
-      "url": "https://www.uniprot.org/taxonomy/3483",
+      "identifier": "9823",
+      "name": "Sus scrofa",
+      "url": "https://www.uniprot.org/taxonomy/9823",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9823",
-      "name": "Sus scrofa",
-      "url": "https://www.uniprot.org/taxonomy/9823",
+      "identifier": "3483",
+      "name": "Cannabis sativa",
+      "url": "https://www.uniprot.org/taxonomy/3483",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -288,13 +288,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1214577",
-      "name": "Diaporthe sclerotioides",
-      "url": "https://www.uniprot.org/taxonomy/1214577",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "29278",
       "name": "vectors",
       "url": "https://www.uniprot.org/taxonomy/29278",
@@ -309,6 +302,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "1214577",
+      "name": "Diaporthe sclerotioides",
+      "url": "https://www.uniprot.org/taxonomy/1214577",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "749906",
       "name": "gut metagenome",
       "url": "https://www.uniprot.org/taxonomy/749906",
@@ -316,9 +316,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "694009",
-      "name": "Severe acute respiratory syndrome coronavirus",
-      "url": "https://www.uniprot.org/taxonomy/694009",
+      "identifier": "12814",
+      "name": "Respiratory syncytial virus",
+      "url": "https://www.uniprot.org/taxonomy/12814",
       "inDefinedTermSet": "UniProt"
     },
     {

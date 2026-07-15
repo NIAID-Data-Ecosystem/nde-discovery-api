@@ -2,31 +2,38 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 2203,
+      "minValue": 2250,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-05-08",
+  "dateModified": "2026-07-03",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2016-05-06",
-      "endDate": "2026-05-08"
+      "endDate": "2026-07-03"
     }
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
   "usageInfo": {
     "url": "https://www.clinicalgenome.org/docs/?doc-type=policies-position-statements"
   },
-  "topicCategory": [
+  "about": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0625",
-      "name": "Genotype and phenotype",
-      "url": "http://edamontology.org/topic_0625",
-      "inDefinedTermSet": "EDAM"
+      "name": "Gene",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C16612",
+      "inDefinedTermSet": "NCIT"
     },
+    {
+      "@type": "DefinedTerm",
+      "name": "GeneVariant",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C97927",
+      "inDefinedTermSet": "NCIT"
+    }
+  ],
+  "topicCategory": [
     {
       "@type": "DefinedTerm",
       "identifier": "topic_0622",
@@ -39,6 +46,13 @@
       "identifier": "topic_0199",
       "name": "Genetic variation",
       "url": "http://edamontology.org/topic_0199",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0625",
+      "name": "Genotype and phenotype",
+      "url": "http://edamontology.org/topic_0625",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -73,9 +87,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0031332",
-      "name": "Glanzmann thrombasthenia 1",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0031332",
+      "identifier": "0018116",
+      "name": "galactosemia",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018116",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -87,6 +101,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "0031332",
+      "name": "Glanzmann thrombasthenia 1",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0031332",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "0018875",
       "name": "Li-Fraumeni syndrome",
       "url": "http://purl.obolibrary.org/obo/MONDO_0018875",
@@ -94,22 +115,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021060",
-      "name": "RASopathy",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021060",
+      "identifier": "0005365",
+      "name": "hearing loss disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005365",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "MONDO:0100216",
-      "name": "DICER1-related tumor predisposition",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0009728",
-      "name": "nephronophthisis 1",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0009728",
+      "identifier": "0007947",
+      "name": "Marfan syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0007947",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -133,14 +148,14 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "Curation",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C48292",
+      "name": "Classification",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C25161",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Classification",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C25161",
+      "name": "Curation",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C48292",
       "inDefinedTermSet": "NCIT"
     }
   ]

@@ -13,7 +13,16 @@
         "identifier": {
           "type": "string"
         },
+        "inDefinedTermSet": {
+          "type": "string"
+        },
         "name": {
+          "type": "string"
+        },
+        "termCode": {
+          "type": "string"
+        },
+        "url": {
           "type": "string"
         }
       },
@@ -137,6 +146,20 @@
       "items": {
         "type": "string"
       }
+    },
+    "about": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/DefinedTerm"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DefinedTerm"
+          },
+          "minItems": 1
+        }
+      ]
     },
     "collectionSize": {
       "type": "array",

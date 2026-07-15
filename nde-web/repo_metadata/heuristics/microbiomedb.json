@@ -16,23 +16,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005093",
-      "name": "skin disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005093",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0043579",
-      "name": "enteritis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0043579",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "C13359",
       "name": "Gastrointestinal",
       "url": "http://purl.obolibrary.org/obo/NCIT_C13359",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C189188",
+      "name": "Infected with SARS-CoV-2",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -41,20 +34,6 @@
       "name": "Infections",
       "url": "https://id.nlm.nih.gov/mesh/D007239.html",
       "inDefinedTermSet": "MeSH"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0009061",
-      "name": "cystic fibrosis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0009061",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C189188",
-      "name": "Infected with SARS-CoV-2",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
-      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -72,10 +51,31 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "0011989",
+      "name": "leishmaniasis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0011989",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "C3038",
       "name": "Fever",
       "url": "http://purl.obolibrary.org/obo/NCIT_C3038",
       "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004979",
+      "name": "asthma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004979",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0009061",
+      "name": "cystic fibrosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0009061",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
@@ -89,9 +89,9 @@
   "species": [
     {
       "@type": "DefinedTerm",
-      "identifier": "9615",
-      "name": "Canis lupus familiaris",
-      "url": "https://www.uniprot.org/taxonomy/9615",
+      "identifier": "9685",
+      "name": "Felis catus",
+      "url": "https://www.uniprot.org/taxonomy/9685",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -103,25 +103,25 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9685",
-      "name": "Felis catus",
-      "url": "https://www.uniprot.org/taxonomy/9685",
+      "identifier": "9615",
+      "name": "Canis lupus familiaris",
+      "url": "https://www.uniprot.org/taxonomy/9615",
       "inDefinedTermSet": "UniProt"
     }
   ],
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
-      "identifier": "5740",
-      "name": "Giardia",
-      "url": "https://www.uniprot.org/taxonomy/5740",
+      "identifier": "410661",
+      "name": "mouse gut metagenome",
+      "url": "https://www.uniprot.org/taxonomy/410661",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "410661",
-      "name": "mouse gut metagenome",
-      "url": "https://www.uniprot.org/taxonomy/410661",
+      "identifier": "5740",
+      "name": "Giardia",
+      "url": "https://www.uniprot.org/taxonomy/5740",
       "inDefinedTermSet": "UniProt"
     }
   ]
