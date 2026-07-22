@@ -17,6 +17,9 @@
   "usageInfo": "https://www.dsmz.de/collection/how-to-order",
   "isAccessibleForFree": false,
   "hasAPI": true,
+  "parentCollection": {
+    "id": "bacdive"
+  },
   "schedule": "Weekly",
   "_mongoCollection": "bacdive",
   "_mongoFilter": {

@@ -16,6 +16,9 @@
   "license": "https://www.atcc.org/policies/terms-and-conditions-of-sale-by-atcc",
   "usageInfo": "https://www.atcc.org/policies/product-use-policies",
   "isAccessibleForFree": false,
+  "parentCollection": {
+    "id": "bacdive"
+  },
   "schedule": "Weekly",
   "_mongoCollection": "bacdive",
   "_mongoFilter": {

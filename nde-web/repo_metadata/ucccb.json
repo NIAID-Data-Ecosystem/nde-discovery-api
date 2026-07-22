@@ -15,6 +15,9 @@
   "conditionsOfAccess": "Restricted",
   "license": "https://ucccb.uc.pt/documentation/",
   "isAccessibleForFree": false,
+  "parentCollection": {
+    "id": "bacdive"
+  },
   "schedule": "Weekly",
   "_mongoCollection": "bacdive",
   "_mongoFilter": {

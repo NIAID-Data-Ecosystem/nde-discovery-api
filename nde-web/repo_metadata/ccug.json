@@ -16,6 +16,9 @@
   "license": "https://www.ccug.se/ordering/restricted",
   "usageInfo": "https://www.ccug.se/ordering/guide",
   "isAccessibleForFree": false,
+  "parentCollection": {
+    "id": "bacdive"
+  },
   "schedule": "Weekly",
   "_mongoCollection": "bacdive",
   "_mongoFilter": {

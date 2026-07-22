@@ -10,15 +10,8 @@ from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
 from tornado.httpclient import HTTPClientError
 from tornado.httputil import HTTPHeaders, url_concat
 from tornado.web import HTTPError, RequestHandler
-from user_data import (
-    _activity_update,
-    _now_iso,
-    _oauth_profile_removals,
-    _oauth_profile_updates,
-    _seed_user_doc,
-    _user_doc_id,
-)
-
+from user_data import (_activity_update, _now_iso, _oauth_profile_removals,
+                       _oauth_profile_updates, _seed_user_doc, _user_doc_id)
 
 EMAIL_RECORD_FIELDS = ("email", "primary", "verified", "visibility")
 
@@ -588,8 +581,16 @@ class NDESourceHandler(MetadataSourceHandler):
                 )
             elif "parentCollection" in data:
                 _meta["src"][source] = {"sourceInfo": source_info[source]}
-                parent = _meta["src"]["veupath_collections"]
-                _meta["src"][source]["version"] = parent["version"]
+                # Subset sources share another source's Mongo collection and
+                # ES documents (e.g. plasmodb -> veupath_collections, the
+                # DSMZ/BacDive culture collections -> bacdive). Borrow the
+                # parent's version from that shared source
+                parent_key = data.get("_mongoCollection")
+                if isinstance(parent_key, list):
+                    parent_key = parent_key[0] if parent_key else None
+                parent = _meta["src"].get(parent_key)
+                if parent and "version" in parent:
+                    _meta["src"][source]["version"] = parent["version"]
 
         for source, config in _SOURCE_STAT_COUNT_OVERRIDES.items():
             await self._refresh_source_stat_count(source, config, _meta)
