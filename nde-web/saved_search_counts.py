@@ -15,6 +15,7 @@ DEFAULT_USER_INDEX = "nde_user_profiles"
 
 _BROWSE_ALL_QUERIES = frozenset({"", "__all__", "__any__", "*", "*:*"})
 _SUPPORTED_TYPES = ["Dataset", "ResourceCatalog"]
+_BIOSAMPLE_CATALOG_SAMPLE_SOURCES = ["BEI Resources"]
 _DEFAULT_SAMPLE_VISIBILITY_FILTER = (
     'NOT(@type:Sample AND NOT additionalType:"BioSample")'
 )
@@ -73,20 +74,33 @@ def frontend_default_extra_filter() -> str:
 
 
 def _build_type_filter() -> dict:
-    computational_tool_condition = {
-        "bool": {
-            "must": [
-                {"term": {"@type": "ComputationalTool"}},
-                {"term": {"includedInDataCatalog.name": "bio.tools"}},
-            ]
-        }
-    }
+    should = [
+        {"terms": {"@type": _SUPPORTED_TYPES}},
+        {
+            "bool": {
+                "must": [
+                    {"term": {"@type": "ComputationalTool"}},
+                    {"term": {"includedInDataCatalog.name": "bio.tools"}},
+                ]
+            }
+        },
+    ]
+    for source in _BIOSAMPLE_CATALOG_SAMPLE_SOURCES:
+        should.append(
+            {
+                "bool": {
+                    "must": [
+                        {"term": {"@type": "Sample"}},
+                        {"term": {"additionalType": "BioSample"}},
+                        {"term": {"includedInDataCatalog.name": source}},
+                    ]
+                }
+            }
+        )
+
     return {
         "bool": {
-            "should": [
-                {"terms": {"@type": _SUPPORTED_TYPES}},
-                computational_tool_condition,
-            ],
+            "should": should,
             "minimum_should_match": 1,
         }
     }

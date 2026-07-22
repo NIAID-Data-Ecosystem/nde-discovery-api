@@ -46,7 +46,16 @@ def test_count_body_uses_main_frontend_type_filter():
             ]
         }
     }
-    assert len(type_filter["should"]) == 2
+    assert type_filter["should"][2] == {
+        "bool": {
+            "must": [
+                {"term": {"@type": "Sample"}},
+                {"term": {"additionalType": "BioSample"}},
+                {"term": {"includedInDataCatalog.name": "BEI Resources"}},
+            ]
+        }
+    }
+    assert len(type_filter["should"]) == 3
     assert "ExperimentalRunSample" not in str(type_filter)
 
 

@@ -8,7 +8,57 @@ import boto3
 from biothings.web.query import ESQueryBuilder, ESResultFormatter
 from biothings.web.query.engine import AsyncESQueryBackend
 from botocore.config import Config as BotoConfig
-from elasticsearch_dsl import A, Q, Search
+from elasticsearch.dsl import A, Q, Search
+
+
+SUPPORTED_PUBLIC_TYPES = ["Dataset", "ResourceCatalog"]
+BIOSAMPLE_CATALOG_SAMPLE_SOURCES = ["BEI Resources"]
+
+
+def _public_type_filter_should_clauses():
+    clauses = [
+        {"terms": {"@type": SUPPORTED_PUBLIC_TYPES}},
+        {
+            "bool": {
+                "must": [
+                    {"term": {"@type": "ComputationalTool"}},
+                    {"term": {"includedInDataCatalog.name": "bio.tools"}},
+                ]
+            }
+        },
+        {
+            "bool": {
+                "must": [
+                    {"term": {"@type": "Sample"}},
+                    {"term": {"additionalType": "ExperimentalRunSample"}},
+                ]
+            }
+        },
+    ]
+
+    for source in BIOSAMPLE_CATALOG_SAMPLE_SOURCES:
+        clauses.append(
+            {
+                "bool": {
+                    "must": [
+                        {"term": {"@type": "Sample"}},
+                        {"term": {"additionalType": "BioSample"}},
+                        {"term": {"includedInDataCatalog.name": source}},
+                    ]
+                }
+            }
+        )
+
+    return clauses
+
+
+def _build_public_type_filter():
+    return {
+        "bool": {
+            "should": _public_type_filter_should_clauses(),
+            "minimum_should_match": 1,
+        }
+    }
 
 
 def transform_lineage_response(response):
@@ -216,35 +266,7 @@ class NDEESQueryBackend(AsyncESQueryBackend):
 
     @staticmethod
     def _build_type_filter():
-        filter_conditions = [
-            {"terms": {
-                "@type": ["Dataset", "ResourceCatalog"]}},
-        ]
-        computational_tool_condition = {
-            "bool": {
-                "must": [
-                    {"term": {"@type": "ComputationalTool"}},
-                    {"term": {"includedInDataCatalog.name": "bio.tools"}},
-                ]
-            }
-        }
-        experimental_run_sample_condition = {
-            "bool": {
-                "must": [
-                    {"term": {"@type": "Sample"}},
-                    {"term": {"additionalType": "ExperimentalRunSample"}},
-                ]
-            }
-        }
-        return {
-            "bool": {
-                "should": filter_conditions + [
-                    computational_tool_condition,
-                    experimental_run_sample_condition,
-                ],
-                "minimum_should_match": 1,
-            }
-        }
+        return _build_public_type_filter()
 
     @staticmethod
     def _query_string_filter(query: str):
@@ -625,40 +647,10 @@ class NDEQueryBuilder(ESQueryBuilder):
         # include only documents from the allowed prod sources
         search = search.query("bool", must=[Q("terms", **{"includedInDataCatalog.name": prod_sources})])
 
-        # We only want supported public types.
-        # Filter to allow @type Dataset, ResourceCatalog, ComputationalTool only
-        # from Bio.tools, and ExperimentalRunSample records.
-        filter_conditions = [
-            # Include Dataset and ResourceCatalog
-            {"terms": {"@type": ["Dataset", "ResourceCatalog"]}},
-        ]
-
-        computational_tool_condition = {
-            "bool": {
-                "must": [
-                    {"term": {"@type": "ComputationalTool"}},
-                    {"term": {"includedInDataCatalog.name": "bio.tools"}}
-                ]
-            }
-        }
-
-        experimental_run_sample_condition = {
-            "bool": {
-                "must": [
-                    {"term": {"@type": "Sample"}},
-                    {"term": {"additionalType": "ExperimentalRunSample"}}
-                ]
-            }
-        }
-
-        search = search.filter(
-            "bool",
-            should=filter_conditions + [
-                computational_tool_condition,
-                experimental_run_sample_condition,
-            ],
-            minimum_should_match=1,
-        )
+        # We only want supported public types and explicitly approved sample
+        # slices. Do not allow bare @type:Sample, since that would expose large
+        # staging-style sample collections with different additionalType values.
+        search = search.filter("bool", **_build_public_type_filter()["bool"])
 
         # Apply the new metadata-based scoring by default:
         # This script considers the completeness ratios and boosts ResourceCatalog items.
