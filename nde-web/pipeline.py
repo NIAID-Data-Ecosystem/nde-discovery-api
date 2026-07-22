@@ -635,8 +635,6 @@ class NDEQueryBuilder(ESQueryBuilder):
         return queries
 
     def apply_extras(self, search, options):
-        facet_or_count_request = _option_int(options.get("size"), 10) <= 0
-
         # We only want those of type Dataset or ComputationalTool. Terms to filter
         # terms = {"@type": ["Dataset", "ComputationalTool"]}
 
@@ -670,19 +668,9 @@ class NDEQueryBuilder(ESQueryBuilder):
             minimum_should_match=1,
         )
 
-        if facet_or_count_request:
-            search = search.extra(request_cache=True)
-
         # apply extra-filtering for frontend to avoid adding unwanted wildcards on certain queries
         if options.extra_filter:
-            extra_filter_query = Q(
-                "query_string",
-                query=options.extra_filter,
-            )
-            if facet_or_count_request:
-                search = search.filter(extra_filter_query)
-            else:
-                search = search.query(extra_filter_query)
+            search = search.query("query_string", query=options.extra_filter)
 
         # apply hist aggregation
         if options.hist:
@@ -707,7 +695,7 @@ class NDEQueryBuilder(ESQueryBuilder):
 
         # Apply function scoring only when returning scored hits. Facet and
         # count requests use size=0, so avoid scoring work for them.
-        if not facet_or_count_request:
+        if _option_int(options.get("size"), 10) > 0:
             if _option_enabled(options.get("use_metadata_score")):
                 custom_function_script = {
                     "source": """
