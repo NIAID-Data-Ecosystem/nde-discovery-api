@@ -140,6 +140,31 @@ Elasticsearch settings from `nde-web/config.py` or
 `nde-web/config_web.py` by default; override them with `--es-host`,
 `--user-index`, or `--data-index` only when needed.
 
+## Warm Filter Query Cache
+
+After publishing a new data release, moving the data alias, clearing
+Elasticsearch caches, or restarting Elasticsearch nodes, warm the common
+filter-sidebar aggregation requests:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/warm_filter_cache.py \
+  --metadata-url https://api-staging.data.niaid.nih.gov/v1/metadata \
+  --dry-run
+```
+
+Remove `--dry-run` to execute the requests. The default pass warms the broad
+browse-all filter aggregation plus every `Specified` and `Unspecified` filter
+option for the unscoped and Shared/Dataset scopes, with both no-date and
+default-date variants. This targets the slowest HAR requests while avoiding a
+full all-scope warmup by default.
+
+Use `--scopes all` for a full portal-scope warmup, `--fields field_a,field_b`
+for a narrower pass, and `--exists-syntax canonical` if the portal is sending
+top-level `_exists_` / `-_exists_` filters. The default `legacy` exists syntax
+matches the current HAR-style field-scoped URLs. The script calls the public
+`/v1/query` API instead of Elasticsearch directly so the Elasticsearch request
+cache sees the same query body generated for portal traffic.
+
 ## Delete Inactive User Profiles
 
 User profile documents track `last_active` when a user logs in or uses the
@@ -174,6 +199,7 @@ nde-web/scripts/sync_repo_metadata.py
 nde-web/scripts/compute_heuristics.py
 nde-web/scripts/delete_inactive_user_profiles.py
 nde-web/scripts/update_saved_search_totals.py
+nde-web/scripts/warm_filter_cache.py
 nde-web/scripts/validate_repo_metadata.py
 nde-web/requirements_scripts.txt
 ```
