@@ -79,6 +79,19 @@ def _looks_like_advanced_query_string(q: str) -> bool:
     return (":" in q) or (" AND " in q) or (" OR " in q) or ("(" in q and ")" in q)
 
 
+def _option_enabled(value) -> bool:
+    if isinstance(value, str):
+        return value.strip().lower() in {"1", "true", "yes", "on"}
+    return bool(value)
+
+
+def _option_int(value, default: int) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
 # Sentinel query values that represent "browse all" — not a real search intent.
 # AI / vector search should fall back to standard search for these.
 _AI_SEARCH_PASSTHROUGH_QUERIES = frozenset({"", "__all__", "__any__", "*"})
@@ -680,40 +693,45 @@ class NDEQueryBuilder(ESQueryBuilder):
             search = search.suggest(
                 "nde_suggester", options.suggester, phrase=phrase_suggester)
 
-        # apply function score
-        if options.use_metadata_score:
-            custom_function_script = {
-                "source": """
-                    double required_ratio = doc['_meta.completeness.required_ratio'].value;
-                    double recommended_ratio = doc['_meta.completeness.recommended_score_ratio'].value;
-                    double b = 1 - params.a;
-                    double d = 1 - params.c;
-                    double score = (params.a * _score) + (b * ((params.c * required_ratio) + (d * recommended_ratio)));
-                    if (doc['@type'].value == 'ResourceCatalog') {
-                        score *= params.boost_factor;
+        # Apply function scoring only when returning scored hits. Facet and
+        # count requests use size=0, so avoid scoring work for them.
+        if _option_int(options.get("size"), 10) > 0:
+            if _option_enabled(options.get("use_metadata_score")):
+                custom_function_script = {
+                    "source": """
+                        double required_ratio = doc['_meta.completeness.required_ratio'].value;
+                        double recommended_ratio = doc['_meta.completeness.recommended_score_ratio'].value;
+                        double b = 1 - params.a;
+                        double d = 1 - params.c;
+                        double score = (params.a * _score) + (b * ((params.c * required_ratio) + (d * recommended_ratio)));
+                        if (doc['@type'].value == 'ResourceCatalog') {
+                            score *= params.boost_factor;
+                        }
+                        return score;
+                    """,
+                    "params": {
+                        "a": 0.8,
+                        "c": 0.75,
+                        "boost_factor": 1000.0
                     }
-                    return score;
-                """,
-                "params": {
-                    "a": 0.8,
-                    "c": 0.75,
-                    "boost_factor": 1000.0
                 }
-            }
-            function_score_query = Q("function_score", script_score={
-                                     "script": custom_function_script}, boost_mode="replace")
-            search = search.query(function_score_query)
-        else:
-            functions = [
-                {"filter": {"term": {"@type": "ResourceCatalog"}}, "weight": 1000}
-            ]
+                function_score_query = Q(
+                    "function_score",
+                    script_score={"script": custom_function_script},
+                    boost_mode="replace",
+                )
+                search = search.query(function_score_query)
+            else:
+                functions = [
+                    {"filter": {"term": {"@type": "ResourceCatalog"}}, "weight": 1000}
+                ]
 
-            search = search.query(
-                "function_score",
-                query=search.to_dict().get("query"),
-                functions=functions,
-                boost_mode="replace",
-            )
+                search = search.query(
+                    "function_score",
+                    query=search.to_dict().get("query"),
+                    functions=functions,
+                    boost_mode="replace",
+                )
 
         # apply multi-term aggregation
         if options.multi_terms_fields:
