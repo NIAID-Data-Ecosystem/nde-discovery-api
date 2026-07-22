@@ -1,0 +1,38 @@
+{
+  "_id": "kctc",
+  "name": "Korean Collection for Type Cultures",
+  "alternateName": [
+    "KCTC"
+  ],
+  "identifier": "KCTC",
+  "url": "https://kctc.kribb.re.kr/en/collection",
+  "abstract": "KCTC is an MSIT supported biospecimen repository that includes IID samples.",
+  "description": "The Korean Collection for Type Cultures (KCTC), the Biological Resource Center (BRC) of the Korea Research Institute of Bioscience and Biotechnology (KRIBB) is the largest biological resource center in Korea. To develop positive countermeasures for the international situation, KCTC provides the infrastructure for the services performed by the acquisition, preservation, and distribution of biological resources. KCTC does researches and development of core technologies for valuable biological resources. KCTC is also constructing local and international networks of biological resources and their related information. The KCTC also plays the role of National Repository for Bio-research Products from the national R&D projects by the government. KCTC operates BRC through standardized management of biological resources based on ISO 9001. KCTC has leading the management of biological resources of Korea.",
+  "collectionType": "Sample Repository",
+  "genre": [
+    "Generalist"
+  ],
+  "conditionsOfAccess": "Restricted",
+  "isAccessibleForFree": false,
+  "schedule": "Weekly",
+  "_mongoCollection": "bacdive",
+  "_mongoFilter": {
+    "includedInDataCatalog.url": {
+      "$regex": "https://kctc\\.kribb\\.re\\.kr/"
+    }
+  },
+  "schema": {
+    "Bacdive-ID": "_id, identifier, url",
+    "DSM-Number": "identifier, url",
+    "keywords": "keywords",
+    "NCBI tax id": "infectiousAgent.identifier",
+    "doi": "doi",
+    "Name and taxonomic classification.LPSN.synonyms": "infectiousAgent.alternateName",
+    "Isolation, sampling and environmental information": "sampleType, locationOfOrigin, species, dateProcessed, dateCollected, collectionMethod, environmentalSystem",
+    "Sequence information": "isBasisFor",
+    "Literature.culture collection no.": "identifier",
+    "Literature.literature": "citation",
+    "Reference": "isBasedOn",
+    "Morphology.cell morphology": "associatedPhenotype"
+  }
+}

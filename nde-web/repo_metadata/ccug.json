@@ -1,0 +1,40 @@
+{
+  "_id": "ccug",
+  "name": "Culture Collection University of Gothenburg",
+  "alternateName": [
+    "CCUG"
+  ],
+  "identifier": "CCUG",
+  "url": "https://www.ccug.se/",
+  "abstract": "CCUG is an University of Gothenberg supported biospecimen repository that includes IID samples.",
+  "description": "The Culture Collection University of Gothenburg (CCUG) operates within the Unit of Molecular Microbiology,which is part of the Department of Clinical Microbiology at Sahlgrenska University Hospital, see: https://www.sahlgrenska.se/omraden/omrade-4/verksamhet-klinisk-mikrobiologi/molekylar-mikrobiologi/  The CCUG serves as the National Reference Laboratory for Bacterial species identification, which performs specialized phenotypic, genotypic, as well as genomic analyses for identifying infectious microorganisms when routine methods prove inadequate.",
+  "collectionType": "Sample Repository",
+  "genre": [
+    "Generalist"
+  ],
+  "conditionsOfAccess": "Restricted",
+  "license": "https://www.ccug.se/ordering/restricted",
+  "usageInfo": "https://www.ccug.se/ordering/guide",
+  "isAccessibleForFree": false,
+  "schedule": "Weekly",
+  "_mongoCollection": "bacdive",
+  "_mongoFilter": {
+    "includedInDataCatalog.url": {
+      "$regex": "https://www\\.ccug\\.se/"
+    }
+  },
+  "schema": {
+    "Bacdive-ID": "_id, identifier, url",
+    "DSM-Number": "identifier, url",
+    "keywords": "keywords",
+    "NCBI tax id": "infectiousAgent.identifier",
+    "doi": "doi",
+    "Name and taxonomic classification.LPSN.synonyms": "infectiousAgent.alternateName",
+    "Isolation, sampling and environmental information": "sampleType, locationOfOrigin, species, dateProcessed, dateCollected, collectionMethod, environmentalSystem",
+    "Sequence information": "isBasisFor",
+    "Literature.culture collection no.": "identifier",
+    "Literature.literature": "citation",
+    "Reference": "isBasedOn",
+    "Morphology.cell morphology": "associatedPhenotype"
+  }
+}

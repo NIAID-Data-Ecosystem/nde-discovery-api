@@ -1,0 +1,39 @@
+{
+  "_id": "ucccb",
+  "name": "University of Coimbra Bacteria Culture Collection",
+  "alternateName": [
+    "UCCCB"
+  ],
+  "identifier": "UCCCB",
+  "url": "https://ucccb.uc.pt/",
+  "abstract": "UCCCB is a MIRRI-ERIC supported biospecimen repository that includes IID samples.",
+  "description": "The University of Coimbra Bacteria Culture Collection (UCCCB) is the first Portuguese Bacterial Culture Collection registered and recognized by the World Federation of Culture Collections as the collection nº 1179 (WFCC). The UC achieves with this collection the availability of reliable and relevant microbial resources for the national and international scientific community, as well as for industry.  As a culture collection, UCCCB will provide a significant degree of continuity with the past through the preservation and distribution of microbial strains described or cited in publications, and will maintain novel microorganisms awaiting future exploitation by biotechnology.  The UCCCB is a partner of the Microbial Resource Research Infrastructure — European Research Infrastructure Consortium (MIRRI-ERIC)",
+  "collectionType": "Sample Repository",
+  "genre": [
+    "Generalist"
+  ],
+  "conditionsOfAccess": "Restricted",
+  "license": "https://ucccb.uc.pt/documentation/",
+  "isAccessibleForFree": false,
+  "schedule": "Weekly",
+  "_mongoCollection": "bacdive",
+  "_mongoFilter": {
+    "includedInDataCatalog.url": {
+      "$regex": "https://ucccb\\.uc\\.pt/"
+    }
+  },
+  "schema": {
+    "Bacdive-ID": "_id, identifier, url",
+    "DSM-Number": "identifier, url",
+    "keywords": "keywords",
+    "NCBI tax id": "infectiousAgent.identifier",
+    "doi": "doi",
+    "Name and taxonomic classification.LPSN.synonyms": "infectiousAgent.alternateName",
+    "Isolation, sampling and environmental information": "sampleType, locationOfOrigin, species, dateProcessed, dateCollected, collectionMethod, environmentalSystem",
+    "Sequence information": "isBasisFor",
+    "Literature.culture collection no.": "identifier",
+    "Literature.literature": "citation",
+    "Reference": "isBasedOn",
+    "Morphology.cell morphology": "associatedPhenotype"
+  }
+}

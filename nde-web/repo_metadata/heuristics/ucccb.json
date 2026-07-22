@@ -1,0 +1,473 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 77,
+      "unitText": "Sample"
+    }
+  ],
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "usageInfo": "Varies",
+  "spatialCoverage": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sweden, Göteborg, Lackarebäcks vattenverk"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Wadden Island Terschelling"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Korea, industrial region of Cheongju"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Finland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Switzerland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Denmark"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Industrial stream near Chungju industry complex, Korea [6898]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Water from Qurugöl Lake located in Azerbaijan, Iran [9939]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Eutrophic lake water"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Portugal, Sierra da Penada"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Clinical specimen"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Russia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Africa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rhizosphere of Platycodon grandiflorum at Chungcheongnam-do, Korea [8271]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "France"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Portugal"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Netherlands"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Activated sludge of a treatment plant receiving chromium-contaminated wastewater from the tannery industry [6040]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Contaminant in an ampoule labeled \"Pseudomonas riboflavina\" IFO 13584 [4145]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Korea"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Soda pan Sós-ér, Hungary [14116]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "North America"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Human pleural fluid"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "River Alviela sediments, Portugal [7079]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Water [037]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Activated sludge from a chromium polluted watewater treatment plant, Alcanena, Portugal [7079]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Israel"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "England"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Seawater [8633]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sweden, Göteborg"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Europe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Iran"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Urine [639]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sweden"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Germany"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Austria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Soil of the Indian Himalaya [7394]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Spain"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sweden, Uppsala"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United Kingdom"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Deep-sea sediment of the east Pacific Ocean (106.4818° W, 5.3016° S) [9519]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Water of Lake Tuosu in Qaidam basin, Qinghai Province, China [10484]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "China"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Australia and Oceania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Asia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Soil from Jeju Island, Republic of Korea [7724]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United States of America"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Japan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Korea, Chungcheongnam-Do"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "France, Grignon"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "India"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hungary"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Thin layer of a purple bacterial bloom occurring in a soda pan in the Kiskunság National Park, Hungary [14116]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Water of the reed belt bordering Lake Fertő (Lake Neusiedl), Fertő-Hanság National Park, Hungary [14116]"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0010691",
+      "name": "Norrie disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0010691",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0008383",
+      "name": "rheumatoid arthritis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008383",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001513",
+      "name": "Obesity",
+      "url": "http://purl.obolibrary.org/obo/HP_0001513",
+      "inDefinedTermSet": "HP"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C116758",
+      "name": "Tic",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C116758",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0007276",
+      "name": "cat-eye syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0007276",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C565753",
+      "name": "Craniosynostosis, Type 2",
+      "url": "https://id.nlm.nih.gov/mesh/C565753.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0008380",
+      "name": "retinoblastoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008380",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0006858",
+      "name": "mouth disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0006858",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0013792",
+      "name": "intracerebral hemorrhage",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0013792",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C90069",
+      "name": "Tip",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C90069",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "376799",
+      "name": "Atriplex portulacoides",
+      "url": "https://www.uniprot.org/taxonomy/376799",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4565",
+      "name": "Triticum aestivum",
+      "url": "https://www.uniprot.org/taxonomy/4565",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "82927",
+      "name": "Avicennia marina",
+      "url": "https://www.uniprot.org/taxonomy/82927",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "254363",
+      "name": "Autographa gamma",
+      "url": "https://www.uniprot.org/taxonomy/254363",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "94286",
+      "name": "Platycodon grandiflorus",
+      "url": "https://www.uniprot.org/taxonomy/94286",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9031",
+      "name": "Gallus gallus",
+      "url": "https://www.uniprot.org/taxonomy/9031",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3708",
+      "name": "Brassica napus",
+      "url": "https://www.uniprot.org/taxonomy/3708",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "71647",
+      "name": "Pinus pinaster",
+      "url": "https://www.uniprot.org/taxonomy/71647",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4530",
+      "name": "Oryza sativa",
+      "url": "https://www.uniprot.org/taxonomy/4530",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "336400",
+      "name": "bacterium B",
+      "url": "https://www.uniprot.org/taxonomy/336400",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1323734",
+      "name": "Belliella aquatica",
+      "url": "https://www.uniprot.org/taxonomy/1323734",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1898440",
+      "name": "Leucobacter sp.",
+      "url": "https://www.uniprot.org/taxonomy/1898440",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1978524",
+      "name": "Salinicola sp.",
+      "url": "https://www.uniprot.org/taxonomy/1978524",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1278057",
+      "name": "Hymenobacter marinus",
+      "url": "https://www.uniprot.org/taxonomy/1278057",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "964",
+      "name": "Herbaspirillum seropedicae",
+      "url": "https://www.uniprot.org/taxonomy/964",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "418750",
+      "name": "Saccharospirillum salsuginis",
+      "url": "https://www.uniprot.org/taxonomy/418750",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "158899",
+      "name": "Collimonas fungivorans",
+      "url": "https://www.uniprot.org/taxonomy/158899",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "942017",
+      "name": "activated sludge metagenome",
+      "url": "https://www.uniprot.org/taxonomy/942017",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "287",
+      "name": "Pseudomonas aeruginosa",
+      "url": "https://www.uniprot.org/taxonomy/287",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ]
+}

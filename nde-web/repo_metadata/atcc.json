@@ -1,0 +1,40 @@
+{
+  "_id": "atcc",
+  "name": "American Type Culture Collection",
+  "alternateName": [
+    "ATCC"
+  ],
+  "identifier": "ATCC",
+  "url": "https://www.atcc.org",
+  "abstract": "ATCC is an NIH supported biospecimen repository that includes IID samples.",
+  "description": "ATCC (American Type Culture Collection) is a private, nonprofit, global biological resource center and standards organization that provides scientists with the biomaterials and resources they need to conduct critical life science research.   We support the scientific community with the world’s largest and most diverse collection of human and animal cell products, as well as molecular genomic tools, microbe products, and biological materials. We offer a host of services, including cell authentication, master and working cell bank production, cGMP commercial biorepository, and biomaterial deposit services. Through our ATCC Federal Solutions initiative, we lend our expertise to federal agencies in areas that include global health and infectious diseases, biodefense, and noncommunicable diseases.",
+  "collectionType": "Sample Repository",
+  "genre": [
+    "Generalist"
+  ],
+  "conditionsOfAccess": "Restricted",
+  "license": "https://www.atcc.org/policies/terms-and-conditions-of-sale-by-atcc",
+  "usageInfo": "https://www.atcc.org/policies/product-use-policies",
+  "isAccessibleForFree": false,
+  "schedule": "Weekly",
+  "_mongoCollection": "bacdive",
+  "_mongoFilter": {
+    "includedInDataCatalog.url": {
+      "$regex": "https://www\\.atcc\\.org/"
+    }
+  },
+  "schema": {
+    "Bacdive-ID": "_id, identifier, url",
+    "DSM-Number": "identifier, url",
+    "keywords": "keywords",
+    "NCBI tax id": "infectiousAgent.identifier",
+    "doi": "doi",
+    "Name and taxonomic classification.LPSN.synonyms": "infectiousAgent.alternateName",
+    "Isolation, sampling and environmental information": "sampleType, locationOfOrigin, species, dateProcessed, dateCollected, collectionMethod, environmentalSystem",
+    "Sequence information": "isBasisFor",
+    "Literature.culture collection no.": "identifier",
+    "Literature.literature": "citation",
+    "Reference": "isBasedOn",
+    "Morphology.cell morphology": "associatedPhenotype"
+  }
+}
