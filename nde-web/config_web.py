@@ -3,8 +3,10 @@ import copy
 from authn.authn_provider import UserCookieAuthProvider
 from biothings.web.settings.default import APP_LIST, QUERY_KWARGS
 from handlers import (
+    GoogleLoginHandler,
     GitHubLoginHandler,
     LogoutHandler,
+    MicrosoftLoginHandler,
     NDESourceHandler,
     ORCIDLoginHandler,
     UserInfoHandler,
@@ -37,6 +39,8 @@ APP_LIST += [
     (r"/logout", LogoutHandler),
     (r"/login/github", GitHubLoginHandler),
     (r"/login/orcid", ORCIDLoginHandler),
+    (r"/login/google", GoogleLoginHandler),
+    (r"/login/microsoft", MicrosoftLoginHandler),
     (r"/xsrf_token", XSRFToken),
 ]
 

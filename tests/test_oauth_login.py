@@ -3,6 +3,7 @@ import json
 import sys
 from pathlib import Path
 from types import SimpleNamespace
+from urllib.parse import parse_qs, urlsplit
 
 from tornado.httpclient import HTTPClientError
 
@@ -103,6 +104,55 @@ def _orcid_handler(next_url, exc=None, token=None):
     handler.redirect = redirects.append
 
     return handler, redirects, cleared
+
+
+def _oidc_handler(handler_cls, next_url="/account", state_cookie=None):
+    handler = handler_cls.__new__(handler_cls)
+    redirects = []
+    cleared = []
+    secure_cookies = []
+
+    handler.application = SimpleNamespace(
+        biothings=SimpleNamespace(
+            config=SimpleNamespace(
+                COOKIE_DOMAIN=None,
+                FRONTEND_ORIGIN="https://data.niaid.nih.gov",
+                FRONTEND_ORIGIN_ALIASES=[],
+                GOOGLE_CLIENT_ID="google-client-id",
+                GOOGLE_CLIENT_SECRET="google-client-secret",
+                MICROSOFT_CLIENT_ID="microsoft-client-id",
+                MICROSOFT_CLIENT_SECRET="microsoft-client-secret",
+                MICROSOFT_TENANT="organizations",
+                WEB_HOST="https://api.data.niaid.nih.gov",
+            )
+        )
+    )
+
+    args = {
+        "next": next_url,
+        "code": None,
+        "state": None,
+        "error": None,
+    }
+
+    def get_argument(name, default=None):
+        return args.get(name, default)
+
+    def get_secure_cookie(*_args, **_kwargs):
+        if state_cookie is None:
+            return None
+        return json.dumps(state_cookie).encode()
+
+    handler.get_argument = get_argument
+    handler.get_secure_cookie = get_secure_cookie
+    handler.set_secure_cookie = lambda *args, **kwargs: secure_cookies.append(
+        (args, kwargs)
+    )
+    handler.clear_cookie = lambda *args, **kwargs: cleared.append((args, kwargs))
+    handler.redirect = redirects.append
+    handler._test_args = args
+
+    return handler, redirects, cleared, secure_cookies
 
 
 def test_github_login_redirects_with_unavailable_error_on_upstream_500():
@@ -229,6 +279,166 @@ def test_github_format_user_record_saves_available_emails():
             "visibility": "public",
         },
     ]
+
+
+def test_google_login_redirects_to_provider_with_stable_callback_url():
+    handler, redirects, _cleared, secure_cookies = _oidc_handler(
+        handlers.GoogleLoginHandler,
+        "https://data.niaid.nih.gov/account",
+    )
+
+    asyncio.run(handlers.GoogleLoginHandler.get(handler))
+
+    assert len(secure_cookies) == 1
+    cookie_args, cookie_kwargs = secure_cookies[0]
+    assert cookie_args[0] == "oauth_state_google"
+    state_cookie = json.loads(cookie_args[1])
+    assert state_cookie["next"] == "https://data.niaid.nih.gov/account"
+    assert cookie_kwargs["httponly"] is True
+    assert cookie_kwargs["samesite"] == "None"
+
+    redirect = urlsplit(redirects[0])
+    query = parse_qs(redirect.query)
+    assert redirect.scheme == "https"
+    assert redirect.netloc == "accounts.google.com"
+    assert redirect.path == "/o/oauth2/v2/auth"
+    assert query["client_id"] == ["google-client-id"]
+    assert query["redirect_uri"] == [
+        "https://api.data.niaid.nih.gov/login/google"
+    ]
+    assert query["response_type"] == ["code"]
+    assert query["scope"] == ["openid profile email"]
+    assert query["state"] == [state_cookie["state"]]
+
+
+def test_google_login_redirects_when_state_validation_fails():
+    handler, redirects, cleared, _secure_cookies = _oidc_handler(
+        handlers.GoogleLoginHandler,
+        state_cookie={
+            "state": "expected-state",
+            "next": "https://data.niaid.nih.gov/account",
+        },
+    )
+    handler._test_args["code"] = "oauth-code"
+    handler._test_args["state"] = "returned-state"
+
+    async def openid_get_oauth2_token(**_kwargs):
+        raise AssertionError("Token lookup should not run")
+
+    handler.openid_get_oauth2_token = openid_get_oauth2_token
+
+    asyncio.run(handlers.GoogleLoginHandler.get(handler))
+
+    assert cleared == [
+        (("oauth_state_google",), {"domain": None, "path": "/"}),
+        (("user",), {"domain": None, "path": "/"}),
+    ]
+    assert redirects == [
+        "https://data.niaid.nih.gov/account?login_error=google_login_failed"
+    ]
+
+
+def test_google_login_sets_cookie_from_userinfo_response():
+    handler, redirects, cleared, secure_cookies = _oidc_handler(
+        handlers.GoogleLoginHandler,
+        state_cookie={
+            "state": "expected-state",
+            "next": "https://data.niaid.nih.gov/account",
+        },
+    )
+    ensured = []
+    handler._test_args["code"] = "oauth-code"
+    handler._test_args["state"] = "expected-state"
+
+    async def openid_get_oauth2_token(**_kwargs):
+        return {"access_token": "access-token"}
+
+    async def openid_get_authenticated_user(_token):
+        return {
+            "sub": "google-user-id",
+            "name": "Alice Example",
+            "email": "alice@example.org",
+            "email_verified": True,
+            "picture": "https://example.org/alice.png",
+        }
+
+    async def ensure_user_profile(user):
+        ensured.append(user)
+
+    handler.openid_get_oauth2_token = openid_get_oauth2_token
+    handler.openid_get_authenticated_user = openid_get_authenticated_user
+    handler._ensure_user_profile = ensure_user_profile
+
+    asyncio.run(handlers.GoogleLoginHandler.get(handler))
+
+    assert cleared == [(("oauth_state_google",), {"domain": None, "path": "/"})]
+    assert redirects == ["https://data.niaid.nih.gov/account"]
+    cookie_args, cookie_kwargs = secure_cookies[0]
+    assert cookie_args[0] == "user"
+    assert cookie_kwargs["httponly"] is True
+    payload = json.loads(cookie_args[1])
+    assert payload == {
+        "username": "google-user-id",
+        "oauth_provider": "Google",
+        "name": "Alice Example",
+        "avatar_url": "https://example.org/alice.png",
+        "email": "alice@example.org",
+        "emails": [
+            {
+                "email": "alice@example.org",
+                "primary": True,
+                "verified": True,
+            }
+        ],
+    }
+    assert ensured == [payload]
+
+
+def test_google_format_user_record_requires_stable_subject():
+    assert (
+        handlers.GoogleLoginHandler._format_user_record({"email": "a@b.test"})
+        is None
+    )
+
+
+def test_microsoft_format_user_record_saves_available_profile_fields():
+    formatted = handlers.MicrosoftLoginHandler._format_user_record(
+        {
+            "sub": "microsoft-user-id",
+            "name": "Alice Example",
+            "email": "alice@example.org",
+            "picture": "https://graph.microsoft.com/v1.0/me/photo/$value",
+        }
+    )
+
+    payload = json.loads(formatted)
+
+    assert payload == {
+        "username": "microsoft-user-id",
+        "oauth_provider": "Microsoft",
+        "name": "Alice Example",
+        "avatar_url": "https://graph.microsoft.com/v1.0/me/photo/$value",
+        "email": "alice@example.org",
+        "emails": [
+            {
+                "email": "alice@example.org",
+                "primary": True,
+            }
+        ],
+    }
+
+
+def test_microsoft_login_uses_configured_tenant_in_provider_urls():
+    handler, _redirects, _cleared, _secure_cookies = _oidc_handler(
+        handlers.MicrosoftLoginHandler
+    )
+
+    assert handler._authorize_url() == (
+        "https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize"
+    )
+    assert handler._token_url() == (
+        "https://login.microsoftonline.com/organizations/oauth2/v2.0/token"
+    )
 
 
 def test_orcid_format_user_record_saves_available_emails():
