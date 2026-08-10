@@ -259,6 +259,59 @@ def test_orcid_format_user_record_saves_available_emails():
     ]
 
 
+def test_orcid_format_user_record_accepts_null_family_name():
+    formatted = handlers.ORCIDLoginHandler._format_user_record(
+        {
+            "orcid-identifier": {"path": "0000-0001-2345-6789"},
+            "person": {
+                "name": {
+                    "given-names": {"value": "Alice"},
+                    "family-name": None,
+                },
+                "emails": None,
+            },
+            "activities-summary": None,
+        }
+    )
+
+    assert json.loads(formatted) == {
+        "username": "0000-0001-2345-6789",
+        "oauth_provider": "ORCID",
+        "name": "Alice",
+    }
+
+
+def test_orcid_format_user_record_accepts_null_optional_sections():
+    records = [
+        {
+            "orcid-identifier": {"path": "0000-0001-2345-6789"},
+            "person": None,
+            "activities-summary": {"employments": None},
+        },
+        {
+            "orcid-identifier": {"path": "0000-0001-2345-6789"},
+            "person": {"name": None},
+            "activities-summary": {
+                "employments": {
+                    "employment-summary": [{"organization": None}],
+                }
+            },
+        },
+        {
+            "orcid-identifier": {"path": "0000-0001-2345-6789"},
+            "person": {
+                "name": {"given-names": None, "family-name": None},
+            },
+        },
+    ]
+
+    for record in records:
+        assert json.loads(handlers.ORCIDLoginHandler._format_user_record(record)) == {
+            "username": "0000-0001-2345-6789",
+            "oauth_provider": "ORCID",
+        }
+
+
 def test_ensure_user_profile_refreshes_available_oauth_identity_fields():
     handler = handlers.BaseLoginHandler.__new__(handlers.BaseLoginHandler)
     client = _AsyncClient(
