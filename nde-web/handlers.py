@@ -685,32 +685,31 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
 
     @staticmethod
     def _format_user_record(user):
-        identifier = user.get("orcid-identifier", {}).get("path")
+        identifier = (user.get("orcid-identifier") or {}).get("path")
         if not identifier:
             return None
         payload = {
             "username": identifier,
             "oauth_provider": "ORCID",
         }
-        person = user.get("person", {})
-        given = person.get("name", {}).get("given-names", {}).get("value")
-        family = person.get("name", {}).get("family-name", {}).get("value")
+        person = user.get("person") or {}
+        name = person.get("name") or {}
+        given = (name.get("given-names") or {}).get("value")
+        family = (name.get("family-name") or {}).get("value")
         if given:
             payload["name"] = given if not family else f"{given} {family}"
-        emails = person.get("emails", {}).get("email", [])
+        emails = (person.get("emails") or {}).get("email") or []
         email_records = _format_email_records(emails)
         email = _primary_email(email_records)
         if email:
             payload["email"] = email
         if email_records:
             payload["emails"] = email_records
-        employment = (
-            user.get("activities-summary", {})
-            .get("employments", {})
-            .get("employment-summary", [])
-        )
+        activities = user.get("activities-summary") or {}
+        employments = activities.get("employments") or {}
+        employment = employments.get("employment-summary") or []
         if employment:
-            org = employment[0].get("organization", {})
+            org = (employment[0] or {}).get("organization") or {}
             payload["organization"] = org.get("name")
         return json.dumps({k: v for k, v in payload.items() if v})
 
