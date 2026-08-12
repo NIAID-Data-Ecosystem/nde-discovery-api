@@ -428,6 +428,100 @@ def test_microsoft_format_user_record_saves_available_profile_fields():
     }
 
 
+def test_microsoft_format_user_record_uses_email_when_name_is_missing():
+    formatted = handlers.MicrosoftLoginHandler._format_user_record(
+        {
+            "sub": "opaque-microsoft-subject",
+            "email": "alice@example.org",
+        }
+    )
+
+    payload = json.loads(formatted)
+
+    assert payload["username"] == "opaque-microsoft-subject"
+    assert payload["name"] == "alice@example.org"
+
+
+def test_microsoft_login_requests_user_read_scope():
+    handler, redirects, _cleared, _secure_cookies = _oidc_handler(
+        handlers.MicrosoftLoginHandler
+    )
+
+    asyncio.run(handlers.MicrosoftLoginHandler.get(handler))
+
+    query = parse_qs(urlsplit(redirects[0]).query)
+    assert query["scope"] == ["openid profile email User.Read"]
+
+
+def test_microsoft_login_gets_display_name_from_graph_profile(monkeypatch):
+    handler, _redirects, _cleared, _secure_cookies = _oidc_handler(
+        handlers.MicrosoftLoginHandler
+    )
+
+    async def get_userinfo(_handler, access_token):
+        assert access_token == "access-token"
+        return {
+            "sub": "microsoft-user-id",
+            "email": "alice@example.org",
+        }
+
+    async def get_profile(_access_token):
+        return {
+            "displayName": "Alice Example",
+            "mail": "alice@example.org",
+        }
+
+    monkeypatch.setattr(
+        handlers.OpenIDConnectLoginHandler,
+        "openid_get_authenticated_user",
+        get_userinfo,
+    )
+    handler._microsoft_get_profile = get_profile
+
+    user = asyncio.run(
+        handlers.MicrosoftLoginHandler.openid_get_authenticated_user(
+            handler,
+            "access-token",
+        )
+    )
+
+    assert user["name"] == "Alice Example"
+
+
+def test_microsoft_login_keeps_userinfo_when_graph_profile_fails(monkeypatch):
+    handler, _redirects, _cleared, _secure_cookies = _oidc_handler(
+        handlers.MicrosoftLoginHandler
+    )
+
+    async def get_userinfo(_handler, _access_token):
+        return {
+            "sub": "microsoft-user-id",
+            "email": "alice@example.org",
+        }
+
+    async def get_profile(_access_token):
+        raise HTTPClientError(503, "Service Unavailable")
+
+    monkeypatch.setattr(
+        handlers.OpenIDConnectLoginHandler,
+        "openid_get_authenticated_user",
+        get_userinfo,
+    )
+    handler._microsoft_get_profile = get_profile
+
+    user = asyncio.run(
+        handlers.MicrosoftLoginHandler.openid_get_authenticated_user(
+            handler,
+            "access-token",
+        )
+    )
+
+    assert user == {
+        "sub": "microsoft-user-id",
+        "email": "alice@example.org",
+    }
+
+
 def test_microsoft_login_uses_configured_tenant_in_provider_urls():
     handler, _redirects, _cleared, _secure_cookies = _oidc_handler(
         handlers.MicrosoftLoginHandler

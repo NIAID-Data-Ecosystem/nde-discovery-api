@@ -759,6 +759,8 @@ class MicrosoftLoginHandler(OpenIDConnectLoginHandler):
     """Initiate or complete the Microsoft OpenID Connect login handshake."""
 
     USERINFO_URL = "https://graph.microsoft.com/oidc/userinfo"
+    PROFILE_URL = "https://graph.microsoft.com/v1.0/me"
+    SCOPES = ["openid", "profile", "email", "User.Read"]
     PROVIDER_NAME = "Microsoft"
     PROVIDER_KEY = "microsoft"
     CLIENT_ID_CONFIG = "MICROSOFT_CLIENT_ID"
@@ -776,6 +778,49 @@ class MicrosoftLoginHandler(OpenIDConnectLoginHandler):
         tenant = quote(str(self._tenant()), safe=".-")
         return f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
 
+    async def _microsoft_get_profile(self, access_token):
+        http = AsyncHTTPClient()
+        headers = HTTPHeaders()
+        headers.add("Accept", "application/json")
+        headers.add("Authorization", f"Bearer {access_token}")
+        response = await http.fetch(
+            self.PROFILE_URL,
+            method="GET",
+            headers=headers,
+        )
+        return json.loads(response.body)
+
+    async def openid_get_authenticated_user(self, access_token):
+        user = await super().openid_get_authenticated_user(access_token)
+        if user.get("name"):
+            return user
+
+        try:
+            profile = await self._microsoft_get_profile(access_token)
+        except (HTTPClientError, ValueError):
+            # A missing display name should not prevent an otherwise valid login.
+            logging.warning(
+                "Could not retrieve the Microsoft Graph user profile",
+                exc_info=True,
+            )
+            return user
+
+        display_name = profile.get("displayName")
+        if not display_name:
+            display_name = " ".join(
+                value
+                for value in (profile.get("givenName"), profile.get("surname"))
+                if value
+            )
+        if display_name:
+            user["name"] = display_name
+
+        if not user.get("email"):
+            email = profile.get("mail") or profile.get("userPrincipalName")
+            if email:
+                user["email"] = email
+        return user
+
     @staticmethod
     def _format_user_record(user):
         identifier = user.get("sub")
@@ -785,12 +830,16 @@ class MicrosoftLoginHandler(OpenIDConnectLoginHandler):
             "username": identifier,
             "oauth_provider": "Microsoft",
         }
-        if user.get("name"):
-            payload["name"] = user["name"]
+        email = user.get("email")
+        # The OIDC endpoint can omit name for personal Microsoft accounts.
+        # Keep the opaque subject as the stable identity, but never use it as
+        # the user-facing label when an email address is available.
+        name = user.get("name") or email
+        if name:
+            payload["name"] = name
         if user.get("picture"):
             payload["avatar_url"] = user["picture"]
 
-        email = user.get("email")
         if email:
             email_records = _format_email_records(
                 [{"email": email, "primary": True}]
