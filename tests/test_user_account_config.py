@@ -19,6 +19,8 @@ def test_user_account_routes_are_registered():
     assert "/user_info" in strings
     assert "/login/github" in strings
     assert "/login/orcid" in strings
+    assert "/login/google" in strings
+    assert "/login/microsoft" in strings
     assert "/xsrf_token" in strings
     assert "/user/data" in strings
     assert "/user/data/favorites/searches" in strings

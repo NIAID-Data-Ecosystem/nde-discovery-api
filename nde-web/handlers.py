@@ -1,13 +1,14 @@
 import json
 import logging
 import os
-from urllib.parse import urlsplit
+import secrets
+from urllib.parse import quote, urlencode, urlsplit
 
 import elasticsearch
 from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.auth.oauth_mixins import GithubOAuth2Mixin, OrcidOAuth2Mixin
 from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
-from tornado.httpclient import HTTPClientError
+from tornado.httpclient import AsyncHTTPClient, HTTPClientError
 from tornado.httputil import HTTPHeaders, url_concat
 from tornado.web import HTTPError, RequestHandler
 from user_data import (
@@ -257,6 +258,206 @@ class BaseLoginHandler(BaseAPIHandler):
                     logging.warning(
                         "Could not update user profile %s", doc_id, exc_info=True
                     )
+
+
+class OpenIDConnectLoginHandler(BaseLoginHandler):
+    """OAuth2 authorization-code login flow for OpenID Connect providers."""
+
+    AUTHORIZE_URL = None
+    TOKEN_URL = None
+    USERINFO_URL = None
+    SCOPES = ["openid", "profile", "email"]
+    PROVIDER_NAME = None
+    PROVIDER_KEY = None
+    CLIENT_ID_CONFIG = None
+    CLIENT_SECRET_CONFIG = None
+    CALLBACK_PATH = None
+    STATE_COOKIE_MAX_AGE_DAYS = 1
+
+    def _callback_url(self):
+        web_host = self.biothings.config.WEB_HOST.rstrip("/")
+        return web_host + self.CALLBACK_PATH
+
+    def _authorize_url(self):
+        return self.AUTHORIZE_URL
+
+    def _token_url(self):
+        return self.TOKEN_URL
+
+    def _userinfo_url(self):
+        return self.USERINFO_URL
+
+    def _state_cookie_name(self):
+        return f"oauth_state_{self.PROVIDER_KEY}"
+
+    def _set_oauth_state_cookie(self, state, next_url):
+        cookie_domain = getattr(self.biothings.config, "COOKIE_DOMAIN", None)
+        self.set_secure_cookie(
+            self._state_cookie_name(),
+            json.dumps({"state": state, "next": next_url}),
+            domain=cookie_domain,
+            path="/",
+            secure=True,
+            httponly=True,
+            samesite="None",
+        )
+
+    def _pop_oauth_state_cookie(self):
+        cookie_domain = getattr(self.biothings.config, "COOKIE_DOMAIN", None)
+        raw = self.get_secure_cookie(
+            self._state_cookie_name(),
+            max_age_days=self.STATE_COOKIE_MAX_AGE_DAYS,
+        )
+        self.clear_cookie(
+            self._state_cookie_name(),
+            domain=cookie_domain,
+            path="/",
+        )
+        if not raw:
+            return None
+        try:
+            value = json.loads(raw.decode())
+        except (AttributeError, TypeError, json.JSONDecodeError):
+            return None
+        return value if isinstance(value, dict) else None
+
+    def _state_next_url(self, state_cookie):
+        next_url = (state_cookie or {}).get("next")
+        return next_url if isinstance(next_url, str) and next_url else "/"
+
+    def _redirect_with_login_error(self, error_code, next_url="/"):
+        clear_user_session_cookie(self)
+        self.redirect(url_concat(next_url, {"login_error": error_code}))
+
+    def _redirect_to_provider(self, client_id):
+        state = secrets.token_urlsafe(32)
+        self._set_oauth_state_cookie(state, safe_next_url(self, "/"))
+        self.redirect(
+            url_concat(
+                self._authorize_url(),
+                {
+                    "client_id": client_id,
+                    "redirect_uri": self._callback_url(),
+                    "response_type": "code",
+                    "scope": " ".join(self.SCOPES),
+                    "state": state,
+                },
+            )
+        )
+
+    async def get(self):
+        client_id = getattr(self.biothings.config, self.CLIENT_ID_CONFIG)
+        client_secret = getattr(self.biothings.config, self.CLIENT_SECRET_CONFIG)
+        error_code = f"{self.PROVIDER_KEY}_login_failed"
+        unavailable_error_code = f"{self.PROVIDER_KEY}_unavailable"
+        code = self.get_argument("code", None)
+
+        if self.get_argument("error", None):
+            state_cookie = self._pop_oauth_state_cookie()
+            self._redirect_with_login_error(
+                error_code,
+                self._state_next_url(state_cookie),
+            )
+            return
+
+        if not code:
+            logging.info("Redirecting to %s for login", self.PROVIDER_NAME)
+            self._redirect_to_provider(client_id)
+            return
+
+        state_cookie = self._pop_oauth_state_cookie()
+        next_url = self._state_next_url(state_cookie)
+        returned_state = self.get_argument("state", None)
+        if not state_cookie or returned_state != state_cookie.get("state"):
+            logging.warning("%s OAuth state validation failed", self.PROVIDER_NAME)
+            self._redirect_with_login_error(error_code, next_url)
+            return
+
+        logging.info("%s returned code, exchanging for token", self.PROVIDER_NAME)
+        try:
+            token = await self.openid_get_oauth2_token(
+                client_id=client_id,
+                client_secret=client_secret,
+                code=code,
+                redirect_uri=self._callback_url(),
+            )
+            access_token = (
+                token.get("access_token") if isinstance(token, dict) else None
+            )
+            if not access_token:
+                logging.warning(
+                    "%s OAuth token response did not include an access token: %s",
+                    self.PROVIDER_NAME,
+                    token.get("error")
+                    if isinstance(token, dict)
+                    else type(token).__name__,
+                )
+                self._redirect_with_login_error(error_code, next_url)
+                return
+            user = await self.openid_get_authenticated_user(access_token)
+        except (HTTPClientError, ValueError) as exc:
+            status = getattr(exc, "code", None)
+            provider_error = (
+                unavailable_error_code if status and status >= 500 else error_code
+            )
+            logging.warning(
+                "%s OAuth request failed with %s; redirecting with %s",
+                self.PROVIDER_NAME,
+                status or type(exc).__name__,
+                provider_error,
+                exc_info=True,
+            )
+            self._redirect_with_login_error(provider_error, next_url)
+            return
+
+        formatted = self._format_user_record(user)
+        logging.info("%s auth response: %s", self.PROVIDER_NAME, formatted)
+        if formatted:
+            set_user_session_cookie(self, formatted)
+            await self._ensure_user_profile(json.loads(formatted))
+        else:
+            clear_user_session_cookie(self)
+        self.redirect(next_url)
+
+    async def openid_get_oauth2_token(
+        self,
+        *,
+        client_id,
+        client_secret,
+        code,
+        redirect_uri,
+    ):
+        http = AsyncHTTPClient()
+        headers = HTTPHeaders()
+        headers.add("Accept", "application/json")
+        headers.add("Content-Type", "application/x-www-form-urlencoded")
+        response = await http.fetch(
+            self._token_url(),
+            method="POST",
+            headers=headers,
+            body=urlencode(
+                {
+                    "client_id": client_id,
+                    "client_secret": client_secret,
+                    "code": code,
+                    "grant_type": "authorization_code",
+                    "redirect_uri": redirect_uri,
+                }
+            ),
+        )
+        return json.loads(response.body)
+
+    async def openid_get_authenticated_user(self, access_token):
+        http = AsyncHTTPClient()
+        headers = HTTPHeaders()
+        headers.add("Accept", "application/json")
+        headers.add("Authorization", f"Bearer {access_token}")
+        response = await http.fetch(
+            self._userinfo_url(),
+            method="GET",
+            headers=headers,
+        )
+        return json.loads(response.body)
 
 
 class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
@@ -514,6 +715,141 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
             org = (employment[0] or {}).get("organization") or {}
             payload["organization"] = org.get("name")
         return json.dumps({k: v for k, v in payload.items() if v})
+
+
+class GoogleLoginHandler(OpenIDConnectLoginHandler):
+    """Initiate or complete the Google OpenID Connect login handshake."""
+
+    AUTHORIZE_URL = "https://accounts.google.com/o/oauth2/v2/auth"
+    TOKEN_URL = "https://oauth2.googleapis.com/token"
+    USERINFO_URL = "https://openidconnect.googleapis.com/v1/userinfo"
+    PROVIDER_NAME = "Google"
+    PROVIDER_KEY = "google"
+    CLIENT_ID_CONFIG = "GOOGLE_CLIENT_ID"
+    CLIENT_SECRET_CONFIG = "GOOGLE_CLIENT_SECRET"
+    CALLBACK_PATH = "/login/google"
+
+    @staticmethod
+    def _format_user_record(user):
+        identifier = user.get("sub")
+        if not identifier:
+            return None
+        payload = {
+            "username": identifier,
+            "oauth_provider": "Google",
+        }
+        if user.get("name"):
+            payload["name"] = user["name"]
+        if user.get("picture"):
+            payload["avatar_url"] = user["picture"]
+
+        email_records = []
+        email = user.get("email")
+        if email:
+            email_record = {
+                "email": email,
+                "primary": True,
+            }
+            if user.get("email_verified") is not None:
+                email_record["verified"] = user["email_verified"]
+            email_records = _format_email_records([email_record])
+            payload["email"] = email
+            payload["emails"] = email_records
+        return json.dumps(payload)
+
+
+class MicrosoftLoginHandler(OpenIDConnectLoginHandler):
+    """Initiate or complete the Microsoft OpenID Connect login handshake."""
+
+    USERINFO_URL = "https://graph.microsoft.com/oidc/userinfo"
+    PROFILE_URL = "https://graph.microsoft.com/v1.0/me"
+    SCOPES = ["openid", "profile", "email", "User.Read"]
+    PROVIDER_NAME = "Microsoft"
+    PROVIDER_KEY = "microsoft"
+    CLIENT_ID_CONFIG = "MICROSOFT_CLIENT_ID"
+    CLIENT_SECRET_CONFIG = "MICROSOFT_CLIENT_SECRET"
+    CALLBACK_PATH = "/login/microsoft"
+
+    def _tenant(self):
+        return getattr(self.biothings.config, "MICROSOFT_TENANT", "common")
+
+    def _authorize_url(self):
+        tenant = quote(str(self._tenant()), safe=".-")
+        return f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize"
+
+    def _token_url(self):
+        tenant = quote(str(self._tenant()), safe=".-")
+        return f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
+
+    async def _microsoft_get_profile(self, access_token):
+        http = AsyncHTTPClient()
+        headers = HTTPHeaders()
+        headers.add("Accept", "application/json")
+        headers.add("Authorization", f"Bearer {access_token}")
+        response = await http.fetch(
+            self.PROFILE_URL,
+            method="GET",
+            headers=headers,
+        )
+        return json.loads(response.body)
+
+    async def openid_get_authenticated_user(self, access_token):
+        user = await super().openid_get_authenticated_user(access_token)
+        if user.get("name"):
+            return user
+
+        try:
+            profile = await self._microsoft_get_profile(access_token)
+        except (HTTPClientError, ValueError):
+            # A missing display name should not prevent an otherwise valid login.
+            logging.warning(
+                "Could not retrieve the Microsoft Graph user profile",
+                exc_info=True,
+            )
+            return user
+
+        display_name = profile.get("displayName")
+        if not display_name:
+            display_name = " ".join(
+                value
+                for value in (profile.get("givenName"), profile.get("surname"))
+                if value
+            )
+        if display_name:
+            user["name"] = display_name
+
+        if not user.get("email"):
+            email = profile.get("mail") or profile.get("userPrincipalName")
+            if email:
+                user["email"] = email
+        return user
+
+    @staticmethod
+    def _format_user_record(user):
+        identifier = user.get("sub")
+        if not identifier:
+            return None
+        payload = {
+            "username": identifier,
+            "oauth_provider": "Microsoft",
+        }
+        email = user.get("email")
+        # The OIDC endpoint can omit name for personal Microsoft accounts.
+        # Keep the opaque subject as the stable identity, but never use it as
+        # the user-facing label when an email address is available.
+        name = user.get("name") or email
+        if name:
+            payload["name"] = name
+        if user.get("picture"):
+            payload["avatar_url"] = user["picture"]
+
+        if email:
+            email_records = _format_email_records(
+                [{"email": email, "primary": True}]
+            )
+            payload["email"] = email
+            payload["emails"] = email_records
+        return json.dumps(payload)
 
 
 class WebAppHandler(RequestHandler):
