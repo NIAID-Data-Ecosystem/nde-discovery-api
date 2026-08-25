@@ -127,6 +127,7 @@ _HEURISTICS_DIR = os.path.join(_REPO_METADATA_DIR, "heuristics")
 _PARENT_COLLECTION_SOURCE_KEYS = {
     "veupathdb": "veupath_collections",
 }
+_INTERNAL_SOURCE_INFO_FIELDS = {"_mongoCollection", "_mongoFilter"}
 _source_info_cache = None
 
 
@@ -888,8 +889,13 @@ class NDESourceHandler(MetadataSourceHandler):
     def extras(self, _meta):
         source_info = _load_source_info()
         for source, data in source_info.items():
+            public_data = {
+                field: value
+                for field, value in data.items()
+                if field not in _INTERNAL_SOURCE_INFO_FIELDS
+            }
             if source in _meta["src"]:
-                _meta["src"][source]["sourceInfo"] = source_info[source]
+                _meta["src"][source]["sourceInfo"] = public_data
                 _meta["src"][source]["sourceInfo"]["metadata_completeness"] = (
                     self.calculate_metadata_compatibility_average(source)
                 )
@@ -900,7 +906,7 @@ class NDESourceHandler(MetadataSourceHandler):
                 parent_collection.get("id")
             )
             if parent_source in _meta["src"]:
-                _meta["src"][source] = {"sourceInfo": source_info[source]}
+                _meta["src"][source] = {"sourceInfo": public_data}
                 parent = _meta["src"][parent_source]
                 if "version" in parent:
                     _meta["src"][source]["version"] = parent["version"]
