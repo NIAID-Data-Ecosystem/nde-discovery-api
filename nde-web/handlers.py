@@ -117,6 +117,7 @@ _REPO_METADATA_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "repo_metadata"
 )
 _HEURISTICS_DIR = os.path.join(_REPO_METADATA_DIR, "heuristics")
+_INTERNAL_SOURCE_INFO_FIELDS = {"_mongoCollection", "_mongoFilter"}
 _source_info_cache = None
 
 _SOURCE_STAT_COUNT_OVERRIDES = {
@@ -909,13 +910,18 @@ class NDESourceHandler(MetadataSourceHandler):
     async def extras(self, _meta):
         source_info = _load_source_info()
         for source, data in source_info.items():
+            public_data = {
+                field: value
+                for field, value in data.items()
+                if field not in _INTERNAL_SOURCE_INFO_FIELDS
+            }
             if source in _meta["src"]:
-                _meta["src"][source]["sourceInfo"] = source_info[source]
+                _meta["src"][source]["sourceInfo"] = public_data
                 _meta["src"][source]["sourceInfo"]["metadata_completeness"] = (
                     self.calculate_metadata_compatibility_average(source)
                 )
             elif "parentCollection" in data:
-                _meta["src"][source] = {"sourceInfo": source_info[source]}
+                _meta["src"][source] = {"sourceInfo": public_data}
                 # Subset sources share another source's Mongo collection and
                 # ES documents (e.g. plasmodb -> veupath_collections, the
                 # DSMZ/BacDive culture collections -> bacdive). Borrow the
