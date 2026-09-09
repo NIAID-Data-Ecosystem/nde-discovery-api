@@ -18,7 +18,6 @@ _SUPPORTED_TYPES = ["Dataset", "ResourceCatalog"]
 _BIOSAMPLE_CATALOG_SAMPLE_SOURCES = ["BEI Resources"]
 _DATA_COLLECTION_SOURCES = [
     "Database of Antimicrobial Activity and Structure of Peptides",
-    "Bacterial and Viral Bioinformatics Resource Center",
     "Electron Microscopy Data Bank",
     "Clinical Genomics Resource (ClinGen)",
 ]
