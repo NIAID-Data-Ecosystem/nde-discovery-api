@@ -16,6 +16,12 @@ DEFAULT_USER_INDEX = "nde_user_profiles"
 _BROWSE_ALL_QUERIES = frozenset({"", "__all__", "__any__", "*", "*:*"})
 _SUPPORTED_TYPES = ["Dataset", "ResourceCatalog"]
 _BIOSAMPLE_CATALOG_SAMPLE_SOURCES = ["BEI Resources"]
+_DATA_COLLECTION_SOURCES = [
+    "Database of Antimicrobial Activity and Structure of Peptides",
+    "Bacterial and Viral Bioinformatics Resource Center",
+    "Electron Microscopy Data Bank",
+    "Clinical Genomics Resource (ClinGen)",
+]
 _DEFAULT_SAMPLE_VISIBILITY_FILTER = (
     'NOT(@type:Sample AND NOT additionalType:"BioSample")'
 )
@@ -81,6 +87,14 @@ def _build_type_filter() -> dict:
                 "must": [
                     {"term": {"@type": "ComputationalTool"}},
                     {"term": {"includedInDataCatalog.name": "bio.tools"}},
+                ]
+            }
+        },
+        {
+            "bool": {
+                "must": [
+                    {"term": {"@type": "DataCollection"}},
+                    {"terms": {"includedInDataCatalog.name": _DATA_COLLECTION_SOURCES}},
                 ]
             }
         },

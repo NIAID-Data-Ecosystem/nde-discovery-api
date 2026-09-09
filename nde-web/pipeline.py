@@ -13,6 +13,12 @@ from elasticsearch.dsl import A, Q, Search
 
 SUPPORTED_PUBLIC_TYPES = ["Dataset", "ResourceCatalog"]
 BIOSAMPLE_CATALOG_SAMPLE_SOURCES = ["BEI Resources"]
+DATA_COLLECTION_SOURCES = [
+    "Database of Antimicrobial Activity and Structure of Peptides",
+    "Bacterial and Viral Bioinformatics Resource Center",
+    "Electron Microscopy Data Bank",
+    "Clinical Genomics Resource (ClinGen)",
+]
 
 
 def _public_type_filter_should_clauses():
@@ -31,6 +37,14 @@ def _public_type_filter_should_clauses():
                 "must": [
                     {"term": {"@type": "Sample"}},
                     {"term": {"additionalType": "ExperimentalRunSample"}},
+                ]
+            }
+        },
+        {
+            "bool": {
+                "must": [
+                    {"term": {"@type": "DataCollection"}},
+                    {"terms": {"includedInDataCatalog.name": DATA_COLLECTION_SOURCES}},
                 ]
             }
         },
@@ -647,9 +661,10 @@ class NDEQueryBuilder(ESQueryBuilder):
         # include only documents from the allowed prod sources
         search = search.query("bool", must=[Q("terms", **{"includedInDataCatalog.name": prod_sources})])
 
-        # We only want supported public types and explicitly approved sample
-        # slices. Do not allow bare @type:Sample, since that would expose large
-        # staging-style sample collections with different additionalType values.
+        # We only want supported public types and explicitly approved Sample
+        # and DataCollection slices. Do not allow bare @type:Sample, since that
+        # would expose large staging-style sample collections with different
+        # additionalType values.
         search = search.filter("bool", **_build_public_type_filter()["bool"])
 
         # Apply the new metadata-based scoring by default:
