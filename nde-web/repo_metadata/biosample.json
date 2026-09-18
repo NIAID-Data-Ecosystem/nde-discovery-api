@@ -1,15 +1,23 @@
 {
   "_id": "biosample",
-  "name": "BioSample",
-  "identifier": "BioSample",
+  "name": "NCBI BioSample",
+  "alternateName": [
+    "National Center for Biotechnology Information BioSample"
+  ],
+  "identifier": "https://www.ncbi.nlm.nih.gov/biosample/ | ncbi_biosample",
   "url": "https://www.ncbi.nlm.nih.gov/biosample/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_639d05db93d24470",
   "abstract": "NCBI BioSample is a NIH supported generalist repository that includes other data.",
-  "description": "NCBI BioSample is a NIH supported generalist repository that includes other data.",
+  "description": "The BioSample database contains descriptions of biological source materials used in experimental assays.",
+  "collectionType": "Sample Repository",
   "type": "Sample Repository",
   "genre": [
     "Generalist"
   ],
-  "conditionsOfAccess": "Open",
+  "conditionsOfAccess": "Varied",
+  "license": "https://www.ncbi.nlm.nih.gov/home/about/policies/",
+  "isAccessibleForFree": true,
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Manual",
   "schema": {}
 }

@@ -1,11 +1,17 @@
 {
   "_id": "dryad",
-  "name": "Dryad Digital Repository",
+  "name": "Dryad Digital Repository (Dryad)",
   "alternateName": [
-    "Dryad"
+    "Dryad",
+    "Dryad Digital Repository",
+    "Data Dryad",
+    "Dryad Digital Repository",
+    "DRIADE",
+    "The Digital Repository of Information and Data for Evolution"
   ],
-  "identifier": "Dryad Digital Repository",
-  "url": "https://datadryad.org",
+  "identifier": "Dryad Digital Repository | dryad",
+  "url": "https://datadryad.org/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_e3d5f43f485aa27d",
   "abstract": "Dryad Digital Repository is a GREI repository that includes most data types and domains.",
   "description": "Dryad is an open source, community driven project that takes a unique approach to data publication and digital preservation. Dryad focuses on search, presentation, and discovery and delegates the responsibility for the data preservation function to the underlying repository with which it is integrated. Dryad aims to allow researchers to validate published findings, explore new analysis methodologies, re-purpose data for research questions unanticipated by the original authors, and perform synthetic studies such as formal meta-analyses.",
   "collectionType": "Dataset Repository",
@@ -15,6 +21,7 @@
   "conditionsOfAccess": "Open",
   "isAccessibleForFree": true,
   "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Monthly",
   "schema": {
     "name": "name",

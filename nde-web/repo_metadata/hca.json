@@ -1,11 +1,13 @@
 {
   "_id": "hca",
-  "name": "Human Cell Atlas",
+  "name": "Human Cell Atlas (HCA)",
   "alternateName": [
-    "HCA"
+    "HCA",
+    "Human Cell Atlas"
   ],
-  "identifier": "Human Cell Atlas",
+  "identifier": "Human Cell Atlas | hca",
   "url": "https://www.humancellatlas.org/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_8b6d97b84ea3c610",
   "abstract": "The Human Cell Atlas is a repository that includes multimodal data of cells in the human body.",
   "description": "Thanks to new single cell genomics and spatial imaging technologies developed since the late 2000s and early 2010s, it is now possible to measure gene expression profiles in individual cells. These large scale data can be used with machine learning algorithms to decipher how the cells differ from and interact with their neighbors, and how they form and function in the tissue. This now allows scientists to identify and understand cell types in unprecedented detail, resolution and breadth. The Human Cell Atlas (HCA) is an international group of researchers using a combination of these new technologies to create cellular reference maps with the position, function and characteristics of every cell type in the human body.",
   "collectionType": "Dataset Repository",
@@ -15,6 +17,7 @@
   "conditionsOfAccess": "Varied",
   "isAccessibleForFree": true,
   "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Weekly",
   "schema": {
     "entryId": "url, _id",

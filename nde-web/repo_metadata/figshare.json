@@ -1,8 +1,9 @@
 {
   "_id": "figshare",
   "name": "Figshare",
-  "identifier": "Figshare",
+  "identifier": "Figshare | figshare",
   "url": "https://figshare.com/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_e35eeecb7cd1417c",
   "abstract": "Figshare is a NIH supported generalist repository that includes generalist data.",
   "description": "Figshare is a repository where users can make all of their research outputs available in a citable, shareable and discoverable manner.",
   "collectionType": "Dataset Repository",
@@ -12,6 +13,7 @@
   "conditionsOfAccess": "Unknown",
   "isAccessibleForFree": true,
   "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Manual",
   "schema": {
     "title": "name",

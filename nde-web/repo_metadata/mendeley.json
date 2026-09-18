@@ -1,8 +1,9 @@
 {
   "_id": "mendeley",
   "name": "Mendeley Data",
-  "identifier": "Mendeley",
+  "identifier": "Mendeley | mendeley",
   "url": "https://data.mendeley.com/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_25cec57160559aa5",
   "abstract": "Mendeley Data is a GREI repository that includes most data types and domains.",
   "description": "Mendeley Data, a product of Elsevier, is one of the newest entrants in the research data repository landscape; the platform was released in April 2016. Mendeley Data is a general-purpose repository, allowing researchers in any field to upload and publish research data. Mendeley Data also allows researchers to share unpublished data privately with research collaborators.",
   "collectionType": "Dataset Repository",
@@ -12,6 +13,7 @@
   "conditionsOfAccess": "Varied",
   "isAccessibleForFree": true,
   "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Weekly",
   "schema": {
     "id": "identifer",

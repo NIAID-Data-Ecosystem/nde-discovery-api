@@ -1,15 +1,29 @@
 {
   "_id": "biostudies",
   "name": "BioStudies",
-  "identifier": "BioStudies",
-  "url": "https://www.ebi.ac.uk/biostudies/",
-  "abstract": "BioStudies is a repository that includes life sciences data by organising links to data in other databases at EMBL-EBI or elsewhere.",
-  "description": "The mission of BioStudies is to provide access to all the data outputs of a life sciences study from a single place, by organising links to data in other databases at EMBL-EBI or elsewhere, as well as hosting data and metadata that do not fit anywhere else. The database accepts submissions via an online tool, or in a simple tab-delimited format. BioStudies provides rich mechanisms for defining and using metadata guidelines specific for a particular data source such as a project or a community, and organises datasets in collections.",
+  "alternateName": [
+    "BioStudies ArrayExpress",
+    "ArrayExpress",
+    "EBI-EMBL BioStudies"
+  ],
+  "identifier": "https://www.ebi.ac.uk/biostudies/arrayexpress | biostudies_arrayexpress",
+  "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_9e06d7276897ad79",
+  "abstract": "ArrayExpress is a EMBL-EBI supported generalist repository that includes genomic data.",
+  "description": "The functional genomics data collection (ArrayExpress), stores data from high-throughput functional genomics experiments, and provides data for reuse to the research community. In line with community guidelines, a study typically contains metadata such as detailed sample annotations, protocols, processed data and raw data. Raw sequence reads from high-throughput sequencing studies are brokered to the European Nucleotide Archive (ENA), and links are provided to download the sequence reads from ENA. Data can be submitted to the ArrayExpress collection through its dedicated submission tool, Annotare",
+  "collectionType": "Dataset Repository",
   "type": "Dataset Repository",
   "genre": [
     "Generalist"
   ],
-  "conditionsOfAccess": "Unknown",
+  "conditionsOfAccess": "Varied",
+  "license": "https://www.ebi.ac.uk/about/terms-of-use",
+  "inLanguage": "English",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "hasDownload": "All content",
+  "creativeWorkStatus": "Accepting Data",
+  "dateCreated": "2002-01-01",
   "schedule": "Manual",
   "schema": {
     "attachto": "url",

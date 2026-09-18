@@ -1,15 +1,27 @@
 {
   "_id": "node",
   "name": "National Omics Data Encyclopedia (NODE)",
-  "identifier": "National Omics Data Encyclopedia",
+  "alternateName": [
+    "National Omics Data Encyclopedia",
+    "NODE"
+  ],
+  "identifier": "https://www.biosino.org/node/ | node",
   "url": "https://www.biosino.org/node/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_6f5ff775f5bccef2",
   "abstract": "NODE is a Chinese Academy of Sciences supported generalist repository that includes multiomic data.",
   "description": "NODE (National Omics Data Encyclopedia) is a biological big data collection platform, including the experimental sample information collection, the file upload of the sequences, and the analysis, share and download of the results. NODE platform consists of six main modules: project, sample, experiment, run, data, and analysis. Project and Sample are independent of each other, but can be linked through Run. In this way, the metadata and sequence information can be integrated.",
+  "collectionType": "Dataset Repository",
   "type": "Dataset Repository",
   "genre": [
     "Generalist"
   ],
-  "conditionsOfAccess": "Open",
+  "conditionsOfAccess": "Varied",
+  "license": "https://creativecommons.org/licenses/by/3.0/cn/deed.en",
+  "inLanguage": "English| Chinese",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "hasDownload": "Partial content",
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Weekly",
   "schema": {
     "projectNo": "identifier",

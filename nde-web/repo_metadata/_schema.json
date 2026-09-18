@@ -139,7 +139,7 @@
     },
     "abstract": {
       "type": "string",
-      "description": "handlers.py parity floor - never overwritten by sync"
+      "description": "Refreshed from nonblank RepoMetaCuration values on staging"
     },
     "alternateName": {
       "type": "array",
@@ -180,7 +180,7 @@
         "Varied",
         "Unknown"
       ],
-      "description": "handlers.py parity floor - never overwritten by sync"
+      "description": "Refreshed from nonblank RepoMetaCuration values on staging"
     },
     "creativeWorkStatus": {
       "type": "string"
@@ -199,7 +199,7 @@
     },
     "description": {
       "type": "string",
-      "description": "handlers.py parity floor - never overwritten by sync"
+      "description": "Refreshed from nonblank RepoMetaCuration values on staging"
     },
     "genre": {
       "type": "array",
@@ -207,7 +207,7 @@
         "type": "string"
       },
       "minItems": 1,
-      "description": "Array of category labels; single-category sources still use a one-element list. The source TSV stores these as a semicolon-joined string ('IID; Omics; ...') and the sync script splits and trims them. | handlers.py parity floor - never overwritten by sync"
+      "description": "Array of category labels; single-category sources still use a one-element list. RepoMetaCuration stores these as a semicolon-joined string ('IID; Omics; ...'); staging sync splits, trims, and replaces the existing values when nonblank."
     },
     "hasAPI": {
       "type": "boolean"
@@ -223,7 +223,7 @@
     },
     "identifier": {
       "type": "string",
-      "description": "handlers.py parity floor - never overwritten by sync"
+      "description": "Refreshed from nonblank RepoMetaCuration values on staging; pipe-separated identifiers remain a string"
     },
     "inLanguage": {
       "type": "string"
@@ -248,7 +248,7 @@
     },
     "name": {
       "type": "string",
-      "description": "handlers.py parity floor - never overwritten by sync"
+      "description": "Refreshed from nonblank RepoMetaCuration values on staging"
     },
     "parentCollection": {
       "type": "object",
@@ -337,7 +337,7 @@
     "url": {
       "type": "string",
       "format": "uri",
-      "description": "handlers.py parity floor - never overwritten by sync"
+      "description": "Refreshed from nonblank RepoMetaCuration values on staging"
     },
     "usageInfo": {
       "oneOf": [

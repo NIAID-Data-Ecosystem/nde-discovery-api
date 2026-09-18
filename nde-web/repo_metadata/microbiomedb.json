@@ -1,8 +1,9 @@
 {
   "_id": "microbiomedb",
   "name": "MicrobiomeDB",
-  "identifier": "MicrobiomeDB",
-  "url": "https://microbiomedb.org/mbio/app",
+  "identifier": "MicrobiomeDB | microbiomedb",
+  "url": "https://microbiomedb.org/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_7f929242375e57cc",
   "abstract": "MicrobiomeDB is a NIAID supported repository that includes clinical microbiome data and analysis tools.",
   "description": "MicrobiomeDB was developed as a discovery tool that empowers researchers to fully leverage their experimental metadata to construct queries that interrogate microbiome datasets.",
   "collectionType": "Dataset Repository",
@@ -11,6 +12,7 @@
   ],
   "conditionsOfAccess": "Open",
   "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Weekly",
   "schema": {
     "displayName": "name",

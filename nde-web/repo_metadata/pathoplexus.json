@@ -1,14 +1,19 @@
 {
   "_id": "pathoplexus",
-  "name": "PathoPlexus",
-  "identifier": "https://pathoplexus.org/",
+  "name": "Pathoplexus",
+  "alternateName": [
+    "pathoplexus"
+  ],
+  "identifier": "https://pathoplexus.org/ | pathoplexus",
   "url": "https://pathoplexus.org/",
-  "sameAs": "https://data.niaid.nih.gov/resources?id=08a29e9afd2f58b6",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_08a29e9afd2f58b6",
   "abstract": "PathoPlexus is a donation supported IID repository that includes sequence data.",
   "description": "Pathoplexus is a new open-source database designed to enhance the sharing and analysis of human viral pathogen genomic data. Developed in response to the growing need for specialized viral databases, Pathoplexus aims to offer the features needed for the research community to share and explore datasets for viruses of public health importance. By leveraging new open-source software, Pathoplexus provides a robust and user-friendly platform for scientists and public health professionals.",
   "collectionType": "Data Repository",
   "genre": [
-    "IID"
+    "IID",
+    "Hemorrhagic Fever Viruses",
+    "Omics"
   ],
   "conditionsOfAccess": "Varied",
   "license": "https://pathoplexus.org/about/terms-of-use/data-use-terms",

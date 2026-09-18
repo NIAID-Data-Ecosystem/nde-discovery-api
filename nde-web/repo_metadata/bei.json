@@ -1,27 +1,31 @@
 {
   "_id": "bei",
-  "name": "BEI Resources",
+  "name": "Biological and Emerging Infections Research Resources (BEIResources)",
   "alternateName": [
     "Biological and Emerging Infections Research Resources Program",
     "NIH AIDS Reagent Program",
-    "NIH HIV Reagent Program"
+    "NIH HIV Reagent Program",
+    "Biological and Emerging Infections Research Resources"
   ],
-  "identifier": "BEI Resources",
-  "url": "https://www.beiresources.org/Home.aspx",
+  "identifier": "https://www.beiresources.org/ | beiresources",
+  "url": "https://www.beiresources.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_933c129858283201",
   "abstract": "BEIResources is a NIAID supported IID repository that includes reagent data.",
-  "description": "BEI Resources was established by the National Institute of Allergy and Infectious Diseases (NIAID) to provide reagents, tools and information for studying Category A, B, and C priority pathogens, emerging infectious disease agents, non-pathogenic microbes and other microbiological materials of relevance to the research community. BEI Resources acquires, authenticates and produces reagents that scientists need to carry out basic research and develop improved diagnostic tests, vaccines, and therapies. By centralizing these functions within BEI Resources, access to and use of these materials in the scientific community is monitored and quality control of the reagents is assured. In addition to supplying the infectious disease community with materials, BEI Resources also encourages and supports the deposit of materials from researchers and institutions. Depositing materials with BEI Resources has many advantages to the researcher and the research community including secure storage, community access and distribution; all while protecting the intellectual property rights of the depositor. The BEI Resources repository will be maintained as a resource for researchers as long as there is need. Your deposit into BEI Resources is a long term investment to aid future research. BEI Resources has been managed under contract by American Type Culture Collection (ATCC) since 2003. A seven-year contract to continue managing BEI Resources was awarded to ATCC in May 2016. The scope of the contract has expanded to a more comprehensive catalog of research materials, including those deposited by other Government-supported research projects, to be made available to the biodefense and emerging infectious disease scientific communities. Fungal, Parasite, Vector and other relevant Materials have been added to the existing Bacterial, Viral and Toxin reagents which cover NIAID Category A, B and C Priority Pathogens and NIAID designated emerging infectious disease agents and organisms.",
-  "collectionType": "Sample Repository",
+  "description": "BEI Resources was established by the National Institute of Allergy and Infectious Diseases (NIAID) to provide reagents, tools and information for studying Category A, B, and C priority pathogens, emerging infectious disease agents, non-pathogenic microbes and other microbiological materials of relevance to the research community.  BEI Resources acquires, authenticates and produces reagents that scientists need to carry out basic research and develop improved diagnostic tests, vaccines, and therapies. By centralizing these functions within BEI Resources, access to and use of these materials in the scientific community is monitored and quality control of the reagents is assured. In addition to supplying the infectious disease community with materials, BEI Resources also encourages and supports the deposit of materials from researchers and institutions. Depositing materials with BEI Resources has many advantages to the researcher and the research community including secure storage, community access and distribution; all while protecting the intellectual property rights of the depositor. The BEI Resources repository will be maintained as a resource for researchers as long as there is need.  Your deposit into BEI Resources is a long term investment to aid future research. BEI Resources has been managed under contract by American Type Culture Collection (ATCC) since 2003.  A seven-year contract to continue managing BEI Resources was awarded to ATCC in May 2016. The scope of the contract has expanded to a more comprehensive catalog of research materials, including those deposited by other Government-supported research projects, to be made available to the biodefense and emerging infectious disease scientific communities. Fungal, Parasite, Vector and other relevant Materials have been added to the existing Bacterial, Viral and Toxin reagents which cover NIAID Category A, B and C Priority Pathogens and NIAID designated emerging infectious disease agents and organisms.",
+  "collectionType": "Repository | Sample Repository",
   "genre": [
-    "IID"
+    "IID",
+    "General Infectious Diseases and Pathogens",
+    "Laboratory Chemicals"
   ],
-  "conditionsOfAccess": "Restricted",
+  "conditionsOfAccess": "Open",
   "license": "https://www.beiresources.org/TermsofUse.aspx",
   "usageInfo": "https://www.beiresources.org/Register.aspx",
   "inLanguage": "English",
   "isAccessibleForFree": true,
   "hasAPI": false,
   "hasDownload": "Record-level",
+  "creativeWorkStatus": "Accepting Data",
   "dateCreated": "2003-11-06",
   "dateModified": "2024-06-13",
   "datePublished": "2003-11-06",

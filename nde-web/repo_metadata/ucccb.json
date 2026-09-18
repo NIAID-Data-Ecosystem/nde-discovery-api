@@ -1,11 +1,13 @@
 {
   "_id": "ucccb",
-  "name": "University of Coimbra Bacteria Culture Collection",
+  "name": "University of Coimbra Bacteria Culture Collection (UCCCB)",
   "alternateName": [
-    "UCCCB"
+    "UCCCB",
+    "University of Coimbra Bacteria Culture Collection"
   ],
-  "identifier": "UCCCB",
+  "identifier": "https://ucccb.uc.pt/ | ucccb",
   "url": "https://ucccb.uc.pt/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_68ffb3cdfbce698d",
   "abstract": "UCCCB is a MIRRI-ERIC supported biospecimen repository that includes IID samples.",
   "description": "The University of Coimbra Bacteria Culture Collection (UCCCB) is the first Portuguese Bacterial Culture Collection registered and recognized by the World Federation of Culture Collections as the collection nº 1179 (WFCC). The UC achieves with this collection the availability of reliable and relevant microbial resources for the national and international scientific community, as well as for industry.  As a culture collection, UCCCB will provide a significant degree of continuity with the past through the preservation and distribution of microbial strains described or cited in publications, and will maintain novel microorganisms awaiting future exploitation by biotechnology.  The UCCCB is a partner of the Microbial Resource Research Infrastructure — European Research Infrastructure Consortium (MIRRI-ERIC)",
   "collectionType": "Sample Repository",
@@ -15,6 +17,7 @@
   "conditionsOfAccess": "Restricted",
   "license": "https://ucccb.uc.pt/documentation/",
   "isAccessibleForFree": false,
+  "creativeWorkStatus": "Accepting Data",
   "parentCollection": {
     "id": "bacdive"
   },

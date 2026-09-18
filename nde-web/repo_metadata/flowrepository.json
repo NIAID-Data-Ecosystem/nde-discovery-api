@@ -1,8 +1,9 @@
 {
   "_id": "flowrepository",
   "name": "Flow Repository",
-  "identifier": "Flow Repository",
+  "identifier": "Flow Repository | flow_repository",
   "url": "http://flowrepository.org/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_d20aaf264019585c",
   "abstract": "Flow Repository is a repository that includes flow cytometry data.",
   "description": "FlowRepository is a database of flow cytometry experiments where you can query and download data collected and annotated according to the MIFlowCyt standard. It is primarily used as a data deposition place for experimental findings published in peer-reviewed journals in the flow cytometry field.",
   "collectionType": "Dataset Repository",
@@ -12,6 +13,7 @@
   "conditionsOfAccess": "Open",
   "isAccessibleForFree": true,
   "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Weekly",
   "schema": {
     "Repository ID": "identifier",
