@@ -49,13 +49,30 @@ def test_count_body_uses_main_frontend_type_filter():
     assert type_filter["should"][2] == {
         "bool": {
             "must": [
+                {"term": {"@type": "DataCollection"}},
+                {
+                    "terms": {
+                        "includedInDataCatalog.name": [
+                            "Database of Antimicrobial Activity and Structure of Peptides",
+                            "Bacterial and Viral Bioinformatics Resource Center",
+                            "Electron Microscopy Data Bank",
+                            "Clinical Genomics Resource (ClinGen)",
+                        ]
+                    }
+                },
+            ]
+        }
+    }
+    assert type_filter["should"][3] == {
+        "bool": {
+            "must": [
                 {"term": {"@type": "Sample"}},
                 {"term": {"additionalType": "BioSample"}},
                 {"term": {"includedInDataCatalog.name": "BEI Resources"}},
             ]
         }
     }
-    assert len(type_filter["should"]) == 3
+    assert len(type_filter["should"]) == 4
     assert "ExperimentalRunSample" not in str(type_filter)
 
 
