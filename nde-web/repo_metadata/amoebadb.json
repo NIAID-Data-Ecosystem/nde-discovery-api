@@ -4,7 +4,7 @@
   "alternateName": [
     "Amoeba Informatics Resources"
   ],
-  "identifier": "AmoebaDB | amoebadb",
+  "identifier": "AmoebaDB",
   "url": "https://amoebadb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_30e130476545786d",
   "abstract": "AmoebaDB is a NIAID supported IID repository that includes genomic data.",

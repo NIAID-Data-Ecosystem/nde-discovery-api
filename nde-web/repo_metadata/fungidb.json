@@ -4,7 +4,7 @@
   "alternateName": [
     "Fungal and Oomycete Informatics Resources"
   ],
-  "identifier": "FungiDB | fungidb",
+  "identifier": "FungiDB",
   "url": "https://fungidb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_8170757edeb0148c",
   "abstract": "FungiDB is a NIAID supported IID repository that includes genomic data.",

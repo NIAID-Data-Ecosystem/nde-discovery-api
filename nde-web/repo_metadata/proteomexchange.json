@@ -1,7 +1,7 @@
 {
   "_id": "proteomexchange",
   "name": "ProteomeXchange",
-  "identifier": "ProteomeXchange | proteomexchange",
+  "identifier": "ProteomeXchange",
   "url": "https://www.proteomexchange.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_0b7a753b763f2528",
   "abstract": "Proteome Xchange is a consortia supported generalist repository that includes proteomic data.",

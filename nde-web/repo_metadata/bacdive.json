@@ -6,7 +6,7 @@
     "BacDive",
     "Bacterial Diversity Database"
   ],
-  "identifier": "https://bacdive.dsmz.de/ | bacdive",
+  "identifier": "BacDive",
   "url": "https://bacdive.dsmz.de/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_e9c5ccfa4872afe2",
   "abstract": "BacDive is a BMBF supported IID repository that includes phenotypic data.",

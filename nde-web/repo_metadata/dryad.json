@@ -9,7 +9,7 @@
     "DRIADE",
     "The Digital Repository of Information and Data for Evolution"
   ],
-  "identifier": "Dryad Digital Repository | dryad",
+  "identifier": "Dryad Digital Repository",
   "url": "https://datadryad.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_e3d5f43f485aa27d",
   "abstract": "Dryad Digital Repository is a GREI repository that includes most data types and domains.",

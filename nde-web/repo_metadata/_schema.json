@@ -223,7 +223,7 @@
     },
     "identifier": {
       "type": "string",
-      "description": "Refreshed from nonblank RepoMetaCuration values on staging; pipe-separated identifiers remain a string"
+      "description": "Stable value used by the portal to filter includedInDataCatalog.name; preserved when staging metadata is refreshed from RepoMetaCuration"
     },
     "inLanguage": {
       "type": "string"

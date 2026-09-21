@@ -1,7 +1,7 @@
 {
   "_id": "vivli",
   "name": "Vivli",
-  "identifier": "Vivli | vivli",
+  "identifier": "Vivli",
   "url": "https://vivli.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_538ff4be0fe312f4",
   "abstract": "Vivli is a GREI repository that includes most data types and domains.",

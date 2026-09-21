@@ -1,7 +1,7 @@
 {
   "_id": "flowrepository",
   "name": "Flow Repository",
-  "identifier": "Flow Repository | flow_repository",
+  "identifier": "Flow Repository",
   "url": "http://flowrepository.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_d20aaf264019585c",
   "abstract": "Flow Repository is a repository that includes flow cytometry data.",

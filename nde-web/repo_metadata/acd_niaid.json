@@ -5,7 +5,7 @@
     "acd_niaid",
     "ACD@NIAID"
   ],
-  "identifier": "accessclinicaldata@NIAID | acd_niaid",
+  "identifier": "accessclinicaldata@NIAID",
   "url": "https://accessclinicaldata.niaid.nih.gov/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_1942645530f7af43",
   "abstract": "AccessClinicalData is a NIAID supported IID repository that includes clinical trials data.",

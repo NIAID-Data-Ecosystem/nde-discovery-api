@@ -1,7 +1,7 @@
 {
   "_id": "zenodo",
   "name": "Zenodo",
-  "identifier": "https://zenodo.org/ | Zenodo | zenodo",
+  "identifier": "Zenodo",
   "url": "https://zenodo.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_72694aa8673977b4",
   "abstract": "Zenodo is a GREI repository that includes most data types and domains.",

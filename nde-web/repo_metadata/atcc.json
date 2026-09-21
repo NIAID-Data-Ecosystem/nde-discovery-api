@@ -5,7 +5,7 @@
     "ATCC",
     "American Type Culture Collection"
   ],
-  "identifier": "https://www.atcc.org | atcc",
+  "identifier": "ATCC",
   "url": "https://www.atcc.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_16130e94bc8a85d7",
   "abstract": "ATCC is an NIH supported biospecimen repository that includes IID samples.",

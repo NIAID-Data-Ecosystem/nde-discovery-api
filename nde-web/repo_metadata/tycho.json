@@ -1,7 +1,7 @@
 {
   "_id": "tycho",
   "name": "Project Tycho",
-  "identifier": "Project Tycho | tycho",
+  "identifier": "Project Tycho",
   "url": "https://www.tycho.pitt.edu/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_76a36925b939cf0e",
   "abstract": "Project TYCHO is a NIH supported IID repository that includes clinical data.",

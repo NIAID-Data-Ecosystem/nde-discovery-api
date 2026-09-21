@@ -5,7 +5,7 @@
     "BV-BRC",
     "Bacterial and Viral Bioinformatics Resource Center"
   ],
-  "identifier": "https://www.bv-brc.org/ | bvbrc",
+  "identifier": "Bacterial and Viral Bioinformatics Resource Center",
   "url": "https://www.bv-brc.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_42e839db86d4166d",
   "abstract": "The Bacterial and Viral Bioinformatics Resource Center (BV-BRC) is a NIAID supported IID repository that includes multimodal pathogen data.",

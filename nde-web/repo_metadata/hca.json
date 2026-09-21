@@ -5,7 +5,7 @@
     "HCA",
     "Human Cell Atlas"
   ],
-  "identifier": "Human Cell Atlas | hca",
+  "identifier": "Human Cell Atlas",
   "url": "https://www.humancellatlas.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_8b6d97b84ea3c610",
   "abstract": "The Human Cell Atlas is a repository that includes multimodal data of cells in the human body.",

@@ -1,7 +1,7 @@
 {
   "_id": "figshare",
   "name": "Figshare",
-  "identifier": "Figshare | figshare",
+  "identifier": "Figshare",
   "url": "https://figshare.com/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_e35eeecb7cd1417c",
   "abstract": "Figshare is a NIH supported generalist repository that includes generalist data.",

@@ -10,13 +10,15 @@ merging, in order of increasing precedence:
     2. the legacy ``source_info`` dict inside ``handlers.py``, if still
        present (used for the initial bootstrap; a no-op afterward)
     3. supplementary fields from the optional priority sheet
-    4. nonblank fields from ``RepoMetaCuration - resource_base.tsv``
+    4. nonblank descriptive fields from ``RepoMetaCuration - resource_base.tsv``
        (matched by source name, aliases, identifiers, URL, or sameAs)
 
-RepoMetaCuration is authoritative for descriptive metadata on staging.
-Blank cells and unmatched sources preserve existing values. Source keys,
-schema mappings, schedules, and other ingestion settings stay in the JSON.
-Re-run any time the TSV or Google Sheet changes.
+RepoMetaCuration is authoritative for descriptive metadata on staging, except
+for ``identifier``. The portal uses that field as the exact
+``includedInDataCatalog.name`` search filter, so existing identifiers remain
+stable. Blank cells and unmatched sources preserve existing values. Source
+keys, schema mappings, schedules, and other ingestion settings stay in the
+JSON. Re-run any time the TSV or Google Sheet changes.
 
 Usage:
     python nde-web/scripts/sync_repo_metadata.py
@@ -154,6 +156,7 @@ RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
     "name": ("name", None),
     "url": ("url", None),
     "sameAs": ("sameAs", None),
+    # Read for matching and validation, but do not copy into existing sources.
     "identifier": ("identifier", None),
     "alternateName": ("alternateName", split_alternate_names),
     "license": ("license", None),
@@ -176,6 +179,11 @@ RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
     "datePublished": ("datePublished", None),
     "creativeWorkStatus": ("creativeWorkStatus", None),
 }
+
+# These values have behavior outside the descriptive source display. In
+# particular, the portal sends ``identifier`` verbatim as its
+# ``includedInDataCatalog.name`` filter.
+RESOURCE_BASE_PRESERVED_FIELDS = frozenset({"identifier"})
 
 
 # Priority-sheet properties safe to extract as scalars. Complex object
@@ -277,6 +285,8 @@ def resource_base_record(row: dict[str, str]) -> dict[str, Any]:
     """Extract supported, nonblank descriptive fields without changing API shapes."""
     record: dict[str, Any] = {}
     for col, (field, coercer) in RESOURCE_BASE_COLUMNS.items():
+        if field in RESOURCE_BASE_PRESERVED_FIELDS:
+            continue
         raw = (row.get(col) or "").strip()
         if not raw:
             continue
@@ -405,7 +415,8 @@ def build(resource_base_tsv: Path | None = None) -> dict[str, dict[str, Any]]:
     priority_by_key = load_priority_sheet_by_key()
     # Keep optional priority-sheet supplements, then apply the current
     # resource_base curation. Only the supported descriptive columns can
-    # overwrite JSON fields; ingestion settings are not in that mapping.
+    # overwrite JSON fields; ingestion settings and the stable search
+    # identifier are not in that mapping.
     for key, data in repos.items():
         data.setdefault("_id", key)
         tsv_row = find_resource_base_row(rows, key, data)

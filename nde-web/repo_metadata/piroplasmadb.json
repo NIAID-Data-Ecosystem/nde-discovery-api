@@ -4,7 +4,7 @@
   "alternateName": [
     "Piroplasma Informatics Resources"
   ],
-  "identifier": "PiroplasmaDB | piroplasmadb",
+  "identifier": "PiroplasmaDB",
   "url": "https://piroplasmadb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_d2655c09ef89ddb9",
   "abstract": "PiroplasmaDB is a NIAID supported IID repository that includes genomic data.",

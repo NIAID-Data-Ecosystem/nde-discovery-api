@@ -4,7 +4,7 @@
   "alternateName": [
     "Plasmodium Informatics Resources"
   ],
-  "identifier": "PlasmoDB | plasmodb",
+  "identifier": "PlasmoDB",
   "url": "https://plasmodb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_f9d0eec727b79c40",
   "abstract": "PlasmoDB is a NIAID supported IID repository that includes genomic data.",

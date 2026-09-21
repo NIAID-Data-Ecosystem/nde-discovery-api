@@ -1,7 +1,7 @@
 {
   "_id": "ncbi_virus",
   "name": "NCBI Virus",
-  "identifier": "https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/ | ncbivirus",
+  "identifier": "NCBI Virus",
   "url": "https://www.ncbi.nlm.nih.gov/labs/virus/vssi/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_b3bb013bc893ca80",
   "abstract": "NCBI Virus is a NIH supported IID repository that includes multiomic data.",

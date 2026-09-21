@@ -4,7 +4,7 @@
   "alternateName": [
     "Cryptosporidium Informatics Resources"
   ],
-  "identifier": "CryptoDB | cryptodb",
+  "identifier": "CryptoDB",
   "url": "https://cryptodb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_3c4f511c4f1a81ef",
   "abstract": "CryptoDB is a NIAID supported IID repository that includes genomic data.",

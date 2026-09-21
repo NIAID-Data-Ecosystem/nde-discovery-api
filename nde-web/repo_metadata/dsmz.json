@@ -5,7 +5,7 @@
     "Leibniz-Institut Deutsche Sammlung von Mikroorganismen und Zellkulturen GmbH",
     "DSMZ"
   ],
-  "identifier": "https://www.dsmz.de/ | dsmz",
+  "identifier": "https://www.dsmz.de/",
   "url": "https://www.dsmz.de/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_94f8ccac6a9536cc",
   "abstract": "DSMZ is a German government supported biospecimen repository that includes IID samples.",

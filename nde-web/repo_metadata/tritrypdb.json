@@ -4,7 +4,7 @@
   "alternateName": [
     "Kinetoplastid Informatics Resources"
   ],
-  "identifier": "TriTrypDB | tritrypdb",
+  "identifier": "TriTrypDB",
   "url": "https://tritrypdb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_db63bb943f36cf13",
   "abstract": "TriTrypDB is a NIAID supported IID repository that includes genomic data.",

@@ -5,7 +5,7 @@
     "EMDB",
     "Electron Microscopy Data Bank"
   ],
-  "identifier": "https://www.ebi.ac.uk/emdb/ | emdb",
+  "identifier": "Electron Microscopy Data Bank",
   "url": "https://www.ebi.ac.uk/emdb/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_f6161fcb840b7162",
   "abstract": "EMDB is a generalist repository that includes image data.",

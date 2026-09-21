@@ -4,7 +4,7 @@
   "alternateName": [
     "Microsporidia Informatics Resources"
   ],
-  "identifier": "MicrosporidiaDB | microsporidiadb",
+  "identifier": "MicrosporidiaDB",
   "url": "https://microsporidiadb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_47cb37667d0b7ecf",
   "abstract": "MicrosporidiaDB is a NIAID supported IID repository that includes genomic data.",

@@ -4,7 +4,7 @@
   "alternateName": [
     "Trichomonas Informatics Resources"
   ],
-  "identifier": "TrichDB | trichdb",
+  "identifier": "TrichDB",
   "url": "https://trichdb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_0249e764e05872c9",
   "abstract": "TrichDB is a NIAID supported IID repository that includes genomic data.",

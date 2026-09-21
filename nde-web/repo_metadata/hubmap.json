@@ -5,7 +5,7 @@
     "Human BioMolecular Atlas Program",
     "HuBMAP"
   ],
-  "identifier": "HuBMAP | hubmap",
+  "identifier": "HuBMAP",
   "url": "https://hubmapconsortium.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_407ed5d60e674997",
   "abstract": "The Human BioMolecular Atlas Program (HuBMAP) is an NIH supported repository that includes multimodal data of healthy cells in the human body.",

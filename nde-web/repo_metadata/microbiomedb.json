@@ -1,7 +1,7 @@
 {
   "_id": "microbiomedb",
   "name": "MicrobiomeDB",
-  "identifier": "MicrobiomeDB | microbiomedb",
+  "identifier": "MicrobiomeDB",
   "url": "https://microbiomedb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_7f929242375e57cc",
   "abstract": "MicrobiomeDB is a NIAID supported repository that includes clinical microbiome data and analysis tools.",

@@ -1,7 +1,7 @@
 {
   "_id": "mendeley",
   "name": "Mendeley Data",
-  "identifier": "Mendeley | mendeley",
+  "identifier": "Mendeley",
   "url": "https://data.mendeley.com/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_25cec57160559aa5",
   "abstract": "Mendeley Data is a GREI repository that includes most data types and domains.",

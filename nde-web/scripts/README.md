@@ -57,10 +57,12 @@ For non-interactive defaults after the TSV is already at the repository root:
 
 The staging sync treats nonblank RepoMetaCuration values as authoritative for
 supported descriptive fields, replacing existing names, descriptions, URLs,
-identifiers, and other curated values. Empty cells keep existing values.
+and other curated values. The existing `identifier` is preserved because the
+portal uses it as the exact `includedInDataCatalog.name` filter when a user
+clicks a repository or resource catalog. Empty cells keep existing values.
 Source keys (`_id` and filenames), schedules, schema mappings, source types,
-parent collections, and Mongo settings are preserved. This change belongs to
-`staging`; production's `main` branch retains its SourceMetaCuration workflow.
+parent collections, and Mongo settings are also preserved. This change belongs
+to `staging`; production's `main` branch retains its SourceMetaCuration workflow.
 
 Rows are matched using names, pipe-separated aliases/identifiers, URLs, and
 `sameAs`, so changed repository URLs can still update existing sources.
@@ -71,8 +73,9 @@ bootstrapping their sources.
 
 `alternateName` supports pipe-separated values as well as older comma/semicolon
 exports. `genre` remains a semicolon-separated array. Other supported fields
-retain their existing API types (for example, `identifier` and `collectionType`
-remain strings, including any pipe-separated values in the sheet).
+retain their existing API types. Pipe-separated values in the sheet's
+`identifier` column are available for row matching, but do not replace the
+single stable identifier returned by `/v1/metadata`.
 
 Both bootstrap and sync accept `--resource-base-tsv <path>` to read another
 download location; relative paths resolve from the repository root. Bootstrap

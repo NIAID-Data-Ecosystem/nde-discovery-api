@@ -4,7 +4,7 @@
   "alternateName": [
     "Toxoplasma Informatics Resources"
   ],
-  "identifier": "ToxoDB | toxodb",
+  "identifier": "ToxoDB",
   "url": "https://toxodb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_c389ad317e5b5269",
   "abstract": "ToxoDB is a NIAID supported IID repository that includes genomic data.",

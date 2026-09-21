@@ -7,7 +7,7 @@
     "NCBI Database of Genotypes and Phenotypes",
     "Database of Genotypes and Phenotypes"
   ],
-  "identifier": "Database of Genotypes and Phenotypes (dbGaP) | dbgap",
+  "identifier": "The Database of Genotypes and Phenotypes",
   "url": "https://www.ncbi.nlm.nih.gov/gap/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_aceed7f510745d85",
   "abstract": "Database of Genotypes and Phenotypes (dbGaP) is a NIH supported IID repository that includes multiomic data.",

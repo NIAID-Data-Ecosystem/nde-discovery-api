@@ -5,7 +5,7 @@
     "National Center for Biotechnology Information BioProject",
     "BioProject"
   ],
-  "identifier": "NCBI BioProject | ncbi_bioproject",
+  "identifier": "NCBI BioProject",
   "url": "https://www.ncbi.nlm.nih.gov/bioproject/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_6f55dc3ae60f3562",
   "abstract": "NCBI BioProject is a NIH supported generalist repository that includes multiomic data.",

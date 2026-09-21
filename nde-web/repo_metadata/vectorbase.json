@@ -4,7 +4,7 @@
   "alternateName": [
     "Bioinformatics Resources for Invertebrate Vectors of Human Pathogens"
   ],
-  "identifier": "VectorBase | vectorbase",
+  "identifier": "VectorBase",
   "url": "https://vectorbase.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_6898a1186cb37637",
   "abstract": "VectorBase is a NIAID supported IID repository that includes genomic data.",

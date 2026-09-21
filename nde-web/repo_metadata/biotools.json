@@ -4,7 +4,7 @@
   "alternateName": [
     "biotools"
   ],
-  "identifier": "bio.tools | biotools",
+  "identifier": "bio.tools",
   "url": "https://bio.tools/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_b911d7388ddab12b",
   "abstract": "bio.tools is an ELIXIR supported tool repository that includes information about software tools, databases and services.",

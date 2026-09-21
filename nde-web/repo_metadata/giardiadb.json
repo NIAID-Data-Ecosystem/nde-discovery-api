@@ -4,7 +4,7 @@
   "alternateName": [
     "Giardia Informatics Resources"
   ],
-  "identifier": "GiardiaDB | giardiadb",
+  "identifier": "GiardiaDB",
   "url": "https://giardiadb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_c13cd7dc7cb2c32b",
   "abstract": "GiardiaDB is a NIAID supported IID repository that includes genomic data.",

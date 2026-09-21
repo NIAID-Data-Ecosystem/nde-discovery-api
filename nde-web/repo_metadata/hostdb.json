@@ -4,7 +4,7 @@
   "alternateName": [
     "Pathogen Host Informatics Resources"
   ],
-  "identifier": "HostDB | hostdb",
+  "identifier": "HostDB",
   "url": "https://hostdb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_5f0b28b602780a53",
   "abstract": "HostDB is a NIAID supported IID repository that includes genomic data.",

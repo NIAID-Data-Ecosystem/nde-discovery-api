@@ -6,7 +6,7 @@
     "ArrayExpress",
     "EBI-EMBL BioStudies"
   ],
-  "identifier": "https://www.ebi.ac.uk/biostudies/arrayexpress | biostudies_arrayexpress",
+  "identifier": "BioStudies",
   "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_9e06d7276897ad79",
   "abstract": "ArrayExpress is a EMBL-EBI supported generalist repository that includes genomic data.",

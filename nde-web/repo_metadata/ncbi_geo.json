@@ -6,7 +6,7 @@
     "NCBI Gene Expression Omnibus",
     "NCBI GEO"
   ],
-  "identifier": "NCBI GEO | ncbi_geo",
+  "identifier": "NCBI GEO",
   "url": "https://www.ncbi.nlm.nih.gov/geo/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_fcbfc7caf66eaee6",
   "abstract": "Gene Expression Omnibus (GEO) is an NIH supported repository that includes microarray and next-generation sequencing data for high-throughput functional genomics for most domains.",

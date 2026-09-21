@@ -4,7 +4,7 @@
   "alternateName": [
     "HIPC ImmuneSpace"
   ],
-  "identifier": "https://www.immunespace.org/project/Studies/begin.view? | immunespace",
+  "identifier": "ImmuneSpace",
   "url": "https://www.immunespace.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_8b9a4aa0d78d0659",
   "abstract": "ImmuneSpace is a NIAID supported IID repository that includes multimodal immunological data.",

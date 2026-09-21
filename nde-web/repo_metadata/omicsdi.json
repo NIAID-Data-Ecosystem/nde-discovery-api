@@ -5,7 +5,7 @@
     "Omics Discovery Index",
     "OmicsDI"
   ],
-  "identifier": "OmicsDI | omicsdi",
+  "identifier": "Omics Discovery Index (OmicsDI)",
   "url": "https://www.omicsdi.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_247a3ef7a91ad612",
   "abstract": "Omics Discovery Index (OmicsDI) is a generalist repository that is part of ELIXIR infrastructure that includes multi-omics data for most domains.",

@@ -5,7 +5,7 @@
     "UCCCB",
     "University of Coimbra Bacteria Culture Collection"
   ],
-  "identifier": "https://ucccb.uc.pt/ | ucccb",
+  "identifier": "UCCCB",
   "url": "https://ucccb.uc.pt/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_68ffb3cdfbce698d",
   "abstract": "UCCCB is a MIRRI-ERIC supported biospecimen repository that includes IID samples.",

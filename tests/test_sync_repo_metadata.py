@@ -83,7 +83,8 @@ def test_sync_refreshes_descriptive_fields_and_preserves_ingestion_settings(
     assert sync_module.main(["--resource-base-tsv", "custom.tsv"]) == 0
     updated = json.loads(path.read_text())
     assert updated["name"] == "New repository name"
-    assert updated["identifier"] == "https://new.example.org/ | example"
+    # The portal uses this exact value for includedInDataCatalog.name searches.
+    assert updated["identifier"] == "Old identifier"
     assert updated["alternateName"] == ["New, expanded name", "EX"]
     assert updated["url"] == "https://new.example.org/"
     assert updated["abstract"] == "New abstract"
@@ -99,6 +100,15 @@ def test_sync_refreshes_descriptive_fields_and_preserves_ingestion_settings(
     ):
         assert updated[field] == original[field]
     assert sync_module.write(sync_module.build(tsv)) == []
+
+
+def test_resource_base_record_excludes_search_identifier():
+    record = sync_module.resource_base_record({
+        "name": "Updated name",
+        "identifier": "new alias | source_key",
+    })
+
+    assert record == {"name": "Updated name"}
 
 
 def test_shared_url_and_identifiers_do_not_collapse_veupath_sources():

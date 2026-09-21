@@ -1,7 +1,7 @@
 {
   "_id": "qiita",
   "name": "Qiita",
-  "identifier": "Qiita | qiita",
+  "identifier": "Qiita",
   "url": "https://qiita.ucsd.edu/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_2dcd7bd112197305",
   "abstract": "Qiita is a repository that includes microbiome data and analysis tools.",

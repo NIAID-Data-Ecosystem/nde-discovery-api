@@ -1,7 +1,7 @@
 {
   "_id": "uniprot",
   "name": "UniProt",
-  "identifier": "https://www.uniprot.org/ | uniprot",
+  "identifier": "UniProt Knowledgebase",
   "url": "https://www.uniprot.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_2d572296274580f6",
   "abstract": "UniProt is a NIAID supported generalist repository that includes proteomic data.",
