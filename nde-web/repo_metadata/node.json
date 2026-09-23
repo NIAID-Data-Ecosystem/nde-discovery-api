@@ -5,7 +5,7 @@
     "National Omics Data Encyclopedia",
     "NODE"
   ],
-  "identifier": "National Omics Data Encyclopedia",
+  "identifier": "National Omics Data Encyclopedia (NODE)",
   "url": "https://www.biosino.org/node/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_6f5ff775f5bccef2",
   "abstract": "NODE is a Chinese Academy of Sciences supported generalist repository that includes multiomic data.",

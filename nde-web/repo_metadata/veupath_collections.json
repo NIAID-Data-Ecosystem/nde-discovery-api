@@ -1,7 +1,7 @@
 {
   "_id": "veupath_collections",
   "name": "VEuPath Collections",
-  "identifier": "VEuPathDB",
+  "identifier": "Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB)",
   "url": "https://veupathdb.org/",
   "abstract": "VEuPathCollections are NIAID supported IID component repositories of VEuPathDB which include collections of genomic data.",
   "description": "VEuPath Collections is the collection of component websites of the Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) that have been constructed using the same infrastructure, data analysis, and loading procedures. VEuPathDB is one of two bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK).   The VEuPath Collections include the following component websites as individual collections:   AmoebaDB   CryptoDB   GiardiaDB   HostDB   PlasmoDB   VectorBase   FungiDB   MicrosporidiaDB   ToxoDB   TrichDB   TriTrypDB   PiroplasmaDB.",

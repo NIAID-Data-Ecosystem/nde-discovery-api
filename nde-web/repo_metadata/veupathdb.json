@@ -5,7 +5,7 @@
     "VEuPathDB",
     "Eukaryotic Pathogen, Vector and Host Informatics Resource"
   ],
-  "identifier": "VEuPathDB",
+  "identifier": "Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB)",
   "url": "https://veupathdb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_1e5fd521cef89596",
   "abstract": "The Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) is a NIAID supported IID repository that includes genomic and phenotypic data for eukaryotic pathogens and invertebrate vectors of infectious disease.",

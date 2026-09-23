@@ -5,7 +5,7 @@
     "RADx Data Hub",
     "Rapid Acceleration of Diagnostics Data Hub"
   ],
-  "identifier": "RADx Data Hub",
+  "identifier": "COVID Rapid Acceleration of Diagnostics (RADx) Data Hub",
   "url": "https://radxdatahub.nih.gov/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_e1e4d07f1c1b3f00",
   "abstract": "COVID RADx Data Hub is a NIH supported IID repository that includes clinical data.",

@@ -5,7 +5,7 @@
     "Repurposing, Focused Rescue, and Accelerated Medchem Database",
     "REFRAMEdb"
   ],
-  "identifier": "ReframeDB",
+  "identifier": "Repurposing, Focused Rescue, and Accelerated Medchem Database (REFRAMEdb)",
   "url": "https://reframedb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_f154932b585807e7",
   "abstract": "ReframeDB is a Calibr maintained repository that has a screening set of 12,000 compounds for drug repositioning.",

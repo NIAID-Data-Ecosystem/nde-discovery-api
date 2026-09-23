@@ -4,7 +4,7 @@
   "alternateName": [
     "National Center for Biotechnology Information BioSample"
   ],
-  "identifier": "BioSample",
+  "identifier": "NCBI BioSample",
   "url": "https://www.ncbi.nlm.nih.gov/biosample/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_639d05db93d24470",
   "abstract": "NCBI BioSample is a NIH supported generalist repository that includes other data.",

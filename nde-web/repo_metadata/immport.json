@@ -6,7 +6,7 @@
     "ImmPort",
     "ImmPort - Bioinformatics For the Future of Immunology"
   ],
-  "identifier": "ImmPort - Bioinformatics For the Future of Immunology",
+  "identifier": "Immunology Database and Analysis Portal (ImmPort)",
   "url": "https://www.immport.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_a2ef1420cbf1fbda",
   "abstract": "The Immunology Database and Analysis Portal (ImmPort) is a NIAID supported IID repository that includes multimodal immunological data.",

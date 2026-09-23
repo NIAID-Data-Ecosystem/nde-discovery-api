@@ -6,7 +6,7 @@
     "NICHD DASH",
     "NICHD Data And Specimen Hub"
   ],
-  "identifier": "NICHD DASH",
+  "identifier": "NICHD Data and Specimen Hub (NICHD DASH)",
   "url": "https://dash.nichd.nih.gov/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_9edeb84bf8cc1159",
   "abstract": "The Data and Specimen Hub (DASH) is an NICHD supported repository that includes clinical data and specimens.",

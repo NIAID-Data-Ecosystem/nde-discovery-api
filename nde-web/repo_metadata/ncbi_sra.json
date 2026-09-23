@@ -8,7 +8,7 @@
     "SRA",
     "Sequence Read Archive"
   ],
-  "identifier": "NCBI SRA",
+  "identifier": "NCBI Sequence Read Archive (NCBI SRA)",
   "url": "https://www.ncbi.nlm.nih.gov/sra/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_75a257bf94fe13ef",
   "abstract": "Sequence Read Archive (SRA) is the NIH supported largest publicly available repository of high throughput sequencing data that includes raw sequencing data and alignment information for most domains.",

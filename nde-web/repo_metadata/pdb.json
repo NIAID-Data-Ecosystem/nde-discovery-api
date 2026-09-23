@@ -7,7 +7,7 @@
     "Research Collaboratory for Structural Bioinformatics Protein Data Bank",
     "RSCB PDB"
   ],
-  "identifier": "Protein Data Bank",
+  "identifier": "Protein Data Bank (PDB)",
   "url": "https://www.rcsb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_a3e6a9539e4642e0",
   "abstract": "Protein Data Bank is a NIAID supported generalist repository that includes structure data.",

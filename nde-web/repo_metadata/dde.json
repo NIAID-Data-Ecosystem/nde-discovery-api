@@ -5,7 +5,7 @@
     "DDE",
     "Data Discovery Engine"
   ],
-  "identifier": "Data Discovery Engine",
+  "identifier": "Data Discovery Engine (DDE)",
   "url": "https://discovery.biothings.io/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_bea3c825e958545e",
   "abstract": "The Data Discovery Engine is a NIAID supported metadata registry that includes metadata from IID and general repositories.",

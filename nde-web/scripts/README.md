@@ -59,7 +59,11 @@ The staging sync treats nonblank RepoMetaCuration values as authoritative for
 supported descriptive fields, replacing existing names, descriptions, URLs,
 and other curated values. The existing `identifier` is preserved because the
 portal uses it as the exact `includedInDataCatalog.name` filter when a user
-clicks a repository or resource catalog. Empty cells keep existing values.
+clicks a repository or resource catalog. After record-level catalog names are
+updated and indexed, set each source's JSON `identifier` to the corresponding
+indexed catalog name; the sync will retain that coordinated value. Grouping
+sources can use a different indexed catalog name than their display `name`.
+Empty cells keep existing values.
 Source keys (`_id` and filenames), schedules, schema mappings, source types,
 parent collections, and Mongo settings are also preserved. This change belongs
 to `staging`; production's `main` branch retains its SourceMetaCuration workflow.

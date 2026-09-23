@@ -5,7 +5,7 @@
     "Clinical Epidemiology Database",
     "ClinEpiDB"
   ],
-  "identifier": "ClinEpiDB",
+  "identifier": "Clinical Epidemiology Database (ClinEpiDB)",
   "url": "https://clinepidb.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_4058ab5071e10d04",
   "abstract": "ClinEpiDB is a NIAID supported IID repository that includes epidemiological data.",

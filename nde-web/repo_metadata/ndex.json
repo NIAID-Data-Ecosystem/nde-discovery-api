@@ -5,7 +5,7 @@
     "Network Data Exchange",
     "NDEx"
   ],
-  "identifier": "NDEx",
+  "identifier": "The Network Data Exchange (NDEx)",
   "url": "https://www.ndexbio.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_fdabe52f096780f3",
   "abstract": "The Network Data Exchange (NDEx) is a NIH supported generalist repository that includes generalist data.",
