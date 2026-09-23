@@ -10,6 +10,8 @@ from biothings.web.query.engine import AsyncESQueryBackend
 from botocore.config import Config as BotoConfig
 from elasticsearch.dsl import A, Q, Search
 
+from approval_filters import dde_resource_catalog_approval_filter
+
 
 SUPPORTED_PUBLIC_TYPES = ["Dataset", "ResourceCatalog"]
 BIOSAMPLE_CATALOG_SAMPLE_SOURCES = ["BEI Resources"]
@@ -657,6 +659,14 @@ class NDEQueryBuilder(ESQueryBuilder):
 
         # exclude staging IDs from the search results
         search = search.query("bool", must_not=[Q("ids", values=staging_ids)])
+
+        # The sheet's catalog approvals are authoritative even when an older
+        # DDE record (such as a superseded catalog version) is absent from
+        # the historical staging_ids blocklist.
+        approved_catalog_filter = dde_resource_catalog_approval_filter(
+            data.get("prod_resource_catalog_ids")
+        )
+        search = search.filter("bool", **approved_catalog_filter["bool"])
 
         # include only documents from the allowed prod sources
         search = search.query("bool", must=[Q("terms", **{"includedInDataCatalog.name": prod_sources})])

@@ -1,6 +1,12 @@
 {
   "_id": "ark",
-  "name": "SAGE ARK Portal",
+  "name": "SAGE Arthritis and Autoimmune and Related Diseases Knowledge Portal (SAGE ARK Portal)",
+  "alternateName": [
+    "SAGE Arthritis and Autoimmune and Related Diseases Knowledge Portal",
+    "SAGE ARK Portal",
+    "ARK Portal",
+    "Arthritis and Autoimmune and Related Diseases Knowledge Portal"
+  ],
   "identifier": "SAGE ARK Portal",
   "url": "https://arkportal.synapse.org/",
   "abstract": "SAGE ARK Portal is a NIAID supported IID repository that includes immune data.",

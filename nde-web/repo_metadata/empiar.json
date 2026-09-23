@@ -1,14 +1,16 @@
 {
   "_id": "empiar",
-  "name": "Electron Microscopy Public Image Archive",
+  "name": "Electron Microscopy Public Image Archive (EMPIAR)",
   "alternateName": [
-    "EMPIAR"
+    "EMPIAR",
+    "Electron Microscopy Public Image Archive"
   ],
   "identifier": "Electron Microscopy Public Image Archive",
   "url": "https://www.ebi.ac.uk/empiar/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_0089e68763ba2b6d",
   "abstract": "EMPIAR is a generalist repository that includes image data.",
-  "description": "EMPIAR (https://empiar.org/ or https://www.ebi.ac.uk/empiar), the Electron Microscopy Public Image Archive, is a public resource for raw images underpinning 3D cryo-EM maps and tomograms (themselves archived in EMDB). EMPIAR also accommodates 3D datasets obtained with volume EM techniques and soft and hard X-ray tomography. All data archived in EMPIAR can be re-used freely without any conditions or restrictions (\"CC0\" license model). Detailed information about EMPIAR policies and procedures is available. The purpose of EMPIAR is to provide easy access to state-of-the-art data to facilitate methods development, validation and re-use, e.g., for Machine Learning applications. EMPIAR data is also used for training and teaching purposes and as part of community challenges.",
-  "collectionType": "Data Repository",
+  "description": "EMPIAR (https://empiar.org/ or https://www.ebi.ac.uk/empiar), the Electron Microscopy Public Image Archive, is a public resource for raw images underpinning 3D cryo-EM maps and tomograms (themselves archived in EMDB). EMPIAR also accommodates 3D datasets obtained with volume EM techniques and soft and hard X-ray tomography. All data archived in EMPIAR can be re-used freely without any conditions or restrictions (\"CC0\" license model). Detailed information about EMPIAR policies and procedures is available.\nThe purpose of EMPIAR is to provide easy access to state-of-the-art data to facilitate methods development, validation and re-use, e.g., for Machine Learning applications. EMPIAR data is also used for training and teaching purposes and as part of community challenges.",
+  "collectionType": "Dataset Repository",
   "genre": [
     "Generalist",
     "Image"
@@ -20,6 +22,7 @@
   "isAccessibleForFree": true,
   "hasAPI": true,
   "hasDownload": "All content",
+  "creativeWorkStatus": "Accepting Data",
   "dateModified": "2026-06-10",
   "schedule": "",
   "schema": {}

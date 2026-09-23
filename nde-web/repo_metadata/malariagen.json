@@ -1,8 +1,9 @@
 {
   "_id": "malariagen",
-  "name": "MalariaGEN",
+  "name": "Malaria Genomic Epidemiology Network (MalariaGEN)",
   "alternateName": [
-    "Malaria Genomic Epidemiology Network"
+    "Malaria Genomic Epidemiology Network",
+    "MalariaGEN"
   ],
   "identifier": "MalariaGEN",
   "url": "https://www.malariagen.net/",

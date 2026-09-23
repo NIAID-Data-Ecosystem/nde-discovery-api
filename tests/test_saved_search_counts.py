@@ -54,7 +54,6 @@ def test_count_body_uses_main_frontend_type_filter():
                     "terms": {
                         "includedInDataCatalog.name": [
                             "Database of Antimicrobial Activity and Structure of Peptides",
-                            "Bacterial and Viral Bioinformatics Resource Center",
                             "Electron Microscopy Data Bank",
                             "Clinical Genomics Resource (ClinGen)",
                         ]
@@ -84,6 +83,7 @@ def test_count_body_applies_main_exclusions():
         exclusions={
             "prod_catalogs": ["Zenodo", "NCBI SRA"],
             "staging_ids": ["staging-doc"],
+            "prod_resource_catalog_ids": ["dde_approved"],
         },
     )
 
@@ -92,6 +92,19 @@ def test_count_body_applies_main_exclusions():
     }
     assert body["query"]["bool"]["filter"][2] == {
         "bool": {"must_not": [{"ids": {"values": ["staging-doc"]}}]}
+    }
+    assert body["query"]["bool"]["filter"][3] == {
+        "bool": {
+            "must_not": [{
+                "bool": {
+                    "must": [
+                        {"term": {"@type": "ResourceCatalog"}},
+                        {"term": {"includedInDataCatalog.name": "Data Discovery Engine"}},
+                    ],
+                    "must_not": [{"ids": {"values": ["dde_approved"]}}],
+                }
+            }]
+        }
     }
 
 

@@ -1,6 +1,10 @@
 {
   "_id": "hubmap",
-  "name": "HuBMAP",
+  "name": "Human Biomolecular Atlas Program (HuBMAP)",
+  "alternateName": [
+    "Human BioMolecular Atlas Program",
+    "HuBMAP"
+  ],
   "identifier": "HuBMAP",
   "url": "https://hubmapconsortium.org/",
   "abstract": "The Human BioMolecular Atlas Program (HuBMAP) is an NIH supported repository that includes multimodal data of healthy cells in the human body.",
@@ -11,6 +15,7 @@
   ],
   "conditionsOfAccess": "Varied",
   "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Weekly",
   "schema": {
     "hubmap_id": "name",

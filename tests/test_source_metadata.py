@@ -33,6 +33,9 @@ def test_metadata_response_uses_build_sources(monkeypatch):
     monkeypatch.setattr(
         handlers, "_load_source_info", lambda: copy.deepcopy(source_info)
     )
+    monkeypatch.setattr(
+        handlers, "_load_approved_source_keys", lambda: {"ndex", "amoebadb"}
+    )
 
     handler = handlers.NDESourceHandler.__new__(handlers.NDESourceHandler)
     monkeypatch.setattr(
@@ -57,3 +60,4 @@ def test_metadata_response_uses_build_sources(monkeypatch):
     }
     assert result["src"]["amoebadb"]["sourceInfo"]["name"] == "AmoebaDB"
     assert result["src"]["amoebadb"]["version"] == "veupath-version"
+    assert "sourceInfo" not in result["src"]["veupath_collections"]
