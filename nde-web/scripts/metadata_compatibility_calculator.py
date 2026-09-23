@@ -465,7 +465,9 @@ class MetadataCompatibilityCalculator:
             recommended_fields = RESOURCE_CATALOG_RECOMMENDED
             required_augmented_fields = RESOURCE_CATALOG_REQUIRED_AUGMENTED
             recommended_augmented_fields = RESOURCE_CATALOG_RECOMMENDED_AUGMENTED
-        elif datasource in ["bv_brc", "emdb", "clingen", "mwccs", "dbaasp"]:
+        elif datasource in [
+            "bv_brc", "emdb", "clingen", "mwccs", "dbaasp", "iedb", "pgs_catalog"
+        ]:
             print(f"Using data collection fields for {datasource}")
             required_fields = DATA_COLLECTION_REQUIRED
             recommended_fields = DATA_COLLECTION_RECOMMENDED

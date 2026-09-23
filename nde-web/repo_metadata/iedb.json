@@ -1,0 +1,29 @@
+{
+  "_id": "iedb",
+  "name": "Immune Epitope Database (IEDB)",
+  "alternateName": [
+    "IEDB",
+    "Immune Epitope Database"
+  ],
+  "identifier": "Immune Epitope Database (IEDB)",
+  "url": "https://www.iedb.org/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_9e34e9698fb412c3",
+  "abstract": "The Immune Epitope Database (IEDB) is a NIAID supported IID repository that includes multimodal immunological data.",
+  "description": "The Immune Epitope Database (IEDB) is a freely available resource funded by NIAID. It catalogs experimental data on antibody and T cell epitopes studied in humans and other animal species in the context of infectious disease, allergy, autoimmunity and transplantation. The IEDB also hosts epitope prediction and analysis tools, and has a companion site, CEDAR (funded by NCI), which houses cancer epitopes.",
+  "collectionType": "Database | Data Repository",
+  "genre": [
+    "IID",
+    "General Infectious Diseases and Pathogens",
+    "Biological Assay"
+  ],
+  "conditionsOfAccess": "Open",
+  "license": "https://www.iedb.org/citation_v3.php",
+  "usageInfo": "https://creativecommons.org/licenses/by/4.0/",
+  "inLanguage": "English",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "hasDownload": "All content",
+  "creativeWorkStatus": "Accepting Data",
+  "schedule": "Weekly",
+  "schema": {}
+}

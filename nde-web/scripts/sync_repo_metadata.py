@@ -48,9 +48,8 @@ HANDLERS_PY = REPO_ROOT / "nde-web" / "handlers.py"
 REPO_METADATA_DIR = REPO_ROOT / "nde-web" / "repo_metadata"
 PRIORITY_TSV = REPO_ROOT / "Priority repo metadata - ResourceCatalog.tsv"
 
-# Priority sheet column header -> NDE source key. The sheet has other
-# columns (TB Portals, IEDB, ITN TrialShare, ACTG) for repos that are
-# not yet ingested; those are ignored.
+# Priority sheet column header -> NDE source key. Other columns are ignored
+# unless their supplements have been reviewed for this metadata workflow.
 PRIORITY_SHEET_COLUMNS: dict[str, str] = {
     "ImmuneSpace": "immunespace",
     "BV-BRC": "bv_brc",
