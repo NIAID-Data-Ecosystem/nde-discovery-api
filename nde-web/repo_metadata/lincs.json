@@ -1,6 +1,11 @@
 {
   "_id": "lincs",
-  "name": "LINCS",
+  "name": "Library of Integrated Network-based Cellular Signatures (LINCS)",
+  "alternateName": [
+    "Library of Integrated Network-based Cellular Signatures",
+    "LINCS",
+    "BD2K-LINCS"
+  ],
   "identifier": "LINCS",
   "url": "https://lincsportal.ccs.miami.edu/",
   "abstract": "The Library of Integrated Network-Based Cellular Signatures (LINCS) Data Portal is an NIH supported repository that includes gene expression and other cellular processes data.",

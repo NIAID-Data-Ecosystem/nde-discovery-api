@@ -9,6 +9,8 @@ import json
 from collections.abc import Iterable, Mapping
 from pathlib import Path
 
+from approval_filters import dde_resource_catalog_approval_filter
+
 
 DEFAULT_DATA_INDEX = "nde_all_current"
 DEFAULT_USER_INDEX = "nde_user_profiles"
@@ -147,6 +149,10 @@ def _build_exclusion_filter_clauses(
     staging_ids = _filter_values(exclusions.get("staging_ids"))
     if staging_ids:
         clauses.append({"bool": {"must_not": [{"ids": {"values": staging_ids}}]}})
+
+    approved_catalog_ids = exclusions.get("prod_resource_catalog_ids")
+    if approved_catalog_ids is not None:
+        clauses.append(dde_resource_catalog_approval_filter(approved_catalog_ids))
 
     return clauses
 

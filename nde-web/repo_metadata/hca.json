@@ -1,8 +1,9 @@
 {
   "_id": "hca",
-  "name": "Human Cell Atlas",
+  "name": "Human Cell Atlas (HCA)",
   "alternateName": [
-    "HCA"
+    "HCA",
+    "Human Cell Atlas"
   ],
   "identifier": "Human Cell Atlas",
   "url": "https://www.humancellatlas.org/",
@@ -15,6 +16,7 @@
   "conditionsOfAccess": "Varied",
   "isAccessibleForFree": true,
   "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Weekly",
   "schema": {
     "entryId": "url, _id",

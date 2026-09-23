@@ -23,11 +23,11 @@ The main new-source command is:
 ./nde-web/venv/bin/python nde-web/scripts/bootstrap_source_metadata.py --source uniprot
 ```
 
-It prompts you to manually download the private `SourceMetaCuration -
+It prompts you to manually download the private `RepoMetaCuration -
 resource_base` tab as TSV from:
 
 ```text
-https://docs.google.com/spreadsheets/d/1SjZ7BNC6oah722psQ_q8oFDB5ZBZjo3np5lBtA3cN-k/edit#gid=349233573
+https://docs.google.com/spreadsheets/d/12TFTEWZHQECir2fnjUs8-Oc3qcV2VTlCgGq86Dz7wUc/edit#gid=349233573
 ```
 
 Select the `resource_base` tab, download it as tab-separated values
@@ -35,7 +35,7 @@ Select the `resource_base` tab, download it as tab-separated values
 repository as:
 
 ```text
-SourceMetaCuration - resource_base.tsv
+RepoMetaCuration - resource_base.tsv
 ```
 
 After the TSV is in place, press Enter in the script prompt. It then runs:
@@ -75,8 +75,36 @@ regenerating Mongo-backed heuristic and completeness caches:
 
 For a new source that does not yet have `repo_metadata/<source>.json`, the
 bootstrap script creates the stub with an empty `schedule` string and empty
-`schema` object. Fill out those two fields in the generated source metadata
-before committing.
+`schema` object only if `_ProdApproved?` is `TRUE`. Fill out those two fields
+in the generated source metadata before committing.
+
+## Refresh Production Approvals
+
+After downloading the current `RepoMetaCuration - resource_base.tsv`, update
+the approved source metadata and production exclusions together:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/sync_repo_metadata.py \
+  --resource-base-tsv 'RepoMetaCuration - resource_base.tsv'
+./nde-web/venv/bin/python nde-web/scripts/sync_prod_approvals.py \
+  --resource-base-tsv 'RepoMetaCuration - resource_base.tsv'
+```
+
+Review the changed JSON files and `nde-web/exclusions.json` before merging.
+`_ProdApproved? = TRUE` authorizes new descriptive source metadata; the
+existing `prod_catalogs` search allowlist remains in force. Production
+`/v1/metadata` only attaches `sourceInfo` for allowed source keys.
+`_ResCatProdApproved? = TRUE` allows the corresponding DDE ResourceCatalog
+record to appear through the search API. A production-only DDE catalog ID
+allowlist also hides older records absent from the sheet, including superseded
+N3C versions. The approvals are independent: an
+approved DDE catalog card may be visible while its crawler source entry is
+hidden, as with BV-BRC.
+
+The source `identifier` stays unchanged because the portal uses it as the
+`includedInDataCatalog.name` query value. ResourceCatalog approvals affect
+the production API filter; changing the production index is a separate data
+release.
 
 ## Refresh Saved Search Totals
 
@@ -155,6 +183,9 @@ Commit script changes when they are part of the branch:
 nde-web/scripts/bootstrap_source_metadata.py
 nde-web/scripts/metadata_compatibility_calculator.py
 nde-web/scripts/sync_repo_metadata.py
+nde-web/scripts/sync_prod_approvals.py
+nde-web/scripts/resource_base.py
+nde-web/approval_filters.py
 nde-web/scripts/compute_heuristics.py
 nde-web/scripts/delete_inactive_user_profiles.py
 nde-web/scripts/update_saved_search_totals.py
@@ -167,7 +198,7 @@ Do not commit downloaded sheet exports or ad hoc reports unless the branch
 explicitly needs a snapshot:
 
 ```text
-SourceMetaCuration - resource_base.tsv
+RepoMetaCuration - resource_base.tsv
 Priority repo metadata - *.tsv
 repo_metadata_fields - *.tsv
 unstandardized_definedterms.tsv

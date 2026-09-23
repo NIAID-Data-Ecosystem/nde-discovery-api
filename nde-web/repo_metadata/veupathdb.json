@@ -1,16 +1,26 @@
 {
   "_id": "veupathdb",
-  "name": "VEuPathDB",
+  "name": "Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB)",
+  "alternateName": [
+    "VEuPathDB",
+    "Eukaryotic Pathogen, Vector and Host Informatics Resource"
+  ],
   "identifier": "VEuPathDB",
-  "url": "https://veupathdb.org/veupathdb/app/",
+  "url": "https://veupathdb.org/",
   "abstract": "The Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) is a NIAID supported IID repository that includes genomic and phenotypic data for eukaryotic pathogens and invertebrate vectors of infectious disease.",
   "description": "The Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB) is one of two Bioinformatics Resource Centers (BRCs) funded by the US National Institute of Allergy and Infectious Diseases (NIAID), with additional support from the Wellcome Trust (UK). VEuPathDB provides access to diverse genomic and other large scale datasets related to eukaryotic pathogens and invertebrate vectors of disease. Organisms supported by this resource include (but are not limited to) the NIAID list of emerging and re-emerging infectious diseases.",
   "collectionType": "Dataset Repository",
   "genre": [
-    "IID"
+    "IID",
+    "General Infectious Diseases and Pathogens",
+    "Biological Assay",
+    "Clinical",
+    "Epidemiological",
+    "Omics"
   ],
   "conditionsOfAccess": "Closed",
   "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Weekly",
   "schema": {
     "id": "identifer",

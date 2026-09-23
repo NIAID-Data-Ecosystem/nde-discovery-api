@@ -1,16 +1,30 @@
 {
   "_id": "clingen",
-  "name": "ClinicalGenomeResource (ClinGen)",
+  "name": "Clinical Genome Resource (ClinGen)",
+  "alternateName": [
+    "ClinGen",
+    "Clinical Genome Resource"
+  ],
   "identifier": "Clinical Genomics Resource (ClinGen)",
-  "url": "https://clinicalgenome.org/",
+  "url": "https://www.clinicalgenome.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_b880e7dc2c2437e0",
   "abstract": "ClinicalGenomeResource (ClinGen) is a NIH supported generalist repository that includes genomic data.",
   "description": "ClinGen is a National Institutes of Health (NIH)-funded resource dedicated to building an authoritative central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.",
+  "collectionType": "Knowledge Base, Data Repository",
   "type": "Data Repository",
   "genre": [
     "Generalist"
   ],
   "conditionsOfAccess": "Open",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "usageInfo": "https://clinicalgenome.org/docs/terms-of-use/",
+  "inLanguage": "English",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "hasDownload": "All content",
+  "creativeWorkStatus": "Accepting Data",
+  "dateCreated": "2013-09-04",
+  "dateModified": "2024-04-07",
   "schedule": "Weekly",
   "schema": {
     "DISEASE ID (MONDO)": "healthCondition.identifier",

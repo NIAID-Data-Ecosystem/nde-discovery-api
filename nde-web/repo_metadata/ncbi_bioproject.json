@@ -1,6 +1,10 @@
 {
   "_id": "ncbi_bioproject",
   "name": "NCBI BioProject",
+  "alternateName": [
+    "National Center for Biotechnology Information BioProject",
+    "BioProject"
+  ],
   "identifier": "NCBI BioProject",
   "url": "https://www.ncbi.nlm.nih.gov/bioproject/",
   "abstract": "NCBI BioProject is a NIH supported generalist repository that includes multiomic data.",
@@ -12,6 +16,7 @@
   "conditionsOfAccess": "Open",
   "isAccessibleForFree": true,
   "hasAPI": true,
+  "creativeWorkStatus": "Accepting Data",
   "schedule": "Weekly",
   "schema": {
     "ProjectDescr/Title": "name",

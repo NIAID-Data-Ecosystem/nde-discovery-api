@@ -124,11 +124,29 @@ _REPO_METADATA_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "repo_metadata"
 )
 _HEURISTICS_DIR = os.path.join(_REPO_METADATA_DIR, "heuristics")
+_EXCLUSIONS_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "exclusions.json"
+)
 _PARENT_COLLECTION_SOURCE_KEYS = {
     "veupathdb": "veupath_collections",
 }
 _INTERNAL_SOURCE_INFO_FIELDS = {"_mongoCollection", "_mongoFilter"}
 _source_info_cache = None
+_approved_source_keys_cache = None
+
+
+def _load_approved_source_keys():
+    """Source metadata visible in production's portal and matcher."""
+    global _approved_source_keys_cache
+    if _approved_source_keys_cache is None:
+        with open(_EXCLUSIONS_PATH) as f:
+            keys = json.load(f).get("prod_source_keys")
+        if not isinstance(keys, list) or not keys or not all(
+            isinstance(key, str) and key for key in keys
+        ):
+            raise RuntimeError("exclusions.json requires prod_source_keys")
+        _approved_source_keys_cache = frozenset(keys)
+    return _approved_source_keys_cache
 
 
 def _load_source_info():
@@ -888,7 +906,10 @@ class NDESourceHandler(MetadataSourceHandler):
 
     def extras(self, _meta):
         source_info = _load_source_info()
+        approved_sources = _load_approved_source_keys()
         for source, data in source_info.items():
+            if source not in approved_sources:
+                continue
             public_data = {
                 field: value
                 for field, value in data.items()

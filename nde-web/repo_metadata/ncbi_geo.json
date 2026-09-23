@@ -1,9 +1,10 @@
 {
   "_id": "ncbi_geo",
-  "name": "NCBI GEO",
+  "name": "NCBI Gene Expression Omnibus (NCBI GEO)",
   "alternateName": [
     "National Center for Biotechnology Information Gene Expression Omnibus",
-    "NCBI Gene Expression Omnibus"
+    "NCBI Gene Expression Omnibus",
+    "NCBI GEO"
   ],
   "identifier": "NCBI GEO",
   "url": "https://www.ncbi.nlm.nih.gov/geo/",

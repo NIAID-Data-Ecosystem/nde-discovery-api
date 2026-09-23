@@ -1,6 +1,10 @@
 {
   "_id": "reframedb",
-  "name": "ReframeDB",
+  "name": "Repurposing, Focused Rescue, and Accelerated Medchem Database (REFRAMEdb)",
+  "alternateName": [
+    "Repurposing, Focused Rescue, and Accelerated Medchem Database",
+    "REFRAMEdb"
+  ],
   "identifier": "ReframeDB",
   "url": "https://reframedb.org/",
   "abstract": "ReframeDB is a Calibr maintained repository that has a screening set of 12,000 compounds for drug repositioning.",

@@ -3,7 +3,7 @@
 
 For one source, this helper can:
 
-1. prompt for the private SourceMetaCuration resource_base Google Sheet TSV
+1. prompt for the private RepoMetaCuration resource_base Google Sheet TSV
 2. create a minimal ``nde-web/repo_metadata/<source>.json`` stub if needed
 3. run ``sync_repo_metadata.py --source <source>``
 4. run ``compute_heuristics.py --source <source>``
@@ -19,7 +19,6 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 import re
 import subprocess
@@ -27,17 +26,16 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from resource_base import (
+    RESOURCE_BASE_SHEET_URL,
+    RESOURCE_BASE_TSV,
+    load_resource_base_rows,
+    row_source_candidates,
+)
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 REPO_METADATA_DIR = REPO_ROOT / "nde-web" / "repo_metadata"
 METADATA_COMPLETENESS_DIR = REPO_ROOT / "nde-web" / "metadata_completeness"
-RESOURCE_BASE_TSV = REPO_ROOT / "SourceMetaCuration - resource_base.tsv"
-
-SHEET_ID = "1SjZ7BNC6oah722psQ_q8oFDB5ZBZjo3np5lBtA3cN-k"
-RESOURCE_BASE_GID = "349233573"
-RESOURCE_BASE_SHEET_URL = (
-    f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/edit"
-    f"#gid={RESOURCE_BASE_GID}"
-)
 
 DEFAULT_MONGO_URL = (
     "mongodb://su02:27017,su09:27017,su11:27017/"
@@ -80,7 +78,7 @@ def display_path(path: Path) -> str:
 def resource_base_download_instructions(path: Path) -> str:
     return "\n".join(
         [
-            "The SourceMetaCuration resource_base sheet is private, so this "
+            "The RepoMetaCuration resource_base sheet is private, so this "
             "script cannot download it automatically.",
             f"Open the sheet: {RESOURCE_BASE_SHEET_URL}",
             "Select the resource_base tab, then choose File > Download > "
@@ -107,41 +105,6 @@ def prompt_for_resource_base_tsv(
         input("Press Enter after moving the TSV into place, or Ctrl-C to stop.")
         if not path.exists():
             print(f"Still missing {display_path(path)}.")
-
-
-def validate_resource_base_tsv(path: Path) -> None:
-    with path.open(newline="", encoding="utf-8") as f:
-        reader = csv.reader(f, delimiter="\t")
-        try:
-            header = next(reader)
-        except StopIteration as exc:
-            raise RuntimeError(f"{path} is empty") from exc
-    required = {"name", "url", "abstract", "description"}
-    if not required.issubset(set(header)):
-        raise RuntimeError(
-            f"{display_path(path)} does not look like SourceMetaCuration "
-            "resource_base.tsv. "
-            f"Download the resource_base tab as TSV from {RESOURCE_BASE_SHEET_URL} "
-            f"and save it to {display_path(RESOURCE_BASE_TSV)}."
-        )
-
-
-def load_resource_base_rows(path: Path) -> list[dict[str, str]]:
-    if not path.exists():
-        raise FileNotFoundError(f"Missing {path}")
-    validate_resource_base_tsv(path)
-    with path.open(newline="", encoding="utf-8") as f:
-        return list(csv.DictReader(f, delimiter="\t"))
-
-
-def row_source_candidates(row: dict[str, str]) -> list[str]:
-    candidates = [
-        row.get("name", ""),
-        row.get("identifier", ""),
-    ]
-    alternate = row.get("alternateName", "")
-    candidates.extend(re.split(r"[,;]", alternate))
-    return [candidate.strip() for candidate in candidates if candidate.strip()]
 
 
 def find_source_row(rows: list[dict[str, str]], source_key: str) -> dict[str, str] | None:
@@ -259,7 +222,7 @@ def prepare_resource_base_tsv(
                 print(resource_base_download_instructions(resource_base_tsv))
         elif resource_base_tsv.exists():
             if confirm(
-                "Refresh SourceMetaCuration resource_base TSV manually before continuing?",
+                "Refresh RepoMetaCuration resource_base TSV manually before continuing?",
                 default=False,
             ):
                 prompt_for_resource_base_tsv(
@@ -300,7 +263,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--resource-base-tsv",
         default=str(RESOURCE_BASE_TSV),
-        help="Where to save/read SourceMetaCuration - resource_base.tsv.",
+        help="Where to save/read RepoMetaCuration - resource_base.tsv.",
     )
     parser.add_argument(
         "--skip-download",
@@ -376,6 +339,11 @@ def bootstrap_source(
 
     created_stub_path = None
     if not source_json_path.exists():
+        if row.get("_ProdApproved?") != "TRUE":
+            raise SystemExit(
+                f"{source_key!r} is not production-approved in RepoMetaCuration; "
+                "a source JSON stub was not created."
+            )
         created_stub_path = create_source_stub(
             source_key=source_key,
             row=row or {},
@@ -391,6 +359,8 @@ def bootstrap_source(
                 "nde-web/scripts/sync_repo_metadata.py",
                 "--source",
                 source_key,
+                "--resource-base-tsv",
+                str(resolve_resource_base_tsv(args.resource_base_tsv)),
             ],
             args.dry_run,
         )
