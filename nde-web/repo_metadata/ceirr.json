@@ -11,7 +11,7 @@
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_5a908221f16d72c6",
   "abstract": "Centers of Excellence for Influenza Research and Response (CEIRR) Resources is a NIAID supported IID repository that includes reagent data.",
   "description": "Resources from the Centers of Excellence for Influenza Research and Response (CEIRR) Network. The Centers of Excellence for Influenza Research and Response (CEIRR) Network is a multidisciplinary and collaborative research network funded by the National Institute of Allergy and Infectious Diseases (NIAID) to study the natural history, transmission and pathogenesis of influenza, and provide an international research infrastructure to address influenza outbreaks.  CEIRR Centers conduct studies both in the United States and abroad to study key influenza research areas and provide pandemic response. Centers undertake projects that aim to better understand the immune response to influenza vaccination and infection and identify which immunological factors can determine disease severity. Surveillance projects investigate how influenza viruses infect, evolve, and transmit in both human and animal infections.",
-  "collectionType": "Portal | Sample Repository | Program Resource",
+  "collectionType": "Portal, Sample Repository, Program Resource",
   "genre": [
     "IID"
   ],

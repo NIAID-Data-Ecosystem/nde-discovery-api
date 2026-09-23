@@ -149,6 +149,11 @@ def _coerce_bool(value: str) -> bool | None:
     return None
 
 
+def _format_collection_type(value: str) -> str:
+    """Keep the source metadata scalar while formatting pipe-separated types."""
+    return ", ".join(part.strip() for part in value.split("|") if part.strip())
+
+
 # Columns in resource_base.tsv mapped to our JSON field names and how to
 # coerce the cell value. A coercer of ``None`` means "use string as-is".
 RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
@@ -163,7 +168,7 @@ RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
     "usageInfo": ("usageInfo", None),
     "abstract": ("abstract", None),
     "description": ("description", None),
-    "collectionType": ("collectionType", None),
+    "collectionType": ("collectionType", _format_collection_type),
     "hasAPI": ("hasAPI", _coerce_bool),
     "hasDownload": ("hasDownload", None),
     "isAccessibleForFree": ("isAccessibleForFree", _coerce_bool),
@@ -193,7 +198,7 @@ RESOURCE_BASE_PRESERVED_FIELDS = frozenset({"identifier"})
 # fragments — they are left to the Phase 3 heuristics pipeline rather
 # than parsed heuristically here.
 PRIORITY_SCALAR_PROPERTIES: dict[str, tuple[str, Any]] = {
-    "collectionType": ("collectionType", None),
+    "collectionType": ("collectionType", _format_collection_type),
     "genre": (
         "genre",
         lambda v: [s.strip() for s in v.split(";") if s.strip()],

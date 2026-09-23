@@ -80,6 +80,8 @@ exports. `genre` remains a semicolon-separated array. Other supported fields
 retain their existing API types. Pipe-separated values in the sheet's
 `identifier` column are available for row matching, but do not replace the
 single stable identifier returned by `/v1/metadata`.
+Pipe-separated `collectionType` values are exposed as comma-separated strings
+so they remain compatible with the source metadata schema's string field.
 
 Both bootstrap and sync accept `--resource-base-tsv <path>` to read another
 download location; relative paths resolve from the repository root. Bootstrap

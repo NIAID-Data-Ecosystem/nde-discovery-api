@@ -93,7 +93,7 @@ def test_sync_refreshes_descriptive_fields_and_preserves_ingestion_settings(
     assert updated["genre"] == ["IID", "Omics"]
     assert updated["hasAPI"] is False
     assert updated["isAccessibleForFree"] is False
-    assert updated["collectionType"] == "Portal | Data Repository"
+    assert updated["collectionType"] == "Portal, Data Repository"
     for field in (
         "_id", "license", "schedule", "schema", "type", "parentCollection",
         "_mongoCollection", "_mongoFilter",

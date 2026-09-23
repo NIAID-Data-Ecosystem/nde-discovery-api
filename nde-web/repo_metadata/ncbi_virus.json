@@ -6,7 +6,7 @@
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_b3bb013bc893ca80",
   "abstract": "NCBI Virus is a NIH supported IID repository that includes multiomic data.",
   "description": "NCBI Virus is a community portal for viral sequence data from RefSeq, GenBank and other NCBI repositories.",
-  "collectionType": "Knowledge Base | Data Repository",
+  "collectionType": "Knowledge Base, Data Repository",
   "genre": [
     "Generalist",
     "Omics",

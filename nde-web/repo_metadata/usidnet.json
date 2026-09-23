@@ -9,7 +9,7 @@
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_e5fe861c511dafb4",
   "abstract": "United States Immunodeficiency Network (USIDNET) is a NIAID supported IID repository that includes clinical data.",
   "description": "The United States Immunodeficiency Network (USIDNET) is a research consortium established to advance scientific research in the field of immunodeficiencies/inborn errors of immunity. We have several goals:     - Collection of phenotype data using automated data extraction to populate a freely accessible registry    - Facilitation of studies on outcomes and phenotypes using USIDNET data    - Matchmaking services to connect clinicians and researchers    - Collaboration with ClinGen, OMIM, MONDO and HPO to improve data in other databases    - Development of do-it-yourself (DIY) data access points    - Mentoring of trainees",
-  "collectionType": "Patient Registry | Sample Repository",
+  "collectionType": "Patient Registry, Sample Repository",
   "genre": [
     "IID",
     "Immunological and Autoimmune Diseases",
