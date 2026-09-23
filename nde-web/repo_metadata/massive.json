@@ -5,7 +5,7 @@
     "Mass Spectrometry Interactive Virtual Environment",
     "MassIVE"
   ],
-  "identifier": "MassIVE",
+  "identifier": "Mass Spectrometry Interactive Virtual Environment (MassIVE)",
   "url": "https://massive.ucsd.edu/",
   "abstract": "MassIVE is a NIH supported Basic science repository that includes mass spectrometry data.",
   "description": "MassIVE is a community resource developed by the NIH-funded Center for Computational Mass Spectrometry to promote the global, free exchange of mass spectrometry data. MassIVE datasets can be assigned ProteomeXchange accessions to satisfy publication requirements.",

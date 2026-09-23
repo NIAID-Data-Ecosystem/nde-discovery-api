@@ -5,7 +5,7 @@
     "EMPIAR",
     "Electron Microscopy Public Image Archive"
   ],
-  "identifier": "Electron Microscopy Public Image Archive",
+  "identifier": "Electron Microscopy Public Image Archive (EMPIAR)",
   "url": "https://www.ebi.ac.uk/empiar/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_0089e68763ba2b6d",
   "abstract": "EMPIAR is a generalist repository that includes image data.",

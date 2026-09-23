@@ -7,7 +7,7 @@
     "NIH HIV Reagent Program",
     "Biological and Emerging Infections Research Resources"
   ],
-  "identifier": "BEI Resources",
+  "identifier": "Biological and Emerging Infections Research Resources (BEIResources)",
   "url": "https://www.beiresources.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_933c129858283201",
   "abstract": "BEIResources is a NIAID supported IID repository that includes reagent data.",

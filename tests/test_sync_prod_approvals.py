@@ -66,3 +66,42 @@ def test_approved_catalog_requires_dde_id():
         approvals.compile_approvals(
             rows, {"staging_ids": [], "prod_catalogs": []}, {}
         )
+
+
+def test_activate_source_names_updates_allowlist_and_keeps_parent_scope():
+    rows = [
+        {"name": "New repository", "url": "https://new.org", "_ProdApproved?": "TRUE"},
+        {"name": "VEuPath Collections", "url": "https://veupathdb.org/", "_ProdApproved?": "TRUE"},
+        {"name": "Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB)",
+         "url": "https://veupathdb.org/", "_ProdApproved?": "TRUE"},
+        {"name": "Hidden repository", "url": "https://hidden.org", "_ProdApproved?": "FALSE"},
+    ]
+    repos = {
+        "approved": {"name": "New repository", "identifier": "Old repository", "url": "https://new.org"},
+        "veupath_collections": {"name": "VEuPath Collections", "identifier": "VEuPathDB",
+                                "url": "https://veupathdb.org/"},
+        "veupathdb": {"name": "Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB)",
+                     "identifier": "VEuPathDB", "url": "https://veupathdb.org/"},
+        "hidden": {"name": "Hidden repository", "identifier": "Hidden repository",
+                   "url": "https://hidden.org"},
+    }
+    exclusions = {"prod_catalogs": ["Old repository", "VEuPathDB", "DDE special"],
+                  "staging_ids": []}
+
+    updated, source_updates = approvals.activate_source_names(rows, exclusions, repos)
+
+    assert updated["prod_catalogs"] == [
+        "New repository",
+        "Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB)",
+        "DDE special",
+    ]
+    assert source_updates["approved"]["identifier"] == "New repository"
+    assert source_updates["veupath_collections"]["identifier"] == source_updates["veupathdb"]["identifier"]
+    assert "hidden" not in source_updates
+    assert exclusions["prod_catalogs"] == ["Old repository", "VEuPathDB", "DDE special"]
+
+    rerun_exclusions, rerun_updates = approvals.activate_source_names(
+        rows, updated, {**repos, **source_updates}
+    )
+    assert rerun_exclusions == updated
+    assert rerun_updates == {}
