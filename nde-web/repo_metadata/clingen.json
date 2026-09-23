@@ -5,7 +5,7 @@
     "ClinGen",
     "Clinical Genome Resource"
   ],
-  "identifier": "Clinical Genomics Resource (ClinGen)",
+  "identifier": "Clinical Genome Resource (ClinGen)",
   "url": "https://www.clinicalgenome.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_b880e7dc2c2437e0",
   "abstract": "ClinicalGenomeResource (ClinGen) is a NIH supported generalist repository that includes genomic data.",

@@ -14,7 +14,16 @@ def dde_resource_catalog_approval_filter(approved_ids):
                     "bool": {
                         "must": [
                             {"term": {"@type": "ResourceCatalog"}},
-                            {"term": {"includedInDataCatalog.name": "Data Discovery Engine"}},
+                            {
+                                "terms": {
+                                    "includedInDataCatalog.name": [
+                                        "Data Discovery Engine",
+                                        "Data Discovery Engine (DDE)",
+                                        "Data Discovery Engine, NDE Systems Biology",
+                                        "Data Discovery Engine, NIAID Data Ecosystem",
+                                    ]
+                                }
+                            },
                         ],
                         "must_not": [{"ids": {"values": approved_ids}}],
                     }

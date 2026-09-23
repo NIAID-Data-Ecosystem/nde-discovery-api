@@ -5,7 +5,7 @@
     "DBAASP",
     "Database of Antimicrobial Activity and Structure of Peptides"
   ],
-  "identifier": "Database of Antimicrobial Activity and Structure of Peptides",
+  "identifier": "Database of Antimicrobial Activity and Structure of Peptides (DBAASP)",
   "url": "https://dbaasp.org/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_cc13744ba5c15cca",
   "abstract": "DBAASP is a NIAID supported IID repository that includes structure data.",

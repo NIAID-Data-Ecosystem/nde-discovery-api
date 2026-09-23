@@ -53,9 +53,9 @@ def test_count_body_uses_main_frontend_type_filter():
                 {
                     "terms": {
                         "includedInDataCatalog.name": [
-                            "Database of Antimicrobial Activity and Structure of Peptides",
-                            "Electron Microscopy Data Bank",
-                            "Clinical Genomics Resource (ClinGen)",
+                            "Database of Antimicrobial Activity and Structure of Peptides (DBAASP)",
+                            "Electron Microscopy Data Bank (EMDB)",
+                            "Clinical Genome Resource (ClinGen)",
                         ]
                     }
                 },
@@ -67,7 +67,7 @@ def test_count_body_uses_main_frontend_type_filter():
             "must": [
                 {"term": {"@type": "Sample"}},
                 {"term": {"additionalType": "BioSample"}},
-                {"term": {"includedInDataCatalog.name": "BEI Resources"}},
+                {"term": {"includedInDataCatalog.name": "Biological and Emerging Infections Research Resources (BEIResources)"}},
             ]
         }
     }
@@ -99,7 +99,12 @@ def test_count_body_applies_main_exclusions():
                 "bool": {
                     "must": [
                         {"term": {"@type": "ResourceCatalog"}},
-                        {"term": {"includedInDataCatalog.name": "Data Discovery Engine"}},
+                        {"terms": {"includedInDataCatalog.name": [
+                            "Data Discovery Engine",
+                            "Data Discovery Engine (DDE)",
+                            "Data Discovery Engine, NDE Systems Biology",
+                            "Data Discovery Engine, NIAID Data Ecosystem",
+                        ]}},
                     ],
                     "must_not": [{"ids": {"values": ["dde_approved"]}}],
                 }

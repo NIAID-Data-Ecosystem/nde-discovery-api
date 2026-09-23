@@ -14,12 +14,13 @@ from approval_filters import dde_resource_catalog_approval_filter
 
 
 SUPPORTED_PUBLIC_TYPES = ["Dataset", "ResourceCatalog"]
-BIOSAMPLE_CATALOG_SAMPLE_SOURCES = ["BEI Resources"]
+BIOSAMPLE_CATALOG_SAMPLE_SOURCES = [
+    "Biological and Emerging Infections Research Resources (BEIResources)"
+]
 DATA_COLLECTION_SOURCES = [
-    "Database of Antimicrobial Activity and Structure of Peptides",
-    "Bacterial and Viral Bioinformatics Resource Center",
-    "Electron Microscopy Data Bank",
-    "Clinical Genomics Resource (ClinGen)",
+    "Database of Antimicrobial Activity and Structure of Peptides (DBAASP)",
+    "Electron Microscopy Data Bank (EMDB)",
+    "Clinical Genome Resource (ClinGen)",
 ]
 
 

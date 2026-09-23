@@ -102,9 +102,22 @@ approved DDE catalog card may be visible while its crawler source entry is
 hidden, as with BV-BRC.
 
 The source `identifier` stays unchanged because the portal uses it as the
-`includedInDataCatalog.name` query value. ResourceCatalog approvals affect
-the production API filter; changing the production index is a separate data
-release.
+`includedInDataCatalog.name` query value during a descriptive-metadata refresh.
+When the crawler records are ready to use the sheet's new names, activate the
+source identifiers and the production search allowlist together:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/sync_prod_approvals.py \
+  --resource-base-tsv 'RepoMetaCuration - resource_base.tsv' \
+  --activate-source-names
+```
+
+This uses the approved row's `name`, not its pipe-separated `identifier` cell.
+VEuPath Collections continues to share its parent VEuPathDB query name. The
+generated API change should go live only after the matching record-level names
+are present in the production build; otherwise source search links and the
+`prod_catalogs` allowlist will not match those records. ResourceCatalog
+approvals remain independent of crawler-source approvals.
 
 ## Refresh Saved Search Totals
 

@@ -17,11 +17,13 @@ DEFAULT_USER_INDEX = "nde_user_profiles"
 
 _BROWSE_ALL_QUERIES = frozenset({"", "__all__", "__any__", "*", "*:*"})
 _SUPPORTED_TYPES = ["Dataset", "ResourceCatalog"]
-_BIOSAMPLE_CATALOG_SAMPLE_SOURCES = ["BEI Resources"]
+_BIOSAMPLE_CATALOG_SAMPLE_SOURCES = [
+    "Biological and Emerging Infections Research Resources (BEIResources)"
+]
 _DATA_COLLECTION_SOURCES = [
-    "Database of Antimicrobial Activity and Structure of Peptides",
-    "Electron Microscopy Data Bank",
-    "Clinical Genomics Resource (ClinGen)",
+    "Database of Antimicrobial Activity and Structure of Peptides (DBAASP)",
+    "Electron Microscopy Data Bank (EMDB)",
+    "Clinical Genome Resource (ClinGen)",
 ]
 _DEFAULT_SAMPLE_VISIBILITY_FILTER = (
     'NOT(@type:Sample AND NOT additionalType:"BioSample")'
