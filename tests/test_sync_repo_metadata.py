@@ -115,6 +115,18 @@ def test_resource_base_record_excludes_search_identifier():
     assert record == {"name": "Updated name"}
 
 
+@pytest.mark.parametrize("cell, expected", [
+    (
+        "Portal | Dataset Repository | Inference Repository",
+        {"collectionType": "Portal, Dataset Repository"},
+    ),
+    # A cell with only staging-only types keeps the existing value, like a blank.
+    ("Inference Repository", {}),
+])
+def test_resource_base_record_omits_staging_only_collection_types(cell, expected):
+    assert sync_module.resource_base_record({"collectionType": cell}) == expected
+
+
 def test_prod_approval_preserves_unapproved_sources_and_catalog_links(
     tmp_path, metadata_checkout
 ):

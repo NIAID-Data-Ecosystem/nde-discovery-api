@@ -149,9 +149,17 @@ def _coerce_bool(value: str) -> bool | None:
     return None
 
 
+# The shared sheet also describes staging-only content. Inferences are not
+# indexed in production, so production source metadata omits their type.
+STAGING_ONLY_COLLECTION_TYPES = frozenset({"Inference Repository"})
+
+
 def _format_collection_type(value: str) -> str:
     """Keep the source metadata scalar while formatting pipe-separated types."""
-    return ", ".join(part.strip() for part in value.split("|") if part.strip())
+    types = (part.strip() for part in value.split("|"))
+    return ", ".join(
+        t for t in types if t and t not in STAGING_ONLY_COLLECTION_TYPES
+    )
 
 
 # Columns in resource_base.tsv mapped to our JSON field names and how to

@@ -101,6 +101,11 @@ N3C versions. The approvals are independent: an
 approved DDE catalog card may be visible while its crawler source entry is
 hidden, as with BV-BRC.
 
+The sheet is shared with staging, so the production sync drops collection
+types for staging-only content (currently `Inference Repository`) from the
+comma-separated `collectionType`. Add future staging-only types to
+`STAGING_ONLY_COLLECTION_TYPES` in `sync_repo_metadata.py`.
+
 The source `identifier` stays unchanged because the portal uses it as the
 `includedInDataCatalog.name` query value during a descriptive-metadata refresh.
 When the crawler records are ready to use the sheet's new names, activate the
