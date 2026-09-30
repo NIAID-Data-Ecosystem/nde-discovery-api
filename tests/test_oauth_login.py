@@ -5,6 +5,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from urllib.parse import parse_qs, urlsplit
 
+import pytest
 from tornado.httpclient import HTTPClientError
 
 
@@ -30,7 +31,33 @@ class _AsyncClient:
         self.updated.append(kwargs)
 
 
-def _github_handler(next_url, exc=None, token=None):
+def _state_cookie_stubs(handler, next_url, args, state_cookie):
+    """Stub a callback whose `state` matches the state cookie unless overridden."""
+    request_args = {"code": "oauth-code", "state": "expected-state", "next": next_url}
+    request_args.update(args or {})
+    if state_cookie is None:
+        state_cookie = {"state": "expected-state", "next": next_url}
+    handler.secure_cookies = []
+
+    def get_secure_cookie(*_args, **_kwargs):
+        return json.dumps(state_cookie).encode() if state_cookie else None
+
+    handler.get_argument = lambda name, default=None: request_args.get(name, default)
+    handler.get_secure_cookie = get_secure_cookie
+    handler.set_secure_cookie = lambda *args, **kwargs: handler.secure_cookies.append(
+        (args, kwargs)
+    )
+
+
+def _state_cleared(provider):
+    return [((f"__Host-oauth_state_{provider}",), {"path": "/"})]
+
+
+def _state_and_session_cleared(provider):
+    return _state_cleared(provider) + [(("user",), {"domain": None, "path": "/"})]
+
+
+def _github_handler(next_url, exc=None, token=None, *, args=None, state_cookie=None):
     handler = handlers.GitHubLoginHandler.__new__(handlers.GitHubLoginHandler)
     redirects = []
     cleared = []
@@ -48,9 +75,6 @@ def _github_handler(next_url, exc=None, token=None):
         )
     )
 
-    def get_argument(name, default=None):
-        return {"code": "oauth-code", "next": next_url}.get(name, default)
-
     async def github_get_oauth2_token(**_kwargs):
         if exc:
             raise exc
@@ -59,7 +83,7 @@ def _github_handler(next_url, exc=None, token=None):
     async def github_get_authenticated_user(_token):
         raise AssertionError("GitHub user lookup should not run")
 
-    handler.get_argument = get_argument
+    _state_cookie_stubs(handler, next_url, args, state_cookie)
     handler.github_get_oauth2_token = github_get_oauth2_token
     handler.github_get_authenticated_user = github_get_authenticated_user
     handler.clear_cookie = lambda *args, **kwargs: cleared.append((args, kwargs))
@@ -68,7 +92,7 @@ def _github_handler(next_url, exc=None, token=None):
     return handler, redirects, cleared
 
 
-def _orcid_handler(next_url, exc=None, token=None):
+def _orcid_handler(next_url, exc=None, token=None, *, args=None, state_cookie=None):
     handler = handlers.ORCIDLoginHandler.__new__(handlers.ORCIDLoginHandler)
     redirects = []
     cleared = []
@@ -86,9 +110,6 @@ def _orcid_handler(next_url, exc=None, token=None):
         )
     )
 
-    def get_argument(name, default=None):
-        return {"code": "oauth-code", "next": next_url}.get(name, default)
-
     async def orcid_get_oauth2_token(**_kwargs):
         if exc:
             raise exc
@@ -97,7 +118,7 @@ def _orcid_handler(next_url, exc=None, token=None):
     async def orcid_get_authenticated_user_record(_token, _orcid_id):
         raise AssertionError("ORCID user lookup should not run")
 
-    handler.get_argument = get_argument
+    _state_cookie_stubs(handler, next_url, args, state_cookie)
     handler.orcid_get_oauth2_token = orcid_get_oauth2_token
     handler.orcid_get_authenticated_user_record = orcid_get_authenticated_user_record
     handler.clear_cookie = lambda *args, **kwargs: cleared.append((args, kwargs))
@@ -163,7 +184,7 @@ def test_github_login_redirects_with_unavailable_error_on_upstream_500():
 
     asyncio.run(handlers.GitHubLoginHandler.get(handler))
 
-    assert cleared == [(("user",), {"domain": None, "path": "/"})]
+    assert cleared == _state_and_session_cleared("github")
     assert redirects == [
         "https://data.niaid.nih.gov/?view=saved&login_error=github_unavailable"
     ]
@@ -177,7 +198,7 @@ def test_github_login_redirects_with_login_failed_error_on_upstream_4xx():
 
     asyncio.run(handlers.GitHubLoginHandler.get(handler))
 
-    assert cleared == [(("user",), {"domain": None, "path": "/"})]
+    assert cleared == _state_and_session_cleared("github")
     assert redirects == [
         "https://data.niaid.nih.gov/account?login_error=github_login_failed"
     ]
@@ -191,7 +212,7 @@ def test_orcid_login_redirects_with_unavailable_error_on_upstream_500():
 
     asyncio.run(handlers.ORCIDLoginHandler.get(handler))
 
-    assert cleared == [(("user",), {"domain": None, "path": "/"})]
+    assert cleared == _state_and_session_cleared("orcid")
     assert redirects == [
         "https://data.niaid.nih.gov/?view=saved&login_error=orcid_unavailable"
     ]
@@ -205,7 +226,7 @@ def test_orcid_login_redirects_with_login_failed_error_on_upstream_4xx():
 
     asyncio.run(handlers.ORCIDLoginHandler.get(handler))
 
-    assert cleared == [(("user",), {"domain": None, "path": "/"})]
+    assert cleared == _state_and_session_cleared("orcid")
     assert redirects == [
         "https://data.niaid.nih.gov/account?login_error=orcid_login_failed"
     ]
@@ -219,7 +240,7 @@ def test_orcid_login_redirects_when_token_response_is_incomplete():
 
     asyncio.run(handlers.ORCIDLoginHandler.get(handler))
 
-    assert cleared == [(("user",), {"domain": None, "path": "/"})]
+    assert cleared == _state_and_session_cleared("orcid")
     assert redirects == [
         "https://data.niaid.nih.gov/account?login_error=orcid_login_failed"
     ]
@@ -233,9 +254,92 @@ def test_github_login_redirects_when_token_response_has_no_access_token():
 
     asyncio.run(handlers.GitHubLoginHandler.get(handler))
 
-    assert cleared == [(("user",), {"domain": None, "path": "/"})]
+    assert cleared == _state_and_session_cleared("github")
     assert redirects == [
         "https://data.niaid.nih.gov/account?login_error=github_login_failed"
+    ]
+
+
+OAUTH2_PROVIDERS = pytest.mark.parametrize(
+    ("make_handler", "handler_cls", "provider"),
+    [
+        pytest.param(_github_handler, handlers.GitHubLoginHandler, "github", id="github"),
+        pytest.param(_orcid_handler, handlers.ORCIDLoginHandler, "orcid", id="orcid"),
+    ],
+)
+
+
+@OAUTH2_PROVIDERS
+def test_oauth2_login_redirects_to_provider_with_state(make_handler, handler_cls, provider):
+    handler, redirects, _cleared = make_handler(
+        "https://data.niaid.nih.gov/account", args={"code": None, "state": None}
+    )
+
+    asyncio.run(handler_cls.get(handler))
+
+    [(cookie_args, cookie_kwargs)] = handler.secure_cookies
+    assert cookie_args[0] == f"__Host-oauth_state_{provider}"
+    state_cookie = json.loads(cookie_args[1])
+    assert state_cookie["next"] == "https://data.niaid.nih.gov/account"
+    assert cookie_kwargs["samesite"] == "Lax"
+    assert cookie_kwargs["expires_days"] == 1
+    assert "domain" not in cookie_kwargs
+
+    redirect = urlsplit(redirects[0])
+    query = parse_qs(redirect.query)
+    assert redirect._replace(query="").geturl() == handler_cls._OAUTH_AUTHORIZE_URL
+    assert query["redirect_uri"] == [f"https://api.data.niaid.nih.gov/login/{provider}"]
+    assert query["state"] == [state_cookie["state"]]
+
+
+@OAUTH2_PROVIDERS
+def test_oauth2_login_rejects_callback_with_mismatched_state(make_handler, handler_cls, provider):
+    handler, redirects, cleared = make_handler(
+        "https://data.niaid.nih.gov/account",
+        AssertionError("Token exchange should not run"),
+        args={"state": "returned-state"},
+    )
+
+    asyncio.run(handler_cls.get(handler))
+
+    # A forged callback must not log the user out, so only the state cookie goes.
+    assert cleared == _state_cleared(provider)
+    assert redirects == [
+        f"https://data.niaid.nih.gov/account?login_error={provider}_login_failed"
+    ]
+
+
+@OAUTH2_PROVIDERS
+def test_oauth2_login_rejects_callback_without_state_cookie(make_handler, handler_cls, provider):
+    handler, redirects, cleared = make_handler(
+        "https://data.niaid.nih.gov/account",
+        AssertionError("Token exchange should not run"),
+        state_cookie={},
+    )
+
+    asyncio.run(handler_cls.get(handler))
+
+    assert cleared == _state_cleared(provider)
+    # With no state cookie there's no saved `next`, so fall back to the portal.
+    assert redirects == [f"https://data.niaid.nih.gov/?login_error={provider}_login_failed"]
+
+
+@OAUTH2_PROVIDERS
+def test_oauth2_login_redirects_with_error_when_provider_denies_access(
+    make_handler, handler_cls, provider
+):
+    handler, redirects, cleared = make_handler(
+        "https://data.niaid.nih.gov/account",
+        AssertionError("Token exchange should not run"),
+        args={"code": None, "error": "access_denied"},
+    )
+
+    asyncio.run(handler_cls.get(handler))
+
+    assert handler.secure_cookies == []
+    assert cleared == _state_cleared(provider)
+    assert redirects == [
+        f"https://data.niaid.nih.gov/account?login_error={provider}_login_failed"
     ]
 
 
@@ -291,11 +395,11 @@ def test_google_login_redirects_to_provider_with_stable_callback_url():
 
     assert len(secure_cookies) == 1
     cookie_args, cookie_kwargs = secure_cookies[0]
-    assert cookie_args[0] == "oauth_state_google"
+    assert cookie_args[0] == "__Host-oauth_state_google"
     state_cookie = json.loads(cookie_args[1])
     assert state_cookie["next"] == "https://data.niaid.nih.gov/account"
     assert cookie_kwargs["httponly"] is True
-    assert cookie_kwargs["samesite"] == "None"
+    assert cookie_kwargs["samesite"] == "Lax"
 
     redirect = urlsplit(redirects[0])
     query = parse_qs(redirect.query)
@@ -329,10 +433,8 @@ def test_google_login_redirects_when_state_validation_fails():
 
     asyncio.run(handlers.GoogleLoginHandler.get(handler))
 
-    assert cleared == [
-        (("oauth_state_google",), {"domain": None, "path": "/"}),
-        (("user",), {"domain": None, "path": "/"}),
-    ]
+    # The existing session is kept: a forged callback must not log the user out.
+    assert cleared == _state_cleared("google")
     assert redirects == [
         "https://data.niaid.nih.gov/account?login_error=google_login_failed"
     ]
@@ -371,7 +473,7 @@ def test_google_login_sets_cookie_from_userinfo_response():
 
     asyncio.run(handlers.GoogleLoginHandler.get(handler))
 
-    assert cleared == [(("oauth_state_google",), {"domain": None, "path": "/"})]
+    assert cleared == _state_cleared("google")
     assert redirects == ["https://data.niaid.nih.gov/account"]
     cookie_args, cookie_kwargs = secure_cookies[0]
     assert cookie_args[0] == "user"

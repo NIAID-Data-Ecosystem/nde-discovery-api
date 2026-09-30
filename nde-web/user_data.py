@@ -8,6 +8,8 @@ Endpoints:
     DELETE /user/data/favorites/searches  - Remove a favorite search
     POST   /user/data/favorites/datasets  - Save a favorite dataset
     DELETE /user/data/favorites/datasets  - Remove a favorite dataset
+
+Writes need a JSON body and the X-XSRFToken header from /xsrf_token (see xsrf.py).
 """
 
 import json
@@ -19,6 +21,7 @@ from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.handlers import BaseAPIHandler
 from saved_search_counts import build_saved_search_count_body
 from tornado.web import HTTPError
+from xsrf import FrontendRequestMixin
 
 logger = logging.getLogger(__name__)
 
@@ -130,38 +133,17 @@ def user_authenticated(method):
 
 
 # ---------------------------------------------------------------------------
-# Base handler with shared CORS behaviour
+# Base handler with shared CORS and CSRF behaviour
 # ---------------------------------------------------------------------------
 
-class _UserDataBase(BioThingsAuthnMixin, BaseAPIHandler):
+class _UserDataBase(FrontendRequestMixin, BioThingsAuthnMixin, BaseAPIHandler):
     """Shared plumbing for all user-data endpoints."""
+
+    CORS_METHODS = "GET, PUT, POST, DELETE, OPTIONS"
+    REQUIRE_JSON_BODY = True
 
     def set_cache_header(self, cache_value):
         self.set_header("Cache-Control", "private, max-age=0, no-cache")
-
-    def set_default_headers(self):
-        super().set_default_headers()
-        origin = self.request.headers.get("Origin")
-        allowed_origin = getattr(
-            self.biothings.config, "FRONTEND_ORIGIN", None)
-        if origin and allowed_origin and origin == allowed_origin:
-            self.set_header("Access-Control-Allow-Origin", origin)
-            self.set_header("Access-Control-Allow-Credentials", "true")
-            self.set_header(
-                "Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS"
-            )
-            req_headers = self.request.headers.get(
-                "Access-Control-Request-Headers"
-            )
-            self.set_header(
-                "Access-Control-Allow-Headers",
-                req_headers or "Content-Type",
-            )
-            self.set_header("Vary", "Origin")
-
-    def options(self, *_args, **_kwargs):
-        self.set_status(204)
-        self.finish()
 
     # -- ES helpers ----------------------------------------------------------
 
