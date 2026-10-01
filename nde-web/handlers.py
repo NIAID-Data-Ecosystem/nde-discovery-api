@@ -1,3 +1,4 @@
+import hmac
 import json
 import logging
 import os
@@ -19,6 +20,7 @@ from user_data import (
     _seed_user_doc,
     _user_doc_id,
 )
+from xsrf import FrontendRequestMixin, cookie_samesite
 
 
 EMAIL_RECORD_FIELDS = ("email", "primary", "verified", "visibility")
@@ -67,10 +69,6 @@ def safe_next_url(handler, default="/"):
     return origin + path + query + fragment
 
 
-def login_error_url(handler, error_code, default="/"):
-    return url_concat(safe_next_url(handler, default), {"login_error": error_code})
-
-
 def _format_email_records(records):
     emails = []
     seen = set()
@@ -111,7 +109,7 @@ def set_user_session_cookie(handler, value):
         path="/",
         secure=True,
         httponly=True,
-        samesite="None",
+        samesite=cookie_samesite(handler.biothings.config),
     )
 
 
@@ -200,9 +198,88 @@ def _load_source_info():
 
 
 class BaseLoginHandler(BaseAPIHandler):
+    PROVIDER_KEY = None
+    CALLBACK_PATH = None
+    STATE_COOKIE_MAX_AGE_DAYS = 1
+
     def set_cache_header(self, cache_value):
         # Disable cache headers for auth endpoints
         self.set_header("Cache-Control", "private, max-age=0, no-cache")
+
+    def _callback_url(self):
+        web_host = self.biothings.config.WEB_HOST.rstrip("/")
+        return web_host + self.CALLBACK_PATH
+
+    def _state_cookie_name(self):
+        # __Host- pins the cookie to this API host, so staging and prod logins
+        # can't overwrite each other's state.
+        return f"__Host-oauth_state_{self.PROVIDER_KEY}"
+
+    def _set_oauth_state_cookie(self, state, next_url):
+        self.set_secure_cookie(
+            self._state_cookie_name(),
+            json.dumps({"state": state, "next": next_url}),
+            expires_days=self.STATE_COOKIE_MAX_AGE_DAYS,
+            path="/",
+            secure=True,
+            httponly=True,
+            samesite=cookie_samesite(self.biothings.config),
+        )
+
+    def _pop_oauth_state_cookie(self):
+        raw = self.get_secure_cookie(
+            self._state_cookie_name(),
+            max_age_days=self.STATE_COOKIE_MAX_AGE_DAYS,
+        )
+        self.clear_cookie(self._state_cookie_name(), path="/")
+        if not raw:
+            return None
+        try:
+            value = json.loads(raw.decode())
+        except (AttributeError, TypeError, json.JSONDecodeError):
+            return None
+        return value if isinstance(value, dict) else None
+
+    def _state_next_url(self, state_cookie):
+        next_url = (state_cookie or {}).get("next")
+        if isinstance(next_url, str) and next_url:
+            return next_url
+        # Without the state cookie, send the user back to the portal, not the API.
+        frontend_origin = getattr(self.biothings.config, "FRONTEND_ORIGIN", None)
+        return f"{frontend_origin.rstrip('/')}/" if frontend_origin else "/"
+
+    def _new_oauth_state(self):
+        """Store a fresh OAuth `state` and the validated `next` URL in a cookie."""
+        state = secrets.token_urlsafe(32)
+        self._set_oauth_state_cookie(state, safe_next_url(self, "/"))
+        return state
+
+    def _verified_callback_next_url(self, error_code):
+        """Check an OAuth callback; return its `next` URL, or None after redirecting.
+
+        A provider error or a `state` mismatch redirects back with `error_code`.
+        Either can come from a forged link, so an existing session is kept.
+        """
+        state_cookie = self._pop_oauth_state_cookie()
+        next_url = self._state_next_url(state_cookie)
+        provider_error = self.get_argument("error", None)
+        returned_state = self.get_argument("state", None)
+        expected_state = (state_cookie or {}).get("state")
+        state_valid = (
+            bool(returned_state)
+            and isinstance(expected_state, str)
+            and hmac.compare_digest(returned_state.encode(), expected_state.encode())
+        )
+        if provider_error or not state_valid:
+            if not provider_error:
+                logging.warning("%s OAuth state validation failed", self.PROVIDER_KEY)
+            self.redirect(url_concat(next_url, {"login_error": error_code}))
+            return None
+        return next_url
+
+    def _redirect_with_login_error(self, error_code, next_url="/"):
+        clear_user_session_cookie(self)
+        self.redirect(url_concat(next_url, {"login_error": error_code}))
 
     async def _update_user_profile(self, es, doc_id, index, updates, removals=None):
         removals = removals or []
@@ -287,15 +364,8 @@ class OpenIDConnectLoginHandler(BaseLoginHandler):
     USERINFO_URL = None
     SCOPES = ["openid", "profile", "email"]
     PROVIDER_NAME = None
-    PROVIDER_KEY = None
     CLIENT_ID_CONFIG = None
     CLIENT_SECRET_CONFIG = None
-    CALLBACK_PATH = None
-    STATE_COOKIE_MAX_AGE_DAYS = 1
-
-    def _callback_url(self):
-        web_host = self.biothings.config.WEB_HOST.rstrip("/")
-        return web_host + self.CALLBACK_PATH
 
     def _authorize_url(self):
         return self.AUTHORIZE_URL
@@ -306,51 +376,8 @@ class OpenIDConnectLoginHandler(BaseLoginHandler):
     def _userinfo_url(self):
         return self.USERINFO_URL
 
-    def _state_cookie_name(self):
-        return f"oauth_state_{self.PROVIDER_KEY}"
-
-    def _set_oauth_state_cookie(self, state, next_url):
-        cookie_domain = getattr(self.biothings.config, "COOKIE_DOMAIN", None)
-        self.set_secure_cookie(
-            self._state_cookie_name(),
-            json.dumps({"state": state, "next": next_url}),
-            domain=cookie_domain,
-            path="/",
-            secure=True,
-            httponly=True,
-            samesite="None",
-        )
-
-    def _pop_oauth_state_cookie(self):
-        cookie_domain = getattr(self.biothings.config, "COOKIE_DOMAIN", None)
-        raw = self.get_secure_cookie(
-            self._state_cookie_name(),
-            max_age_days=self.STATE_COOKIE_MAX_AGE_DAYS,
-        )
-        self.clear_cookie(
-            self._state_cookie_name(),
-            domain=cookie_domain,
-            path="/",
-        )
-        if not raw:
-            return None
-        try:
-            value = json.loads(raw.decode())
-        except (AttributeError, TypeError, json.JSONDecodeError):
-            return None
-        return value if isinstance(value, dict) else None
-
-    def _state_next_url(self, state_cookie):
-        next_url = (state_cookie or {}).get("next")
-        return next_url if isinstance(next_url, str) and next_url else "/"
-
-    def _redirect_with_login_error(self, error_code, next_url="/"):
-        clear_user_session_cookie(self)
-        self.redirect(url_concat(next_url, {"login_error": error_code}))
-
     def _redirect_to_provider(self, client_id):
-        state = secrets.token_urlsafe(32)
-        self._set_oauth_state_cookie(state, safe_next_url(self, "/"))
+        state = self._new_oauth_state()
         self.redirect(
             url_concat(
                 self._authorize_url(),
@@ -371,25 +398,13 @@ class OpenIDConnectLoginHandler(BaseLoginHandler):
         unavailable_error_code = f"{self.PROVIDER_KEY}_unavailable"
         code = self.get_argument("code", None)
 
-        if self.get_argument("error", None):
-            state_cookie = self._pop_oauth_state_cookie()
-            self._redirect_with_login_error(
-                error_code,
-                self._state_next_url(state_cookie),
-            )
-            return
-
-        if not code:
+        if not code and not self.get_argument("error", None):
             logging.info("Redirecting to %s for login", self.PROVIDER_NAME)
             self._redirect_to_provider(client_id)
             return
 
-        state_cookie = self._pop_oauth_state_cookie()
-        next_url = self._state_next_url(state_cookie)
-        returned_state = self.get_argument("state", None)
-        if not state_cookie or returned_state != state_cookie.get("state"):
-            logging.warning("%s OAuth state validation failed", self.PROVIDER_NAME)
-            self._redirect_with_login_error(error_code, next_url)
+        next_url = self._verified_callback_next_url(error_code)
+        if next_url is None:
             return
 
         logging.info("%s returned code, exchanging for token", self.PROVIDER_NAME)
@@ -479,31 +494,8 @@ class OpenIDConnectLoginHandler(BaseLoginHandler):
         return json.loads(response.body)
 
 
-class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
+class UserInfoHandler(FrontendRequestMixin, BioThingsAuthnMixin, BaseLoginHandler):
     """Return the authenticated user profile or challenge the client."""
-
-    def set_default_headers(self):
-        super().set_default_headers()
-        origin = self.request.headers.get("Origin")
-        allowed_origin = getattr(
-            self.biothings.config, "FRONTEND_ORIGIN", None)
-        if origin and allowed_origin and origin == allowed_origin:
-            self.set_header("Access-Control-Allow-Origin", origin)
-            self.set_header("Access-Control-Allow-Credentials", "true")
-            self.set_header("Access-Control-Allow-Methods", "GET, OPTIONS")
-            req_headers = self.request.headers.get(
-                "Access-Control-Request-Headers"
-            )
-            self.set_header(
-                "Access-Control-Allow-Headers",
-                req_headers or "Content-Type",
-            )
-            self.set_header("Vary", "Origin")
-
-    def options(self):
-        # CORS preflight for frontend fetch() calls.
-        self.set_status(204)
-        self.finish()
 
     def get(self):
         if self.current_user:
@@ -521,36 +513,47 @@ class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
         raise HTTPError(403)
 
 
-class LogoutHandler(BaseLoginHandler):
-    """Clear auth cookie and redirect home."""
+class LogoutHandler(FrontendRequestMixin, BaseLoginHandler):
+    """Clear the auth cookie. The portal POSTs here with its XSRF token."""
+
+    CORS_METHODS = "POST, OPTIONS"
 
     def get(self):
+        # Kept for portal builds that still navigate here; remove once every
+        # deployed portal logs out with POST.
         clear_user_session_cookie(self)
         self.redirect(safe_next_url(self, "/"))
+
+    def post(self):
+        clear_user_session_cookie(self)
+        self.set_status(204)
+        self.finish()
 
 
 class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
     """Initiate or complete the GitHub OAuth2 handshake."""
 
     SCOPES = ["user:email"]
+    PROVIDER_KEY = "github"
     CALLBACK_PATH = "/login/github"
 
     async def get(self):
         client_id = self.biothings.config.GITHUB_CLIENT_ID
         client_secret = self.biothings.config.GITHUB_CLIENT_SECRET
-        redirect_uri = url_concat(
-            self.biothings.config.WEB_HOST + self.CALLBACK_PATH,
-            {"next": self.get_argument("next", "/")},
-        )
         code = self.get_argument("code", None)
 
-        if not code:
+        if not code and not self.get_argument("error", None):
             logging.info("Redirecting to GitHub for login")
             self.authorize_redirect(
-                redirect_uri=redirect_uri,
+                redirect_uri=self._callback_url(),
                 client_id=client_id,
                 scope=self.SCOPES,
+                extra_params={"state": self._new_oauth_state()},
             )
+            return
+
+        next_url = self._verified_callback_next_url("github_login_failed")
+        if next_url is None:
             return
 
         logging.info("GitHub returned code, exchanging for token")
@@ -566,8 +569,7 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
                     "GitHub OAuth token response did not include an access token: %s",
                     token.get("error") if isinstance(token, dict) else type(token).__name__,
                 )
-                clear_user_session_cookie(self)
-                self.redirect(login_error_url(self, "github_login_failed"))
+                self._redirect_with_login_error("github_login_failed", next_url)
                 return
             user = await self.github_get_authenticated_user(access_token)
             emails = await self.github_get_authenticated_user_emails(access_token)
@@ -581,8 +583,7 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
                 error_code,
                 exc_info=True,
             )
-            clear_user_session_cookie(self)
-            self.redirect(login_error_url(self, error_code))
+            self._redirect_with_login_error(error_code, next_url)
             return
         formatted = self._format_user_record(user, emails=emails)
         logging.info("GitHub auth response: %s", formatted)
@@ -591,7 +592,7 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
             await self._ensure_user_profile(json.loads(formatted))
         else:
             clear_user_session_cookie(self)
-        self.redirect(safe_next_url(self, "/"))
+        self.redirect(next_url)
 
     async def github_get_authenticated_user_emails(self, access_token):
         """Fetch GitHub account email addresses when the granted scope allows it."""
@@ -644,24 +645,26 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
     """Initiate or complete the ORCID OAuth2 handshake."""
 
     SCOPES = ["/authenticate", "openid"]
+    PROVIDER_KEY = "orcid"
     CALLBACK_PATH = "/login/orcid"
 
     async def get(self):
         client_id = self.biothings.config.ORCID_CLIENT_ID
         client_secret = self.biothings.config.ORCID_CLIENT_SECRET
-        redirect_uri = url_concat(
-            self.biothings.config.WEB_HOST + self.CALLBACK_PATH,
-            {"next": self.get_argument("next", "/")},
-        )
         code = self.get_argument("code", None)
 
-        if not code:
+        if not code and not self.get_argument("error", None):
             logging.info("Redirecting to ORCID for login")
             self.authorize_redirect(
-                redirect_uri=redirect_uri,
+                redirect_uri=self._callback_url(),
                 client_id=client_id,
                 scope=self.SCOPES,
+                extra_params={"state": self._new_oauth_state()},
             )
+            return
+
+        next_url = self._verified_callback_next_url("orcid_login_failed")
+        if next_url is None:
             return
 
         logging.info("ORCID returned code, exchanging for token")
@@ -678,8 +681,7 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
                     "ORCID OAuth token response was incomplete: %s",
                     token.get("error") if isinstance(token, dict) else type(token).__name__,
                 )
-                clear_user_session_cookie(self)
-                self.redirect(login_error_url(self, "orcid_login_failed"))
+                self._redirect_with_login_error("orcid_login_failed", next_url)
                 return
             user = await self.orcid_get_authenticated_user_record(token, orcid_id)
         except (HTTPClientError, ValueError) as exc:
@@ -693,8 +695,7 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
                 error_code,
                 exc_info=True,
             )
-            clear_user_session_cookie(self)
-            self.redirect(login_error_url(self, error_code))
+            self._redirect_with_login_error(error_code, next_url)
             return
         formatted = self._format_user_record(user)
         logging.info("ORCID auth response: %s", formatted)
@@ -703,7 +704,7 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
             await self._ensure_user_profile(json.loads(formatted))
         else:
             clear_user_session_cookie(self)
-        self.redirect(safe_next_url(self, "/"))
+        self.redirect(next_url)
 
     @staticmethod
     def _format_user_record(user):

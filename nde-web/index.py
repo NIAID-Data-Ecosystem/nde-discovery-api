@@ -13,6 +13,7 @@ from handlers import WebAppHandler
 from tornado.ioloop import IOLoop
 from tornado.options import options
 from tornado.web import StaticFileHandler
+from xsrf import xsrf_settings
 
 SETTINGS = {
     "default_handler_class": WebAppHandler,
@@ -74,5 +75,6 @@ def _schedule_daily_backup(config):
 
 if __name__ == '__main__':
     options.parse_command_line()
-    _schedule_daily_backup(_load_config_module())
-    main(ROUTES, SETTINGS)
+    config = _load_config_module()
+    _schedule_daily_backup(config)
+    main(ROUTES, {**SETTINGS, **xsrf_settings(config)})
