@@ -99,7 +99,9 @@ record to appear through the search API. A production-only DDE catalog ID
 allowlist also hides older records absent from the sheet, including superseded
 N3C versions. The approvals are independent: an
 approved DDE catalog card may be visible while its crawler source entry is
-hidden, as with BV-BRC.
+hidden, as with BV-BRC. `_ResCatProdApproved? = NONE` marks a source without
+its own DDE ResourceCatalog record, such as VEuPath Collections, and is
+treated as unapproved.
 
 The sheet is shared with staging, so the production sync drops collection
 types for staging-only content (currently `Inference Repository`) from the

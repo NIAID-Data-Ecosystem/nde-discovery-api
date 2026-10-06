@@ -68,6 +68,26 @@ def test_approved_catalog_requires_dde_id():
         )
 
 
+def test_catalog_flag_none_approves_source_without_catalog():
+    row = {
+        "name": "VEuPath Collections", "url": "https://veupathdb.org/",
+        "_ProdApproved?": "TRUE", "_ResCatProdApproved?": "NONE", "sameAs": "",
+    }
+    repos = {"veupath_collections": {"name": "VEuPath Collections",
+                                     "url": "https://veupathdb.org/"}}
+    current = {"staging_ids": ["dde_legacy"], "prod_catalogs": []}
+
+    updated = approvals.compile_approvals([row], current, repos)
+
+    assert updated["prod_source_keys"] == ["veupath_collections"]
+    assert updated["prod_resource_catalog_ids"] == []
+    assert updated["staging_ids"] == ["dde_legacy"]
+    with pytest.raises(ValueError, match="invalid or missing _ProdApproved"):
+        approvals.compile_approvals(
+            [{**row, "_ProdApproved?": "NONE"}], current, repos
+        )
+
+
 def test_activate_source_names_updates_allowlist_and_keeps_parent_scope():
     rows = [
         {"name": "New repository", "url": "https://new.org", "_ProdApproved?": "TRUE"},

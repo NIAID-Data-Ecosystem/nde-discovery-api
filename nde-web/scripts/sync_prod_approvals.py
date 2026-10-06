@@ -25,7 +25,12 @@ from sync_repo_metadata import (
 )
 
 EXCLUSIONS_JSON = REPO_ROOT / "nde-web" / "exclusions.json"
-VALID_FLAGS = {"TRUE", "FALSE", "IGNORE"}
+VALID_FLAGS = {
+    "_ProdApproved?": {"TRUE", "FALSE", "IGNORE"},
+    # NONE marks a source without its own DDE ResourceCatalog record; like
+    # FALSE, it never approves a catalog.
+    "_ResCatProdApproved?": {"TRUE", "FALSE", "IGNORE", "NONE"},
+}
 QUERY_NAME_PARENT_KEYS = {"veupath_collections": "veupathdb"}
 
 
@@ -56,8 +61,8 @@ def compile_approvals(rows: list[dict[str, str]], exclusions: dict,
         name = row.get("name", "").strip()
         if not name:
             continue
-        for field in ("_ProdApproved?", "_ResCatProdApproved?"):
-            if row.get(field) not in VALID_FLAGS:
+        for field, valid_flags in VALID_FLAGS.items():
+            if row.get(field) not in valid_flags:
                 raise ValueError(f"{name}: invalid or missing {field}")
         record_id = catalog_id(row.get("sameAs", ""))
         if row["_ResCatProdApproved?"] == "TRUE" and not record_id:
