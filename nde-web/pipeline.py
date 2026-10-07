@@ -80,8 +80,10 @@ def _looks_like_advanced_query_string(q: str) -> bool:
 
 
 # Sentinel query values that represent "browse all" — not a real search intent.
-# AI / vector search should fall back to standard search for these.
+# kNN always ranks against some text, so AI / vector search ranks these against
+# AI_SEARCH_DEFAULT_QUERY instead, or falls back to standard search if it's empty.
 _AI_SEARCH_PASSTHROUGH_QUERIES = frozenset({"", "__all__", "__any__", "*"})
+_AI_SEARCH_DEFAULT_QUERY = "Immune-mediated and Infectious Disease Data"
 
 
 class _TTLCache:
@@ -325,10 +327,12 @@ class NDEESQueryBackend(AsyncESQueryBackend):
         # builder folds into the Search body.
         raw_q = str(getattr(query, '_nde_raw_q', '') or '').strip()
 
-        if raw_q in _AI_SEARCH_PASSTHROUGH_QUERIES:
-            return await super().execute(query, **options)
-
         user_q = raw_q
+        if raw_q in _AI_SEARCH_PASSTHROUGH_QUERIES:
+            user_q = str(getattr(
+                cfg, "AI_SEARCH_DEFAULT_QUERY", _AI_SEARCH_DEFAULT_QUERY) or "").strip()
+            if not user_q:
+                return await super().execute(query, **options)
 
         # Cache embeddings because the UI can trigger many facet calls
         # for the same query text.
