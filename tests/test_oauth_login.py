@@ -50,7 +50,7 @@ def _state_cookie_stubs(handler, next_url, args, state_cookie):
 
 
 def _state_cleared(provider):
-    return [((f"__Host-oauth_state_{provider}",), {"path": "/"})]
+    return [((f"__Host-oauth_state_{provider}",), {"path": "/", "secure": True})]
 
 
 def _state_and_session_cleared(provider):

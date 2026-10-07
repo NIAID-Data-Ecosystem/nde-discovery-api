@@ -231,7 +231,7 @@ class BaseLoginHandler(BaseAPIHandler):
             self._state_cookie_name(),
             max_age_days=self.STATE_COOKIE_MAX_AGE_DAYS,
         )
-        self.clear_cookie(self._state_cookie_name(), path="/")
+        self.clear_cookie(self._state_cookie_name(), path="/", secure=True)
         if not raw:
             return None
         try:
