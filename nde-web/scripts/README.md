@@ -61,8 +61,8 @@ and other curated values. Empty cells keep existing values, except that
 `identifier` always follows the sheet: it is the last pipe-separated value of
 the `identifier` column (`https://www.iedb.org/ | iedb` becomes `iedb`), or an
 empty string when the cell has no pipe.
-Source keys (`_id` and filenames), schedules, schema mappings, source types,
-parent collections, and Mongo settings are also preserved. This change belongs
+Source keys (`_id` and filenames), schedules, schema mappings, parent
+collections, and Mongo settings are also preserved. This change belongs
 to `staging`; production's `main` branch retains its SourceMetaCuration workflow.
 
 Rows are matched using names, pipe-separated aliases/identifiers, URLs, and

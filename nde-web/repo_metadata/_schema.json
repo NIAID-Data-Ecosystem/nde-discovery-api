@@ -335,10 +335,6 @@
         "$ref": "#/$defs/DefinedTerm"
       }
     },
-    "type": {
-      "type": "string",
-      "description": "handlers.py parity floor - never overwritten by sync"
-    },
     "url": {
       "type": "string",
       "format": "uri",

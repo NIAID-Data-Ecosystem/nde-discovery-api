@@ -72,7 +72,6 @@ FIELD_ORDER = [
     "abstract",
     "description",
     "collectionType",
-    "type",
     "genre",
     "conditionsOfAccess",
     "license",
@@ -353,7 +352,6 @@ HANDLERS_PROTECTED_FIELDS = frozenset({
     "schedule",
     "schema",
     "parentCollection",
-    "type",
 })
 
 # Fields where the curation TSVs are authoritative and should overwrite

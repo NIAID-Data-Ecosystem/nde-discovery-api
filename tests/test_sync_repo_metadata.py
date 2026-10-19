@@ -51,7 +51,6 @@ def test_sync_refreshes_descriptive_fields_and_preserves_ingestion_settings(
         "license": "Existing license",
         "schedule": "Weekly",
         "schema": {"title": "name"},
-        "type": "Data Repository",
         "parentCollection": {"id": "parent"},
         "_mongoCollection": "shared_collection",
         "_mongoFilter": {"source": "example"},
@@ -94,7 +93,7 @@ def test_sync_refreshes_descriptive_fields_and_preserves_ingestion_settings(
     assert updated["isAccessibleForFree"] is False
     assert updated["collectionType"] == ["Portal", "Data Repository"]
     for field in (
-        "_id", "license", "schedule", "schema", "type", "parentCollection",
+        "_id", "license", "schedule", "schema", "parentCollection",
         "_mongoCollection", "_mongoFilter",
     ):
         assert updated[field] == original[field]
