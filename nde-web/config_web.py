@@ -76,7 +76,17 @@ SOURCE_TYPEDEF = {
     "multi_terms_size": {"type": int, "default": 10},
     "lineage": {"type": int, "default": None},
     "use_ai_search": {"type": bool, "default": False},
+    "ranking": {"type": str, "default": None, "enum": ("classic", "reuse")},
+    "ranking_params": {"type": str, "default": None},
 }
+
+# Ranking of text searches (issue #44, see ranking.py): "classic" is BM25
+# alone; "reuse" rescores the top RANKING_RESCORE_WINDOW hits per shard by
+# reuse potential. dev defaults to "reuse" and accepts ranking_params
+# (e.g. "w_ctx:0.03,window:1000") so weights can be tuned without a deploy.
+RANKING_DEFAULT = "reuse"
+RANKING_RESCORE_WINDOW = 500
+RANKING_ALLOW_OVERRIDES = True
 
 QUERY_KWARGS = copy.deepcopy(QUERY_KWARGS)
 QUERY_KWARGS["GET"].update(SOURCE_TYPEDEF)
