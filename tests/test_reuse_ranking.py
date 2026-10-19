@@ -13,8 +13,10 @@ import pytest
 WEB_DIR = Path(__file__).resolve().parents[1] / "nde-web"
 sys.path.insert(0, str(WEB_DIR))
 
+import config_web  # noqa: E402
 import pipeline  # noqa: E402
 import ranking  # noqa: E402
+from biothings.web.options.manager import OptionSet, ReqArgs  # noqa: E402
 from search_text import prefix_query  # noqa: E402
 
 
@@ -127,3 +129,28 @@ def test_ranking_params_need_overrides_enabled(runtime_config):
 def test_bad_ranking_params_are_rejected(ranking_params):
     with pytest.raises(ValueError):
         build("asthma", ranking_params=ranking_params)
+
+
+def test_unknown_ranking_is_rejected():
+    with pytest.raises(ValueError):
+        build("asthma", ranking="bm25")
+
+
+def parse_query_args(**args):
+    """Parse request args the way the /query handler does."""
+    options = OptionSet({"GET": config_web.QUERY_KWARGS["GET"]})
+    return options.parse("GET", ReqArgs(query=args))
+
+
+def test_requests_without_ranking_args_are_accepted():
+    args = parse_query_args(q="asthma")
+
+    assert args.ranking is None
+    assert args.ranking_params is None
+
+
+def test_ranking_args_reach_the_builder():
+    args = parse_query_args(q="asthma", ranking="classic", ranking_params="w_ctx:0.05")
+
+    assert args.ranking == "classic"
+    assert args.ranking_params == "w_ctx:0.05"
