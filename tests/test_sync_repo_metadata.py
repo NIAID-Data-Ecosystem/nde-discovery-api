@@ -83,8 +83,7 @@ def test_sync_refreshes_descriptive_fields_and_preserves_ingestion_settings(
     assert sync_module.main(["--resource-base-tsv", "custom.tsv"]) == 0
     updated = json.loads(path.read_text())
     assert updated["name"] == "New repository name"
-    # The portal uses this exact value for includedInDataCatalog.name searches.
-    assert updated["identifier"] == "Old identifier"
+    assert updated["identifier"] == "example"
     assert updated["alternateName"] == ["New, expanded name", "EX"]
     assert updated["url"] == "https://new.example.org/"
     assert updated["abstract"] == "New abstract"
@@ -93,7 +92,7 @@ def test_sync_refreshes_descriptive_fields_and_preserves_ingestion_settings(
     assert updated["genre"] == ["IID", "Omics"]
     assert updated["hasAPI"] is False
     assert updated["isAccessibleForFree"] is False
-    assert updated["collectionType"] == "Portal, Data Repository"
+    assert updated["collectionType"] == ["Portal", "Data Repository"]
     for field in (
         "_id", "license", "schedule", "schema", "type", "parentCollection",
         "_mongoCollection", "_mongoFilter",
@@ -102,13 +101,30 @@ def test_sync_refreshes_descriptive_fields_and_preserves_ingestion_settings(
     assert sync_module.write(sync_module.build(tsv)) == []
 
 
-def test_resource_base_record_excludes_search_identifier():
+@pytest.mark.parametrize("cell, identifier", [
+    ("new alias | source_key", "source_key"),
+    ("https://zenodo.org/ | Zenodo | zenodo", "zenodo"),
+    ("https://actgnetwork.org/ |actg", "actg"),
+    ("http://immuneexpresso.org", ""),
+    ("", ""),
+])
+def test_resource_base_record_uses_last_pipe_value_as_identifier(cell, identifier):
     record = sync_module.resource_base_record({
         "name": "Updated name",
-        "identifier": "new alias | source_key",
+        "identifier": cell,
     })
 
-    assert record == {"name": "Updated name"}
+    assert record == {"name": "Updated name", "identifier": identifier}
+
+
+@pytest.mark.parametrize("cell", [
+    "Portal | Data Repository",
+    "Portal, Data Repository",
+])
+def test_resource_base_record_splits_collection_types(cell):
+    record = sync_module.resource_base_record({"collectionType": cell})
+
+    assert record["collectionType"] == ["Portal", "Data Repository"]
 
 
 def test_shared_url_and_identifiers_do_not_collapse_veupath_sources():

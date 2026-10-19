@@ -28,8 +28,7 @@ REPO_METADATA_DIR = REPO_ROOT / "nde-web" / "repo_metadata"
 HEURISTICS_DIR = REPO_METADATA_DIR / "heuristics"
 METADATA_COMPLETENESS_DIR = REPO_ROOT / "nde-web" / "metadata_completeness"
 
-REQUIRED_SOURCE_FIELDS = ("_id", "name", "description",
-                          "url", "identifier", "schema")
+REQUIRED_SOURCE_FIELDS = ("_id", "name", "description", "url", "schema")
 CONDITIONS_OF_ACCESS = {"Open", "Closed",
                         "Restricted", "Embargoed", "Varied", "Unknown"}
 SCHEDULES = {"Weekly", "Monthly", "Quarterly", "Manual"}
@@ -73,13 +72,16 @@ def validate_curated(path: Path, errors: list[str], warnings: list[str]) -> None
         if field not in data or data[field] in blank_values:
             errors.append(f"{label}: missing required field {field!r}")
 
+    # Empty when the sheet's identifier cell has no source key after a pipe.
+    if not isinstance(data.get("identifier"), str):
+        errors.append(f"{label}: identifier must be a string")
     if "schema" in data and not isinstance(data["schema"], dict):
         errors.append(f"{label}: schema must be an object")
-    if "genre" in data:
-        if not isinstance(data["genre"], list) or not all(
-            isinstance(item, str) and item for item in data["genre"]
-        ):
-            errors.append(f"{label}: genre must be a non-empty string array")
+    for field in ("genre", "collectionType"):
+        if field in data and (not isinstance(data[field], list) or not all(
+            isinstance(item, str) and item for item in data[field]
+        )):
+            errors.append(f"{label}: {field} must be a non-empty string array")
     if data.get("conditionsOfAccess") not in (None, *CONDITIONS_OF_ACCESS):
         errors.append(
             f"{label}: conditionsOfAccess must be one of "

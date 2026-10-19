@@ -57,6 +57,12 @@ def split_alternate_names(value: str) -> list[str]:
     ]
 
 
+def source_identifier(value: str) -> str:
+    # The last pipe-separated value is the sheet's source key. A cell
+    # without a pipe holds only a URL or name, so it has no key.
+    return value.rsplit("|", 1)[-1].strip() if "|" in value else ""
+
+
 def row_source_candidates(row: dict[str, str]) -> list[str]:
     candidates = [row.get("name", "")]
     candidates.extend(row.get("identifier", "").split("|"))

@@ -57,13 +57,10 @@ For non-interactive defaults after the TSV is already at the repository root:
 
 The staging sync treats nonblank RepoMetaCuration values as authoritative for
 supported descriptive fields, replacing existing names, descriptions, URLs,
-and other curated values. The existing `identifier` is preserved because the
-portal uses it as the exact `includedInDataCatalog.name` filter when a user
-clicks a repository or resource catalog. After record-level catalog names are
-updated and indexed, set each source's JSON `identifier` to the corresponding
-indexed catalog name; the sync will retain that coordinated value. Grouping
-sources can use a different indexed catalog name than their display `name`.
-Empty cells keep existing values.
+and other curated values. Empty cells keep existing values, except that
+`identifier` always follows the sheet: it is the last pipe-separated value of
+the `identifier` column (`https://www.iedb.org/ | iedb` becomes `iedb`), or an
+empty string when the cell has no pipe.
 Source keys (`_id` and filenames), schedules, schema mappings, source types,
 parent collections, and Mongo settings are also preserved. This change belongs
 to `staging`; production's `main` branch retains its SourceMetaCuration workflow.
@@ -76,12 +73,10 @@ column count are reported and skipped. Re-export or correct those rows before
 bootstrapping their sources.
 
 `alternateName` supports pipe-separated values as well as older comma/semicolon
-exports. `genre` remains a semicolon-separated array. Other supported fields
-retain their existing API types. Pipe-separated values in the sheet's
-`identifier` column are available for row matching, but do not replace the
-single stable identifier returned by `/v1/metadata`.
-Pipe-separated `collectionType` values are exposed as comma-separated strings
-so they remain compatible with the source metadata schema's string field.
+exports. `genre` remains a semicolon-separated array. `collectionType` is an
+array split on pipes or commas. Other supported fields retain their existing
+API types. Every pipe-separated value in the sheet's `identifier` column is
+also used for row matching.
 
 Both bootstrap and sync accept `--resource-base-tsv <path>` to read another
 download location; relative paths resolve from the repository root. Bootstrap

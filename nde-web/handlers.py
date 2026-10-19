@@ -116,6 +116,10 @@ _REPO_METADATA_DIR = os.path.join(
 )
 _HEURISTICS_DIR = os.path.join(_REPO_METADATA_DIR, "heuristics")
 _INTERNAL_SOURCE_INFO_FIELDS = {"_mongoCollection", "_mongoFilter"}
+# Hub sources not listed under /v1/metadata src. No records carry the
+# "VEuPath Collections" catalog name; VEuPathDB and the component sites
+# that share its Mongo collection list them instead.
+_HIDDEN_SOURCES = {"veupath_collections"}
 _source_info_cache = None
 
 _SOURCE_STAT_COUNT_OVERRIDES = {
@@ -933,6 +937,13 @@ class NDESourceHandler(MetadataSourceHandler):
                 parent = _meta["src"].get(parent_key)
                 if parent and "version" in parent:
                     _meta["src"][source]["version"] = parent["version"]
+
+        # Hide sources only after subset sources borrow their version.
+        _meta["src"] = {
+            source: info
+            for source, info in _meta["src"].items()
+            if source not in _HIDDEN_SOURCES
+        }
 
         for source, config in _SOURCE_STAT_COUNT_OVERRIDES.items():
             await self._refresh_source_stat_count(source, config, _meta)

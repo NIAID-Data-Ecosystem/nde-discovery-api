@@ -2,6 +2,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 
 SCRIPTS_DIR = Path(__file__).resolve().parents[1] / "nde-web" / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
@@ -40,9 +42,15 @@ def test_resolve_new_source_key_from_alternate_name_uses_first_value():
     ) == "usidnet"
 
 
+@pytest.mark.parametrize("cell, identifier", [
+    ("https://usidnet.org/ | usidnet", "usidnet"),
+    ("https://usidnet.org/", ""),
+])
 def test_create_source_stub_sets_id_filename_and_alternate_names(
     tmp_path,
     monkeypatch,
+    cell,
+    identifier,
 ):
     repo_metadata_dir = tmp_path / "nde-web" / "repo_metadata"
     monkeypatch.setattr(bootstrap_module, "REPO_ROOT", tmp_path)
@@ -52,19 +60,19 @@ def test_create_source_stub_sets_id_filename_and_alternate_names(
         source_key="usidnet",
         row={
             "name": "United States Immunodeficiency Network",
+            "identifier": cell,
             "alternateName": "USIDNET, USID Network",
             "url": "https://usidnet.org/",
             "abstract": "Clinical data registry.",
             "description": "United States Immunodeficiency Network registry.",
         },
-        assume_yes=True,
         dry_run=False,
     )
 
     assert created == repo_metadata_dir / "usidnet.json"
     data = json.loads(created.read_text())
     assert data["_id"] == "usidnet"
-    assert data["identifier"] == "USIDNET"
+    assert data["identifier"] == identifier
     assert data["alternateName"] == ["USIDNET", "USID Network"]
 
 

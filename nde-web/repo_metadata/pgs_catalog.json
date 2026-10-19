@@ -5,11 +5,14 @@
     "PGS Catalog",
     "Polygenic Score Catalog"
   ],
-  "identifier": "Polygenic Score Catalog (PGS Catalog)",
+  "identifier": "pgscatalog",
   "url": "https://www.pgscatalog.org/",
+  "sameAs": "https://data.niaid.nih.gov/resources?id=dde_aa6531505bff0194",
   "abstract": "Polygenic Score Catalog is a NIH supported generalist repository that includes polygenic scores data.",
   "description": "The PGS Catalog is an open database of published polygenic scores (PGS). Each PGS in the Catalog is consistently annotated with relevant metadata; including scoring files (variants, effect alleles/weights), annotations of how the PGS was developed and applied, and evaluations of their predictive performance. See the PGS Catalog Data Description page for a complete description of the metadata captured for PGS, Samples, Performance Metrics, Traits, and Publications.",
-  "collectionType": "Database",
+  "collectionType": [
+    "Database"
+  ],
   "genre": [
     "Generalist"
   ],

@@ -5,12 +5,14 @@
     "CCUG",
     "Culture Collection University of Gothenburg"
   ],
-  "identifier": "Culture Collection University of Gothenburg (CCUG)",
+  "identifier": "ccug",
   "url": "https://www.ccug.se/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_32f043de2d2307c3",
   "abstract": "CCUG is an University of Gothenberg supported biospecimen repository that includes IID samples.",
   "description": "The Culture Collection University of Gothenburg (CCUG) operates within the Unit of Molecular Microbiology,which is part of the Department of Clinical Microbiology at Sahlgrenska University Hospital, see: https://www.sahlgrenska.se/omraden/omrade-4/verksamhet-klinisk-mikrobiologi/molekylar-mikrobiologi/  The CCUG serves as the National Reference Laboratory for Bacterial species identification, which performs specialized phenotypic, genotypic, as well as genomic analyses for identifying infectious microorganisms when routine methods prove inadequate.",
-  "collectionType": "Sample Repository",
+  "collectionType": [
+    "Sample Repository"
+  ],
   "genre": [
     "Generalist"
   ],

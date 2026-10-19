@@ -168,7 +168,12 @@
       }
     },
     "collectionType": {
-      "type": "string"
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "Array of collection types. RepoMetaCuration stores these as a pipe-joined string ('Portal | Data Repository'); staging sync splits on pipes or commas, trims, and replaces the existing values when nonblank."
     },
     "conditionsOfAccess": {
       "type": "string",
@@ -223,7 +228,7 @@
     },
     "identifier": {
       "type": "string",
-      "description": "Stable value used by the portal to filter includedInDataCatalog.name; preserved when staging metadata is refreshed from RepoMetaCuration"
+      "description": "Source key: the last pipe-separated value of RepoMetaCuration's identifier column ('https://example.org/ | example' -> 'example'), or an empty string when the cell has no pipe. Replaced whenever staging metadata is refreshed from RepoMetaCuration."
     },
     "inLanguage": {
       "type": "string"

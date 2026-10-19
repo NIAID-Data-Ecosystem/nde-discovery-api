@@ -13,12 +13,12 @@ merging, in order of increasing precedence:
     4. nonblank descriptive fields from ``RepoMetaCuration - resource_base.tsv``
        (matched by source name, aliases, identifiers, URL, or sameAs)
 
-RepoMetaCuration is authoritative for descriptive metadata on staging, except
-for ``identifier``. The portal uses that field as the exact
-``includedInDataCatalog.name`` search filter, so existing identifiers remain
-stable. Blank cells and unmatched sources preserve existing values. Source
-keys, schema mappings, schedules, and other ingestion settings stay in the
-JSON. Re-run any time the TSV or Google Sheet changes.
+RepoMetaCuration is authoritative for descriptive metadata on staging.
+``identifier`` is the source key after the last pipe in the sheet's
+``identifier`` column, or an empty string when that cell has no pipe. Other
+blank cells and unmatched sources preserve existing values. Source keys,
+schema mappings, schedules, and other ingestion settings stay in the JSON.
+Re-run any time the TSV or Google Sheet changes.
 
 Usage:
     python nde-web/scripts/sync_repo_metadata.py
@@ -40,6 +40,7 @@ from resource_base import (
     RESOURCE_BASE_TSV,
     load_resource_base_rows,
     row_source_candidates,
+    source_identifier,
     split_alternate_names,
 )
 
@@ -149,9 +150,9 @@ def _coerce_bool(value: str) -> bool | None:
     return None
 
 
-def _format_collection_type(value: str) -> str:
-    """Keep the source metadata scalar while formatting pipe-separated types."""
-    return ", ".join(part.strip() for part in value.split("|") if part.strip())
+def _split_collection_types(value: str) -> list[str]:
+    """Split the sheet's pipe-separated types; comma-separated also works."""
+    return [part.strip() for part in re.split(r"[|,]", value) if part.strip()]
 
 
 # Columns in resource_base.tsv mapped to our JSON field names and how to
@@ -160,15 +161,14 @@ RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
     "name": ("name", None),
     "url": ("url", None),
     "sameAs": ("sameAs", None),
-    # Read for matching and validation, but do not copy into existing sources.
-    "identifier": ("identifier", None),
+    "identifier": ("identifier", source_identifier),
     "alternateName": ("alternateName", split_alternate_names),
     "license": ("license", None),
     "conditionsOfAccess": ("conditionsOfAccess", None),
     "usageInfo": ("usageInfo", None),
     "abstract": ("abstract", None),
     "description": ("description", None),
-    "collectionType": ("collectionType", _format_collection_type),
+    "collectionType": ("collectionType", _split_collection_types),
     "hasAPI": ("hasAPI", _coerce_bool),
     "hasDownload": ("hasDownload", None),
     "isAccessibleForFree": ("isAccessibleForFree", _coerce_bool),
@@ -184,11 +184,6 @@ RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
     "creativeWorkStatus": ("creativeWorkStatus", None),
 }
 
-# These values have behavior outside the descriptive source display. In
-# particular, the portal sends ``identifier`` verbatim as its
-# ``includedInDataCatalog.name`` filter.
-RESOURCE_BASE_PRESERVED_FIELDS = frozenset({"identifier"})
-
 
 # Priority-sheet properties safe to extract as scalars. Complex object
 # fields (funding, author, citation, about, measurementTechnique,
@@ -198,7 +193,7 @@ RESOURCE_BASE_PRESERVED_FIELDS = frozenset({"identifier"})
 # fragments — they are left to the Phase 3 heuristics pipeline rather
 # than parsed heuristically here.
 PRIORITY_SCALAR_PROPERTIES: dict[str, tuple[str, Any]] = {
-    "collectionType": ("collectionType", _format_collection_type),
+    "collectionType": ("collectionType", _split_collection_types),
     "genre": (
         "genre",
         lambda v: [s.strip() for s in v.split(";") if s.strip()],
@@ -286,11 +281,10 @@ def load_priority_sheet_by_key() -> dict[str, dict[str, Any]]:
 
 
 def resource_base_record(row: dict[str, str]) -> dict[str, Any]:
-    """Extract supported, nonblank descriptive fields without changing API shapes."""
-    record: dict[str, Any] = {}
+    """Extract the source identifier and supported, nonblank descriptive fields."""
+    # Unlike other fields, an identifier cell without a key clears the old value.
+    record: dict[str, Any] = {"identifier": ""}
     for col, (field, coercer) in RESOURCE_BASE_COLUMNS.items():
-        if field in RESOURCE_BASE_PRESERVED_FIELDS:
-            continue
         raw = (row.get(col) or "").strip()
         if not raw:
             continue
@@ -418,9 +412,8 @@ def build(resource_base_tsv: Path | None = None) -> dict[str, dict[str, Any]]:
     )
     priority_by_key = load_priority_sheet_by_key()
     # Keep optional priority-sheet supplements, then apply the current
-    # resource_base curation. Only the supported descriptive columns can
-    # overwrite JSON fields; ingestion settings and the stable search
-    # identifier are not in that mapping.
+    # resource_base curation. Only the supported columns can overwrite
+    # JSON fields; ingestion settings are not in that mapping.
     for key, data in repos.items():
         data.setdefault("_id", key)
         tsv_row = find_resource_base_row(rows, key, data)

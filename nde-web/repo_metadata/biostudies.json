@@ -6,12 +6,14 @@
     "ArrayExpress",
     "EBI-EMBL BioStudies"
   ],
-  "identifier": "BioStudies",
+  "identifier": "biostudies_arrayexpress",
   "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/",
   "sameAs": "https://data.niaid.nih.gov/resources?id=dde_9e06d7276897ad79",
   "abstract": "ArrayExpress is a EMBL-EBI supported generalist repository that includes genomic data.",
   "description": "The functional genomics data collection (ArrayExpress), stores data from high-throughput functional genomics experiments, and provides data for reuse to the research community. In line with community guidelines, a study typically contains metadata such as detailed sample annotations, protocols, processed data and raw data. Raw sequence reads from high-throughput sequencing studies are brokered to the European Nucleotide Archive (ENA), and links are provided to download the sequence reads from ENA. Data can be submitted to the ArrayExpress collection through its dedicated submission tool, Annotare",
-  "collectionType": "Dataset Repository",
+  "collectionType": [
+    "Dataset Repository"
+  ],
   "type": "Dataset Repository",
   "genre": [
     "Generalist"
