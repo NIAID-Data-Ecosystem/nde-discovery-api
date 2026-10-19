@@ -725,12 +725,12 @@ class NDEQueryBuilder(ESQueryBuilder):
             )
 
         # rerank the top hits of text searches by reuse potential (see ranking.py)
-        ranking_name, ranking_params, window = ranking.settings(
+        ranking_name, ranking_params, windows = ranking.settings(
             options, _load_runtime_config())
         if (ranking_name == ranking.RANKING_REUSE and options.nde_text_search
                 and ranking.can_rescore(options)):
             search = search.extra(
-                rescore=ranking.rescore(ranking_params, window))
+                rescore=ranking.rescore(ranking_params, windows))
 
         # apply multi-term aggregation
         if options.multi_terms_fields:

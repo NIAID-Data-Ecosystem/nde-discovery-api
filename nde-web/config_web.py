@@ -83,11 +83,14 @@ SOURCE_TYPEDEF = {
 }
 
 # Ranking of text searches (issue #44, see ranking.py): "classic" is BM25
-# alone; "reuse" rescores the top RANKING_RESCORE_WINDOW hits per shard by
-# reuse potential. dev defaults to "reuse" and accepts ranking_params
-# (e.g. "w_ctx:0.03,window:1000") so weights can be tuned without a deploy.
+# alone; "reuse" rescores the top hits per shard by reuse potential, the
+# fields and sample count over RANKING_RESCORE_WINDOW and the text check
+# over RANKING_TEXT_WINDOW. dev defaults to "reuse" and accepts
+# ranking_params (e.g. "w_ctx:0.03,text_window:100") so weights can be tuned
+# without a deploy.
 RANKING_DEFAULT = "reuse"
-RANKING_RESCORE_WINDOW = 500
+RANKING_RESCORE_WINDOW = 5000
+RANKING_TEXT_WINDOW = 50
 RANKING_ALLOW_OVERRIDES = True
 
 QUERY_KWARGS = copy.deepcopy(QUERY_KWARGS)

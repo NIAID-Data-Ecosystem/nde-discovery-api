@@ -26,7 +26,8 @@ def runtime_config(monkeypatch):
     config = types.ModuleType("config")
     config.AI_SEARCH_VECTOR_FIELD = "ibmGraniteEmbedding"
     config.RANKING_DEFAULT = "reuse"
-    config.RANKING_RESCORE_WINDOW = 500
+    config.RANKING_RESCORE_WINDOW = 5000
+    config.RANKING_TEXT_WINDOW = 50
     config.RANKING_ALLOW_OVERRIDES = True
     monkeypatch.setitem(sys.modules, "config", config)
     return config
@@ -50,6 +51,10 @@ def text_clauses(body):
     raise AssertionError("no dis_max clause")
 
 
+def script(rescorer):
+    return rescorer["query"]["rescore_query"]["function_score"]["functions"][0]["script_score"]["script"]
+
+
 def test_term_boosts_match_any_case():
     clauses = text_clauses(build("HIV"))
 
@@ -70,12 +75,16 @@ def test_one_letter_words_are_not_prefix_expanded():
 
 
 def test_text_search_is_rescored_by_reuse_potential():
-    rescore = build("asthma")["rescore"]
+    fields, text = build("asthma")["rescore"]
 
-    assert rescore["window_size"] == 500
-    function = rescore["query"]["rescore_query"]["function_score"]["functions"][0]
-    assert function["script_score"]["script"]["params"] == ranking.DEFAULT_PARAMS
-    assert rescore["query"]["score_mode"] == "multiply"
+    # Doc-values signals over a wide window, the _source text check over the top.
+    assert (fields["window_size"], text["window_size"]) == (5000, 50)
+    assert script(fields)["source"] == ranking.FIELDS_SCRIPT
+    assert script(text)["source"] == ranking.TEXT_SCRIPT
+    assert "params._source" not in ranking.FIELDS_SCRIPT
+    for rescorer in (fields, text):
+        assert script(rescorer)["params"] == ranking.DEFAULT_PARAMS
+        assert rescorer["query"]["score_mode"] == "multiply"
 
 
 def test_relevance_sort_is_rescored():
@@ -109,20 +118,19 @@ def test_classic_is_the_default_without_ranking_config(runtime_config):
 
 
 def test_ranking_params_tune_the_rescore():
-    rescore = build("asthma", ranking_params="w_ctx:0.05,window:1000")["rescore"]
+    fields, text = build("asthma", ranking_params="w_ctx:0.05,window:1000,text_window:100")["rescore"]
 
-    assert rescore["window_size"] == 1000
-    params = rescore["query"]["rescore_query"]["function_score"]["functions"][0]["script_score"]["script"]["params"]
-    assert params["w_ctx"] == 0.05
+    assert (fields["window_size"], text["window_size"]) == (1000, 100)
+    assert script(fields)["params"]["w_ctx"] == 0.05
 
 
 def test_ranking_params_need_overrides_enabled(runtime_config):
     runtime_config.RANKING_ALLOW_OVERRIDES = False
 
-    rescore = build("asthma", ranking_params="w_ctx:0.05")["rescore"]
+    fields, text = build("asthma", ranking_params="w_ctx:0.05,text_window:100")["rescore"]
 
-    params = rescore["query"]["rescore_query"]["function_score"]["functions"][0]["script_score"]["script"]["params"]
-    assert params["w_ctx"] == ranking.DEFAULT_PARAMS["w_ctx"]
+    assert script(fields)["params"]["w_ctx"] == ranking.DEFAULT_PARAMS["w_ctx"]
+    assert text["window_size"] == 50
 
 
 @pytest.mark.parametrize("ranking_params", ["bogus:1", "w_ctx:high"])
