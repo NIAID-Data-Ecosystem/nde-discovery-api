@@ -1,24 +1,20 @@
+import hmac
 import json
 import logging
 import os
-from urllib.parse import urlsplit
+import secrets
+from urllib.parse import quote, urlencode, urlsplit
 
 import elasticsearch
 from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.auth.oauth_mixins import GithubOAuth2Mixin, OrcidOAuth2Mixin
 from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
-from tornado.httpclient import HTTPClientError
+from tornado.httpclient import AsyncHTTPClient, HTTPClientError
 from tornado.httputil import HTTPHeaders, url_concat
 from tornado.web import HTTPError, RequestHandler
-from user_data import (
-    _activity_update,
-    _now_iso,
-    _oauth_profile_removals,
-    _oauth_profile_updates,
-    _seed_user_doc,
-    _user_doc_id,
-)
-
+from user_data import (_activity_update, _now_iso, _oauth_profile_removals,
+                       _oauth_profile_updates, _seed_user_doc, _user_doc_id)
+from xsrf import FrontendRequestMixin, cookie_samesite
 
 EMAIL_RECORD_FIELDS = ("email", "primary", "verified", "visibility")
 
@@ -66,10 +62,6 @@ def safe_next_url(handler, default="/"):
     return origin + path + query + fragment
 
 
-def login_error_url(handler, error_code, default="/"):
-    return url_concat(safe_next_url(handler, default), {"login_error": error_code})
-
-
 def _format_email_records(records):
     emails = []
     seen = set()
@@ -110,7 +102,7 @@ def set_user_session_cookie(handler, value):
         path="/",
         secure=True,
         httponly=True,
-        samesite="None",
+        samesite=cookie_samesite(handler.biothings.config),
     )
 
 
@@ -123,6 +115,7 @@ _REPO_METADATA_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "repo_metadata"
 )
 _HEURISTICS_DIR = os.path.join(_REPO_METADATA_DIR, "heuristics")
+_INTERNAL_SOURCE_INFO_FIELDS = {"_mongoCollection", "_mongoFilter"}
 _source_info_cache = None
 
 _SOURCE_STAT_COUNT_OVERRIDES = {
@@ -184,9 +177,88 @@ def _load_source_info():
 
 
 class BaseLoginHandler(BaseAPIHandler):
+    PROVIDER_KEY = None
+    CALLBACK_PATH = None
+    STATE_COOKIE_MAX_AGE_DAYS = 1
+
     def set_cache_header(self, cache_value):
         # Disable cache headers for auth endpoints
         self.set_header("Cache-Control", "private, max-age=0, no-cache")
+
+    def _callback_url(self):
+        web_host = self.biothings.config.WEB_HOST.rstrip("/")
+        return web_host + self.CALLBACK_PATH
+
+    def _state_cookie_name(self):
+        # __Host- pins the cookie to this API host, so staging and prod logins
+        # can't overwrite each other's state.
+        return f"__Host-oauth_state_{self.PROVIDER_KEY}"
+
+    def _set_oauth_state_cookie(self, state, next_url):
+        self.set_secure_cookie(
+            self._state_cookie_name(),
+            json.dumps({"state": state, "next": next_url}),
+            expires_days=self.STATE_COOKIE_MAX_AGE_DAYS,
+            path="/",
+            secure=True,
+            httponly=True,
+            samesite=cookie_samesite(self.biothings.config),
+        )
+
+    def _pop_oauth_state_cookie(self):
+        raw = self.get_secure_cookie(
+            self._state_cookie_name(),
+            max_age_days=self.STATE_COOKIE_MAX_AGE_DAYS,
+        )
+        self.clear_cookie(self._state_cookie_name(), path="/", secure=True)
+        if not raw:
+            return None
+        try:
+            value = json.loads(raw.decode())
+        except (AttributeError, TypeError, json.JSONDecodeError):
+            return None
+        return value if isinstance(value, dict) else None
+
+    def _state_next_url(self, state_cookie):
+        next_url = (state_cookie or {}).get("next")
+        if isinstance(next_url, str) and next_url:
+            return next_url
+        # Without the state cookie, send the user back to the portal, not the API.
+        frontend_origin = getattr(self.biothings.config, "FRONTEND_ORIGIN", None)
+        return f"{frontend_origin.rstrip('/')}/" if frontend_origin else "/"
+
+    def _new_oauth_state(self):
+        """Store a fresh OAuth `state` and the validated `next` URL in a cookie."""
+        state = secrets.token_urlsafe(32)
+        self._set_oauth_state_cookie(state, safe_next_url(self, "/"))
+        return state
+
+    def _verified_callback_next_url(self, error_code):
+        """Check an OAuth callback; return its `next` URL, or None after redirecting.
+
+        A provider error or a `state` mismatch redirects back with `error_code`.
+        Either can come from a forged link, so an existing session is kept.
+        """
+        state_cookie = self._pop_oauth_state_cookie()
+        next_url = self._state_next_url(state_cookie)
+        provider_error = self.get_argument("error", None)
+        returned_state = self.get_argument("state", None)
+        expected_state = (state_cookie or {}).get("state")
+        state_valid = (
+            bool(returned_state)
+            and isinstance(expected_state, str)
+            and hmac.compare_digest(returned_state.encode(), expected_state.encode())
+        )
+        if provider_error or not state_valid:
+            if not provider_error:
+                logging.warning("%s OAuth state validation failed", self.PROVIDER_KEY)
+            self.redirect(url_concat(next_url, {"login_error": error_code}))
+            return None
+        return next_url
+
+    def _redirect_with_login_error(self, error_code, next_url="/"):
+        clear_user_session_cookie(self)
+        self.redirect(url_concat(next_url, {"login_error": error_code}))
 
     async def _update_user_profile(self, es, doc_id, index, updates, removals=None):
         removals = removals or []
@@ -263,31 +335,146 @@ class BaseLoginHandler(BaseAPIHandler):
                     )
 
 
-class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
+class OpenIDConnectLoginHandler(BaseLoginHandler):
+    """OAuth2 authorization-code login flow for OpenID Connect providers."""
+
+    AUTHORIZE_URL = None
+    TOKEN_URL = None
+    USERINFO_URL = None
+    SCOPES = ["openid", "profile", "email"]
+    PROVIDER_NAME = None
+    CLIENT_ID_CONFIG = None
+    CLIENT_SECRET_CONFIG = None
+
+    def _authorize_url(self):
+        return self.AUTHORIZE_URL
+
+    def _token_url(self):
+        return self.TOKEN_URL
+
+    def _userinfo_url(self):
+        return self.USERINFO_URL
+
+    def _redirect_to_provider(self, client_id):
+        state = self._new_oauth_state()
+        self.redirect(
+            url_concat(
+                self._authorize_url(),
+                {
+                    "client_id": client_id,
+                    "redirect_uri": self._callback_url(),
+                    "response_type": "code",
+                    "scope": " ".join(self.SCOPES),
+                    "state": state,
+                },
+            )
+        )
+
+    async def get(self):
+        client_id = getattr(self.biothings.config, self.CLIENT_ID_CONFIG)
+        client_secret = getattr(self.biothings.config, self.CLIENT_SECRET_CONFIG)
+        error_code = f"{self.PROVIDER_KEY}_login_failed"
+        unavailable_error_code = f"{self.PROVIDER_KEY}_unavailable"
+        code = self.get_argument("code", None)
+
+        if not code and not self.get_argument("error", None):
+            logging.info("Redirecting to %s for login", self.PROVIDER_NAME)
+            self._redirect_to_provider(client_id)
+            return
+
+        next_url = self._verified_callback_next_url(error_code)
+        if next_url is None:
+            return
+
+        logging.info("%s returned code, exchanging for token", self.PROVIDER_NAME)
+        try:
+            token = await self.openid_get_oauth2_token(
+                client_id=client_id,
+                client_secret=client_secret,
+                code=code,
+                redirect_uri=self._callback_url(),
+            )
+            access_token = (
+                token.get("access_token") if isinstance(token, dict) else None
+            )
+            if not access_token:
+                logging.warning(
+                    "%s OAuth token response did not include an access token: %s",
+                    self.PROVIDER_NAME,
+                    token.get("error")
+                    if isinstance(token, dict)
+                    else type(token).__name__,
+                )
+                self._redirect_with_login_error(error_code, next_url)
+                return
+            user = await self.openid_get_authenticated_user(access_token)
+        except (HTTPClientError, ValueError) as exc:
+            status = getattr(exc, "code", None)
+            provider_error = (
+                unavailable_error_code if status and status >= 500 else error_code
+            )
+            logging.warning(
+                "%s OAuth request failed with %s; redirecting with %s",
+                self.PROVIDER_NAME,
+                status or type(exc).__name__,
+                provider_error,
+                exc_info=True,
+            )
+            self._redirect_with_login_error(provider_error, next_url)
+            return
+
+        formatted = self._format_user_record(user)
+        logging.info("%s auth response: %s", self.PROVIDER_NAME, formatted)
+        if formatted:
+            set_user_session_cookie(self, formatted)
+            await self._ensure_user_profile(json.loads(formatted))
+        else:
+            clear_user_session_cookie(self)
+        self.redirect(next_url)
+
+    async def openid_get_oauth2_token(
+        self,
+        *,
+        client_id,
+        client_secret,
+        code,
+        redirect_uri,
+    ):
+        http = AsyncHTTPClient()
+        headers = HTTPHeaders()
+        headers.add("Accept", "application/json")
+        headers.add("Content-Type", "application/x-www-form-urlencoded")
+        response = await http.fetch(
+            self._token_url(),
+            method="POST",
+            headers=headers,
+            body=urlencode(
+                {
+                    "client_id": client_id,
+                    "client_secret": client_secret,
+                    "code": code,
+                    "grant_type": "authorization_code",
+                    "redirect_uri": redirect_uri,
+                }
+            ),
+        )
+        return json.loads(response.body)
+
+    async def openid_get_authenticated_user(self, access_token):
+        http = AsyncHTTPClient()
+        headers = HTTPHeaders()
+        headers.add("Accept", "application/json")
+        headers.add("Authorization", f"Bearer {access_token}")
+        response = await http.fetch(
+            self._userinfo_url(),
+            method="GET",
+            headers=headers,
+        )
+        return json.loads(response.body)
+
+
+class UserInfoHandler(FrontendRequestMixin, BioThingsAuthnMixin, BaseLoginHandler):
     """Return the authenticated user profile or challenge the client."""
-
-    def set_default_headers(self):
-        super().set_default_headers()
-        origin = self.request.headers.get("Origin")
-        allowed_origin = getattr(
-            self.biothings.config, "FRONTEND_ORIGIN", None)
-        if origin and allowed_origin and origin == allowed_origin:
-            self.set_header("Access-Control-Allow-Origin", origin)
-            self.set_header("Access-Control-Allow-Credentials", "true")
-            self.set_header("Access-Control-Allow-Methods", "GET, OPTIONS")
-            req_headers = self.request.headers.get(
-                "Access-Control-Request-Headers"
-            )
-            self.set_header(
-                "Access-Control-Allow-Headers",
-                req_headers or "Content-Type",
-            )
-            self.set_header("Vary", "Origin")
-
-    def options(self):
-        # CORS preflight for frontend fetch() calls.
-        self.set_status(204)
-        self.finish()
 
     def get(self):
         if self.current_user:
@@ -305,36 +492,47 @@ class UserInfoHandler(BioThingsAuthnMixin, BaseLoginHandler):
         raise HTTPError(403)
 
 
-class LogoutHandler(BaseLoginHandler):
-    """Clear auth cookie and redirect home."""
+class LogoutHandler(FrontendRequestMixin, BaseLoginHandler):
+    """Clear the auth cookie. The portal POSTs here with its XSRF token."""
+
+    CORS_METHODS = "POST, OPTIONS"
 
     def get(self):
+        # Kept for portal builds that still navigate here; remove once every
+        # deployed portal logs out with POST.
         clear_user_session_cookie(self)
         self.redirect(safe_next_url(self, "/"))
+
+    def post(self):
+        clear_user_session_cookie(self)
+        self.set_status(204)
+        self.finish()
 
 
 class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
     """Initiate or complete the GitHub OAuth2 handshake."""
 
     SCOPES = ["user:email"]
+    PROVIDER_KEY = "github"
     CALLBACK_PATH = "/login/github"
 
     async def get(self):
         client_id = self.biothings.config.GITHUB_CLIENT_ID
         client_secret = self.biothings.config.GITHUB_CLIENT_SECRET
-        redirect_uri = url_concat(
-            self.biothings.config.WEB_HOST + self.CALLBACK_PATH,
-            {"next": self.get_argument("next", "/")},
-        )
         code = self.get_argument("code", None)
 
-        if not code:
+        if not code and not self.get_argument("error", None):
             logging.info("Redirecting to GitHub for login")
             self.authorize_redirect(
-                redirect_uri=redirect_uri,
+                redirect_uri=self._callback_url(),
                 client_id=client_id,
                 scope=self.SCOPES,
+                extra_params={"state": self._new_oauth_state()},
             )
+            return
+
+        next_url = self._verified_callback_next_url("github_login_failed")
+        if next_url is None:
             return
 
         logging.info("GitHub returned code, exchanging for token")
@@ -350,8 +548,7 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
                     "GitHub OAuth token response did not include an access token: %s",
                     token.get("error") if isinstance(token, dict) else type(token).__name__,
                 )
-                clear_user_session_cookie(self)
-                self.redirect(login_error_url(self, "github_login_failed"))
+                self._redirect_with_login_error("github_login_failed", next_url)
                 return
             user = await self.github_get_authenticated_user(access_token)
             emails = await self.github_get_authenticated_user_emails(access_token)
@@ -365,8 +562,7 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
                 error_code,
                 exc_info=True,
             )
-            clear_user_session_cookie(self)
-            self.redirect(login_error_url(self, error_code))
+            self._redirect_with_login_error(error_code, next_url)
             return
         formatted = self._format_user_record(user, emails=emails)
         logging.info("GitHub auth response: %s", formatted)
@@ -375,7 +571,7 @@ class GitHubLoginHandler(BaseLoginHandler, GithubOAuth2Mixin):
             await self._ensure_user_profile(json.loads(formatted))
         else:
             clear_user_session_cookie(self)
-        self.redirect(safe_next_url(self, "/"))
+        self.redirect(next_url)
 
     async def github_get_authenticated_user_emails(self, access_token):
         """Fetch GitHub account email addresses when the granted scope allows it."""
@@ -428,24 +624,26 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
     """Initiate or complete the ORCID OAuth2 handshake."""
 
     SCOPES = ["/authenticate", "openid"]
+    PROVIDER_KEY = "orcid"
     CALLBACK_PATH = "/login/orcid"
 
     async def get(self):
         client_id = self.biothings.config.ORCID_CLIENT_ID
         client_secret = self.biothings.config.ORCID_CLIENT_SECRET
-        redirect_uri = url_concat(
-            self.biothings.config.WEB_HOST + self.CALLBACK_PATH,
-            {"next": self.get_argument("next", "/")},
-        )
         code = self.get_argument("code", None)
 
-        if not code:
+        if not code and not self.get_argument("error", None):
             logging.info("Redirecting to ORCID for login")
             self.authorize_redirect(
-                redirect_uri=redirect_uri,
+                redirect_uri=self._callback_url(),
                 client_id=client_id,
                 scope=self.SCOPES,
+                extra_params={"state": self._new_oauth_state()},
             )
+            return
+
+        next_url = self._verified_callback_next_url("orcid_login_failed")
+        if next_url is None:
             return
 
         logging.info("ORCID returned code, exchanging for token")
@@ -462,8 +660,7 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
                     "ORCID OAuth token response was incomplete: %s",
                     token.get("error") if isinstance(token, dict) else type(token).__name__,
                 )
-                clear_user_session_cookie(self)
-                self.redirect(login_error_url(self, "orcid_login_failed"))
+                self._redirect_with_login_error("orcid_login_failed", next_url)
                 return
             user = await self.orcid_get_authenticated_user_record(token, orcid_id)
         except (HTTPClientError, ValueError) as exc:
@@ -477,8 +674,7 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
                 error_code,
                 exc_info=True,
             )
-            clear_user_session_cookie(self)
-            self.redirect(login_error_url(self, error_code))
+            self._redirect_with_login_error(error_code, next_url)
             return
         formatted = self._format_user_record(user)
         logging.info("ORCID auth response: %s", formatted)
@@ -487,38 +683,172 @@ class ORCIDLoginHandler(BaseLoginHandler, OrcidOAuth2Mixin):
             await self._ensure_user_profile(json.loads(formatted))
         else:
             clear_user_session_cookie(self)
-        self.redirect(safe_next_url(self, "/"))
+        self.redirect(next_url)
 
     @staticmethod
     def _format_user_record(user):
-        identifier = user.get("orcid-identifier", {}).get("path")
+        identifier = (user.get("orcid-identifier") or {}).get("path")
         if not identifier:
             return None
         payload = {
             "username": identifier,
             "oauth_provider": "ORCID",
         }
-        person = user.get("person", {})
-        given = person.get("name", {}).get("given-names", {}).get("value")
-        family = person.get("name", {}).get("family-name", {}).get("value")
+        person = user.get("person") or {}
+        name = person.get("name") or {}
+        given = (name.get("given-names") or {}).get("value")
+        family = (name.get("family-name") or {}).get("value")
         if given:
             payload["name"] = given if not family else f"{given} {family}"
-        emails = person.get("emails", {}).get("email", [])
+        emails = (person.get("emails") or {}).get("email") or []
         email_records = _format_email_records(emails)
         email = _primary_email(email_records)
         if email:
             payload["email"] = email
         if email_records:
             payload["emails"] = email_records
-        employment = (
-            user.get("activities-summary", {})
-            .get("employments", {})
-            .get("employment-summary", [])
-        )
+        activities = user.get("activities-summary") or {}
+        employments = activities.get("employments") or {}
+        employment = employments.get("employment-summary") or []
         if employment:
-            org = employment[0].get("organization", {})
+            org = (employment[0] or {}).get("organization") or {}
             payload["organization"] = org.get("name")
         return json.dumps({k: v for k, v in payload.items() if v})
+
+
+class GoogleLoginHandler(OpenIDConnectLoginHandler):
+    """Initiate or complete the Google OpenID Connect login handshake."""
+
+    AUTHORIZE_URL = "https://accounts.google.com/o/oauth2/v2/auth"
+    TOKEN_URL = "https://oauth2.googleapis.com/token"
+    USERINFO_URL = "https://openidconnect.googleapis.com/v1/userinfo"
+    PROVIDER_NAME = "Google"
+    PROVIDER_KEY = "google"
+    CLIENT_ID_CONFIG = "GOOGLE_CLIENT_ID"
+    CLIENT_SECRET_CONFIG = "GOOGLE_CLIENT_SECRET"
+    CALLBACK_PATH = "/login/google"
+
+    @staticmethod
+    def _format_user_record(user):
+        identifier = user.get("sub")
+        if not identifier:
+            return None
+        payload = {
+            "username": identifier,
+            "oauth_provider": "Google",
+        }
+        if user.get("name"):
+            payload["name"] = user["name"]
+        if user.get("picture"):
+            payload["avatar_url"] = user["picture"]
+
+        email_records = []
+        email = user.get("email")
+        if email:
+            email_record = {
+                "email": email,
+                "primary": True,
+            }
+            if user.get("email_verified") is not None:
+                email_record["verified"] = user["email_verified"]
+            email_records = _format_email_records([email_record])
+            payload["email"] = email
+            payload["emails"] = email_records
+        return json.dumps(payload)
+
+
+class MicrosoftLoginHandler(OpenIDConnectLoginHandler):
+    """Initiate or complete the Microsoft OpenID Connect login handshake."""
+
+    USERINFO_URL = "https://graph.microsoft.com/oidc/userinfo"
+    PROFILE_URL = "https://graph.microsoft.com/v1.0/me"
+    SCOPES = ["openid", "profile", "email", "User.Read"]
+    PROVIDER_NAME = "Microsoft"
+    PROVIDER_KEY = "microsoft"
+    CLIENT_ID_CONFIG = "MICROSOFT_CLIENT_ID"
+    CLIENT_SECRET_CONFIG = "MICROSOFT_CLIENT_SECRET"
+    CALLBACK_PATH = "/login/microsoft"
+
+    def _tenant(self):
+        return getattr(self.biothings.config, "MICROSOFT_TENANT", "common")
+
+    def _authorize_url(self):
+        tenant = quote(str(self._tenant()), safe=".-")
+        return f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize"
+
+    def _token_url(self):
+        tenant = quote(str(self._tenant()), safe=".-")
+        return f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
+
+    async def _microsoft_get_profile(self, access_token):
+        http = AsyncHTTPClient()
+        headers = HTTPHeaders()
+        headers.add("Accept", "application/json")
+        headers.add("Authorization", f"Bearer {access_token}")
+        response = await http.fetch(
+            self.PROFILE_URL,
+            method="GET",
+            headers=headers,
+        )
+        return json.loads(response.body)
+
+    async def openid_get_authenticated_user(self, access_token):
+        user = await super().openid_get_authenticated_user(access_token)
+        if user.get("name"):
+            return user
+
+        try:
+            profile = await self._microsoft_get_profile(access_token)
+        except (HTTPClientError, ValueError):
+            # A missing display name should not prevent an otherwise valid login.
+            logging.warning(
+                "Could not retrieve the Microsoft Graph user profile",
+                exc_info=True,
+            )
+            return user
+
+        display_name = profile.get("displayName")
+        if not display_name:
+            display_name = " ".join(
+                value
+                for value in (profile.get("givenName"), profile.get("surname"))
+                if value
+            )
+        if display_name:
+            user["name"] = display_name
+
+        if not user.get("email"):
+            email = profile.get("mail") or profile.get("userPrincipalName")
+            if email:
+                user["email"] = email
+        return user
+
+    @staticmethod
+    def _format_user_record(user):
+        identifier = user.get("sub")
+        if not identifier:
+            return None
+        payload = {
+            "username": identifier,
+            "oauth_provider": "Microsoft",
+        }
+        email = user.get("email")
+        # The OIDC endpoint can omit name for personal Microsoft accounts.
+        # Keep the opaque subject as the stable identity, but never use it as
+        # the user-facing label when an email address is available.
+        name = user.get("name") or email
+        if name:
+            payload["name"] = name
+        if user.get("picture"):
+            payload["avatar_url"] = user["picture"]
+
+        if email:
+            email_records = _format_email_records(
+                [{"email": email, "primary": True}]
+            )
+            payload["email"] = email
+            payload["emails"] = email_records
+        return json.dumps(payload)
 
 
 class WebAppHandler(RequestHandler):
@@ -581,15 +911,28 @@ class NDESourceHandler(MetadataSourceHandler):
     async def extras(self, _meta):
         source_info = _load_source_info()
         for source, data in source_info.items():
+            public_data = {
+                field: value
+                for field, value in data.items()
+                if field not in _INTERNAL_SOURCE_INFO_FIELDS
+            }
             if source in _meta["src"]:
-                _meta["src"][source]["sourceInfo"] = source_info[source]
+                _meta["src"][source]["sourceInfo"] = public_data
                 _meta["src"][source]["sourceInfo"]["metadata_completeness"] = (
                     self.calculate_metadata_compatibility_average(source)
                 )
             elif "parentCollection" in data:
-                _meta["src"][source] = {"sourceInfo": source_info[source]}
-                parent = _meta["src"]["veupath_collections"]
-                _meta["src"][source]["version"] = parent["version"]
+                _meta["src"][source] = {"sourceInfo": public_data}
+                # Subset sources share another source's Mongo collection and
+                # ES documents (e.g. plasmodb -> veupath_collections, the
+                # DSMZ/BacDive culture collections -> bacdive). Borrow the
+                # parent's version from that shared source
+                parent_key = data.get("_mongoCollection")
+                if isinstance(parent_key, list):
+                    parent_key = parent_key[0] if parent_key else None
+                parent = _meta["src"].get(parent_key)
+                if parent and "version" in parent:
+                    _meta["src"][source]["version"] = parent["version"]
 
         for source, config in _SOURCE_STAT_COUNT_OVERRIDES.items():
             await self._refresh_source_stat_count(source, config, _meta)

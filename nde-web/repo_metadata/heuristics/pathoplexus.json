@@ -1,0 +1,4371 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 15,
+      "unitText": "DataCollection"
+    }
+  ],
+  "dateModified": "2026-08-17",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "1900-01-01",
+      "endDate": "2026-08-17"
+    }
+  ],
+  "license": "https://pathoplexus.org/about/terms-of-use/terms-of-service",
+  "usageInfo": {
+    "name": "Data Use Terms",
+    "url": "https://pathoplexus.org/about/terms-of-use/data-use-terms",
+    "@type": "CreativeWork"
+  },
+  "spatialCoverage": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tarlac Province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "(Guangzhou)"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mato Grosso do Sul"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Florida, Miami Beach"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Florida"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kyzylorda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Washington,King County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "North region, Jujuy Province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rio de Janeiro, Rio de Janeiro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Erie Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NYANKUNDE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jharkhand"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bayelsa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Krasnodar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Netherlands"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hyogo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Susehri, Citlice"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Goiania, Goais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nassau Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Caetes, Pernambuco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Antioquia, Medellin"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chapadao do Sul, Mato Grosso do Sul"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Minas Gerais, Ladainha"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Equateur,Ntondo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Laguna de Castillos, Rocha"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Jarinu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kastomonu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Xinjiang Uygur Autonomous Region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guangzhou Children's Hospital"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Espirito Santo, Cariacica"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Sao Paulo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ, Teresopolis [IBGE7 3305802]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Itatiba [IBGE7 3523404]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "District of Columbia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Padova"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Makassar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Selangor"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rwanda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Democratic Republic of the Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Banjarmasin"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Northern Cape"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Santee,California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Temessadou M'Boke"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Grand Kru"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Almeria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Washington, Snohomish County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Yildizeli, Cukursaray"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ohio"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Richmond Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rwampara"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Forecariah"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ciudad Autonoma de Buenos Aires"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Emilia Romagna"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Itabira, Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vienna,Vienna"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sarlahi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Maryland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Amazonas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Goroka EHP"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ, Duas Barras [IBGE7 3301603]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vientiane Capital"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Al Seeb"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Antioquia, Sabaneta"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GR"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Soul Clinic, Monstserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Joao Camara, Rio Grande do Norte"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ibaraki"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cape Mount"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Illinois, Cook County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Miami, Florida"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Maktaaral district"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Itambacuri, Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hu Nan Province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yozgat, Akdagmadeni"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "El Bolson"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Buchana, Grand Bassa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sichuan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ARU"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Patients wake"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Castelo dos Sonhos, Mato Grasso State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Barclay Farm, Margibi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ANDHRA PRADESH, TIRUPATI"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "AZ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Roma"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Wuerzburg"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tchomia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Dar es Salaam"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Sarkisla, Saricicek"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nyankunde"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mengla,Yunnan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kamalapur, Dhaka"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hainan Island"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Valdivia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Seoul"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "PB"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Salta"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Region de Los Rios"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Africa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Olinda, Pernambuco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hunan,Changsha"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SOTA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Arua"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Colombo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ, Angra Dos Reis [IBGE7 3300100]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Minas Gerais, Teofilo Otoni"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kamphaeng Phet"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Aichi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Home, Health care setting"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United Kingdom"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Milwaukee, WI"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "AG"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gilbert, Maricopa Co., AZ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "La Araucania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Katwa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vera, MT"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ancona"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "River Gee"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Brazil"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tshopo,Opala"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mambasa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Serefiye"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Virginia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kanagawa, Kawasaki City"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "New York"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "TX"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tursunzade region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yamaguchi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bucharest"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kissidougou"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Malmo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Westchester Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sendai"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Kizilca"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yozgat, Cekerek, Bayindirhoyuk"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Susehri, Cataloluk"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Osmaniye"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Suzhou"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Quebec"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Karnataka"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sankuru,Bena-Dibele"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Sudan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Distrito Nacional"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bunya Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Washington"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Republic of the Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ, Sumidouro [IBGE7 3305703]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Odisha"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Needowein, Margibi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Jundiai"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Itapetininga [IBGE7 3522307]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Piura"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ratchaburi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Quebec City, QC"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Goa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kerala,Trivandrum"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Derekoy"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Phuntsholing"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Louisiana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kutch District, Gujarat State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Maindombe,Inongo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Akoren"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Faranah"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kailahun District"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Esmeraldas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vientiane"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Watsi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bensonville, Monstserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Belo Horizonte"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Alagoas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rio Grande do Sul"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mongbwalu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sudan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Antsirabe I"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lusaka, University Teaching Hospital"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kline"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "CO, Weld County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ambohidratrimo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Taakaev Province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zaire"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Schwaz,Tyrol"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ES, Vitoria [IBGE7 3205309]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Iloilo City"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guinea"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Albany Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chillan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hillsborough, New Hampshire"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sud-Kivu,Kamituga"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Weil Medical college,NYC"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jhb"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Dallas Co. TX"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BAMBU"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Buenos Aires province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Veneto region, Verona"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "VarzeaGrande, MT"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ethiopia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Equateur,Bikoro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Barranquilla"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jundiai City"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Goiatuba, Goais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Fortaleza"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Amman"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rapid City SD"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Denton Co. TX"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "FL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Los Lagos"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Caete, Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Dogansar, Camikebir"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bombali"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Igarata [IBGE7 3520202]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Anapolis, GO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Brescia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Liberia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kampheang-Phet"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guangzhou"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Sao Paulo City"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Dogansar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ghana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Montpellier"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vienna"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jallah's Town, Monstserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Carolina"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sud-Kivu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Buenos Aires"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cook, Illinois"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kathmandu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Karachi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Al Ain"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kalmykia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Sao Paulo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Malisheve"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Damas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bulape_Kasai"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RWAMPARA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Missouri"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Seattle"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rome"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nzerekore"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kikwit"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Dogansar, Cinci"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Karacahisar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bomi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Heidelberg"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hennepin, Minnesota"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Accra"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MD"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kindia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "camping activities"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MG, Brumadinho [IBGE7 3109006]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "province Equateur"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Battery Factory, Monstserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Portuguesa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Fogo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bahia, Salvador, Pau da Lima"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kanagawa,Yokohama"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Okayama"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Queens Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kakamega"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Padua"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Birmingham"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Portoviejo, Manabi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hospital for Tropical Medicine, Bangkok"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ladainha, Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Wuxi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kono"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tahiti"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Angola"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Connecticut"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Imo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nia Nia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "province Kasai Oriental"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Valle del Cauca, Cali"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "IL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MONGWALU"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South region, Rio Negro province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jilin"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Oran"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kampheange Phet"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rajasthan State, Sirohi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Albuquerque, New Mexico"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Oregon,Multnomah County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bangkok"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Birthday party"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Argentina"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kentucky"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "IL, Chicago"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Gumuscevre"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Arizona"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "DRC"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Veneto region, Venezia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mariana, Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mongala"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Montgomery Co. TX"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Amazonas, Manaus"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BUNIA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kobe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Phitsanulok"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Colorado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Dupont Road, Monstserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Budapest"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ, Niteroi [IBGE7 3303302]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Albuquerque NM"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "North Dakota"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MG, Nova Lima [IBGE7 3144805]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Volgograd region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jakarta"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Johor Bahru"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Barkedji region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tonkolili"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mai-Ndombe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Punjab"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ho Chi Minh city"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Veneto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bogota"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "St Paul Bridge, Monstserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Victoria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Aparecida de Goiania, Goais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sawla"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jaipur City, Rajasthan state"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Antananarivo-renivohitra"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vienna International Airport"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "N'Zerekore"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Inner Mongolia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "India"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Al Maabela"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Antanifotsy"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Minnesota"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tshuapa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Philadelphia, PA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Minas Gerais, Itambacuri"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Minas Gerais, Novo Cruzeiro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guizhou"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chubut"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nouvelle-Aquitaine"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rockland Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Borno State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Aru"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "TN"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Niagara Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pune"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Suffolk Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yunnan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rajasthan State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Maharashtra,Pune"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Jacarei [IBGE7 3524402]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "La Plata"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kanagawa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Salavan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guerrero"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Conakry"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenema"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cuiaba, MT"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo City"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Oklahoma"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lombardia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rio Negro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Texas, Houston"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Loreto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Dezhou"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Little Rock, Arkansas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Davao Region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "FCT"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kasese"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Qiyang county, Hunan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "El Oro, Portobelo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Okinawa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pujehun"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lita"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Giresun, Alucra, Aktepe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Drodro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Astrakhan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bakersfield,California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ticino"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sabah"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Esenler"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Maindombe,Kiri"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jambi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Songkha"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hyogo, Kobe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Italy"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Marica-RJ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Fukui"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yamagata"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ulaanbaatar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "San_Diego,California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ceará"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Grand Bassa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Goiania, GO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Alberta"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pathumthani"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Sao Paulo [IBGE7 3550308]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MANGALA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Shanghai"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tshopo,Yakusu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nong Khai"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Osaka"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Saint Thomas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NYAKUNDE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Luweero"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Goias, Jandaia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "New Brunswick"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Washington, King County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Marquesas islands"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sante Fe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "VA, Norfolk County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "France"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "São Paulo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Home"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Miyagi,Sendai"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Puerto Rico"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Florida, Miami-Dade County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sukabumi, West Java"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sairam district"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Punta del Diablo, Rocha Department"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Komanda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Oregon, Multnomah County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Liverpool"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Valenca-RJ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sanharo, Pernambuco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "fataki"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "rwampara"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mekong Delta"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Alabang, Muntinlupa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ibadan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Oswego Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rajkot District, Gujarat State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Santa Catarina"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Work place"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "New Delhi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bambu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Stockholm"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gujarat"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NIZI"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gujarat State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Entebbe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Georgia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ituri"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Uruguay"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Adamfaki"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "San Martin de los Andes"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Forecaria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guachipas, Salta"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Sarapui [IBGE7 3551108]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "VA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Washington,Snohomish County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tempe AZ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rio de Janeiro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Amasya"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Parana State, Gral. Carneiro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Asarcik"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Koinodugu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ, Rio De Janeiro [IBGE7 3304557]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MN"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Yildizeli, Sariyar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Klang valley"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NC"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Los Rios"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Fataki"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Francisco Morazan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "San Diego, California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Car trip"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hangzhou"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bolivar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Dubreka"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Teofilo Otoni, Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Prishtine"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gainesville, Florida"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ilha Grande-RJ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NewMexico"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ES, Santa Leopoldina [IBGE7 3204500]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Yildizeli, Cobansaray"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Franca Sao Pablo state"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Easter Island"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Harris County, TX"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sukisa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tanzania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ES, Serra [IBGE7 3205002]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ, Valenca [IBGE7 3306107]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Alaska"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ZH"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Yildiz"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hawaii"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mali"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cajamarca"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rayong"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Turkestan region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Manitoba"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cape Town"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Entre Rios"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gorakhpur"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Eldorado [IBGE7 3514809]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Campania Region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Thiruvananthapuram, Kerala"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Aflou"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hainan HK"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Ribeirao Preto [IBGE7 3543402]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Recife, Pernambuco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guangdong"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rivers"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kilo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bali"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Paraguay"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Sarkisla, Ortatopac"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nara"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rostov region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MUNGWALU"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Haikou"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Managua"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sud-Ubangi,Bulu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Saint Petersburg"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Morelos"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Valle del Cauca"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Aktas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Assam, Dibrugarh"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Monroe Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zliten"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lampang"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Guarulhos"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Aragua"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Montserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Itaquaquecetuba"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kinshasa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yunnan, Jinghong"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "south"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bulape"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chiapas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yolo, California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Great Britain"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Michigan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sorriso, MT"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Khon Kaen"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gueckedou"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guangzhou, Guangdong Province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RIMBA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Brasilia de Minas, Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Volgograd"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Marburg"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hokkaido, Sapporo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Yildizeli, Akcakale"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lop Buri"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Manguinhos, Rio de Janeiro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Utah"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "North region, Salta province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Catoren"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jeddah"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Xinjiang province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Iporanga [IBGE7 3521200]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Santander"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kerala"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yambio"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pergamino"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Western Rural"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MG, Juiz De Fora [IBGE7 3136702]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Ribeirao Preto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bariloche"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Minas Gerais State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Antioquia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Woodbury, Iowa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Fukuoka"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Novo Cruzeiro, Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gety"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kampong Spueu Province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "DE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Palmas, Tocantins"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Niigata"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mandima"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "OH"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Isiro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Russia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Shanxi,Taiyuan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Sao Roque [IBGE7 3550605]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Goroka"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "FeiraDeSantana, BA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Neuquen"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tokat, Kizik"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Delhi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gunma"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Indiana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Montesserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Danube Delta, Mila 26"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Catalonia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bronx Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Barcelona"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Mairipora [IBGE7 3528502]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Goiania, Goias"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Campo Grande"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chiba"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Yildizeli, Seyhhalil"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kampala"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "western rural"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kedougou"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ES, Santa Teresa [IBGE7 3204609]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mie"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Istanbul"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kirklareli"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Stavropol"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Uige"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Xi Shuang Ban Na"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Adanse Dompoase"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Harbel, Margibi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ouro Preto, Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tshopo,Yahuma"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Mairipora"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rio Grande do Norte, Natal"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "KILO"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chautauqua Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Northern Ireland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Assam"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Baroda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jinka"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Piracaia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Coyah"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chiba, Chiba-city"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Sao Jose Dos Campos [IBGE7 3549904]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Koyulhisar, Boyali"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Itapecerica Da Serra [IBGE7 3522208]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yogyakarta"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "three healthcare facilities, one in Kampala one in Wakiso and another in Mbale district"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ontario"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pita"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jiangsu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Kivu, Kamituga"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lobaye"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rochester, NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lombardy"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Conacry"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ciudad de Buenos Aires"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NewYork"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "El Oro, Machala"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Wakiso"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bonthe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MG, Mariana [IBGE7 3140001]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Ovacik"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Boke"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Texas, TX"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Central region, Buenos Aires province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Goiás"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Hafik, Onbasilar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Health care setting"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Orange Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Baghdad"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lagos"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Taubate"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tochigi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rudaki region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Grand Cape Mount"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, SP"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pottawattamie, Iowa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kwilu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Koyulhisar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Las Piedras, Canelenes Department"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ntoroko"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lokolia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Massachusetts"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nord-Kivu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mandje"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Uganda"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Braganca Paulista [IBGE7 3507605]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bong"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yucatan, Maxcanu, Paraiso"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Arvin,California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rockingham, New Hampshire"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tamil Nadu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Redlight, Monstserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ribeirao Preto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mogadishu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chanthaburi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Amparo [IBGE7 3501905]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mombasa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Polk, Iowa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Veneto region, Vicenza"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Kazakhstan oblast"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "San Luis Potosi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Louveira [IBGE7 3527306]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Paulista, Pernambuco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Marilia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "GA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kankan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Switzerland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rondonopolis, Mato Grosso"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Louveira"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Abia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hoima"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Soweto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Equateur,Bolomba"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MI"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Kurucaabat"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Jundiai [IBGE7 3525904]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chicago, IL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cu Chi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Saint Helena"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Volgograd Region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "New Mexico"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Manta, Manabi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Beijing"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Piedmont"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ES, Ibatiba [IBGE7 3202454]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guayaquil"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kourou"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MG, Congonhal [IBGE7 3117900]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Embu Guaau [IBGE7 3515103]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Salam"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Phetchabun"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nebraska"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Telimele"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MONGBWALU"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Hafik, Ekingolu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "El Oro, Huaquillas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Astrakhan region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Milwaukee"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bangui"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Berlin"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Koyulhisar, Camikebir"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nakasongola"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yucatan, Tekax"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kalasin"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mangala"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yunnan, Ruili"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Fortaleza, CE"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Wuhan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bismark ND"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sweden"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Iowa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bahwere"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pennsylvania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NY, New York City"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Long An"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Frankfurt"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Illinois, West Chicago suburbs"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "St. Joseph County, IN"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MinasGerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Northern Territory"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Xinjiang, Bachu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Breves, Para"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gabon"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Astrahan region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Navrongo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MAMBASA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Ubatuba [IBGE7 3555406]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Emilia-Romagna"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Leon"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kailahun"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kitzbuehel,Tyrol"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ, Cantagalo [IBGE7 3301108]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Osasco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Goias State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Western-Area-Urban"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tolten"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Texas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Western Cape"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Salvador, BA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Christchurch"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vioja, Monstserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nashville, TN"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lonquimay"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Montevideo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Wisconsin"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bas-Uele"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Greater Accra"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ, Nova Friburgo [IBGE7 3303401]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rio de janeiro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ramona,California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Normandy"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Conneticut, Stamford"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Guangdong Province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Madrid"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Melbourne"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jiangxi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Monte Alegre Do Sul [IBGE7 3531209]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Canada"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Occitanie"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Caceres, Extremadura"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Moyamba"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "San Gabriel Valley, California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tristan da Cunha"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gujarat State, Amreli"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lima"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Western Urban"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Campinas [IBGE7 3509502]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nakhon Ratchasima"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Casimiro de Abreu-RJ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pittsburgh, PA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bahia, Salvador, Sao Marcos"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Sarkisla, Yalani"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NJ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gulu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cadiz, Andalusia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ningbo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mato Grosso"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bonja, Monstserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "LA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ, Volta Redonda [IBGE7 3306305]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "KCH"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Limoeiro, Pernambuco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nimba"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tennessee"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sokoto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Baringo County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Maciel"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kasai"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Johannesburg"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Illinois"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Queretaro"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Graz,Styria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Miami, FL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gauteng"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "western area"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zhejiang"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bristol"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Vinhedo [IBGE7 3556701]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Shenzhen"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Larimer, Colorado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sardinia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ON"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Udon Thani"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kilifi District"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pernambuco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Pisa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yangon"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Meeting in Chile/Car trip"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nha Trang"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nanjing"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Guarulhos [IBGE7 3518800]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ho Chi Minh City"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Suffolk Couunty, NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Pinhalzinho [IBGE7 3538204]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mbale"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nia nia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Kaplan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Emilia-Romagna region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jilin, Changchun"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Amreli District, Gujarat State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Fort Bend Co. TX"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Dibrugarh"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Surabaya"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Sao Sebastiao [IBGE7 3550704]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hokkaido"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tampa FL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Tuiuti [IBGE7 3554953]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BL"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Australia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kambia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Barquisimeto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Parana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kanagawa, Yokohama"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Equateur"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "El_Cajon,California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Peru"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kern, California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Teresopolis-RJ"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "AUNGBA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Spain"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Port Harcourt"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Dutchess Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Karabalcik"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kampong Chaam Province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Soroti"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sud-Ubangi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Basel-Stadt"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yunnan Province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Mairipora"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Texas/Houston"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kufstein,Tyrol"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "ID"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nizi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bueng Kan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Oaxaca"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Scotland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Black Hawk, Iowa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Shared drink"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yucatan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gangtok"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Trinidad"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hong Kong"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "western urban"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Uzbekistan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "WA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hanoi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "British Columbia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Onondaga Co., NY"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "USA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "LITA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kumamoto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vadodara District, Gujarat State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kilifi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "synthetic construct"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "EmiliaRomagna"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Esquel"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "BS"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Al-Khurma"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sacramento, California"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tshopo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tadjikistan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ile de france"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Koinadugu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sierra Leone"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MG, Belo Horizonte [IBGE7 3106200]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Barra Do Turvo [IBGE7 3505401]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "West Bengal"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Fukushima"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Santander, Bucaramanga"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Osaka City"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Campo Limpo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Xiamen"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sankuru"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bhuj District, Gujarat State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "southern Sudan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "PA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nancahua"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Queensland"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gbarpolu"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bunia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Yokohama"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "DC"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Alabang"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lanco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Chile"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Port Loko"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Oregon"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "WBR, Louisiana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rostov"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jiangsu, Nantong"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ribeirao Preto, Sao Paulo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Saxony-Anhalt"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Salvadore, Bahia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "San Pedro, Colonia Department"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Aomori"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Western Area Urban"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "SP, Jaboticabal [IBGE7 3524303]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zhalagash"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sinoe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sinop, MT"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Stavropol region"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gujarat State,Amreli"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Region de los Rios"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "VD"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Samut Sakorn"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Riyadh"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "North Carolina"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Yildizeli, Yusufoglan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nanchang"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Veneto region, Padova"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cincinnati, OH"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Dakota"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Garanhuns, Pernambuco"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Peridomestic"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bolivia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Manaus, Amazonas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Araraquara, Sao Paulo State"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kansas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Margibi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mayinga"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Western Area"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sud-Ubangi,Bangabola"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Hafik, Kaytarmis"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Roatan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Montana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vacaria, Rio Grande do Sul"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sao Paulo, Itatiba"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Puerto Octay"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Hafik, Cakmak"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Kangal, Karagucuk"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tripura"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Maine"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tapachula, Chiapas"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Meeting/Car trip"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Maindombe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kolkata"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Illinois, Cook"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Oaxaca, Tehuantepec Isthmus"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lechiguanas Islands"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hiroshima"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "NBA"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nova Lima, Minas Gerais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ndjole"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Nigeria"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Monstserrado"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ramsey, Minnesota"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "North region, Salta Province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Gujarat State, Bhavnagar"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Tokyo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Madhya Pradesh"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "San Luis Potosi."
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Goias"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Story, Iowa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sivas, Zara, Atalan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Al-Fulah City, Western Kordufan Province"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "New Jersey"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Likati"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Germany"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "RJ, Cachoeiras De Macacu [IBGE7 3300803]"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ari Zone"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bundibugyo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Phichit"
+    }
+  ],
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "MolecularSequence",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C164396"
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3324",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3305",
+      "name": "Public health and epidemiology",
+      "url": "http://edamontology.org/topic_3305",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4325",
+      "name": "Ebola virus disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_4325",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0025382",
+      "name": "sarcoma, avian",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0025382",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0017879",
+      "name": "hantavirus pulmonary syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0017879",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C125640",
+      "name": "Human Metapneumovirus",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C125640",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005737",
+      "name": "Ebola hemorrhagic fever",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005737",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D012120",
+      "name": "Respiration Disorders",
+      "url": "https://id.nlm.nih.gov/mesh/D012120.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005502",
+      "name": "dengue disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005502",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "FluA"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12287",
+      "name": "Crimean-Congo hemorrhagic fever",
+      "url": "http://purl.obolibrary.org/obo/DOID_12287",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C113725",
+      "name": "Undiagnosed",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C113725",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9397",
+      "name": "Chiroptera",
+      "url": "https://www.uniprot.org/taxonomy/9397",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9598",
+      "name": "Pan troglodytes",
+      "url": "https://www.uniprot.org/taxonomy/9598",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7160",
+      "name": "Aedes albopictus",
+      "url": "https://www.uniprot.org/taxonomy/7160",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7157",
+      "name": "Culicidae",
+      "url": "https://www.uniprot.org/taxonomy/7157",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "314293",
+      "name": "Simiiformes",
+      "url": "https://www.uniprot.org/taxonomy/314293",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7159",
+      "name": "Aedes aegypti",
+      "url": "https://www.uniprot.org/taxonomy/7159",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9534",
+      "name": "Chlorocebus aethiops",
+      "url": "https://www.uniprot.org/taxonomy/9534",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9541",
+      "name": "Macaca fascicularis",
+      "url": "https://www.uniprot.org/taxonomy/9541",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11250",
+      "name": "Human respiratory syncytial virus",
+      "url": "https://www.uniprot.org/taxonomy/11250",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12814",
+      "name": "Respiratory syncytial virus",
+      "url": "https://www.uniprot.org/taxonomy/12814",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "208895",
+      "name": "Human respiratory syncytial virus B",
+      "url": "https://www.uniprot.org/taxonomy/208895",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1439707",
+      "name": "Respiratory syncytial virus type A",
+      "url": "https://www.uniprot.org/taxonomy/1439707",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3049954",
+      "name": "Orthopneumovirus hominis",
+      "url": "https://www.uniprot.org/taxonomy/3049954",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "208893",
+      "name": "Human respiratory syncytial virus A",
+      "url": "https://www.uniprot.org/taxonomy/208893",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "402052",
+      "name": "Crimean-Congo hemorrhagic fever virus (ZAM57/06)",
+      "url": "https://www.uniprot.org/taxonomy/402052",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "647334",
+      "name": "Measles virus MVi/Yamagata.JPN/19.07",
+      "url": "https://www.uniprot.org/taxonomy/647334",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3052462",
+      "name": "Orthoebolavirus zairense",
+      "url": "https://www.uniprot.org/taxonomy/3052462",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "662606",
+      "name": "Measles virus MVs/National Capital Region.PHL/2000/00-2161/[D3]",
+      "url": "https://www.uniprot.org/taxonomy/662606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "ILLUMINA"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "GridION"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "MinION"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "NextSeq 1000"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "WGS"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina MiSeq"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina MiniSeq"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Nextera XT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "NextSeq 550"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Illumina iSeq 100"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

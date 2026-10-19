@@ -1,0 +1,367 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 18096,
+      "unitText": "DataCollection"
+    }
+  ],
+  "dateModified": "2026-09-14",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "endDate": "2026-09-14"
+    }
+  ],
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "usageInfo": {
+    "@type": "CreativeWork",
+    "name": "How to cite the IEDB",
+    "url": "https://discuss.iedb.org/t/citing-the-iedb/63"
+  },
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "immune epitope assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_1110128"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Epitope",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C13189"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "IEDB source reference"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Antigen"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Immune receptor"
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0804",
+      "name": "Immunology",
+      "url": "http://edamontology.org/topic_0804",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3948",
+      "name": "Immunoinformatics",
+      "url": "http://edamontology.org/topic_3948",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8469",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/DOID_8469",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "ONTIE:0003423"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "403",
+      "name": "mouth disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_403",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "DOID:934",
+      "url": "http://purl.obolibrary.org/obo/DOID_934",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1883",
+      "name": "hepatitis C",
+      "url": "http://purl.obolibrary.org/obo/DOID_1883",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "DOID:9744",
+      "url": "http://purl.obolibrary.org/obo/DOID_9744",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11263",
+      "name": "chlamydia",
+      "url": "http://purl.obolibrary.org/obo/DOID_11263",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "DOID:2377",
+      "url": "http://purl.obolibrary.org/obo/DOID_2377",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2043",
+      "name": "hepatitis B",
+      "url": "http://purl.obolibrary.org/obo/DOID_2043",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "DOID:104",
+      "url": "http://purl.obolibrary.org/obo/DOID_104",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "360549",
+      "name": "Themiste hennahi",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=360549",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1634342",
+      "name": "Norovirus Hu/GII/JP/2015/GII.P17_GII.17/Kawasaki308",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1634342",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "480019",
+      "name": "Influenza A virus (A/Moscow/10/1999(H3N2))",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=480019",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10095",
+      "name": "Mus sp.",
+      "url": "https://www.uniprot.org/taxonomy/10095",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "642794",
+      "name": "Influenza A virus (A/Auckland/1/2009(H1N1))",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=642794",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "183764",
+      "name": "Influenza A virus (A/Puerto Rico/8/34/Mount Sinai(H1N1))",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=183764",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7227",
+      "name": "Drosophila melanogaster",
+      "url": "https://www.uniprot.org/taxonomy/7227",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2492960",
+      "name": "Bacillus yapensis",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2492960",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "441771",
+      "name": "Clostridium botulinum A str. Hall",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=441771",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1318439",
+      "name": "Influenza A virus (A/Washington/05/2011(H1N1))",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1318439",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12461",
+      "name": "Hepatitis E virus",
+      "url": "https://www.uniprot.org/taxonomy/12461",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "508771",
+      "name": "Toxoplasma gondii (strain ATCC 50611 / Me49)",
+      "url": "https://www.uniprot.org/taxonomy/508771",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5851",
+      "name": "Plasmodium knowlesi (strain H)",
+      "url": "https://www.uniprot.org/taxonomy/5851",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "347515",
+      "name": "Leishmania major strain Friedlin",
+      "url": "https://www.uniprot.org/taxonomy/347515",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "337042",
+      "name": "Alphapapillomavirus 7",
+      "url": "https://www.uniprot.org/taxonomy/337042",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "443226",
+      "name": "Coccidioides posadasii (strain RMSCC 757 / Silveira)",
+      "url": "https://www.uniprot.org/taxonomy/443226",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "489455",
+      "name": "hepatitis B virus genotype A",
+      "url": "https://www.uniprot.org/taxonomy/489455",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "31604",
+      "name": "Morbillivirus caprinae",
+      "url": "https://www.uniprot.org/taxonomy/31604",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "353154",
+      "name": "Theileria annulata strain Ankara",
+      "url": "https://www.uniprot.org/taxonomy/353154",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "333668",
+      "name": "Theileria parva strain Muguga",
+      "url": "https://www.uniprot.org/taxonomy/333668",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "OBI:1110128",
+      "name": "immune epitope assay",
+      "url": "http://purl.obolibrary.org/obo/OBI_1110128",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "IEDB_ASSAY_TYPE:34",
+      "name": "ELISA",
+      "inDefinedTermSet": "IEDB"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "IEDB_ASSAY_TYPE:37",
+      "name": "western blot",
+      "inDefinedTermSet": "IEDB"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "IEDB_ASSAY_TYPE:316",
+      "name": "biological activity",
+      "inDefinedTermSet": "IEDB"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "IEDB_ASSAY_TYPE:48",
+      "name": "ELISPOT",
+      "inDefinedTermSet": "IEDB"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "IEDB_ASSAY_TYPE:69",
+      "name": "3H-thymidine",
+      "inDefinedTermSet": "IEDB"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "IEDB_ASSAY_TYPE:418",
+      "name": "purified MHC/direct/fluorescence",
+      "inDefinedTermSet": "IEDB"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "IEDB_ASSAY_TYPE:289",
+      "name": "purified MHC/direct/radioactivity",
+      "inDefinedTermSet": "IEDB"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "IEDB_ASSAY_TYPE:38",
+      "name": "immuno staining",
+      "inDefinedTermSet": "IEDB"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "IEDB_ASSAY_TYPE:311",
+      "name": "inhibition by antigen",
+      "inDefinedTermSet": "IEDB"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}

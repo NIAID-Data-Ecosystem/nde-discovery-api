@@ -1,0 +1,29 @@
+{
+  "_id": "pgs_catalog",
+  "name": "Polygenic Score Catalog (PGS Catalog)",
+  "alternateName": [
+    "PGS Catalog",
+    "Polygenic Score Catalog"
+  ],
+  "identifier": "Polygenic Score Catalog (PGS Catalog)",
+  "url": "https://www.pgscatalog.org/",
+  "abstract": "Polygenic Score Catalog is a NIH supported generalist repository that includes polygenic scores data.",
+  "description": "The PGS Catalog is an open database of published polygenic scores (PGS). Each PGS in the Catalog is consistently annotated with relevant metadata; including scoring files (variants, effect alleles/weights), annotations of how the PGS was developed and applied, and evaluations of their predictive performance. See the PGS Catalog Data Description page for a complete description of the metadata captured for PGS, Samples, Performance Metrics, Traits, and Publications.",
+  "collectionType": "Database",
+  "genre": [
+    "Generalist"
+  ],
+  "conditionsOfAccess": "Open",
+  "license": "https://www.ebi.ac.uk/about/terms-of-use/",
+  "inLanguage": "English",
+  "version": "v2025.08.06",
+  "isAccessibleForFree": true,
+  "hasAPI": true,
+  "hasDownload": "All content",
+  "creativeWorkStatus": "Accepting Data",
+  "dateCreated": "2019-08-06",
+  "dateModified": "2025-08-06",
+  "datePublished": "2019-10-14",
+  "schedule": "Weekly",
+  "schema": {}
+}

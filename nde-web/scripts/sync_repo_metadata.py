@@ -9,11 +9,16 @@ merging, in order of increasing precedence:
     1. the existing per-repo JSON on disk, if present
     2. the legacy ``source_info`` dict inside ``handlers.py``, if still
        present (used for the initial bootstrap; a no-op afterward)
-    3. scalar fields from ``SourceMetaCuration - resource_base.tsv``
-       (matched by URL; ``sameAs`` can also fall back to source key)
+    3. supplementary fields from the optional priority sheet
+    4. nonblank descriptive fields from ``RepoMetaCuration - resource_base.tsv``
+       (matched by source name, aliases, identifiers, URL, or sameAs)
 
-Existing fields are preserved; TSV values only fill gaps. Re-run any time
-the TSV or Google Sheet changes.
+RepoMetaCuration is authoritative for descriptive metadata on staging, except
+for ``identifier``. The portal uses that field as the exact
+``includedInDataCatalog.name`` search filter, so existing identifiers remain
+stable. Blank cells and unmatched sources preserve existing values. Source
+keys, schema mappings, schedules, and other ingestion settings stay in the
+JSON. Re-run any time the TSV or Google Sheet changes.
 
 Usage:
     python nde-web/scripts/sync_repo_metadata.py
@@ -27,18 +32,24 @@ import ast
 import csv
 import json
 import re
+import warnings
 from pathlib import Path
 from typing import Any
+
+from resource_base import (
+    RESOURCE_BASE_TSV,
+    load_resource_base_rows,
+    row_source_candidates,
+    split_alternate_names,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 HANDLERS_PY = REPO_ROOT / "nde-web" / "handlers.py"
 REPO_METADATA_DIR = REPO_ROOT / "nde-web" / "repo_metadata"
-RESOURCE_BASE_TSV = REPO_ROOT / "SourceMetaCuration - resource_base.tsv"
 PRIORITY_TSV = REPO_ROOT / "Priority repo metadata - ResourceCatalog.tsv"
 
-# Priority sheet column header -> NDE source key. The sheet has other
-# columns (TB Portals, IEDB, ITN TrialShare, ACTG) for repos that are
-# not yet ingested; those are ignored.
+# Priority sheet column header -> NDE source key. Other columns are ignored
+# unless their supplements have been reviewed for this metadata workflow.
 PRIORITY_SHEET_COLUMNS: dict[str, str] = {
     "ImmuneSpace": "immunespace",
     "BV-BRC": "bv_brc",
@@ -138,23 +149,26 @@ def _coerce_bool(value: str) -> bool | None:
     return None
 
 
+def _format_collection_type(value: str) -> str:
+    """Keep the source metadata scalar while formatting pipe-separated types."""
+    return ", ".join(part.strip() for part in value.split("|") if part.strip())
+
+
 # Columns in resource_base.tsv mapped to our JSON field names and how to
 # coerce the cell value. A coercer of ``None`` means "use string as-is".
 RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
     "name": ("name", None),
     "url": ("url", None),
     "sameAs": ("sameAs", None),
+    # Read for matching and validation, but do not copy into existing sources.
     "identifier": ("identifier", None),
-    "alternateName": (
-        "alternateName",
-        lambda v: [s.strip() for s in v.split(",") if s.strip()],
-    ),
+    "alternateName": ("alternateName", split_alternate_names),
     "license": ("license", None),
     "conditionsOfAccess": ("conditionsOfAccess", None),
     "usageInfo": ("usageInfo", None),
     "abstract": ("abstract", None),
     "description": ("description", None),
-    "collectionType": ("collectionType", None),
+    "collectionType": ("collectionType", _format_collection_type),
     "hasAPI": ("hasAPI", _coerce_bool),
     "hasDownload": ("hasDownload", None),
     "isAccessibleForFree": ("isAccessibleForFree", _coerce_bool),
@@ -170,6 +184,11 @@ RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
     "creativeWorkStatus": ("creativeWorkStatus", None),
 }
 
+# These values have behavior outside the descriptive source display. In
+# particular, the portal sends ``identifier`` verbatim as its
+# ``includedInDataCatalog.name`` filter.
+RESOURCE_BASE_PRESERVED_FIELDS = frozenset({"identifier"})
+
 
 # Priority-sheet properties safe to extract as scalars. Complex object
 # fields (funding, author, citation, about, measurementTechnique,
@@ -179,7 +198,7 @@ RESOURCE_BASE_COLUMNS: dict[str, tuple[str, Any]] = {
 # fragments — they are left to the Phase 3 heuristics pipeline rather
 # than parsed heuristically here.
 PRIORITY_SCALAR_PROPERTIES: dict[str, tuple[str, Any]] = {
-    "collectionType": ("collectionType", None),
+    "collectionType": ("collectionType", _format_collection_type),
     "genre": (
         "genre",
         lambda v: [s.strip() for s in v.split(";") if s.strip()],
@@ -266,56 +285,69 @@ def load_priority_sheet_by_key() -> dict[str, dict[str, Any]]:
     return {k: v for k, v in out.items() if v}
 
 
-def load_resource_base_by_url() -> dict[str, dict[str, Any]]:
-    """Return resource_base.tsv rows keyed by normalized URL."""
-    if not RESOURCE_BASE_TSV.exists():
-        return {}
-    out: dict[str, dict[str, Any]] = {}
-    with RESOURCE_BASE_TSV.open() as f:
-        reader = csv.DictReader(f, delimiter="\t")
-        for row in reader:
-            url = row.get("url", "").strip()
-            if not url:
-                continue
-            record: dict[str, Any] = {}
-            for col, (field, coercer) in RESOURCE_BASE_COLUMNS.items():
-                raw = (row.get(col) or "").strip()
-                if not raw:
-                    continue
-                value = coercer(raw) if coercer else raw
-                if value is None or value == "" or value == []:
-                    continue
-                record[field] = value
-            if record:
-                out[_norm_url(url)] = record
-    return out
+def resource_base_record(row: dict[str, str]) -> dict[str, Any]:
+    """Extract supported, nonblank descriptive fields without changing API shapes."""
+    record: dict[str, Any] = {}
+    for col, (field, coercer) in RESOURCE_BASE_COLUMNS.items():
+        if field in RESOURCE_BASE_PRESERVED_FIELDS:
+            continue
+        raw = (row.get(col) or "").strip()
+        if not raw:
+            continue
+        value = coercer(raw) if coercer else raw
+        if value is not None and value != "" and value != []:
+            record[field] = value
+    return record
 
 
-def load_resource_base_same_as_by_source_key() -> dict[str, dict[str, Any]]:
-    """Return sameAs values keyed by source-like TSV identifiers.
+def find_resource_base_row(
+    rows: list[dict[str, str]],
+    key: str,
+    data: dict[str, Any],
+) -> dict[str, str] | None:
+    """Match a unique row, including sources whose curated URL has changed.
 
-    Most rows are matched by URL. A few curation rows use a URL variant
-    from the one in repo metadata, so this fallback lets ``DBAASP`` map
-    to ``dbaasp`` without broadening all resource_base fields.
+    Prefer names and aliases before shared identifiers/URLs so VEuPath
+    Collections and VEuPathDB remain separate. Never choose an arbitrary
+    row when a match is ambiguous.
     """
-    if not RESOURCE_BASE_TSV.exists():
-        return {}
-    out: dict[str, dict[str, Any]] = {}
-    with RESOURCE_BASE_TSV.open() as f:
-        reader = csv.DictReader(f, delimiter="\t")
-        for row in reader:
-            same_as = (row.get("sameAs") or "").strip()
-            if not same_as:
-                continue
-            key = _norm_source_key(row.get("identifier") or "")
-            if key:
-                out[key] = {"sameAs": same_as}
-    return out
+    names = {_norm_source_key(key), _norm_source_key(data.get("name", ""))} - {""}
+    same_as = data.get("sameAs", [])
+    if isinstance(same_as, str):
+        same_as = [same_as]
+    identifiers = set(data.get("identifier", "").split("|"))
+    identifiers.update(data.get("alternateName", []))
+    identifiers = {_norm_source_key(value) for value in identifiers} - {""}
+    predicates = (
+        lambda row: _norm_source_key(row.get("name", "")) in names,
+        lambda row: any(
+            _norm_source_key(alias) in names
+            for alias in split_alternate_names(row.get("alternateName", ""))
+        ),
+        lambda row: _norm_source_key(key) in {
+            _norm_source_key(value) for value in row.get("identifier", "").split("|")
+        },
+        lambda row: bool(data.get("url"))
+        and _norm_url(row.get("url", "")) == _norm_url(data["url"]),
+        lambda row: bool(row.get("sameAs")) and row["sameAs"] in same_as,
+        lambda row: bool(identifiers.intersection(
+            _norm_source_key(value) for value in row_source_candidates(row)
+        )),
+    )
+    ambiguous = False
+    for predicate in predicates:
+        matches = [row for row in rows if predicate(row)]
+        if len(matches) == 1:
+            return matches[0]
+        ambiguous = ambiguous or len(matches) > 1
+    reason = "ambiguous resource_base matches" if ambiguous else "no resource_base match"
+    warnings.warn(f"{key}: {reason}; preserving existing metadata.", stacklevel=2)
+    return None
 
 
 # Fields originally hand-maintained inside handlers.py. These are the
-# parity floor: automated TSV syncs may fill them when blank but must
-# never overwrite them. Everything else is rebuildable from the sheet.
+# parity floor for the legacy/priority-sheet merge. RepoMetaCuration's
+# descriptive fields are applied separately and are authoritative on staging.
 HANDLERS_PROTECTED_FIELDS = frozenset({
     "name",
     "abstract",
@@ -374,31 +406,30 @@ def order_fields(data: dict[str, Any]) -> dict[str, Any]:
     return ordered
 
 
-def build() -> dict[str, dict[str, Any]]:
+def build(resource_base_tsv: Path | None = None) -> dict[str, dict[str, Any]]:
     """Build the merged per-repo metadata dict."""
     repos = load_existing_repo_jsons()
     legacy = load_source_info_from_handlers()
     for key, data in legacy.items():
         repos.setdefault(key, {})
         merge(repos[key], data)
-    tsv_by_url = load_resource_base_by_url()
-    tsv_same_as_by_key = load_resource_base_same_as_by_source_key()
+    rows = load_resource_base_rows(
+        resource_base_tsv if resource_base_tsv is not None else RESOURCE_BASE_TSV
+    )
     priority_by_key = load_priority_sheet_by_key()
-    # Priority sheet is curated and authoritative for non-protected
-    # fields; resource_base.tsv is coarser and only fills blanks.
+    # Keep optional priority-sheet supplements, then apply the current
+    # resource_base curation. Only the supported descriptive columns can
+    # overwrite JSON fields; ingestion settings and the stable search
+    # identifier are not in that mapping.
     for key, data in repos.items():
         data.setdefault("_id", key)
+        tsv_row = find_resource_base_row(rows, key, data)
+        if tsv_row is None:
+            continue
         priority_row = priority_by_key.get(key)
         if priority_row:
             merge_update(data, priority_row)
-        url = data.get("url")
-        if url:
-            tsv_row = tsv_by_url.get(_norm_url(url))
-            if tsv_row:
-                merge(data, tsv_row)
-        tsv_same_as = tsv_same_as_by_key.get(_norm_source_key(key))
-        if tsv_same_as:
-            merge(data, tsv_same_as)
+        data.update(resource_base_record(tsv_row))
     return repos
 
 
@@ -441,11 +472,23 @@ def main(argv: list[str] | None = None) -> int:
         help="Build in memory and print a summary without writing files.",
     )
     parser.add_argument(
+        "--resource-base-tsv",
+        type=Path,
+        default=RESOURCE_BASE_TSV,
+        help="Path to RepoMetaCuration - resource_base.tsv (relative to the repository root).",
+    )
+    parser.add_argument(
         "--source",
         help="Only write this source key. Default: all sources.",
     )
     args = parser.parse_args(argv)
-    repos = build()
+    resource_base_tsv = args.resource_base_tsv
+    if not resource_base_tsv.is_absolute():
+        resource_base_tsv = REPO_ROOT / resource_base_tsv
+    try:
+        repos = build(resource_base_tsv)
+    except (OSError, RuntimeError) as exc:
+        parser.error(str(exc))
     try:
         repos = filter_repos(repos, args.source)
     except KeyError as exc:
