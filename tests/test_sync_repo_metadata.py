@@ -55,7 +55,6 @@ def test_sync_refreshes_descriptive_fields_and_preserves_ingestion_settings(
         "license": "Existing license",
         "schedule": "Weekly",
         "schema": {"title": "name"},
-        "type": "Data Repository",
         "parentCollection": {"id": "parent"},
         "_mongoCollection": "shared_collection",
         "_mongoFilter": {"source": "example"},
@@ -86,9 +85,9 @@ def test_sync_refreshes_descriptive_fields_and_preserves_ingestion_settings(
     assert json.loads(path.read_text()) == original
     assert sync_module.main(["--resource-base-tsv", "custom.tsv"]) == 0
     updated = json.loads(path.read_text())
-    assert updated["name"] == "New repository name"
     # The portal uses this exact value for includedInDataCatalog.name searches.
-    assert updated["identifier"] == "Old identifier"
+    assert updated["name"] == "Old repository name"
+    assert updated["identifier"] == "example"
     assert updated["alternateName"] == ["New, expanded name", "EX"]
     assert updated["url"] == "https://new.example.org/"
     assert updated["abstract"] == "New abstract"
@@ -97,34 +96,45 @@ def test_sync_refreshes_descriptive_fields_and_preserves_ingestion_settings(
     assert updated["genre"] == ["IID", "Omics"]
     assert updated["hasAPI"] is False
     assert updated["isAccessibleForFree"] is False
-    assert updated["collectionType"] == "Portal, Data Repository"
+    assert updated["collectionType"] == ["Portal", "Data Repository"]
     for field in (
-        "_id", "license", "schedule", "schema", "type", "parentCollection",
+        "_id", "license", "schedule", "schema", "parentCollection",
         "_mongoCollection", "_mongoFilter",
     ):
         assert updated[field] == original[field]
     assert sync_module.write(sync_module.build(tsv)) == []
 
 
-def test_resource_base_record_excludes_search_identifier():
+@pytest.mark.parametrize("cell, identifier", [
+    ("new alias | source_key", "source_key"),
+    ("https://zenodo.org/ | Zenodo | zenodo", "zenodo"),
+    ("https://actgnetwork.org/ |actg", "actg"),
+    ("http://immuneexpresso.org", ""),
+    ("", ""),
+])
+def test_resource_base_record_uses_last_pipe_value_and_excludes_search_name(
+    cell, identifier
+):
     record = sync_module.resource_base_record({
         "name": "Updated name",
-        "identifier": "new alias | source_key",
+        "identifier": cell,
     })
 
-    assert record == {"name": "Updated name"}
+    assert record == {"identifier": identifier}
 
 
 @pytest.mark.parametrize("cell, expected", [
     (
         "Portal | Dataset Repository | Inference Repository",
-        {"collectionType": "Portal, Dataset Repository"},
+        ["Portal", "Dataset Repository"],
     ),
+    ("Portal, Dataset Repository", ["Portal", "Dataset Repository"]),
     # A cell with only staging-only types keeps the existing value, like a blank.
-    ("Inference Repository", {}),
+    ("Inference Repository", None),
 ])
 def test_resource_base_record_omits_staging_only_collection_types(cell, expected):
-    assert sync_module.resource_base_record({"collectionType": cell}) == expected
+    record = sync_module.resource_base_record({"collectionType": cell})
+    assert record.get("collectionType") == expected
 
 
 def test_prod_approval_preserves_unapproved_sources_and_catalog_links(
@@ -158,6 +168,7 @@ def test_prod_approval_preserves_unapproved_sources_and_catalog_links(
         },
         {
             "name": "New approved name", "url": "https://approved.example.org",
+            "identifier": "https://approved.example.org | approved",
             "sameAs": "https://data.niaid.nih.gov/resources?id=dde_unapproved",
         },
         {
@@ -169,8 +180,8 @@ def test_prod_approval_preserves_unapproved_sources_and_catalog_links(
 
     built = sync_module.build(tsv)
     assert built["unapproved"] == originals["unapproved"]
-    assert built["approved"]["name"] == "New approved name"
-    assert built["approved"]["identifier"] == "Indexed name"
+    assert built["approved"]["name"] == "Old approved name"
+    assert built["approved"]["identifier"] == "approved"
     assert "sameAs" not in built["approved"]
     assert built["catalog_approved"]["sameAs"].endswith("dde_approved")
 

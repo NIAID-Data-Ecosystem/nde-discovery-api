@@ -88,37 +88,29 @@ def test_catalog_flag_none_approves_source_without_catalog():
         )
 
 
-def test_activate_source_names_updates_allowlist_and_keeps_parent_scope():
+def test_activate_source_names_updates_names_and_allowlist_together():
     rows = [
         {"name": "New repository", "url": "https://new.org", "_ProdApproved?": "TRUE"},
-        {"name": "VEuPath Collections", "url": "https://veupathdb.org/", "_ProdApproved?": "TRUE"},
-        {"name": "Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB)",
-         "url": "https://veupathdb.org/", "_ProdApproved?": "TRUE"},
         {"name": "Hidden repository", "url": "https://hidden.org", "_ProdApproved?": "FALSE"},
     ]
     repos = {
-        "approved": {"name": "New repository", "identifier": "Old repository", "url": "https://new.org"},
-        "veupath_collections": {"name": "VEuPath Collections", "identifier": "VEuPathDB",
-                                "url": "https://veupathdb.org/"},
-        "veupathdb": {"name": "Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB)",
-                     "identifier": "VEuPathDB", "url": "https://veupathdb.org/"},
-        "hidden": {"name": "Hidden repository", "identifier": "Hidden repository",
+        "approved": {"name": "Old repository", "identifier": "approved", "url": "https://new.org"},
+        "hidden": {"name": "Old hidden repository", "identifier": "hidden",
                    "url": "https://hidden.org"},
     }
-    exclusions = {"prod_catalogs": ["Old repository", "VEuPathDB", "DDE special"],
+    exclusions = {"prod_catalogs": ["Old repository", "Old hidden repository", "DDE special"],
                   "staging_ids": []}
 
     updated, source_updates = approvals.activate_source_names(rows, exclusions, repos)
 
     assert updated["prod_catalogs"] == [
-        "New repository",
-        "Eukaryotic Pathogen, Vector and Host Informatics Resource (VEuPathDB)",
-        "DDE special",
+        "New repository", "Old hidden repository", "DDE special",
     ]
-    assert source_updates["approved"]["identifier"] == "New repository"
-    assert source_updates["veupath_collections"]["identifier"] == source_updates["veupathdb"]["identifier"]
-    assert "hidden" not in source_updates
-    assert exclusions["prod_catalogs"] == ["Old repository", "VEuPathDB", "DDE special"]
+    # The source key stays put; only the search name moves with the allowlist.
+    assert source_updates == {"approved": {**repos["approved"], "name": "New repository"}}
+    assert exclusions["prod_catalogs"] == [
+        "Old repository", "Old hidden repository", "DDE special",
+    ]
 
     rerun_exclusions, rerun_updates = approvals.activate_source_names(
         rows, updated, {**repos, **source_updates}

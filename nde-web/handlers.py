@@ -128,6 +128,10 @@ _EXCLUSIONS_PATH = os.path.join(
 _PARENT_COLLECTION_SOURCE_KEYS = {
     "veupathdb": "veupath_collections",
 }
+# Hub sources not listed under /v1/metadata src. No records carry the
+# "VEuPath Collections" catalog name; VEuPathDB and the component sites
+# that share its Mongo collection list them instead.
+_HIDDEN_SOURCES = {"veupath_collections"}
 _INTERNAL_SOURCE_INFO_FIELDS = {"_mongoCollection", "_mongoFilter"}
 _source_info_cache = None
 _approved_source_keys_cache = None
@@ -932,4 +936,11 @@ class NDESourceHandler(MetadataSourceHandler):
                 parent = _meta["src"][parent_source]
                 if "version" in parent:
                     _meta["src"][source]["version"] = parent["version"]
+
+        # Hide sources only after subset sources borrow their version.
+        _meta["src"] = {
+            source: info
+            for source, info in _meta["src"].items()
+            if source not in _HIDDEN_SOURCES
+        }
         return _meta

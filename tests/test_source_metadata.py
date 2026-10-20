@@ -59,5 +59,6 @@ def test_metadata_response_uses_build_sources(monkeypatch):
         "source": "ndex"
     }
     assert result["src"]["amoebadb"]["sourceInfo"]["name"] == "AmoebaDB"
+    # Subset sources borrow the version before VEuPath Collections is hidden.
     assert result["src"]["amoebadb"]["version"] == "veupath-version"
-    assert "sourceInfo" not in result["src"]["veupath_collections"]
+    assert "veupath_collections" not in result["src"]

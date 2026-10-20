@@ -31,6 +31,7 @@ from resource_base import (
     RESOURCE_BASE_TSV,
     load_resource_base_rows,
     row_source_candidates,
+    source_identifier,
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -129,7 +130,6 @@ def source_stub_reminder(path: Path) -> str:
 def create_source_stub(
     source_key: str,
     row: dict[str, str],
-    assume_yes: bool,
     dry_run: bool,
 ) -> Path | None:
     path = REPO_METADATA_DIR / f"{source_key}.json"
@@ -143,16 +143,10 @@ def create_source_stub(
             "Create the source JSON manually or fix the sheet row."
         )
 
-    identifier = (row.get("identifier") or "").strip()
-    if not identifier and not assume_yes:
-        identifier = prompt("Identifier", name)
-    if not identifier:
-        identifier = name
-
     data: dict[str, Any] = {
         "_id": source_key,
         "name": name,
-        "identifier": identifier,
+        "identifier": source_identifier(row.get("identifier") or ""),
         "url": (row.get("url") or "").strip(),
         "abstract": (row.get("abstract") or "").strip(),
         "description": (row.get("description") or "").strip(),
@@ -169,7 +163,7 @@ def create_source_stub(
     data = {
         k: v
         for k, v in data.items()
-        if v not in ("", [], {}) or k in {"schedule", "schema"}
+        if v not in ("", [], {}) or k in {"identifier", "schedule", "schema"}
     }
 
     if dry_run:
@@ -347,7 +341,6 @@ def bootstrap_source(
         created_stub_path = create_source_stub(
             source_key=source_key,
             row=row or {},
-            assume_yes=args.yes,
             dry_run=args.dry_run,
         )
 

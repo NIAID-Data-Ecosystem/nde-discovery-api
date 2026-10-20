@@ -3,7 +3,7 @@
 The private sheet is not deployed. Commit the generated ``exclusions.json``
 alongside curated source JSONs so the API can enforce both approval flags.
 Use ``--activate-source-names`` only with a corresponding crawler-record build;
-it switches source search identifiers and the production allowlist together.
+it switches source search names and the production allowlist together.
 """
 
 from __future__ import annotations
@@ -31,7 +31,6 @@ VALID_FLAGS = {
     # FALSE, it never approves a catalog.
     "_ResCatProdApproved?": {"TRUE", "FALSE", "IGNORE", "NONE"},
 }
-QUERY_NAME_PARENT_KEYS = {"veupath_collections": "veupathdb"}
 
 
 def catalog_id(same_as: str) -> str | None:
@@ -108,11 +107,11 @@ def compile_approvals(rows: list[dict[str, str]], exclusions: dict,
 def activate_source_names(
     rows: list[dict[str, str]], exclusions: dict, repos: dict[str, dict]
 ) -> tuple[dict, dict[str, dict]]:
-    """Synchronize approved search names with source identifiers and allowlist.
+    """Synchronize approved search names with source names and allowlist.
 
-    The sheet's ``identifier`` column contains URLs and aliases, so its
-    single display ``name`` is the exact query name. VEuPath Collections is
-    the one source whose records are intentionally scoped to its parent.
+    The portal queries ``includedInDataCatalog.name`` with a source's
+    ``name``, which ``sync_repo_metadata.py`` preserves until this switches
+    it to the approved row's ``name``.
     """
     approved_rows = {}
     for key, source in repos.items():
@@ -125,23 +124,17 @@ def activate_source_names(
     renamed_catalogs: dict[str, str] = {}
     updated_repos: dict[str, dict] = {}
     for key, row in approved_rows.items():
-        parent_key = QUERY_NAME_PARENT_KEYS.get(key, key)
-        parent_row = approved_rows.get(parent_key)
-        if parent_row is None:
-            raise ValueError(
-                f"{key}: approved query-name parent {parent_key!r} is missing"
-            )
-        new_name = parent_row.get("name", "").strip()
+        new_name = row.get("name", "").strip()
         if not new_name:
             raise ValueError(f"{key}: approved query name is blank")
-        old_name = repos[key].get("identifier")
+        old_name = repos[key].get("name")
         if not isinstance(old_name, str) or not old_name:
-            raise ValueError(f"{key}: existing source identifier is missing")
+            raise ValueError(f"{key}: existing source name is missing")
         if old_name in renamed_catalogs and renamed_catalogs[old_name] != new_name:
             raise ValueError(f"{old_name}: conflicting approved query names")
         renamed_catalogs[old_name] = new_name
         if old_name != new_name:
-            updated_repos[key] = {**repos[key], "identifier": new_name}
+            updated_repos[key] = {**repos[key], "name": new_name}
 
     prod_catalogs = []
     for old_name in exclusions["prod_catalogs"]:
@@ -159,7 +152,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--activate-source-names",
         action="store_true",
-        help="Switch approved source identifiers and prod_catalogs to sheet names together.",
+        help="Switch approved source names and prod_catalogs to sheet names together.",
     )
     args = parser.parse_args(argv)
     resource_base = args.resource_base_tsv
@@ -182,7 +175,7 @@ def main(argv: list[str] | None = None) -> int:
         f"Approved source keys: {len(updated['prod_source_keys'])}; "
         f"newly excluded catalog IDs: {len(new_ids - old_ids)}; "
         f"newly approved catalog IDs: {len(old_ids - new_ids)}; "
-        f"renamed source identifiers: {len(source_updates)}"
+        f"renamed source names: {len(source_updates)}"
     )
     if not args.dry_run:
         for key, source in source_updates.items():

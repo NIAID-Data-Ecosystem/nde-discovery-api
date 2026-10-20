@@ -100,18 +100,20 @@ allowlist also hides older records absent from the sheet, including superseded
 N3C versions. The approvals are independent: an
 approved DDE catalog card may be visible while its crawler source entry is
 hidden, as with BV-BRC. `_ResCatProdApproved? = NONE` marks a source without
-its own DDE ResourceCatalog record, such as VEuPath Collections, and is
-treated as unapproved.
+its own DDE ResourceCatalog record and is treated as unapproved.
 
-The sheet is shared with staging, so the production sync drops collection
-types for staging-only content (currently `Inference Repository`) from the
-comma-separated `collectionType`. Add future staging-only types to
+Approved rows set the source `identifier` to the last pipe-separated value of
+the sheet's `identifier` column (`https://www.iedb.org/ | iedb` becomes
+`iedb`), or an empty string when the cell has no pipe. `collectionType` is an
+array split on pipes or commas. The sheet is shared with staging, so the
+production sync drops collection types for staging-only content (currently
+`Inference Repository`). Add future staging-only types to
 `STAGING_ONLY_COLLECTION_TYPES` in `sync_repo_metadata.py`.
 
-The source `identifier` stays unchanged because the portal uses it as the
+The source `name` stays unchanged because the portal uses it as the
 `includedInDataCatalog.name` query value during a descriptive-metadata refresh.
 When the crawler records are ready to use the sheet's new names, activate the
-source identifiers and the production search allowlist together:
+source names and the production search allowlist together:
 
 ```bash
 ./nde-web/venv/bin/python nde-web/scripts/sync_prod_approvals.py \
@@ -120,10 +122,9 @@ source identifiers and the production search allowlist together:
 ```
 
 This uses the approved row's `name`, not its pipe-separated `identifier` cell.
-VEuPath Collections continues to share its parent VEuPathDB query name. The
-generated API change should go live only after the matching record-level names
-are present in the production build; otherwise source search links and the
-`prod_catalogs` allowlist will not match those records. ResourceCatalog
+The generated API change should go live only after the matching record-level
+names are present in the production build; otherwise source search links and
+the `prod_catalogs` allowlist will not match those records. ResourceCatalog
 approvals remain independent of crawler-source approvals.
 
 ## Refresh Saved Search Totals

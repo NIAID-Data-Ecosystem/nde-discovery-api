@@ -145,7 +145,12 @@
       }
     },
     "collectionType": {
-      "type": "string"
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "Array of collection types. RepoMetaCuration stores these as a pipe-joined string ('Portal | Data Repository'); the sync splits on pipes or commas, trims, and drops staging-only types."
     },
     "conditionsOfAccess": {
       "type": "string",
@@ -200,7 +205,7 @@
     },
     "identifier": {
       "type": "string",
-      "description": "handlers.py parity floor - never overwritten by sync"
+      "description": "Source key: the last pipe-separated value of RepoMetaCuration's identifier column ('https://example.org/ | example' -> 'example'), or an empty string when the cell has no pipe. Replaced from approved rows by the sync."
     },
     "inLanguage": {
       "type": "string"
@@ -225,7 +230,7 @@
     },
     "name": {
       "type": "string",
-      "description": "handlers.py parity floor - never overwritten by sync"
+      "description": "Exact includedInDataCatalog.name the portal searches for this source; preserved by sync_repo_metadata.py and switched with prod_catalogs by sync_prod_approvals.py --activate-source-names"
     },
     "parentCollection": {
       "type": "object",
@@ -306,10 +311,6 @@
       "items": {
         "$ref": "#/$defs/DefinedTerm"
       }
-    },
-    "type": {
-      "type": "string",
-      "description": "handlers.py parity floor - never overwritten by sync"
     },
     "url": {
       "type": "string",
