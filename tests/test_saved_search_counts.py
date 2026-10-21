@@ -133,6 +133,26 @@ def test_simple_query_matches_public_search_shape():
     } in queries
 
 
+def test_counts_follow_search_case_and_one_letter_words():
+    body = build_saved_search_count_body(
+        "Influenza A",
+        {},
+        include_frontend_defaults=False,
+        include_exclusions=False,
+    )
+    queries = body["query"]["bool"]["must"][0]["dis_max"]["queries"]
+
+    assert {"term": {"name": {"value": "influenza a", "boost": 5}}} in queries
+    assert {
+        "query_string": {
+            "query": "Influenza* A",
+            "default_operator": "AND",
+            "boost": 0.5,
+            "lenient": True,
+        }
+    } in queries
+
+
 def test_string_filter_is_query_string_clause():
     body = build_saved_search_count_body(
         "__all__",

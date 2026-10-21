@@ -10,6 +10,7 @@ from collections.abc import Iterable, Mapping
 from pathlib import Path
 
 from approval_filters import dde_resource_catalog_approval_filter
+from search_text import prefix_query, term_value
 
 
 DEFAULT_DATA_INDEX = "nde_all_current"
@@ -176,7 +177,7 @@ def _build_query_clause(query: str | None) -> dict:
         }
 
     if q.startswith('"') and q.endswith('"'):
-        unquoted = q.strip('"')
+        unquoted = term_value(q.strip('"'))
         return {
             "dis_max": {
                 "queries": [
@@ -194,8 +195,8 @@ def _build_query_clause(query: str | None) -> dict:
         }
 
     queries = [
-        {"term": {"_id": {"value": q, "boost": 5}}},
-        {"term": {"name": {"value": q, "boost": 5}}},
+        {"term": {"_id": {"value": term_value(q), "boost": 5}}},
+        {"term": {"name": {"value": term_value(q), "boost": 5}}},
         {
             "query_string": {
                 "query": q,
@@ -208,7 +209,7 @@ def _build_query_clause(query: str | None) -> dict:
         queries.append(
             {
                 "query_string": {
-                    "query": "* ".join(q.split()) + "*",
+                    "query": prefix_query(q),
                     "default_operator": "AND",
                     "boost": 0.5,
                     "lenient": True,

@@ -56,6 +56,12 @@ def _run_backup_thread(config):
 
 
 def _schedule_daily_backup(config):
+    # Deployments that aren't production (e.g. dev serving a copy of the prod
+    # build) set this False so they never write into production's backups.
+    if not getattr(config, "DAILY_BACKUP_ENABLED", True):
+        logging.getLogger("daily_backup").info("Daily Elasticsearch backup disabled by config")
+        return
+
     from aiocron import crontab
 
     loop = IOLoop.instance().asyncio_loop

@@ -76,7 +76,19 @@ SOURCE_TYPEDEF = {
     "multi_terms_size": {"type": int, "default": 10},
     "lineage": {"type": int, "default": None},
     "use_ai_search": {"type": bool, "default": False},
+    # No "enum": biothings validates the default (None) against it too.
+    # ranking.settings() rejects unknown values instead.
+    "ranking": {"type": str, "default": None},
+    "ranking_params": {"type": str, "default": None},
 }
+
+# Ranking of text searches (issue #44, see ranking.py): "classic" is BM25
+# alone; "reuse" multiplies the top RANKING_RESCORE_WINDOW hits per shard by
+# the build's _meta.ranking.reuse_factor. RANKING_ALLOW_OVERRIDES lets
+# requests tune the weights with ranking_params (dev only).
+RANKING_DEFAULT = "classic"
+RANKING_RESCORE_WINDOW = 5000
+RANKING_ALLOW_OVERRIDES = False
 
 QUERY_KWARGS = copy.deepcopy(QUERY_KWARGS)
 QUERY_KWARGS["GET"].update(SOURCE_TYPEDEF)

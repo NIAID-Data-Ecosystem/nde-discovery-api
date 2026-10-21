@@ -11,6 +11,8 @@ from botocore.config import Config as BotoConfig
 from elasticsearch.dsl import A, Q, Search
 
 from approval_filters import dde_resource_catalog_approval_filter
+import ranking
+from search_text import prefix_query, term_value
 
 
 SUPPORTED_PUBLIC_TYPES = ["Dataset", "ResourceCatalog"]
@@ -603,6 +605,9 @@ class NDEQueryBuilder(ESQueryBuilder):
     # https://docs.biothings.io/en/latest/_modules/biothings/web/query/builder.html#ESQueryBuilder.default_string_query
 
     def build(self, q=None, **options):
+        # apply_extras doesn't see q; only real text searches get reranked.
+        options["nde_text_search"] = (
+            isinstance(q, str) and q.strip() not in _AI_SEARCH_PASSTHROUGH_QUERIES)
         search = super().build(q, **options)
         if isinstance(search, Search):
             search._nde_raw_q = q
@@ -622,8 +627,8 @@ class NDEQueryBuilder(ESQueryBuilder):
         elif q.startswith('"') and q.endswith('"'):
             queries = [
                 # term query boosting
-                Q("term", _id={"value": q.strip('"'), "boost": 5}),
-                Q("term", name={"value": q.strip('"'), "boost": 5}),
+                Q("term", _id={"value": term_value(q.strip('"')), "boost": 5}),
+                Q("term", name={"value": term_value(q.strip('"')), "boost": 5}),
                 # query string
                 Q("query_string", query=q, default_operator="AND", lenient=True),
             ]
@@ -639,9 +644,9 @@ class NDEQueryBuilder(ESQueryBuilder):
 
     def build_queries(self, q, custom_function_script):
         queries = [
-            Q("function_score", query=Q("term", _id={"value": q, "boost": 5}),
+            Q("function_score", query=Q("term", _id={"value": term_value(q), "boost": 5}),
               script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
-            Q("function_score", query=Q("term", name={"value": q, "boost": 5}),
+            Q("function_score", query=Q("term", name={"value": term_value(q), "boost": 5}),
               script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
             Q("function_score", query=Q("query_string", query=q, default_operator="AND", lenient=True),
               script_score={"script": custom_function_script} if custom_function_script else None, boost_mode="replace"),
@@ -650,7 +655,7 @@ class NDEQueryBuilder(ESQueryBuilder):
         if not ("*" in q or "?" in q):
             wc_query = Q(
                 "query_string",
-                query="* ".join(q.split()) + "*",
+                query=prefix_query(q),
                 default_operator="AND",
                 boost=0.5,
                 lenient=True,
@@ -721,6 +726,14 @@ class NDEQueryBuilder(ESQueryBuilder):
         function_score_query = Q("function_score", script_score={
                                  "script": custom_function_script}, boost_mode="replace")
         search = search.query(function_score_query)
+
+        # rerank the top hits of text searches by reuse potential (see ranking.py)
+        ranking_name, ranking_params, window, tuned = ranking.settings(
+            options, _load_runtime_config())
+        if (ranking_name == ranking.RANKING_REUSE and options.nde_text_search
+                and ranking.can_rescore(options)):
+            search = search.extra(
+                rescore=ranking.rescore(ranking_params, window, tuned))
 
         # apply extra-filtering if present
         if options.extra_filter:
