@@ -1,0 +1,353 @@
+{
+  "collectionSize": [
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "unitText": "DataCollection"
+    }
+  ],
+  "dateModified": "2026-10-16",
+  "temporalCoverage": [
+    {
+      "@type": "TemporalInterval",
+      "temporalType": "collection",
+      "startDate": "2021-02-24",
+      "endDate": "2026-10-16"
+    }
+  ],
+  "usageInfo": {
+    "@type": "CreativeWork",
+    "name": "How To Use VAC",
+    "url": "https://www.niaid.nih.gov/research/vaccine-adjuvant-compendium-vac",
+    "description": "Adjuvant records in VAC list the points of contact for each adjuvant to allow vaccine researchers to contact the intellectual property (IP) holder directly."
+  },
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "ChemicalSubstance",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C103205"
+    }
+  ],
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0804",
+      "name": "Immunology",
+      "url": "http://edamontology.org/topic_0804",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3379",
+      "name": "Preclinical and clinical studies",
+      "url": "http://edamontology.org/topic_3379",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3966",
+      "name": "Vaccinology",
+      "url": "http://edamontology.org/topic_3966",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0021040",
+      "name": "pancreatic neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021040",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002041",
+      "name": "fungal infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002041",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004975",
+      "name": "Alzheimer disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004975",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005113",
+      "name": "bacterial infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005113",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005812",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C14283",
+      "name": "Virus",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C14283",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D062787",
+      "name": "Drug Overdose",
+      "url": "https://id.nlm.nih.gov/mesh/D062787.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0018076",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000775",
+      "name": "drug allergy",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0000775",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0020731",
+      "name": "arbovirus infection",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0020731",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9521",
+      "name": "Saimiri sciureus",
+      "url": "https://www.uniprot.org/taxonomy/9521",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "78584",
+      "name": "Lepilemur septentrionalis",
+      "url": "https://www.uniprot.org/taxonomy/78584",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9491",
+      "name": "Saguinus imperator",
+      "url": "https://www.uniprot.org/taxonomy/9491",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9513",
+      "name": "Cebus",
+      "url": "https://www.uniprot.org/taxonomy/9513",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9796",
+      "name": "Equus caballus",
+      "url": "https://www.uniprot.org/taxonomy/9796",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "286419",
+      "name": "Canis lupus dingo",
+      "url": "https://www.uniprot.org/taxonomy/286419",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9837",
+      "name": "Camelus bactrianus",
+      "url": "https://www.uniprot.org/taxonomy/9837",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "61388",
+      "name": "Prionailurus viverrinus",
+      "url": "https://www.uniprot.org/taxonomy/61388",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10335",
+      "name": "Human herpesvirus 3",
+      "url": "https://www.uniprot.org/taxonomy/10335",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "633",
+      "name": "Yersinia pseudotuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/633",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12637",
+      "name": "Dengue virus",
+      "url": "https://www.uniprot.org/taxonomy/12637",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10566",
+      "name": "Human papillomavirus",
+      "url": "https://www.uniprot.org/taxonomy/10566",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "746128",
+      "name": "Aspergillus fumigatus",
+      "url": "https://www.uniprot.org/taxonomy/746128",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1335626",
+      "name": "Middle East respiratory syndrome-related coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/1335626",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11082",
+      "name": "West Nile virus",
+      "url": "https://www.uniprot.org/taxonomy/11082",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "6183",
+      "name": "Schistosoma mansoni",
+      "url": "https://www.uniprot.org/taxonomy/6183",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2748079",
+      "name": "Rhizobium sp. RM",
+      "url": "https://www.uniprot.org/taxonomy/2748079",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11292",
+      "name": "Lyssavirus rabies",
+      "url": "https://www.uniprot.org/taxonomy/11292",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "name": "brain histology"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "durability of immune response"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Long-lived antibody-secreting cells (bone marrow and spleen)"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Innate immune profile"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "cytokine profiling"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "cytokines"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C142568",
+      "name": "Group Sequential Design",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C142568",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C82639",
+      "name": "Parallel Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C82639",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C82640",
+      "name": "Single Group Study",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C82640",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "mucosal biofilm"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ]
+}
