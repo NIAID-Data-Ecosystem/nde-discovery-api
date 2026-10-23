@@ -473,7 +473,10 @@ class MetadataCompatibilityCalculator:
             recommended_fields = DATA_COLLECTION_RECOMMENDED
             required_augmented_fields = DATA_COLLECTION_REQUIRED_AUGMENTED
             recommended_augmented_fields = DATA_COLLECTION_RECOMMENDED_AUGMENTED
-        elif datasource in ["ceirr", "biosample", "bei"]:
+        elif datasource in [
+            "ceirr", "biosample", "bei", "usidnet",
+            "bacdive", "atcc", "ccug", "dsmz", "kctc", "ucccb"
+        ]:
             print(f"Using sample fields for {datasource}")
             required_fields = SAMPLE_REQUIRED_FIELDS
             recommended_fields = SAMPLE_RECOMMENDED_FIELDS
