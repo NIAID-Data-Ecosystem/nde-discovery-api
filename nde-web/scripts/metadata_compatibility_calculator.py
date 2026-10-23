@@ -323,6 +323,27 @@ class MetadataCompatibilityCalculator:
         mongo_filter = repo_metadata.get("_mongoFilter")
         return collection_names, mongo_filter
 
+    def split_augmented_coverage(
+        self, augmented_coverage, required_fields, recommended_fields
+    ):
+        """File augmented coverage under the badge section that shows each field.
+
+        The augmented field lists follow the hub's `_meta` buckets, which don't
+        always match the badge (funding is a recommended DataCollection field).
+        Fields the badge doesn't show are dropped.
+        """
+        required_coverage = {
+            field: coverage
+            for field, coverage in augmented_coverage.items()
+            if field in required_fields
+        }
+        recommended_coverage = {
+            field: coverage
+            for field, coverage in augmented_coverage.items()
+            if field in recommended_fields
+        }
+        return required_coverage, recommended_coverage
+
     def combine_aggregation_results(self, results):
         """Combine aggregation averages from one or more Mongo collections."""
         if not results:
@@ -466,7 +487,8 @@ class MetadataCompatibilityCalculator:
             required_augmented_fields = RESOURCE_CATALOG_REQUIRED_AUGMENTED
             recommended_augmented_fields = RESOURCE_CATALOG_RECOMMENDED_AUGMENTED
         elif datasource in [
-            "bv_brc", "emdb", "clingen", "mwccs", "dbaasp", "iedb", "pgs_catalog"
+            "bv_brc", "emdb", "clingen", "mwccs", "dbaasp", "iedb", "pgs_catalog",
+            "ncbi_virus", "uniprot", "pathoplexus", "vac"
         ]:
             print(f"Using data collection fields for {datasource}")
             required_fields = DATA_COLLECTION_REQUIRED
@@ -636,18 +658,15 @@ class MetadataCompatibilityCalculator:
                 sum_recommended_coverage, 2)
 
             # Extract coverage for augmented fields
-            required_augmented_coverage = {}
-            recommended_augmented_coverage = {}
-
-            for field in required_augmented_fields:
+            augmented_coverage = {}
+            for field in required_augmented_fields + recommended_augmented_fields:
                 key = f'avg_{field}_presence'
-                required_augmented_coverage[field] = round(
-                    averages.pop(key, 0), 2)
+                augmented_coverage[field] = round(averages.pop(key, 0), 2)
 
-            for field in recommended_augmented_fields:
-                key = f'avg_{field}_presence'
-                recommended_augmented_coverage[field] = round(
-                    averages.pop(key, 0), 2)
+            required_augmented_coverage, recommended_augmented_coverage = (
+                self.split_augmented_coverage(
+                    augmented_coverage, required_fields, recommended_fields)
+            )
 
             averages['required_augmented_fields_coverage'] = required_augmented_coverage
             averages['recommended_augmented_fields_coverage'] = recommended_augmented_coverage
@@ -664,12 +683,12 @@ class MetadataCompatibilityCalculator:
 
             # Binary scores for augmented fields
             binary_required_augmented = sum(
-                1 for field in required_augmented_fields
-                if required_augmented_coverage.get(field, 0) > 0
+                1 for coverage in required_augmented_coverage.values()
+                if coverage > 0
             )
             binary_recommended_augmented = sum(
-                1 for field in recommended_augmented_fields
-                if recommended_augmented_coverage.get(field, 0) > 0
+                1 for coverage in recommended_augmented_coverage.values()
+                if coverage > 0
             )
 
             total_required_fields = len(required_fields)
