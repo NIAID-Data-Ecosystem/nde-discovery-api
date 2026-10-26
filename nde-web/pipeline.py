@@ -9,6 +9,7 @@ from biothings.web.query import ESQueryBuilder, ESResultFormatter
 from biothings.web.query.engine import AsyncESQueryBackend
 from botocore.config import Config as BotoConfig
 from elasticsearch.dsl import A, Q, Search
+from tornado.options import options
 
 from approval_filters import dde_resource_catalog_approval_filter
 
@@ -111,10 +112,13 @@ def transform_lineage_response(response):
 def _load_runtime_config():
     """Load the Biothings runtime config module.
 
-    The API server loads `config.py` as module name `config`. Importing it at
-    module import time would create a circular dependency, so we import lazily.
+    The API server loads the module named by `--conf` (default `config`), e.g.
+    `config_prod` in the Kubernetes image, which ships no `config.py`.
+    Importing it at module import time would create a circular dependency, so
+    we import lazily.
     """
-    return importlib.import_module("config")
+    module_name = getattr(options, "conf", None) or "config"
+    return importlib.import_module(module_name)
 
 
 def _find_first_query_string_query(query_obj):
