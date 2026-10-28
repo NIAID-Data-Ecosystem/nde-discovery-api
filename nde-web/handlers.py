@@ -263,7 +263,15 @@ class BaseLoginHandler(BaseAPIHandler):
             and hmac.compare_digest(returned_state.encode(), expected_state.encode())
         )
         if provider_error or not state_valid:
-            if not provider_error:
+            if provider_error:
+                # %r keeps text from a forged link on one log line.
+                logging.warning(
+                    "%s login returned error %r: %r",
+                    self.PROVIDER_KEY,
+                    provider_error,
+                    self.get_argument("error_description", None),
+                )
+            else:
                 logging.warning("%s OAuth state validation failed", self.PROVIDER_KEY)
             self.redirect(url_concat(next_url, {"login_error": error_code}))
             return None
@@ -426,11 +434,14 @@ class OpenIDConnectLoginHandler(BaseLoginHandler):
             provider_error = (
                 unavailable_error_code if status and status >= 500 else error_code
             )
+            # An error response is the provider's error JSON, never a token.
+            response = getattr(exc, "response", None)
             logging.warning(
-                "%s OAuth request failed with %s; redirecting with %s",
+                "%s OAuth request failed with %s; redirecting with %s. Response: %r",
                 self.PROVIDER_NAME,
                 status or type(exc).__name__,
                 provider_error,
+                response.body[:500] if response is not None and response.body else None,
                 exc_info=True,
             )
             self._redirect_with_login_error(provider_error, next_url)

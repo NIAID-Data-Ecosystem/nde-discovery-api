@@ -47,10 +47,11 @@ APP_LIST += [
 ]
 
 # NIH Login (NIH Okta) client that NIH CIT registered for staging (RITM0706436).
+# NIH asked us to use its "default" authorization server as the issuer.
 # /login/okta returns 404 until a host's config.py sets OKTA_CLIENT_SECRET.
 # Production will get its own client ID and issuer.
 OKTA_CLIENT_ID = "0oa25awn4oQbxvg2m0j7"
-OKTA_ISSUER = "https://loginstg.nih.gov"
+OKTA_ISSUER = "https://loginstg.nih.gov/oauth2/default"
 
 # User data persistence handlers
 APP_LIST += [
