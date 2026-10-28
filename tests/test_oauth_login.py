@@ -2,6 +2,7 @@ import asyncio
 import base64
 import hashlib
 import json
+import logging
 import sys
 import time
 from pathlib import Path
@@ -150,7 +151,7 @@ def _oidc_handler(handler_cls, next_url="/account", state_cookie=None):
                 MICROSOFT_TENANT="organizations",
                 OKTA_CLIENT_ID="okta-client-id",
                 OKTA_CLIENT_SECRET="okta-client-secret",
-                OKTA_ISSUER="https://loginstg.nih.gov",
+                OKTA_ISSUER="https://loginstg.nih.gov/oauth2/default",
                 WEB_HOST="https://api.data.niaid.nih.gov",
             )
         )
@@ -663,7 +664,7 @@ def _jwt(claims):
 
 def _okta_id_token(**overrides):
     claims = {
-        "iss": "https://loginstg.nih.gov",
+        "iss": "https://loginstg.nih.gov/oauth2/default",
         "aud": "okta-client-id",
         "sub": "00u-okta-user",
         "exp": time.time() + 300,
@@ -715,7 +716,7 @@ def test_okta_login_redirects_with_pkce_challenge_and_nonce():
     query = parse_qs(redirect.query)
     verifier_digest = hashlib.sha256(state_cookie["code_verifier"].encode()).digest()
     assert redirect._replace(query="").geturl() == (
-        "https://loginstg.nih.gov/oauth2/v1/authorize"
+        "https://loginstg.nih.gov/oauth2/default/v1/authorize"
     )
     assert query["client_id"] == ["okta-client-id"]
     assert query["redirect_uri"] == ["https://api.data.niaid.nih.gov/login/okta"]
@@ -770,7 +771,7 @@ def test_okta_token_request_uses_basic_auth_and_pkce_verifier(monkeypatch):
 
     [(url, kwargs)] = requests
     assert token == {"access_token": "access-token"}
-    assert url == "https://loginstg.nih.gov/oauth2/v1/token"
+    assert url == "https://loginstg.nih.gov/oauth2/default/v1/token"
     assert kwargs["auth_mode"] == "basic"
     assert kwargs["auth_username"] == "okta-client-id"
     assert kwargs["auth_password"] == "okta-client-secret"
@@ -828,7 +829,7 @@ def test_okta_login_sets_cookie_after_checking_the_id_token():
             _okta_id_token(aud="other-client"), "00u-okta-user", id="wrong-audience"
         ),
         pytest.param(
-            _okta_id_token(iss="https://loginstg.nih.gov/oauth2/default"),
+            _okta_id_token(iss="https://loginstg.nih.gov"),
             "00u-okta-user",
             id="wrong-issuer",
         ),
@@ -863,18 +864,33 @@ def test_okta_endpoints_follow_the_configured_issuer():
         handlers.OktaLoginHandler
     )
 
-    assert handler._token_url() == "https://loginstg.nih.gov/oauth2/v1/token"
+    assert handler._token_url() == "https://loginstg.nih.gov/oauth2/default/v1/token"
 
-    handler.application.biothings.config.OKTA_ISSUER = (
-        "https://loginstg.nih.gov/oauth2/default/"
+    # Okta's org authorization server keeps its endpoints under /oauth2/v1.
+    handler.application.biothings.config.OKTA_ISSUER = "https://loginstg.nih.gov/"
+
+    assert handler._authorize_url() == "https://loginstg.nih.gov/oauth2/v1/authorize"
+    assert handler._userinfo_url() == "https://loginstg.nih.gov/oauth2/v1/userinfo"
+
+
+def test_okta_login_logs_the_error_nih_sends_back(caplog):
+    handler, redirects, cleared, _secure_cookies = _oidc_handler(
+        handlers.OktaLoginHandler, state_cookie=OKTA_STATE_COOKIE
+    )
+    handler._test_args.update(
+        error="access_denied",
+        error_description="User is not assigned to the client application.",
     )
 
-    assert handler._authorize_url() == (
-        "https://loginstg.nih.gov/oauth2/default/v1/authorize"
-    )
-    assert handler._userinfo_url() == (
-        "https://loginstg.nih.gov/oauth2/default/v1/userinfo"
-    )
+    with caplog.at_level(logging.WARNING):
+        asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    assert cleared == _state_cleared("okta")
+    assert redirects == [
+        "https://data.niaid.nih.gov/account?login_error=okta_login_failed"
+    ]
+    assert "'access_denied'" in caplog.text
+    assert "User is not assigned to the client application." in caplog.text
 
 
 def test_okta_format_user_record_uses_email_when_name_is_missing():
