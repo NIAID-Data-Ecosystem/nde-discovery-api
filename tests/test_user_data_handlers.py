@@ -138,6 +138,19 @@ def test_seed_user_doc_preserves_available_email_records():
     ]
 
 
+def test_profile_keeps_the_nih_login_provider():
+    user = {
+        "username": "00u-okta-user",
+        "oauth_provider": "Okta",
+        "idp": "0oa-google-idp",
+    }
+
+    assert user_data._seed_user_doc(user)["idp"] == "0oa-google-idp"
+    # Profiles made before idp was saved pick it up on the next login.
+    existing = {"username": "00u-okta-user", "oauth_provider": "Okta"}
+    assert user_data._oauth_profile_updates(existing, user)["idp"] == "0oa-google-idp"
+
+
 def test_user_data_put_updates_all_preferences_on_existing_profile():
     profile = user_data._seed_user_doc(USER)
     handler = _handler(

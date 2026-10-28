@@ -38,6 +38,8 @@ OAUTH_PROFILE_FIELDS = (
     "emails",
     "avatar_url",
     "organization",
+    # NIH Login only: NIH's ID for the provider the user signed in through.
+    "idp",
 )
 REMOVABLE_OAUTH_PROFILE_FIELDS = {
     "ORCID": ("email", "emails"),

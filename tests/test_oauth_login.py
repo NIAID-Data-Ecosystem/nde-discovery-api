@@ -669,6 +669,7 @@ def _okta_id_token(**overrides):
         "sub": "00u-okta-user",
         "exp": time.time() + 300,
         "nonce": "expected-nonce",
+        "idp": "0oa-google-idp",
     }
     claims.update(overrides)
     return _jwt(claims)
@@ -806,6 +807,7 @@ def test_okta_login_sets_cookie_after_checking_the_id_token():
     assert payload == {
         "username": "00u-okta-user",
         "oauth_provider": "Okta",
+        "idp": "0oa-google-idp",
         "name": "Alice Example",
         "email": "alice@example.org",
         "emails": [
