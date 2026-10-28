@@ -994,6 +994,9 @@ class OktaLoginHandler(OpenIDConnectLoginHandler):
         # OIDC Core 5.3.2: userinfo must describe the user the ID token names.
         if user.get("sub") != claims["sub"]:
             raise ValueError("NIH Login userinfo subject does not match the ID token")
+        # Only the ID token says which provider (Google, ORCID, ...) NIH used.
+        if claims.get("idp"):
+            user["idp"] = claims["idp"]
         return user
 
     def _verified_id_token_claims(self, id_token):
@@ -1032,6 +1035,8 @@ class OktaLoginHandler(OpenIDConnectLoginHandler):
             # Lowercased, this is also the profile ID prefix: okta:<sub>.
             "oauth_provider": "Okta",
         }
+        if user.get("idp"):
+            payload["idp"] = user["idp"]
         email = user.get("email")
         full_name = " ".join(
             value
