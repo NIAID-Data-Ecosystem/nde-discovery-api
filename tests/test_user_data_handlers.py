@@ -151,6 +151,29 @@ def test_profile_keeps_the_nih_login_provider():
     assert user_data._oauth_profile_updates(existing, user)["idp"] == "0oa-google-idp"
 
 
+def test_nih_login_orcid_profiles_drop_emails_the_user_hides():
+    existing = {
+        "username": "00u-okta-user",
+        "oauth_provider": "Okta",
+        "email": "0000-0002-1825-0097@nih.gov",
+        "emails": [{"email": "0000-0002-1825-0097@nih.gov", "primary": True}],
+    }
+    orcid_login = {
+        "username": "00u-okta-user",
+        "oauth_provider": "Okta",
+        "orcid": "0000-0002-1825-0097",
+    }
+
+    assert user_data._seed_user_doc(orcid_login)["orcid"] == "0000-0002-1825-0097"
+    assert user_data._oauth_profile_removals(existing, orcid_login) == [
+        "email",
+        "emails",
+    ]
+    # Other NIH Login users, and ORCID logins whose lookup failed, keep their emails.
+    other_login = {"username": "00u-okta-user", "oauth_provider": "Okta"}
+    assert user_data._oauth_profile_removals(existing, other_login) == []
+
+
 def test_user_data_put_updates_all_preferences_on_existing_profile():
     profile = user_data._seed_user_doc(USER)
     handler = _handler(

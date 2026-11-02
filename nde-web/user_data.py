@@ -40,6 +40,8 @@ OAUTH_PROFILE_FIELDS = (
     "organization",
     # NIH Login only: NIH's ID for the provider the user signed in through.
     "idp",
+    # NIH Login only: the ORCID iD of a user who signed in through ORCID.
+    "orcid",
 )
 REMOVABLE_OAUTH_PROFILE_FIELDS = {
     "ORCID": ("email", "emails"),
@@ -78,6 +80,10 @@ def _oauth_profile_updates(existing: dict, user: dict) -> dict:
 def _oauth_profile_removals(existing: dict, user: dict) -> list[str]:
     """Return OAuth-derived fields that should be removed from an existing doc."""
     provider = (user.get("oauth_provider") or "").upper()
+    # OktaLoginHandler adds `orcid` only after reading the user's public ORCID
+    # emails, so those logins can drop an email the user has since hidden.
+    if user.get("orcid"):
+        provider = "ORCID"
     removable_fields = REMOVABLE_OAUTH_PROFILE_FIELDS.get(provider, ())
     return [
         field

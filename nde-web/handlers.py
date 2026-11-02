@@ -4,6 +4,7 @@ import hmac
 import json
 import logging
 import os
+import re
 import secrets
 import time
 from urllib.parse import quote, urlencode, urlsplit
@@ -919,6 +920,26 @@ def _jwt_claims(token):
     return claims
 
 
+ORCID_PUBLIC_API_URL = "https://pub.orcid.org/v3.0"
+# NIH Login gives users who sign in through ORCID this synthetic address. NIH CIT
+# confirmed the format won't change (RITM0706436).
+_NIH_ORCID_EMAIL = re.compile(r"(\d{4}-\d{4}-\d{4}-\d{3}[\dX])@nih\.gov", re.IGNORECASE)
+
+
+def _orcid_id_from_nih_email(email):
+    """Return the ORCID iD in an NIH Login <ORCID iD>@nih.gov address, else None."""
+    match = _NIH_ORCID_EMAIL.fullmatch(email or "")
+    if not match:
+        return None
+    orcid_id = match.group(1).upper()
+    # The last character is an ISO 7064 MOD 11-2 check digit.
+    total = 0
+    for digit in orcid_id.replace("-", "")[:-1]:
+        total = (total + int(digit)) * 2
+    check = (12 - total % 11) % 11
+    return orcid_id if orcid_id[-1] == ("X" if check == 10 else str(check)) else None
+
+
 class OktaLoginHandler(OpenIDConnectLoginHandler):
     """Initiate or complete the NIH Login (NIH Okta) OpenID Connect handshake.
 
@@ -1018,7 +1039,44 @@ class OktaLoginHandler(OpenIDConnectLoginHandler):
         # Only the ID token says which provider (Google, ORCID, ...) NIH used.
         if claims.get("idp"):
             user["idp"] = claims["idp"]
+        orcid_id = _orcid_id_from_nih_email(user.get("email"))
+        if orcid_id:
+            await self._use_public_orcid_emails(user, orcid_id)
         return user
+
+    async def _use_public_orcid_emails(self, user, orcid_id):
+        """Swap NIH's synthetic ORCID address for the user's public ORCID emails.
+
+        <ORCID iD>@nih.gov isn't a mailbox, though NIH still marks it verified.
+        Like our own ORCID login, keep only the emails the user made public.
+        """
+        user.pop("email", None)
+        user.pop("email_verified", None)
+        try:
+            user["orcid_emails"] = await self._orcid_public_emails(orcid_id)
+        except (HTTPClientError, OSError, ValueError):
+            # Without the list, a hidden email and an outage look the same, so
+            # leave the iD out too: the profile keeps the emails it already has.
+            logging.warning(
+                "Could not read public ORCID emails for %s", orcid_id, exc_info=True
+            )
+            return
+        user["orcid"] = orcid_id
+
+    async def _orcid_public_emails(self, orcid_id):
+        http = AsyncHTTPClient()
+        headers = HTTPHeaders()
+        headers.add("Accept", "application/json")
+        # The lookup is optional, so it shouldn't hold up the login for long.
+        response = await http.fetch(
+            f"{ORCID_PUBLIC_API_URL}/{orcid_id}/email",
+            method="GET",
+            headers=headers,
+            request_timeout=5,
+        )
+        body = json.loads(response.body)
+        records = body.get("email") if isinstance(body, dict) else None
+        return records if isinstance(records, list) else []
 
     def _verified_id_token_claims(self, id_token):
         """Return the ID token's claims once they're shown to belong to this login.
@@ -1058,7 +1116,20 @@ class OktaLoginHandler(OpenIDConnectLoginHandler):
         }
         if user.get("idp"):
             payload["idp"] = user["idp"]
-        email = user.get("email")
+        if user.get("orcid"):
+            payload["orcid"] = user["orcid"]
+
+        if "orcid_emails" in user:
+            email_records = _format_email_records(user["orcid_emails"])
+        elif user.get("email"):
+            email_record = {"email": user["email"], "primary": True}
+            if user.get("email_verified") is not None:
+                email_record["verified"] = user["email_verified"]
+            email_records = _format_email_records([email_record])
+        else:
+            email_records = []
+        email = _primary_email(email_records)
+
         full_name = " ".join(
             value
             for value in (user.get("given_name"), user.get("family_name"))
@@ -1069,11 +1140,8 @@ class OktaLoginHandler(OpenIDConnectLoginHandler):
             payload["name"] = name
 
         if email:
-            email_record = {"email": email, "primary": True}
-            if user.get("email_verified") is not None:
-                email_record["verified"] = user["email_verified"]
             payload["email"] = email
-            payload["emails"] = _format_email_records([email_record])
+            payload["emails"] = email_records
         return json.dumps(payload)
 
 
