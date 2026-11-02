@@ -907,6 +907,148 @@ def test_okta_format_user_record_uses_email_when_name_is_missing():
     assert payload["emails"] == [{"email": "alice@example.org", "primary": True}]
 
 
+# ORCID's documented sample iD.
+ORCID_SAMPLE_ID = "0000-0002-1825-0097"
+
+
+@pytest.mark.parametrize(
+    ("email", "orcid_id"),
+    [
+        ("0000-0002-1825-0097@nih.gov", "0000-0002-1825-0097"),
+        ("0000-0002-1694-233x@NIH.GOV", "0000-0002-1694-233X"),
+        pytest.param("0000-0002-1825-0098@nih.gov", None, id="bad-check-digit"),
+        ("0000-0002-1825-0097@example.org", None),
+        ("alice.example@nih.gov", None),
+        (None, None),
+    ],
+)
+def test_orcid_id_is_read_only_from_nih_orcid_addresses(email, orcid_id):
+    assert handlers._orcid_id_from_nih_email(email) == orcid_id
+
+
+def _okta_orcid_callback_handler(public_emails):
+    """An NIH Login callback for an ORCID user; `public_emails` may be an exception."""
+    handler, redirects, _cleared, secure_cookies, ensured = _okta_callback_handler(
+        _okta_id_token(idp="0oa-orcid-idp"),
+        {
+            "sub": "00u-okta-user",
+            "name": "Josiah Carberry",
+            "email": f"{ORCID_SAMPLE_ID}@nih.gov",
+            "email_verified": True,
+        },
+    )
+    lookups = []
+
+    async def orcid_public_emails(orcid_id):
+        lookups.append(orcid_id)
+        if isinstance(public_emails, Exception):
+            raise public_emails
+        return public_emails
+
+    handler._orcid_public_emails = orcid_public_emails
+    return handler, redirects, secure_cookies, ensured, lookups
+
+
+def test_okta_orcid_login_uses_public_orcid_emails_instead_of_nih_address():
+    handler, redirects, secure_cookies, ensured, lookups = _okta_orcid_callback_handler(
+        [
+            {
+                "email": "josiah@example.org",
+                "primary": True,
+                "verified": True,
+                "visibility": "public",
+                "put-code": None,
+            }
+        ]
+    )
+
+    asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    assert lookups == [ORCID_SAMPLE_ID]
+    assert redirects == ["https://data.niaid.nih.gov/account"]
+    payload = json.loads(secure_cookies[0][0][1])
+    assert payload == {
+        "username": "00u-okta-user",
+        "oauth_provider": "Okta",
+        "idp": "0oa-orcid-idp",
+        "orcid": ORCID_SAMPLE_ID,
+        "name": "Josiah Carberry",
+        "email": "josiah@example.org",
+        "emails": [
+            {
+                "email": "josiah@example.org",
+                "primary": True,
+                "verified": True,
+                "visibility": "public",
+            }
+        ],
+    }
+    assert ensured == [payload]
+
+
+def test_okta_orcid_login_without_a_public_email_has_no_email():
+    handler, _redirects, secure_cookies, ensured, _lookups = (
+        _okta_orcid_callback_handler([])
+    )
+
+    asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    payload = json.loads(secure_cookies[0][0][1])
+    assert payload["orcid"] == ORCID_SAMPLE_ID
+    assert "email" not in payload
+    assert "emails" not in payload
+    assert ensured == [payload]
+
+
+def test_okta_orcid_login_still_signs_in_when_orcid_is_unreachable(caplog):
+    handler, redirects, secure_cookies, ensured, _lookups = (
+        _okta_orcid_callback_handler(HTTPClientError(503))
+    )
+
+    with caplog.at_level(logging.WARNING):
+        asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    assert redirects == ["https://data.niaid.nih.gov/account"]
+    payload = json.loads(secure_cookies[0][0][1])
+    # No iD and no email, so the stored profile keeps the emails it has.
+    assert payload == {
+        "username": "00u-okta-user",
+        "oauth_provider": "Okta",
+        "idp": "0oa-orcid-idp",
+        "name": "Josiah Carberry",
+    }
+    assert ensured == [payload]
+    assert f"Could not read public ORCID emails for {ORCID_SAMPLE_ID}" in caplog.text
+
+
+def test_okta_reads_public_orcid_emails_without_a_token(monkeypatch):
+    handler, _redirects, _cleared, _secure_cookies = _oidc_handler(
+        handlers.OktaLoginHandler
+    )
+    requests = []
+    bodies = [
+        b'{"email": [{"email": "josiah@example.org", "visibility": "public"}]}',
+        b'{"path": "/0000-0002-1825-0097/email"}',
+    ]
+
+    class FakeAsyncHTTPClient:
+        async def fetch(self, url, **kwargs):
+            requests.append((url, kwargs))
+            return SimpleNamespace(body=bodies.pop(0))
+
+    monkeypatch.setattr(handlers, "AsyncHTTPClient", FakeAsyncHTTPClient)
+
+    with_email = asyncio.run(handler._orcid_public_emails(ORCID_SAMPLE_ID))
+    without_email = asyncio.run(handler._orcid_public_emails(ORCID_SAMPLE_ID))
+
+    url, kwargs = requests[0]
+    assert url == "https://pub.orcid.org/v3.0/0000-0002-1825-0097/email"
+    assert kwargs["headers"]["Accept"] == "application/json"
+    assert "Authorization" not in kwargs["headers"]
+    assert with_email == [{"email": "josiah@example.org", "visibility": "public"}]
+    assert without_email == []
+
+
 def test_orcid_format_user_record_saves_available_emails():
     formatted = handlers.ORCIDLoginHandler._format_user_record(
         {
