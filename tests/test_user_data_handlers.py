@@ -216,6 +216,29 @@ def test_user_data_put_creates_profile_when_missing():
     assert handler.updated == []
 
 
+def test_onboarding_shows_until_the_portal_marks_it_complete():
+    handler = _handler(user_data.UserDataHandler)
+    _run(handler.get)
+    assert handler.writes[0]["onboarding_complete"] is False
+
+    handler = _handler(
+        user_data.UserDataHandler,
+        docs=handler.state,
+        body=_json_body({"onboarding_complete": True}),
+    )
+    _run(handler.put)
+    handler = _handler(user_data.UserDataHandler, docs=handler.state)
+    _run(handler.get)
+    assert handler.writes[0]["onboarding_complete"] is True
+
+    # Profiles made before onboarding existed get the popup too.
+    profile = user_data._seed_user_doc(USER)
+    del profile["onboarding_complete"]
+    handler = _handler(user_data.UserDataHandler, docs={DOC_ID: profile})
+    _run(handler.get)
+    assert handler.writes[0]["onboarding_complete"] is False
+
+
 def test_user_data_put_validates_body_and_preference_types():
     _assert_http_error(400, _handler(user_data.UserDataHandler).put)
     _assert_http_error(

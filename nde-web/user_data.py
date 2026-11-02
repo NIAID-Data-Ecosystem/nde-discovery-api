@@ -29,8 +29,18 @@ logger = logging.getLogger(__name__)
 # Helpers
 # ---------------------------------------------------------------------------
 
+# The portal sets this to true once the user has been through its onboarding
+# popup. Profiles made before onboarding existed don't have the field, which
+# counts as false, so existing users see the popup too.
+ONBOARDING_FIELD = "onboarding_complete"
 UPDATABLE_PREFERENCES = frozenset(
-    {"ai_toggle_preference", "contact_preference", "beta", "feedback_preference"}
+    {
+        "ai_toggle_preference",
+        "contact_preference",
+        "beta",
+        "feedback_preference",
+        ONBOARDING_FIELD,
+    }
 )
 OAUTH_PROFILE_FIELDS = (
     "name",
@@ -117,6 +127,7 @@ def _seed_user_doc(user: dict) -> dict:
         "contact_preference": False,
         "beta": False,
         "feedback_preference": False,
+        ONBOARDING_FIELD: False,
         "created": now,
         "updated": now,
         ACTIVITY_FIELD: now,
@@ -236,11 +247,13 @@ class UserDataHandler(_UserDataBase):
             logger.info("Created user profile %s", doc_id)
         else:
             await self._record_user_activity(doc_id, doc)
+        # Older profiles don't store the field; tell the portal it's false.
+        doc.setdefault(ONBOARDING_FIELD, False)
         self.write(doc)
 
     @user_authenticated
     async def put(self):
-        """Update preference fields (ai_toggle_preference, contact_preference, beta)."""
+        """Update the preference fields and onboarding flag in UPDATABLE_PREFERENCES."""
         if not self.request.body:
             raise HTTPError(400, reason="Expecting a JSON body.")
         try:
