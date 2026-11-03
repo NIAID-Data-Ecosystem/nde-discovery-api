@@ -10,7 +10,6 @@
         "dde_68ffb3cdfbce698d",
         "dde_a0fa28da8a3eb618",
         "dde_639d05db93d24470",
-        "dde_08a29e9afd2f58b6",
         "dde_8e9017e5d89fcb48",
         "dde_e5fe861c511dafb4"
     ],
@@ -56,7 +55,8 @@
         "National Omics Data Encyclopedia (NODE)",
         "Database of Antimicrobial Activity and Structure of Peptides (DBAASP)",
         "Electron Microscopy Data Bank (EMDB)",
-        "Clinical Genome Resource (ClinGen)"
+        "Clinical Genome Resource (ClinGen)",
+        "Pathoplexus"
     ],
     "prod_source_keys": [
         "acd_niaid",
@@ -97,6 +97,7 @@
         "ndex",
         "node",
         "omicsdi",
+        "pathoplexus",
         "pdb",
         "piroplasmadb",
         "plasmodb",
@@ -116,6 +117,7 @@
     "prod_resource_catalog_ids": [
         "dde_0089e68763ba2b6d",
         "dde_0249e764e05872c9",
+        "dde_08a29e9afd2f58b6",
         "dde_0b7a753b763f2528",
         "dde_0fa5ab6e627f4e6e",
         "dde_11bb8ccc46a23eb7",
