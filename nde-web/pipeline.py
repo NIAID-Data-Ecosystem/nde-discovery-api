@@ -22,6 +22,7 @@ DATA_COLLECTION_SOURCES = [
     "Database of Antimicrobial Activity and Structure of Peptides (DBAASP)",
     "Electron Microscopy Data Bank (EMDB)",
     "Clinical Genome Resource (ClinGen)",
+    "Pathoplexus",
 ]
 
 

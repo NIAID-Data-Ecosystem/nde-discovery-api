@@ -24,6 +24,7 @@ _DATA_COLLECTION_SOURCES = [
     "Database of Antimicrobial Activity and Structure of Peptides (DBAASP)",
     "Electron Microscopy Data Bank (EMDB)",
     "Clinical Genome Resource (ClinGen)",
+    "Pathoplexus",
 ]
 _DEFAULT_SAMPLE_VISIBILITY_FILTER = (
     'NOT(@type:Sample AND NOT additionalType:"BioSample")'

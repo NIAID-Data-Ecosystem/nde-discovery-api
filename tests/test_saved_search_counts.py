@@ -56,6 +56,7 @@ def test_count_body_uses_main_frontend_type_filter():
                             "Database of Antimicrobial Activity and Structure of Peptides (DBAASP)",
                             "Electron Microscopy Data Bank (EMDB)",
                             "Clinical Genome Resource (ClinGen)",
+                            "Pathoplexus",
                         ]
                     }
                 },
