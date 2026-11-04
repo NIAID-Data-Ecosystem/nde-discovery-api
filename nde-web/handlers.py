@@ -17,12 +17,15 @@ from tornado.httpclient import AsyncHTTPClient, HTTPClientError
 from tornado.httputil import HTTPHeaders, url_concat
 from tornado.web import HTTPError, RequestHandler
 from user_data import (
+    IDENTIFIER_FIELD,
     _activity_update,
     _now_iso,
     _oauth_profile_removals,
     _oauth_profile_updates,
+    _profile_identifier,
     _seed_user_doc,
     _user_doc_id,
+    _with_old_profile_settings,
 )
 from xsrf import FrontendRequestMixin, cookie_samesite
 
@@ -343,7 +346,7 @@ class BaseLoginHandler(BaseAPIHandler):
             resp = await es.get(id=doc_id, index=index)
         except elasticsearch.exceptions.NotFoundError:
             try:
-                doc = _seed_user_doc(user_dict)
+                doc = await self._new_user_profile(es, index, user_dict)
                 await es.index(id=doc_id, body=doc, index=index)
                 logging.info("Created new user profile %s", doc_id)
             except Exception:
@@ -376,6 +379,10 @@ class BaseLoginHandler(BaseAPIHandler):
                     logging.warning(
                         "Could not update user profile %s", doc_id, exc_info=True
                     )
+
+    async def _new_user_profile(self, es, index, user_dict):
+        """Return the document for a user's first profile."""
+        return _seed_user_doc(user_dict)
 
 
 class OpenIDConnectLoginHandler(BaseLoginHandler):
@@ -1041,8 +1048,55 @@ class OktaLoginHandler(OpenIDConnectLoginHandler):
             user["idp"] = claims["idp"]
         orcid_id = _orcid_id_from_nih_email(user.get("email"))
         if orcid_id:
+            user[IDENTIFIER_FIELD] = _profile_identifier("orcid", orcid_id=orcid_id)
             await self._use_public_orcid_emails(user, orcid_id)
+        else:
+            provider = self._idp_provider(user.get("idp"))
+            identifier = _profile_identifier(provider, user.get("email"))
+            if identifier:
+                user[IDENTIFIER_FIELD] = identifier
         return user
+
+    def _idp_provider(self, idp):
+        """Return our name for the provider behind an NIH Login idp, if it's listed."""
+        providers = getattr(self.biothings.config, "OKTA_IDP_PROVIDERS", None) or {}
+        return providers.get(idp)
+
+    async def _new_user_profile(self, es, index, user_dict):
+        """Start a first NIH Login profile from the user's old profile, if any.
+
+        A user's old Google, Microsoft or ORCID profile shares the new profile's
+        IDENTIFIER_FIELD (see user_data.py), so its saved items and preferences
+        carry over. If the lookup fails, the user still gets an empty profile.
+        """
+        doc = await super()._new_user_profile(es, index, user_dict)
+        identifier = user_dict.get(IDENTIFIER_FIELD)
+        if not identifier:
+            return doc
+        try:
+            response = await es.search(
+                index=index,
+                size=10,
+                query={"term": {f"{IDENTIFIER_FIELD}.keyword": identifier}},
+            )
+            old_profiles = [
+                (hit["_id"], hit["_source"]) for hit in response["hits"]["hits"]
+            ]
+            merged = _with_old_profile_settings(doc, old_profiles)
+        except Exception:
+            logging.warning(
+                "Could not copy older profiles' settings into %s",
+                _user_doc_id(user_dict),
+                exc_info=True,
+            )
+            return doc
+        if old_profiles:
+            logging.info(
+                "Copied settings from %s into %s",
+                ", ".join(merged["linked_accounts"]),
+                _user_doc_id(user_dict),
+            )
+        return merged
 
     async def _use_public_orcid_emails(self, user, orcid_id):
         """Swap NIH's synthetic ORCID address for the user's public ORCID emails.
@@ -1118,6 +1172,8 @@ class OktaLoginHandler(OpenIDConnectLoginHandler):
             payload["idp"] = user["idp"]
         if user.get("orcid"):
             payload["orcid"] = user["orcid"]
+        if user.get(IDENTIFIER_FIELD):
+            payload[IDENTIFIER_FIELD] = user[IDENTIFIER_FIELD]
 
         if "orcid_emails" in user:
             email_records = _format_email_records(user["orcid_emails"])

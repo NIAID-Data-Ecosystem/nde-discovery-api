@@ -57,6 +57,14 @@ APP_LIST += [
 # Production will get its own client ID and issuer.
 OKTA_CLIENT_ID = "0oa25awn4oQbxvg2m0j7"
 OKTA_ISSUER = "https://loginstg.nih.gov/oauth2/default"
+# The provider behind each staging NIH Login idp (the ID token's idp claim), as
+# seen in test sign-ins; production's IDs will differ. Profiles' _identifier
+# uses these names. A sign-in through an unlisted IdP (HHS, for now) gets none.
+OKTA_IDP_PROVIDERS = {
+    "0oa1l0tjhgKL3YyBI0j7": "google",
+    "0oa1lhb6inAL3BrG80j7": "microsoft",
+    "0oa1lqd89clFs6IwV0j7": "orcid",
+}
 
 # User data persistence handlers
 APP_LIST += [
