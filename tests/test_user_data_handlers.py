@@ -151,6 +151,85 @@ def test_profile_keeps_the_nih_login_provider():
     assert user_data._oauth_profile_updates(existing, user)["idp"] == "0oa-google-idp"
 
 
+@pytest.mark.parametrize(
+    ("user", "identifier"),
+    [
+        (
+            {"username": "alice", "oauth_provider": "GitHub", "email": "Alice@Example.org"},
+            "github_alice@example.org",
+        ),
+        (
+            {"username": "1234", "oauth_provider": "Google", "email": "alice@example.org"},
+            "google_alice@example.org",
+        ),
+        (
+            {"username": "0000-0002-1825-0097", "oauth_provider": "ORCID"},
+            "orcid_0000-0002-1825-0097",
+        ),
+        # NIH Login sends its own, naming the provider NIH used.
+        (
+            {
+                "username": "00u-okta-user",
+                "oauth_provider": "Okta",
+                "email": "alice@example.org",
+                "_identifier": "google_alice@example.org",
+            },
+            "google_alice@example.org",
+        ),
+        (
+            {"username": "00u-okta-user", "oauth_provider": "Okta", "email": "alice@example.org"},
+            None,
+        ),
+        ({"username": "alice", "oauth_provider": "GitHub"}, None),
+    ],
+)
+def test_profile_identifier_ties_old_profiles_to_nih_login_ones(user, identifier):
+    assert user_data._seed_user_doc(user).get("_identifier") == identifier
+
+
+def test_old_profile_settings_combine_saved_items_and_take_newest_preferences():
+    new_doc = user_data._seed_user_doc(
+        {"username": "00u-okta-user", "oauth_provider": "Okta"}
+    )
+    older = (
+        "microsoft:old",
+        {
+            "beta": True,
+            "contact_preference": False,
+            "last_active": "2026-01-01T00:00:00+00:00",
+            "favorite_searches": [{"name": "a", "query": "a", "filters": {}}],
+            "favorite_datasets": [{"dataset_id": "d1", "name": "One"}],
+        },
+    )
+    newer = (
+        "microsoft:new",
+        {
+            "beta": False,
+            "contact_preference": True,
+            "last_active": "2026-06-01T00:00:00+00:00",
+            "favorite_searches": [
+                {"name": "a", "query": "a", "filters": {}},
+                {"name": "b", "query": "b", "filters": {"x": ["y"]}},
+            ],
+            "favorite_datasets": [
+                {"dataset_id": "d1", "name": "One"},
+                {"dataset_id": "d2", "name": "Two"},
+            ],
+        },
+    )
+
+    merged = user_data._with_old_profile_settings(new_doc, [older, newer])
+
+    assert merged["linked_accounts"] == ["microsoft:new", "microsoft:old"]
+    assert merged["beta"] is False
+    assert merged["contact_preference"] is True
+    assert [entry["name"] for entry in merged["favorite_searches"]] == ["a", "b"]
+    assert [entry["dataset_id"] for entry in merged["favorite_datasets"]] == ["d1", "d2"]
+    # The seed document itself isn't changed, and no old profiles means no change.
+    assert new_doc["linked_accounts"] == []
+    assert user_data._with_old_profile_settings(new_doc, []) == new_doc
+
+
 def test_nih_login_orcid_profiles_drop_emails_the_user_hides():
     existing = {
         "username": "00u-okta-user",

@@ -152,6 +152,7 @@ def _oidc_handler(handler_cls, next_url="/account", state_cookie=None):
                 OKTA_CLIENT_ID="okta-client-id",
                 OKTA_CLIENT_SECRET="okta-client-secret",
                 OKTA_ISSUER="https://loginstg.nih.gov/oauth2/default",
+                OKTA_IDP_PROVIDERS={"0oa-google-idp": "google", "0oa-orcid-idp": "orcid"},
                 WEB_HOST="https://api.data.niaid.nih.gov",
             )
         )
@@ -808,6 +809,7 @@ def test_okta_login_sets_cookie_after_checking_the_id_token():
         "username": "00u-okta-user",
         "oauth_provider": "Okta",
         "idp": "0oa-google-idp",
+        "_identifier": "google_alice@example.org",
         "name": "Alice Example",
         "email": "alice@example.org",
         "emails": [
@@ -818,6 +820,20 @@ def test_okta_login_sets_cookie_after_checking_the_id_token():
             }
         ],
     }
+    assert ensured == [payload]
+
+
+def test_okta_login_through_an_unlisted_provider_has_no_identifier():
+    handler, _redirects, _cleared, secure_cookies, ensured = _okta_callback_handler(
+        _okta_id_token(idp="0oa-hhs-idp"),
+        {"sub": "00u-okta-user", "name": "Alice Example", "email": "alice@nih.gov"},
+    )
+
+    asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    payload = json.loads(secure_cookies[0][0][1])
+    assert payload["email"] == "alice@nih.gov"
+    assert "_identifier" not in payload
     assert ensured == [payload]
 
 
@@ -972,6 +988,7 @@ def test_okta_orcid_login_uses_public_orcid_emails_instead_of_nih_address():
         "oauth_provider": "Okta",
         "idp": "0oa-orcid-idp",
         "orcid": ORCID_SAMPLE_ID,
+        "_identifier": f"orcid_{ORCID_SAMPLE_ID}",
         "name": "Josiah Carberry",
         "email": "josiah@example.org",
         "emails": [
@@ -995,6 +1012,7 @@ def test_okta_orcid_login_without_a_public_email_has_no_email():
 
     payload = json.loads(secure_cookies[0][0][1])
     assert payload["orcid"] == ORCID_SAMPLE_ID
+    assert payload["_identifier"] == f"orcid_{ORCID_SAMPLE_ID}"
     assert "email" not in payload
     assert "emails" not in payload
     assert ensured == [payload]
@@ -1010,11 +1028,13 @@ def test_okta_orcid_login_still_signs_in_when_orcid_is_unreachable(caplog):
 
     assert redirects == ["https://data.niaid.nih.gov/account"]
     payload = json.loads(secure_cookies[0][0][1])
-    # No iD and no email, so the stored profile keeps the emails it has.
+    # No iD and no email, so the stored profile keeps the emails it has. The
+    # identifier comes from NIH's address, so it doesn't need ORCID.
     assert payload == {
         "username": "00u-okta-user",
         "oauth_provider": "Okta",
         "idp": "0oa-orcid-idp",
+        "_identifier": f"orcid_{ORCID_SAMPLE_ID}",
         "name": "Josiah Carberry",
     }
     assert ensured == [payload]
@@ -1201,6 +1221,114 @@ def test_ensure_user_profile_removes_orcid_email_when_no_longer_available():
     assert "emails" not in params["updates"]
     assert "last_active" in params["updates"]
     assert "updated" in params["updates"]
+
+
+class _FirstSignInClient:
+    """An ES client with no profile for the user yet; `old_hits` share their key."""
+
+    def __init__(self, old_hits=(), search_error=None):
+        self.old_hits = list(old_hits)
+        self.search_error = search_error
+        self.searches = []
+        self.indexed = []
+
+    async def get(self, **_kwargs):
+        not_found = handlers.elasticsearch.exceptions.NotFoundError
+        raise not_found.__new__(not_found)
+
+    async def search(self, **kwargs):
+        self.searches.append(kwargs)
+        if self.search_error:
+            raise self.search_error
+        return {"hits": {"hits": self.old_hits}}
+
+    async def index(self, **kwargs):
+        self.indexed.append(kwargs)
+
+
+def _first_sign_in_handler(handler_cls, client):
+    handler = handler_cls.__new__(handler_cls)
+    handler.application = SimpleNamespace(
+        biothings=SimpleNamespace(
+            config=SimpleNamespace(ES_USER_INDEX="users"),
+            elasticsearch=SimpleNamespace(async_client=client),
+        )
+    )
+    return handler
+
+
+NIH_LOGIN_GOOGLE_USER = {
+    "username": "00u-okta-user",
+    "oauth_provider": "Okta",
+    "idp": "0oa-google-idp",
+    "_identifier": "google_alice@example.org",
+    "name": "Alice Example",
+    "email": "alice@example.org",
+}
+
+
+def test_first_nih_login_profile_starts_from_the_old_profile_settings():
+    old_source = {
+        "username": "1234",
+        "oauth_provider": "Google",
+        "name": "Alice Old Name",
+        "email": "alice@example.org",
+        "_identifier": "google_alice@example.org",
+        "ai_toggle_preference": True,
+        "contact_preference": True,
+        "onboarding_complete": True,
+        "favorite_searches": [{"name": "covid", "query": "covid", "filters": {}}],
+        "favorite_datasets": [{"dataset_id": "zenodo.1", "name": "Dataset"}],
+    }
+    client = _FirstSignInClient([{"_id": "google:1234", "_source": old_source}])
+    handler = _first_sign_in_handler(handlers.OktaLoginHandler, client)
+
+    asyncio.run(handler._ensure_user_profile(dict(NIH_LOGIN_GOOGLE_USER)))
+
+    [search] = client.searches
+    assert search["index"] == "users"
+    assert search["query"] == {"term": {"_identifier.keyword": "google_alice@example.org"}}
+    [indexed] = client.indexed
+    doc = indexed["body"]
+    assert indexed["id"] == "okta:00u-okta-user"
+    assert doc["linked_accounts"] == ["google:1234"]
+    assert doc["favorite_searches"] == old_source["favorite_searches"]
+    assert doc["favorite_datasets"] == old_source["favorite_datasets"]
+    assert doc["ai_toggle_preference"] is True
+    assert doc["contact_preference"] is True
+    assert doc["onboarding_complete"] is True
+    # Who the user is still comes from NIH Login.
+    assert doc["name"] == "Alice Example"
+    assert doc["oauth_provider"] == "Okta"
+
+
+def test_first_nih_login_profile_is_made_even_if_the_old_profile_lookup_fails(caplog):
+    client = _FirstSignInClient(search_error=RuntimeError("search failed"))
+    handler = _first_sign_in_handler(handlers.OktaLoginHandler, client)
+
+    with caplog.at_level(logging.WARNING):
+        asyncio.run(handler._ensure_user_profile(dict(NIH_LOGIN_GOOGLE_USER)))
+
+    [indexed] = client.indexed
+    assert indexed["body"]["linked_accounts"] == []
+    assert indexed["body"]["favorite_searches"] == []
+    assert "Could not copy older profiles' settings into okta:00u-okta-user" in caplog.text
+
+
+def test_first_profile_from_other_logins_does_not_look_for_old_profiles():
+    client = _FirstSignInClient()
+    handler = _first_sign_in_handler(handlers.BaseLoginHandler, client)
+
+    asyncio.run(
+        handler._ensure_user_profile(
+            {"username": "alice", "oauth_provider": "GitHub", "email": "alice@example.org"}
+        )
+    )
+
+    assert client.searches == []
+    [indexed] = client.indexed
+    assert indexed["id"] == "github:alice"
+    assert indexed["body"]["_identifier"] == "github_alice@example.org"
 
 
 def test_ensure_user_profile_keeps_github_email_when_email_lookup_is_unavailable():

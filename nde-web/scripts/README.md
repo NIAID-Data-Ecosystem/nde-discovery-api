@@ -208,6 +208,23 @@ settings from `nde-web/config.py` or `nde-web/config_web.py` by default, skips
 system marker documents, and falls back to `updated` then `created` for legacy
 profiles that do not yet have `last_active`.
 
+## Backfill Profile Identifiers
+
+Each profile's `_identifier` (`<provider>_<email>`, or `orcid_<ORCID iD>`) ties a
+user's old Google, Microsoft or ORCID profile to the NIH Login profile they use
+through the same provider. GitHub profiles get one too. Logins keep it current.
+Add it to profiles saved before it existed with:
+
+```bash
+./nde-web/venv/bin/python nde-web/scripts/backfill_profile_identifiers.py \
+  --dry-run
+```
+
+Remove `--dry-run` after reviewing the counts. The script reads Elasticsearch
+settings like the cleanup script above, skips system marker documents and NIH
+Login profiles (they get the key at their next sign-in), and changes only
+`_identifier`, so profiles don't look recently active.
+
 ## Commit Checklist
 
 Commit source-specific metadata outputs:
@@ -227,6 +244,7 @@ nde-web/scripts/sync_repo_metadata.py
 nde-web/scripts/resource_base.py
 nde-web/scripts/compute_heuristics.py
 nde-web/scripts/delete_inactive_user_profiles.py
+nde-web/scripts/backfill_profile_identifiers.py
 nde-web/scripts/update_saved_search_totals.py
 nde-web/scripts/warm_filter_cache.py
 nde-web/scripts/validate_repo_metadata.py
