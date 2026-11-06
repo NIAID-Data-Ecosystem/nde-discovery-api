@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 1827196,
+      "minValue": 2211680,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2055-12-31",
+  "dateModified": "2026-10-23",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "startDate": "1753-01-01",
-      "endDate": "2055-12-31"
+      "startDate": "1977-10-02",
+      "endDate": "2026-10-23"
     }
   ],
   "license": "Varies",
@@ -49,23 +49,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "EDAM.TOPIC:3292",
-      "name": "Biochemistry"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "EDAM.TOPIC:2229",
       "name": "Cell biology"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "EDAM.TOPIC:3855",
-      "name": "Environmental sciences"
+      "identifier": "EDAM.TOPIC:3314",
+      "name": "Chemistry"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "EDAM.TOPIC:0610",
-      "name": "Ecology"
+      "identifier": "EDAM.TOPIC:3292",
+      "name": "Biochemistry"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "EDAM.TOPIC:3855",
+      "name": "Environmental sciences"
     },
     {
       "@type": "DefinedTerm",
@@ -79,70 +79,73 @@
   "healthCondition": [
     {
       "@type": "DefinedTerm",
-      "identifier": "0100096",
+      "identifier": "0080600",
       "name": "COVID-19",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_0080600",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005015",
+      "identifier": "9351",
       "name": "diabetes mellitus",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_9351",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0003265",
-      "name": "adjustment disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0003265",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "1612",
+      "name": "breast cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1612",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005070",
-      "name": "neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "6713",
+      "name": "cerebrovascular disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_6713",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021100",
-      "name": "breast neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "9970",
+      "name": "obesity",
+      "url": "http://purl.obolibrary.org/obo/DOID_9970",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005098",
-      "name": "stroke disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005098",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "10763",
+      "name": "hypertension",
+      "url": "http://purl.obolibrary.org/obo/DOID_10763",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0011122",
-      "name": "obesity disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0011122",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "9352",
+      "name": "type 2 diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/DOID_9352",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005044",
-      "name": "hypertensive disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005044",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "1324",
+      "name": "lung cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1324",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Disease"
+      "identifier": "399",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/DOID_399",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C4878",
-      "name": "Lung Carcinoma",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C4878",
-      "inDefinedTermSet": "NCIT"
+      "identifier": "9256",
+      "name": "colorectal cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_9256",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
@@ -157,52 +160,152 @@
     {
       "@type": "DefinedTerm",
       "identifier": "9606",
-      "name": "human"
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10095",
+      "name": "Mus sp.",
+      "url": "https://www.uniprot.org/taxonomy/10095",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "10090",
-      "name": "mice"
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3193",
-      "name": "plants"
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1869227",
-      "name": "bacteria"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "10090",
-      "name": "mouse"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "2839062",
-      "name": "transformation"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "11676",
-      "name": "HIV"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "2873985",
-      "name": "vector"
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "9605",
-      "name": "humans"
+      "name": "Homo",
+      "url": "https://www.uniprot.org/taxonomy/9605",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3193",
+      "name": "Embryophyta",
+      "url": "https://www.uniprot.org/taxonomy/3193",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "82038",
+      "name": "Prospero",
+      "url": "https://www.uniprot.org/taxonomy/82038",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10114",
+      "name": "Rattus",
+      "url": "https://www.uniprot.org/taxonomy/10114",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4530",
+      "name": "Oryza sativa",
+      "url": "https://www.uniprot.org/taxonomy/4530",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11709",
+      "name": "Human immunodeficiency virus 2",
+      "url": "https://www.uniprot.org/taxonomy/11709",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "2697049",
-      "name": "SARS-CoV-2"
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2",
+      "name": "Bacteria",
+      "url": "https://www.uniprot.org/taxonomy/2",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2775475",
+      "name": "Binary",
+      "url": "https://www.uniprot.org/taxonomy/2775475",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1869227",
+      "name": "bacterium",
+      "url": "https://www.uniprot.org/taxonomy/1869227",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "693996",
+      "name": "Alphacoronavirus",
+      "url": "https://www.uniprot.org/taxonomy/693996",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4751",
+      "name": "Fungi",
+      "url": "https://www.uniprot.org/taxonomy/4751",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11676",
+      "name": "Human immunodeficiency virus type 1",
+      "url": "https://www.uniprot.org/taxonomy/11676",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",

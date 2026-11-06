@@ -2,21 +2,22 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 2992,
+      "minValue": 3109,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-07-01",
+  "dateModified": "2026-10-28",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2002-06-18",
-      "endDate": "2026-07-01"
+      "endDate": "2026-10-28"
     }
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
   "usageInfo": {
+    "@type": "CreativeWork",
     "url": "https://www.ebi.ac.uk/emdb/faq#:~:text=Data%20files%20contained%20in%20the,and%20the%20EMDB%20accession%20id."
   },
   "about": [
@@ -29,9 +30,9 @@
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0781",
-      "name": "Virology",
-      "url": "http://edamontology.org/topic_0781",
+      "identifier": "topic_1317",
+      "name": "Structural biology",
+      "url": "http://edamontology.org/topic_1317",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -43,10 +44,90 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_1317",
-      "name": "Structural biology",
-      "url": "http://edamontology.org/topic_1317",
+      "identifier": "topic_0781",
+      "name": "Virology",
+      "url": "http://edamontology.org/topic_0781",
       "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8469",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/DOID_8469",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2043",
+      "name": "hepatitis B",
+      "url": "http://purl.obolibrary.org/obo/DOID_2043",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1273",
+      "name": "respiratory syncytial virus infectious disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_1273",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "399",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/DOID_399",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10457",
+      "name": "Legionnaires' disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_10457",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "403",
+      "name": "mouth disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_403",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3298",
+      "name": "vaccinia",
+      "url": "http://purl.obolibrary.org/obo/DOID_3298",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0050175",
+      "name": "tick-borne encephalitis",
+      "url": "http://purl.obolibrary.org/obo/DOID_0050175",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2237",
+      "name": "hepatitis",
+      "url": "http://purl.obolibrary.org/obo/DOID_2237",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8622",
+      "name": "measles",
+      "url": "http://purl.obolibrary.org/obo/DOID_8622",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
     }
   ],
   "species": [
@@ -66,23 +147,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10116",
-      "name": "Rattus norvegicus",
-      "url": "https://www.uniprot.org/taxonomy/10116",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "7227",
       "name": "Drosophila melanogaster",
       "url": "https://www.uniprot.org/taxonomy/7227",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "9986",
-      "name": "Oryctolagus cuniculus",
-      "url": "https://www.uniprot.org/taxonomy/9986",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -94,16 +161,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7108",
-      "name": "Spodoptera frugiperda",
-      "url": "https://www.uniprot.org/taxonomy/7108",
+      "identifier": "9986",
+      "name": "Oryctolagus cuniculus",
+      "url": "https://www.uniprot.org/taxonomy/9986",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "6884",
-      "name": "Leiurus hebraeus",
-      "url": "https://www.uniprot.org/taxonomy/6884",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7108",
+      "name": "Spodoptera frugiperda",
+      "url": "https://www.uniprot.org/taxonomy/7108",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -115,9 +189,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3562",
-      "name": "Spinacia oleracea",
-      "url": "https://www.uniprot.org/taxonomy/3562",
+      "identifier": "3702",
+      "name": "Arabidopsis thaliana",
+      "url": "https://www.uniprot.org/taxonomy/3702",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4577",
+      "name": "Zea mays",
+      "url": "https://www.uniprot.org/taxonomy/4577",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -139,23 +220,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1280",
-      "name": "Staphylococcus aureus",
-      "url": "https://www.uniprot.org/taxonomy/1280",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "694009",
       "name": "Severe acute respiratory syndrome coronavirus",
       "url": "https://www.uniprot.org/taxonomy/694009",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "1314",
-      "name": "Streptococcus pyogenes",
-      "url": "https://www.uniprot.org/taxonomy/1314",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -167,13 +234,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "83333",
-      "name": "Escherichia coli (strain K12)",
-      "url": "https://www.uniprot.org/taxonomy/83333",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "562",
       "name": "Escherichia coli",
       "url": "https://www.uniprot.org/taxonomy/562",
@@ -181,23 +241,44 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "45657",
-      "name": "Desulfonema ishimotonii",
-      "url": "https://www.uniprot.org/taxonomy/45657",
+      "identifier": "83333",
+      "name": "Escherichia coli (strain K12)",
+      "url": "https://www.uniprot.org/taxonomy/83333",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1351",
-      "name": "Enterococcus faecalis",
-      "url": "https://www.uniprot.org/taxonomy/1351",
+      "identifier": "1314",
+      "name": "Streptococcus pyogenes",
+      "url": "https://www.uniprot.org/taxonomy/1314",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "66797",
-      "name": "Spbetavirus SPbeta",
-      "url": "https://www.uniprot.org/taxonomy/66797",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "64187",
+      "name": "Xanthomonas oryzae pv. oryzae",
+      "url": "https://www.uniprot.org/taxonomy/64187",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11628",
+      "name": "Machupo virus",
+      "url": "https://www.uniprot.org/taxonomy/11628",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10298",
+      "name": "Human herpesvirus 1",
+      "url": "https://www.uniprot.org/taxonomy/10298",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -212,8 +293,14 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "Atomic Resolution X-Ray Crystallography",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C19588",
+      "name": "Tomography",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C38093",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Electron Microscopy",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C16854",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -224,14 +311,8 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Electron Microscopy",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C16854",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Tomography",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C38093",
+      "name": "Atomic Resolution X-Ray Crystallography",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C19588",
       "inDefinedTermSet": "NCIT"
     }
   ]

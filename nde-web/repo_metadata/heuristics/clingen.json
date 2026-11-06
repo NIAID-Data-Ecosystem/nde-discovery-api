@@ -2,21 +2,22 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 2250,
+      "minValue": 2303,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-07-03",
+  "dateModified": "2026-10-30",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2016-05-06",
-      "endDate": "2026-07-03"
+      "endDate": "2026-10-30"
     }
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
   "usageInfo": {
+    "@type": "CreativeWork",
     "url": "https://www.clinicalgenome.org/docs/?doc-type=policies-position-statements"
   },
   "about": [
@@ -36,16 +37,16 @@
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0622",
-      "name": "Genomics",
-      "url": "http://edamontology.org/topic_0622",
+      "identifier": "topic_0199",
+      "name": "Genetic variation",
+      "url": "http://edamontology.org/topic_0199",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0199",
-      "name": "Genetic variation",
-      "url": "http://edamontology.org/topic_0199",
+      "identifier": "topic_0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -73,37 +74,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0003778",
-      "name": "inborn error of immunity",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0003778",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0015974",
-      "name": "severe combined immunodeficiency",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0015974",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0018116",
       "name": "galactosemia",
       "url": "http://purl.obolibrary.org/obo/MONDO_0018116",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0004741",
-      "name": "tyrosinemia",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004741",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0031332",
-      "name": "Glanzmann thrombasthenia 1",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0031332",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -115,16 +88,43 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005365",
-      "name": "hearing loss disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005365",
+      "identifier": "0031332",
+      "name": "Glanzmann thrombasthenia 1",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0031332",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0007947",
-      "name": "Marfan syndrome",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0007947",
+      "identifier": "0004741",
+      "name": "tyrosinemia",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004741",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0003778",
+      "name": "inborn error of immunity",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0003778",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0007113",
+      "name": "Angelman syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0007113",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005015",
+      "name": "diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "MONDO:0100062",
+      "name": "genetic developmental and epileptic encephalopathy",
       "inDefinedTermSet": "MONDO"
     },
     {

@@ -98,45 +98,45 @@
   "healthCondition": [
     {
       "@type": "DefinedTerm",
-      "identifier": "0021100",
-      "name": "breast neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "1612",
+      "name": "breast cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1612",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005105",
+      "identifier": "1909",
       "name": "melanoma",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005105",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_1909",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0004976",
+      "identifier": "332",
       "name": "amyotrophic lateral sclerosis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004976",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_332",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0004323",
+      "identifier": "767",
       "name": "muscular atrophy",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004323",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_767",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0008383",
+      "identifier": "7148",
       "name": "rheumatoid arthritis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0008383",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_7148",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0002129",
+      "identifier": "184",
       "name": "bone cancer",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0002129",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_184",
+      "inDefinedTermSet": "DOID"
     }
   ],
   "species": [
@@ -145,27 +145,6 @@
       "identifier": "9606",
       "name": "Homo sapiens",
       "url": "https://www.uniprot.org/taxonomy/9606",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "55714",
-      "name": "Venus",
-      "url": "https://www.uniprot.org/taxonomy/55714",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "13661",
-      "name": "Ruvettus",
-      "url": "https://www.uniprot.org/taxonomy/13661",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "145437",
-      "name": "Rumina",
-      "url": "https://www.uniprot.org/taxonomy/145437",
       "inDefinedTermSet": "UniProt"
     }
   ],

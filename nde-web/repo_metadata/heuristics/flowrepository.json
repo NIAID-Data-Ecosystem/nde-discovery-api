@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 2302,
+      "minValue": 2304,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-03-01",
+  "dateModified": "2026-09-01",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2011-04-01",
-      "endDate": "2026-03-01"
+      "endDate": "2026-09-01"
     }
   ],
   "license": "http://flowrepository.org/terms_of_service",
@@ -99,10 +99,10 @@
   "healthCondition": [
     {
       "@type": "DefinedTerm",
-      "identifier": "0100096",
+      "identifier": "0080600",
       "name": "COVID-19",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_0080600",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
@@ -113,23 +113,30 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005292",
+      "identifier": "0060180",
       "name": "colitis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005292",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_0060180",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "0004992",
       "name": "cancer",
       "url": "http://purl.obolibrary.org/obo/MONDO_0004992",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1324",
+      "name": "lung cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1324",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0008383",
+      "name": "rheumatoid arthritis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0008383",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -141,31 +148,24 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0008383",
-      "name": "rheumatoid arthritis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0008383",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C4878",
-      "name": "Lung Carcinoma",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C4878",
-      "inDefinedTermSet": "NCIT"
+      "identifier": "1909",
+      "name": "melanoma",
+      "url": "http://purl.obolibrary.org/obo/DOID_1909",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005059",
-      "name": "leukemia",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005059",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C35041",
-      "name": "Stress",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C35041",
-      "inDefinedTermSet": "NCIT"
+      "identifier": "1612",
+      "name": "breast cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1612",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
@@ -200,13 +200,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9605",
-      "name": "Homo",
-      "url": "https://www.uniprot.org/taxonomy/9605",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "9544",
       "name": "Macaca mulatta",
       "url": "https://www.uniprot.org/taxonomy/9544",
@@ -214,16 +207,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "227726",
-      "name": "Solanum hyporhodium",
-      "url": "https://www.uniprot.org/taxonomy/227726",
+      "identifier": "381124",
+      "name": "Zea mays subsp. mays",
+      "url": "https://www.uniprot.org/taxonomy/381124",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10114",
-      "name": "Rattus",
-      "url": "https://www.uniprot.org/taxonomy/10114",
+      "identifier": "9605",
+      "name": "Homo",
+      "url": "https://www.uniprot.org/taxonomy/9605",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -235,9 +235,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9534",
-      "name": "Chlorocebus aethiops",
-      "url": "https://www.uniprot.org/taxonomy/9534",
+      "identifier": "3701",
+      "name": "Arabidopsis",
+      "url": "https://www.uniprot.org/taxonomy/3701",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -259,9 +259,16 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
-      "identifier": "4932",
-      "name": "Saccharomyces cerevisiae",
-      "url": "https://www.uniprot.org/taxonomy/4932",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -273,23 +280,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2901879",
-      "name": "Severe acute respiratory syndrome coronavirus",
-      "url": "https://www.uniprot.org/taxonomy/2901879",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "357231",
-      "name": "Murine norovirus",
-      "url": "https://www.uniprot.org/taxonomy/357231",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "3082809",
-      "name": "Candidatus Colicola",
-      "url": "https://www.uniprot.org/taxonomy/3082809",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -301,9 +294,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "562",
-      "name": "Escherichia coli",
-      "url": "https://www.uniprot.org/taxonomy/562",
+      "identifier": "12721",
+      "name": "Human immunodeficiency virus",
+      "url": "https://www.uniprot.org/taxonomy/12721",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -325,6 +318,13 @@
       "identifier": "384",
       "name": "Rhizobium leguminosarum",
       "url": "https://www.uniprot.org/taxonomy/384",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2856755",
+      "name": "Melanographium smilacis",
+      "url": "https://www.uniprot.org/taxonomy/2856755",
       "inDefinedTermSet": "UniProt"
     },
     {

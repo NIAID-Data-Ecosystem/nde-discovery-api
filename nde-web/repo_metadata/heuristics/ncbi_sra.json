@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 658401,
+      "minValue": 714891,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-03-20",
+  "dateModified": "2026-11-03",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2006-11-03",
-      "endDate": "2026-03-20"
+      "endDate": "2026-11-03"
     }
   ],
   "topicCategory": [
@@ -98,73 +98,73 @@
   "healthCondition": [
     {
       "@type": "DefinedTerm",
-      "identifier": "0021100",
-      "name": "breast neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "1612",
+      "name": "breast cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1612",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005070",
-      "name": "neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "9970",
+      "name": "obesity",
+      "url": "http://purl.obolibrary.org/obo/DOID_9970",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0011122",
-      "name": "obesity disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0011122",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005105",
-      "name": "melanoma",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005105",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005059",
-      "name": "leukemia",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005059",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0100096",
-      "name": "COVID-19",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005575",
+      "identifier": "9256",
       "name": "colorectal cancer",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005575",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_9256",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0020731",
-      "name": "arbovirus infection",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0020731",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "1240",
+      "name": "leukemia",
+      "url": "http://purl.obolibrary.org/obo/DOID_1240",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0008315",
-      "name": "prostate cancer",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0008315",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "1909",
+      "name": "melanoma",
+      "url": "http://purl.obolibrary.org/obo/DOID_1909",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C4878",
-      "name": "Lung Carcinoma",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C4878",
+      "identifier": "1324",
+      "name": "lung cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1324",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C12801",
+      "name": "Tissue",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C12801",
       "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10283",
+      "name": "prostate cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_10283",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "934",
+      "name": "viral infectious disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_934",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9119",
+      "name": "acute myeloid leukemia",
+      "url": "http://purl.obolibrary.org/obo/DOID_9119",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
@@ -227,16 +227,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "4577",
-      "name": "Zea mays",
-      "url": "https://www.uniprot.org/taxonomy/4577",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10116",
-      "name": "Rattus norvegicus",
-      "url": "https://www.uniprot.org/taxonomy/10116",
+      "identifier": "4577",
+      "name": "Zea mays",
+      "url": "https://www.uniprot.org/taxonomy/4577",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -286,13 +286,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "408172",
-      "name": "marine metagenome",
-      "url": "https://www.uniprot.org/taxonomy/408172",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "408170",
       "name": "human gut metagenome",
       "url": "https://www.uniprot.org/taxonomy/408170",
@@ -307,9 +300,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "4932",
-      "name": "Saccharomyces cerevisiae",
-      "url": "https://www.uniprot.org/taxonomy/4932",
+      "identifier": "408172",
+      "name": "marine metagenome",
+      "url": "https://www.uniprot.org/taxonomy/408172",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "449393",
+      "name": "freshwater metagenome",
+      "url": "https://www.uniprot.org/taxonomy/449393",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -321,9 +321,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "449393",
-      "name": "freshwater metagenome",
-      "url": "https://www.uniprot.org/taxonomy/449393",
+      "identifier": "1297885",
+      "name": "plant metagenome",
+      "url": "https://www.uniprot.org/taxonomy/1297885",
       "inDefinedTermSet": "UniProt"
     },
     {

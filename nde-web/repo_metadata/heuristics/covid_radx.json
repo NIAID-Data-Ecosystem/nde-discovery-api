@@ -17,86 +17,6 @@
   ],
   "license": "https://sharing.nih.gov/accessing-data/accessing-genomic-data/how-to-request-and-access-datasets-from-dbgap",
   "usageInfo": "Varies",
-  "topicCategory": [
-    {
-      "@type": "DefinedTerm",
-      "identifier": "topic_3305",
-      "name": "Public health and epidemiology",
-      "url": "http://edamontology.org/topic_3305",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "topic_3324",
-      "name": "Infectious disease",
-      "url": "http://edamontology.org/topic_3324",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "topic_3292",
-      "name": "Biochemistry",
-      "url": "http://edamontology.org/topic_3292",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "topic_3344",
-      "name": "Biomedical science",
-      "url": "http://edamontology.org/topic_3344",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "topic_3307",
-      "name": "Computational biology",
-      "url": "http://edamontology.org/topic_3307",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "topic_3297",
-      "name": "Biotechnology",
-      "url": "http://edamontology.org/topic_3297",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "topic_3063",
-      "name": "Medical informatics",
-      "url": "http://edamontology.org/topic_3063",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "topic_2229",
-      "name": "Cell biology",
-      "url": "http://edamontology.org/topic_2229",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "topic_0781",
-      "name": "Virology",
-      "url": "http://edamontology.org/topic_0781",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "topic_3070",
-      "name": "Biology",
-      "url": "http://edamontology.org/topic_3070",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Topic",
-      "url": "http://edamontology.org/topic_0003",
-      "inDefinedTermSet": "EDAM",
-      "identifier": "0003",
-      "termCode": "topic_0003"
-    }
-  ],
   "healthCondition": [
     {
       "@type": "DefinedTerm",
@@ -107,52 +27,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C16880",
-      "name": "Mortality Rate",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C16880",
+      "identifier": "C171532",
+      "name": "Severe Acute Respiratory Syndrome Coronavirus 2 Measurement",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C171532",
       "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "D007239",
-      "name": "Infections",
-      "url": "https://id.nlm.nih.gov/mesh/D007239.html",
-      "inDefinedTermSet": "MeSH"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C154635",
-      "name": "Death Domain",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C154635",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0004975",
-      "name": "Alzheimer disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004975",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0016168",
-      "name": "cryopyrin-associated periodic syndrome",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0016168",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "D003643",
-      "name": "Death",
-      "url": "https://id.nlm.nih.gov/mesh/D003643.html",
-      "inDefinedTermSet": "MeSH"
     },
     {
       "@type": "DefinedTerm",
@@ -163,10 +41,52 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C189188",
-      "name": "Infected with SARS-CoV-2",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
+      "identifier": "0005091",
+      "name": "severe acute respiratory syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005091",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0100163",
+      "name": "COVID-19–associated multisystem inflammatory syndrome in children",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100163",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C3038",
+      "name": "Fever",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3038",
       "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C3137",
+      "name": "Inflammation",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3137",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C1909",
+      "name": "Pharmacologic Substance",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C1909",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005015",
+      "name": "diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0011122",
+      "name": "obesity disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0011122",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
@@ -196,9 +116,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2901879",
-      "name": "Severe acute respiratory syndrome coronavirus",
-      "url": "https://www.uniprot.org/taxonomy/2901879",
+      "identifier": "693996",
+      "name": "Alphacoronavirus",
+      "url": "https://www.uniprot.org/taxonomy/693996",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12721",
+      "name": "Human immunodeficiency virus",
+      "url": "https://www.uniprot.org/taxonomy/12721",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -210,37 +137,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1986198",
-      "name": "Coronaviridae sp.",
-      "url": "https://www.uniprot.org/taxonomy/1986198",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "347537",
-      "name": "Bat SARS CoV Rf1/2004",
-      "url": "https://www.uniprot.org/taxonomy/347537",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "12814",
-      "name": "Respiratory syncytial virus",
-      "url": "https://www.uniprot.org/taxonomy/12814",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "11709",
       "name": "Human immunodeficiency virus 2",
       "url": "https://www.uniprot.org/taxonomy/11709",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "10239",
-      "name": "Viruses",
-      "url": "https://www.uniprot.org/taxonomy/10239",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -252,9 +151,30 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "147711",
-      "name": "Rhinovirus A",
-      "url": "https://www.uniprot.org/taxonomy/147711",
+      "identifier": "2901879",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/2901879",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12814",
+      "name": "Respiratory syncytial virus",
+      "url": "https://www.uniprot.org/taxonomy/12814",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11103",
+      "name": "Hepacivirus hominis",
+      "url": "https://www.uniprot.org/taxonomy/11103",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12059",
+      "name": "Enterovirus",
+      "url": "https://www.uniprot.org/taxonomy/12059",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -270,7 +190,7 @@
     {
       "@type": "DefinedTerm",
       "identifier": "C17176",
-      "name": "Survey",
+      "name": "survey",
       "url": "http://purl.obolibrary.org/obo/NCIT_C17176",
       "inDefinedTermSet": "NCIT"
     },
@@ -283,16 +203,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C16751",
+      "identifier": "C154589",
       "name": "Focus Group",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C154589",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C16751",
+      "name": "Interview",
       "url": "http://purl.obolibrary.org/obo/NCIT_C16751",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C154589",
-      "name": "Focus Group",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C154589",
+      "identifier": "C20055",
+      "name": "Nucleic Acid Amplification Test",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C20055",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -304,13 +231,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C20055",
-      "name": "organism detection by PCR assay",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C20055",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "C53465",
       "name": "Rapid Antigen Test",
       "url": "http://purl.obolibrary.org/obo/NCIT_C53465",
@@ -318,16 +238,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C16723",
-      "name": "Immunology Test",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C16723",
+      "identifier": "C170821",
+      "name": "Electronic Health Record Review",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C170821",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C170821",
-      "name": "Electronic health record",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C170821",
+      "identifier": "C16723",
+      "name": "Immunology Test",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C16723",
       "inDefinedTermSet": "NCIT"
     },
     {

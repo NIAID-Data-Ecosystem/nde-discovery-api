@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 1458,
+      "minValue": 1544,
       "unitText": "Dataset"
     }
   ],
@@ -111,13 +111,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C15265",
-      "name": "Kidney Transplantation",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C15265",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "C25742",
       "name": "Pregnancy",
       "url": "http://purl.obolibrary.org/obo/NCIT_C25742",
@@ -128,6 +121,13 @@
       "identifier": "C92861",
       "name": "Preterm Birth",
       "url": "http://purl.obolibrary.org/obo/NCIT_C92861",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C15265",
+      "name": "Kidney Transplantation",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C15265",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -191,23 +191,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9605",
-      "name": "Homo",
-      "url": "https://www.uniprot.org/taxonomy/9605",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "9544",
       "name": "Macaca mulatta",
       "url": "https://www.uniprot.org/taxonomy/9544",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "10036",
-      "name": "Mesocricetus auratus",
-      "url": "https://www.uniprot.org/taxonomy/10036",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -219,9 +205,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9443",
-      "name": "Primates",
-      "url": "https://www.uniprot.org/taxonomy/9443",
+      "identifier": "10036",
+      "name": "Mesocricetus auratus",
+      "url": "https://www.uniprot.org/taxonomy/10036",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -233,9 +219,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10026",
-      "name": "Cricetinae",
-      "url": "https://www.uniprot.org/taxonomy/10026",
+      "identifier": "9605",
+      "name": "Homo",
+      "url": "https://www.uniprot.org/taxonomy/9605",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9443",
+      "name": "Primates",
+      "url": "https://www.uniprot.org/taxonomy/9443",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9825",
+      "name": "Sus scrofa domesticus",
+      "url": "https://www.uniprot.org/taxonomy/9825",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -250,6 +250,13 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "2901879",
       "name": "Severe acute respiratory syndrome coronavirus",
       "url": "https://www.uniprot.org/taxonomy/2901879",
@@ -257,16 +264,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1986198",
-      "name": "Coronaviridae sp.",
-      "url": "https://www.uniprot.org/taxonomy/1986198",
+      "identifier": "693996",
+      "name": "Alphacoronavirus",
+      "url": "https://www.uniprot.org/taxonomy/693996",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "347537",
-      "name": "Bat SARS CoV Rf1/2004",
-      "url": "https://www.uniprot.org/taxonomy/347537",
+      "identifier": "119210",
+      "name": "H3N2 subtype",
+      "url": "https://www.uniprot.org/taxonomy/119210",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "114727",
+      "name": "H1N1 subtype",
+      "url": "https://www.uniprot.org/taxonomy/114727",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -278,9 +292,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "186672",
-      "name": "Pseudovirus",
-      "url": "https://www.uniprot.org/taxonomy/186672",
+      "identifier": "11309",
+      "name": "unidentified influenza virus",
+      "url": "https://www.uniprot.org/taxonomy/11309",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1773",
+      "name": "Mycobacterium tuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/1773",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -292,30 +313,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2971083",
-      "name": "Vector NC",
-      "url": "https://www.uniprot.org/taxonomy/2971083",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "11309",
-      "name": "unidentified influenza virus",
-      "url": "https://www.uniprot.org/taxonomy/11309",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "10535",
-      "name": "unidentified adenovirus",
-      "url": "https://www.uniprot.org/taxonomy/10535",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "1773",
-      "name": "Mycobacterium tuberculosis",
-      "url": "https://www.uniprot.org/taxonomy/1773",
+      "identifier": "3052731",
+      "name": "Respirovirus muris",
+      "url": "https://www.uniprot.org/taxonomy/3052731",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -358,17 +358,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0000459",
-      "name": "polymerase chain reaction assay",
-      "url": "http://purl.obolibrary.org/obo/MMO_0000459",
-      "inDefinedTermSet": "MMO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0000875",
       "name": "viral hemagglutination inhibition assay",
       "url": "http://purl.obolibrary.org/obo/OBI_0000875",
       "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000459",
+      "name": "polymerase chain reaction assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000459",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",
@@ -379,17 +379,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0000458",
-      "name": "enzyme-linked immunosorbent spot assay",
-      "url": "http://purl.obolibrary.org/obo/MMO_0000458",
-      "inDefinedTermSet": "MMO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "C120695",
       "name": "Virus Neutralization Assay",
       "url": "http://purl.obolibrary.org/obo/NCIT_C120695",
       "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0000458",
+      "name": "enzyme-linked immunosorbent spot assay",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000458",
+      "inDefinedTermSet": "MMO"
     },
     {
       "@type": "DefinedTerm",

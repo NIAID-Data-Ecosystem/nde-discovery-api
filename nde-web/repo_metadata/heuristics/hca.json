@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 530,
+      "minValue": 532,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-03-02",
+  "dateModified": "2026-05-21",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2019-05-10",
-      "endDate": "2026-03-02"
+      "endDate": "2026-05-21"
     }
   ],
   "healthCondition": [
@@ -25,6 +25,20 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "0005070",
+      "name": "neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C3137",
+      "name": "Inflammation",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3137",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "0100096",
       "name": "COVID-19",
       "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
@@ -32,9 +46,37 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005002",
-      "name": "chronic obstructive pulmonary disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005002",
+      "identifier": "C3044",
+      "name": "Fibrosis",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3044",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004992",
+      "name": "cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004992",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005015",
+      "name": "diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005252",
+      "name": "heart failure",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005252",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002771",
+      "name": "pulmonary fibrosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002771",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -42,48 +84,6 @@
       "identifier": "0005148",
       "name": "type 2 diabetes mellitus",
       "url": "http://purl.obolibrary.org/obo/MONDO_0005148",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0800029",
-      "name": "interstitial lung disease 2",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0800029",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005005",
-      "name": "clear cell renal carcinoma",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005005",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005812",
-      "name": "influenza",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C3346",
-      "name": "Psoriasis",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C3346",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005011",
-      "name": "Crohn disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005011",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005301",
-      "name": "multiple sclerosis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005301",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -112,9 +112,131 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "9989",
+      "name": "Rodentia",
+      "url": "https://www.uniprot.org/taxonomy/9989",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9598",
+      "name": "Pan troglodytes",
+      "url": "https://www.uniprot.org/taxonomy/9598",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9669",
+      "name": "Mustela putorius furo",
+      "url": "https://www.uniprot.org/taxonomy/9669",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "112137",
+      "name": "Musculus",
+      "url": "https://www.uniprot.org/taxonomy/112137",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9541",
+      "name": "Macaca fascicularis",
+      "url": "https://www.uniprot.org/taxonomy/9541",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "9615",
       "name": "Canis lupus familiaris",
       "url": "https://www.uniprot.org/taxonomy/9615",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9395",
+      "name": "Tupaia glis",
+      "url": "https://www.uniprot.org/taxonomy/9395",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "70862",
+      "name": "teleost fish",
+      "url": "https://www.uniprot.org/taxonomy/70862",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "694009",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/694009",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12721",
+      "name": "Human immunodeficiency virus",
+      "url": "https://www.uniprot.org/taxonomy/12721",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10566",
+      "name": "Human papillomavirus",
+      "url": "https://www.uniprot.org/taxonomy/10566",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10407",
+      "name": "Hepatitis B virus",
+      "url": "https://www.uniprot.org/taxonomy/10407",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11320",
+      "name": "Influenza A virus",
+      "url": "https://www.uniprot.org/taxonomy/11320",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5476",
+      "name": "Candida albicans",
+      "url": "https://www.uniprot.org/taxonomy/5476",
       "inDefinedTermSet": "UniProt"
     }
   ]

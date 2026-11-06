@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 408,
+      "minValue": 418,
       "unitText": "Dataset"
     }
   ],
@@ -103,36 +103,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Mutant Kras is associated with several human cancers, most notably pancreactic, colon, and lung."
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0015474",
       "name": "cryptosporidiosis",
       "url": "http://purl.obolibrary.org/obo/MONDO_0015474",
       "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0001517",
-      "name": "dysentery",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0001517",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "extensively drug-resistant Acinetobacter baumannii"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C27988",
-      "name": "Cytotoxicity",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C27988",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Serious Gram-negative bacterial infections (by WHO priority 1 pathogens for which new drugs are needed)"
     },
     {
       "@type": "DefinedTerm",
@@ -143,7 +117,45 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "ADMET - Metabolism"
+      "identifier": "C27988",
+      "name": "Cytotoxicity",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C27988",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C171133",
+      "name": "COVID-19 Infection",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C171133",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0006042",
+      "name": "meningeal tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0006042",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005812",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005015",
+      "name": "diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004992",
+      "name": "cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004992",
+      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
@@ -171,13 +183,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9605",
-      "name": "Homo",
-      "url": "https://www.uniprot.org/taxonomy/9605",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "9925",
       "name": "Capra hircus",
       "url": "https://www.uniprot.org/taxonomy/9925",
@@ -192,9 +197,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2041123",
-      "name": "Lobelia baumannii",
-      "url": "https://www.uniprot.org/taxonomy/2041123",
+      "identifier": "9605",
+      "name": "Homo",
+      "url": "https://www.uniprot.org/taxonomy/9605",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -209,6 +214,13 @@
       "identifier": "9986",
       "name": "Oryctolagus cuniculus",
       "url": "https://www.uniprot.org/taxonomy/9986",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3911",
+      "name": "Vicia villosa",
+      "url": "https://www.uniprot.org/taxonomy/3911",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -237,16 +249,9 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
-      "identifier": "2",
-      "name": "Bacteria",
-      "url": "https://www.uniprot.org/taxonomy/2",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "2901879",
-      "name": "Severe acute respiratory syndrome coronavirus",
-      "url": "https://www.uniprot.org/taxonomy/2901879",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -258,37 +263,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2697049",
-      "name": "Severe acute respiratory syndrome coronavirus 2",
-      "url": "https://www.uniprot.org/taxonomy/2697049",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "10239",
-      "name": "Viruses",
-      "url": "https://www.uniprot.org/taxonomy/10239",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "182785",
-      "name": "Mycobacterium tuberculosis subsp. tuberculosis",
-      "url": "https://www.uniprot.org/taxonomy/182785",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "3082809",
-      "name": "Candidatus Colicola",
-      "url": "https://www.uniprot.org/taxonomy/3082809",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "6134",
-      "name": "Renilla",
-      "url": "https://www.uniprot.org/taxonomy/6134",
+      "identifier": "64320",
+      "name": "Zika virus",
+      "url": "https://www.uniprot.org/taxonomy/64320",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -300,9 +277,44 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1879016",
-      "name": "Zika virus vector pZIKV-ICD",
-      "url": "https://www.uniprot.org/taxonomy/1879016",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "6134",
+      "name": "Renilla",
+      "url": "https://www.uniprot.org/taxonomy/6134",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5807",
+      "name": "Cryptosporidium parvum",
+      "url": "https://www.uniprot.org/taxonomy/5807",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "693996",
+      "name": "Alphacoronavirus",
+      "url": "https://www.uniprot.org/taxonomy/693996",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "237895",
+      "name": "Cryptosporidium hominis",
+      "url": "https://www.uniprot.org/taxonomy/237895",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5833",
+      "name": "Plasmodium falciparum",
+      "url": "https://www.uniprot.org/taxonomy/5833",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -328,11 +340,6 @@
       "name": "Biochemical Assay",
       "url": "https://ontobee.org/ontology/APO?iri=http://purl.obolibrary.org/obo/APO_0000190",
       "inDefinedTermSet": "APO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0000",
-      "name": "DELETE"
     },
     {
       "@type": "DefinedTerm",
@@ -378,10 +385,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0001746",
-      "name": "development or differentiation design",
-      "url": "http://www.ebi.ac.uk/efo/EFO_0001746",
-      "inDefinedTermSet": "EFO"
+      "identifier": "0001211",
+      "name": "ex vivo design",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001211",
+      "inDefinedTermSet": "OBI"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0001285",
+      "name": "in vitro design",
+      "url": "http://purl.obolibrary.org/obo/OBI_0001285",
+      "inDefinedTermSet": "OBI"
     },
     {
       "@type": "DefinedTerm",

@@ -2,16 +2,16 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 6242,
+      "minValue": 6286,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-07-04",
+  "dateModified": "2026-10-31",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "endDate": "2026-07-04"
+      "endDate": "2026-10-31"
     }
   ],
   "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -30,13 +30,6 @@
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3301",
-      "name": "Microbiology",
-      "url": "http://edamontology.org/topic_3301",
-      "inDefinedTermSet": "EDAM"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "topic_0209",
       "name": "Medicinal chemistry",
       "url": "http://edamontology.org/topic_0209",
@@ -48,6 +41,93 @@
       "name": "Chemoinformatics",
       "url": "http://edamontology.org/topic_2814",
       "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3301",
+      "name": "Microbiology",
+      "url": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "399",
+      "name": "tuberculosis",
+      "url": "http://purl.obolibrary.org/obo/DOID_399",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8469",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/DOID_8469",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10457",
+      "name": "Legionnaires' disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_10457",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "305",
+      "name": "carcinoma",
+      "url": "http://purl.obolibrary.org/obo/DOID_305",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "684",
+      "name": "hepatocellular carcinoma",
+      "url": "http://purl.obolibrary.org/obo/DOID_684",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3905",
+      "name": "lung carcinoma",
+      "url": "http://purl.obolibrary.org/obo/DOID_3905",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "769",
+      "name": "neuroblastoma",
+      "url": "http://purl.obolibrary.org/obo/DOID_769",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10534",
+      "name": "stomach cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_10534",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1115",
+      "name": "sarcoma",
+      "url": "http://purl.obolibrary.org/obo/DOID_1115",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9538",
+      "name": "multiple myeloma",
+      "url": "http://purl.obolibrary.org/obo/DOID_9538",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
     }
   ],
   "species": [
@@ -60,6 +140,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "1268774",
+      "name": "Carabus lusitanicus lusitanicus",
+      "url": "https://www.uniprot.org/taxonomy/1268774",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "222794",
       "name": "Neurotoma",
       "url": "https://www.uniprot.org/taxonomy/222794",
@@ -67,9 +154,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1268774",
-      "name": "Carabus lusitanicus lusitanicus",
-      "url": "https://www.uniprot.org/taxonomy/1268774",
+      "identifier": "10088",
+      "name": "Mus",
+      "url": "https://www.uniprot.org/taxonomy/10088",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -88,23 +175,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10088",
-      "name": "Mus",
-      "url": "https://www.uniprot.org/taxonomy/10088",
+      "identifier": "1137542",
+      "name": "Aristida utilis var. utilis",
+      "url": "https://www.uniprot.org/taxonomy/1137542",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "119374",
-      "name": "Haemulon",
-      "url": "https://www.uniprot.org/taxonomy/119374",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "42043",
-      "name": "Silene vulgaris",
-      "url": "https://www.uniprot.org/taxonomy/42043",
+      "identifier": "58762",
+      "name": "Mesothelae",
+      "url": "https://www.uniprot.org/taxonomy/58762",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -116,9 +196,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "58762",
-      "name": "Mesothelae",
-      "url": "https://www.uniprot.org/taxonomy/58762",
+      "identifier": "119374",
+      "name": "Haemulon",
+      "url": "https://www.uniprot.org/taxonomy/119374",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -213,6 +293,12 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
+      "name": "3D structure prediction",
+      "url": "http://www.bioassayontology.org/bao#BAO_0002216",
+      "inDefinedTermSet": "BAO"
+    },
+    {
+      "@type": "DefinedTerm",
       "name": "Minimum Inhibitory Concentration Test",
       "url": "http://purl.obolibrary.org/obo/NCIT_C128985",
       "inDefinedTermSet": "GENEPIO"
@@ -222,12 +308,6 @@
       "name": "cytotoxicity assay",
       "url": "http://www.bioassayontology.org/bao#BAO_0002993",
       "inDefinedTermSet": "ENM"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "3D structure prediction",
-      "url": "http://www.bioassayontology.org/bao#BAO_0002216",
-      "inDefinedTermSet": "BAO"
     }
   ]
 }

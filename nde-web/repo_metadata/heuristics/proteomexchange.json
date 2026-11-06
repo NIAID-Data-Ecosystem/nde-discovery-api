@@ -2,34 +2,35 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 51318,
+      "minValue": 56845,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-03-31",
+  "dateModified": "2026-09-30",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2012-05-09",
-      "endDate": "2026-03-31"
+      "endDate": "2026-09-30"
     }
   ],
   "license": "https://www.proteomexchange.org/pxcollaborativeagreement_2024.pdf",
   "usageInfo": {
+    "@type": "CreativeWork",
     "url": "https://www.proteomexchange.org/docs/reprocessed_guidelines_px.pdf"
   },
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "name": "Proteomics",
-      "url": "http://edamontology.org/topic_0121",
+      "name": "Protein properties",
+      "url": "http://edamontology.org/topic_0123",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Protein properties",
-      "url": "http://edamontology.org/topic_0123",
+      "name": "Proteomics",
+      "url": "http://edamontology.org/topic_0121",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -50,59 +51,59 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021100",
-      "name": "breast neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "1612",
+      "name": "breast cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1612",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005559",
-      "name": "neurodegenerative disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005559",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005575",
-      "name": "colorectal cancer",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005575",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C4878",
-      "name": "Lung Carcinoma",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C4878",
+      "identifier": "C3137",
+      "name": "Inflammation",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3137",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005015",
-      "name": "diabetes mellitus",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "9256",
+      "name": "colorectal cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_9256",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0007256",
-      "name": "hepatocellular carcinoma",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0007256",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0100096",
+      "identifier": "0080600",
       "name": "COVID-19",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_0080600",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1324",
+      "name": "lung cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1324",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9970",
+      "name": "obesity",
+      "url": "http://purl.obolibrary.org/obo/DOID_9970",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9351",
+      "name": "diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/DOID_9351",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "684",
+      "name": "hepatocellular carcinoma",
+      "url": "http://purl.obolibrary.org/obo/DOID_684",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
@@ -130,16 +131,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10116",
-      "name": "Rattus norvegicus",
-      "url": "https://www.uniprot.org/taxonomy/10116",
+      "identifier": "3702",
+      "name": "Arabidopsis thaliana",
+      "url": "https://www.uniprot.org/taxonomy/3702",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3702",
-      "name": "Arabidopsis thaliana",
-      "url": "https://www.uniprot.org/taxonomy/3702",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -210,9 +211,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "4932",
-      "name": "Saccharomyces cerevisiae",
-      "url": "https://www.uniprot.org/taxonomy/4932",
+      "identifier": "1869227",
+      "name": "bacterium",
+      "url": "https://www.uniprot.org/taxonomy/1869227",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -224,16 +225,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1280",
-      "name": "Staphylococcus aureus",
-      "url": "https://www.uniprot.org/taxonomy/1280",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1869227",
-      "name": "bacterium",
-      "url": "https://www.uniprot.org/taxonomy/1869227",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -245,9 +246,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "36329",
-      "name": "Plasmodium falciparum (isolate 3D7)",
-      "url": "https://www.uniprot.org/taxonomy/36329",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -259,9 +260,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2697049",
-      "name": "Severe acute respiratory syndrome coronavirus 2",
-      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "identifier": "5833",
+      "name": "Plasmodium falciparum",
+      "url": "https://www.uniprot.org/taxonomy/5833",
       "inDefinedTermSet": "UniProt"
     },
     {

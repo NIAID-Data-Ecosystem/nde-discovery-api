@@ -2,16 +2,16 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 18096,
+      "minValue": 18116,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-09-14",
+  "dateModified": "2026-10-29",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "endDate": "2026-09-14"
+      "endDate": "2026-10-29"
     }
   ],
   "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -28,16 +28,21 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Epitope",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C13189"
-    },
-    {
-      "@type": "DefinedTerm",
       "name": "IEDB source reference"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Antigen"
+      "identifier": "C13189",
+      "name": "Epitope",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C13189",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C268",
+      "name": "Antigen",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C268",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -47,16 +52,16 @@
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0804",
-      "name": "Immunology",
-      "url": "http://edamontology.org/topic_0804",
+      "identifier": "topic_3948",
+      "name": "Immunoinformatics",
+      "url": "http://edamontology.org/topic_3948",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3948",
-      "name": "Immunoinformatics",
-      "url": "http://edamontology.org/topic_3948",
+      "identifier": "topic_0804",
+      "name": "Immunology",
+      "url": "http://edamontology.org/topic_0804",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -136,73 +141,73 @@
   "species": [
     {
       "@type": "DefinedTerm",
-      "identifier": "360549",
-      "name": "Themiste hennahi",
-      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=360549",
+      "identifier": "2050018",
+      "name": "Rodent coronavirus",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2050018",
       "inDefinedTermSet": "NCBI Taxonomy"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1634342",
-      "name": "Norovirus Hu/GII/JP/2015/GII.P17_GII.17/Kawasaki308",
-      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1634342",
+      "identifier": "128948",
+      "name": "Sudan virus - Boniface, Sudan,1976",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=128948",
       "inDefinedTermSet": "NCBI Taxonomy"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "480019",
-      "name": "Influenza A virus (A/Moscow/10/1999(H3N2))",
-      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=480019",
+      "identifier": "261658",
+      "name": "Cavenderia fasciculata",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=261658",
       "inDefinedTermSet": "NCBI Taxonomy"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10095",
-      "name": "Mus sp.",
-      "url": "https://www.uniprot.org/taxonomy/10095",
+      "identifier": "10377",
+      "name": "Human herpesvirus 4 strain B95-8",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=10377",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11484",
+      "name": "Influenza A virus (A/whale/Maine/1/84(H13N9))",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=11484",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11589",
+      "name": "Rift valley fever virus (STRAIN ZH-548 M12)",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=11589",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "425551",
+      "name": "Influenza A virus (A/AA/Huston/1945(H1N1))",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=425551",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1777792",
+      "name": "Influenza A virus (A/Michigan/45/2015(H1N1))",
+      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1777792",
+      "inDefinedTermSet": "NCBI Taxonomy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "70175",
+      "name": "Androctonus australis hector",
+      "url": "https://www.uniprot.org/taxonomy/70175",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "642794",
-      "name": "Influenza A virus (A/Auckland/1/2009(H1N1))",
-      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=642794",
-      "inDefinedTermSet": "NCBI Taxonomy"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "183764",
-      "name": "Influenza A virus (A/Puerto Rico/8/34/Mount Sinai(H1N1))",
-      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=183764",
-      "inDefinedTermSet": "NCBI Taxonomy"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "7227",
-      "name": "Drosophila melanogaster",
-      "url": "https://www.uniprot.org/taxonomy/7227",
+      "identifier": "7130",
+      "name": "Manduca sexta",
+      "url": "https://www.uniprot.org/taxonomy/7130",
       "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "2492960",
-      "name": "Bacillus yapensis",
-      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2492960",
-      "inDefinedTermSet": "NCBI Taxonomy"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "441771",
-      "name": "Clostridium botulinum A str. Hall",
-      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=441771",
-      "inDefinedTermSet": "NCBI Taxonomy"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "1318439",
-      "name": "Influenza A virus (A/Washington/05/2011(H1N1))",
-      "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1318439",
-      "inDefinedTermSet": "NCBI Taxonomy"
     },
     {
       "@type": "DefinedTerm",
@@ -223,9 +228,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "508771",
-      "name": "Toxoplasma gondii (strain ATCC 50611 / Me49)",
-      "url": "https://www.uniprot.org/taxonomy/508771",
+      "identifier": "337042",
+      "name": "Alphapapillomavirus 7",
+      "url": "https://www.uniprot.org/taxonomy/337042",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -244,16 +249,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "337042",
-      "name": "Alphapapillomavirus 7",
-      "url": "https://www.uniprot.org/taxonomy/337042",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "443226",
-      "name": "Coccidioides posadasii (strain RMSCC 757 / Silveira)",
-      "url": "https://www.uniprot.org/taxonomy/443226",
+      "identifier": "508771",
+      "name": "Toxoplasma gondii (strain ATCC 50611 / Me49)",
+      "url": "https://www.uniprot.org/taxonomy/508771",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -261,6 +259,20 @@
       "identifier": "489455",
       "name": "hepatitis B virus genotype A",
       "url": "https://www.uniprot.org/taxonomy/489455",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "333668",
+      "name": "Theileria parva strain Muguga",
+      "url": "https://www.uniprot.org/taxonomy/333668",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "443226",
+      "name": "Coccidioides posadasii (strain RMSCC 757 / Silveira)",
+      "url": "https://www.uniprot.org/taxonomy/443226",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -275,13 +287,6 @@
       "identifier": "353154",
       "name": "Theileria annulata strain Ankara",
       "url": "https://www.uniprot.org/taxonomy/353154",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "333668",
-      "name": "Theileria parva strain Muguga",
-      "url": "https://www.uniprot.org/taxonomy/333668",
       "inDefinedTermSet": "UniProt"
     },
     {

@@ -2,16 +2,16 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 776,
+      "minValue": 785,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-09-17",
+  "dateModified": "2026-10-23",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "endDate": "2026-09-17"
+      "endDate": "2026-10-23"
     }
   ],
   "usageInfo": {
@@ -30,9 +30,9 @@
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0622",
-      "name": "Genomics",
-      "url": "http://edamontology.org/topic_0622",
+      "identifier": "topic_0625",
+      "name": "Genotype and phenotype",
+      "url": "http://edamontology.org/topic_0625",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -44,9 +44,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0625",
-      "name": "Genotype and phenotype",
-      "url": "http://edamontology.org/topic_0625",
+      "identifier": "topic_0622",
+      "name": "Genomics",
+      "url": "http://edamontology.org/topic_0622",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -109,16 +109,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0018908",
-      "name": "non-Hodgkin lymphoma",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0018908",
+      "identifier": "0004970",
+      "name": "adenocarcinoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004970",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0004970",
-      "name": "adenocarcinoma",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004970",
+      "identifier": "0018908",
+      "name": "non-Hodgkin lymphoma",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0018908",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -147,13 +147,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "166845",
-      "name": "Bronchus",
-      "url": "https://www.uniprot.org/taxonomy/166845",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "706092",
       "name": "Phyllodes",
       "url": "https://www.uniprot.org/taxonomy/706092",
@@ -161,9 +154,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "41013",
-      "name": "Tinea",
-      "url": "https://www.uniprot.org/taxonomy/41013",
+      "identifier": "166845",
+      "name": "Bronchus",
+      "url": "https://www.uniprot.org/taxonomy/166845",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -175,16 +168,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "85819",
-      "name": "Phthiraptera",
-      "url": "https://www.uniprot.org/taxonomy/85819",
+      "identifier": "41013",
+      "name": "Tinea",
+      "url": "https://www.uniprot.org/taxonomy/41013",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9031",
-      "name": "Gallus gallus",
-      "url": "https://www.uniprot.org/taxonomy/9031",
+      "identifier": "85819",
+      "name": "Phthiraptera",
+      "url": "https://www.uniprot.org/taxonomy/85819",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -196,9 +189,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1408500",
-      "name": "Scabies",
-      "url": "https://www.uniprot.org/taxonomy/1408500",
+      "identifier": "370836",
+      "name": "Pityriasis",
+      "url": "https://www.uniprot.org/taxonomy/370836",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9031",
+      "name": "Gallus gallus",
+      "url": "https://www.uniprot.org/taxonomy/9031",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -227,16 +227,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "4751",
-      "name": "Fungi",
-      "url": "https://www.uniprot.org/taxonomy/4751",
+      "identifier": "10376",
+      "name": "Epstein-Barr virus (strain GD1)",
+      "url": "https://www.uniprot.org/taxonomy/10376",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11118",
-      "name": "Coronaviridae",
-      "url": "https://www.uniprot.org/taxonomy/11118",
+      "identifier": "4751",
+      "name": "Fungi",
+      "url": "https://www.uniprot.org/taxonomy/4751",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -248,37 +248,37 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10376",
-      "name": "Epstein-Barr virus (strain GD1)",
-      "url": "https://www.uniprot.org/taxonomy/10376",
+      "identifier": "11118",
+      "name": "Coronaviridae",
+      "url": "https://www.uniprot.org/taxonomy/11118",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2093",
-      "name": "Mycoplasma",
-      "url": "https://www.uniprot.org/taxonomy/2093",
+      "identifier": "34384",
+      "name": "Arthrodermataceae",
+      "url": "https://www.uniprot.org/taxonomy/34384",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10404",
-      "name": "Hepadnaviridae",
-      "url": "https://www.uniprot.org/taxonomy/10404",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "12059",
-      "name": "Enterovirus",
-      "url": "https://www.uniprot.org/taxonomy/12059",
+      "identifier": "10292",
+      "name": "Herpesviridae",
+      "url": "https://www.uniprot.org/taxonomy/10292",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10358",
-      "name": "Cytomegalovirus",
-      "url": "https://www.uniprot.org/taxonomy/10358",
+      "identifier": "10407",
+      "name": "Hepatitis B virus",
+      "url": "https://www.uniprot.org/taxonomy/10407",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -293,17 +293,17 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "identifier": "MMO_0000575",
-      "name": "computational method",
-      "url": "http://purl.obolibrary.org/obo/MMO_0000575",
-      "inDefinedTermSet": "MMO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "operation_3197",
       "name": "Genetic variation analysis",
       "url": "http://edamontology.org/operation_3197",
       "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "MMO_0000575",
+      "name": "computational method",
+      "url": "http://purl.obolibrary.org/obo/MMO_0000575",
+      "inDefinedTermSet": "MMO"
     }
   ]
 }

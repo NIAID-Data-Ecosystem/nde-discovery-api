@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 16670,
+      "minValue": 16747,
       "unitText": "Sample"
     }
   ],
@@ -11,73 +11,73 @@
   "healthCondition": [
     {
       "@type": "DefinedTerm",
-      "identifier": "0018076",
+      "identifier": "399",
       "name": "tuberculosis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_399",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005812",
+      "identifier": "8469",
       "name": "influenza",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_8469",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0009693",
-      "name": "plasma cell myeloma",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0009693",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "9538",
+      "name": "multiple myeloma",
+      "url": "http://purl.obolibrary.org/obo/DOID_9538",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005091",
+      "identifier": "2945",
       "name": "severe acute respiratory syndrome",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005091",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_2945",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0006052",
+      "identifier": "2957",
       "name": "pulmonary tuberculosis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0006052",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_2957",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0002595",
+      "identifier": "3298",
       "name": "vaccinia",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0002595",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_3298",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0020731",
-      "name": "arbovirus infection",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0020731",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "934",
+      "name": "viral infectious disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_934",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005136",
+      "identifier": "12365",
       "name": "malaria",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_12365",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0012268",
-      "name": "AIDS",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0012268",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "635",
+      "name": "acquired immunodeficiency syndrome",
+      "url": "http://purl.obolibrary.org/obo/DOID_635",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0001673",
-      "name": "diarrheal disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0001673",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "13250",
+      "name": "diarrhea",
+      "url": "http://purl.obolibrary.org/obo/DOID_13250",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
@@ -147,16 +147,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9913",
-      "name": "Bos taurus",
-      "url": "https://www.uniprot.org/taxonomy/9913",
+      "identifier": "3988",
+      "name": "Ricinus communis",
+      "url": "https://www.uniprot.org/taxonomy/3988",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3988",
-      "name": "Ricinus communis",
-      "url": "https://www.uniprot.org/taxonomy/3988",
+      "identifier": "7192",
+      "name": "Simulium vittatum",
+      "url": "https://www.uniprot.org/taxonomy/7192",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -213,16 +213,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "59201",
-      "name": "Salmonella enterica I",
-      "url": "https://www.uniprot.org/taxonomy/59201",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "562",
-      "name": "Escherichia coli",
-      "url": "https://www.uniprot.org/taxonomy/562",
+      "identifier": "59201",
+      "name": "Salmonella enterica I",
+      "url": "https://www.uniprot.org/taxonomy/59201",
       "inDefinedTermSet": "UniProt"
     },
     {

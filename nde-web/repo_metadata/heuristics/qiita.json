@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 878,
+      "minValue": 891,
       "unitText": "Dataset"
     }
   ],
@@ -96,9 +96,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0011122",
-      "name": "obesity disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0011122",
+      "identifier": "9970",
+      "name": "obesity",
+      "url": "http://purl.obolibrary.org/obo/DOID_9970",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005575",
+      "name": "colorectal cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005575",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -110,16 +117,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005575",
-      "name": "colorectal cancer",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005575",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "identifier": "0005070",
+      "name": "neoplasm",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -131,10 +131,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005015",
-      "name": "diabetes mellitus",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "C3137",
+      "name": "Inflammation",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3137",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -145,17 +145,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005401",
-      "name": "colonic neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005401",
+      "identifier": "0011122",
+      "name": "obesity disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0011122",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005109",
-      "name": "HIV infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "C18078",
+      "name": "Carcinogenesis",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C18078",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -176,13 +176,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10095",
-      "name": "Mus sp.",
-      "url": "https://www.uniprot.org/taxonomy/10095",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "10090",
       "name": "Mus musculus",
       "url": "https://www.uniprot.org/taxonomy/10090",
@@ -190,16 +183,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9605",
-      "name": "Homo",
-      "url": "https://www.uniprot.org/taxonomy/9605",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "3193",
-      "name": "Embryophyta",
-      "url": "https://www.uniprot.org/taxonomy/3193",
+      "identifier": "10095",
+      "name": "Mus sp.",
+      "url": "https://www.uniprot.org/taxonomy/10095",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -211,9 +197,30 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10114",
-      "name": "Rattus",
-      "url": "https://www.uniprot.org/taxonomy/10114",
+      "identifier": "9605",
+      "name": "Homo",
+      "url": "https://www.uniprot.org/taxonomy/9605",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9615",
+      "name": "Canis lupus familiaris",
+      "url": "https://www.uniprot.org/taxonomy/9615",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3193",
+      "name": "Embryophyta",
+      "url": "https://www.uniprot.org/taxonomy/3193",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9823",
+      "name": "Sus scrofa",
+      "url": "https://www.uniprot.org/taxonomy/9823",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -225,16 +232,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "50557",
-      "name": "Insecta",
-      "url": "https://www.uniprot.org/taxonomy/50557",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "2157",
-      "name": "Archaea",
-      "url": "https://www.uniprot.org/taxonomy/2157",
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -249,9 +249,9 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
-      "identifier": "410661",
-      "name": "mouse gut metagenome",
-      "url": "https://www.uniprot.org/taxonomy/410661",
+      "identifier": "1869227",
+      "name": "bacterium",
+      "url": "https://www.uniprot.org/taxonomy/1869227",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -263,30 +263,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "256318",
-      "name": "metagenome",
-      "url": "https://www.uniprot.org/taxonomy/256318",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "1936497",
-      "name": "Firmicutes bacterium Firmicutes_1",
-      "url": "https://www.uniprot.org/taxonomy/1936497",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "269269",
-      "name": "Bacteroidetes bacterium S1",
-      "url": "https://www.uniprot.org/taxonomy/269269",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "357231",
-      "name": "Murine norovirus",
-      "url": "https://www.uniprot.org/taxonomy/357231",
+      "identifier": "1678",
+      "name": "Bifidobacterium",
+      "url": "https://www.uniprot.org/taxonomy/1678",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -305,9 +284,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2964732",
-      "name": "Archaeal virus sp.",
-      "url": "https://www.uniprot.org/taxonomy/2964732",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "976",
+      "name": "Bacteroidota",
+      "url": "https://www.uniprot.org/taxonomy/976",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -315,6 +301,20 @@
       "identifier": "4751",
       "name": "Fungi",
       "url": "https://www.uniprot.org/taxonomy/4751",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1301",
+      "name": "Streptococcus",
+      "url": "https://www.uniprot.org/taxonomy/1301",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1224",
+      "name": "Pseudomonadota",
+      "url": "https://www.uniprot.org/taxonomy/1224",
       "inDefinedTermSet": "UniProt"
     },
     {

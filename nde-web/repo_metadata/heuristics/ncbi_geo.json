@@ -2,22 +2,22 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 264383,
+      "minValue": 299515,
       "unitText": "Dataset"
     },
     {
       "@type": "QuantitativeValue",
-      "minValue": 7977186,
+      "minValue": 8692510,
       "unitText": "Sample"
     }
   ],
-  "dateModified": "2025-10-06",
+  "dateModified": "2026-10-31",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "startDate": "2001-01-22",
-      "endDate": "2025-10-06"
+      "startDate": "2000-09-28",
+      "endDate": "2026-10-31"
     }
   ],
   "topicCategory": [
@@ -109,20 +109,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021100",
-      "name": "breast neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "C3137",
       "name": "Inflammation",
       "url": "http://purl.obolibrary.org/obo/NCIT_C3137",
@@ -137,6 +123,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "C19151",
+      "name": "Metastasis",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C19151",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "0008315",
       "name": "prostate cancer",
       "url": "http://purl.obolibrary.org/obo/MONDO_0008315",
@@ -144,9 +137,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C35041",
-      "name": "Stress",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C35041",
+      "identifier": "1612",
+      "name": "breast cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1612",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C3044",
+      "name": "Fibrosis",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3044",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C18121",
+      "name": "Tumorigenesis",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C18121",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -154,13 +161,6 @@
       "identifier": "0005105",
       "name": "melanoma",
       "url": "http://purl.obolibrary.org/obo/MONDO_0005105",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0018874",
-      "name": "acute myeloid leukemia",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0018874",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -189,13 +189,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3702",
-      "name": "Arabidopsis thaliana",
-      "url": "https://www.uniprot.org/taxonomy/3702",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "10116",
       "name": "Rattus norvegicus",
       "url": "https://www.uniprot.org/taxonomy/10116",
@@ -210,16 +203,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7955",
-      "name": "Danio rerio",
-      "url": "https://www.uniprot.org/taxonomy/7955",
+      "identifier": "3702",
+      "name": "Arabidopsis thaliana",
+      "url": "https://www.uniprot.org/taxonomy/3702",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9823",
-      "name": "Sus scrofa",
-      "url": "https://www.uniprot.org/taxonomy/9823",
+      "identifier": "7955",
+      "name": "Danio rerio",
+      "url": "https://www.uniprot.org/taxonomy/7955",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -231,9 +224,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9031",
-      "name": "Gallus gallus",
-      "url": "https://www.uniprot.org/taxonomy/9031",
+      "identifier": "9823",
+      "name": "Sus scrofa",
+      "url": "https://www.uniprot.org/taxonomy/9823",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -241,6 +234,13 @@
       "identifier": "4530",
       "name": "Oryza sativa",
       "url": "https://www.uniprot.org/taxonomy/4530",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9031",
+      "name": "Gallus gallus",
+      "url": "https://www.uniprot.org/taxonomy/9031",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -255,6 +255,13 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "6239",
       "name": "Caenorhabditis elegans",
       "url": "https://www.uniprot.org/taxonomy/6239",
@@ -262,9 +269,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "4932",
-      "name": "Saccharomyces cerevisiae",
-      "url": "https://www.uniprot.org/taxonomy/4932",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -283,44 +290,37 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "562",
-      "name": "Escherichia coli",
-      "url": "https://www.uniprot.org/taxonomy/562",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "511145",
-      "name": "Escherichia coli str. K-12 substr. MG1655",
-      "url": "https://www.uniprot.org/taxonomy/511145",
+      "identifier": "1869227",
+      "name": "bacterium",
+      "url": "https://www.uniprot.org/taxonomy/1869227",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "287",
-      "name": "Pseudomonas aeruginosa",
-      "url": "https://www.uniprot.org/taxonomy/287",
+      "identifier": "12721",
+      "name": "Human immunodeficiency virus",
+      "url": "https://www.uniprot.org/taxonomy/12721",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10376",
-      "name": "Epstein-Barr virus (strain GD1)",
-      "url": "https://www.uniprot.org/taxonomy/10376",
+      "identifier": "1773",
+      "name": "Mycobacterium tuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/1773",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "11676",
-      "name": "Human immunodeficiency virus 1",
-      "url": "https://www.uniprot.org/taxonomy/11676",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "37296",
-      "name": "Human herpesvirus 8",
-      "url": "https://www.uniprot.org/taxonomy/37296",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
       "inDefinedTermSet": "UniProt"
     },
     {

@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 144787,
+      "minValue": 158479,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-06-05",
+  "dateModified": "2026-10-29",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "startDate": "1970-01-01",
-      "endDate": "2026-06-05"
+      "startDate": "1970-06-01",
+      "endDate": "2026-10-29"
     }
   ],
   "license": "Varies",
@@ -99,73 +99,73 @@
   "healthCondition": [
     {
       "@type": "DefinedTerm",
-      "identifier": "0100096",
+      "identifier": "0080600",
       "name": "COVID-19",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_0080600",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0003265",
-      "name": "adjustment disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0003265",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005015",
+      "identifier": "9351",
       "name": "diabetes mellitus",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005015",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_9351",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C3346",
-      "name": "Psoriasis",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C3346",
-      "inDefinedTermSet": "NCIT"
+      "identifier": "8893",
+      "name": "psoriasis",
+      "url": "http://purl.obolibrary.org/obo/DOID_8893",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005105",
+      "identifier": "1909",
       "name": "melanoma",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005105",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_1909",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021100",
-      "name": "breast neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "6713",
+      "name": "cerebrovascular disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_6713",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005098",
-      "name": "stroke disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005098",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "9970",
+      "name": "obesity",
+      "url": "http://purl.obolibrary.org/obo/DOID_9970",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0011122",
-      "name": "obesity disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0011122",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "1612",
+      "name": "breast cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1612",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0004980",
-      "name": "atopic eczema",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004980",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "3310",
+      "name": "atopic dermatitis",
+      "url": "http://purl.obolibrary.org/obo/DOID_3310",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0011918",
-      "name": "anxiety",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0011918",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "2030",
+      "name": "anxiety disorder",
+      "url": "http://purl.obolibrary.org/obo/DOID_2030",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9352",
+      "name": "type 2 diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/DOID_9352",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
@@ -200,9 +200,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3193",
-      "name": "Embryophyta",
-      "url": "https://www.uniprot.org/taxonomy/3193",
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -214,23 +214,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10114",
-      "name": "Rattus",
-      "url": "https://www.uniprot.org/taxonomy/10114",
+      "identifier": "3193",
+      "name": "Embryophyta",
+      "url": "https://www.uniprot.org/taxonomy/3193",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9913",
-      "name": "Bos taurus",
-      "url": "https://www.uniprot.org/taxonomy/9913",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "9605",
-      "name": "Homo",
-      "url": "https://www.uniprot.org/taxonomy/9605",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -245,6 +238,13 @@
       "identifier": "381124",
       "name": "Zea mays subsp. mays",
       "url": "https://www.uniprot.org/taxonomy/381124",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10114",
+      "name": "Rattus",
+      "url": "https://www.uniprot.org/taxonomy/10114",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -280,16 +280,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2839062",
-      "name": "Transformation",
-      "url": "https://www.uniprot.org/taxonomy/2839062",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "2971083",
-      "name": "Vector NC",
-      "url": "https://www.uniprot.org/taxonomy/2971083",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -301,9 +294,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2901879",
-      "name": "Severe acute respiratory syndrome coronavirus",
-      "url": "https://www.uniprot.org/taxonomy/2901879",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -315,16 +308,23 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1986198",
-      "name": "Coronaviridae sp.",
-      "url": "https://www.uniprot.org/taxonomy/1986198",
+      "identifier": "693996",
+      "name": "Alphacoronavirus",
+      "url": "https://www.uniprot.org/taxonomy/693996",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3082809",
-      "name": "Candidatus Colicola",
-      "url": "https://www.uniprot.org/taxonomy/3082809",
+      "identifier": "4751",
+      "name": "Fungi",
+      "url": "https://www.uniprot.org/taxonomy/4751",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "29178",
+      "name": "Foraminifera",
+      "url": "https://www.uniprot.org/taxonomy/29178",
       "inDefinedTermSet": "UniProt"
     },
     {

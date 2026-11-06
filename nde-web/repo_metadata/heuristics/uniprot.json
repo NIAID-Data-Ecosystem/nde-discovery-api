@@ -2,16 +2,16 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 71038,
+      "minValue": 72464,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-06-10",
+  "dateModified": "2026-09-02",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "endDate": "2026-06-10"
+      "endDate": "2026-09-02"
     }
   ],
   "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -23,18 +23,25 @@
   "about": [
     {
       "@type": "DefinedTerm",
-      "name": "Proteome",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C18276",
+      "name": "Protein",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17021",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Protein",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C17021",
+      "name": "Proteome",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C18276",
       "inDefinedTermSet": "NCIT"
     }
   ],
   "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0080",
+      "name": "Sequence analysis",
+      "url": "http://edamontology.org/topic_0080",
+      "inDefinedTermSet": "EDAM"
+    },
     {
       "@type": "DefinedTerm",
       "identifier": "topic_0121",
@@ -48,84 +55,157 @@
       "name": "Protein properties",
       "url": "http://edamontology.org/topic_0123",
       "inDefinedTermSet": "EDAM"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10457",
+      "name": "Legionnaires' disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_10457",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0080",
-      "name": "Sequence analysis",
-      "url": "http://edamontology.org/topic_0080",
-      "inDefinedTermSet": "EDAM"
+      "identifier": "2043",
+      "name": "hepatitis B",
+      "url": "http://purl.obolibrary.org/obo/DOID_2043",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11263",
+      "name": "chlamydia",
+      "url": "http://purl.obolibrary.org/obo/DOID_11263",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4411",
+      "name": "hepatitis E",
+      "url": "http://purl.obolibrary.org/obo/DOID_4411",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1883",
+      "name": "hepatitis C",
+      "url": "http://purl.obolibrary.org/obo/DOID_1883",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4483",
+      "name": "rhinitis",
+      "url": "http://purl.obolibrary.org/obo/DOID_4483",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1115",
+      "name": "sarcoma",
+      "url": "http://purl.obolibrary.org/obo/DOID_1115",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2237",
+      "name": "hepatitis",
+      "url": "http://purl.obolibrary.org/obo/DOID_2237",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8469",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/DOID_8469",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "640",
+      "name": "encephalomyelitis",
+      "url": "http://purl.obolibrary.org/obo/DOID_640",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
     }
   ],
   "species": [
     {
       "@type": "DefinedTerm",
-      "identifier": "60889",
-      "name": "Melipona bicolor",
-      "url": "https://www.uniprot.org/taxonomy/60889",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10089",
-      "name": "Mus caroli",
-      "url": "https://www.uniprot.org/taxonomy/10089",
+      "identifier": "4530",
+      "name": "Oryza sativa",
+      "url": "https://www.uniprot.org/taxonomy/4530",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "37079",
-      "name": "Pelecanoides urinatrix",
-      "url": "https://www.uniprot.org/taxonomy/37079",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "159417",
-      "name": "Clavelina lepadiformis",
-      "url": "https://www.uniprot.org/taxonomy/159417",
+      "identifier": "374723",
+      "name": "Phtheirospermum japonicum",
+      "url": "https://www.uniprot.org/taxonomy/374723",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "33528",
-      "name": "Gambusia affinis",
-      "url": "https://www.uniprot.org/taxonomy/33528",
+      "identifier": "269412",
+      "name": "Xiphorhynchus elegans",
+      "url": "https://www.uniprot.org/taxonomy/269412",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9770",
-      "name": "Balaenoptera physalus",
-      "url": "https://www.uniprot.org/taxonomy/9770",
+      "identifier": "48155",
+      "name": "Sylvia atricapilla",
+      "url": "https://www.uniprot.org/taxonomy/48155",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7994",
-      "name": "Astyanax mexicanus",
-      "url": "https://www.uniprot.org/taxonomy/7994",
+      "identifier": "29031",
+      "name": "Phlebotomus papatasi",
+      "url": "https://www.uniprot.org/taxonomy/29031",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7461",
-      "name": "Apis cerana",
-      "url": "https://www.uniprot.org/taxonomy/7461",
+      "identifier": "7092",
+      "name": "Bombyx mandarina",
+      "url": "https://www.uniprot.org/taxonomy/7092",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "187382",
-      "name": "Chlamydotis macqueenii",
-      "url": "https://www.uniprot.org/taxonomy/187382",
+      "identifier": "57060",
+      "name": "Eleutherodactylus coqui",
+      "url": "https://www.uniprot.org/taxonomy/57060",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "100784",
-      "name": "Balearica regulorum gibbericeps",
-      "url": "https://www.uniprot.org/taxonomy/100784",
+      "identifier": "1572043",
+      "name": "Triplophysa tibetana",
+      "url": "https://www.uniprot.org/taxonomy/1572043",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -138,6 +218,34 @@
     }
   ],
   "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "573",
+      "name": "Klebsiella pneumoniae",
+      "url": "https://www.uniprot.org/taxonomy/573",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
+      "inDefinedTermSet": "UniProt"
+    },
     {
       "@type": "DefinedTerm",
       "identifier": "1905",
@@ -154,23 +262,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "416016",
-      "name": "Flavobacterium cucumis",
-      "url": "https://www.uniprot.org/taxonomy/416016",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "587735",
-      "name": "Jeotgalibacillus terrae",
-      "url": "https://www.uniprot.org/taxonomy/587735",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "64495",
-      "name": "Rhizopus oryzae",
-      "url": "https://www.uniprot.org/taxonomy/64495",
+      "identifier": "287",
+      "name": "Pseudomonas aeruginosa",
+      "url": "https://www.uniprot.org/taxonomy/287",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -182,16 +276,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "358",
-      "name": "Rhizobium radiobacter",
-      "url": "https://www.uniprot.org/taxonomy/358",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "47760",
-      "name": "Streptomyces aurantiacus",
-      "url": "https://www.uniprot.org/taxonomy/47760",
+      "identifier": "64495",
+      "name": "Rhizopus oryzae",
+      "url": "https://www.uniprot.org/taxonomy/64495",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -199,13 +286,6 @@
       "identifier": "105219",
       "name": "Ralstonia mannitolilytica",
       "url": "https://www.uniprot.org/taxonomy/105219",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "2500789",
-      "name": "Gordonia phage Mutzi",
-      "url": "https://www.uniprot.org/taxonomy/2500789",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -220,15 +300,15 @@
   "measurementTechnique": [
     {
       "@type": "DefinedTerm",
-      "name": "Curation",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C48292",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
       "name": "Sequence analysis",
       "url": "http://edamontology.org/operation_2403",
       "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Curation",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C48292",
+      "inDefinedTermSet": "NCIT"
     }
   ]
 }

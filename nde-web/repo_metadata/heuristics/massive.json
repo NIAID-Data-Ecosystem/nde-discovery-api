@@ -2,7 +2,7 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 126,
+      "minValue": 20489,
       "unitText": "Dataset"
     }
   ],
@@ -10,77 +10,80 @@
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "startDate": "2013-03-18"
+      "startDate": "2013-03-17"
     }
   ],
   "license": "http://creativecommons.org/publicdomain/zero/1.0/",
   "healthCondition": [
     {
       "@type": "DefinedTerm",
-      "identifier": "0001103",
-      "name": "giardiasis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0001103",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "1612",
+      "name": "breast cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1612",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0018076",
+      "identifier": "10652",
+      "name": "Alzheimer's disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_10652",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0080600",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/DOID_0080600",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1324",
+      "name": "lung cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1324",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2394",
+      "name": "ovarian cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_2394",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1909",
+      "name": "melanoma",
+      "url": "http://purl.obolibrary.org/obo/DOID_1909",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "399",
       "name": "tuberculosis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
-      "inDefinedTermSet": "MONDO"
+      "url": "http://purl.obolibrary.org/obo/DOID_399",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0004335",
-      "name": "digestive system disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004335",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "9970",
+      "name": "obesity",
+      "url": "http://purl.obolibrary.org/obo/DOID_9970",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005233",
-      "name": "non-small cell lung carcinoma",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005233",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "9256",
+      "name": "colorectal cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_9256",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021100",
-      "name": "breast neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005070",
-      "name": "neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005070",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "diffuse large B cell lymphoma"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0021084",
-      "name": "vision disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021084",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005136",
-      "name": "malaria",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0027407",
-      "name": "Kleefstra syndrome 1",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0027407",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "9352",
+      "name": "type 2 diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/DOID_9352",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
@@ -108,13 +111,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "311430",
-      "name": "Severiana severini",
-      "url": "https://www.uniprot.org/taxonomy/311430",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "3702",
       "name": "Arabidopsis thaliana",
       "url": "https://www.uniprot.org/taxonomy/3702",
@@ -122,30 +118,37 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7634",
-      "name": "Heliocidaris erythrogramma",
-      "url": "https://www.uniprot.org/taxonomy/7634",
+      "identifier": "10116",
+      "name": "Rattus norvegicus",
+      "url": "https://www.uniprot.org/taxonomy/10116",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "39352",
-      "name": "Origanum vulgare",
-      "url": "https://www.uniprot.org/taxonomy/39352",
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1035550",
-      "name": "Brunfelsia grandiflora",
-      "url": "https://www.uniprot.org/taxonomy/1035550",
+      "identifier": "3750",
+      "name": "Malus domestica",
+      "url": "https://www.uniprot.org/taxonomy/3750",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "756011",
-      "name": "Vitis mustangensis",
-      "url": "https://www.uniprot.org/taxonomy/756011",
+      "identifier": "7227",
+      "name": "Drosophila melanogaster",
+      "url": "https://www.uniprot.org/taxonomy/7227",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4376",
+      "name": "Nepenthes alata",
+      "url": "https://www.uniprot.org/taxonomy/4376",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -157,10 +160,7 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3673",
-      "name": "Momordica charantia",
-      "url": "https://www.uniprot.org/taxonomy/3673",
-      "inDefinedTermSet": "UniProt"
+      "name": "no species"
     },
     {
       "@type": "DefinedTerm",
@@ -174,6 +174,13 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "4932",
       "name": "Saccharomyces cerevisiae",
       "url": "https://www.uniprot.org/taxonomy/4932",
@@ -181,65 +188,58 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "272558",
-      "name": "Halalkalibacterium halodurans (strain ATCC BAA-125 / DSM 18197 / FERM 7344 / JCM 9153 / C-125)",
-      "url": "https://www.uniprot.org/taxonomy/272558",
+      "identifier": "171259",
+      "name": "Haptophyta environmental samples",
+      "url": "https://www.uniprot.org/taxonomy/171259",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "511145",
-      "name": "Escherichia coli str. K-12 substr. MG1655",
-      "url": "https://www.uniprot.org/taxonomy/511145",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "410658",
-      "name": "soil metagenome",
-      "url": "https://www.uniprot.org/taxonomy/410658",
+      "identifier": "6239",
+      "name": "Caenorhabditis elegans",
+      "url": "https://www.uniprot.org/taxonomy/6239",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1879010",
-      "name": "Bacillota bacterium",
-      "url": "https://www.uniprot.org/taxonomy/1879010",
+      "identifier": "1902",
+      "name": "Streptomyces coelicolor",
+      "url": "https://www.uniprot.org/taxonomy/1902",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "33750",
-      "name": "Hawaii calicivirus",
-      "url": "https://www.uniprot.org/taxonomy/33750",
+      "identifier": "1869227",
+      "name": "bacterium",
+      "url": "https://www.uniprot.org/taxonomy/1869227",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "55194",
-      "name": "Malassezia furfur",
-      "url": "https://www.uniprot.org/taxonomy/55194",
+      "identifier": "1423",
+      "name": "Bacillus subtilis",
+      "url": "https://www.uniprot.org/taxonomy/1423",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "45462",
-      "name": "Brevibacillus borstelensis",
-      "url": "https://www.uniprot.org/taxonomy/45462",
+      "identifier": "4751",
+      "name": "Fungi",
+      "url": "https://www.uniprot.org/taxonomy/4751",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2850",
-      "name": "Phaeodactylum tricornutum",
-      "url": "https://www.uniprot.org/taxonomy/2850",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "61305",
-      "name": "Nocardiopsis synnemataformans",
-      "url": "https://www.uniprot.org/taxonomy/61305",
+      "identifier": "1931",
+      "name": "Streptomyces sp.",
+      "url": "https://www.uniprot.org/taxonomy/1931",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -272,11 +272,15 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "timsTOF fleX"
+      "name": "LTQ Orbitrap Velos"
     },
     {
       "@type": "DefinedTerm",
-      "name": "TripleTOF 5600"
+      "name": "LTQ Orbitrap Elite"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "maXis"
     },
     {
       "@type": "DefinedTerm",
@@ -284,19 +288,15 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Orbitrap Astral"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Synapt MS"
-    },
-    {
-      "@type": "DefinedTerm",
-      "name": "Orbitrap Exploris 120"
+      "name": "Q Exactive HF-X"
     },
     {
       "@type": "DefinedTerm",
       "name": "Orbitrap Exploris 240"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "TripleTOF 5600"
     },
     {
       "@type": "DefinedTerm",

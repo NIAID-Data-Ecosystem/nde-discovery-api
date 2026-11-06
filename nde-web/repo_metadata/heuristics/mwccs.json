@@ -30,16 +30,16 @@
   "topicCategory": [
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_3305",
-      "name": "Public health and epidemiology",
-      "url": "http://edamontology.org/topic_3305",
+      "identifier": "topic_0804",
+      "name": "Infectious disease",
+      "url": "http://edamontology.org/topic_0804",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0804",
-      "name": "Infectious disease",
-      "url": "http://edamontology.org/topic_0804",
+      "identifier": "topic_3305",
+      "name": "Public health and epidemiology",
+      "url": "http://edamontology.org/topic_3305",
       "inDefinedTermSet": "EDAM"
     }
   ],
@@ -60,30 +60,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0004995",
-      "name": "cardiovascular disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004995",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005275",
-      "name": "lung disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005275",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0002025",
-      "name": "psychiatric disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0002025",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0002494",
       "name": "substance-related disorder",
       "url": "http://purl.obolibrary.org/obo/MONDO_0002494",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0004790",
+      "name": "fatty liver disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004790",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -95,9 +81,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021945",
-      "name": "hearing disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021945",
+      "identifier": "0004995",
+      "name": "cardiovascular disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004995",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -112,6 +98,20 @@
       "identifier": "0006858",
       "name": "mouth disorder",
       "url": "http://purl.obolibrary.org/obo/MONDO_0006858",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0002025",
+      "name": "psychiatric disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0002025",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0021945",
+      "name": "hearing disorder",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021945",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -158,10 +158,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "name": "Abbreviated Patient’s Assessment of Own Functioning Inventory (PAOFI)"
-    },
-    {
-      "@type": "DefinedTerm",
       "name": "Trials A&B"
     },
     {
@@ -170,29 +166,33 @@
     },
     {
       "@type": "DefinedTerm",
+      "name": "Abbreviated Patient’s Assessment of Own Functioning Inventory (PAOFI)"
+    },
+    {
+      "@type": "DefinedTerm",
       "name": "Echocardiogram examination (an ultrasound that takes pictures of the heart and records blood flow through the heart and attached blood vessels)"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Modified Medical Research Council Dyspnea scale"
+      "name": "Fibroscan with Controlled Attenuation Parameter (CAP): Ultrasound of the liver to estimate the amount of liver fibrosis (liver scarring) and steatosis (fat)."
     },
     {
       "@type": "DefinedTerm",
-      "name": "Spirometry"
+      "name": "WHO Composite International Diagnostic Interview (CIDI) as defined by American Psychiatric Association Diagnostic and Statistical Manual-5"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Photographs of the inside of the mouth:"
+      "name": "Digit Symbol Substitution Test (DSST)"
     },
     {
       "@type": "DefinedTerm",
-      "name": "Spatial working memory (SPWN)"
+      "name": "Flanker"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0200111",
-      "name": "data visualization",
-      "url": "http://purl.obolibrary.org/obo/OBI_0200111",
+      "identifier": "0000014",
+      "name": "color (quality)",
+      "url": "http://purl.obolibrary.org/obo/PATO_0000014",
       "inDefinedTermSet": "OBI"
     },
     {
