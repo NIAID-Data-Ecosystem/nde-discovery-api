@@ -2,16 +2,16 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 67130,
+      "minValue": 72464,
       "unitText": "DataCollection"
     }
   ],
-  "dateModified": "2026-01-28",
+  "dateModified": "2026-09-02",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "endDate": "2026-01-28"
+      "endDate": "2026-09-02"
     }
   ],
   "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -43,75 +43,155 @@
       "inDefinedTermSet": "EDAM"
     }
   ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10457",
+      "name": "Legionnaires' disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_10457",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2043",
+      "name": "hepatitis B",
+      "url": "http://purl.obolibrary.org/obo/DOID_2043",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11263",
+      "name": "chlamydia",
+      "url": "http://purl.obolibrary.org/obo/DOID_11263",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4411",
+      "name": "hepatitis E",
+      "url": "http://purl.obolibrary.org/obo/DOID_4411",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1883",
+      "name": "hepatitis C",
+      "url": "http://purl.obolibrary.org/obo/DOID_1883",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4483",
+      "name": "rhinitis",
+      "url": "http://purl.obolibrary.org/obo/DOID_4483",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1115",
+      "name": "sarcoma",
+      "url": "http://purl.obolibrary.org/obo/DOID_1115",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2237",
+      "name": "hepatitis",
+      "url": "http://purl.obolibrary.org/obo/DOID_2237",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8469",
+      "name": "influenza",
+      "url": "http://purl.obolibrary.org/obo/DOID_8469",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "640",
+      "name": "encephalomyelitis",
+      "url": "http://purl.obolibrary.org/obo/DOID_640",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
   "species": [
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:648251",
-      "name": "Bombyx mori densovirus 5 (isolate Shinshu)",
-      "url": "http://purl.uniprot.org/taxonomy/648251",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:1629404",
-      "name": "Denitromonas halophila",
-      "url": "http://purl.uniprot.org/taxonomy/1629404",
+      "identifier": "4530",
+      "name": "Oryza sativa",
+      "url": "https://www.uniprot.org/taxonomy/4530",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:1227364",
-      "name": "Candida verbasci",
-      "url": "http://purl.uniprot.org/taxonomy/1227364",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:74498",
-      "name": "Arthrobotrys conoides",
-      "url": "http://purl.uniprot.org/taxonomy/74498",
+      "identifier": "374723",
+      "name": "Phtheirospermum japonicum",
+      "url": "https://www.uniprot.org/taxonomy/374723",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:2817475",
-      "name": "Arthrobacter jiangjiafuii",
-      "url": "http://purl.uniprot.org/taxonomy/2817475",
+      "identifier": "269412",
+      "name": "Xiphorhynchus elegans",
+      "url": "https://www.uniprot.org/taxonomy/269412",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:1630162",
-      "name": "Bifidobacterium tissieri",
-      "url": "http://purl.uniprot.org/taxonomy/1630162",
+      "identifier": "48155",
+      "name": "Sylvia atricapilla",
+      "url": "https://www.uniprot.org/taxonomy/48155",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:1093672",
-      "name": "Pseudomonas phage JBD26",
-      "url": "http://purl.uniprot.org/taxonomy/1093672",
+      "identifier": "29031",
+      "name": "Phlebotomus papatasi",
+      "url": "https://www.uniprot.org/taxonomy/29031",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:2786424",
-      "name": "ssRNA phage SRR5466725_5",
-      "url": "http://purl.uniprot.org/taxonomy/2786424",
+      "identifier": "7092",
+      "name": "Bombyx mandarina",
+      "url": "https://www.uniprot.org/taxonomy/7092",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:460265",
-      "name": "Methylobacterium nodulans (strain LMG 21967 / CNCM I-2342 / ORS 2060)",
-      "url": "http://purl.uniprot.org/taxonomy/460265",
+      "identifier": "57060",
+      "name": "Eleutherodactylus coqui",
+      "url": "https://www.uniprot.org/taxonomy/57060",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "taxonomy:1209917",
-      "name": "Colletotrichum cuscutae",
-      "url": "http://purl.uniprot.org/taxonomy/1209917",
+      "identifier": "1572043",
+      "name": "Triplophysa tibetana",
+      "url": "https://www.uniprot.org/taxonomy/1572043",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -126,51 +206,30 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
-      "identifier": "587735",
-      "name": "Jeotgalibacillus terrae",
-      "url": "https://www.uniprot.org/taxonomy/587735",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "47760",
-      "name": "Streptomyces aurantiacus",
-      "url": "https://www.uniprot.org/taxonomy/47760",
+      "identifier": "573",
+      "name": "Klebsiella pneumoniae",
+      "url": "https://www.uniprot.org/taxonomy/573",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "416016",
-      "name": "Flavobacterium cucumis",
-      "url": "https://www.uniprot.org/taxonomy/416016",
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "508771",
-      "name": "Toxoplasma gondii (strain ATCC 50611 / Me49)",
-      "url": "https://www.uniprot.org/taxonomy/508771",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "105219",
-      "name": "Ralstonia mannitolilytica",
-      "url": "https://www.uniprot.org/taxonomy/105219",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "405555",
-      "name": "Haloactinospora alba",
-      "url": "https://www.uniprot.org/taxonomy/405555",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "64495",
-      "name": "Rhizopus oryzae",
-      "url": "https://www.uniprot.org/taxonomy/64495",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -182,16 +241,37 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2039234",
-      "name": "Halobacterium litoreum",
-      "url": "https://www.uniprot.org/taxonomy/2039234",
+      "identifier": "405555",
+      "name": "Haloactinospora alba",
+      "url": "https://www.uniprot.org/taxonomy/405555",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1391653",
-      "name": "Vulgatibacter incomptus",
-      "url": "https://www.uniprot.org/taxonomy/1391653",
+      "identifier": "287",
+      "name": "Pseudomonas aeruginosa",
+      "url": "https://www.uniprot.org/taxonomy/287",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "508771",
+      "name": "Toxoplasma gondii (strain ATCC 50611 / Me49)",
+      "url": "https://www.uniprot.org/taxonomy/508771",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "64495",
+      "name": "Rhizopus oryzae",
+      "url": "https://www.uniprot.org/taxonomy/64495",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "105219",
+      "name": "Ralstonia mannitolilytica",
+      "url": "https://www.uniprot.org/taxonomy/105219",
       "inDefinedTermSet": "UniProt"
     },
     {

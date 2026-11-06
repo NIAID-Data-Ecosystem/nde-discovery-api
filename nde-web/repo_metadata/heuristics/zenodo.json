@@ -2,88 +2,338 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 5070,
-      "unitText": "Thing"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 62265,
-      "unitText": "PresentationDigitalDocument"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 13174,
-      "unitText": "MediaObject"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 39029,
-      "unitText": "Chapter"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 1099696,
-      "unitText": "ImageObject"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 101413,
-      "unitText": "CreativeWork"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 5922,
-      "unitText": "TechArticle"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 29921,
-      "unitText": "Book"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 2441261,
-      "unitText": "ScholarlyArticle"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 161681,
-      "unitText": "ComputationalTool"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 425094,
+      "minValue": 686709,
       "unitText": "Dataset"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 32130,
-      "unitText": "Report"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 3178,
-      "unitText": "Review"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 26277,
-      "unitText": "Poster"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 573,
-      "unitText": "Collection"
     }
   ],
-  "dateModified": "2025-04-11",
+  "dateModified": "2026-10-31",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
-      "startDate": "0195-09-14",
-      "endDate": "2025-04-11"
+      "startDate": "1902-10-02",
+      "endDate": "2026-10-31"
     }
   ],
-  "license": "Varies"
+  "license": "Varies",
+  "topicCategory": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3855",
+      "name": "Environmental sciences",
+      "url": "http://edamontology.org/topic_3855",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0610",
+      "name": "Ecology",
+      "url": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3307",
+      "name": "Computational biology",
+      "url": "http://edamontology.org/topic_3307",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3679",
+      "name": "Animal study",
+      "url": "http://edamontology.org/topic_3679",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3070",
+      "name": "Biology",
+      "url": "http://edamontology.org/topic_3070",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_0091",
+      "name": "Bioinformatics",
+      "url": "http://edamontology.org/topic_0091",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3053",
+      "name": "Genetics",
+      "url": "http://edamontology.org/topic_3053",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3050",
+      "name": "Biodiversity",
+      "url": "http://edamontology.org/topic_3050",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3047",
+      "name": "Molecular biology",
+      "url": "http://edamontology.org/topic_3047",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "topic_3500",
+      "name": "Zoology",
+      "url": "http://edamontology.org/topic_3500",
+      "inDefinedTermSet": "EDAM"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Topic",
+      "url": "http://edamontology.org/topic_0003",
+      "inDefinedTermSet": "EDAM",
+      "identifier": "0003",
+      "termCode": "topic_0003"
+    }
+  ],
+  "healthCondition": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0080600",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/DOID_0080600",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1612",
+      "name": "breast cancer",
+      "url": "http://purl.obolibrary.org/obo/DOID_1612",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "6713",
+      "name": "cerebrovascular disease",
+      "url": "http://purl.obolibrary.org/obo/DOID_6713",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9351",
+      "name": "diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/DOID_9351",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "6688",
+      "name": "autoimmune lymphoproliferative syndrome",
+      "url": "http://purl.obolibrary.org/obo/DOID_6688",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9970",
+      "name": "obesity",
+      "url": "http://purl.obolibrary.org/obo/DOID_9970",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12365",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/DOID_12365",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10763",
+      "name": "hypertension",
+      "url": "http://purl.obolibrary.org/obo/DOID_10763",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9352",
+      "name": "type 2 diabetes mellitus",
+      "url": "http://purl.obolibrary.org/obo/DOID_9352",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8622",
+      "name": "measles",
+      "url": "http://purl.obolibrary.org/obo/DOID_8622",
+      "inDefinedTermSet": "DOID"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Other",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C17649",
+      "inDefinedTermSet": "NCIT",
+      "identifier": "C17649",
+      "termCode": "NCIT_C17649"
+    }
+  ],
+  "species": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3193",
+      "name": "Embryophyta",
+      "url": "https://www.uniprot.org/taxonomy/3193",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "583063",
+      "name": "Delos",
+      "url": "https://www.uniprot.org/taxonomy/583063",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10095",
+      "name": "Mus sp.",
+      "url": "https://www.uniprot.org/taxonomy/10095",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "8782",
+      "name": "Aves",
+      "url": "https://www.uniprot.org/taxonomy/8782",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "117565",
+      "name": "Myxini",
+      "url": "https://www.uniprot.org/taxonomy/117565",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9605",
+      "name": "Homo",
+      "url": "https://www.uniprot.org/taxonomy/9605",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "212257",
+      "name": "Panda",
+      "url": "https://www.uniprot.org/taxonomy/212257",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2775475",
+      "name": "Binary",
+      "url": "https://www.uniprot.org/taxonomy/2775475",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "5671",
+      "name": "Leishmania infantum",
+      "url": "https://www.uniprot.org/taxonomy/5671",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2",
+      "name": "Bacteria",
+      "url": "https://www.uniprot.org/taxonomy/2",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4751",
+      "name": "Fungi",
+      "url": "https://www.uniprot.org/taxonomy/4751",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2081351",
+      "name": "Drosophila",
+      "url": "https://www.uniprot.org/taxonomy/2081351",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "11709",
+      "name": "Human immunodeficiency virus 2",
+      "url": "https://www.uniprot.org/taxonomy/11709",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10239",
+      "name": "Viruses",
+      "url": "https://www.uniprot.org/taxonomy/10239",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "2845622",
+      "name": "Mivirus genovaense",
+      "url": "https://www.uniprot.org/taxonomy/2845622",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ]
 }

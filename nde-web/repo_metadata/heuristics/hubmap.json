@@ -2,22 +2,22 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 8963,
-      "unitText": "Dataset"
+      "minValue": 3587,
+      "unitText": "Sample"
     },
     {
       "@type": "QuantitativeValue",
-      "minValue": 4922,
-      "unitText": "Sample"
+      "minValue": 9947,
+      "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-05-29",
+  "dateModified": "2026-10-27",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2019-09-20",
-      "endDate": "2026-05-29"
+      "endDate": "2026-10-27"
     }
   ],
   "topicCategory": [
@@ -103,59 +103,37 @@
   "healthCondition": [
     {
       "@type": "DefinedTerm",
-      "identifier": "0005044",
-      "name": "hypertensive disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005044",
+      "name": "Hypertension"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Intracranial hemorrhage",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021178",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0004992",
-      "name": "cancer",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004992",
+      "name": "Cancer"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Coronary Artery Disease"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Blunt Injury",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021178",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005049",
-      "name": "obsolete intracranial hemorrhage",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005049",
+      "name": "Cardiovascular",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021178",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005010",
-      "name": "coronary artery disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005010",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "D014949",
-      "name": "Wounds, Nonpenetrating",
-      "url": "https://id.nlm.nih.gov/mesh/D014949.html",
-      "inDefinedTermSet": "MeSH"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0004995",
-      "name": "cardiovascular disorder",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004995",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0000745",
-      "name": "cardiac arrest",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0000745",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005148",
-      "name": "type 2 diabetes mellitus",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005148",
-      "inDefinedTermSet": "MONDO"
+      "name": "Cardiac Arrest"
     },
     {
       "@type": "DefinedTerm",
@@ -163,10 +141,13 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0018770",
-      "name": "Jeune syndrome",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0018770",
+      "name": "Gunshot wound",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0021178",
       "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Type 2 Diabetes Mellitus"
     },
     {
       "@type": "DefinedTerm",
@@ -183,22 +164,6 @@
       "identifier": "9606",
       "name": "Homo sapiens",
       "url": "https://www.uniprot.org/taxonomy/9606",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "1207117",
-      "name": "Anoxia",
-      "url": "https://www.uniprot.org/taxonomy/1207117",
-      "inDefinedTermSet": "UniProt"
-    }
-  ],
-  "infectiousAgent": [
-    {
-      "@type": "DefinedTerm",
-      "identifier": "1492155",
-      "name": "bacterium 57",
-      "url": "https://www.uniprot.org/taxonomy/1492155",
       "inDefinedTermSet": "UniProt"
     }
   ],

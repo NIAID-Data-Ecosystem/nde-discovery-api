@@ -9,7 +9,8 @@ in MongoDB (``nde_hub_src.<source_key>``) into repo-level fields:
 * ``dateModified`` — max across records
 * ``collectionSize`` — per ``@type`` count as a ``QuantitativeValue``
 * ``temporalCoverage`` — ``TemporalInterval`` from earliest
-  ``dateCreated``/``datePublished`` to latest ``dateModified``
+  ``dateCreated``/``datePublished`` to latest ``dateModified``, counting
+  only plausible dates (see ``_plausible_date``)
 * ``spatialCoverage`` — deduped ``AdministrativeArea`` array
 * ``topicCategory``, ``healthCondition``, ``species``,
   ``infectiousAgent``, ``measurementTechnique``, ``variableMeasured`` —
@@ -33,6 +34,7 @@ Env vars: MONGO_URL (default mongodb://su11:27017/),
 from __future__ import annotations
 
 import argparse
+import datetime
 import json
 import logging
 import os
@@ -55,6 +57,17 @@ DEFAULT_MONGO_DB = os.environ.get("MONGO_DB", "nde_hub_src")
 # Cap for the number of distinct values kept per aggregated field.
 # Protects against runaway arrays on pathological sources.
 MAX_TERMS = int(os.environ.get("HEURISTICS_MAX_TERMS", "5000"))
+
+# Record dates the date heuristics ignore. One upstream typo would otherwise
+# set a whole source's range: Zenodo has a dataset "published" in the year 206
+# and one "modified" in 2030. Dates before the floor, dates after the day the
+# script runs, and the placeholders sources emit for unknown dates are skipped.
+DATE_FLOOR = os.environ.get("HEURISTICS_DATE_FLOOR", "1900")
+# YYYY, YYYY-MM or YYYY-MM-DD, optionally followed by a time.
+ISO_DATE_REGEX = r"^\d{4}(-\d{2}(-\d{2})?)?([T ]|$)"
+# January 1 of 1900 or 1970 at any precision, e.g. Pathoplexus's "1900-01"
+# measles collection date and Figshare's "1970-01-01" 16S datasets.
+PLACEHOLDER_DATE_REGEX = r"^(1900|1970)(-01){0,2}$"
 
 DEFINED_TERM_FIELDS = [
     "topicCategory",
@@ -132,15 +145,51 @@ def agg_collection_size() -> list[dict[str, Any]]:
     ]
 
 
-def agg_dates() -> list[dict[str, Any]]:
-    """Min dateCreated/datePublished + max dateModified in one pass."""
+def _plausible_date(field: str, today: str) -> dict[str, Any]:
+    """``$field`` if it is an ISO date string from ``DATE_FLOOR`` through
+    ``today`` and not a placeholder, else null, which ``$min``/``$max``
+    skip. ``$and`` short-circuits, so the string operators only ever see
+    strings."""
+    value = f"${field}"
+    day = {"$substrCP": [value, 0, 10]}
+    is_iso = {"$regexMatch": {"input": value, "regex": ISO_DATE_REGEX}}
+    is_placeholder = {
+        "$regexMatch": {"input": day, "regex": PLACEHOLDER_DATE_REGEX}
+    }
+    return {
+        "$cond": [
+            {
+                "$and": [
+                    {"$eq": [{"$type": value}, "string"]},
+                    is_iso,
+                    {"$gte": [day, DATE_FLOOR]},
+                    {"$lte": [day, today]},
+                    {"$not": [is_placeholder]},
+                ]
+            },
+            value,
+            None,
+        ]
+    }
+
+
+def agg_dates(today: str | None = None) -> list[dict[str, Any]]:
+    """Min dateCreated/datePublished + max dateModified in one pass, over
+    plausible dates only. ``today`` defaults to the current date."""
+    today = today or datetime.date.today().isoformat()
     return [
         {
             "$group": {
                 "_id": None,
-                "min_dateCreated": {"$min": "$dateCreated"},
-                "min_datePublished": {"$min": "$datePublished"},
-                "max_dateModified": {"$max": "$dateModified"},
+                "min_dateCreated": {
+                    "$min": _plausible_date("dateCreated", today)
+                },
+                "min_datePublished": {
+                    "$min": _plausible_date("datePublished", today)
+                },
+                "max_dateModified": {
+                    "$max": _plausible_date("dateModified", today)
+                },
             }
         }
     ]

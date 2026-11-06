@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 32927,
+      "minValue": 34275,
       "unitText": "ComputationalTool"
     }
   ],
-  "dateModified": "2026-03-02",
+  "dateModified": "2026-10-01",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "2015-01-21",
-      "endDate": "2026-03-02"
+      "endDate": "2026-10-01"
     }
   ],
   "license": "Varies",
@@ -99,16 +99,9 @@
   "healthCondition": [
     {
       "@type": "DefinedTerm",
-      "identifier": "0100096",
-      "name": "COVID-19",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "identifier": "0004992",
+      "name": "cancer",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004992",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -120,23 +113,37 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0021100",
-      "name": "breast neoplasm",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0021100",
+      "identifier": "0100096",
+      "name": "COVID-19",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0018076",
-      "name": "tuberculosis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0018076",
+      "identifier": "C171532",
+      "name": "Severe Acute Respiratory Syndrome Coronavirus 2 Measurement",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C171532",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0019065",
+      "name": "amyloidosis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0019065",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0000001",
-      "name": "disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0000001",
+      "identifier": "D035583",
+      "name": "Rare Diseases",
+      "url": "https://id.nlm.nih.gov/mesh/D035583.html",
+      "inDefinedTermSet": "MeSH"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005109",
+      "name": "HIV infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005109",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -148,24 +155,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C4878",
-      "name": "Lung Carcinoma",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C4878",
+      "identifier": "0005091",
+      "name": "severe acute respiratory syndrome",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005091",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C150481",
+      "name": "Bitter",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C150481",
       "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0005136",
-      "name": "malaria",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "0004975",
-      "name": "Alzheimer disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0004975",
-      "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
@@ -180,52 +180,152 @@
     {
       "@type": "DefinedTerm",
       "identifier": "9606",
-      "name": "human"
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
       "identifier": "10090",
-      "name": "mouse"
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9606",
-      "name": "Human"
+      "identifier": "4530",
+      "name": "Oryza sativa",
+      "url": "https://www.uniprot.org/taxonomy/4530",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2873985",
-      "name": "vector"
+      "identifier": "3702",
+      "name": "Arabidopsis thaliana",
+      "url": "https://www.uniprot.org/taxonomy/3702",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2775475",
-      "name": "binary"
+      "identifier": "7955",
+      "name": "Danio rerio",
+      "url": "https://www.uniprot.org/taxonomy/7955",
+      "inDefinedTermSet": "UniProt"
     },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "4081",
+      "name": "Solanum lycopersicum",
+      "url": "https://www.uniprot.org/taxonomy/4081",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7227",
+      "name": "Drosophila melanogaster",
+      "url": "https://www.uniprot.org/taxonomy/7227",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7165",
+      "name": "Anopheles gambiae",
+      "url": "https://www.uniprot.org/taxonomy/7165",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "3847",
+      "name": "Glycine max",
+      "url": "https://www.uniprot.org/taxonomy/3847",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "All",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "NCBITaxon",
+      "identifier": "1",
+      "termCode": "NCBITaxon_1"
+    }
+  ],
+  "infectiousAgent": [
     {
       "@type": "DefinedTerm",
       "identifier": "2697049",
-      "name": "SARS-CoV-2"
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "3193",
-      "name": "plants"
+      "identifier": "562",
+      "name": "Escherichia coli",
+      "url": "https://www.uniprot.org/taxonomy/562",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "1869227",
-      "name": "bacteria"
+      "identifier": "1773",
+      "name": "Mycobacterium tuberculosis",
+      "url": "https://www.uniprot.org/taxonomy/1773",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "10239",
-      "name": "viruses"
+      "identifier": "4932",
+      "name": "Saccharomyces cerevisiae",
+      "url": "https://www.uniprot.org/taxonomy/4932",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "408169",
-      "name": "metagenomes"
+      "identifier": "12721",
+      "name": "Human immunodeficiency virus",
+      "url": "https://www.uniprot.org/taxonomy/12721",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "6239",
+      "name": "Caenorhabditis elegans",
+      "url": "https://www.uniprot.org/taxonomy/6239",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "44689",
+      "name": "Dictyostelium discoideum",
+      "url": "https://www.uniprot.org/taxonomy/44689",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1570291",
+      "name": "Ebola virus",
+      "url": "https://www.uniprot.org/taxonomy/1570291",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "1423",
+      "name": "Bacillus subtilis",
+      "url": "https://www.uniprot.org/taxonomy/1423",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "694009",
+      "name": "Severe acute respiratory syndrome coronavirus",
+      "url": "https://www.uniprot.org/taxonomy/694009",
+      "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",

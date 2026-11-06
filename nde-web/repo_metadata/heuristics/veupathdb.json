@@ -2,17 +2,17 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 3225,
+      "minValue": 2592,
       "unitText": "Dataset"
     }
   ],
-  "dateModified": "2024-05-07",
+  "dateModified": "2026-08-19",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "1998-10-15",
-      "endDate": "2024-05-07"
+      "endDate": "2026-08-19"
     }
   ],
   "healthCondition": [
@@ -25,66 +25,66 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "identifier": "0005502",
+      "name": "dengue disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005502",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0011989",
-      "name": "leishmaniasis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0011989",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "12365",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/DOID_12365",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0001444",
-      "name": "Chagas disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0001444",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "C189188",
-      "name": "Infected with SARS-CoV-2",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
+      "identifier": "C77163",
+      "name": "Candida",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C77163",
       "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0001103",
-      "name": "giardiasis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0001103",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "0111670",
+      "name": "primary hyperoxaluria type 1",
+      "url": "http://purl.obolibrary.org/obo/DOID_0111670",
+      "inDefinedTermSet": "DOID"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0019956",
-      "name": "encephalitis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0019956",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "C3890",
+      "name": "Hypoxia",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C3890",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "D007239",
-      "name": "Infections",
-      "url": "https://id.nlm.nih.gov/mesh/D007239.html",
+      "identifier": "C123422",
+      "name": "Naegleria",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C123422",
+      "inDefinedTermSet": "NCIT"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "D003560",
+      "name": "Cysts",
+      "url": "https://id.nlm.nih.gov/mesh/D003560.html",
       "inDefinedTermSet": "MeSH"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0010691",
-      "name": "Norrie disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0010691",
+      "identifier": "0005446",
+      "name": "cutaneous leishmaniasis",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005446",
       "inDefinedTermSet": "MONDO"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0005661",
-      "name": "babesiosis",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005661",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "C38008",
+      "name": "Post",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C38008",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -105,9 +105,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7165",
-      "name": "Anopheles gambiae",
-      "url": "https://www.uniprot.org/taxonomy/7165",
+      "identifier": "9606",
+      "name": "Homo sapiens",
+      "url": "https://www.uniprot.org/taxonomy/9606",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -119,9 +119,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7160",
-      "name": "Aedes albopictus",
-      "url": "https://www.uniprot.org/taxonomy/7160",
+      "identifier": "10090",
+      "name": "Mus musculus",
+      "url": "https://www.uniprot.org/taxonomy/10090",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7165",
+      "name": "Anopheles gambiae",
+      "url": "https://www.uniprot.org/taxonomy/7165",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -133,9 +140,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7173",
-      "name": "Anopheles arabiensis",
-      "url": "https://www.uniprot.org/taxonomy/7173",
+      "identifier": "7160",
+      "name": "Aedes albopictus",
+      "url": "https://www.uniprot.org/taxonomy/7160",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7394",
+      "name": "Glossina morsitans",
+      "url": "https://www.uniprot.org/taxonomy/7394",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -147,23 +161,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "62324",
-      "name": "Anopheles funestus",
-      "url": "https://www.uniprot.org/taxonomy/62324",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "7176",
-      "name": "Culex quinquefasciatus",
-      "url": "https://www.uniprot.org/taxonomy/7176",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "6945",
-      "name": "Ixodes scapularis",
-      "url": "https://www.uniprot.org/taxonomy/6945",
+      "identifier": "7370",
+      "name": "Musca domestica",
+      "url": "https://www.uniprot.org/taxonomy/7370",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -185,9 +185,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2971083",
-      "name": "Vector NC",
-      "url": "https://www.uniprot.org/taxonomy/2971083",
+      "identifier": "5833",
+      "name": "Plasmodium falciparum",
+      "url": "https://www.uniprot.org/taxonomy/5833",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -220,9 +220,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "5811",
-      "name": "Toxoplasma gondii",
-      "url": "https://www.uniprot.org/taxonomy/5811",
+      "identifier": "5855",
+      "name": "Plasmodium vivax",
+      "url": "https://www.uniprot.org/taxonomy/5855",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -234,16 +234,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "237561",
-      "name": "Candida albicans (strain SC5314 / ATCC MYA-2876)",
-      "url": "https://www.uniprot.org/taxonomy/237561",
+      "identifier": "941442",
+      "name": "Giardia intestinalis assemblage A",
+      "url": "https://www.uniprot.org/taxonomy/941442",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "235443",
-      "name": "Cryptococcus neoformans var. grubii serotype A (strain H99 / ATCC 208821 / CBS 10515 / FGSC 9487)",
-      "url": "https://www.uniprot.org/taxonomy/235443",
+      "identifier": "5207",
+      "name": "Cryptococcus neoformans",
+      "url": "https://www.uniprot.org/taxonomy/5207",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -265,13 +265,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C19142",
-      "name": "Population Biology",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C19142",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0622",
       "name": "Genomics",
       "url": "http://edamontology.org/topic_0622",
@@ -279,17 +272,17 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C70700",
-      "name": "Biospecimen Collection Method",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C70700",
-      "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0000642",
       "name": "protein expression assay",
       "url": "http://purl.obolibrary.org/obo/MMO_0000642",
       "inDefinedTermSet": "MMO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C70700",
+      "name": "Biospecimen Collection Method",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C70700",
+      "inDefinedTermSet": "NCIT"
     },
     {
       "@type": "DefinedTerm",
@@ -312,6 +305,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "0013017",
+      "name": "functional phenotypic",
+      "url": "http://www.bioassayontology.org/bao#BAO_0013017",
+      "inDefinedTermSet": "BAO"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "0000011",
       "name": "planned process",
       "url": "http://purl.obolibrary.org/obo/OBI_0000011",
@@ -319,10 +319,7 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0600047",
-      "name": "sequencing assay",
-      "url": "http://purl.obolibrary.org/obo/OBI_0600047",
-      "inDefinedTermSet": "OBI"
+      "name": "RFLP"
     },
     {
       "@type": "DefinedTerm",

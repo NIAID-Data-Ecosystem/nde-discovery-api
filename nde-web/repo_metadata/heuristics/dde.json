@@ -2,27 +2,27 @@
   "collectionSize": [
     {
       "@type": "QuantitativeValue",
-      "minValue": 43,
+      "minValue": 575,
+      "unitText": "Dataset"
+    },
+    {
+      "@type": "QuantitativeValue",
+      "minValue": 102,
       "unitText": "ResourceCatalog"
     },
     {
       "@type": "QuantitativeValue",
       "minValue": 50,
       "unitText": "ComputationalTool"
-    },
-    {
-      "@type": "QuantitativeValue",
-      "minValue": 575,
-      "unitText": "Dataset"
     }
   ],
-  "dateModified": "2026-05-15",
+  "dateModified": "2026-09-24",
   "temporalCoverage": [
     {
       "@type": "TemporalInterval",
       "temporalType": "collection",
       "startDate": "1988-12-31",
-      "endDate": "2026-05-15"
+      "endDate": "2026-09-24"
     }
   ],
   "license": "Varies",
@@ -30,83 +30,7 @@
   "spatialCoverage": [
     {
       "@type": "AdministrativeArea",
-      "name": "Botswana"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "São José do Rio Preto, SP, Brazil"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Spain"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Kenya"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Sweden"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Peru"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Thailand"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Cebu City, Philippines"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Hospital de Base and Care Units in São José do Rio Preto"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Moldova"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "São Paulo state"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Belo Horizonte"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Benin"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Seattle"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Duluth"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Baltimore"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Romania"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Democratic Republic of Congo"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Nigeria"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Hospital de Base in São José do Rio Preto"
+      "name": "Perú"
     },
     {
       "@type": "AdministrativeArea",
@@ -114,11 +38,27 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Zimbabwe"
+      "name": "Belarus"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Guinea"
+      "name": "Benin"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Canada"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "South Africa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Rhode Island"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Jordan"
     },
     {
       "@type": "AdministrativeArea",
@@ -126,11 +66,27 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Cambodia"
+      "name": "Uganda"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Kyrgyzstan"
+      "name": "Sweden"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Belo Horizonte"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cebu City, Philippines"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "São José do Rio Preto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Seattle"
     },
     {
       "@type": "AdministrativeArea",
@@ -138,11 +94,23 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Azerbaijan"
+      "name": "Tanzania"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Mexico"
+      "name": "Spain"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Liberia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "São Paulo state"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Côte d'Ivoire"
     },
     {
       "@type": "AdministrativeArea",
@@ -150,27 +118,15 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "United Kingdom"
+      "name": "São Paulo "
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Kazakhstan"
+      "name": "Michigan"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Brazil"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Malawi"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "MN"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Belarus"
+      "name": "Argentina"
     },
     {
       "@type": "AdministrativeArea",
@@ -182,59 +138,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Florida"
+      "name": "Peru"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Michigan"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "São Paulo"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Togo"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Philippines"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Liberia"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Haiti"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Argentina"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Vietnam"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Rhode Island"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Europe"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "São Paulo "
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Washington"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Republic of Congo"
+      "name": "Hospital de Base in São José do Rio Preto"
     },
     {
       "@type": "AdministrativeArea",
@@ -242,31 +150,11 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Neotropics"
+      "name": "Philippines"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Hospital de Base of São José do Rio Preto"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Uganda"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Canada"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Ghana"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Senegal"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "United States of America"
+      "name": "Nigeria"
     },
     {
       "@type": "AdministrativeArea",
@@ -274,27 +162,59 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Georgia"
+      "name": "Washington"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "South Africa"
+      "name": "São Paulo"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Jordan"
+      "name": "Thailand"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Perú"
+      "name": "Azerbaijan"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Minas Gerais"
+      "name": "United States of America"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Tanzania"
+      "name": "Europe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Florida"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hospital de Base of São José do Rio Preto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Romania"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Senegal"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zimbabwe"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "MN"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Neotropics"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Baltimore"
     },
     {
       "@type": "AdministrativeArea",
@@ -302,11 +222,91 @@
     },
     {
       "@type": "AdministrativeArea",
-      "name": "Côte d'Ivoire"
+      "name": "Guinea"
     },
     {
       "@type": "AdministrativeArea",
-      "name": "São José do Rio Preto"
+      "name": "Cambodia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Georgia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Duluth"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Haiti"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Botswana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Vietnam"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Democratic Republic of Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Mexico"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kyrgyzstan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Malawi"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "United Kingdom"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Moldova"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ghana"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Brazil"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hospital de Base and Care Units in São José do Rio Preto"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "São José do Rio Preto, SP, Brazil"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kazakhstan"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Kenya"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Republic of Congo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Togo"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Minas Gerais"
     }
   ],
   "topicCategory": [
@@ -361,16 +361,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_2229",
-      "name": "Cell biology",
-      "url": "http://edamontology.org/topic_2229",
+      "identifier": "topic_0091",
+      "name": "Bioinformatics",
+      "url": "http://edamontology.org/topic_0091",
       "inDefinedTermSet": "EDAM"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "topic_0091",
-      "name": "Bioinformatics",
-      "url": "http://edamontology.org/topic_0091",
+      "identifier": "topic_2229",
+      "name": "Cell biology",
+      "url": "http://edamontology.org/topic_2229",
       "inDefinedTermSet": "EDAM"
     },
     {
@@ -392,13 +392,6 @@
   "healthCondition": [
     {
       "@type": "DefinedTerm",
-      "identifier": "0005550",
-      "name": "infectious disease",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
-      "inDefinedTermSet": "MONDO"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "0100096",
       "name": "COVID-19",
       "url": "http://purl.obolibrary.org/obo/MONDO_0100096",
@@ -406,9 +399,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C189188",
-      "name": "Infected with SARS-CoV-2",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
+      "identifier": "0005550",
+      "name": "infectious disease",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005550",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "C171532",
+      "name": "Severe Acute Respiratory Syndrome Coronavirus 2 Measurement",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C171532",
       "inDefinedTermSet": "NCIT"
     },
     {
@@ -420,17 +420,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "C171532",
-      "name": "Severe Acute Respiratory Syndrome Coronavirus 2 Measurement",
-      "url": "http://purl.obolibrary.org/obo/NCIT_C171532",
+      "identifier": "C189188",
+      "name": "Infected with SARS-CoV-2",
+      "url": "http://purl.obolibrary.org/obo/NCIT_C189188",
       "inDefinedTermSet": "NCIT"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "D003643",
-      "name": "Death",
-      "url": "https://id.nlm.nih.gov/mesh/D003643.html",
-      "inDefinedTermSet": "MeSH"
     },
     {
       "@type": "DefinedTerm",
@@ -441,10 +434,10 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "0020731",
-      "name": "arbovirus infection",
-      "url": "http://purl.obolibrary.org/obo/MONDO_0020731",
-      "inDefinedTermSet": "MONDO"
+      "identifier": "D003643",
+      "name": "Death",
+      "url": "https://id.nlm.nih.gov/mesh/D003643.html",
+      "inDefinedTermSet": "MeSH"
     },
     {
       "@type": "DefinedTerm",
@@ -458,6 +451,13 @@
       "identifier": "0005812",
       "name": "influenza",
       "url": "http://purl.obolibrary.org/obo/MONDO_0005812",
+      "inDefinedTermSet": "MONDO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "0005136",
+      "name": "malaria",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005136",
       "inDefinedTermSet": "MONDO"
     },
     {
@@ -486,16 +486,43 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "13613",
-      "name": "Microbiota",
-      "url": "https://www.uniprot.org/taxonomy/13613",
+      "name": "root",
+      "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
+      "inDefinedTermSet": "ADO"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10026",
+      "name": "Cricetinae",
+      "url": "https://www.uniprot.org/taxonomy/10026",
       "inDefinedTermSet": "UniProt"
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "9669",
-      "name": "Mustela putorius furo",
-      "url": "https://www.uniprot.org/taxonomy/9669",
+      "identifier": "9913",
+      "name": "Bos taurus",
+      "url": "https://www.uniprot.org/taxonomy/9913",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "7160",
+      "name": "Aedes albopictus",
+      "url": "https://www.uniprot.org/taxonomy/7160",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "10036",
+      "name": "Mesocricetus auratus",
+      "url": "https://www.uniprot.org/taxonomy/10036",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "9031",
+      "name": "Gallus gallus",
+      "url": "https://www.uniprot.org/taxonomy/9031",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -514,34 +541,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "7955",
-      "name": "Danio rerio",
-      "url": "https://www.uniprot.org/taxonomy/7955",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "9031",
-      "name": "Gallus gallus",
-      "url": "https://www.uniprot.org/taxonomy/9031",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "9615",
-      "name": "Canis lupus familiaris",
-      "url": "https://www.uniprot.org/taxonomy/9615",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "9823",
-      "name": "Sus scrofa",
-      "url": "https://www.uniprot.org/taxonomy/9823",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "name": "All",
       "url": "http://purl.obolibrary.org/obo/NCBITaxon_1",
       "inDefinedTermSet": "NCBITaxon",
@@ -552,9 +551,9 @@
   "infectiousAgent": [
     {
       "@type": "DefinedTerm",
-      "identifier": "1280",
-      "name": "Staphylococcus aureus",
-      "url": "https://www.uniprot.org/taxonomy/1280",
+      "identifier": "2697049",
+      "name": "Severe acute respiratory syndrome coronavirus 2",
+      "url": "https://www.uniprot.org/taxonomy/2697049",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -566,6 +565,13 @@
     },
     {
       "@type": "DefinedTerm",
+      "identifier": "1280",
+      "name": "Staphylococcus aureus",
+      "url": "https://www.uniprot.org/taxonomy/1280",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "1335626",
       "name": "Middle East respiratory syndrome-related coronavirus",
       "url": "https://www.uniprot.org/taxonomy/1335626",
@@ -573,9 +579,16 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "2697049",
-      "name": "Severe acute respiratory syndrome coronavirus 2",
-      "url": "https://www.uniprot.org/taxonomy/2697049",
+      "identifier": "1570291",
+      "name": "Ebola virus",
+      "url": "https://www.uniprot.org/taxonomy/1570291",
+      "inDefinedTermSet": "UniProt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "12637",
+      "name": "Dengue virus",
+      "url": "https://www.uniprot.org/taxonomy/12637",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -594,20 +607,6 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "102793",
-      "name": "Influenza A virus H5N1",
-      "url": "https://www.uniprot.org/taxonomy/102793",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "1570291",
-      "name": "Ebola virus",
-      "url": "https://www.uniprot.org/taxonomy/1570291",
-      "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
       "identifier": "11082",
       "name": "West Nile virus",
       "url": "https://www.uniprot.org/taxonomy/11082",
@@ -615,9 +614,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "470",
-      "name": "Acinetobacter baumannii",
-      "url": "https://www.uniprot.org/taxonomy/470",
+      "identifier": "2845822",
+      "name": "Aquabacterium sp. CECT 9606",
+      "url": "https://www.uniprot.org/taxonomy/2845822",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -688,17 +687,16 @@
     },
     {
       "@type": "DefinedTerm",
+      "name": "planned process",
+      "url": "https://ontobee.org/ontology/OBI?iri=http://purl.obolibrary.org/obo/OBI_0000011",
+      "inDefinedTermSet": "ADDICTO"
+    },
+    {
+      "@type": "DefinedTerm",
       "identifier": "0002117",
       "name": "whole genome sequencing assay",
       "url": "http://purl.obolibrary.org/obo/OBI_0002117",
       "inDefinedTermSet": "OBI"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "http://id.nlm.nih.gov/mesh/D001431",
-      "name": "Bacteriological Techniques",
-      "url": "http://id.nlm.nih.gov/mesh/D001431",
-      "inDefinedTermSet": "MESH"
     },
     {
       "@type": "DefinedTerm",

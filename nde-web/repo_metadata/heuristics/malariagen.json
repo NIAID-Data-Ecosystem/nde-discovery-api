@@ -64,23 +64,9 @@
       "name": "Anopheles",
       "url": "https://www.uniprot.org/taxonomy/44482",
       "inDefinedTermSet": "UniProt"
-    },
-    {
-      "@type": "DefinedTerm",
-      "identifier": "491846",
-      "name": "Danaea vivax",
-      "url": "https://www.uniprot.org/taxonomy/491846",
-      "inDefinedTermSet": "UniProt"
     }
   ],
   "infectiousAgent": [
-    {
-      "@type": "DefinedTerm",
-      "identifier": "2971083",
-      "name": "Vector NC",
-      "url": "https://www.uniprot.org/taxonomy/2971083",
-      "inDefinedTermSet": "UniProt"
-    },
     {
       "@type": "DefinedTerm",
       "identifier": "5833",
@@ -90,9 +76,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "357002",
-      "name": "Jola",
-      "url": "https://www.uniprot.org/taxonomy/357002",
+      "identifier": "5855",
+      "name": "Plasmodium vivax",
+      "url": "https://www.uniprot.org/taxonomy/5855",
       "inDefinedTermSet": "UniProt"
     },
     {
@@ -104,9 +90,9 @@
     },
     {
       "@type": "DefinedTerm",
-      "identifier": "5855",
-      "name": "Plasmodium vivax",
-      "url": "https://www.uniprot.org/taxonomy/5855",
+      "identifier": "357002",
+      "name": "Jola",
+      "url": "https://www.uniprot.org/taxonomy/357002",
       "inDefinedTermSet": "UniProt"
     }
   ]
