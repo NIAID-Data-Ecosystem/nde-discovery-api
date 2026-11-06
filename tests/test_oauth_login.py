@@ -152,7 +152,6 @@ def _oidc_handler(handler_cls, next_url="/account", state_cookie=None):
                 OKTA_CLIENT_ID="okta-client-id",
                 OKTA_CLIENT_SECRET="okta-client-secret",
                 OKTA_ISSUER="https://loginstg.nih.gov/oauth2/default",
-                OKTA_IDP_PROVIDERS={"0oa-google-idp": "google", "0oa-orcid-idp": "orcid"},
                 WEB_HOST="https://api.data.niaid.nih.gov",
             )
         )
@@ -671,6 +670,7 @@ def _okta_id_token(**overrides):
         "exp": time.time() + 300,
         "nonce": "expected-nonce",
         "idp": "0oa-google-idp",
+        "source": "Google",
     }
     claims.update(overrides)
     return _jwt(claims)
@@ -808,7 +808,7 @@ def test_okta_login_sets_cookie_after_checking_the_id_token():
     assert payload == {
         "username": "00u-okta-user",
         "oauth_provider": "Okta",
-        "idp": "0oa-google-idp",
+        "idp": "google",
         "_identifier": "google_alice@example.org",
         "name": "Alice Example",
         "email": "alice@example.org",
@@ -823,18 +823,48 @@ def test_okta_login_sets_cookie_after_checking_the_id_token():
     assert ensured == [payload]
 
 
-def test_okta_login_through_an_unlisted_provider_has_no_identifier():
+@pytest.mark.parametrize(
+    ("id_token_source", "userinfo_source", "idp", "identifier"),
+    [
+        ("NIH", None, "nih", "nih_alice@nih.gov"),
+        pytest.param(
+            None, "Microsoft", "microsoft", "microsoft_alice@nih.gov", id="userinfo-only"
+        ),
+    ],
+)
+def test_okta_login_names_the_provider_from_nih_source_claim(
+    id_token_source, userinfo_source, idp, identifier
+):
+    userinfo = {"sub": "00u-okta-user", "name": "Alice Example", "email": "alice@nih.gov"}
+    if userinfo_source:
+        userinfo["source"] = userinfo_source
     handler, _redirects, _cleared, secure_cookies, ensured = _okta_callback_handler(
-        _okta_id_token(idp="0oa-hhs-idp"),
-        {"sub": "00u-okta-user", "name": "Alice Example", "email": "alice@nih.gov"},
+        _okta_id_token(source=id_token_source), userinfo
     )
 
     asyncio.run(handlers.OktaLoginHandler.get(handler))
 
     payload = json.loads(secure_cookies[0][0][1])
+    assert payload["idp"] == idp
+    assert payload["_identifier"] == identifier
+    assert ensured == [payload]
+
+
+def test_okta_login_without_a_source_claim_has_no_provider(caplog):
+    handler, _redirects, _cleared, secure_cookies, ensured = _okta_callback_handler(
+        _okta_id_token(source=None),
+        {"sub": "00u-okta-user", "name": "Alice Example", "email": "alice@nih.gov"},
+    )
+
+    with caplog.at_level(logging.WARNING):
+        asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    payload = json.loads(secure_cookies[0][0][1])
     assert payload["email"] == "alice@nih.gov"
+    assert "idp" not in payload
     assert "_identifier" not in payload
     assert ensured == [payload]
+    assert "NIH Login sent no source claim (idp '0oa-google-idp')" in caplog.text
 
 
 @pytest.mark.parametrize(
@@ -945,7 +975,7 @@ def test_orcid_id_is_read_only_from_nih_orcid_addresses(email, orcid_id):
 def _okta_orcid_callback_handler(public_emails):
     """An NIH Login callback for an ORCID user; `public_emails` may be an exception."""
     handler, redirects, _cleared, secure_cookies, ensured = _okta_callback_handler(
-        _okta_id_token(idp="0oa-orcid-idp"),
+        _okta_id_token(idp="0oa-orcid-idp", source="ORCiD"),
         {
             "sub": "00u-okta-user",
             "name": "Josiah Carberry",
@@ -986,7 +1016,7 @@ def test_okta_orcid_login_uses_public_orcid_emails_instead_of_nih_address():
     assert payload == {
         "username": "00u-okta-user",
         "oauth_provider": "Okta",
-        "idp": "0oa-orcid-idp",
+        "idp": "orcid",
         "orcid": ORCID_SAMPLE_ID,
         "_identifier": f"orcid_{ORCID_SAMPLE_ID}",
         "name": "Josiah Carberry",
@@ -1033,7 +1063,7 @@ def test_okta_orcid_login_still_signs_in_when_orcid_is_unreachable(caplog):
     assert payload == {
         "username": "00u-okta-user",
         "oauth_provider": "Okta",
-        "idp": "0oa-orcid-idp",
+        "idp": "orcid",
         "_identifier": f"orcid_{ORCID_SAMPLE_ID}",
         "name": "Josiah Carberry",
     }
@@ -1260,7 +1290,7 @@ def _first_sign_in_handler(handler_cls, client):
 NIH_LOGIN_GOOGLE_USER = {
     "username": "00u-okta-user",
     "oauth_provider": "Okta",
-    "idp": "0oa-google-idp",
+    "idp": "google",
     "_identifier": "google_alice@example.org",
     "name": "Alice Example",
     "email": "alice@example.org",

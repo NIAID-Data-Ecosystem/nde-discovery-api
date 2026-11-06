@@ -142,13 +142,16 @@ def test_profile_keeps_the_nih_login_provider():
     user = {
         "username": "00u-okta-user",
         "oauth_provider": "Okta",
-        "idp": "0oa-google-idp",
+        "idp": "google",
     }
 
-    assert user_data._seed_user_doc(user)["idp"] == "0oa-google-idp"
-    # Profiles made before idp was saved pick it up on the next login.
+    assert user_data._seed_user_doc(user)["idp"] == "google"
+    # Profiles made before idp was saved pick it up on the next login, and ones
+    # that saved NIH's raw IdP ID get the provider's name.
     existing = {"username": "00u-okta-user", "oauth_provider": "Okta"}
-    assert user_data._oauth_profile_updates(existing, user)["idp"] == "0oa-google-idp"
+    assert user_data._oauth_profile_updates(existing, user)["idp"] == "google"
+    existing["idp"] = "0oa1l0tjhgKL3YyBI0j7"
+    assert user_data._oauth_profile_updates(existing, user)["idp"] == "google"
 
 
 @pytest.mark.parametrize(

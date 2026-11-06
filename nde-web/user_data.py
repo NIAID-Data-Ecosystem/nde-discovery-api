@@ -48,7 +48,8 @@ OAUTH_PROFILE_FIELDS = (
     "emails",
     "avatar_url",
     "organization",
-    # NIH Login only: NIH's ID for the provider the user signed in through.
+    # NIH Login only: the provider NIH signed the user in through (orcid,
+    # google, microsoft or nih), from NIH's `source` claim.
     "idp",
     # NIH Login only: the ORCID iD of a user who signed in through ORCID.
     "orcid",
