@@ -1043,24 +1043,24 @@ class OktaLoginHandler(OpenIDConnectLoginHandler):
         # OIDC Core 5.3.2: userinfo must describe the user the ID token names.
         if user.get("sub") != claims["sub"]:
             raise ValueError("NIH Login userinfo subject does not match the ID token")
-        # Only the ID token says which provider (Google, ORCID, ...) NIH used.
-        if claims.get("idp"):
-            user["idp"] = claims["idp"]
+        # NIH's `source` claim names the provider it used (ORCiD, Google,
+        # Microsoft or NIH), with the same values on staging and production.
+        source = claims.get("source") or user.get("source")
+        if source:
+            user["idp"] = str(source).strip().lower()
+        else:
+            logging.warning(
+                "NIH Login sent no source claim (idp %r)", claims.get("idp")
+            )
         orcid_id = _orcid_id_from_nih_email(user.get("email"))
         if orcid_id:
             user[IDENTIFIER_FIELD] = _profile_identifier("orcid", orcid_id=orcid_id)
             await self._use_public_orcid_emails(user, orcid_id)
         else:
-            provider = self._idp_provider(user.get("idp"))
-            identifier = _profile_identifier(provider, user.get("email"))
+            identifier = _profile_identifier(user.get("idp"), user.get("email"))
             if identifier:
                 user[IDENTIFIER_FIELD] = identifier
         return user
-
-    def _idp_provider(self, idp):
-        """Return our name for the provider behind an NIH Login idp, if it's listed."""
-        providers = getattr(self.biothings.config, "OKTA_IDP_PROVIDERS", None) or {}
-        return providers.get(idp)
 
     async def _new_user_profile(self, es, index, user_dict):
         """Start a first NIH Login profile from the user's old profile, if any.
