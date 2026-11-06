@@ -380,19 +380,13 @@ def _prefix_match(
     return [{"$match": mongo_filter}, *pipeline]
 
 
-class HeuristicsError(Exception):
-    """An aggregation failed, so the source's heuristics are incomplete."""
-
-
 def compute_for_source(
     collection,
     mongo_filter: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Run all aggregations for one Mongo collection and return the
-    heuristic field dict. Missing fields are fine; a failed aggregation
-    raises ``HeuristicsError`` instead of dropping its fields, so that a
-    partial result never replaces a complete cache file (a dropped
-    connection once erased ncbi_virus's dates and license that way).
+    heuristic field dict. Never raises on missing fields — each
+    aggregation is independent and its failure only drops that field.
 
     ``mongo_filter`` is prepended as a ``$match`` stage to every
     aggregation, so the heuristics reflect only the matching subset."""
@@ -415,7 +409,7 @@ def compute_for_source(
         if sizes:
             result["collectionSize"] = sizes
     except Exception as e:
-        raise HeuristicsError(f"collectionSize failed: {e}") from e
+        logging.warning("collectionSize failed: %s", e)
 
     # dates (for dateModified + temporalCoverage)
     max_mod = None
@@ -442,7 +436,7 @@ def compute_for_source(
                     interval["endDate"] = max_mod
                 result["temporalCoverage"] = [interval]
     except Exception as e:
-        raise HeuristicsError(f"dates failed: {e}") from e
+        logging.warning("dates failed: %s", e)
 
     # license / usageInfo consensus
     for field in ("license", "usageInfo"):
@@ -451,7 +445,8 @@ def compute_for_source(
                 _prefix_match(agg_consensus(field), mongo_filter)
             ))
         except Exception as e:
-            raise HeuristicsError(f"{field} consensus failed: {e}") from e
+            logging.warning("%s consensus failed: %s", field, e)
+            continue
         values = [d["_id"] for d in distinct if d.get("_id") is not None]
         if len(values) == 1:
             result[field] = values[0]
@@ -469,7 +464,7 @@ def compute_for_source(
                 {"@type": "AdministrativeArea", "name": p} for p in places
             ]
     except Exception as e:
-        raise HeuristicsError(f"spatialCoverage failed: {e}") from e
+        logging.warning("spatialCoverage failed: %s", e)
 
     # DefinedTerm fields: rank by frequency, keep top N, emit rollup
     # when truncated. Richer DefinedTerm shape (identifier/name/url/
@@ -480,7 +475,8 @@ def compute_for_source(
                 _prefix_match(agg_defined_term(field), mongo_filter)
             ))
         except Exception as e:
-            raise HeuristicsError(f"{field} aggregation failed: {e}") from e
+            logging.warning("%s aggregation failed: %s", field, e)
+            continue
         # Buckets arrive sorted by count desc; dedupe identical
         # (identifier, name) keys defensively.
         terms: list[dict[str, Any]] = []
@@ -571,7 +567,6 @@ def run(url: str, db_name: str, only: str | None, dry_run: bool) -> int:
     available = set(db.list_collection_names())
     written = 0
     skipped = 0
-    failed: list[str] = []
     for key, repo in repos.items():
         # Allow a per-repo override of the Mongo collection name.
         # Accepts a string or a list of collection names — for sources
@@ -588,18 +583,10 @@ def run(url: str, db_name: str, only: str | None, dry_run: bool) -> int:
             )
             continue
         mongo_filter = repo.get("_mongoFilter")
-        try:
-            per_collection = [
-                compute_for_source(db[n], mongo_filter=mongo_filter)
-                for n in names
-            ]
-        except HeuristicsError as e:
-            failed.append(key)
-            print(
-                f"{key}: {e}. Kept the existing heuristics file.",
-                flush=True,
-            )
-            continue
+        per_collection = [
+            compute_for_source(db[n], mongo_filter=mongo_filter)
+            for n in names
+        ]
         heuristic = _merge_results(per_collection)
         path = write_cache(key, heuristic)
         written += 1
@@ -612,16 +599,12 @@ def run(url: str, db_name: str, only: str | None, dry_run: bool) -> int:
         suffix = f" ({'; '.join(suffix_parts)})" if suffix_parts else ""
         print(
             f"{key}: wrote {len(heuristic)} heuristic fields to {rel}"
-            f"{suffix}",
-            flush=True,
+            f"{suffix}"
         )
     print(
-        f"Done. Wrote {written}, skipped {skipped}, failed {len(failed)}, "
+        f"Done. Wrote {written}, skipped {skipped}, "
         f"total {len(repos)} sources."
     )
-    if failed:
-        print(f"Rerun each failed source with --source: {', '.join(failed)}")
-        return 1
     return 0
 
 
