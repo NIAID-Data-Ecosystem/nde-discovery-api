@@ -894,6 +894,13 @@ class NDESourceHandler(MetadataSourceHandler):
     GET /v1/metadata
     """
 
+    async def get(self):
+        # dev=true adds the server's package inventory and index name to the
+        # response, so hosts have to opt in with ALLOW_METADATA_DEV.
+        if not getattr(self.biothings.config, "ALLOW_METADATA_DEV", False):
+            self.args.dev = False
+        await super().get()
+
     def load_from_cache(self, datasource):
         file_name = f"cache_{datasource}.json"
         folder = "metadata_completeness"

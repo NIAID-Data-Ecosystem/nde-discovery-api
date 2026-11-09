@@ -33,6 +33,11 @@ APP_LIST += [
     (r"/{ver}/metadata/?", NDESourceHandler),
 ]
 
+# /metadata?dev=true lists every installed Python package and its version, so
+# it stays off on public hosts. A host's config.py can set this to True to turn
+# it back on for debugging.
+ALLOW_METADATA_DEV = False
+
 # OAuth and XSRF handlers
 APP_LIST += [
     (r"/user_info", UserInfoHandler),
