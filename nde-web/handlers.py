@@ -1,8 +1,12 @@
+import base64
+import hashlib
 import hmac
 import json
 import logging
 import os
+import re
 import secrets
+import time
 from urllib.parse import quote, urlencode, urlsplit
 
 import elasticsearch
@@ -13,12 +17,15 @@ from tornado.httpclient import AsyncHTTPClient, HTTPClientError
 from tornado.httputil import HTTPHeaders, url_concat
 from tornado.web import HTTPError, RequestHandler
 from user_data import (
+    IDENTIFIER_FIELD,
     _activity_update,
     _now_iso,
     _oauth_profile_removals,
     _oauth_profile_updates,
+    _profile_identifier,
     _seed_user_doc,
     _user_doc_id,
+    _with_old_profile_settings,
 )
 from xsrf import FrontendRequestMixin, cookie_samesite
 
@@ -219,10 +226,10 @@ class BaseLoginHandler(BaseAPIHandler):
         # can't overwrite each other's state.
         return f"__Host-oauth_state_{self.PROVIDER_KEY}"
 
-    def _set_oauth_state_cookie(self, state, next_url):
+    def _set_oauth_state_cookie(self, state, next_url, **extra):
         self.set_secure_cookie(
             self._state_cookie_name(),
-            json.dumps({"state": state, "next": next_url}),
+            json.dumps({"state": state, "next": next_url, **extra}),
             expires_days=self.STATE_COOKIE_MAX_AGE_DAYS,
             path="/",
             secure=True,
@@ -252,10 +259,13 @@ class BaseLoginHandler(BaseAPIHandler):
         frontend_origin = getattr(self.biothings.config, "FRONTEND_ORIGIN", None)
         return f"{frontend_origin.rstrip('/')}/" if frontend_origin else "/"
 
-    def _new_oauth_state(self):
-        """Store a fresh OAuth `state` and the validated `next` URL in a cookie."""
+    def _new_oauth_state(self, **extra):
+        """Store a fresh OAuth `state` and the validated `next` URL in a cookie.
+
+        Providers can keep other per-login values, such as a PKCE verifier, in `extra`.
+        """
         state = secrets.token_urlsafe(32)
-        self._set_oauth_state_cookie(state, safe_next_url(self, "/"))
+        self._set_oauth_state_cookie(state, safe_next_url(self, "/"), **extra)
         return state
 
     def _verified_callback_next_url(self, error_code):
@@ -263,8 +273,11 @@ class BaseLoginHandler(BaseAPIHandler):
 
         A provider error or a `state` mismatch redirects back with `error_code`.
         Either can come from a forged link, so an existing session is kept.
+        The state cookie's values stay on `self._callback_state` for the rest
+        of the callback.
         """
         state_cookie = self._pop_oauth_state_cookie()
+        self._callback_state = state_cookie or {}
         next_url = self._state_next_url(state_cookie)
         provider_error = self.get_argument("error", None)
         returned_state = self.get_argument("state", None)
@@ -275,7 +288,15 @@ class BaseLoginHandler(BaseAPIHandler):
             and hmac.compare_digest(returned_state.encode(), expected_state.encode())
         )
         if provider_error or not state_valid:
-            if not provider_error:
+            if provider_error:
+                # %r keeps text from a forged link on one log line.
+                logging.warning(
+                    "%s login returned error %r: %r",
+                    self.PROVIDER_KEY,
+                    provider_error,
+                    self.get_argument("error_description", None),
+                )
+            else:
                 logging.warning("%s OAuth state validation failed", self.PROVIDER_KEY)
             self.redirect(url_concat(next_url, {"login_error": error_code}))
             return None
@@ -325,7 +346,7 @@ class BaseLoginHandler(BaseAPIHandler):
             resp = await es.get(id=doc_id, index=index)
         except elasticsearch.exceptions.NotFoundError:
             try:
-                doc = _seed_user_doc(user_dict)
+                doc = await self._new_user_profile(es, index, user_dict)
                 await es.index(id=doc_id, body=doc, index=index)
                 logging.info("Created new user profile %s", doc_id)
             except Exception:
@@ -358,6 +379,10 @@ class BaseLoginHandler(BaseAPIHandler):
                     logging.warning(
                         "Could not update user profile %s", doc_id, exc_info=True
                     )
+
+    async def _new_user_profile(self, es, index, user_dict):
+        """Return the document for a user's first profile."""
+        return _seed_user_doc(user_dict)
 
 
 class OpenIDConnectLoginHandler(BaseLoginHandler):
@@ -432,17 +457,20 @@ class OpenIDConnectLoginHandler(BaseLoginHandler):
                 )
                 self._redirect_with_login_error(error_code, next_url)
                 return
-            user = await self.openid_get_authenticated_user(access_token)
+            user = await self._openid_user_from_token(token)
         except (HTTPClientError, ValueError) as exc:
             status = getattr(exc, "code", None)
             provider_error = (
                 unavailable_error_code if status and status >= 500 else error_code
             )
+            # An error response is the provider's error JSON, never a token.
+            response = getattr(exc, "response", None)
             logging.warning(
-                "%s OAuth request failed with %s; redirecting with %s",
+                "%s OAuth request failed with %s; redirecting with %s. Response: %r",
                 self.PROVIDER_NAME,
                 status or type(exc).__name__,
                 provider_error,
+                response.body[:500] if response is not None and response.body else None,
                 exc_info=True,
             )
             self._redirect_with_login_error(provider_error, next_url)
@@ -484,6 +512,10 @@ class OpenIDConnectLoginHandler(BaseLoginHandler):
             ),
         )
         return json.loads(response.body)
+
+    async def _openid_user_from_token(self, token):
+        """Return the user's claims for a token response that has an access token."""
+        return await self.openid_get_authenticated_user(token["access_token"])
 
     async def openid_get_authenticated_user(self, access_token):
         http = AsyncHTTPClient()
@@ -871,6 +903,299 @@ class MicrosoftLoginHandler(OpenIDConnectLoginHandler):
             email_records = _format_email_records(
                 [{"email": email, "primary": True}]
             )
+            payload["email"] = email
+            payload["emails"] = email_records
+        return json.dumps(payload)
+
+
+def _pkce_challenge(code_verifier):
+    """Return the S256 PKCE challenge for `code_verifier` (RFC 7636)."""
+    digest = hashlib.sha256(code_verifier.encode()).digest()
+    return base64.urlsafe_b64encode(digest).rstrip(b"=").decode()
+
+
+def _jwt_claims(token):
+    """Decode a JWT's claims without checking its signature."""
+    try:
+        payload = token.split(".")[1]
+        padded = payload + "=" * (-len(payload) % 4)
+        claims = json.loads(base64.urlsafe_b64decode(padded))
+    except (AttributeError, IndexError, ValueError) as exc:
+        raise ValueError("Malformed JWT") from exc
+    if not isinstance(claims, dict):
+        raise ValueError("Malformed JWT")
+    return claims
+
+
+ORCID_PUBLIC_API_URL = "https://pub.orcid.org/v3.0"
+# NIH Login gives users who sign in through ORCID this synthetic address. NIH CIT
+# confirmed the format won't change (RITM0706436).
+_NIH_ORCID_EMAIL = re.compile(r"(\d{4}-\d{4}-\d{4}-\d{3}[\dX])@nih\.gov", re.IGNORECASE)
+
+
+def _orcid_id_from_nih_email(email):
+    """Return the ORCID iD in an NIH Login <ORCID iD>@nih.gov address, else None."""
+    match = _NIH_ORCID_EMAIL.fullmatch(email or "")
+    if not match:
+        return None
+    orcid_id = match.group(1).upper()
+    # The last character is an ISO 7064 MOD 11-2 check digit.
+    total = 0
+    for digit in orcid_id.replace("-", "")[:-1]:
+        total = (total + int(digit)) * 2
+    check = (12 - total % 11) % 11
+    return orcid_id if orcid_id[-1] == ("X" if check == 10 else str(check)) else None
+
+
+class OktaLoginHandler(OpenIDConnectLoginHandler):
+    """Initiate or complete the NIH Login (NIH Okta) OpenID Connect handshake.
+
+    NIH registered the client with PKCE (S256), a nonce and client_secret_basic,
+    and asks that every login's ID token be checked.
+    """
+
+    PROVIDER_NAME = "NIH Login"
+    PROVIDER_KEY = "okta"
+    CLIENT_ID_CONFIG = "OKTA_CLIENT_ID"
+    CLIENT_SECRET_CONFIG = "OKTA_CLIENT_SECRET"
+    CALLBACK_PATH = "/login/okta"
+
+    async def get(self):
+        # Only hosts with an NIH Login client secret in their config serve this login.
+        if not getattr(self.biothings.config, self.CLIENT_SECRET_CONFIG, None):
+            raise HTTPError(404)
+        await super().get()
+
+    def _issuer(self):
+        return self.biothings.config.OKTA_ISSUER.rstrip("/")
+
+    def _endpoint(self, name):
+        # Okta's org authorization server (issuer https://<domain>) serves
+        # /oauth2/v1/*; a custom one (issuer .../oauth2/<id>) serves <issuer>/v1/*.
+        issuer = self._issuer()
+        base = issuer if "/oauth2/" in issuer else f"{issuer}/oauth2"
+        return f"{base}/v1/{name}"
+
+    def _authorize_url(self):
+        return self._endpoint("authorize")
+
+    def _token_url(self):
+        return self._endpoint("token")
+
+    def _userinfo_url(self):
+        return self._endpoint("userinfo")
+
+    def _redirect_to_provider(self, client_id):
+        code_verifier = secrets.token_urlsafe(64)
+        nonce = secrets.token_urlsafe(32)
+        state = self._new_oauth_state(code_verifier=code_verifier, nonce=nonce)
+        self.redirect(
+            url_concat(
+                self._authorize_url(),
+                {
+                    "client_id": client_id,
+                    "redirect_uri": self._callback_url(),
+                    "response_type": "code",
+                    "scope": " ".join(self.SCOPES),
+                    "state": state,
+                    "nonce": nonce,
+                    "code_challenge": _pkce_challenge(code_verifier),
+                    "code_challenge_method": "S256",
+                },
+            )
+        )
+
+    async def openid_get_oauth2_token(
+        self,
+        *,
+        client_id,
+        client_secret,
+        code,
+        redirect_uri,
+    ):
+        http = AsyncHTTPClient()
+        headers = HTTPHeaders()
+        headers.add("Accept", "application/json")
+        headers.add("Content-Type", "application/x-www-form-urlencoded")
+        # client_secret_basic: the client authenticates in the Authorization
+        # header, not the form body.
+        response = await http.fetch(
+            self._token_url(),
+            method="POST",
+            headers=headers,
+            auth_username=client_id,
+            auth_password=client_secret,
+            auth_mode="basic",
+            body=urlencode(
+                {
+                    "code": code,
+                    "code_verifier": self._callback_state.get("code_verifier", ""),
+                    "grant_type": "authorization_code",
+                    "redirect_uri": redirect_uri,
+                }
+            ),
+        )
+        return json.loads(response.body)
+
+    async def _openid_user_from_token(self, token):
+        claims = self._verified_id_token_claims(token.get("id_token"))
+        user = await self.openid_get_authenticated_user(token["access_token"])
+        # OIDC Core 5.3.2: userinfo must describe the user the ID token names.
+        if user.get("sub") != claims["sub"]:
+            raise ValueError("NIH Login userinfo subject does not match the ID token")
+        # NIH's `source` claim names the provider it used (ORCiD, Google,
+        # Microsoft or NIH), with the same values on staging and production.
+        source = claims.get("source") or user.get("source")
+        if source:
+            user["idp"] = str(source).strip().lower()
+        else:
+            logging.warning(
+                "NIH Login sent no source claim (idp %r)", claims.get("idp")
+            )
+        orcid_id = _orcid_id_from_nih_email(user.get("email"))
+        if orcid_id:
+            user[IDENTIFIER_FIELD] = _profile_identifier("orcid", orcid_id=orcid_id)
+            await self._use_public_orcid_emails(user, orcid_id)
+        else:
+            identifier = _profile_identifier(user.get("idp"), user.get("email"))
+            if identifier:
+                user[IDENTIFIER_FIELD] = identifier
+        return user
+
+    async def _new_user_profile(self, es, index, user_dict):
+        """Start a first NIH Login profile from the user's old profile, if any.
+
+        A user's old Google, Microsoft or ORCID profile shares the new profile's
+        IDENTIFIER_FIELD (see user_data.py), so its saved items and preferences
+        carry over. If the lookup fails, the user still gets an empty profile.
+        """
+        doc = await super()._new_user_profile(es, index, user_dict)
+        identifier = user_dict.get(IDENTIFIER_FIELD)
+        if not identifier:
+            return doc
+        try:
+            response = await es.search(
+                index=index,
+                size=10,
+                query={"term": {f"{IDENTIFIER_FIELD}.keyword": identifier}},
+            )
+            old_profiles = [
+                (hit["_id"], hit["_source"]) for hit in response["hits"]["hits"]
+            ]
+            merged = _with_old_profile_settings(doc, old_profiles)
+        except Exception:
+            logging.warning(
+                "Could not copy older profiles' settings into %s",
+                _user_doc_id(user_dict),
+                exc_info=True,
+            )
+            return doc
+        if old_profiles:
+            logging.info(
+                "Copied settings from %s into %s",
+                ", ".join(merged["linked_accounts"]),
+                _user_doc_id(user_dict),
+            )
+        return merged
+
+    async def _use_public_orcid_emails(self, user, orcid_id):
+        """Swap NIH's synthetic ORCID address for the user's public ORCID emails.
+
+        <ORCID iD>@nih.gov isn't a mailbox, though NIH still marks it verified.
+        Like our own ORCID login, keep only the emails the user made public.
+        """
+        user.pop("email", None)
+        user.pop("email_verified", None)
+        try:
+            user["orcid_emails"] = await self._orcid_public_emails(orcid_id)
+        except (HTTPClientError, OSError, ValueError):
+            # Without the list, a hidden email and an outage look the same, so
+            # leave the iD out too: the profile keeps the emails it already has.
+            logging.warning(
+                "Could not read public ORCID emails for %s", orcid_id, exc_info=True
+            )
+            return
+        user["orcid"] = orcid_id
+
+    async def _orcid_public_emails(self, orcid_id):
+        http = AsyncHTTPClient()
+        headers = HTTPHeaders()
+        headers.add("Accept", "application/json")
+        # The lookup is optional, so it shouldn't hold up the login for long.
+        response = await http.fetch(
+            f"{ORCID_PUBLIC_API_URL}/{orcid_id}/email",
+            method="GET",
+            headers=headers,
+            request_timeout=5,
+        )
+        body = json.loads(response.body)
+        records = body.get("email") if isinstance(body, dict) else None
+        return records if isinstance(records, list) else []
+
+    def _verified_id_token_claims(self, id_token):
+        """Return the ID token's claims once they're shown to belong to this login.
+
+        The token comes straight from the token endpoint over TLS, which OIDC
+        Core 3.1.3.7 accepts in place of checking its signature.
+        """
+        claims = _jwt_claims(id_token)
+        client_id = getattr(self.biothings.config, self.CLIENT_ID_CONFIG)
+        audience = claims.get("aud")
+        audiences = audience if isinstance(audience, list) else [audience]
+        expires_at = claims.get("exp")
+        nonce = self._callback_state.get("nonce")
+        if claims.get("iss") != self._issuer():
+            raise ValueError("ID token issuer does not match OKTA_ISSUER")
+        if client_id not in audiences:
+            raise ValueError("ID token was issued to another client")
+        if not isinstance(expires_at, (int, float)) or expires_at <= time.time():
+            raise ValueError("ID token has expired")
+        if not isinstance(nonce, str) or not hmac.compare_digest(
+            str(claims.get("nonce", "")).encode(), nonce.encode()
+        ):
+            raise ValueError("ID token nonce does not match this login")
+        if not claims.get("sub"):
+            raise ValueError("ID token has no subject")
+        return claims
+
+    @staticmethod
+    def _format_user_record(user):
+        identifier = user.get("sub")
+        if not identifier:
+            return None
+        payload = {
+            "username": identifier,
+            # Lowercased, this is also the profile ID prefix: okta:<sub>.
+            "oauth_provider": "Okta",
+        }
+        if user.get("idp"):
+            payload["idp"] = user["idp"]
+        if user.get("orcid"):
+            payload["orcid"] = user["orcid"]
+        if user.get(IDENTIFIER_FIELD):
+            payload[IDENTIFIER_FIELD] = user[IDENTIFIER_FIELD]
+
+        if "orcid_emails" in user:
+            email_records = _format_email_records(user["orcid_emails"])
+        elif user.get("email"):
+            email_record = {"email": user["email"], "primary": True}
+            if user.get("email_verified") is not None:
+                email_record["verified"] = user["email_verified"]
+            email_records = _format_email_records([email_record])
+        else:
+            email_records = []
+        email = _primary_email(email_records)
+
+        full_name = " ".join(
+            value
+            for value in (user.get("given_name"), user.get("family_name"))
+            if value
+        )
+        name = user.get("name") or full_name or email
+        if name:
+            payload["name"] = name
+
+        if email:
             payload["email"] = email
             payload["emails"] = email_records
         return json.dumps(payload)

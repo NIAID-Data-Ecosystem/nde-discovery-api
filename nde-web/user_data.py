@@ -38,10 +38,20 @@ OAUTH_PROFILE_FIELDS = (
     "emails",
     "avatar_url",
     "organization",
+    # NIH Login only: the provider NIH signed the user in through (orcid,
+    # google, microsoft or nih), from NIH's `source` claim.
+    "idp",
+    # NIH Login only: the ORCID iD of a user who signed in through ORCID.
+    "orcid",
 )
 REMOVABLE_OAUTH_PROFILE_FIELDS = {
     "ORCID": ("email", "emails"),
 }
+# Ties together one person's profiles from the same provider: `<provider>_<email>`,
+# or `orcid_<ORCID iD>` because ORCID users may share no email. NIH Login profiles
+# use the provider NIH signed the user in through, so a user's old google: profile
+# and their okta: one share a key, and the old profile's settings can be found.
+IDENTIFIER_FIELD = "_identifier"
 ACTIVITY_FIELD = "last_active"
 
 
@@ -56,9 +66,29 @@ def _user_doc_id(user: dict) -> str:
     return f"{provider}:{username}"
 
 
+def _profile_identifier(provider, email=None, orcid_id=None):
+    """Return the IDENTIFIER_FIELD value for a sign-in, or None if it lacks one."""
+    provider = (provider or "").lower()
+    if provider == "orcid":
+        return f"orcid_{orcid_id}" if orcid_id else None
+    email = (email or "").strip().lower()
+    return f"{provider}_{email}" if provider and email else None
+
+
 def _oauth_profile_fields(user: dict) -> dict:
     """Profile fields copied from the OAuth provider payload when available."""
-    return {field: user[field] for field in OAUTH_PROFILE_FIELDS if user.get(field)}
+    fields = {field: user[field] for field in OAUTH_PROFILE_FIELDS if user.get(field)}
+    if (user.get("oauth_provider") or "").upper() == "OKTA":
+        # Only OktaLoginHandler knows which provider NIH used, so it sends the key.
+        identifier = user.get(IDENTIFIER_FIELD)
+    else:
+        # An ORCID profile's username is the user's ORCID iD.
+        identifier = _profile_identifier(
+            user.get("oauth_provider"), user.get("email"), user.get("username")
+        )
+    if identifier:
+        fields[IDENTIFIER_FIELD] = identifier
+    return fields
 
 
 def _oauth_profile_updates(existing: dict, user: dict) -> dict:
@@ -76,6 +106,10 @@ def _oauth_profile_updates(existing: dict, user: dict) -> dict:
 def _oauth_profile_removals(existing: dict, user: dict) -> list[str]:
     """Return OAuth-derived fields that should be removed from an existing doc."""
     provider = (user.get("oauth_provider") or "").upper()
+    # OktaLoginHandler adds `orcid` only after reading the user's public ORCID
+    # emails, so those logins can drop an email the user has since hidden.
+    if user.get("orcid"):
+        provider = "ORCID"
     removable_fields = REMOVABLE_OAUTH_PROFILE_FIELDS.get(provider, ())
     return [
         field
@@ -115,6 +149,51 @@ def _seed_user_doc(user: dict) -> dict:
     }
     doc.update(_oauth_profile_fields(user))
     return doc
+
+
+def _profile_activity(doc: dict) -> str:
+    """Return when a profile was last used, as an ISO timestamp ("" if unknown)."""
+    return doc.get(ACTIVITY_FIELD) or doc.get("updated") or doc.get("created") or ""
+
+
+def _with_old_profile_settings(doc: dict, old_profiles: list) -> dict:
+    """Return a new NIH Login profile filled in from the old profiles it replaces.
+
+    `old_profiles` holds (doc ID, source) pairs that share the new profile's
+    IDENTIFIER_FIELD. Saved searches and datasets come from all of them, and
+    preferences from the one used most recently. `linked_accounts` records them;
+    the old profiles themselves aren't changed.
+    """
+    if not old_profiles:
+        return doc
+    old_profiles = sorted(
+        old_profiles, key=lambda item: _profile_activity(item[1]), reverse=True
+    )
+    merged = dict(doc)
+    latest = old_profiles[0][1]
+    merged.update(
+        {field: latest[field] for field in UPDATABLE_PREFERENCES if field in latest}
+    )
+
+    searches, datasets = [], []
+    seen_searches, seen_datasets = set(), set()
+    for source in [doc] + [source for _doc_id, source in old_profiles]:
+        for entry in source.get("favorite_searches") or []:
+            key = json.dumps(
+                [entry.get("name"), entry.get("query"), entry.get("filters")],
+                sort_keys=True,
+            )
+            if key not in seen_searches:
+                seen_searches.add(key)
+                searches.append(entry)
+        for entry in source.get("favorite_datasets") or []:
+            if entry.get("dataset_id") not in seen_datasets:
+                seen_datasets.add(entry.get("dataset_id"))
+                datasets.append(entry)
+    merged["favorite_searches"] = searches
+    merged["favorite_datasets"] = datasets
+    merged["linked_accounts"] = [doc_id for doc_id, _source in old_profiles]
+    return merged
 
 
 # ---------------------------------------------------------------------------

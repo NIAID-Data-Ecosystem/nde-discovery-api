@@ -1,12 +1,17 @@
 import asyncio
+import base64
+import hashlib
 import json
+import logging
 import sys
+import time
 from pathlib import Path
 from types import SimpleNamespace
 from urllib.parse import parse_qs, urlsplit
 
 import pytest
 from tornado.httpclient import HTTPClientError
+from tornado.web import HTTPError
 
 
 WEB_DIR = Path(__file__).resolve().parents[1] / "nde-web"
@@ -144,6 +149,9 @@ def _oidc_handler(handler_cls, next_url="/account", state_cookie=None):
                 MICROSOFT_CLIENT_ID="microsoft-client-id",
                 MICROSOFT_CLIENT_SECRET="microsoft-client-secret",
                 MICROSOFT_TENANT="organizations",
+                OKTA_CLIENT_ID="okta-client-id",
+                OKTA_CLIENT_SECRET="okta-client-secret",
+                OKTA_ISSUER="https://loginstg.nih.gov/oauth2/default",
                 WEB_HOST="https://api.data.niaid.nih.gov",
             )
         )
@@ -637,6 +645,460 @@ def test_microsoft_login_uses_configured_tenant_in_provider_urls():
     )
 
 
+OKTA_STATE_COOKIE = {
+    "state": "expected-state",
+    "next": "https://data.niaid.nih.gov/account",
+    "code_verifier": "pkce-verifier",
+    "nonce": "expected-nonce",
+}
+
+
+def _jwt(claims):
+    """Build an unsigned JWT; the Okta handler only reads its claims."""
+
+    def encode(part):
+        return base64.urlsafe_b64encode(json.dumps(part).encode()).rstrip(b"=").decode()
+
+    return f"{encode({'alg': 'RS256'})}.{encode(claims)}.signature"
+
+
+def _okta_id_token(**overrides):
+    claims = {
+        "iss": "https://loginstg.nih.gov/oauth2/default",
+        "aud": "okta-client-id",
+        "sub": "00u-okta-user",
+        "exp": time.time() + 300,
+        "nonce": "expected-nonce",
+        "idp": "0oa-google-idp",
+        "source": "Google",
+    }
+    claims.update(overrides)
+    return _jwt(claims)
+
+
+def _okta_callback_handler(id_token, userinfo):
+    handler, redirects, cleared, secure_cookies = _oidc_handler(
+        handlers.OktaLoginHandler, state_cookie=OKTA_STATE_COOKIE
+    )
+    ensured = []
+    handler._test_args["code"] = "oauth-code"
+    handler._test_args["state"] = "expected-state"
+
+    async def openid_get_oauth2_token(**_kwargs):
+        return {"access_token": "access-token", "id_token": id_token}
+
+    async def openid_get_authenticated_user(access_token):
+        assert access_token == "access-token"
+        return userinfo
+
+    async def ensure_user_profile(user):
+        ensured.append(user)
+
+    handler.openid_get_oauth2_token = openid_get_oauth2_token
+    handler.openid_get_authenticated_user = openid_get_authenticated_user
+    handler._ensure_user_profile = ensure_user_profile
+    return handler, redirects, cleared, secure_cookies, ensured
+
+
+def test_okta_login_redirects_with_pkce_challenge_and_nonce():
+    handler, redirects, _cleared, secure_cookies = _oidc_handler(
+        handlers.OktaLoginHandler,
+        "https://data.niaid.nih.gov/account",
+    )
+
+    asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    [(cookie_args, cookie_kwargs)] = secure_cookies
+    assert cookie_args[0] == "__Host-oauth_state_okta"
+    assert cookie_kwargs["httponly"] is True
+    state_cookie = json.loads(cookie_args[1])
+    assert state_cookie["next"] == "https://data.niaid.nih.gov/account"
+
+    redirect = urlsplit(redirects[0])
+    query = parse_qs(redirect.query)
+    verifier_digest = hashlib.sha256(state_cookie["code_verifier"].encode()).digest()
+    assert redirect._replace(query="").geturl() == (
+        "https://loginstg.nih.gov/oauth2/default/v1/authorize"
+    )
+    assert query["client_id"] == ["okta-client-id"]
+    assert query["redirect_uri"] == ["https://api.data.niaid.nih.gov/login/okta"]
+    assert query["response_type"] == ["code"]
+    assert query["scope"] == ["openid profile email"]
+    assert query["state"] == [state_cookie["state"]]
+    assert query["nonce"] == [state_cookie["nonce"]]
+    assert query["code_challenge_method"] == ["S256"]
+    assert query["code_challenge"] == [
+        base64.urlsafe_b64encode(verifier_digest).rstrip(b"=").decode()
+    ]
+    # Only the challenge leaves the API; the verifier stays in the cookie.
+    assert state_cookie["code_verifier"] not in redirects[0]
+
+
+def test_okta_login_is_not_served_without_a_client_secret():
+    handler, redirects, _cleared, secure_cookies = _oidc_handler(
+        handlers.OktaLoginHandler
+    )
+    handler.application.biothings.config.OKTA_CLIENT_SECRET = None
+
+    with pytest.raises(HTTPError) as excinfo:
+        asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    assert excinfo.value.status_code == 404
+    assert redirects == []
+    assert secure_cookies == []
+
+
+def test_okta_token_request_uses_basic_auth_and_pkce_verifier(monkeypatch):
+    handler, _redirects, _cleared, _secure_cookies = _oidc_handler(
+        handlers.OktaLoginHandler
+    )
+    handler._callback_state = {"code_verifier": "pkce-verifier"}
+    requests = []
+
+    class FakeAsyncHTTPClient:
+        async def fetch(self, url, **kwargs):
+            requests.append((url, kwargs))
+            return SimpleNamespace(body=b'{"access_token": "access-token"}')
+
+    monkeypatch.setattr(handlers, "AsyncHTTPClient", FakeAsyncHTTPClient)
+
+    token = asyncio.run(
+        handler.openid_get_oauth2_token(
+            client_id="okta-client-id",
+            client_secret="okta-client-secret",
+            code="oauth-code",
+            redirect_uri="https://api.data.niaid.nih.gov/login/okta",
+        )
+    )
+
+    [(url, kwargs)] = requests
+    assert token == {"access_token": "access-token"}
+    assert url == "https://loginstg.nih.gov/oauth2/default/v1/token"
+    assert kwargs["auth_mode"] == "basic"
+    assert kwargs["auth_username"] == "okta-client-id"
+    assert kwargs["auth_password"] == "okta-client-secret"
+    assert parse_qs(kwargs["body"]) == {
+        "code": ["oauth-code"],
+        "code_verifier": ["pkce-verifier"],
+        "grant_type": ["authorization_code"],
+        "redirect_uri": ["https://api.data.niaid.nih.gov/login/okta"],
+    }
+
+
+def test_okta_login_sets_cookie_after_checking_the_id_token():
+    handler, redirects, cleared, secure_cookies, ensured = _okta_callback_handler(
+        _okta_id_token(),
+        {
+            "sub": "00u-okta-user",
+            "given_name": "Alice",
+            "family_name": "Example",
+            "email": "alice@example.org",
+            "email_verified": True,
+        },
+    )
+
+    asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    assert cleared == _state_cleared("okta")
+    assert redirects == ["https://data.niaid.nih.gov/account"]
+    cookie_args, cookie_kwargs = secure_cookies[0]
+    assert cookie_args[0] == "user"
+    assert cookie_kwargs["httponly"] is True
+    payload = json.loads(cookie_args[1])
+    assert payload == {
+        "username": "00u-okta-user",
+        "oauth_provider": "Okta",
+        "idp": "google",
+        "_identifier": "google_alice@example.org",
+        "name": "Alice Example",
+        "email": "alice@example.org",
+        "emails": [
+            {
+                "email": "alice@example.org",
+                "primary": True,
+                "verified": True,
+            }
+        ],
+    }
+    assert ensured == [payload]
+
+
+@pytest.mark.parametrize(
+    ("id_token_source", "userinfo_source", "idp", "identifier"),
+    [
+        ("NIH", None, "nih", "nih_alice@nih.gov"),
+        pytest.param(
+            None, "Microsoft", "microsoft", "microsoft_alice@nih.gov", id="userinfo-only"
+        ),
+    ],
+)
+def test_okta_login_names_the_provider_from_nih_source_claim(
+    id_token_source, userinfo_source, idp, identifier
+):
+    userinfo = {"sub": "00u-okta-user", "name": "Alice Example", "email": "alice@nih.gov"}
+    if userinfo_source:
+        userinfo["source"] = userinfo_source
+    handler, _redirects, _cleared, secure_cookies, ensured = _okta_callback_handler(
+        _okta_id_token(source=id_token_source), userinfo
+    )
+
+    asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    payload = json.loads(secure_cookies[0][0][1])
+    assert payload["idp"] == idp
+    assert payload["_identifier"] == identifier
+    assert ensured == [payload]
+
+
+def test_okta_login_without_a_source_claim_has_no_provider(caplog):
+    handler, _redirects, _cleared, secure_cookies, ensured = _okta_callback_handler(
+        _okta_id_token(source=None),
+        {"sub": "00u-okta-user", "name": "Alice Example", "email": "alice@nih.gov"},
+    )
+
+    with caplog.at_level(logging.WARNING):
+        asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    payload = json.loads(secure_cookies[0][0][1])
+    assert payload["email"] == "alice@nih.gov"
+    assert "idp" not in payload
+    assert "_identifier" not in payload
+    assert ensured == [payload]
+    assert "NIH Login sent no source claim (idp '0oa-google-idp')" in caplog.text
+
+
+@pytest.mark.parametrize(
+    ("id_token", "userinfo_sub"),
+    [
+        pytest.param(
+            _okta_id_token(nonce="other-nonce"), "00u-okta-user", id="wrong-nonce"
+        ),
+        pytest.param(
+            _okta_id_token(aud="other-client"), "00u-okta-user", id="wrong-audience"
+        ),
+        pytest.param(
+            _okta_id_token(iss="https://loginstg.nih.gov"),
+            "00u-okta-user",
+            id="wrong-issuer",
+        ),
+        pytest.param(
+            _okta_id_token(exp=time.time() - 60), "00u-okta-user", id="expired"
+        ),
+        pytest.param("not-a-jwt", "00u-okta-user", id="malformed"),
+        pytest.param(None, "00u-okta-user", id="missing"),
+        pytest.param(_okta_id_token(), "00u-other-user", id="userinfo-mismatch"),
+    ],
+)
+def test_okta_login_rejects_id_token_that_does_not_match_the_login(
+    id_token, userinfo_sub
+):
+    handler, redirects, cleared, secure_cookies, ensured = _okta_callback_handler(
+        id_token,
+        {"sub": userinfo_sub, "email": "alice@example.org"},
+    )
+
+    asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    assert secure_cookies == []
+    assert ensured == []
+    assert cleared == _state_and_session_cleared("okta")
+    assert redirects == [
+        "https://data.niaid.nih.gov/account?login_error=okta_login_failed"
+    ]
+
+
+def test_okta_endpoints_follow_the_configured_issuer():
+    handler, _redirects, _cleared, _secure_cookies = _oidc_handler(
+        handlers.OktaLoginHandler
+    )
+
+    assert handler._token_url() == "https://loginstg.nih.gov/oauth2/default/v1/token"
+
+    # Okta's org authorization server keeps its endpoints under /oauth2/v1.
+    handler.application.biothings.config.OKTA_ISSUER = "https://loginstg.nih.gov/"
+
+    assert handler._authorize_url() == "https://loginstg.nih.gov/oauth2/v1/authorize"
+    assert handler._userinfo_url() == "https://loginstg.nih.gov/oauth2/v1/userinfo"
+
+
+def test_okta_login_logs_the_error_nih_sends_back(caplog):
+    handler, redirects, cleared, _secure_cookies = _oidc_handler(
+        handlers.OktaLoginHandler, state_cookie=OKTA_STATE_COOKIE
+    )
+    handler._test_args.update(
+        error="access_denied",
+        error_description="User is not assigned to the client application.",
+    )
+
+    with caplog.at_level(logging.WARNING):
+        asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    assert cleared == _state_cleared("okta")
+    assert redirects == [
+        "https://data.niaid.nih.gov/account?login_error=okta_login_failed"
+    ]
+    assert "'access_denied'" in caplog.text
+    assert "User is not assigned to the client application." in caplog.text
+
+
+def test_okta_format_user_record_uses_email_when_name_is_missing():
+    formatted = handlers.OktaLoginHandler._format_user_record(
+        {"sub": "00u-okta-user", "email": "alice@example.org"}
+    )
+
+    payload = json.loads(formatted)
+
+    assert payload["username"] == "00u-okta-user"
+    assert payload["name"] == "alice@example.org"
+    assert payload["emails"] == [{"email": "alice@example.org", "primary": True}]
+
+
+# ORCID's documented sample iD.
+ORCID_SAMPLE_ID = "0000-0002-1825-0097"
+
+
+@pytest.mark.parametrize(
+    ("email", "orcid_id"),
+    [
+        ("0000-0002-1825-0097@nih.gov", "0000-0002-1825-0097"),
+        ("0000-0002-1694-233x@NIH.GOV", "0000-0002-1694-233X"),
+        pytest.param("0000-0002-1825-0098@nih.gov", None, id="bad-check-digit"),
+        ("0000-0002-1825-0097@example.org", None),
+        ("alice.example@nih.gov", None),
+        (None, None),
+    ],
+)
+def test_orcid_id_is_read_only_from_nih_orcid_addresses(email, orcid_id):
+    assert handlers._orcid_id_from_nih_email(email) == orcid_id
+
+
+def _okta_orcid_callback_handler(public_emails):
+    """An NIH Login callback for an ORCID user; `public_emails` may be an exception."""
+    handler, redirects, _cleared, secure_cookies, ensured = _okta_callback_handler(
+        _okta_id_token(idp="0oa-orcid-idp", source="ORCiD"),
+        {
+            "sub": "00u-okta-user",
+            "name": "Josiah Carberry",
+            "email": f"{ORCID_SAMPLE_ID}@nih.gov",
+            "email_verified": True,
+        },
+    )
+    lookups = []
+
+    async def orcid_public_emails(orcid_id):
+        lookups.append(orcid_id)
+        if isinstance(public_emails, Exception):
+            raise public_emails
+        return public_emails
+
+    handler._orcid_public_emails = orcid_public_emails
+    return handler, redirects, secure_cookies, ensured, lookups
+
+
+def test_okta_orcid_login_uses_public_orcid_emails_instead_of_nih_address():
+    handler, redirects, secure_cookies, ensured, lookups = _okta_orcid_callback_handler(
+        [
+            {
+                "email": "josiah@example.org",
+                "primary": True,
+                "verified": True,
+                "visibility": "public",
+                "put-code": None,
+            }
+        ]
+    )
+
+    asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    assert lookups == [ORCID_SAMPLE_ID]
+    assert redirects == ["https://data.niaid.nih.gov/account"]
+    payload = json.loads(secure_cookies[0][0][1])
+    assert payload == {
+        "username": "00u-okta-user",
+        "oauth_provider": "Okta",
+        "idp": "orcid",
+        "orcid": ORCID_SAMPLE_ID,
+        "_identifier": f"orcid_{ORCID_SAMPLE_ID}",
+        "name": "Josiah Carberry",
+        "email": "josiah@example.org",
+        "emails": [
+            {
+                "email": "josiah@example.org",
+                "primary": True,
+                "verified": True,
+                "visibility": "public",
+            }
+        ],
+    }
+    assert ensured == [payload]
+
+
+def test_okta_orcid_login_without_a_public_email_has_no_email():
+    handler, _redirects, secure_cookies, ensured, _lookups = (
+        _okta_orcid_callback_handler([])
+    )
+
+    asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    payload = json.loads(secure_cookies[0][0][1])
+    assert payload["orcid"] == ORCID_SAMPLE_ID
+    assert payload["_identifier"] == f"orcid_{ORCID_SAMPLE_ID}"
+    assert "email" not in payload
+    assert "emails" not in payload
+    assert ensured == [payload]
+
+
+def test_okta_orcid_login_still_signs_in_when_orcid_is_unreachable(caplog):
+    handler, redirects, secure_cookies, ensured, _lookups = (
+        _okta_orcid_callback_handler(HTTPClientError(503))
+    )
+
+    with caplog.at_level(logging.WARNING):
+        asyncio.run(handlers.OktaLoginHandler.get(handler))
+
+    assert redirects == ["https://data.niaid.nih.gov/account"]
+    payload = json.loads(secure_cookies[0][0][1])
+    # No iD and no email, so the stored profile keeps the emails it has. The
+    # identifier comes from NIH's address, so it doesn't need ORCID.
+    assert payload == {
+        "username": "00u-okta-user",
+        "oauth_provider": "Okta",
+        "idp": "orcid",
+        "_identifier": f"orcid_{ORCID_SAMPLE_ID}",
+        "name": "Josiah Carberry",
+    }
+    assert ensured == [payload]
+    assert f"Could not read public ORCID emails for {ORCID_SAMPLE_ID}" in caplog.text
+
+
+def test_okta_reads_public_orcid_emails_without_a_token(monkeypatch):
+    handler, _redirects, _cleared, _secure_cookies = _oidc_handler(
+        handlers.OktaLoginHandler
+    )
+    requests = []
+    bodies = [
+        b'{"email": [{"email": "josiah@example.org", "visibility": "public"}]}',
+        b'{"path": "/0000-0002-1825-0097/email"}',
+    ]
+
+    class FakeAsyncHTTPClient:
+        async def fetch(self, url, **kwargs):
+            requests.append((url, kwargs))
+            return SimpleNamespace(body=bodies.pop(0))
+
+    monkeypatch.setattr(handlers, "AsyncHTTPClient", FakeAsyncHTTPClient)
+
+    with_email = asyncio.run(handler._orcid_public_emails(ORCID_SAMPLE_ID))
+    without_email = asyncio.run(handler._orcid_public_emails(ORCID_SAMPLE_ID))
+
+    url, kwargs = requests[0]
+    assert url == "https://pub.orcid.org/v3.0/0000-0002-1825-0097/email"
+    assert kwargs["headers"]["Accept"] == "application/json"
+    assert "Authorization" not in kwargs["headers"]
+    assert with_email == [{"email": "josiah@example.org", "visibility": "public"}]
+    assert without_email == []
+
+
 def test_orcid_format_user_record_saves_available_emails():
     formatted = handlers.ORCIDLoginHandler._format_user_record(
         {
@@ -789,6 +1251,112 @@ def test_ensure_user_profile_removes_orcid_email_when_no_longer_available():
     assert "emails" not in params["updates"]
     assert "last_active" in params["updates"]
     assert "updated" in params["updates"]
+
+
+class _FirstSignInClient:
+    """An ES client with no profile for the user yet; `old_hits` share their key."""
+
+    def __init__(self, old_hits=(), search_error=None):
+        self.old_hits = list(old_hits)
+        self.search_error = search_error
+        self.searches = []
+        self.indexed = []
+
+    async def get(self, **_kwargs):
+        not_found = handlers.elasticsearch.exceptions.NotFoundError
+        raise not_found.__new__(not_found)
+
+    async def search(self, **kwargs):
+        self.searches.append(kwargs)
+        if self.search_error:
+            raise self.search_error
+        return {"hits": {"hits": self.old_hits}}
+
+    async def index(self, **kwargs):
+        self.indexed.append(kwargs)
+
+
+def _first_sign_in_handler(handler_cls, client):
+    handler = handler_cls.__new__(handler_cls)
+    handler.application = SimpleNamespace(
+        biothings=SimpleNamespace(
+            config=SimpleNamespace(ES_USER_INDEX="users"),
+            elasticsearch=SimpleNamespace(async_client=client),
+        )
+    )
+    return handler
+
+
+NIH_LOGIN_GOOGLE_USER = {
+    "username": "00u-okta-user",
+    "oauth_provider": "Okta",
+    "idp": "google",
+    "_identifier": "google_alice@example.org",
+    "name": "Alice Example",
+    "email": "alice@example.org",
+}
+
+
+def test_first_nih_login_profile_starts_from_the_old_profile_settings():
+    old_source = {
+        "username": "1234",
+        "oauth_provider": "Google",
+        "name": "Alice Old Name",
+        "email": "alice@example.org",
+        "_identifier": "google_alice@example.org",
+        "ai_toggle_preference": True,
+        "contact_preference": True,
+        "favorite_searches": [{"name": "covid", "query": "covid", "filters": {}}],
+        "favorite_datasets": [{"dataset_id": "zenodo.1", "name": "Dataset"}],
+    }
+    client = _FirstSignInClient([{"_id": "google:1234", "_source": old_source}])
+    handler = _first_sign_in_handler(handlers.OktaLoginHandler, client)
+
+    asyncio.run(handler._ensure_user_profile(dict(NIH_LOGIN_GOOGLE_USER)))
+
+    [search] = client.searches
+    assert search["index"] == "users"
+    assert search["query"] == {"term": {"_identifier.keyword": "google_alice@example.org"}}
+    [indexed] = client.indexed
+    doc = indexed["body"]
+    assert indexed["id"] == "okta:00u-okta-user"
+    assert doc["linked_accounts"] == ["google:1234"]
+    assert doc["favorite_searches"] == old_source["favorite_searches"]
+    assert doc["favorite_datasets"] == old_source["favorite_datasets"]
+    assert doc["ai_toggle_preference"] is True
+    assert doc["contact_preference"] is True
+    # Who the user is still comes from NIH Login.
+    assert doc["name"] == "Alice Example"
+    assert doc["oauth_provider"] == "Okta"
+
+
+def test_first_nih_login_profile_is_made_even_if_the_old_profile_lookup_fails(caplog):
+    client = _FirstSignInClient(search_error=RuntimeError("search failed"))
+    handler = _first_sign_in_handler(handlers.OktaLoginHandler, client)
+
+    with caplog.at_level(logging.WARNING):
+        asyncio.run(handler._ensure_user_profile(dict(NIH_LOGIN_GOOGLE_USER)))
+
+    [indexed] = client.indexed
+    assert indexed["body"]["linked_accounts"] == []
+    assert indexed["body"]["favorite_searches"] == []
+    assert "Could not copy older profiles' settings into okta:00u-okta-user" in caplog.text
+
+
+def test_first_profile_from_other_logins_does_not_look_for_old_profiles():
+    client = _FirstSignInClient()
+    handler = _first_sign_in_handler(handlers.BaseLoginHandler, client)
+
+    asyncio.run(
+        handler._ensure_user_profile(
+            {"username": "alice", "oauth_provider": "GitHub", "email": "alice@example.org"}
+        )
+    )
+
+    assert client.searches == []
+    [indexed] = client.indexed
+    assert indexed["id"] == "github:alice"
+    assert indexed["body"]["_identifier"] == "github_alice@example.org"
 
 
 def test_ensure_user_profile_keeps_github_email_when_email_lookup_is_unavailable():

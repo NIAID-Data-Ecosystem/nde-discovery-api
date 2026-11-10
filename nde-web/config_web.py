@@ -8,6 +8,7 @@ from handlers import (
     LogoutHandler,
     MicrosoftLoginHandler,
     NDESourceHandler,
+    OktaLoginHandler,
     ORCIDLoginHandler,
     UserInfoHandler,
     WebAppHandler,
@@ -46,8 +47,16 @@ APP_LIST += [
     (r"/login/orcid", ORCIDLoginHandler),
     (r"/login/google", GoogleLoginHandler),
     (r"/login/microsoft", MicrosoftLoginHandler),
+    (r"/login/okta", OktaLoginHandler),
     (r"/xsrf_token", XSRFToken),
 ]
+
+# NIH Login (NIH Okta) client that NIH CIT registered for production
+# (RITM0706436). NIH asked us to use its "default" authorization server as the
+# issuer. /login/okta returns 404 until a host's config.py sets
+# OKTA_CLIENT_SECRET.
+OKTA_CLIENT_ID = "0oa26s7khdrvKuQZQ0j7"
+OKTA_ISSUER = "https://login.nih.gov/oauth2/default"
 
 # User data persistence handlers
 APP_LIST += [

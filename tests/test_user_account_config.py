@@ -21,6 +21,7 @@ def test_user_account_routes_are_registered():
     assert "/login/orcid" in strings
     assert "/login/google" in strings
     assert "/login/microsoft" in strings
+    assert "/login/okta" in strings
     assert "/xsrf_token" in strings
     assert "/user/data" in strings
     assert "/user/data/favorites/searches" in strings
