@@ -1306,7 +1306,6 @@ def test_first_nih_login_profile_starts_from_the_old_profile_settings():
         "_identifier": "google_alice@example.org",
         "ai_toggle_preference": True,
         "contact_preference": True,
-        "onboarding_complete": True,
         "favorite_searches": [{"name": "covid", "query": "covid", "filters": {}}],
         "favorite_datasets": [{"dataset_id": "zenodo.1", "name": "Dataset"}],
     }
@@ -1326,7 +1325,6 @@ def test_first_nih_login_profile_starts_from_the_old_profile_settings():
     assert doc["favorite_datasets"] == old_source["favorite_datasets"]
     assert doc["ai_toggle_preference"] is True
     assert doc["contact_preference"] is True
-    assert doc["onboarding_complete"] is True
     # Who the user is still comes from NIH Login.
     assert doc["name"] == "Alice Example"
     assert doc["oauth_provider"] == "Okta"
