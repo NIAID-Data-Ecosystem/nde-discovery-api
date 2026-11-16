@@ -39,6 +39,10 @@ APP_LIST += [
 # it back on for debugging.
 ALLOW_METADATA_DEV = False
 
+# Each worker rebuilds the plain /v1/metadata response at most this often, in
+# seconds. 0 rebuilds it on every request.
+METADATA_CACHE_TTL_S = 300
+
 # OAuth and XSRF handlers
 APP_LIST += [
     (r"/user_info", UserInfoHandler),

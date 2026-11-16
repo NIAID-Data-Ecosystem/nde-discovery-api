@@ -1,6 +1,7 @@
 import base64
 import hashlib
 import hmac
+import inspect
 import json
 import logging
 import os
@@ -10,6 +11,7 @@ import time
 from urllib.parse import quote, urlencode, urlsplit
 
 import elasticsearch
+from biothings.utils import serializer
 from biothings.web.auth.authn import BioThingsAuthnMixin
 from biothings.web.auth.oauth_mixins import GithubOAuth2Mixin, OrcidOAuth2Mixin
 from biothings.web.handlers import BaseAPIHandler, MetadataSourceHandler
@@ -1214,6 +1216,12 @@ class WebAppHandler(RequestHandler):
         raise HTTPError(404)
 
 
+# Plain /v1/metadata responses as JSON bytes, {biothing_type: (expires_at,
+# body)}. The portal fetches this ~2.9 MB document on page loads, and
+# building it queries Elasticsearch and reads a file per source.
+_metadata_json_cache = {}
+
+
 class NDESourceHandler(MetadataSourceHandler):
     """
     GET /v1/metadata
@@ -1224,7 +1232,40 @@ class NDESourceHandler(MetadataSourceHandler):
         # response, so hosts have to opt in with ALLOW_METADATA_DEV.
         if not getattr(self.biothings.config, "ALLOW_METADATA_DEV", False):
             self.args.dev = False
-        await super().get()
+        if self.args.dev or self.args.raw or self.format != "json":
+            await super().get()
+            return
+
+        body = await self._metadata_json()
+        # body is already JSON, so skip BaseAPIHandler.write(), which would
+        # serialize it again.
+        self.set_header("Content-Type", "application/json; charset=UTF-8")
+        RequestHandler.write(self, body)
+        self.finish()
+
+    async def _metadata_json(self):
+        """The plain /v1/metadata body, rebuilt at most once per
+        METADATA_CACHE_TTL_S in each worker."""
+        cached = _metadata_json_cache.get(self.biothing_type)
+        if cached and time.monotonic() < cached[0]:
+            return cached[1]
+
+        # MetadataSourceHandler.get() without dev or raw.
+        await self.metadata.refresh(self.biothing_type)
+        meta = {
+            key: value
+            for key, value in self.metadata.get_metadata(self.biothing_type).items()
+            if not key.startswith("_")
+        }
+        meta = self.extras(meta)
+        if inspect.isawaitable(meta):
+            meta = await meta
+        body = serializer.to_json(dict(sorted(meta.items())), return_bytes=True)
+
+        ttl = float(getattr(self.biothings.config, "METADATA_CACHE_TTL_S", 300))
+        if ttl > 0:
+            _metadata_json_cache[self.biothing_type] = (time.monotonic() + ttl, body)
+        return body
 
     def load_from_cache(self, datasource):
         file_name = f"cache_{datasource}.json"
