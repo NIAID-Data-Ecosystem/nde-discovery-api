@@ -1,5 +1,6 @@
 import ast
 import asyncio
+import json
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -25,6 +26,7 @@ class _FakeMetadata:
 
 
 def _metadata_response(config, dev=True):
+    handlers._metadata_json_cache.clear()
     handler = handlers.NDESourceHandler.__new__(handlers.NDESourceHandler)
     handler.application = SimpleNamespace(
         biothings=SimpleNamespace(
@@ -38,11 +40,18 @@ def _metadata_response(config, dev=True):
     handler.biothing_type = None
     handler.args = SimpleNamespace(dev=dev, raw=False)
     handler.extras = lambda meta: meta
+    # dev responses go through biothings, which passes finish() a dict. The
+    # plain response is written as cached JSON bytes before finish().
+    handler.set_header = lambda name, value: None
+    handler._finished = False
+    handler._write_buffer = []
     sent = []
-    handler.finish = sent.append
+    handler.finish = lambda chunk=None: sent.append(chunk)
 
     asyncio.run(handler.get())
 
+    if sent[0] is None:
+        return json.loads(b"".join(handler._write_buffer))
     return sent[0]
 
 
